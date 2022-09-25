@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Territorio : MonoBehaviour
 {
     public int id;
     public string nome;
     public ZonaTerritorial zonaTerritorial;
     public Vector2 posicao;
-    public int eleitor;
-    //private Recurso recurso;
+    public Eleitores eleitor;
+    public int qntEleitor;
+    public int recurso;
     void Start()
     {
         
