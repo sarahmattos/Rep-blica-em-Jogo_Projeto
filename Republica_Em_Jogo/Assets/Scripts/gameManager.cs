@@ -5,15 +5,13 @@ using UnityEngine;
 public class gameManager : MonoBehaviour
 {
     public Jogador[] jogadores;
-    //public Territorio[] cartaTerritorios;
     public List<Territorio> cartaTerritorio = new List<Territorio>();
-    int rand, aux, max, rand4;
+    int rand, aux;
+    public int numJogadores;
 
     void Start()
     {
         aux = 0;
-        max = 4;
-       // divisãoInicial();
     }
 
     void Update()
@@ -25,31 +23,26 @@ public class gameManager : MonoBehaviour
 
         while (cartaTerritorio.Count>0)
         {
+            //aux serve para limitar a quantidade de carta por pessoa em jogo
             aux++;
+            //rand vai randomizar os territorios da nossa lista, removendo eles quando foram distribuidos
             rand = Random.Range(0, cartaTerritorio.Count);
+            //nome do territorio sorteado
             Debug.Log("rand: " +  cartaTerritorio[rand].nome);
+            //o id do eleitor recebe o auxiliar que representa o jogador
             cartaTerritorio[rand].eleitor.id = aux;
             Debug.Log("id: " + cartaTerritorio[rand].eleitor.id);
-
-
-            //Debug.Log("cor: " + cartaTerritorio[rand].eleitor.cor);
-            //cartaTerritorios[rand].eleitor.mudarCor(aux-1);
-            
-            //Debug.Log("aux: " + aux);
-            Debug.Log(jogadores[aux - 1].cor);
+            //a cor do eleitor fica igual a cor do jogador respectivamente
             cartaTerritorio[rand].eleitor.cor = jogadores[aux - 1].cor;
-            
-            Debug.Log(cartaTerritorio[rand].eleitor.cor);
-            if (aux == max)
+            cartaTerritorio[rand].eleitor.mudarCor();
+            //quando o numero chegar na quantidade de jogadores volta a distribuir para o primeiro e assim por diante
+            if (aux == numJogadores)
             {
                 aux = 0;
             }
+            //remove o território já sorteado da lista de territorios
             cartaTerritorio.RemoveAt(rand);
-            //cartaTerritorio[rand].eleitor.cores = jogadores[cartaTerritorio[rand].eleitor.id].cor;
-
 
         }
-        
-
     }
 }
