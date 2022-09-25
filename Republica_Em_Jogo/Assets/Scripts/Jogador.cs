@@ -6,7 +6,7 @@ public class Jogador : MonoBehaviour
 {
     public int id;
     public string nome;
-    public string cor;
+    public Color cor;
     public bool turno;
     public enum acao
     {
