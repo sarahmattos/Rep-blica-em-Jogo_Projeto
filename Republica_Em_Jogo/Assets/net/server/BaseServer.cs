@@ -68,8 +68,8 @@ public class BaseServer : MonoBehaviour
             {
                 if (cmd == NetworkEvent.Type.Data)
                 {
-                    uint number = stream.ReadByte();
-                    Debug.Log("Got " + number + " from the Client");
+                    byte opCode = stream.ReadByte();
+                    Debug.Log("Got " + opCode + " as operation code");
                 }
                 else if (cmd == NetworkEvent.Type.Disconnect)
                 {

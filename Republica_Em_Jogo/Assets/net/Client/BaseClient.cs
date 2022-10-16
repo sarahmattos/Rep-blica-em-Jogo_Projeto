@@ -39,7 +39,6 @@ public class BaseClient : MonoBehaviour
             Debug.Log("perdeu conexão com server");
         }
     }
-    
     protected virtual void UpdateMessagePump()
     {
         DataStreamReader stream;
@@ -63,5 +62,12 @@ public class BaseClient : MonoBehaviour
                 }
             }
         
+    }
+    public virtual void SendToServer(NetMessage msg)
+    {
+        DataStreamWriter writer;
+        driver.BeginSend(connection, out writer);
+        msg.Serialize(ref writer);
+        driver.EndSend(writer);
     }
 }
