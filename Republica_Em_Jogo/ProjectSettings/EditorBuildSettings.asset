@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/netCode/scene/NetcodeScene.unity
+    guid: 5b1b62b30f4afec4d9f17cd4c083e6a9
   m_configObjects: {}
