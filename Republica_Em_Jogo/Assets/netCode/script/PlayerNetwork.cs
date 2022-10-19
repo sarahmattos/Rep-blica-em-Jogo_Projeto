@@ -3,8 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
+
 public class PlayerNetwork : NetworkBehaviour
 {
+    
+    public string resposta;
+    private NetworkManagerUI netManager;
+
+    public void Start()
+    {
+        this.netManager = GameObject.FindObjectOfType<NetworkManagerUI>();
+    }
     private NetworkVariable<MyCustomData> randomNumber = new NetworkVariable<MyCustomData>(
         new MyCustomData
         {
@@ -12,7 +21,7 @@ public class PlayerNetwork : NetworkBehaviour
             _bool=false,
         }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    
+    private NetworkVariable<float> testfloat = new NetworkVariable<float>(8, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public struct MyCustomData :INetworkSerializable
     {
@@ -31,20 +40,37 @@ public class PlayerNetwork : NetworkBehaviour
         randomNumber.OnValueChanged += (MyCustomData previousValue, MyCustomData newValue) =>
         {
             Debug.Log(OwnerClientId + "; randomNumber: " + newValue._int+"; "+newValue._bool);
+            netManager.chatView.text = newValue._int.ToString();
+            
+        };
+        testfloat.OnValueChanged += (float previousValue, float newValue) =>
+        {
+            Debug.Log(OwnerClientId + "; testfloat: " + newValue );
+            netManager.chatView.text = newValue.ToString();
+
         };
     }
 
     private void Update()
     {
-
+        
+        //chatInput = GameObject.FindGameObjectsWithTag("inputField");
         if (!IsOwner) return;
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            resposta = netManager.chatInput.text;
+            testfloat.Value = float.Parse(resposta);
+        }
 
         if (Input.GetKeyDown(KeyCode.T)){
+            resposta = netManager.chatInput.text;
+            //Debug.Log(resposta);
             randomNumber.Value = new MyCustomData{
-                _int = 10,
+                _int = int.Parse(resposta),
                  _bool = true,
             };
-         }
+            
+        }
         Vector3 moveDir = new Vector3(0, 0, 0);
 
         if (Input.GetKey(KeyCode.W)) moveDir.z = +1f;
