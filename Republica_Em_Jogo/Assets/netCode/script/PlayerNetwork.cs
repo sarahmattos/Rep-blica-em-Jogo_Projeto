@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using Unity.Collections;
 
 
 public class PlayerNetwork : NetworkBehaviour
@@ -21,7 +22,7 @@ public class PlayerNetwork : NetworkBehaviour
             _bool=false,
         }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    private NetworkVariable<float> testfloat = new NetworkVariable<float>(8, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private NetworkVariable<FixedString128Bytes> testfloat = new NetworkVariable<FixedString128Bytes>("oi", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public struct MyCustomData :INetworkSerializable
     {
@@ -43,10 +44,11 @@ public class PlayerNetwork : NetworkBehaviour
             netManager.chatView.text = newValue._int.ToString();
             
         };
-        testfloat.OnValueChanged += (float previousValue, float newValue) =>
+        testfloat.OnValueChanged += (FixedString128Bytes previousValue, FixedString128Bytes newValue) =>
         {
+            //string aux = "Cliente "+OwnerClientId +" disse: " +newValue.ToString();
             Debug.Log(OwnerClientId + "; testfloat: " + newValue );
-            netManager.chatView.text = newValue.ToString();
+            netManager.chatView.text = "Cliente " + OwnerClientId + " disse: " + newValue.ToString();
 
         };
     }
@@ -56,13 +58,13 @@ public class PlayerNetwork : NetworkBehaviour
         
         //chatInput = GameObject.FindGameObjectsWithTag("inputField");
         if (!IsOwner) return;
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             resposta = netManager.chatInput.text;
-            testfloat.Value = float.Parse(resposta);
+            testfloat.Value = resposta;
         }
 
-        if (Input.GetKeyDown(KeyCode.T)){
+        if (Input.GetKeyDown(KeyCode.LeftShift)){
             resposta = netManager.chatInput.text;
             //Debug.Log(resposta);
             randomNumber.Value = new MyCustomData{
