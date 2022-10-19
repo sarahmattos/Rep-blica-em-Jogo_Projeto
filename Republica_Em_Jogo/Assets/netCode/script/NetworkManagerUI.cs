@@ -9,9 +9,10 @@ public class NetworkManagerUI : MonoBehaviour
     [SerializeField] private Button hostBtn;
     [SerializeField] private Button serverBtn;
     [SerializeField] private Button clientBtn;
+    [SerializeField] private Button nameBtn;
     public TMP_InputField chatInput;
     public TMP_Text chatView;
-
+    public string name;
     private void Awake()
     {
         hostBtn.onClick.AddListener(() =>
@@ -26,5 +27,11 @@ public class NetworkManagerUI : MonoBehaviour
         {
             NetworkManager.Singleton.StartClient();
         });
+    }
+    public void SendName()
+    {
+        name=chatInput.text;
+        chatInput.text = "";
+        nameBtn.gameObject.SetActive(false);
     }
 }

@@ -7,7 +7,6 @@ using Unity.Collections;
 
 public class PlayerNetwork : NetworkBehaviour
 {
-    
     public string resposta;
     private NetworkManagerUI netManager;
 
@@ -23,6 +22,7 @@ public class PlayerNetwork : NetworkBehaviour
         }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     private NetworkVariable<FixedString128Bytes> testfloat = new NetworkVariable<FixedString128Bytes>("oi", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private NetworkVariable<FixedString128Bytes> nameId = new NetworkVariable<FixedString128Bytes>("oi", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public struct MyCustomData :INetworkSerializable
     {
@@ -48,7 +48,8 @@ public class PlayerNetwork : NetworkBehaviour
         {
             //string aux = "Cliente "+OwnerClientId +" disse: " +newValue.ToString();
             Debug.Log(OwnerClientId + "; testfloat: " + newValue );
-            netManager.chatView.text = "Cliente " + OwnerClientId + " disse: " + newValue.ToString();
+            
+            netManager.chatView.text = nameId.Value.ToString() + " disse: " + newValue.ToString();
 
         };
     }
@@ -58,6 +59,7 @@ public class PlayerNetwork : NetworkBehaviour
         
         //chatInput = GameObject.FindGameObjectsWithTag("inputField");
         if (!IsOwner) return;
+        nameId.Value = netManager.name;
         if (Input.GetKeyDown(KeyCode.Return))
         {
             resposta = netManager.chatInput.text;
