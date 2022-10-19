@@ -64,6 +64,7 @@ public class PlayerNetwork : NetworkBehaviour
         {
             resposta = netManager.chatInput.text;
             testfloat.Value = resposta;
+            netManager.chatInput.text = "";
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift)){
