@@ -9,12 +9,6 @@ public class GameDataconfig : Singleton<GameDataconfig>
     public int maxConnections;
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-
-            NetworkDriver networkDriver = new NetworkDriver();
-            NetworkConnection nc = new NetworkConnection();
-            nc.Disconnect(networkDriver);        }
 
     }
 

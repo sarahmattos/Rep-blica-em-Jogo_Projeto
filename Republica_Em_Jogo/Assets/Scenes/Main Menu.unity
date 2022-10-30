@@ -5562,7 +5562,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1903875544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5658,7 +5658,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxConnections: 4
-  Debugger: {fileID: 0}
   inputFieldJoinCode: {fileID: 108266620}
   TextJoinCode: {fileID: 200530027}
 --- !u!1 &1919239543

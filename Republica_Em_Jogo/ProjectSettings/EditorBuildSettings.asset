@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Ale - NetCode Lan test/Scene default.unity
+    path: Assets/Scenes/Main Menu.unity
     guid: 12248f374dc61f64196d3ec613c7c9d6
   m_configObjects: {}
