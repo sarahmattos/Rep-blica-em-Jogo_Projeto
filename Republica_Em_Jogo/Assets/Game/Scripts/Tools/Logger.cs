@@ -2,6 +2,8 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using System;
+using Unity.Netcode;
+using UnityEngine.SceneManagement;
 
 namespace Game.Tools
 {
@@ -34,7 +36,10 @@ namespace Game.Tools
             {
                 debugAreaText.text += $"<color=\"white\">{DateTime.Now.ToString("HH:mm:ss.fff")} {this.GetType().Name} enabled</color>\n";
             }
+
+            DontDestroyOnLoad(gameObject);
         }
+
 
         public void LogInfo(string message)
         {
@@ -62,5 +67,22 @@ namespace Game.Tools
                 debugAreaText.text = string.Empty;
             }
         }
+
+
+
+        //PARA reiniciar rapidamente durante o desenvolvimento.
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                NetworkManager.Singleton.Shutdown();
+                SceneManager.LoadScene(0);
+            }
+        }
+
+
+
+
+
     }
 }

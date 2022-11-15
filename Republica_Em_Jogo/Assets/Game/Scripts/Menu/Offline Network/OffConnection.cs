@@ -3,9 +3,9 @@ using System;
 using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
-using Unity.Services.Relay.Models;
 using UnityEngine;
 using Logger = Game.Tools.Logger;
+using UnityEngine.SceneManagement;
 
 namespace Game.Connection
 {
@@ -18,52 +18,61 @@ namespace Game.Connection
         private IPManager ipManager;
         private string IpHostingGame;
         [SerializeField] private TMP_Text ipHostingGameText;
+
+        public int clientsConnected => NetworkManager.Singleton.ConnectedClients.Count;
         private void Awake()
         {
             ipManager = GetComponent<IPManager>();
 
         }
+
         void Start()
         {
 
-            ipAddressInput.onValueChanged.AddListener((string value) =>
-            {
-                PlayerPrefs.SetString("ipAddressJoin", value);
-            });
+            ipAddressInput.onValueChanged.AddListener((string value) => { PlayerPrefs.SetString("ipAddressJoin", value); });
             ipAddressInput.text = PlayerPrefs.GetString("ipAddressJoin");
-
-            NetworkManager.Singleton.OnClientConnectedCallback += (ulong data) =>
-            {
-                Logger.Instance.LogInfo(string.Concat("jogador ",(int)data+1, " entrou na sala."));
-
-                //IReadOnlyList<NetworkClient> clients = NetworkManager.Singleton.ConnectedClientsList;
-                //foreach (NetworkClient client in clients)
-                //{
-                //    Logger.Instance.LogInfo(client.ClientId.ToString());
-                //}
-
-
-                if ((int)data + 1 == GameDataconfig.Instance.maxConnections)
-                {
-                    Logger.Instance.LogWarning(string.Concat("sala cheia. ", (int)data + 1, " jogadores nela."));
-                    if(NetworkManager.Singleton.IsHost)
-                    {
-                        //PlayerPrefs.SetString("myIpAddress", IPManager.Instance.myIpAddress());
-                        //NetworkManager.Singleton.NetworkConfig.
-                        Logger.Instance.LogInfo("AGORA FOI VACILAO");
-                    }
-                }
-            };
+            //if(NetworkManager.Singleton.IsHost)
+            //{
+                NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnect;
+                NetworkManager.Singleton.OnClientDisconnectCallback += OnClientdisconnect;
+            //}
 
             NetworkManager.Singleton.OnTransportFailure += () =>
            {
                Logger.Instance.LogError("fALHO ao CRIAR HOST VACILÃO.");
            };
-
-
         }
 
-      
+        private void OnDisable()
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnect;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientdisconnect;
+        }
+
+        private void OnClientdisconnect(ulong data)
+        {
+        
+        }
+
+        private void OnClientConnect(ulong data)
+        {
+            Logger.Instance.LogInfo(string.Concat("jogadores connectados: ", clientsConnected));
+            if (clientsConnected == GameDataconfig.Instance.maxConnections)
+            {
+                Logger.Instance.LogWarning(string.Concat("sala cheia. ", NetworkManager.Singleton.ConnectedClients.Count, " jogadores nela."));
+                LoadGameplayScene();
+
+            }
+        }
+
+
+        public void LoadGameplayScene()
+        {
+            NetworkManager.Singleton.SceneManager.LoadScene(GameDataconfig.Instance.gameSceneName, LoadSceneMode.Single);
+            Logger.Instance.LogInfo("Sala cheia. Carregando Cena Nova.");
+
+        }
+  
 
         public void ConfigAndStartHostIP()
         {

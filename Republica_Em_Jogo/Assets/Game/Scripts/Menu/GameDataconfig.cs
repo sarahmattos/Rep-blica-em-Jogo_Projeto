@@ -7,6 +7,7 @@ using UnityEngine;
 public class GameDataconfig : Singleton<GameDataconfig> 
 {
     public int maxConnections;
+    public string gameSceneName;
     private void Update()
     {
 

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerInteraction2 : NetworkBehaviour
 {
     private TMP_Text text;
-    private Camera cam;
+    [SerializeField] private Camera cam;
     private NetworkVariable<int> nextInt = new NetworkVariable<int>
     (
         1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner
@@ -17,10 +17,14 @@ public class PlayerInteraction2 : NetworkBehaviour
 
     private void Awake()
     {
-        cam = FindObjectOfType<Camera>();
         text = GetComponent<TMP_Text>();
     }
 
+    private void Start()
+    {
+        cam = FindObjectOfType<Camera>();
+
+    }
     private void OnEnable()
     {
         nextInt.OnValueChanged += UpdateText;
@@ -34,11 +38,11 @@ public class PlayerInteraction2 : NetworkBehaviour
         {
             nextInt.Value += 1;
         }
+
+        //transform.LookAt(transform.position + cam.transform.forward);
+
     }
-    private void LateUpdate()
-    {
-        transform.LookAt(transform.position + cam.transform.forward);
-    }
+
 
     public void UpdateText(int previousValue, int nextValue)
     {
