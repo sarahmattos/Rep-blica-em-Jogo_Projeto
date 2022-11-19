@@ -12,6 +12,9 @@
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
+Build - República em jogo/*
+Republica_Em_Jogo_clone_0/*
+Republica_Em_Jogo_clone_1/*
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
