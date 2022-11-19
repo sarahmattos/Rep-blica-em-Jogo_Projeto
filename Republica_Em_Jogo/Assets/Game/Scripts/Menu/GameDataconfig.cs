@@ -6,12 +6,11 @@ using UnityEngine;
 
 public class GameDataconfig : Singleton<GameDataconfig> 
 {
-    public int maxConnections;
-    public string gameSceneName;
-    private void Update()
-    {
+    [SerializeField] private int maxConnections;
+    [SerializeField] private string gameSceneName;
+    [SerializeField] private List<Color> playerColorOrder;
 
-    }
-
-
+    public int MaxConnections => maxConnections; 
+    public string GameSceneName  => gameSceneName;
+    public List<Color> PlayerColorOrder  => playerColorOrder; 
 }

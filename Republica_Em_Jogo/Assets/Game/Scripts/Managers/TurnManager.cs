@@ -22,10 +22,15 @@ namespace Game.managers {
             GeneratePlayerOrder();
         }
 
+
+
         public override void OnNetworkSpawn()
         {
+
             currentIndex.OnValueChanged += PlayerTurn;
             currentIndex.OnValueChanged += (int p, int n) => { Logger.Instance.LogInfo(string.Concat("Vez do jogador:", CurrentPlayer)); };
+            
+
         }
 
         public override void OnDestroy()
@@ -56,8 +61,6 @@ namespace Game.managers {
                 playersOrder.Add(allClientID[i]);
                 Logger.Instance.LogWarning(allClientID[i].ToString());
             }
-
-
 
             playersOrder = new NetworkList<int>(allClientID,
                 NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server

@@ -47,7 +47,7 @@ namespace Game.Networking
         private void UpdatePlayerCount(int value)
         {
             Tools.Logger.Instance.LogInfo(value + "pega.");
-            text_contagemJogadores.SetText(string.Concat(value, "/",GameDataconfig.Instance.maxConnections," jogadores."));
+            text_contagemJogadores.SetText(string.Concat(value, "/",GameDataconfig.Instance.MaxConnections," jogadores."));
         }
 
         //[ClientRpc]
