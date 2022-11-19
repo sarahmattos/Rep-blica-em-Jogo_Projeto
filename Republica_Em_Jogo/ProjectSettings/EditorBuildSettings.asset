@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Game/Scenes/MainMenuScene.unity
     guid: 12248f374dc61f64196d3ec613c7c9d6
   - enabled: 1
-    path: Assets/netCode/scene/NetcodeScene.unity
+    path: Assets/Sarah/netCode (teste)/scene/NetcodeScene.unity
     guid: 5b1b62b30f4afec4d9f17cd4c083e6a9
   m_configObjects: {}

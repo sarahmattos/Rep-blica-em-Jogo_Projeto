@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Target : MonoBehaviour
+public class MostrarNomeBairro : MonoBehaviour
 {
     private Renderer renderer;
     [SerializeField] private Material highlightMaterial;

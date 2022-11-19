@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 362199312791776889, guid: 8b36d5f38a02f9e46b06690628b6cbfd, type: 3}
       propertyPath: m_Name
-      value: bangu
+      value: bangu Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1030509541024363715, guid: 8b36d5f38a02f9e46b06690628b6cbfd, type: 3}
       propertyPath: m_RootOrder
@@ -53,6 +53,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1030509541024363715, guid: 8b36d5f38a02f9e46b06690628b6cbfd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708897715806293586, guid: 8b36d5f38a02f9e46b06690628b6cbfd, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
