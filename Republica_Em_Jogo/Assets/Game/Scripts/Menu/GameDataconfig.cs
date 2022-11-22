@@ -12,5 +12,10 @@ public class GameDataconfig : Singleton<GameDataconfig>
 
     public int MaxConnections => maxConnections; 
     public string GameSceneName  => gameSceneName;
-    public List<Color> PlayerColorOrder  => playerColorOrder; 
+    public List<Color> PlayerColorOrder  => playerColorOrder;
+
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 }

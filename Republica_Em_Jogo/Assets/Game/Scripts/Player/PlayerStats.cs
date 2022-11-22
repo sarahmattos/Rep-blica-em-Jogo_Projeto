@@ -14,6 +14,7 @@ namespace Game.Player {
         [SerializeField] private string nome;
         [SerializeField] private int eleitores;
 
+
         public int playerID => (int)OwnerClientId;
         public Color Cor { get => cor; }
         public Objetivo Objetivo { get => objetivo;}
@@ -30,7 +31,6 @@ namespace Game.Player {
 
             NetworkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
 
-            //InitializeStats();
         }
 
 
@@ -39,16 +39,14 @@ namespace Game.Player {
             base.OnDestroy();
             NetworkManager.SceneManager.OnSceneEvent -= SceneManager_OnSceneEvent;
 
-
         }
         private void SceneManager_OnSceneEvent(SceneEvent sceneEvent)
         {
-            Logger.Instance.LogInfo("olha aqui: "+sceneEvent.SceneEventType.ToString());
-
 
             switch (sceneEvent.SceneEventType)
             {
-                case SceneEventType.LoadComplete:
+                 
+                case SceneEventType.Load:
                     {
                         if (sceneEvent.SceneName == GameDataconfig.Instance.GameSceneName)
                         {
@@ -62,10 +60,16 @@ namespace Game.Player {
             };
         }
 
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.S)) 
+                if (initializeStats == null) Logger.Instance.LogInfo("initStats vazio?");
+            else Logger.Instance.LogInfo("TA CHEIO!");
+
+        }
 
         public void InitializeStats()
         {
-            Debug.Log("Initializando");
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
             nome = string.Concat("jogador ", playerID);
         }
