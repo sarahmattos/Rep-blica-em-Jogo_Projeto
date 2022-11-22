@@ -6,13 +6,12 @@ using UnityEngine.UI;
 using Game.managers;
 using TMPro;
 using Game.Player;
-using Unity.Collections;
 
 namespace Game.UI
 {
     public class HudStatsJogador : NetworkBehaviour
     {
-        
+
         public GameObject button; //botao para testar
 
         [SerializeField] private Image iconJogador;
@@ -29,8 +28,8 @@ namespace Game.UI
             if (TurnManager.Instance.IsCurrent)
             {
                 button.SetActive(true);
-               
             }
+
         }
 
         public override void OnDestroy()
@@ -45,13 +44,9 @@ namespace Game.UI
         {
             button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
             playerStats.initializeStats += InitializeHudStats;
-            InitializeHudStats(playerStats);
 
         }
-        public void nameChange()
-        {
-            text_nomeJogador.SetText(playerStats.Nome);
-        }
+
         private void FindingLocalPlayerStats()
         {
             PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
@@ -67,11 +62,10 @@ namespace Game.UI
         private void InitializeHudStats(PlayerStats playerStats)
         {
             iconJogador.color = playerStats.Cor;
-            text_nomeJogador.SetText("Jogador: "+ NetworkManager.Singleton.LocalClientId.ToString());
-            //testfloat.Value = playerStats.Nome;
+            text_nomeJogador.SetText(playerStats.Nome);
             text_eleitores.SetText(textToDisplayEleitores);
         }
-        
-}
+
+    }
 
 }
