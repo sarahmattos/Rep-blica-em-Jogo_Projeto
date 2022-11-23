@@ -13,6 +13,7 @@ namespace Game.UI
 {
     public class HudStatsJogador : NetworkBehaviour
     {
+        
 
         public GameObject button; //botao para testar
 
