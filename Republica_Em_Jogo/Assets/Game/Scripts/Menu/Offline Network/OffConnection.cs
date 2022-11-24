@@ -56,12 +56,9 @@ namespace Game.Connection
 
         private void OnClientConnect(ulong data)
         {
-            Logger.Instance.LogInfo(string.Concat("jogadores connectados: ", clientsConnected));
             if (clientsConnected == GameDataconfig.Instance.MaxConnections)
             {
-                Logger.Instance.LogWarning(string.Concat("sala cheia. ", NetworkManager.Singleton.ConnectedClients.Count, " jogadores nela."));
                 LoadGameplayScene();
-
             }
         }
 
@@ -69,8 +66,6 @@ namespace Game.Connection
         public void LoadGameplayScene()
         {
             NetworkManager.Singleton.SceneManager.LoadScene(GameDataconfig.Instance.GameSceneName, LoadSceneMode.Single);
-            Logger.Instance.LogInfo("Sala cheia. Carregando Cena Nova.");
-
         }
   
 

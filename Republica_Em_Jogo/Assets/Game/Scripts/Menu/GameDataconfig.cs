@@ -7,11 +7,13 @@ using UnityEngine;
 public class GameDataconfig : Singleton<GameDataconfig> 
 {
     [SerializeField] private int maxConnections;
+    [SerializeField] private string menuSceneName;
     [SerializeField] private string gameSceneName;
     [SerializeField] private List<Color> playerColorOrder;
 
-    public int MaxConnections => maxConnections; 
-    public string GameSceneName  => gameSceneName;
+    public int MaxConnections => maxConnections;
+    public string GameSceneName => gameSceneName;
+    public string MenuSceneName => menuSceneName;
     public List<Color> PlayerColorOrder  => playerColorOrder;
 
     private void Start()

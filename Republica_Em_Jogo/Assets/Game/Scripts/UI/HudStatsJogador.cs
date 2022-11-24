@@ -25,7 +25,7 @@ namespace Game.UI
         private void Start()
         {
             FindingLocalPlayerStats();
-            playerStats.initializeStats += InitializeHudStats;
+            //playerStats.initializeStats += InitializeHudStats;
             button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
 
             //fui();
@@ -67,7 +67,7 @@ namespace Game.UI
         {
             base.OnDestroy();
             TurnManager.Instance.isLocalPlayerTurn -= (bool value) => { button.SetActive(value); };
-            playerStats.initializeStats -= InitializeHudStats;
+            //playerStats.initializeStats -= InitializeHudStats;
             //NetworkManager.SceneManager.OnSceneEvent -= SceneManager_OnSceneEvent;
 
         }

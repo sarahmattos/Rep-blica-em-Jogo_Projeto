@@ -168,17 +168,12 @@ public class OnlineConnection : MonoBehaviour
 
         if (NetworkManager.Singleton.StartClient())
         {
-
-            Logger.Instance.LogInfo("HostIP: " + ipv4address.ToString());
-            Logger.Instance.LogInfo("Port: " + port.ToString());
-
             var result = new StringBuilder();
             foreach (var item in hostConnectionData)
             {
                 result.Append(item);
 
             }
-            Logger.Instance.LogInfo("hostData: " + result.ToString());
         }
         yield return null;
     }
@@ -196,21 +191,6 @@ public class OnlineConnection : MonoBehaviour
     public void JoinGame()
     {
         StartCoroutine(ConfigureTransportAndStartNgoAsClient());
-    }
-
-
-
-
-    private void OnGUI()
-    {
-        GUILayout.BeginArea(new Rect(10, 10, 300, 300));
-
-        if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
-        {
-            
-        }
-
-        GUILayout.EndArea();
     }
 
 

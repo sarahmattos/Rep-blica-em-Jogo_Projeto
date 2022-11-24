@@ -7,6 +7,8 @@ using System;
 namespace Game.managers {
     public class TurnManager : NetworkSingleton<TurnManager>
     {
+
+        //algum erro sinalizado pra esta networklist e networkvariable
         public NetworkList<int> playersOrder = new NetworkList<int>();
 
         public NetworkVariable<int> currentIndex = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -89,8 +91,6 @@ namespace Game.managers {
     }
 
 }
-
-
 
 
 //PARA LEMBRAR DEPOIS, CASO PRECISE
