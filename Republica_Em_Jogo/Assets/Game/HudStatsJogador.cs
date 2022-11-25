@@ -84,7 +84,7 @@ namespace Game.UI
                 //Logger.Instance.LogInfo("playerId: " + stats.playerID);
                 //Logger.Instance.LogInfo("id: " + NetworkManager.Singleton.LocalClientId);
                 //if (stats.playerID == (int)NetworkManager.Singleton.LocalClientId)
-                if (stats.playerID == (int)OwnerClientId;
+                if (stats.playerID == (int)OwnerClientId);
                     {
                     Logger.Instance.LogInfo("identrou: "+ OwnerClientId);
                     playerStats = stats;

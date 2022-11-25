@@ -24,7 +24,7 @@ namespace Game.Territorio
         private void Start()
         {
             text_nome.SetText(dados.Nome);
-            material.MudarCor(Color.gray);
+            //material.Color=
 
         }
 

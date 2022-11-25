@@ -74,6 +74,7 @@ namespace Game.Player {
         public void InitializeStats()
         {
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
+            //bairrosControl.instance.jogadoresConectados= clientsConnected.Count;
             maxTerritorio = GameDataconfig.Instance.territoriosInScene;
             eleitores = maxTerritorio / clientsConnected.Count;
             nome = string.Concat("jogador ", playerID);
