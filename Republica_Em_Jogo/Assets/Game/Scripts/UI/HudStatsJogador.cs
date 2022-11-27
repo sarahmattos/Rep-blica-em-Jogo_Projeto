@@ -13,6 +13,7 @@ namespace Game.UI
 {
     public class HudStatsJogador : NetworkBehaviour
     {
+        
 
         public GameObject button; //botao para testar
 
@@ -79,8 +80,13 @@ namespace Game.UI
             PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
             foreach (PlayerStats stats in allPlayerStats)
             {
-                if (stats.playerID == (int)OwnerClientId)
-                {
+                //
+                //Logger.Instance.LogInfo("playerId: " + stats.playerID);
+                //Logger.Instance.LogInfo("id: " + NetworkManager.Singleton.LocalClientId);
+                //if (stats.playerID == (int)NetworkManager.Singleton.LocalClientId)
+                if (stats.playerID == (int)OwnerClientId);
+                    {
+                    Logger.Instance.LogInfo("identrou: "+ OwnerClientId);
                     playerStats = stats;
                     InitializeHudStats(playerStats);
                 }
@@ -92,6 +98,7 @@ namespace Game.UI
             Logger.Instance.LogInfo("initialize huds");
             iconJogador.color = playerStats.Cor;
             text_nomeJogador.SetText(playerStats.Nome);
+            Logger.Instance.LogInfo("playerNome: " + playerStats.Nome);
             text_eleitores.SetText(textToDisplayEleitores);
         }
 

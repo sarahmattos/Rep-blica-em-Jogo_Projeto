@@ -6,10 +6,11 @@ using UnityEngine;
 namespace Game.Territorio
 {
     [Serializable]
-    public class DadoBairro
+    public class DadoBairro: MonoBehaviour
     {
         [SerializeField] private string nome;
         [SerializeField] private DadoBairro[] bairrosVizinhos;
+        [SerializeField] private Material materialBairro;
         //[SerializeField] private Eleitores[] eleitores;
         //[SerializeField] private int recursos;
 

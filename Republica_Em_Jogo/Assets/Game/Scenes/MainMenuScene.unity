@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -258,6 +258,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 23.52, y: 0, z: 0}
+--- !u!1 &478145784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7113440598284823579, guid: f6097795ea5b74841988b6fe10c0c4ca, type: 3}
+  m_PrefabInstance: {fileID: 7113440598004798042}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &528230397 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2020222664862958728, guid: d1a96900b24533049bdbbe4803ed6a46, type: 3}
+  m_PrefabInstance: {fileID: 2020222663534006620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &871572781
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,6 +481,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1869996979 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 280695444056516613, guid: 0cc0a4c97a116a4488646f9bba098773, type: 3}
+  m_PrefabInstance: {fileID: 280695444098103232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1903875547 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2020222664862958727, guid: d1a96900b24533049bdbbe4803ed6a46, type: 3}
@@ -1168,6 +1183,42 @@ PrefabInstance:
       propertyPath: maxConnections
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: territoriosInScene
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: territoriosInScene.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[2].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[3].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: territoriosInScene.Array.data[0]
+      value: 
+      objectReference: {fileID: 528230397}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: territoriosInScene.Array.data[1]
+      value: 
+      objectReference: {fileID: 478145784}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: territoriosInScene.Array.data[2]
+      value: 
+      objectReference: {fileID: 1869996979}
     - target: {fileID: 7864590252159608621, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: m_Name
       value: GameData
