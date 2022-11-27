@@ -1,13 +1,14 @@
+using Game.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bairrosControl : MonoBehaviour
+public class bairrosControl : Singleton<bairrosControl>
 {
-    public static bairrosControl instance;
+    //public static bairrosControl instance;
     private GameObject[] gameObjects;
     public Color bairroColor;
-    public GameDataconfig gameDataconfig;
+    //public GameDataconfig gameDataconfig;
     public int jogadoresConectados;
     private int bairroId;
     public int numeroSorteado;
@@ -18,9 +19,9 @@ public class bairrosControl : MonoBehaviour
 
     void Start()
     {
-        instance = this;
+        //instance = this;
         gameObjects = GameObject.FindGameObjectsWithTag("Bairro");
-        gameDataconfig = GameObject.FindObjectOfType<GameDataconfig>();
+        //gameDataconfig = GameObject.FindObjectOfType<GameDataconfig>();
         Debug.Log(gameObjects.Length);
         for (int i = 0; i < gameObjects.Length; i++)
         {
@@ -43,7 +44,7 @@ public class bairrosControl : MonoBehaviour
         {
             distribuicao++;
             var bairroRenderer = gameObjects[numerosJaSorteados[i]].GetComponent<Renderer>();
-            bairroColor = gameDataconfig.playerColorOrder[distribuicao];
+            bairroColor = GameDataconfig.Instance.PlayerColorOrder[distribuicao];
             bairroRenderer.material.SetColor("_Color", bairroColor);
             if (distribuicao == 2)
             {

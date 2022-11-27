@@ -10,7 +10,7 @@ public class GameDataconfig : Singleton<GameDataconfig>
     [SerializeField] private string menuSceneName;
     [SerializeField] private string gameSceneName;
     [SerializeField] private List<Color> playerColorOrder;
-
+    public int territoriosInScene = 14;
     public int MaxConnections => maxConnections;
     public string GameSceneName => gameSceneName;
     public string MenuSceneName => menuSceneName;
