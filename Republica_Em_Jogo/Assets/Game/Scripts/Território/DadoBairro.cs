@@ -1,22 +1,21 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Game.Territorio
 {
     [Serializable]
-    public class DadoBairro: MonoBehaviour
+    public class DadoBairro
     {
         [SerializeField] private string nome;
         [SerializeField] private DadoBairro[] bairrosVizinhos;
-        [SerializeField] private Material materialBairro;
-        //[SerializeField] private Eleitores[] eleitores;
-        //[SerializeField] private int recursos;
-
+        public NetworkVariable<int> playerIDNoControl = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        //public NetworkVariable<int> eleitores = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        
         public string Nome { get => nome; }
         public DadoBairro[] BairrosVizinhos { get => bairrosVizinhos; }
-        //public Eleitores[] Eleitores { get => eleitores; }
+
+
     }
 
 }

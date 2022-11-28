@@ -25,37 +25,44 @@ namespace Game {
         private NetworkVariable<int> gameStateIndex = new NetworkVariable<int>();
         private GameState currentState = GameState.MenuSceneLoad;
 
-        public event Action menuSceneLoad;
-        public event Action gameplaySceneLoad;
-        public event Action initializePlayers;
-        public event Action initialDistribution;
-           
+        public event Action menuSceneLoad; //stateIndex = 0;
+        public event Action gameplaySceneLoad;//stateIndex = 1;
+        public event Action initializePlayers;//stateIndex = 2;
+        public event Action initialDistribution;//stateIndex = 3;
+
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        public void ChangeStateServerRPC(int index)
+        [ClientRpc]
+        public void ChangeStateClientRpc(int state)
         {
-            gameStateIndex.Value = index;
-            currentState = (GameState)index;
+            Logger.Instance.LogWarning(string.Concat("Stado atual de jogo: ", (GameState)state));
+            gameStateIndex.Value = state;
+            currentState = (GameState)state;
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        public void NextStateServerRPC()
-        {
-            gameStateIndex.Value++;
-            currentState = (GameState)((int)currentState + 1);
-        }
+        //[ServerRpc(RequireOwnership = false)]
+        //public void NextStateServerRPC()
+        //{
+        //    gameStateIndex.Value++;
+        //    currentState = (GameState)((int)currentState + 1);
+        //}
 
         public override void OnNetworkSpawn()
         {
-            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnLoadEventCompleted;
             gameStateIndex.OnValueChanged += onStateIndexChanged;
+            if(IsServer) NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnLoadEventCompleted;
+            
             gameplaySceneLoad += OnGameplaySceneLoad;
-            initializePlayers += OnInitializePlayers;
-            initialDistribution += OnInitialDistribution;
+        }
+        public override void OnNetworkDespawn()
+        {
+            gameStateIndex.OnValueChanged -= onStateIndexChanged;
+            if(IsServer) NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnLoadEventCompleted;
+            
+            gameplaySceneLoad -= OnGameplaySceneLoad;
         }
 
         private void onStateIndexChanged(int previous, int next)
@@ -74,18 +81,7 @@ namespace Game {
                 case 3:
                     initialDistribution?.Invoke();
                     break;
-
             }
-
-        }
-        
-
-        public override void OnNetworkDespawn()
-        {
-            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnLoadEventCompleted;
-            gameplaySceneLoad -= OnGameplaySceneLoad;
-            initializePlayers -= OnInitializePlayers;
-            initialDistribution -= OnInitialDistribution;
 
         }
 
@@ -93,40 +89,29 @@ namespace Game {
         {
             if (sceneName == GameDataconfig.Instance.MenuSceneName)
             {
-                ChangeStateServerRPC(0);
+                ChangeStateClientRpc((int)GameState.MenuSceneLoad);
             }
 
             if (sceneName == GameDataconfig.Instance.GameSceneName)
             {
-                ChangeStateServerRPC(1);
-                gameplaySceneLoad?.Invoke();
+                ChangeStateClientRpc((int)GameState.gameplaySceneLoad);
             }
         }
 
         private void OnGameplaySceneLoad()
         {
-            initializePlayers?.Invoke();
-            Logger.Instance.LogInfo("TESTE1: Cena carregada");
+
+            if (!IsServer) return;
+            ChangeStateClientRPC((int)GameState.initializePlayers);
         }
 
-        private void OnInitializePlayers()
-        {
-            initialDistribution?.Invoke();
-            Logger.Instance.LogInfo("TESTE2: Players Initialized");
-        }
-
-
-        private void OnInitialDistribution()
-        {
-            Logger.Instance.LogInfo("TESTE3: Initial Distribution");
-
-        }
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.S))
+            if(Input.GetKeyDown(KeyCode.C))
             {
-                NextStateServerRPC();
+                if (!IsServer) return;
+                ChangeStateClientRPC((int)GameState.initializePlayers);
             }
         }
     }

@@ -1,4 +1,5 @@
 
+using Game.Tools;
 using UnityEngine;
 
 namespace Game.Territorio
@@ -6,19 +7,18 @@ namespace Game.Territorio
     public class ZonaTerritorial : MonoBehaviour
     {
 
-        [SerializeField] private Bairro[] bairrosDaZona;
+        [SerializeField] private Bairro[] bairros;
 
-    //public int id;
-    //public string nome;
-    //void Start()
-    //{
+        public Bairro[] Bairros => bairros;
 
-        //}
+        private void Awake()
+        {
+            bairros = GetComponentsInChildren<Bairro>();
+            bairros.Shuffle();
+        }
 
-        //void Update()
-        //{
 
-        //}
+
     }
 
 

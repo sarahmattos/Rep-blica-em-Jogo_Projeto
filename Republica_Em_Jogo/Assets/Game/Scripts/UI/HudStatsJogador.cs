@@ -13,15 +13,13 @@ namespace Game.UI
 {
     public class HudStatsJogador : NetworkBehaviour
     {
-        
-
         public GameObject button; //botao para testar
 
         [SerializeField] private Image iconJogador;
         [SerializeField] private TMP_Text text_nomeJogador;
         [SerializeField] private TMP_Text text_eleitores;
         [SerializeField] private PlayerStats playerStats;
-        public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.Eleitores);
+        public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
 
 
         //TODO: Remover quando não precisar mais dos botões
@@ -63,7 +61,7 @@ namespace Game.UI
 
         private void InitializeHudStats()
         {
-            Logger.Instance.LogInfo("Stats player inicializado.");
+            Logger.Instance.LogInfo("HUD player inicializado.");
             iconJogador.color = playerStats.Cor;
             text_nomeJogador.SetText(playerStats.Nome);
             text_eleitores.SetText(textToDisplayEleitores);

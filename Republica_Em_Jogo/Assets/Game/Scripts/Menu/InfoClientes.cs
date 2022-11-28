@@ -1,45 +1,37 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
-using Game.Tools;
-using System.Linq;
-using Logger = Game.Tools.Logger;
+
 
 namespace Game.Networking
 {
     public class InfoClientes : MonoBehaviour
     {
         [SerializeField] private TMP_Text text_contagemJogadores;
-        IReadOnlyDictionary<ulong, NetworkClient> clientsConnected => NetworkManager.Singleton.ConnectedClients;
+        int clientsConnected => NetworkManager.Singleton.ConnectedClients.Count;
         
         private void Start()
         {
-            NetworkManager.Singleton.OnClientConnectedCallback += OnClienteCallbackConnection;
-            NetworkManager.Singleton.OnClientDisconnectCallback += OnClienteCallbackConnection;
- 
+            if (!NetworkManager.Singleton.IsServer)
+            {
+                NetworkManager.Singleton.OnClientConnectedCallback += OnClienteCallbackConnection;
+                NetworkManager.Singleton.OnClientDisconnectCallback += OnClienteCallbackConnection;
+            }
+
         }
 
         private void OnDisable()
         {
-            NetworkManager.Singleton.OnClientConnectedCallback -= OnClienteCallbackConnection;
-            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClienteCallbackConnection;
-        }
-
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.P))
+            if (!NetworkManager.Singleton.IsServer)
             {
-                Logger.Instance.LogInfo("LocalID: "+NetworkManager.Singleton.LocalClientId.ToString());
+                NetworkManager.Singleton.OnClientConnectedCallback -= OnClienteCallbackConnection;
+                NetworkManager.Singleton.OnClientDisconnectCallback -= OnClienteCallbackConnection;
             }
-            
         }
 
         private void OnClienteCallbackConnection(ulong obj)
         {
-            UpdatePlayerCount(clientsConnected.Count);
+            UpdatePlayerCount(clientsConnected);
 
         }
 

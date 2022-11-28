@@ -42,6 +42,13 @@ namespace Game.Tools
             }
         }
 
+        public static void NextValue(this int value, int max)
+        {
+            if (value < max) value++;
+            else value = 0;
+        }
+
+
         //public static void ShufleNetworkListPlayer(this NetworkList<PlayerData> list)
         //{
         //    int n = list.Count;

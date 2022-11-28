@@ -37,7 +37,6 @@ namespace Game.managers {
 
         public override void OnDestroy()
         {
-            base.OnDestroy();
             currentIndex.OnValueChanged -= PlayerTurn;
             currentIndex.OnValueChanged -= (int p, int n) => { Logger.Instance.LogInfo(string.Concat("Vez do jogador:", CurrentPlayer)); };
 

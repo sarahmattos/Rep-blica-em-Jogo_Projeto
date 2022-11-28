@@ -16,7 +16,7 @@ namespace Game.Player {
         [SerializeField] private Objetivo objetivo;
 
         [SerializeField] private string nome;
-        [SerializeField] private int eleitores;
+        [SerializeField] private int eleitoresTotais;
 
 
         public int playerID => (int)OwnerClientId;
@@ -24,16 +24,16 @@ namespace Game.Player {
         public Color Cor { get => cor; }
         public Objetivo Objetivo { get => objetivo;}
         public string Nome { get => nome;}
-        public int Eleitores { get => eleitores; }
+        public int EleitoresTotais { get => eleitoresTotais; }
         
         public override void OnNetworkSpawn()
         {
-            GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
+            GameStateHandler.Instance.initializePlayers += InitializeStats;
         }
 
         public override void OnNetworkDespawn()
         {
-            GameStateHandler.Instance.gameplaySceneLoad -= InitializeStats;
+            GameStateHandler.Instance.initializePlayers -= InitializeStats;
 
         }
 
@@ -42,8 +42,21 @@ namespace Game.Player {
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
             //bairrosControl.instance.jogadoresConectados= clientsConnected.Count;
             maxTerritorio = GameDataconfig.Instance.territoriosInScene;
-            eleitores = maxTerritorio / /*clientsConnected.Count;*/  2;
+            eleitoresTotais = maxTerritorio / /*clientsConnected.Count;*/  2;
             nome = string.Concat("jogador ", playerID);
+
+
+
+
+            //TODO: isso, aqui, não ta legal. só provisório.
+            Logger.Instance.LogError(IsHost.ToString());  
+            if (IsServer)
+            {
+                GameStateHandler.Instance.ChangeStateClientRPC((int)GameState.initialDistribuition);
+
+            }
+
+
         }
 
 
