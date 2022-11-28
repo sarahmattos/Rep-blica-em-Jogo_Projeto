@@ -9,13 +9,15 @@ namespace Game.Player {
 
     public class PlayerStats : NetworkBehaviour
     {
-        IReadOnlyDictionary<ulong, NetworkClient> clientsConnected => NetworkManager.Singleton.ConnectedClients;
+        //a linha abaixo pode ser acessado pelo server (e host)
+        //IReadOnlyDictionary<ulong, NetworkClient> clientsConnected => NetworkManager.Singleton.ConnectedClients;
         [SerializeField] private Color cor;
         [SerializeField] private int maxTerritorio;
         [SerializeField] private Objetivo objetivo;
 
         [SerializeField] private string nome;
         [SerializeField] private int eleitores;
+
 
 
         public int playerID => (int)OwnerClientId;
@@ -28,6 +30,7 @@ namespace Game.Player {
         public override void OnNetworkSpawn()
         {
             GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
+            Logger.Instance.LogInfo("subscribe initializeStats on" + this.gameObject.GetInstanceID());
 
         }
 
@@ -37,13 +40,12 @@ namespace Game.Player {
 
         }
 
-
         public void InitializeStats()
         {
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
             //bairrosControl.instance.jogadoresConectados= clientsConnected.Count;
             maxTerritorio = GameDataconfig.Instance.territoriosInScene;
-            eleitores = maxTerritorio / clientsConnected.Count;
+            eleitores = maxTerritorio / /*clientsConnected.Count;*/  2;
             nome = string.Concat("jogador ", playerID);
         }
 
