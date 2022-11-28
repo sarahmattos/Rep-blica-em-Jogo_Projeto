@@ -102,7 +102,7 @@ namespace Game {
         {
 
             if (!IsServer) return;
-            ChangeStateClientRPC((int)GameState.initializePlayers);
+            ChangeStateClientRpc((int)GameState.initializePlayers);
         }
 
 
@@ -111,7 +111,7 @@ namespace Game {
             if(Input.GetKeyDown(KeyCode.C))
             {
                 if (!IsServer) return;
-                ChangeStateClientRPC((int)GameState.initializePlayers);
+                ChangeStateClientRpc((int)GameState.initializePlayers);
             }
         }
     }

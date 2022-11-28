@@ -52,7 +52,7 @@ namespace Game.Player {
             Logger.Instance.LogError(IsHost.ToString());  
             if (IsServer)
             {
-                GameStateHandler.Instance.ChangeStateClientRPC((int)GameState.initialDistribuition);
+                GameStateHandler.Instance.ChangeStateClientRpc((int)GameState.initialDistribuition);
 
             }
 

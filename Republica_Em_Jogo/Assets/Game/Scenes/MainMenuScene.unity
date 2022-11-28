@@ -544,7 +544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7222468533012933980, guid: 6f631b9dbeba5f942aef9bc8588209d0, type: 3}
       propertyPath: m_Name
-      value: GameStateHandler
+      value: GameStates
       objectReference: {fileID: 0}
     - target: {fileID: 7222468533012933981, guid: 6f631b9dbeba5f942aef9bc8588209d0, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -1045,6 +1045,14 @@ PrefabInstance:
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[7].Prefab
       value: 
       objectReference: {fileID: 2598168954061059554, guid: 1fb03bb4a0e38b149ad04d32e6575d4e, type: 3}
+    - target: {fileID: 6756490650274717501, guid: a93b2473a637c354ba3a69b00d90719a, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[3].Override
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756490650274717501, guid: a93b2473a637c354ba3a69b00d90719a, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[3].SourcePrefabToOverride
+      value: 
+      objectReference: {fileID: 7677490024804130843, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a93b2473a637c354ba3a69b00d90719a, type: 3}
 --- !u!1001 &7113440598004798042
@@ -1201,7 +1209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxConnections
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: territoriosInScene
