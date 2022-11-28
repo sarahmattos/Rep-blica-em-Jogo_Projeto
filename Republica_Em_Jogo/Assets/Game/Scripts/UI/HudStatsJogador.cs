@@ -23,82 +23,49 @@ namespace Game.UI
         [SerializeField] private PlayerStats playerStats;
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.Eleitores);
 
+
+        //TODO: Remover quando não precisar mais dos botões
         private void Start()
         {
-            FindingLocalPlayerStats();
-            //playerStats.initializeStats += InitializeHudStats;
             button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
-
-            //fui();
-
         }
 
-        //public void fui()
-        //{
-        //    TurnManager.Instance.isLocalPlayerTurn += (bool value) => { button.SetActive(value); };
+        public override void OnNetworkSpawn()
+        {
+            GameStateHandler.Instance.initializePlayers += FindingLocalPlayerStats;
+        }
 
-        //    if (TurnManager.Instance.IsCurrent)
-        //    {
-        //        button.SetActive(true);
-        //    }
-        //    NetworkManager.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
-
-
-        //}
-        //private void SceneManager_OnSceneEvent(SceneEvent sceneEvent)
-        //{
-
-        //    switch (sceneEvent.SceneEventType)
-        //    {
-
-        //        case SceneEventType.Load:
-        //            {
-        //                if (sceneEvent.SceneName == GameDataconfig.Instance.GameSceneName)
-        //                {
-        //                    Logger.Instance.LogInfo("entrou no scenemanager pelo hud stat");
-
-        //                }
-        //                break;
-        //            }
-        //    };
-        //}
+        public override void OnNetworkDespawn()
+        {
+            GameStateHandler.Instance.initializePlayers -= FindingLocalPlayerStats;
+        }
 
 
+        //TODO: Remover quando não precisar mais dos botões
         public override void OnDestroy()
         {
-            base.OnDestroy();
             TurnManager.Instance.isLocalPlayerTurn -= (bool value) => { button.SetActive(value); };
-            //playerStats.initializeStats -= InitializeHudStats;
-            //NetworkManager.SceneManager.OnSceneEvent -= SceneManager_OnSceneEvent;
 
         }
-
-
 
         private void FindingLocalPlayerStats()
         {
             PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
             foreach (PlayerStats stats in allPlayerStats)
             {
-                //
-                //Logger.Instance.LogInfo("playerId: " + stats.playerID);
-                //Logger.Instance.LogInfo("id: " + NetworkManager.Singleton.LocalClientId);
-                //if (stats.playerID == (int)NetworkManager.Singleton.LocalClientId)
-                if (stats.playerID == (int)OwnerClientId);
-                    {
-                    Logger.Instance.LogInfo("identrou: "+ OwnerClientId);
+                if (stats.IsLocalPlayer)
+                {
                     playerStats = stats;
-                    InitializeHudStats(playerStats);
+                    InitializeHudStats();
                 }
             }
         }
 
-        private void InitializeHudStats(PlayerStats playerStats)
+        private void InitializeHudStats()
         {
-            Logger.Instance.LogInfo("initialize huds");
+            Logger.Instance.LogInfo("Stats player inicializado.");
             iconJogador.color = playerStats.Cor;
             text_nomeJogador.SetText(playerStats.Nome);
-            Logger.Instance.LogInfo("playerNome: " + playerStats.Nome);
             text_eleitores.SetText(textToDisplayEleitores);
         }
 

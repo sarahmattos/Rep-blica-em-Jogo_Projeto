@@ -9,7 +9,7 @@ namespace Game.Player {
 
     public class PlayerStats : NetworkBehaviour
     {
-        //a linha abaixo pode ser acessado pelo server (e host)
+        //a linha abaixo só pode ser acessado pelo server (e host)
         //IReadOnlyDictionary<ulong, NetworkClient> clientsConnected => NetworkManager.Singleton.ConnectedClients;
         [SerializeField] private Color cor;
         [SerializeField] private int maxTerritorio;
@@ -19,9 +19,8 @@ namespace Game.Player {
         [SerializeField] private int eleitores;
 
 
-
         public int playerID => (int)OwnerClientId;
-        //public int playerID => (int)NetworkManager.Singleton.LocalClientId;
+        
         public Color Cor { get => cor; }
         public Objetivo Objetivo { get => objetivo;}
         public string Nome { get => nome;}
@@ -30,8 +29,6 @@ namespace Game.Player {
         public override void OnNetworkSpawn()
         {
             GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
-            Logger.Instance.LogInfo("subscribe initializeStats on" + this.gameObject.GetInstanceID());
-
         }
 
         public override void OnNetworkDespawn()
