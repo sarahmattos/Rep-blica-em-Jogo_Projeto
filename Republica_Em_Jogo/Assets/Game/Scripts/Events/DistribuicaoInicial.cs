@@ -3,6 +3,7 @@ using Game.Territorio;
 using Game.Tools;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using Logger = Game.Tools.Logger;
@@ -18,10 +19,17 @@ namespace Territorio
         [SerializeField] private int intervaloTempo;
         private event Action distribuicaoStart;
         private event Action distribuicaoEnd;
+        [SerializeField] private List<Bairro> todosBairros;
         private void Awake()
         {
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
             zonasTerritoriais.Shuffle();
+            
+            for (int i = 0; i < zonasTerritoriais.Length; i++)
+            {
+                todosBairros.AddAll(zonasTerritoriais[i].Bairros);
+
+            }
         }
 
         public override void OnNetworkSpawn()
@@ -53,7 +61,16 @@ namespace Territorio
                 foreach (Bairro bairro in zona.Bairros)
                 {
                     bairro.SetPlayerControl(aux);
-                    aux.NextValue(clients);
+                    Logger.Instance.LogInfo(string.Concat("aux atual: ", aux));
+                    if (aux < clients-1)
+                    {
+                        aux++;
+                    }
+                    else
+                    {
+                        aux = 0;
+                    }
+                    //aux.NextValue(clients);
                 }
             }
             distribuicaoEnd?.Invoke();

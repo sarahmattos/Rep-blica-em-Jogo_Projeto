@@ -42,10 +42,26 @@ namespace Game.Tools
             }
         }
 
-        public static void NextValue(this int value, int max)
+        public static void AddAll<T>(this IList<T> list, IList<T> newValues)
         {
-            if (value < max) value++;
-            else value = 0;
+            foreach (T values in newValues)
+            {
+                list.Add(values);
+            }
+        }
+
+        public static void NextValue(this int xis, int max)
+        {
+            if (xis < max)
+            {
+                xis = xis + 1;
+                xis++;
+            }
+            else
+            {
+                xis = 0;
+                xis++;
+            }
         }
 
 

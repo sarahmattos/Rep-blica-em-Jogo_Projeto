@@ -17527,6 +17527,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: paciencia
       objectReference: {fileID: 0}
+    - target: {fileID: 2288217624960724882, guid: d23f14fedb68a8a4fad3d36a4032ddc5, type: 3}
+      propertyPath: nome
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d23f14fedb68a8a4fad3d36a4032ddc5, type: 3}
 --- !u!1 &1582813067193029322

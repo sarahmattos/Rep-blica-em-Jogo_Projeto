@@ -19,6 +19,19 @@ namespace Game.Player {
         [SerializeField] private int eleitoresTotais;
 
 
+        private void Awake()
+        {
+            //para os clients inscreverem métodos no initializePlayers
+            GameStateHandler.Instance.initializePlayers += InitializeStats;
+
+        }
+
+        public override void OnDestroy()
+        {
+            //para os clients desinscrever métodos no initializePlayers
+            GameStateHandler.Instance.initializePlayers += InitializeStats;
+        }
+
         public int playerID => (int)OwnerClientId;
         
         public Color Cor { get => cor; }
@@ -28,6 +41,8 @@ namespace Game.Player {
         
         public override void OnNetworkSpawn()
         {
+            //host inscreve
+            //host inscreve
             GameStateHandler.Instance.initializePlayers += InitializeStats;
         }
 
@@ -49,12 +64,12 @@ namespace Game.Player {
 
 
             //TODO: isso, aqui, não ta legal. só provisório.
-            Logger.Instance.LogError(IsHost.ToString());  
-            if (IsServer)
-            {
-                GameStateHandler.Instance.ChangeStateClientRpc((int)GameState.initialDistribuition);
+            //Logger.Instance.LogError(IsHost.ToString());  
+            //if (IsServer)
+            //{
+            //    GameStateHandler.Instance.ChangeStateClientRpc((int)GameState.initialDistribuition);
 
-            }
+            //}
 
 
         }

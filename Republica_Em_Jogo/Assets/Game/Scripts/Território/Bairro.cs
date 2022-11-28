@@ -7,11 +7,20 @@ namespace Game.Territorio
 {
     public class Bairro : NetworkBehaviour
     {
-        [SerializeField] private DadoBairro dados;
+
+        [SerializeField] private string nome;
+        public NetworkVariable<int> playerIDNoControl = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        //public NetworkVariable<int> eleitores = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        public string Nome { get => nome; }
+
+
+
+
+        //[SerializeField] private DadoBairro dados;
         private Material material;
         private TMP_Text text_nome;
          
-        public DadoBairro Dados => dados;
+        //public DadoBairro Dados => dados;
 
         public event Action playerControlMuda;
 
@@ -26,16 +35,16 @@ namespace Game.Territorio
 
         private void OnEnable()
         {
-            dados.playerIDNoControl.OnValueChanged += onPlayerControlMuda;
+            playerIDNoControl.OnValueChanged += onPlayerControlMuda;
         }
         private void OnDisable()
         {
-            dados.playerIDNoControl.OnValueChanged -= onPlayerControlMuda;
+            playerIDNoControl.OnValueChanged -= onPlayerControlMuda;
         }
 
         public void SetPlayerControl(int playerID)
         {
-            dados.playerIDNoControl.Value = playerID;
+            playerIDNoControl.Value = playerID;
         }
         
 
@@ -46,18 +55,9 @@ namespace Game.Territorio
 
         private void Start()
         {
-            text_nome.SetText(dados.Nome);
+            text_nome.SetText(Nome);
 
         }
-
-        //MOVI PARA DadosBairro
-        //public int id;
-        //public string nome;
-        ////public ZonaTerritorial zonaTerritorial; // Faz sentido a zona que ter os bairros, não o inverso
-        //public Vector2 posicao;
-        //public Eleitores eleitor;
-        //public int qntEleitor;
-        //public int recurso;
 
         
 

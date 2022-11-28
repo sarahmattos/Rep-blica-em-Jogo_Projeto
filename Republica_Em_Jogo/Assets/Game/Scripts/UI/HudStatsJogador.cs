@@ -30,6 +30,7 @@ namespace Game.UI
 
         public override void OnNetworkSpawn()
         {
+            Logger.Instance.LogInfo("Atualizando no hud stats");
             GameStateHandler.Instance.initializePlayers += FindingLocalPlayerStats;
         }
 

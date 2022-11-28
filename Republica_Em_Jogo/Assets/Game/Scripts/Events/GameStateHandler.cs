@@ -23,12 +23,29 @@ namespace Game {
     public class GameStateHandler : NetworkSingleton<GameStateHandler>
     {
         private NetworkVariable<int> gameStateIndex = new NetworkVariable<int>();
-        private GameState currentState = GameState.MenuSceneLoad;
+        //private GameState currentState = GameState.MenuSceneLoad;
 
         public event Action menuSceneLoad; //stateIndex = 0;
         public event Action gameplaySceneLoad;//stateIndex = 1;
         public event Action initializePlayers;//stateIndex = 2;
         public event Action initialDistribution;//stateIndex = 3;
+
+        private void Awake()
+        {
+            gameStateIndex.OnValueChanged += teste;
+            gameStateIndex.OnValueChanged += onStateIndexChanged;
+        }
+
+        public override void OnDestroy()
+        {
+            gameStateIndex.OnValueChanged -= teste;
+            gameStateIndex.OnValueChanged -= onStateIndexChanged;
+        }
+
+        private void teste(int previousValue, int newValue)
+        {
+            Logger.Instance.LogWarning("state index atual.: " + newValue);
+        }
 
         private void Start()
         {
@@ -40,7 +57,7 @@ namespace Game {
         {
             Logger.Instance.LogWarning(string.Concat("Stado atual de jogo: ", (GameState)state));
             gameStateIndex.Value = state;
-            currentState = (GameState)state;
+            //currentState = (GameState)state;
         }
 
         //[ServerRpc(RequireOwnership = false)]
@@ -52,15 +69,14 @@ namespace Game {
 
         public override void OnNetworkSpawn()
         {
-            gameStateIndex.OnValueChanged += onStateIndexChanged;
-            if(IsServer) NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnLoadEventCompleted;
-            
+            Logger.Instance.LogInfo("Chamei no OnSpawn no Game State.");
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnLoadEventCompleted;
             gameplaySceneLoad += OnGameplaySceneLoad;
         }
         public override void OnNetworkDespawn()
         {
             gameStateIndex.OnValueChanged -= onStateIndexChanged;
-            if(IsServer) NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnLoadEventCompleted;
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnLoadEventCompleted;
             
             gameplaySceneLoad -= OnGameplaySceneLoad;
         }
@@ -110,8 +126,8 @@ namespace Game {
         {
             if(Input.GetKeyDown(KeyCode.C))
             {
-                if (!IsServer) return;
-                ChangeStateClientRpc((int)GameState.initializePlayers);
+                //if (!IsServer) return;
+                ChangeStateClientRpc((int)GameState.initialDistribuition);
             }
         }
     }

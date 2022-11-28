@@ -8,6 +8,7 @@ namespace Game.Territorio
     {
 
         [SerializeField] private Bairro[] bairros;
+        int x;
 
         public Bairro[] Bairros => bairros;
 
@@ -17,6 +18,16 @@ namespace Game.Territorio
             bairros.Shuffle();
         }
 
+        private void verificarPlayerNasZonas(ulong client)
+        {
+            foreach(Bairro bairro in bairros)
+            {
+                if(bairro.playerIDNoControl.Value == (int)client)
+                {
+                    x++;
+                }
+            }
+        }
 
 
     }
