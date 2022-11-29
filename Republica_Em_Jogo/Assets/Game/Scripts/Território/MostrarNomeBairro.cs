@@ -5,9 +5,9 @@ using UnityEngine;
 public class MostrarNomeBairro : MonoBehaviour
 {
     private Renderer renderer;
-    [SerializeField] private Material highlightMaterial;
+    //[SerializeField] private Material highlightMaterial;
     [SerializeField] private GameObject nomeBairro;
-    [SerializeField] private Material defaultMaterial;
+    //[SerializeField] private Material defaultMaterial;
     // Start is called before the first frame update
     void Start()
     {
