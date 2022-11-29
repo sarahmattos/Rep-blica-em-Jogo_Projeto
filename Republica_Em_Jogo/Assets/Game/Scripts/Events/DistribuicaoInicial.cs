@@ -23,7 +23,6 @@ namespace Territorio
         private void Awake()
         {
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
-            zonasTerritoriais.Shuffle();
         }
 
         private void Start()
@@ -33,6 +32,8 @@ namespace Territorio
                 todosBairros.AddAll(zonasTerritoriais[i].Bairros);
 
             }
+
+            todosBairros.Shuffle();
         }
 
         public override void OnNetworkSpawn()

@@ -15,7 +15,6 @@ namespace Game.Territorio
         private void Awake()
         {
             bairros = GetComponentsInChildren<Bairro>();
-            bairros.Shuffle();
         }
 
         private void verificarPlayerNasZonas(ulong client)
