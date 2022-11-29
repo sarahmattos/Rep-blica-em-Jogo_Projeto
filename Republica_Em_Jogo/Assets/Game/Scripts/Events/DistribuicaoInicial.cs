@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using Game.Player;
 using Logger = Game.Tools.Logger;
 
 namespace Territorio
@@ -20,6 +21,7 @@ namespace Territorio
         private event Action distribuicaoStart;
         private event Action distribuicaoEnd;
         [SerializeField] private List<Bairro> todosBairros;
+        [SerializeField] private PlayerStats playerStats;
         private void Awake()
         {
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
@@ -56,6 +58,7 @@ namespace Territorio
             distribuicaoStart?.Invoke();
             StartCoroutine(DefinePlayerNosBairros());
             distribuicaoEnd?.Invoke();
+            //contagemEleitor();
         }
 
 
@@ -68,8 +71,12 @@ namespace Territorio
             foreach (Bairro bairro in todosBairros)
             {
                 bairro.SetPlayerControl(aux);
-
-                
+                /*
+                if (playerStats.playerID == aux)
+                {
+                    playerStats.incrementarEleitor();
+                }
+                */
                 if (aux < clients - 1)
                 {
                     aux++;
@@ -82,6 +89,7 @@ namespace Territorio
                 yield return new WaitForSeconds(intervaloTempo);
             }
         }
+        
 
 
 

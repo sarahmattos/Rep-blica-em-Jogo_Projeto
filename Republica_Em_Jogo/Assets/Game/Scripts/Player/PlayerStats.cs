@@ -57,7 +57,7 @@ namespace Game.Player {
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
             //bairrosControl.instance.jogadoresConectados= clientsConnected.Count;
             maxTerritorio = GameDataconfig.Instance.territoriosInScene;
-            eleitoresTotais = maxTerritorio / /*clientsConnected.Count;*/  2;
+            //eleitoresTotais = maxTerritorio / /*clientsConnected.Count;*/  2;
             nome = string.Concat("jogador ", playerID);
 
 
@@ -74,7 +74,10 @@ namespace Game.Player {
 
         }
 
-
+        public void incrementarEleitor()
+        {
+            eleitoresTotais++;
+        }
 
     }
 }
