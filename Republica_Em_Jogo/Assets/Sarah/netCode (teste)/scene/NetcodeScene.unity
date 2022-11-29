@@ -19700,7 +19700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7677490024804130846, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
       propertyPath: intervaloTempo
-      value: 1
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}

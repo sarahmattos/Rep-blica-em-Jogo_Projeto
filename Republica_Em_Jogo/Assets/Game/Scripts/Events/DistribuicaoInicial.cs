@@ -16,7 +16,7 @@ namespace Territorio
     public class DistribuicaoInicial : NetworkSingleton<DistribuicaoInicial>
     {
         [SerializeField] private ZonaTerritorial[] zonasTerritoriais;
-        [SerializeField] private int intervaloTempo;
+        [SerializeField] private float intervaloTempo = 0.5f;
         private event Action distribuicaoStart;
         private event Action distribuicaoEnd;
         [SerializeField] private List<Bairro> todosBairros;
@@ -24,7 +24,10 @@ namespace Territorio
         {
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
             zonasTerritoriais.Shuffle();
-            
+        }
+
+        private void Start()
+        {
             for (int i = 0; i < zonasTerritoriais.Length; i++)
             {
                 todosBairros.AddAll(zonasTerritoriais[i].Bairros);
@@ -47,41 +50,37 @@ namespace Territorio
 
         private void DistribuiBairros()
         {
-            Logger.Instance.LogWarning(string.Concat("somos o serve: ", IsServer));
             if (!IsServer) return;
 
             distribuicaoStart?.Invoke();
-
-            int clients = NetworkManager.Singleton.ConnectedClientsIds.Count;
-            int aux = 0;
-            Logger.Instance.LogInfo("Estamos distribuindo os territórios.");
-            Logger.Instance.LogInfo(string.Concat("...", clients, " conectados."));
-            foreach (ZonaTerritorial zona in zonasTerritoriais)
-            {
-                foreach (Bairro bairro in zona.Bairros)
-                {
-                    bairro.SetPlayerControl(aux);
-                    Logger.Instance.LogInfo(string.Concat("aux atual: ", aux));
-                    if (aux < clients-1)
-                    {
-                        aux++;
-                    }
-                    else
-                    {
-                        aux = 0;
-                    }
-                    //aux.NextValue(clients);
-                }
-            }
+            StartCoroutine(DefinePlayerNosBairros());
             distribuicaoEnd?.Invoke();
         }
 
 
 
-        //private IEnumerator DefinePlayerNosBairros()
-        //{
-        //    yield return new WaitForSeconds(intervaloTempo);
-        //}
+        private IEnumerator DefinePlayerNosBairros()
+        {
+            int clients = NetworkManager.Singleton.ConnectedClientsIds.Count;
+            int aux = 0;
+
+            foreach (Bairro bairro in todosBairros)
+            {
+                bairro.SetPlayerControl(aux);
+
+                
+                if (aux < clients - 1)
+                {
+                    aux++;
+                }
+                else
+                {
+                    aux = 0;
+                }
+
+                yield return new WaitForSeconds(intervaloTempo);
+            }
+        }
 
 
 
