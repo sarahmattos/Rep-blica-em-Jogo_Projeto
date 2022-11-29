@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1218,6 +1218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 168963768}
+  - component: {fileID: 168963769}
   m_Layer: 0
   m_Name: oeste1
   m_TagString: Untagged
@@ -1244,6 +1245,19 @@ Transform:
   m_Father: {fileID: 1265116356}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &168963769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168963767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bairros: []
 --- !u!1 &169080416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,6 +1368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 182986451}
+  - component: {fileID: 182986452}
   m_Layer: 0
   m_Name: norte1
   m_TagString: Untagged
@@ -1380,6 +1395,19 @@ Transform:
   m_Father: {fileID: 1265116356}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &182986452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182986450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bairros: []
 --- !u!1 &186064870
 GameObject:
   m_ObjectHideFlags: 0
@@ -9962,7 +9990,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1496075896
 GameObject:
@@ -10840,6 +10868,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1614791237}
+  - component: {fileID: 1614791238}
   m_Layer: 0
   m_Name: centro
   m_TagString: Untagged
@@ -10866,6 +10895,19 @@ Transform:
   m_Father: {fileID: 1265116356}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1614791238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614791236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bairros: []
 --- !u!1 &1630392382
 GameObject:
   m_ObjectHideFlags: 0
@@ -10952,6 +10994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1630867882}
+  - component: {fileID: 1630867883}
   m_Layer: 0
   m_Name: norte2
   m_TagString: Untagged
@@ -10978,6 +11021,19 @@ Transform:
   m_Father: {fileID: 1265116356}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1630867883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630867881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bairros: []
 --- !u!1 &1633870713
 GameObject:
   m_ObjectHideFlags: 0
@@ -12792,6 +12848,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867154619}
+  - component: {fileID: 1867154620}
   m_Layer: 0
   m_Name: sul
   m_TagString: Untagged
@@ -12818,6 +12875,19 @@ Transform:
   m_Father: {fileID: 1265116356}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1867154620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867154618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bairros: []
 --- !u!1 &1877497738
 GameObject:
   m_ObjectHideFlags: 0
@@ -14726,6 +14796,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2075658897}
+  - component: {fileID: 2075658898}
   m_Layer: 0
   m_Name: oeste2
   m_TagString: Untagged
@@ -14752,6 +14823,19 @@ Transform:
   m_Father: {fileID: 1265116356}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2075658898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075658896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bairros: []
 --- !u!1 &2119847717
 GameObject:
   m_ObjectHideFlags: 0
@@ -15463,6 +15547,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652024813305}
   - component: {fileID: 919132147482422340}
+  - component: {fileID: 919132147482422341}
+  - component: {fileID: 919132147482422342}
   m_Layer: 0
   m_Name: senadorblend
   m_TagString: Untagged
@@ -15488,6 +15574,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132147482422341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147482422339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: "Senador Camar\xE1"
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132147482422342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147482422339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 584743359
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132147577021246
 GameObject:
   m_ObjectHideFlags: 0
@@ -15516,6 +15633,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450651862024916}
   - component: {fileID: 919132147669833839}
+  - component: {fileID: 919132147669833840}
+  - component: {fileID: 919132147669833841}
   m_Layer: 0
   m_Name: caju
   m_TagString: Untagged
@@ -15541,6 +15660,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132147669833840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147669833838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Caju
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132147669833841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147669833838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3255633447
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132147680886790
 GameObject:
   m_ObjectHideFlags: 0
@@ -15551,6 +15701,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450651952749244}
   - component: {fileID: 919132147680886791}
+  - component: {fileID: 919132147680886792}
+  - component: {fileID: 919132147680886793}
   m_Layer: 0
   m_Name: vila
   m_TagString: Untagged
@@ -15576,6 +15728,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132147680886792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147680886790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Vila Isabel
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132147680886793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147680886790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1958410920
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132147877096222
 GameObject:
   m_ObjectHideFlags: 0
@@ -15586,6 +15769,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450651798761892}
   - component: {fileID: 919132147877096223}
+  - component: {fileID: 919132147877096224}
+  - component: {fileID: 919132147877096225}
   m_Layer: 0
   m_Name: realengo
   m_TagString: Untagged
@@ -15611,6 +15796,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132147877096224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147877096222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Realengo
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132147877096225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147877096222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3562390973
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148038255017
 GameObject:
   m_ObjectHideFlags: 0
@@ -15621,6 +15837,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652576455443}
   - component: {fileID: 919132148038255018}
+  - component: {fileID: 919132148038255019}
+  - component: {fileID: 919132148038255020}
   m_Layer: 0
   m_Name: campG
   m_TagString: Untagged
@@ -15646,6 +15864,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148038255019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148038255017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Campo Grande
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148038255020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148038255017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3001787254
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148043654490
 GameObject:
   m_ObjectHideFlags: 0
@@ -15656,6 +15905,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652571402208}
   - component: {fileID: 919132148043654491}
+  - component: {fileID: 919132148043654492}
+  - component: {fileID: 919132148043654493}
   m_Layer: 0
   m_Name: bangu
   m_TagString: Untagged
@@ -15681,6 +15932,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148043654492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148043654490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Bangu
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148043654493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148043654490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2272303079
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148062634941
 GameObject:
   m_ObjectHideFlags: 0
@@ -15691,6 +15973,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652519045383}
   - component: {fileID: 919132148062634942}
+  - component: {fileID: 919132148062634943}
+  - component: {fileID: 919132148062634944}
   m_Layer: 0
   m_Name: penha
   m_TagString: Untagged
@@ -15716,6 +16000,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148062634943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148062634941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Penha
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148062634944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148062634941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2275316560
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148071289984
 GameObject:
   m_ObjectHideFlags: 0
@@ -15728,6 +16043,8 @@ GameObject:
   - component: {fileID: 3469287838675173791}
   - component: {fileID: 1711813854612288853}
   - component: {fileID: 3469287838675173792}
+  - component: {fileID: 3469287838675173793}
+  - component: {fileID: 3469287838675173794}
   m_Layer: 0
   m_Name: recreio
   m_TagString: Bairro
@@ -15745,6 +16062,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652429871542}
   - component: {fileID: 919132148176859917}
+  - component: {fileID: 919132148176859918}
+  - component: {fileID: 919132148176859919}
   m_Layer: 0
   m_Name: inhauma
   m_TagString: Untagged
@@ -15770,6 +16089,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148176859918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148176859916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: "Inha\xFAma"
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148176859919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148176859916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3155982310
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148296636615
 GameObject:
   m_ObjectHideFlags: 0
@@ -15834,6 +16184,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652356717786}
   - component: {fileID: 919132148351202913}
+  - component: {fileID: 919132148351202914}
+  - component: {fileID: 919132148351202915}
   m_Layer: 0
   m_Name: copa
   m_TagString: Untagged
@@ -15859,6 +16211,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148351202914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148351202912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Copacabana
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148351202915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148351202912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 432275507
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148428905087
 GameObject:
   m_ObjectHideFlags: 0
@@ -15869,6 +16252,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652145041605}
   - component: {fileID: 919132148428905088}
+  - component: {fileID: 919132148428905089}
+  - component: {fileID: 919132148428905090}
   m_Layer: 0
   m_Name: tijuca
   m_TagString: Untagged
@@ -15894,6 +16279,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148428905089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148428905087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Tijuca
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148428905090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148428905087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3650151884
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148466356782
 GameObject:
   m_ObjectHideFlags: 0
@@ -15922,6 +16338,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652234100505}
   - component: {fileID: 919132148515894692}
+  - component: {fileID: 919132148515894693}
+  - component: {fileID: 919132148515894694}
   m_Layer: 0
   m_Name: ipanema
   m_TagString: Untagged
@@ -15947,6 +16365,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148515894693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148515894691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Ipanema
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148515894694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148515894691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2729408743
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148520022202
 GameObject:
   m_ObjectHideFlags: 0
@@ -15975,6 +16424,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652202419420}
   - component: {fileID: 919132148547100263}
+  - component: {fileID: 919132148547100264}
+  - component: {fileID: 919132148547100265}
   m_Layer: 0
   m_Name: barra
   m_TagString: Untagged
@@ -16000,6 +16451,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148547100264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148547100262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Barra da Tijuca
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148547100265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148547100262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 118882990
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148599340441
 GameObject:
   m_ObjectHideFlags: 0
@@ -16010,6 +16492,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653055772451}
   - component: {fileID: 919132148599340442}
+  - component: {fileID: 919132148599340443}
+  - component: {fileID: 919132148599340444}
   m_Layer: 0
   m_Name: jacarepagua
   m_TagString: Untagged
@@ -16035,6 +16519,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148599340443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148599340441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: "Jacarepagu\xE1"
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148599340444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148599340441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 4104612560
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148624265255
 GameObject:
   m_ObjectHideFlags: 0
@@ -16045,6 +16560,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653164587677}
   - component: {fileID: 919132148624265256}
+  - component: {fileID: 919132148624265257}
+  - component: {fileID: 919132148624265258}
   m_Layer: 0
   m_Name: rocinha
   m_TagString: Untagged
@@ -16070,6 +16587,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148624265257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148624265255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Rocinha
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148624265258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148624265255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1529495931
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148704876169
 GameObject:
   m_ObjectHideFlags: 0
@@ -16098,6 +16646,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652967096557}
   - component: {fileID: 919132148714080856}
+  - component: {fileID: 919132148714080857}
+  - component: {fileID: 919132148714080858}
   m_Layer: 0
   m_Name: pavuna
   m_TagString: Untagged
@@ -16123,6 +16673,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148714080857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148714080855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Pavuna
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148714080858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148714080855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2557066432
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148750932468
 GameObject:
   m_ObjectHideFlags: 0
@@ -16133,6 +16714,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652936799054}
   - component: {fileID: 919132148750932469}
+  - component: {fileID: 919132148750932470}
+  - component: {fileID: 919132148750932471}
   m_Layer: 0
   m_Name: taquara
   m_TagString: Untagged
@@ -16158,6 +16741,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148750932470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148750932468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Taquara
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148750932471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148750932468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2013755367
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148778282161
 GameObject:
   m_ObjectHideFlags: 0
@@ -16168,6 +16782,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653035492875}
   - component: {fileID: 919132148778282162}
+  - component: {fileID: 919132148778282163}
+  - component: {fileID: 919132148778282164}
   m_Layer: 0
   m_Name: saoCris
   m_TagString: Untagged
@@ -16193,6 +16809,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148778282163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148778282161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: "S\xE3o Critov\xE3o"
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148778282164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148778282161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3517435213
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148810308556
 GameObject:
   m_ObjectHideFlags: 0
@@ -16203,6 +16850,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653012951414}
   - component: {fileID: 919132148810308557}
+  - component: {fileID: 919132148810308558}
+  - component: {fileID: 919132148810308559}
   m_Layer: 0
   m_Name: meier
   m_TagString: Untagged
@@ -16228,6 +16877,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148810308558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148810308556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: "M\xE9ier"
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148810308559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148810308556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3923151172
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148953456212
 GameObject:
   m_ObjectHideFlags: 0
@@ -16238,6 +16918,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652692661486}
   - component: {fileID: 919132148953456213}
+  - component: {fileID: 919132148953456214}
+  - component: {fileID: 919132148953456215}
   m_Layer: 0
   m_Name: madureira
   m_TagString: Untagged
@@ -16263,6 +16945,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148953456214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148953456212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Madureira
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148953456215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148953456212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3233177666
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148973587673
 GameObject:
   m_ObjectHideFlags: 0
@@ -16273,6 +16986,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652706477667}
   - component: {fileID: 919132148973587674}
+  - component: {fileID: 919132148973587675}
+  - component: {fileID: 919132148973587676}
   m_Layer: 0
   m_Name: centro
   m_TagString: Untagged
@@ -16298,6 +17013,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148973587675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148973587673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Centro
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148973587676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148973587673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2864870267
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132148980195181
 GameObject:
   m_ObjectHideFlags: 0
@@ -16308,6 +17054,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652700526039}
   - component: {fileID: 919132148980195182}
+  - component: {fileID: 919132148980195183}
+  - component: {fileID: 919132148980195184}
   m_Layer: 0
   m_Name: botafogo
   m_TagString: Untagged
@@ -16333,6 +17081,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132148980195183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148980195181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Botafogo
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132148980195184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148980195181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 431877666
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132149140963321
 GameObject:
   m_ObjectHideFlags: 0
@@ -16359,6 +17138,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653692951822}
   - component: {fileID: 919132149169399733}
+  - component: {fileID: 919132149169399734}
+  - component: {fileID: 919132149169399735}
   m_Layer: 0
   m_Name: ilha
   m_TagString: Untagged
@@ -16384,6 +17165,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132149169399734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149169399732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Ilha do Governador
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132149169399735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149169399732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1256477453
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132149332804729
 GameObject:
   m_ObjectHideFlags: 0
@@ -16394,6 +17206,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653522910915}
   - component: {fileID: 919132149332804730}
+  - component: {fileID: 919132149332804731}
+  - component: {fileID: 919132149332804732}
   m_Layer: 0
   m_Name: rioComp
   m_TagString: Untagged
@@ -16419,6 +17233,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &919132149332804731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149332804729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Rio Comprido
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &919132149332804732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149332804729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 333260521
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &919132149411668143
 GameObject:
   m_ObjectHideFlags: 0
@@ -18691,6 +19536,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &3469287838675173793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148071289984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63517ac757fb3a74da40cdd57dc5ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nome: Recreio
+  playerIDNoControl:
+    m_InternalValue: -1
+--- !u!114 &3469287838675173794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148071289984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 4077330071
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!33 &3631933210551099610
 MeshFilter:
   m_ObjectHideFlags: 0
