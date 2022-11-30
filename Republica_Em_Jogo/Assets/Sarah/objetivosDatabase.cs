@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
+using Game.Tools;
+using Unity.Networking.Transport;
 
-public class objetivosDatabase : MonoBehaviour
+public class objetivosDatabase : Singleton<objetivosDatabase>
 {
     public string objetivoComplemento;
     public string[] zonasNome;
     int indice;
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         zonasNome = new string[7];
-
 
         zonasNome[0] = "Sul";
         zonasNome[1] = "Norte1";
@@ -21,27 +24,14 @@ public class objetivosDatabase : MonoBehaviour
         zonasNome[6] = "Centro";
 
 
-
-
-
         indice = Random.Range(0, zonasNome.Length);
         gerarObjetivo(zonasNome[indice]);
 
     }
     
-    void OnGUI()
-    {
-        if (GUI.Button(new Rect(10, 10, 100, 50), "Instantiate!"))
-        {
-            indice = Random.Range(0, zonasNome.Length);
-            gerarObjetivo(zonasNome[indice]);
-        }
-    }
-    
     public void gerarObjetivo(string zonaComplemento)
     {
-        objetivoComplemento = "Seu objetivo é conquistar a zona "+ zonaComplemento + " acrescentando nela dois recursos de educação e de saúde";
-        Debug.Log(objetivoComplemento);
+        objetivoComplemento = "Objetivo: Conquistar a zona "+ zonaComplemento + " acrescentando nela dois recursos de educação e de saúde";
     }
     
 }
