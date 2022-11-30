@@ -52,19 +52,11 @@ namespace Game.Tools
             }
         }
 
-        public static void NextValue(this int xis, int max)
-        {
-            if (xis < max)
-            {
-                xis = xis + 1;
-                xis++;
-            }
-            else
-            {
-                xis = 0;
-                xis++;
-            }
-        }
+        //public static void NextValue(this int value, int max)
+        //{
+        //   value = (1 + value) % max; 
+
+        //}
 
 
         //public static void ShufleNetworkListPlayer(this NetworkList<PlayerData> list)

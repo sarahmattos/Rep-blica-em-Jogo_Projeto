@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Networking.Transport;
 using UnityEngine;
+using Logger = Game.Tools.Logger;
 
 public class GameDataconfig : Singleton<GameDataconfig> 
 {
@@ -19,5 +20,13 @@ public class GameDataconfig : Singleton<GameDataconfig>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.F9))
+        {
+            Logger.Instance.gameObject.SetActive(!Logger.Instance.gameObject.activeSelf);
+        }
     }
 }

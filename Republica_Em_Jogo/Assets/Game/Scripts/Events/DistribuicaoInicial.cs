@@ -11,8 +11,8 @@ using Logger = Game.Tools.Logger;
 namespace Territorio
 {
 
-    //(1) somente um jogador deve fazer a distribuicao e (2) os dados devem ser acessíveis a todos.
-    //(3) Este compartilhamento é feito nos próprios bairros e atualizados por cada jogador.
+    //(1) somente um jogador deve fazer a distribuicao e (2) os dados devem ser acessï¿½veis a todos.
+    //(3) Este compartilhamento ï¿½ feito nos prï¿½prios bairros e atualizados por cada jogador.
     public class DistribuicaoInicial : NetworkSingleton<DistribuicaoInicial>
     {
         [SerializeField] private ZonaTerritorial[] zonasTerritoriais;
@@ -67,17 +67,8 @@ namespace Territorio
 
             foreach (Bairro bairro in todosBairros)
             {
-                bairro.SetPlayerControl(aux);
-
-                
-                if (aux < clients - 1)
-                {
-                    aux++;
-                }
-                else
-                {
-                    aux = 0;
-                }
+                bairro.SetPlayerControl(aux);                
+                aux = (1 + aux) % (clients);
 
                 yield return new WaitForSeconds(intervaloTempo);
             }
