@@ -14,10 +14,10 @@ namespace Game.Player {
         [SerializeField] private Color cor;
         [SerializeField] private int maxTerritorio;
         [SerializeField] private Objetivo objetivo;
+        [SerializeField] private string objetivoCarta;
 
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
-
 
         private void Awake()
         {
@@ -36,6 +36,7 @@ namespace Game.Player {
         
         public Color Cor { get => cor; }
         public Objetivo Objetivo { get => objetivo;}
+        public string ObjetivoCarta { get => objetivoCarta; }
         public string Nome { get => nome;}
         public int EleitoresTotais { get => eleitoresTotais; }
         
@@ -59,6 +60,7 @@ namespace Game.Player {
             maxTerritorio = GameDataconfig.Instance.territoriosInScene;
             eleitoresTotais = maxTerritorio / /*clientsConnected.Count;*/  2;
             nome = string.Concat("jogador ", playerID);
+            objetivoCarta = objetivosDatabase.Instance.objetivoComplemento;
 
 
 

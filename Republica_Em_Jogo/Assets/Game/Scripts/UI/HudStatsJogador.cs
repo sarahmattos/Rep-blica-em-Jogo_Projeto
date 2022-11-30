@@ -18,6 +18,7 @@ namespace Game.UI
         [SerializeField] private Image iconJogador;
         [SerializeField] private TMP_Text text_nomeJogador;
         [SerializeField] private TMP_Text text_eleitores;
+        [SerializeField] private TMP_Text text_objetivo;
         [SerializeField] private PlayerStats playerStats;
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
 
@@ -66,6 +67,7 @@ namespace Game.UI
             iconJogador.color = playerStats.Cor;
             text_nomeJogador.SetText(playerStats.Nome);
             text_eleitores.SetText(textToDisplayEleitores);
+            text_objetivo.SetText(playerStats.ObjetivoCarta);
         }
 
     }
