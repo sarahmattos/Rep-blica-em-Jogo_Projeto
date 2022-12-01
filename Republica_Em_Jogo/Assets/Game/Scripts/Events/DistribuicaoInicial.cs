@@ -6,7 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using Logger = Game.Tools.Logger;
 
 namespace Territorio
 {
@@ -15,11 +14,13 @@ namespace Territorio
     //(3) Este compartilhamento � feito nos pr�prios bairros e atualizados por cada jogador.
     public class DistribuicaoInicial : NetworkSingleton<DistribuicaoInicial>
     {
-        [SerializeField] private ZonaTerritorial[] zonasTerritoriais;
         [SerializeField] private float intervaloTempo = 0.5f;
+        private ZonaTerritorial[] zonasTerritoriais;
+        private List<Bairro> todosBairros;
+
+
         private event Action distribuicaoStart;
         private event Action distribuicaoEnd;
-        [SerializeField] private List<Bairro> todosBairros;
         private void Awake()
         {
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();

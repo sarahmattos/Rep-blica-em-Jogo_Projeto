@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 using Game.managers;
 using TMPro;
 using Game.Player;
-using Game.Tools;
 using Logger = Game.Tools.Logger;
 
 namespace Game.UI
@@ -63,7 +60,6 @@ namespace Game.UI
 
         private void InitializeHudStats()
         {
-            Logger.Instance.LogInfo("HUD player inicializado.");
             iconJogador.color = playerStats.Cor;
             text_nomeJogador.SetText(playerStats.Nome);
             text_eleitores.SetText(textToDisplayEleitores);

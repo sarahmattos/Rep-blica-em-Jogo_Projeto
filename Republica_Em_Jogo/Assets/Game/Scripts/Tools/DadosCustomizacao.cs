@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
+//FOI USADO PARA TESTE
 public class DadosCustomizacao : Singleton<DadosCustomizacao>
 {
     [SerializeField] private List<ParNomeCor> parNomeCor;

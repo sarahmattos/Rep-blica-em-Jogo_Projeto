@@ -7,7 +7,7 @@ namespace Game.Territorio
     public class ZonaTerritorial : MonoBehaviour
     {
 
-        [SerializeField] private Bairro[] bairros;
+        private Bairro[] bairros;
         int x;
 
         public Bairro[] Bairros => bairros;

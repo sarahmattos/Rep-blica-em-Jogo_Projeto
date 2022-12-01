@@ -22,11 +22,4 @@ public class GameDataconfig : Singleton<GameDataconfig>
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F9))
-        {
-            Logger.Instance.gameObject.SetActive(!Logger.Instance.gameObject.activeSelf);
-        }
-    }
 }

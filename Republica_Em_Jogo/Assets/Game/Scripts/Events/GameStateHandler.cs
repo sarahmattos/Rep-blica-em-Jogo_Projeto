@@ -1,6 +1,5 @@
 using Game.Tools;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -124,9 +123,9 @@ namespace Game {
 
         private void Update()
         {
+            //PROVISORIO
             if(Input.GetKeyDown(KeyCode.C))
             {
-                //if (!IsServer) return;
                 ChangeStateClientRpc((int)GameState.initialDistribuition);
             }
         }

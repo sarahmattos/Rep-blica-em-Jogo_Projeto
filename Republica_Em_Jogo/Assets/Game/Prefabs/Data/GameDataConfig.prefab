@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81c1033ebf964e4e815e2e75efa4e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxConnections: 4
+  maxConnections: 1
+  menuSceneName: MainMenuScene
   gameSceneName: NetcodeScene
   playerColorOrder:
-  - {r: 1, g: 0.2584905, b: 0.2584905, a: 0}
-  - {r: 0.4837507, g: 1, b: 0.3150943, a: 0}
-  - {r: 1, g: 0, b: 0.9215689, a: 0}
-  - {r: 1, g: 0.92001164, b: 0, a: 0}
+  - {r: 1, g: 0.545098, b: 0.5803921, a: 1}
+  - {r: 0.6745098, g: 0.8705883, b: 0.6666667, a: 1}
+  - {r: 0.6627451, g: 0.8980393, b: 0.89019614, a: 1}
+  - {r: 0.9528302, g: 0.78357273, b: 0.5788893, a: 1}
+  territoriosInScene: 28

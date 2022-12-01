@@ -1200,7 +1200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bairros: []
 --- !u!1 &182986450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,7 +1248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bairros: []
 --- !u!1 &246803105
 GameObject:
   m_ObjectHideFlags: 0
@@ -10048,7 +10046,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bairros: []
 --- !u!1001 &1622686645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10268,7 +10265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bairros: []
 --- !u!1001 &1635333809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11614,7 +11610,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bairros: []
 --- !u!1 &1929002165
 GameObject:
   m_ObjectHideFlags: 0
@@ -11818,7 +11813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bairros: []
 --- !u!1 &1947548620
 GameObject:
   m_ObjectHideFlags: 0
@@ -12678,7 +12672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e84d30f22f30141a301d9d994f5110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bairros: []
 --- !u!1 &2102090408
 GameObject:
   m_ObjectHideFlags: 0
@@ -19817,7 +19810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7677490024804130846, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
       propertyPath: intervaloTempo
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
