@@ -10,17 +10,11 @@ namespace Game.Territorio
 
         [SerializeField] private string nome;
         public NetworkVariable<int> playerIDNoControl = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-        //public NetworkVariable<int> eleitores = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         public string Nome { get => nome; }
 
-
-
-
-        //[SerializeField] private DadoBairro dados;
         private Material material;
         private TMP_Text text_nome;
-         
-        //public DadoBairro Dados => dados;
+        private SetUpBairro setUpBairro;
 
         public event Action playerControlMuda;
 
@@ -29,7 +23,9 @@ namespace Game.Territorio
         {
             text_nome = GetComponentInChildren<TMP_Text>();
             material = GetComponentInChildren<MeshRenderer>().material;
+            setUpBairro = GetComponentInChildren<SetUpBairro>();
             material.color = Color.gray;
+
             
         }
 
@@ -37,6 +33,7 @@ namespace Game.Territorio
         {
             playerIDNoControl.OnValueChanged += onPlayerControlMuda;
         }
+
         private void OnDisable()
         {
             playerIDNoControl.OnValueChanged -= onPlayerControlMuda;
@@ -45,6 +42,7 @@ namespace Game.Territorio
         public void SetPlayerControl(int playerID)
         {
             playerIDNoControl.Value = playerID;
+            setUpBairro.Eleitores?.MudaValorEleitores(1);
         }
         
 
