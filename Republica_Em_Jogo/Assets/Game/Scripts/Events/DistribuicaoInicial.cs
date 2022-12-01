@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using Logger = Game.Tools.Logger;
 
 namespace Territorio
 {
@@ -16,7 +17,9 @@ namespace Territorio
     {
         [SerializeField] private float intervaloTempo = 0.5f;
         private ZonaTerritorial[] zonasTerritoriais;
-        private List<Bairro> todosBairros;
+        
+        //OBS: embora não pareca ser necessario, sem SerializeField não funciona, por algum motivo.
+        [SerializeField] private List<Bairro> todosBairros;
 
 
         private event Action distribuicaoStart;
@@ -28,13 +31,7 @@ namespace Territorio
 
         private void Start()
         {
-            for (int i = 0; i < zonasTerritoriais.Length; i++)
-            {
-                todosBairros.AddAll(zonasTerritoriais[i].Bairros);
-
-            }
-
-            todosBairros.Shuffle();
+           todosBairros = GetBairros();
         }
 
         public override void OnNetworkSpawn()
@@ -46,9 +43,7 @@ namespace Territorio
         public override void OnNetworkDespawn()
         {
             GameStateHandler.Instance.initialDistribution -= DistribuiBairros;
-
         }
-
 
         private void DistribuiBairros()
         {
@@ -59,6 +54,18 @@ namespace Territorio
             distribuicaoEnd?.Invoke();
         }
 
+        private List<Bairro> GetBairros()
+        {
+            List<Bairro> bairros = new List<Bairro>();
+            for (int i = 0; i < zonasTerritoriais.Length; i++)
+            {
+                bairros.AddAll(zonasTerritoriais[i].Bairros);
+            }
+
+            bairros.Shuffle();
+            return bairros;
+
+        }
 
 
         private IEnumerator DefinePlayerNosBairros()
@@ -68,6 +75,7 @@ namespace Territorio
 
             foreach (Bairro bairro in todosBairros)
             {
+                Logger.Instance.LogInfo(aux.ToString());
                 bairro.SetPlayerControl(aux);                
                 aux = (1 + aux) % (clients);
 
