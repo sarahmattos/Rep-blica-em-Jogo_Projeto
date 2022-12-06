@@ -13,17 +13,33 @@ namespace Game.Player {
 
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
+        float eleitoresNovos;
 
         private void Awake()
         {
-            //para os clients inscreverem métodos no initializePlayers
+            //para os clients inscreverem mï¿½todos no initializePlayers
             GameStateHandler.Instance.initializePlayers += InitializeStats;
 
         }
-
+        void OnGUI()
+        {
+            //apenas teste
+            if (GUI.Button(new Rect(10, 10, 150, 100), "Distribuicao eleitores"))
+            {
+              inicioRodada();
+             }
+        }
+        private void inicioRodada()
+         {
+             eleitoresNovos = eleitoresTotais / 2;
+             float eleitoresAdd = Mathf.Floor(eleitoresNovos);
+             eleitoresTotais += (int)eleitoresAdd;
+             Debug.Log("eleitorestotais "+eleitoresTotais);
+             
+         }
         public override void OnDestroy()
         {
-            //para os clients desinscrever métodos no initializePlayers
+            //para os clients desinscrever mï¿½todos no initializePlayers
             GameStateHandler.Instance.initializePlayers += InitializeStats;
         }
 

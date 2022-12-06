@@ -20,7 +20,7 @@ namespace Game.UI
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
 
 
-        //TODO: Remover quando não precisar mais dos botões
+        //TODO: Remover quando nï¿½o precisar mais dos botï¿½es
         private void Start()
         {
             button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
@@ -38,7 +38,7 @@ namespace Game.UI
         }
 
 
-        //TODO: Remover quando não precisar mais dos botões
+        //TODO: Remover quando nï¿½o precisar mais dos botï¿½es
         public override void OnDestroy()
         {
             TurnManager.Instance.isLocalPlayerTurn -= (bool value) => { button.SetActive(value); };

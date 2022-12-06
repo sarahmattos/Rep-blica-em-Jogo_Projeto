@@ -1,5 +1,6 @@
 using TMPro;
 using Unity.Netcode;
+using UnityEngine;
 
 namespace Game.Territorio
 {
@@ -8,7 +9,6 @@ namespace Game.Territorio
         public NetworkVariable<int> eleitores = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         private TMP_Text text_eleitores;
-
 
         private void Awake()
         {
