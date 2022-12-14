@@ -15,10 +15,17 @@ namespace Game.Player {
         [SerializeField] private int eleitoresTotais;
         float eleitoresNovos;
 
+        public int playerID => (int)OwnerClientId;
+
+        public Color Cor { get => cor; }
+        public Objetivo Objetivo { get => objetivo; }
+        public string ObjetivoCarta { get => objetivoCarta; }
+        public string Nome { get => nome; }
+        public int EleitoresTotais { get => eleitoresTotais; }
         private void Awake()
         {
             //para os clients inscreverem m�todos no initializePlayers
-            GameStateHandler.Instance.initializePlayers += InitializeStats;
+            GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
 
         }
         void OnGUI()
@@ -40,25 +47,19 @@ namespace Game.Player {
         public override void OnDestroy()
         {
             //para os clients desinscrever m�todos no initializePlayers
-            GameStateHandler.Instance.initializePlayers += InitializeStats;
+            GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
         }
 
-        public int playerID => (int)OwnerClientId;
-        
-        public Color Cor { get => cor; }
-        public Objetivo Objetivo { get => objetivo;}
-        public string ObjetivoCarta { get => objetivoCarta; }
-        public string Nome { get => nome;}
-        public int EleitoresTotais { get => eleitoresTotais; }
+
         
         public override void OnNetworkSpawn()
         {
-            GameStateHandler.Instance.initializePlayers += InitializeStats;
+            GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
         }
 
         public override void OnNetworkDespawn()
         {
-            GameStateHandler.Instance.initializePlayers -= InitializeStats;
+            GameStateHandler.Instance.gameplaySceneLoad -= InitializeStats;
 
         }
 

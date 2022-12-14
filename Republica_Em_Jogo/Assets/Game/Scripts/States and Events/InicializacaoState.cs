@@ -8,12 +8,12 @@ using Unity.Netcode;
 using UnityEngine;
 using Logger = Game.Tools.Logger;
 
-namespace Territorio
+namespace Game
 {
 
     //(1) somente um jogador deve fazer a distribuicao e (2) os dados devem ser acess�veis a todos.
     //(3) Este compartilhamento � feito nos pr�prios bairros e atualizados por cada jogador.
-    public class DistribuicaoInicial : NetworkSingleton<DistribuicaoInicial>
+    public class InicializacaoState : NetworkBehaviour
     {
         [SerializeField] private float intervaloTempo = 0.5f;
         private ZonaTerritorial[] zonasTerritoriais;
@@ -22,8 +22,8 @@ namespace Territorio
         [SerializeField] private List<Bairro> todosBairros;
 
 
-        private event Action distribuicaoStart;
-        private event Action distribuicaoEnd;
+        private event Action inicializacaoStart;
+        private event Action inicializacaoEnd;
         private void Awake()
         {
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
@@ -36,22 +36,20 @@ namespace Territorio
 
         public override void OnNetworkSpawn()
         {
-            GameStateHandler.Instance.initialDistribution += DistribuiBairros;
+            GameStateHandler.Instance.initializeTerritorio += DistribuiBairros;
 
         }
 
         public override void OnNetworkDespawn()
         {
-            GameStateHandler.Instance.initialDistribution -= DistribuiBairros;
+            GameStateHandler.Instance.initializeTerritorio -= DistribuiBairros;
         }
 
         private void DistribuiBairros()
         {
             if (!IsServer) return;
-
-            distribuicaoStart?.Invoke();
             StartCoroutine(DefinePlayerNosBairros());
-            distribuicaoEnd?.Invoke();
+
         }
 
         private List<Bairro> GetBairros()
@@ -73,14 +71,24 @@ namespace Territorio
             int clients = NetworkManager.Singleton.ConnectedClientsIds.Count;
             int aux = 0;
 
+
+            inicializacaoStart?.Invoke();
+            Logger.Instance.LogInfo("distribuição COMECOU.");
             foreach (Bairro bairro in todosBairros)
             {
-                Logger.Instance.LogInfo(aux.ToString());
                 bairro.SetPlayerControl(aux);                
                 aux = (1 + aux) % (clients);
 
                 yield return new WaitForSeconds(intervaloTempo);
             }
+
+            Logger.Instance.LogInfo("distribuição TERMINOU.");
+
+            inicializacaoEnd?.Invoke();
+            GameStateHandler.Instance.ChangeStateClientRpc((int)GameState.DESENVOLVIMENTO);
+            //TurnManager.Instance.ChangePlayerTurnServerRpc(0);  
+            //TurnManager.Instance.NextTurnServerRpc();
+
         }
 
 

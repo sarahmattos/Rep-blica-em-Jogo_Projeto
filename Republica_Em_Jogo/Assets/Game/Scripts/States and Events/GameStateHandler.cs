@@ -1,5 +1,6 @@
 using Game.Tools;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -10,13 +11,13 @@ namespace Game {
 
     public enum GameState
     {
-        MenuSceneLoad,
-        gameplaySceneLoad,
-        initializePlayers,
-        initialDistribuition,
-        //loopGame,
-        //eleicoes,
-        //endGame
+        MENU_SCENE_LOAD,
+        GAMEPLAY_SCENE_LOAD,
+        //INITIALIZE_PLAYERS,
+        INITIALIZE_TERRITORIO,
+        DESENVOLVIMENTO,
+        ELEICOES
+
     }
 
     public class GameStateHandler : NetworkSingleton<GameStateHandler>
@@ -26,25 +27,19 @@ namespace Game {
 
         public event Action menuSceneLoad; //stateIndex = 0;
         public event Action gameplaySceneLoad;//stateIndex = 1;
-        public event Action initializePlayers;//stateIndex = 2;
-        public event Action initialDistribution;//stateIndex = 3;
-
+        public event Action initializeTerritorio;//stateIndex = 2;
+        public event Action desenvolvimento; // stateIndex = 3;
+        public event Action eleicoes; //stateIndex = 4;
         private void Awake()
         {
-            gameStateIndex.OnValueChanged += teste;
             gameStateIndex.OnValueChanged += onStateIndexChanged;
         }
 
         public override void OnDestroy()
         {
-            gameStateIndex.OnValueChanged -= teste;
             gameStateIndex.OnValueChanged -= onStateIndexChanged;
         }
 
-        private void teste(int previousValue, int newValue)
-        {
-            Logger.Instance.LogWarning("state index atual.: " + newValue);
-        }
 
         private void Start()
         {
@@ -56,7 +51,7 @@ namespace Game {
         {
             Logger.Instance.LogWarning(string.Concat("Stado atual de jogo: ", (GameState)state));
             gameStateIndex.Value = state;
-            //currentState = (GameState)state;
+
         }
 
         //[ServerRpc(RequireOwnership = false)]
@@ -68,7 +63,6 @@ namespace Game {
 
         public override void OnNetworkSpawn()
         {
-            Logger.Instance.LogInfo("Chamei no OnSpawn no Game State.");
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnLoadEventCompleted;
             gameplaySceneLoad += OnGameplaySceneLoad;
         }
@@ -91,10 +85,10 @@ namespace Game {
                     gameplaySceneLoad?.Invoke();
                     break;
                 case 2:
-                    initializePlayers?.Invoke();
+                    initializeTerritorio?.Invoke();
                     break;
                 case 3:
-                    initialDistribution?.Invoke();
+                    desenvolvimento?.Invoke();
                     break;
             }
 
@@ -104,31 +98,32 @@ namespace Game {
         {
             if (sceneName == GameDataconfig.Instance.MenuSceneName)
             {
-                ChangeStateClientRpc((int)GameState.MenuSceneLoad);
+                ChangeStateClientRpc((int)GameState.MENU_SCENE_LOAD);
             }
 
             if (sceneName == GameDataconfig.Instance.GameSceneName)
             {
-                ChangeStateClientRpc((int)GameState.gameplaySceneLoad);
+                ChangeStateClientRpc((int)GameState.GAMEPLAY_SCENE_LOAD);
             }
         }
 
         private void OnGameplaySceneLoad()
         {
-
             if (!IsServer) return;
-            ChangeStateClientRpc((int)GameState.initializePlayers);
+            StartCoroutine(Inicializacao_Territorio());
         }
 
-
-        private void Update()
+        private IEnumerator Inicializacao_Territorio()
         {
-            //PROVISORIO
-            if(Input.GetKeyDown(KeyCode.C))
-            {
-                ChangeStateClientRpc((int)GameState.initialDistribuition);
-            }
+            yield return new WaitForSeconds(1);
+            ChangeStateClientRpc((int)GameState.INITIALIZE_TERRITORIO);
+
         }
+
+
+
+
+
     }
 
 }

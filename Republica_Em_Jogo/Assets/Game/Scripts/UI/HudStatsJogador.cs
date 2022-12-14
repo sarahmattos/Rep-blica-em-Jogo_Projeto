@@ -1,7 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
-using Game.managers;
 using TMPro;
 using Game.Player;
 using Logger = Game.Tools.Logger;
@@ -23,18 +22,18 @@ namespace Game.UI
         //TODO: Remover quando n�o precisar mais dos bot�es
         private void Start()
         {
-            button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
+            //button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
         }
 
         public override void OnNetworkSpawn()
         {
-            Logger.Instance.LogInfo("Atualizando no hud stats");
-            GameStateHandler.Instance.initializePlayers += FindingLocalPlayerStats;
+            GameStateHandler.Instance.initializeTerritorio += FindingLocalPlayerStats;
+            //button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
         }
 
         public override void OnNetworkDespawn()
         {
-            GameStateHandler.Instance.initializePlayers -= FindingLocalPlayerStats;
+            GameStateHandler.Instance.initializeTerritorio -= FindingLocalPlayerStats;
         }
 
 

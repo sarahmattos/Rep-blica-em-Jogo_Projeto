@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7222468533012933979}
   - component: {fileID: 7222468533012933978}
   - component: {fileID: 7222468533012933981}
+  - component: {fileID: 1930919784}
   m_Layer: 0
   m_Name: GameStates
   m_TagString: Untagged
@@ -61,3 +62,15 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &1930919784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7222468533012933980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8624652aca55de40ba9df91c1818447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
