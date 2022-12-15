@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e818477c177f1043a34d339bb589bed, type: 3}
+  m_Name: projetoAtributos
+  m_EditorClassIdentifier: 
+  proposta:
+  - "Aumento da verba na educa\xE7\xE3o elevando o repasse para creches e escolas
+    na zona escolhida: "
+  - 'Amplia o direito de meia-entrada para garis e enfermeiras municipais na zona
+    escolhida:  '
+  - "Aumenta verba para constru\xE7\xE3o e manuten\xE7\xE3o de \xE1reas de lazer
+    na zona escolhida: "
+  - "Constru\xE7\xE3o de um conjunto habitacional na zona escolhida: "
+  - "Dobra o n\xFAmero de banheiros qu\xEDmicos no per\xEDodo do carnaval na zona
+    escolhida: "
+  numRecompensa: 010000000200000003000000
+  recompensaText: 'Eleitores e cartas ganhas se aprovado: '
