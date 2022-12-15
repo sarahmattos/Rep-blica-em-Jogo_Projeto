@@ -43,6 +43,14 @@ namespace Game.Tools
                 Logger.Instance.LogInfo("networkM.connecteds: " + NetworkManager.Singleton.ConnectedClientsIds.Count);
             }
 
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                for (int i = 0; i < TurnManager.Instance.playersOrder.Count; i++)
+                {
+                    Logger.Instance.LogInfo("player: " + TurnManager.Instance.playersOrder[i]);
+                }
+            }
+
 
 
             TimeUpdate();
