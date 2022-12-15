@@ -9,8 +9,7 @@ namespace Game {
     {
 
 
-        //algum erro sinalizado pra esta networklist e networkvariable
-        private NetworkList<int> playersOrder = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkList<int> playersOrder = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         private NetworkVariable<int> currentIndex = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private NetworkVariable<int> connectedClientCount = new NetworkVariable<int>();
         private NetworkVariable<int> currentPlayer = new NetworkVariable<int>();
@@ -77,6 +76,7 @@ namespace Game {
 
         private void GeneratePlayerOrder()
         {
+            if (!IsHost) return;
             Logger.Instance.LogInfo("generatying pdrer: " + GetConnectedClientCount);
 
             List<int> allClientID = new List<int>();
@@ -86,11 +86,11 @@ namespace Game {
             }
 
             allClientID.Shuffle();
-
             for (int i = 0; i < allClientID.Count; i++)
             {
+                Logger.Instance.LogInfo("id: " + allClientID[i]);
                 playersOrder.Add(allClientID[i]);
-                Logger.Instance.LogWarning(allClientID[i].ToString());
+
             }
 
         }
