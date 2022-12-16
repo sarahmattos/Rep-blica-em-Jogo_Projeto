@@ -58,7 +58,7 @@ public class PlayerNetwork : NetworkBehaviour
     {
         
         //chatInput = GameObject.FindGameObjectsWithTag("inputField");
-        if (!IsOwner) return;
+            
         nameId.Value = netManager.name;
         if (Input.GetKeyDown(KeyCode.Return))
         {
