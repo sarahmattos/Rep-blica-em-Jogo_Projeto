@@ -9,7 +9,7 @@ using Unity.Collections;
 
 public class Projeto : NetworkBehaviour
 {
-    public NetworkVariable<FixedString4096Bytes > projetoNetworkTexto = new NetworkVariable<FixedString4096Bytes >("", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private NetworkVariable<FixedString4096Bytes > projetoNetworkTexto = new NetworkVariable<FixedString4096Bytes >("ola", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public ProjetoObject projetoManager;
     [SerializeField] private TMP_Text text_projetoCarta;
     public string proposta;
@@ -19,14 +19,18 @@ public class Projeto : NetworkBehaviour
     public void sortearProjeto(){
         proposta = projetoManager.proposta[Random.Range(0, projetoManager.proposta.Length)];
         numRecompensa = projetoManager.numRecompensa[Random.Range(0, projetoManager.numRecompensa.Length)];
-        recompensaText += projetoManager.recompensaText;
+        recompensaText = projetoManager.recompensaText;
+         Debug.Log("projeto: "+projetoNetworkTexto.Value);
+        if (IsOwner) {
         projetoNetworkTexto.Value=(proposta +"\n"+ "\n"+ recompensaText+""+numRecompensa.ToString());
         Debug.Log("projeto: "+projetoNetworkTexto.Value);
+        }
     }
      private void OnEnable()
     {
         projetoNetworkTexto.OnValueChanged += (FixedString4096Bytes  previousValue, FixedString4096Bytes  newValue) =>
         {
+            Debug.Log("newValue.ToString()");
             text_projetoCarta.text =  newValue.ToString();
         };
     }
@@ -34,4 +38,21 @@ public class Projeto : NetworkBehaviour
         {
            text_projetoCarta.text =  newValue.ToString();
         }
+        private void Update()
+    {
+        
+        //chatInput = GameObject.FindGameObjectsWithTag("inputField");
+            if (!IsOwner) return;
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+           proposta = projetoManager.proposta[Random.Range(0, projetoManager.proposta.Length)];
+        numRecompensa = projetoManager.numRecompensa[Random.Range(0, projetoManager.numRecompensa.Length)];
+        recompensaText = projetoManager.recompensaText;
+         Debug.Log("projeto: "+projetoNetworkTexto.Value);
+        //if (IsOwner) {
+        projetoNetworkTexto.Value=(proposta +"\n"+ "\n"+ recompensaText+""+numRecompensa.ToString());
+        Debug.Log("projeto: "+projetoNetworkTexto.Value);
+        //}
+        }
+    }
 }
