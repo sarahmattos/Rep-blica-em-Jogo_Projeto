@@ -12,7 +12,7 @@ namespace Game {
         public NetworkList<int> playersOrder = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         private NetworkVariable<int> currentIndex = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private NetworkVariable<int> connectedClientCount = new NetworkVariable<int>();
-        private NetworkVariable<int> currentPlayer = new NetworkVariable<int>();
+        private NetworkVariable<int> currentPlayer = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         public int GetCurrentPlayer => currentPlayer.Value;
         public int GetConnectedClientCount => connectedClientCount.Value;
         public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == GetCurrentPlayer);
@@ -21,26 +21,14 @@ namespace Game {
 
         private void Awake()
         {
-            Logger.Instance.LogWarning("we SERVER"+(!IsServer) );
+            Logger.Instance.LogInfo("esse awake)");
             currentIndex.OnValueChanged += UpdatePlayerTurn;
+            Logger.Instance.LogInfo("mas só eu sóu o host awake)");
+
             GameStateHandler.Instance.gameplaySceneLoad += UpdateClientscount;
             GameStateHandler.Instance.desenvolvimento += GeneratePlayerOrder;
         }
 
-
-
-        //só o server que fáz as atualizações 
-        public override void OnNetworkSpawn()
-        {
-            //currentIndex.OnValueChanged += UpdateCurrentPlayer;
-            Logger.Instance.LogWarning("in onNetworkSpawn");
-        }
-
-        public override void OnNetworkDespawn()
-        {
-            //currentIndex.OnValueChanged -= UpdateCurrentPlayer;
-
-        }
 
         public override void OnDestroy()
         {
@@ -51,8 +39,8 @@ namespace Game {
         }
         private void UpdateClientscount()
         {
-            //if (!IsHost) return;
-            Logger.Instance.LogWarning("updateClientcont heeeeeeeeeeeeeeeee");
+            if (!IsHost) return;
+            Logger.Instance.LogInfo("souo host e to atualizando clientcount");
             connectedClientCount.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
 
         }
@@ -68,8 +56,9 @@ namespace Game {
         //    currentIndex.OnValueChanged -= UpdatePlayerTurn;
         //}
 
-        private void UpdatePlayerTurn(int _, int _2)
+        private void UpdatePlayerTurn(int previousValue, int nextValue)
         {
+            Logger.Instance.LogInfo("UPDATE PALYER TURN!");
             currentPlayer.Value =  playersOrder[currentIndex.Value];
             isLocalPlayerTurn?.Invoke(LocalIsCurrent);
         }
@@ -113,7 +102,7 @@ namespace Game {
 
             //currentIndex.Value =  (1 + currentIndex.Value) % GetConnectedClientCount;
 
-            if (GetConnectedClientCount != 0)
+            if (GetConnectedClientCount > 1)
             {
                 if (currentIndex.Value < GetConnectedClientCount - 1)
                 {

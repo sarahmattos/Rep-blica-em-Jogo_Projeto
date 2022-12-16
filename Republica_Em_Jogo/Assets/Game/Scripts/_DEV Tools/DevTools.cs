@@ -51,6 +51,11 @@ namespace Game.Tools
                 }
             }
 
+            if(Input.GetKeyDown(KeyCode.M))
+            {
+                Logger.Instance.LogInfo("current: " + TurnManager.Instance.GetCurrentPlayer);
+                Logger.Instance.LogInfo("local: " + TurnManager.Instance.LocalIsCurrent);
+            }
 
 
             TimeUpdate();
