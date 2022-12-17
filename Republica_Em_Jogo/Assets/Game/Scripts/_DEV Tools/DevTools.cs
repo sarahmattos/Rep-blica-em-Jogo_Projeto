@@ -40,26 +40,11 @@ namespace Game.Tools
                 Logger.Instance.LogInfo(" connected count: " + TurnManager.Instance.GetConnectedClientCount);
                 Logger.Instance.LogInfo("currentPlayer:" + TurnManager.Instance.GetCurrentPlayer);
                 Logger.Instance.LogInfo("Player atual?: " + TurnManager.Instance.LocalIsCurrent);
-                Logger.Instance.LogInfo("networkM.connecteds: " + NetworkManager.Singleton.ConnectedClientsIds.Count);
             }
 
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                for (int i = 0; i < TurnManager.Instance.playersOrder.Count; i++)
-                {
-                    Logger.Instance.LogInfo("player: " + TurnManager.Instance.playersOrder[i]);
-                }
-            }
-
-            if(Input.GetKeyDown(KeyCode.M))
-            {
-                Logger.Instance.LogInfo("current: " + TurnManager.Instance.GetCurrentPlayer);
-                Logger.Instance.LogInfo("local: " + TurnManager.Instance.LocalIsCurrent);
-            }
-
+       
 
             TimeUpdate();
-
 
         }
 

@@ -82,7 +82,6 @@ namespace Game
         public void ChangeDesenvStateServerRpc(int state)
         {
 
-            Logger.Instance.LogWarning(string.Concat("Player ",TurnManager.Instance.GetCurrentPlayer, ", no Stado ", (DesenvolState)state));
             desenvStateIndex.Value = state;
         }
 
@@ -94,10 +93,9 @@ namespace Game
                 desenvStateIndex.Value = desenvStateIndex.Value + 1;
             } else
             {
-                //marcando aqui
-                Logger.Instance.LogWarning("next turn");
+
+                //TODO: aqui não ta legal
                 TurnManager.Instance.NextTurnServerRpc();
-                //marcando aqui
 
 
                 desenvStateIndex.Value = 0;

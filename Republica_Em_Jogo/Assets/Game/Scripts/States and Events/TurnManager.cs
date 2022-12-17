@@ -8,8 +8,9 @@ namespace Game {
     public class TurnManager : NetworkSingleton<TurnManager>
     {
 
-
-        public NetworkList<int> playersOrder = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        //Lembrar que: apenas Servers/Owners podem alterar NetworkVariables.
+        //Para fazer isso via client, pode ser usado métodos ServerRpc, assim como é feito nesta classe
+        private NetworkList<int> playersOrder = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private NetworkVariable<int> currentIndex = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private NetworkVariable<int> connectedClientCount = new NetworkVariable<int>();
         private NetworkVariable<int> currentPlayer = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -19,11 +20,9 @@ namespace Game {
 
         public event Action<bool> isLocalPlayerTurn;
 
-        private void Awake()
+        private void Start()
         {
-            Logger.Instance.LogInfo("esse awake)");
             currentIndex.OnValueChanged += UpdatePlayerTurn;
-            Logger.Instance.LogInfo("mas só eu sóu o host awake)");
 
             GameStateHandler.Instance.gameplaySceneLoad += UpdateClientscount;
             GameStateHandler.Instance.desenvolvimento += GeneratePlayerOrder;
@@ -58,15 +57,12 @@ namespace Game {
 
         private void UpdatePlayerTurn(int previousValue, int nextValue)
         {
-            Logger.Instance.LogInfo("UPDATE PALYER TURN!");
-            currentPlayer.Value =  playersOrder[currentIndex.Value];
             isLocalPlayerTurn?.Invoke(LocalIsCurrent);
         }
 
         private void GeneratePlayerOrder()
         {
             if (!IsHost) return;
-            Logger.Instance.LogInfo("generatying pdrer: " + GetConnectedClientCount);
 
             List<int> allClientID = new List<int>();
             for (int i = 0; i < GetConnectedClientCount; i++)
@@ -84,7 +80,7 @@ namespace Game {
 
         }
 
-        [ServerRpc(RequireOwnership = false)]
+        [ServerRpc(RequireOwnership =false)]
         public void ChangePlayerTurnServerRpc(int value)
         {
             currentIndex.Value = value;
@@ -97,9 +93,7 @@ namespace Game {
         [ServerRpc(RequireOwnership = false)]
         public void NextTurnServerRpc()
         {
-            // this will cause a replication over the network
-            // and ultimately invoke `OnValueChanged` on receivers
-
+            currentIndex.Value++;
             //currentIndex.Value =  (1 + currentIndex.Value) % GetConnectedClientCount;
 
             if (GetConnectedClientCount > 1)
@@ -118,6 +112,8 @@ namespace Game {
                 currentIndex.Value = 0;
 
             }
+
+            currentPlayer.Value = playersOrder[currentIndex.Value];
 
             Logger.Instance.LogWarning(string.Concat("Player ", GetCurrentPlayer+" vai jogar."));
 
