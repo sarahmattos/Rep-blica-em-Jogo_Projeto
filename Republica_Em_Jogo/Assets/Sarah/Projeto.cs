@@ -18,38 +18,13 @@ public class Projeto : NetworkBehaviour
    
     //Client cashing
     private string clientDados;
-     private string textoTotal="ola";
+     private string textoTotal="";
 
-    private void UpdateServer() {
-        projetoNetworkTexto.Value = textoTotal;
-    
-    }
-
-    private void UpdateClient() {
-    if (clientDados != textoTotal )
-         {
-        clientDados = textoTotal;
-        UpdateClientPositionServerRpc(clientDados); 
-        } 
-        
-    }
 
 [ServerRpc(RequireOwnership = false)]
     public void UpdateClientPositionServerRpc(string clientDados)
      {
-    textoTotal = clientDados; 
-    }
-
-
-
-
-void Update()
-    {
-        if (NetworkManager.Singleton.IsServer) {
-        UpdateServer(); }
-        if (NetworkManager.Singleton.IsClient) {
-        UpdateClient(); } 
-        
+     projetoNetworkTexto.Value = clientDados;
     }
 
     public void sortearProjeto(){
@@ -57,13 +32,21 @@ void Update()
         numRecompensa = projetoManager.numRecompensa[Random.Range(0, projetoManager.numRecompensa.Length)];
         recompensaText = projetoManager.recompensaText;
         textoTotal= proposta +"\n"+ "\n"+ recompensaText+""+numRecompensa.ToString();
+        atualizarProjeto(textoTotal);
         
+    }
+    public void atualizarProjeto(string textoTotal2){
+        if(NetworkManager.Singleton.IsClient){  
+            UpdateClientPositionServerRpc(textoTotal2);
+        }
+        if (NetworkManager.Singleton.IsServer){
+            projetoNetworkTexto.Value = textoTotal2;
+        }
     }
      private void OnEnable()
     {
         projetoNetworkTexto.OnValueChanged += (FixedString4096Bytes  previousValue, FixedString4096Bytes  newValue) =>
         {
-            Debug.Log("newValue.ToString()");
             text_projetoCarta.text =  newValue.ToString();
         };
     }
