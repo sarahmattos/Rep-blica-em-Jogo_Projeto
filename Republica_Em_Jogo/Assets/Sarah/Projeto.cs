@@ -9,22 +9,55 @@ using Unity.Collections;
 
 public class Projeto : NetworkBehaviour
 {
-    private NetworkVariable<FixedString4096Bytes > projetoNetworkTexto = new NetworkVariable<FixedString4096Bytes >("ola", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private NetworkVariable<FixedString4096Bytes> projetoNetworkTexto = new NetworkVariable<FixedString4096Bytes>();
     public ProjetoObject projetoManager;
     [SerializeField] private TMP_Text text_projetoCarta;
     public string proposta;
     public int numRecompensa;
     public string recompensaText;
    
+    //Client cashing
+    private string clientDados;
+     private string textoTotal="ola";
+
+    private void UpdateServer() {
+        projetoNetworkTexto.Value = textoTotal;
+    
+    }
+
+    private void UpdateClient() {
+    if (clientDados != textoTotal )
+         {
+        clientDados = textoTotal;
+        UpdateClientPositionServerRpc(clientDados); 
+        } 
+        
+    }
+
+[ServerRpc(RequireOwnership = false)]
+    public void UpdateClientPositionServerRpc(string clientDados)
+     {
+    textoTotal = clientDados; 
+    }
+
+
+
+
+void Update()
+    {
+        if (NetworkManager.Singleton.IsServer) {
+        UpdateServer(); }
+        if (NetworkManager.Singleton.IsClient) {
+        UpdateClient(); } 
+        
+    }
+
     public void sortearProjeto(){
         proposta = projetoManager.proposta[Random.Range(0, projetoManager.proposta.Length)];
         numRecompensa = projetoManager.numRecompensa[Random.Range(0, projetoManager.numRecompensa.Length)];
         recompensaText = projetoManager.recompensaText;
-         Debug.Log("projeto: "+projetoNetworkTexto.Value);
-        if (IsOwner) {
-        projetoNetworkTexto.Value=(proposta +"\n"+ "\n"+ recompensaText+""+numRecompensa.ToString());
-        Debug.Log("projeto: "+projetoNetworkTexto.Value);
-        }
+        textoTotal= proposta +"\n"+ "\n"+ recompensaText+""+numRecompensa.ToString();
+        
     }
      private void OnEnable()
     {
@@ -34,25 +67,5 @@ public class Projeto : NetworkBehaviour
             text_projetoCarta.text =  newValue.ToString();
         };
     }
-    private void onProjetoMuda(int previousValue, int newValue)
-        {
-           text_projetoCarta.text =  newValue.ToString();
-        }
-        private void Update()
-    {
-        
-        //chatInput = GameObject.FindGameObjectsWithTag("inputField");
-            if (!IsOwner) return;
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-           proposta = projetoManager.proposta[Random.Range(0, projetoManager.proposta.Length)];
-        numRecompensa = projetoManager.numRecompensa[Random.Range(0, projetoManager.numRecompensa.Length)];
-        recompensaText = projetoManager.recompensaText;
-         Debug.Log("projeto: "+projetoNetworkTexto.Value);
-        //if (IsOwner) {
-        projetoNetworkTexto.Value=(proposta +"\n"+ "\n"+ recompensaText+""+numRecompensa.ToString());
-        Debug.Log("projeto: "+projetoNetworkTexto.Value);
-        //}
-        }
-    }
+   
 }
