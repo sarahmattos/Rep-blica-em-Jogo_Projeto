@@ -97,22 +97,28 @@ public class Projeto : NetworkBehaviour
         {
             text_avisoProjeto.text = "Aguardando votação... "+newValue.ToString();
         };
-       /* boolNetwork.OnValueChanged += (bool  previousValue, bool  newValue) =>
+        boolNetwork.OnValueChanged += (bool  previousValue, bool  newValue) =>
         {
              if(newValue==true){
                 projetoUI.SetActive(true);
+                verProjetoBtn.SetActive(false);
              }
-             if(newValue==false){
-                projetoUI.SetActive(true);
+            
+        };
+        boolNetwork2.OnValueChanged += (bool  previousValue, bool  newValue) =>
+        {
+             if(newValue==true){
+                bntsUi.SetActive(false);
              }
+            
         };
 
-        */
+        
         
 
     }
     private void Update(){
-        if(NetworkManager.Singleton.IsClient){
+        /*if(NetworkManager.Singleton.IsClient){
         //Debug.Log(projetoNetworkTexto.Value);
         //Debug.Log(boolNetwork.Value);
         }
@@ -132,7 +138,7 @@ public class Projeto : NetworkBehaviour
                 falseUIServerRpc();
               }
         }
-
+   
         if(boolNetwork2.Value==true){
 
             bntsUi.SetActive(false);
@@ -145,6 +151,7 @@ public class Projeto : NetworkBehaviour
                 false2UIServerRpc();
               }
         }
+         */
 
     }
     public void escolherZona(string zonaName){
