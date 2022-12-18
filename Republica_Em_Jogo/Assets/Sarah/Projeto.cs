@@ -10,21 +10,60 @@ using Unity.Collections;
 public class Projeto : NetworkBehaviour
 {
     private NetworkVariable<FixedString4096Bytes> projetoNetworkTexto = new NetworkVariable<FixedString4096Bytes>();
+    private NetworkVariable<FixedString4096Bytes> zonaNetworkName = new NetworkVariable<FixedString4096Bytes>();
+    private NetworkVariable<bool> boolNetwork = new NetworkVariable<bool>(false);
+    private NetworkVariable<bool> boolNetwork2 = new NetworkVariable<bool>(false);
     public ProjetoObject projetoManager;
     [SerializeField] private TMP_Text text_projetoCarta;
+    [SerializeField] private TMP_Text text_avisoProjeto;
+    public GameObject projetoUI;
+    public GameObject restoUI;
+    public GameObject bntsUi;
+    public GameObject verProjetoBtn;
     public string proposta;
     public int numRecompensa;
-    public string recompensaText;
+    public string recompensaText, zonaNameLocal;
    
     //Client cashing
     private string clientDados;
      private string textoTotal="";
 
 
-[ServerRpc(RequireOwnership = false)]
+   
+    [ServerRpc(RequireOwnership = false)]
+    public void UpdateZonaServerRpc(string clientDados)
+     {
+        zonaNetworkName.Value =clientDados;
+        Debug.Log(zonaNetworkName.Value);
+        
+    }
+//
+    [ServerRpc(RequireOwnership = false)]
     public void UpdateClientPositionServerRpc(string clientDados)
      {
      projetoNetworkTexto.Value = clientDados;
+     
+    }
+        
+    [ServerRpc(RequireOwnership = false)]
+    public void falseUIServerRpc()
+     {
+        boolNetwork.Value= false;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void trueUIServerRpc()
+     {
+        boolNetwork.Value= true;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void true2UIServerRpc()
+     {
+        boolNetwork2.Value= true;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void false2UIServerRpc()
+     {
+        boolNetwork2.Value= false;
     }
 
     public void sortearProjeto(){
@@ -38,9 +77,14 @@ public class Projeto : NetworkBehaviour
     public void atualizarProjeto(string textoTotal2){
         if(NetworkManager.Singleton.IsClient){  
             UpdateClientPositionServerRpc(textoTotal2);
+            trueUIServerRpc();
+            Debug.Log("cliente");
         }
         if (NetworkManager.Singleton.IsServer){
             projetoNetworkTexto.Value = textoTotal2;
+            boolNetwork.Value= true;
+            Debug.Log("server");
+            
         }
     }
      private void OnEnable()
@@ -49,6 +93,74 @@ public class Projeto : NetworkBehaviour
         {
             text_projetoCarta.text =  newValue.ToString();
         };
+        zonaNetworkName.OnValueChanged += (FixedString4096Bytes  previousValue, FixedString4096Bytes  newValue) =>
+        {
+            text_avisoProjeto.text = "Aguardando votação... "+newValue.ToString();
+        };
+       /* boolNetwork.OnValueChanged += (bool  previousValue, bool  newValue) =>
+        {
+             if(newValue==true){
+                projetoUI.SetActive(true);
+             }
+             if(newValue==false){
+                projetoUI.SetActive(true);
+             }
+        };
+
+        */
+        
+
+    }
+    private void Update(){
+        if(NetworkManager.Singleton.IsClient){
+        //Debug.Log(projetoNetworkTexto.Value);
+        //Debug.Log(boolNetwork.Value);
+        }
+        if(boolNetwork.Value==true){
+
+            projetoUI.SetActive(true);
+            Debug.Log("ativou");
+            verProjetoBtn.SetActive(false);
+
+             if (NetworkManager.Singleton.IsServer){
+                
+                Debug.Log("server");
+                boolNetwork.Value=false;
+             }
+              if(NetworkManager.Singleton.IsClient){ 
+                Debug.Log("boolNetwork.Value");
+                falseUIServerRpc();
+              }
+        }
+
+        if(boolNetwork2.Value==true){
+
+            bntsUi.SetActive(false);
+            
+
+             if (NetworkManager.Singleton.IsServer){
+                boolNetwork2.Value=false;
+             }
+              if(NetworkManager.Singleton.IsClient){ 
+                false2UIServerRpc();
+              }
+        }
+
+    }
+    public void escolherZona(string zonaName){
+        if (NetworkManager.Singleton.IsServer){
+           
+            zonaNetworkName.Value =zonaName;
+            boolNetwork2.Value=true;
+            Debug.Log(zonaNetworkName.Value);
+        }
+        if(NetworkManager.Singleton.IsClient){ 
+            true2UIServerRpc();
+            UpdateZonaServerRpc(zonaName);
+        }
+        
+        //zonaNameLocal= zonaName;
+        //Debug.Log(zonaNameLocal);
     }
    
 }
