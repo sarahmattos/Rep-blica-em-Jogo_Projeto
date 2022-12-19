@@ -619,6 +619,7 @@ MonoBehaviour:
   recompensaText: 
   zonaNameLocal: 
   thisClient: 0
+  clienteLocal: -1
 --- !u!224 &1903875547 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2020222664862958727, guid: d1a96900b24533049bdbbe4803ed6a46, type: 3}
