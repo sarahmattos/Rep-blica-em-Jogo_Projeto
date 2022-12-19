@@ -609,6 +609,7 @@ MonoBehaviour:
   projetoManager: {fileID: 11400000, guid: 2910fdc27ce7cdd489424b00e81158d5, type: 2}
   text_projetoCarta: {fileID: 0}
   text_avisoProjeto: {fileID: 0}
+  text_avisoOutros: {fileID: 0}
   projetoUI: {fileID: 0}
   restoUI: {fileID: 0}
   bntsUi: {fileID: 0}
@@ -617,6 +618,7 @@ MonoBehaviour:
   numRecompensa: 0
   recompensaText: 
   zonaNameLocal: 
+  thisClient: 0
 --- !u!224 &1903875547 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2020222664862958727, guid: d1a96900b24533049bdbbe4803ed6a46, type: 3}

@@ -11,11 +11,13 @@ public class Projeto : NetworkBehaviour
 {
     private NetworkVariable<FixedString4096Bytes> projetoNetworkTexto = new NetworkVariable<FixedString4096Bytes>();
     private NetworkVariable<FixedString4096Bytes> zonaNetworkName = new NetworkVariable<FixedString4096Bytes>();
+    private NetworkVariable<int> idPlayer = new NetworkVariable<int>(-1);
     private NetworkVariable<bool> boolNetwork = new NetworkVariable<bool>(false);
     private NetworkVariable<bool> boolNetwork2 = new NetworkVariable<bool>(false);
     public ProjetoObject projetoManager;
     [SerializeField] private TMP_Text text_projetoCarta;
     [SerializeField] private TMP_Text text_avisoProjeto;
+    [SerializeField] private TMP_Text text_avisoOutros;
     public GameObject projetoUI;
     public GameObject restoUI;
     public GameObject bntsUi;
@@ -23,6 +25,7 @@ public class Projeto : NetworkBehaviour
     public string proposta;
     public int numRecompensa;
     public string recompensaText, zonaNameLocal;
+    public bool thisClient=false;
    
     //Client cashing
     private string clientDados;
@@ -39,10 +42,12 @@ public class Projeto : NetworkBehaviour
     }
 //
     [ServerRpc(RequireOwnership = false)]
-    public void UpdateClientPositionServerRpc(string clientDados)
+    public void UpdateClientPositionServerRpc(string clientDados, int clientId)
      {
      projetoNetworkTexto.Value = clientDados;
-     
+     idPlayer.Value= clientId;
+     Debug.Log("Cliente idPlayer "+idPlayer.Value);
+     Debug.Log("Cliente NetworkManager.Singleton.LocalClientId "+NetworkManager.Singleton.LocalClientId);
     }
         
     [ServerRpc(RequireOwnership = false)]
@@ -76,13 +81,16 @@ public class Projeto : NetworkBehaviour
     }
     public void atualizarProjeto(string textoTotal2){
         if(NetworkManager.Singleton.IsClient){  
-            UpdateClientPositionServerRpc(textoTotal2);
+            Debug.Log(NetworkManager.Singleton.LocalClientId);
+            int id =(int)NetworkManager.Singleton.LocalClientId;
+            UpdateClientPositionServerRpc(textoTotal2, id);
             trueUIServerRpc();
             Debug.Log("cliente");
         }
         if (NetworkManager.Singleton.IsServer){
             projetoNetworkTexto.Value = textoTotal2;
             boolNetwork.Value= true;
+            idPlayer.Value= (int)NetworkManager.Singleton.LocalClientId;
             Debug.Log("server");
             
         }
@@ -95,13 +103,20 @@ public class Projeto : NetworkBehaviour
         };
         zonaNetworkName.OnValueChanged += (FixedString4096Bytes  previousValue, FixedString4096Bytes  newValue) =>
         {
-            text_avisoProjeto.text = "Aguardando votação... "+newValue.ToString();
+            //text_avisoProjeto.transform.position = new Vector3(3.5f, -90f, transform.position.z);
+            text_avisoProjeto.text = "\n"+"\n"+"\n"+"Zona escolhida: "+newValue.ToString()+"\n"+"Aguardando votação... ";
         };
         boolNetwork.OnValueChanged += (bool  previousValue, bool  newValue) =>
         {
              if(newValue==true){
+                Debug.Log("mudou o bool");
                 projetoUI.SetActive(true);
                 verProjetoBtn.SetActive(false);
+                if(thisClient!=true){
+                    bntsUi.SetActive(false);
+                    text_avisoProjeto.text="Aguardando zona ser escolhida";
+                }
+                //-90.23
              }
             
         };
@@ -111,6 +126,16 @@ public class Projeto : NetworkBehaviour
                 bntsUi.SetActive(false);
              }
             
+        };
+        idPlayer.OnValueChanged += (int  previousValue, int  newValue) =>
+        {
+           /* Debug.Log("newValue "+newValue);
+            Debug.Log("NetworkManager.Singleton.LocalClientId "+NetworkManager.Singleton.LocalClientId);
+             if(newValue==(int)NetworkManager.Singleton.LocalClientId){
+                thisClient=true;
+                Debug.Log("mudou o this cliente "+thisClient);
+             }
+            */
         };
 
         
@@ -166,8 +191,6 @@ public class Projeto : NetworkBehaviour
             UpdateZonaServerRpc(zonaName);
         }
         
-        //zonaNameLocal= zonaName;
-        //Debug.Log(zonaNameLocal);
     }
    
 }
