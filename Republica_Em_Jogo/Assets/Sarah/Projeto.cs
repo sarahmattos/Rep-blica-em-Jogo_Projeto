@@ -47,22 +47,7 @@ public class Projeto : NetworkBehaviour
      {
      projetoNetworkTexto.Value = clientDados;
      idPlayer.Value= clientId;
-     Debug.Log("clientid "+clientId);
-     Debug.Log("Cliente idPlayer "+idPlayer.Value);
-     Debug.Log("Cliente NetworkManager.Singleton.LocalClientId "+NetworkManager.Singleton.LocalClientId);
     
-    }
-        
-    [ServerRpc(RequireOwnership = false)]
-    public void falseUIServerRpc()
-     {
-        boolNetwork.Value= false;
-    }
-    [ServerRpc(RequireOwnership = false)]
-    public void trueUIServerRpc()
-     {
-        boolNetwork.Value= true;
-        
     }
     [ServerRpc(RequireOwnership = false)]
     public void true2UIServerRpc()
@@ -76,23 +61,20 @@ public class Projeto : NetworkBehaviour
     }
 
     public void sortearProjeto(){
+        //textoprojeto
         proposta = projetoManager.proposta[Random.Range(0, projetoManager.proposta.Length)];
         numRecompensa = projetoManager.numRecompensa[Random.Range(0, projetoManager.numRecompensa.Length)];
         recompensaText = projetoManager.recompensaText;
         textoTotal= proposta +"\n"+ "\n"+ recompensaText+""+numRecompensa.ToString();
+        
         atualizarProjeto(textoTotal);
         
     }
     public void atualizarProjeto(string textoTotal2){
         if(NetworkManager.Singleton.IsClient){  
-            Debug.Log(NetworkManager.Singleton.LocalClientId);
             int id =(int)NetworkManager.Singleton.LocalClientId;
             UpdateClientPositionServerRpc(textoTotal2, id);
-            
             Debug.Log("cliente");
-            Debug.Log("clientid "+id);
-            Debug.Log("Cliente idPlayer "+idPlayer.Value);
-            Debug.Log("Cliente NetworkManager.Singleton.LocalClientId "+NetworkManager.Singleton.LocalClientId);
         }
         if (NetworkManager.Singleton.IsServer){
             projetoNetworkTexto.Value = textoTotal2;
@@ -106,16 +88,13 @@ public class Projeto : NetworkBehaviour
 
         idPlayer.OnValueChanged += (int  previousValue, int  newValue) =>
         {
-            clienteLocal=newValue;
-            Debug.Log("new value "+newValue);
-            if(clienteLocal==newValue){
-                if(NetworkManager.Singleton.IsClient){
-                trueUIServerRpc();
-            }
-            if (NetworkManager.Singleton.IsServer){
-                boolNetwork.Value= true;
-            }
-            }
+            projetoUI.SetActive(true);
+            verProjetoBtn.SetActive(false);
+            if(newValue!=(int)NetworkManager.Singleton.LocalClientId){
+                    bntsUi.SetActive(false);
+                    text_avisoProjeto.text="Aguardando zona ser escolhida";
+             }
+
             
             
         };
@@ -128,23 +107,7 @@ public class Projeto : NetworkBehaviour
             //text_avisoProjeto.transform.position = new Vector3(3.5f, -90f, transform.position.z);
             text_avisoProjeto.text = "\n"+"\n"+"\n"+"Zona escolhida: "+newValue.ToString()+"\n"+"Aguardando votação... ";
         };
-        boolNetwork.OnValueChanged += (bool  previousValue, bool  newValue) =>
-        {
-             if(newValue==true){
-                Debug.Log("mudou o bool");
-                projetoUI.SetActive(true);
-                verProjetoBtn.SetActive(false);
-                Debug.Log("idPalyer:" +idPlayer.Value);
-                Debug.Log("clienteLocal:" +clienteLocal);
-                Debug.Log("NetworkManager.Singleton.LocalClientI:" +NetworkManager.Singleton.LocalClientId);
-                if(clienteLocal!=(int)NetworkManager.Singleton.LocalClientId){
-                    bntsUi.SetActive(false);
-                    text_avisoProjeto.text="Aguardando zona ser escolhida";
-                }
-                //-90.23
-             }
-            
-        };
+        
         boolNetwork2.OnValueChanged += (bool  previousValue, bool  newValue) =>
         {
              if(newValue==true){
