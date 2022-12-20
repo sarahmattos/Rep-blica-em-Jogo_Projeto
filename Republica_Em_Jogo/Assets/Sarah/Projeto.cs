@@ -7,6 +7,7 @@ using TMPro;
 using Unity.Netcode;
 using Unity.Collections;
 
+
 public class Projeto : NetworkBehaviour
 {
     private NetworkVariable<FixedString4096Bytes> projetoNetworkTexto = new NetworkVariable<FixedString4096Bytes>();
@@ -30,11 +31,14 @@ public class Projeto : NetworkBehaviour
     public int clienteLocal= -1;
     public int sim , nao, numPlayer;
     private string mostrarResposta;
+    //public ZonaTerritorial[] ZonaTerritorial { get => zonas; 
    
     //Client cashing
     private string clientDados;
      private string textoTotal="";
+    public void Awake(){
 
+    }
 
     [ServerRpc(RequireOwnership = false)]
     public void DefaultValuesServerRpc()
@@ -146,6 +150,7 @@ public class Projeto : NetworkBehaviour
         };
         zonaNetworkName.OnValueChanged += (FixedString4096Bytes  previousValue, FixedString4096Bytes  newValue) =>
         {
+            zonaNameLocal=newValue.ToString();
             if(newValue!=""){
             bntsUi.SetActive(false);
             if(clienteLocal==(int)NetworkManager.Singleton.LocalClientId){
@@ -185,7 +190,16 @@ public class Projeto : NetworkBehaviour
             }
 
         }
+        
     }
+    
+    public void eleitoresZonaFinal(){
+           
+          //SetUpZona.instance.eleitoresZona(numRecompensa, zonaNameLocal);
+               
+
+        }
+        
     public void fechar(){
         fecharBtn.SetActive(false);
         projetoUI.SetActive(false);
@@ -234,3 +248,4 @@ public class Projeto : NetworkBehaviour
     }
    
 }
+

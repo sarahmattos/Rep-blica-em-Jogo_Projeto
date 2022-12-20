@@ -14,8 +14,8 @@ namespace Game.Territorio
 
         private Material material;
         private TMP_Text text_nome;
-        private SetUpBairro setUpBairro;
-
+        [SerializeField] private SetUpBairro setUpBairro;
+        public SetUpBairro SetUpBairro { get => setUpBairro; } 
         public event Action playerControlMuda;
 
 
