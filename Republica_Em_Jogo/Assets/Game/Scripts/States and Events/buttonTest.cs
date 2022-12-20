@@ -17,7 +17,7 @@ namespace  Game
         [SerializeField] private TMP_Text textState;
 
 
-        private void Start()
+        private void Awake()
         {
             nextState.gameObject.SetActive(false);
             nextTurn.gameObject.SetActive(false);
@@ -52,8 +52,6 @@ namespace  Game
 
         private void OnPlayerTurnUpdate(bool value)
         {
-            Logger.Instance.LogError("Current:" + TurnManager.Instance.GetCurrentPlayer);
-            Logger.Instance.LogError("Sou o atual: " + value);
             nextState.gameObject.SetActive(value);
             nextTurn.gameObject.SetActive(value);
             

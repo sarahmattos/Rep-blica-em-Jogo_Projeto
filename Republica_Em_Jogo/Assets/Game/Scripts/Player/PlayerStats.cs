@@ -15,7 +15,7 @@ namespace Game.Player {
         [SerializeField] private int eleitoresTotais;
         float eleitoresNovos;
 
-        public int playerID => (int)OwnerClientId;
+        public int playerID => (int)NetworkManager.Singleton.LocalClientId;
 
         public Color Cor { get => cor; }
         public Objetivo Objetivo { get => objetivo; }

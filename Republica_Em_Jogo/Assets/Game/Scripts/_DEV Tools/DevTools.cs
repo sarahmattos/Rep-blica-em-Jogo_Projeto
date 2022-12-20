@@ -42,6 +42,7 @@ namespace Game.Tools
                 Logger.Instance.LogInfo("Player atual?: " + TurnManager.Instance.LocalIsCurrent);
             }
 
+            
        
 
             TimeUpdate();

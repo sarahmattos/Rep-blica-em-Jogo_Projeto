@@ -33,6 +33,7 @@ namespace Game {
         private void Awake()
         {
             gameStateIndex.OnValueChanged += onStateIndexChanged;
+
         }
 
         public override void OnDestroy()
@@ -46,8 +47,8 @@ namespace Game {
             DontDestroyOnLoad(gameObject);
         }
 
-        [ClientRpc]
-        public void ChangeStateClientRpc(int state)
+        [ServerRpc(RequireOwnership = false)]
+        public void ChangeStateServerRpc(int state)
         {
             Logger.Instance.LogWarning(string.Concat("Stado atual de jogo: ", (GameState)state));
             gameStateIndex.Value = state;
@@ -58,7 +59,7 @@ namespace Game {
         //public void NextStateServerRPC()
         //{
         //    gameStateIndex.Value++;
-        //    currentState = (GameState)((int)currentState + 1);
+        //    //gameStateIndex.Value = (GameState)((int)currentState + 1);
         //}
 
         public override void OnNetworkSpawn()
@@ -98,12 +99,12 @@ namespace Game {
         {
             if (sceneName == GameDataconfig.Instance.MenuSceneName)
             {
-                ChangeStateClientRpc((int)GameState.MENU_SCENE_LOAD);
+                ChangeStateServerRpc((int)GameState.MENU_SCENE_LOAD);
             }
 
             if (sceneName == GameDataconfig.Instance.GameSceneName)
             {
-                ChangeStateClientRpc((int)GameState.GAMEPLAY_SCENE_LOAD);
+                ChangeStateServerRpc((int)GameState.GAMEPLAY_SCENE_LOAD);
             }
         }
 
@@ -116,7 +117,7 @@ namespace Game {
         private IEnumerator Inicializacao_Territorio()
         {
             yield return new WaitForSeconds(1);
-            ChangeStateClientRpc((int)GameState.INITIALIZE_TERRITORIO);
+            ChangeStateServerRpc((int)GameState.INITIALIZE_TERRITORIO);
 
         }
 
@@ -125,6 +126,8 @@ namespace Game {
 
 
     }
+
+
 
 }
 

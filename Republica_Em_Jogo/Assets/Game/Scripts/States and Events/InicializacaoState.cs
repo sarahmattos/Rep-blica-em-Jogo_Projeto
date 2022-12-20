@@ -85,7 +85,7 @@ namespace Game
             Logger.Instance.LogInfo("distribuição TERMINOU.");
 
             inicializacaoEnd?.Invoke();
-            GameStateHandler.Instance.ChangeStateClientRpc((int)GameState.DESENVOLVIMENTO);
+            GameStateHandler.Instance.ChangeStateServerRpc((int)GameState.DESENVOLVIMENTO);
             //TurnManager.Instance.ChangePlayerTurnServerRpc(0);  
             //TurnManager.Instance.NextTurnServerRpc();
 
