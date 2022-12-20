@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+namespace Game.Territorio
+{
 public class Baralho : MonoBehaviour
 {
     private Renderer renderer;
@@ -27,5 +28,6 @@ public class Baralho : MonoBehaviour
         projeto.projetoUI.SetActive(false);
         projeto.verProjetoBtn.SetActive(true);
     }
+}
 }
 

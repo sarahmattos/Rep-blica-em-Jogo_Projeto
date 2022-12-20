@@ -6,12 +6,12 @@ namespace Game.Territorio
 {
 public class SetUpZona : MonoBehaviour
 {
-    public static SetUpZona instance;
+    //public static SetUpZona instance;
     private ZonaTerritorial[] zonas;
     public ZonaTerritorial[] ZonaTerritorial => zonas;
     void Start()
     {
-        instance= this;
+        //instance= this;
     }
 
     private void Awake()
