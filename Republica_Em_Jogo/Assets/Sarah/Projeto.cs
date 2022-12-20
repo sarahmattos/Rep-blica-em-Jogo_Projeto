@@ -11,7 +11,7 @@ public class Projeto : NetworkBehaviour
 {
     private NetworkVariable<FixedString4096Bytes> projetoNetworkTexto = new NetworkVariable<FixedString4096Bytes>();
     private NetworkVariable<FixedString4096Bytes> zonaNetworkName = new NetworkVariable<FixedString4096Bytes>();
-    private NetworkVariable<int> recompensaNetworkNum = new NetworkVariable<int>();
+    private NetworkVariable<int> recompensaNetworkNum = new NetworkVariable<int>(-1);
     private NetworkVariable<int> idPlayer = new NetworkVariable<int>(-1);
     private NetworkVariable<int> votacaoResposta = new NetworkVariable<int>(-1);
     public ProjetoObject projetoManager;
@@ -32,6 +32,15 @@ public class Projeto : NetworkBehaviour
     private string clientDados;
      private string textoTotal="";
 
+
+    [ServerRpc(RequireOwnership = false)]
+    public void DefaultValuesServerRpc()
+     {
+        recompensaNetworkNum.Value=-1;
+        votacaoResposta.Value=-1;
+        projetoNetworkTexto.Value="";
+        zonaNetworkName.Value="";
+    }
 
    [ServerRpc(RequireOwnership = false)]
     public void UpdateVotacaoServerRpc(int valor)
@@ -60,6 +69,8 @@ public class Projeto : NetworkBehaviour
 
     public void sortearProjeto(){
         //textoprojeto
+        //se for seu turno
+        defaultValues();
         proposta = projetoManager.proposta[Random.Range(0, projetoManager.proposta.Length)];
         numRecompensa = projetoManager.numRecompensa[Random.Range(0, projetoManager.numRecompensa.Length)];
         recompensaText = projetoManager.recompensaText;
@@ -91,6 +102,8 @@ public class Projeto : NetworkBehaviour
             projetoUI.SetActive(true);
             verProjetoBtn.SetActive(false);
             fecharBtn.SetActive(false);
+            bntsUi.SetActive(true);
+            text_avisoProjeto.text="Escolha uma zona:";
             if(newValue!=(int)NetworkManager.Singleton.LocalClientId){
                     bntsUi.SetActive(false);
                     text_avisoProjeto.text="Aguardando zona ser escolhida";
@@ -129,6 +142,7 @@ public class Projeto : NetworkBehaviour
             if(newValue==1){
                text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO NÃO APROVADO";
             }
+
             
         };
         
@@ -139,6 +153,20 @@ public class Projeto : NetworkBehaviour
     public void fechar(){
         fecharBtn.SetActive(false);
         projetoUI.SetActive(false);
+        
+        
+    }
+    public void defaultValues(){
+        if (NetworkManager.Singleton.IsServer){
+           recompensaNetworkNum.Value=-1;
+           votacaoResposta.Value=-1;
+           projetoNetworkTexto.Value="";
+           zonaNetworkName.Value="";
+
+        }
+        if(NetworkManager.Singleton.IsClient){ 
+            DefaultValuesServerRpc();
+        }
         
     }
 

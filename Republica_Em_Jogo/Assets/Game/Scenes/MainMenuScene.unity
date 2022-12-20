@@ -614,6 +614,7 @@ MonoBehaviour:
   restoUI: {fileID: 0}
   bntsUi: {fileID: 0}
   btns2: {fileID: 0}
+  fecharBtn: {fileID: 0}
   verProjetoBtn: {fileID: 0}
   proposta: 
   numRecompensa: 0
