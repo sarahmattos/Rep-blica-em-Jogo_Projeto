@@ -13,7 +13,9 @@ public class Projeto : NetworkBehaviour
     private NetworkVariable<FixedString4096Bytes> zonaNetworkName = new NetworkVariable<FixedString4096Bytes>();
     private NetworkVariable<int> recompensaNetworkNum = new NetworkVariable<int>(-1);
     private NetworkVariable<int> idPlayer = new NetworkVariable<int>(-1);
-    private NetworkVariable<int> votacaoResposta = new NetworkVariable<int>(-1);
+    private NetworkVariable<int> votacaoRespostaFavor = new NetworkVariable<int>(0);
+    private NetworkVariable<int> votacaoRespostaContra = new NetworkVariable<int>(0);
+    private NetworkVariable<int> numPlayers = new NetworkVariable<int>(-1);
     public ProjetoObject projetoManager;
     [SerializeField] private TMP_Text text_projetoCarta;
     [SerializeField] private TMP_Text text_avisoProjeto;
@@ -26,7 +28,7 @@ public class Projeto : NetworkBehaviour
     public int numRecompensa;
     public string recompensaText, zonaNameLocal;
     public int clienteLocal= -1;
-    public int sim , nao;
+    public int sim , nao, numPlayer;
    
     //Client cashing
     private string clientDados;
@@ -37,7 +39,8 @@ public class Projeto : NetworkBehaviour
     public void DefaultValuesServerRpc()
      {
         recompensaNetworkNum.Value=-1;
-        votacaoResposta.Value=-1;
+        votacaoRespostaFavor.Value=0;
+        votacaoRespostaContra.Value=0;
         projetoNetworkTexto.Value="";
         zonaNetworkName.Value="";
     }
@@ -45,7 +48,12 @@ public class Projeto : NetworkBehaviour
    [ServerRpc(RequireOwnership = false)]
     public void UpdateVotacaoServerRpc(int valor)
      {
-        votacaoResposta.Value =valor;
+        if(valor==0){
+            votacaoRespostaFavor.Value++;
+        }
+        if(valor==1){
+            votacaoRespostaContra.Value++;
+        }
         
         
     }
@@ -63,6 +71,7 @@ public class Projeto : NetworkBehaviour
      projetoNetworkTexto.Value = clientDados;
      recompensaNetworkNum.Value=num;
      idPlayer.Value= clientId;
+     numPlayers.Value=NetworkManager.Singleton.ConnectedClientsIds.Count;
     
     }
     
@@ -89,12 +98,20 @@ public class Projeto : NetworkBehaviour
             projetoNetworkTexto.Value = textoTotal2;
             idPlayer.Value= (int)NetworkManager.Singleton.LocalClientId;
             recompensaNetworkNum.Value = numRecompensa;
+            numPlayers.Value=NetworkManager.Singleton.ConnectedClientsIds.Count;
              Debug.Log("server");
             
         }
     }
      private void OnEnable()
     {
+        numPlayers.OnValueChanged += (int  previousValue, int  newValue) =>
+        {
+           
+            numPlayer=newValue;
+            
+            
+        };
 
         idPlayer.OnValueChanged += (int  previousValue, int  newValue) =>
         {
@@ -114,14 +131,21 @@ public class Projeto : NetworkBehaviour
         };
         recompensaNetworkNum.OnValueChanged += (int  previousValue, int  newValue) =>
         {
-           numRecompensa= newValue;
+            if(newValue!=-1){
+                numRecompensa= newValue;
+            }
+           
         };
         projetoNetworkTexto.OnValueChanged += (FixedString4096Bytes  previousValue, FixedString4096Bytes  newValue) =>
         {
-            text_projetoCarta.text =  newValue.ToString();
+            if(newValue!=""){
+                text_projetoCarta.text =  newValue.ToString();
+            }
+            
         };
         zonaNetworkName.OnValueChanged += (FixedString4096Bytes  previousValue, FixedString4096Bytes  newValue) =>
         {
+            if(newValue!=""){
             bntsUi.SetActive(false);
             if(clienteLocal==(int)NetworkManager.Singleton.LocalClientId){
             text_avisoProjeto.text = "\n"+"\n"+"\n"+"Zona escolhida: "+newValue.ToString()+"\n"+"Aguardando votação... ";
@@ -129,27 +153,38 @@ public class Projeto : NetworkBehaviour
                 text_avisoProjeto.text = "\n"+"\n"+"Zona escolhida: "+newValue.ToString()+"\n"+"Vote: ";
                 btns2.SetActive(true);
             }
-            
-        };
-        votacaoResposta.OnValueChanged += (int  previousValue, int  newValue) =>
-        {
-            btns2.SetActive(false);
-            Debug.Log(newValue);
-            fecharBtn.SetActive(true);
-            if(newValue==0){
-                text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO APROVADO"+"\n"+"Recompensa: "+numRecompensa+ " carta(s) e "+numRecompensa+" eleitor(es)";
             }
-            if(newValue==1){
-               text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO NÃO APROVADO";
-            }
-
             
         };
         
+        votacaoRespostaFavor.OnValueChanged += (int  previousValue, int  newValue) =>
+        {
+            sim=newValue;
+            
+        };
+        votacaoRespostaContra.OnValueChanged += (int  previousValue, int  newValue) =>
+        {
+            nao=newValue;
+            
+        };
         
 
     }
-    
+    public void Update(){
+        Debug.Log("sim "+sim);
+        Debug.Log("nao "+nao);
+        if(sim+nao>=numPlayer-1){
+            btns2.SetActive(false);
+            fecharBtn.SetActive(true);
+            if(sim>nao){
+                text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO APROVADO"+"\n"+"Recompensa: "+numRecompensa+ " carta(s) e "+numRecompensa+" eleitor(es)";
+            }
+            if(nao>=sim){
+               text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO NÃO APROVADO";
+            }
+
+        }
+    }
     public void fechar(){
         fecharBtn.SetActive(false);
         projetoUI.SetActive(false);
@@ -157,9 +192,12 @@ public class Projeto : NetworkBehaviour
         
     }
     public void defaultValues(){
+        sim=0;
+        nao=0;
         if (NetworkManager.Singleton.IsServer){
            recompensaNetworkNum.Value=-1;
-           votacaoResposta.Value=-1;
+           votacaoRespostaFavor.Value=0;
+           votacaoRespostaContra.Value=0;
            projetoNetworkTexto.Value="";
            zonaNetworkName.Value="";
 
@@ -184,18 +222,20 @@ public class Projeto : NetworkBehaviour
     public void votacao(int resposta){
 
             Debug.Log("resposta"+resposta);
-        
-             if (NetworkManager.Singleton.IsServer){
-                votacaoResposta.Value=resposta;
-                 Debug.Log("votacao"+votacaoResposta.Value);
-              }
+           /* if (NetworkManager.Singleton.IsServer){
+                if(resposta==0){
+                    votacaoRespostaFavor.Value++;
+                }
+                if(resposta==1){
+                    votacaoRespostaContra.Value++;
+                }
+            }
+             */
               if(NetworkManager.Singleton.IsClient){
                 UpdateVotacaoServerRpc(resposta);
-                
+         
               }
             
-     
-        
     }
    
 }
