@@ -29,6 +29,7 @@ public class Projeto : NetworkBehaviour
     public string recompensaText, zonaNameLocal;
     public int clienteLocal= -1;
     public int sim , nao, numPlayer;
+    private string mostrarResposta;
    
     //Client cashing
     private string clientDados;
@@ -221,20 +222,14 @@ public class Projeto : NetworkBehaviour
     }
     public void votacao(int resposta){
 
-            Debug.Log("resposta"+resposta);
-           /* if (NetworkManager.Singleton.IsServer){
-                if(resposta==0){
-                    votacaoRespostaFavor.Value++;
-                }
-                if(resposta==1){
-                    votacaoRespostaContra.Value++;
-                }
-            }
-             */
               if(NetworkManager.Singleton.IsClient){
                 UpdateVotacaoServerRpc(resposta);
-         
               }
+              
+              if(resposta==0)mostrarResposta="a favor";
+              if(resposta==1)mostrarResposta="contra";
+              btns2.SetActive(false);
+              text_avisoProjeto.text = "\n"+"\n"+"\n"+"Seu partido votou "+mostrarResposta+"\n"+"Aguardando outros partidos...";
             
     }
    
