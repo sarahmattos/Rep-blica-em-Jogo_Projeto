@@ -7,5 +7,5 @@ using UnityEngine;
 public class RecursoCartaObjeto : ScriptableObject
 {
     public string[] tipoRecurso;
-    
+    public bool atualizar;
 }

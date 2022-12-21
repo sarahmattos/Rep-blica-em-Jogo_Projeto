@@ -40,10 +40,6 @@ namespace Game.Player {
             {
               inicioRodada();
              }
-             if (GUI.Button(new Rect(10, 120, 150, 100), "Distribuicao recursos"))
-            {
-             recursoDistribuicao(Random.Range(1, 3));
-             }
              
         }
 

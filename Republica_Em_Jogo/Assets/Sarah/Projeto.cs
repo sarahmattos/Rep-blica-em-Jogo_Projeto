@@ -6,9 +6,11 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.Netcode;
 using Unity.Collections;
+ using Game.Territorio;
+ using Game.UI;
 
-namespace Game.Territorio
-{
+//namespace Game.Territorio
+//{
     public class Projeto : NetworkBehaviour
     {
         private NetworkVariable<FixedString4096Bytes> projetoNetworkTexto = new NetworkVariable<FixedString4096Bytes>();
@@ -22,6 +24,7 @@ namespace Game.Territorio
         [SerializeField] private TMP_Text text_projetoCarta;
         [SerializeField] private TMP_Text text_avisoProjeto;
         [SerializeField] private TMP_Text text_avisoOutros;
+        private HudStatsJogador hs;
         public GameObject projetoUI;
         public GameObject restoUI;
         public GameObject bntsUi, btns2, fecharBtn;
@@ -40,6 +43,7 @@ namespace Game.Territorio
         private string textoTotal="";
         public void Awake(){
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();
+            hs = FindObjectOfType<HudStatsJogador>();
         }
 
         [ServerRpc(RequireOwnership = false)]
@@ -91,7 +95,6 @@ namespace Game.Territorio
             numRecompensa = projetoManager.numRecompensa[Random.Range(0, projetoManager.numRecompensa.Length)];
             recompensaText = projetoManager.recompensaText;
             textoTotal= proposta +"\n"+ "\n"+ recompensaText+""+numRecompensa.ToString();
-            
             atualizarProjeto(textoTotal);
             
         }
@@ -123,6 +126,7 @@ namespace Game.Territorio
             idPlayer.OnValueChanged += (int  previousValue, int  newValue) =>
             {
                 clienteLocal=newValue;
+                //hs.updateRecursoCartaUI(numRecompensa, clienteLocal);
                 projetoUI.SetActive(true);
                 verProjetoBtn.SetActive(false);
                 fecharBtn.SetActive(false);
@@ -188,6 +192,7 @@ namespace Game.Territorio
                 if(sim>nao){
                     text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO APROVADO"+"\n"+"Recompensa: "+numRecompensa+ " carta(s) e "+numRecompensa+" eleitor(es)";
                     eleitoresZonaFinal();
+                    
                 }
                 if(nao>=sim){
                 text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO NÃO APROVADO";
@@ -198,10 +203,10 @@ namespace Game.Territorio
         }
         
         public void eleitoresZonaFinal(){
-            
             setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
+            hs.updateRecursoCartaUI(numRecompensa, clienteLocal);
             zonaNameLocal="";
-                
+            clienteLocal=-1;
             }
             
         public void fechar(){
@@ -256,4 +261,4 @@ namespace Game.Territorio
         }
     
     }
-}
+//}

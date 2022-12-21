@@ -67,12 +67,16 @@ namespace Game.UI
             text_objetivo.SetText(playerStats.ObjetivoCarta);
             
         }
-        /* private void Update()
+         public void updateRecursoCartaUI(int quantidade, int idTurno)
         {
-            text_saudeCarta.SetText("Saúde: "+playerStats.numSaude.ToString());
-            text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());
+            //if(playerStats.playerID==idTurno){
+                playerStats.recursoDistribuicao(quantidade);
+                text_saudeCarta.SetText("Saúde: "+playerStats.numSaude.ToString());
+                text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());
+            //}
+            
         }
-        */
+        
     }
 
 }
