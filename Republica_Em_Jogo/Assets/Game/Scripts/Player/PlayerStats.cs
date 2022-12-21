@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Game.Player {
 
@@ -10,11 +11,13 @@ namespace Game.Player {
         [SerializeField] private int maxTerritorio;
         [SerializeField] private Objetivo objetivo;
         [SerializeField] private string objetivoCarta;
-
+        [SerializeField] private List<string> recursoCarta = new List<string>();
+        [SerializeField] public int numSaude;
+        [SerializeField] public int numEducacao;
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
         float eleitoresNovos;
-
+        public RecursoCartaObjeto recursoManager;
         public int playerID => (int)OwnerClientId;
 
         public Color Cor { get => cor; }
@@ -26,8 +29,10 @@ namespace Game.Player {
         {
             //para os clients inscreverem m�todos no initializePlayers
             GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
+            
 
         }
+       
         void OnGUI()
         {
             //apenas teste
@@ -35,7 +40,28 @@ namespace Game.Player {
             {
               inicioRodada();
              }
+             if (GUI.Button(new Rect(10, 120, 150, 100), "Distribuicao recursos"))
+            {
+             recursoDistribuicao(Random.Range(1, 3));
+             }
+             
         }
+
+        public void recursoDistribuicao(int quantidade){
+            for(int i = 0; i < quantidade; i++)
+                {
+                    string rnd = recursoManager.tipoRecurso[Random.Range(0, recursoManager.tipoRecurso.Length)];
+                    recursoCarta.Add(rnd);
+                    if(rnd == "Saúde"){
+                        numSaude++;
+                    }
+                    if(rnd == "Educação"){
+                        numEducacao++;
+                    }
+                }
+
+        }
+       
         private void inicioRodada()
          {
              eleitoresNovos = eleitoresTotais / 2;
@@ -73,7 +99,7 @@ namespace Game.Player {
 
 
         }
-
+        
 
 
     }

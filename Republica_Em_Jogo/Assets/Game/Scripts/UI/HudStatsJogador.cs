@@ -16,6 +16,8 @@ namespace Game.UI
         [SerializeField] private TMP_Text text_eleitores;
         [SerializeField] private TMP_Text text_objetivo;
         [SerializeField] private PlayerStats playerStats;
+        [SerializeField] private TMP_Text text_saudeCarta;
+        [SerializeField] private TMP_Text text_eduCarta;
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
 
 
@@ -63,8 +65,14 @@ namespace Game.UI
             text_nomeJogador.SetText(playerStats.Nome);
             text_eleitores.SetText(textToDisplayEleitores);
             text_objetivo.SetText(playerStats.ObjetivoCarta);
+            
         }
-
+        /* private void Update()
+        {
+            text_saudeCarta.SetText("Saúde: "+playerStats.numSaude.ToString());
+            text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());
+        }
+        */
     }
 
 }
