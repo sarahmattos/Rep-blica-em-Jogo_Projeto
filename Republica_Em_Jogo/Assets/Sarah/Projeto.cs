@@ -207,6 +207,7 @@ using Unity.Collections;
             hs.updateRecursoCartaUI(numRecompensa, clienteLocal);
             zonaNameLocal="";
             clienteLocal=-1;
+            numRecompensa=-1;
             }
             
         public void fechar(){

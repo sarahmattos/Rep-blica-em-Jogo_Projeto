@@ -70,9 +70,12 @@ namespace Game.UI
          public void updateRecursoCartaUI(int quantidade, int idTurno)
         {
             //if(playerStats.playerID==idTurno){
-                playerStats.recursoDistribuicao(quantidade);
+                if(quantidade>-1){
+                    playerStats.recursoDistribuicao(quantidade);
                 text_saudeCarta.SetText("Saúde: "+playerStats.numSaude.ToString());
                 text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());
+                }
+                
             //}
             
         }
