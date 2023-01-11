@@ -30,7 +30,7 @@ using Unity.Collections;
         public GameObject bntsUi, btns2, fecharBtn;
         public GameObject verProjetoBtn;
         public string proposta;
-        public int numRecompensa;
+        public int numRecompensa, numRecompensaDefault;
         public string recompensaText, zonaNameLocal;
         public int clienteLocal= -1;
         public int sim , nao, numPlayer;
@@ -144,6 +144,7 @@ using Unity.Collections;
             {
                 if(newValue!=-1){
                     numRecompensa= newValue;
+                    numRecompensaDefault=numRecompensa;
                 }
             
             };
@@ -190,9 +191,8 @@ using Unity.Collections;
                 btns2.SetActive(false);
                 fecharBtn.SetActive(true);
                 if(sim>nao){
-                    text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO APROVADO"+"\n"+"Recompensa: "+numRecompensa+ " carta(s) e "+numRecompensa+" eleitor(es)";
+                    text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO APROVADO"+"\n"+"Recompensa: "+numRecompensaDefault+ " carta(s) e "+numRecompensaDefault+" eleitor(es)";
                     eleitoresZonaFinal();
-                    
                 }
                 if(nao>=sim){
                 text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO NÃO APROVADO";
