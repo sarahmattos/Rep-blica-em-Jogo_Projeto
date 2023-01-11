@@ -67,10 +67,11 @@ namespace Game.UI
             text_objetivo.SetText(playerStats.ObjetivoCarta);
             
         }
-         public void updateRecursoCartaUI(int quantidade, int idTurno)
+         public void updateRecursoCartaUI(int quantidade)
         {
             //if(playerStats.playerID==idTurno){
                 if(quantidade>-1){
+                    Debug.Log("entrou recurso");
                     playerStats.recursoDistribuicao(quantidade);
                 text_saudeCarta.SetText("Saúde: "+playerStats.numSaude.ToString());
                 text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());

@@ -618,6 +618,7 @@ MonoBehaviour:
   verProjetoBtn: {fileID: 0}
   proposta: 
   numRecompensa: 0
+  numRecompensaDefault: 0
   recompensaText: 
   zonaNameLocal: 
   clienteLocal: -1
@@ -1359,7 +1360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxConnections
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608621, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: m_Name

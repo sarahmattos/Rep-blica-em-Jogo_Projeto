@@ -28,6 +28,16 @@ public class SetUpZona : MonoBehaviour
             }
 
         }
+        public void playerZona(ulong valor, string nome){
+            foreach(ZonaTerritorial zona in zonas)
+            {
+                if(zona.Nome==nome){
+                    Debug.Log("recursoNameZona: "+nome);
+                    zona.verificarPlayerNasZonas(valor);
+                }
+            }
+
+        }
         public void chamar(){
             eleitoresZona(2,"Oeste1");
         }

@@ -36,6 +36,7 @@ using Unity.Collections;
         public int sim , nao, numPlayer;
         private string mostrarResposta;
         private SetUpZona setUpZona;  
+        private ZonaTerritorial zt;  
         private bool mostrouResultado=false;
     
         //Client cashing
@@ -43,6 +44,8 @@ using Unity.Collections;
         private string textoTotal="";
         public void Awake(){
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();
+            zt = GameObject.FindObjectOfType<ZonaTerritorial>();
+            
             hs = FindObjectOfType<HudStatsJogador>();
         }
 
@@ -72,7 +75,7 @@ using Unity.Collections;
         public void UpdateZonaServerRpc(string clientDados)
         {
             zonaNetworkName.Value =clientDados;
-            Debug.Log(zonaNetworkName.Value);
+            //Debug.Log(zonaNetworkName.Value);
             
         }
     //
@@ -186,8 +189,8 @@ using Unity.Collections;
         public void Update(){
             if(numPlayer>1){
             if(sim+nao>=numPlayer-1 ){
-                Debug.Log("numPlayer"+numPlayer);
-                Debug.Log("nao"+nao);
+                //Debug.Log("numPlayer"+numPlayer);
+                //Debug.Log("nao"+nao);
                 btns2.SetActive(false);
                 fecharBtn.SetActive(true);
                 if(sim>nao){
@@ -204,7 +207,12 @@ using Unity.Collections;
         
         public void eleitoresZonaFinal(){
             setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
-            hs.updateRecursoCartaUI(numRecompensa, clienteLocal);
+            setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
+            if(zt.playerInZona==true){
+                hs.updateRecursoCartaUI(numRecompensa);
+                zt.playerInZona=false;
+            }
+            
             zonaNameLocal="";
             clienteLocal=-1;
             numRecompensa=-1;
@@ -238,7 +246,7 @@ using Unity.Collections;
             if (NetworkManager.Singleton.IsServer){
             
                 zonaNetworkName.Value =zonaName;
-                Debug.Log(zonaNetworkName.Value);
+                //Debug.Log(zonaNetworkName.Value);
             }
             if(NetworkManager.Singleton.IsClient){ 
                 UpdateZonaServerRpc(zonaName);

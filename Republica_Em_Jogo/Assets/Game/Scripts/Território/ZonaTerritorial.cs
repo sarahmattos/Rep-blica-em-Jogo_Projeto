@@ -9,6 +9,7 @@ namespace Game.Territorio
         [SerializeField] private string nome;
         private Bairro[] bairros;
         int x;
+        public bool playerInZona=false;
 
         public Bairro[] Bairros => bairros;
         public string Nome { get => nome; }
@@ -18,13 +19,19 @@ namespace Game.Territorio
             bairros = GetComponentsInChildren<Bairro>();
         }
 
-        private void verificarPlayerNasZonas(ulong client)
+        public void verificarPlayerNasZonas(ulong client)
         {
             foreach(Bairro bairro in bairros)
             {
+                 Debug.Log("cliente: "+(int)client);
+                 Debug.Log("playerIDNoControl: "+bairro.playerIDNoControl.Value);
+                 
                 if(bairro.playerIDNoControl.Value == (int)client)
                 {
-                    x++;
+                   
+                    Debug.Log("bairroNome: "+bairro.Nome);
+                    //x++;
+                    playerInZona=true;
                 }
             }
         }
