@@ -9,14 +9,14 @@ namespace Game.Territorio
         [SerializeField] private string nome;
         private Bairro[] bairros;
         int x;
-        public bool playerInZona=false;
 
         public Bairro[] Bairros => bairros;
         public string Nome { get => nome; }
-
+        private Projeto projeto;  
         private void Awake()
         {
             bairros = GetComponentsInChildren<Bairro>();
+             projeto = GameObject.FindObjectOfType<Projeto>();
         }
 
         public void verificarPlayerNasZonas(ulong client)
@@ -30,8 +30,9 @@ namespace Game.Territorio
                 {
                    
                     Debug.Log("bairroNome: "+bairro.Nome);
+                    projeto.playerInZona=true;
                     //x++;
-                    playerInZona=true;
+                    
                 }
             }
         }

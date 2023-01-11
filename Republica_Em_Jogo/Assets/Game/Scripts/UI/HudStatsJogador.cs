@@ -70,6 +70,7 @@ namespace Game.UI
          public void updateRecursoCartaUI(int quantidade)
         {
             //if(playerStats.playerID==idTurno){
+                Debug.Log(quantidade +"quantidade");
                 if(quantidade>-1){
                     Debug.Log("entrou recurso");
                     playerStats.recursoDistribuicao(quantidade);

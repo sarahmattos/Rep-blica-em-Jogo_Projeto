@@ -38,6 +38,7 @@ using Unity.Collections;
         private SetUpZona setUpZona;  
         private ZonaTerritorial zt;  
         private bool mostrouResultado=false;
+        public bool playerInZona=false;
     
         //Client cashing
         private string clientDados;
@@ -206,11 +207,16 @@ using Unity.Collections;
         }
         
         public void eleitoresZonaFinal(){
+             if (NetworkManager.Singleton.IsServer){
             setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
+             }
             setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
-            if(zt.playerInZona==true){
-                hs.updateRecursoCartaUI(numRecompensa);
-                zt.playerInZona=false;
+            if(playerInZona==true){
+                Debug.Log("playerINzona true");
+                hs.updateRecursoCartaUI(numRecompensaDefault);
+                playerInZona=false;
+            }else{
+               // Debug.Log("playerINzona false");
             }
             
             zonaNameLocal="";
