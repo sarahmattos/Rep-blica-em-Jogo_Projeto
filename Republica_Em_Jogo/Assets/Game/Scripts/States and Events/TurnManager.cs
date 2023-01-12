@@ -23,11 +23,9 @@ namespace Game {
         private void Awake()
         {
             currentIndex.OnValueChanged += UpdatePlayerTurn;
-
             GameStateHandler.Instance.gameplaySceneLoad += UpdateClientscount;
             GameStateHandler.Instance.desenvolvimento += DefineConfigIniciais;
         }
-
 
         public override void OnDestroy()
         {
