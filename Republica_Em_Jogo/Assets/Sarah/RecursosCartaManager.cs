@@ -10,6 +10,7 @@ public class RecursosCartaManager : MonoBehaviour
     private HudStatsJogador hs;
     [SerializeField] private GameObject semTroca;
     [SerializeField] private GameObject comTroca;
+    [SerializeField] private GameObject avisoDistribuicao;
     [SerializeField] private Button eduTrocaBtn;
     [SerializeField] private Button saudeTrocaBtn;
     [SerializeField] private TMP_Text text_edu;
@@ -66,7 +67,8 @@ public class RecursosCartaManager : MonoBehaviour
    }
    public void distribuiNovosRecursos(){
     if(novosEdu>0||novosSaude>0){
-        text_recursoDistribuicao.SetText("Distribuia seus recursos!");
+        avisoDistribuicao.SetActive(true);
+        text_recursoDistribuicao.SetText("Distribuia seus recursos! Clique no recurso do bairro que deseja adicionar!"+ "\n" +" Educação: "+novosEdu +" Saúde: "+novosSaude);
     }
    }
 }

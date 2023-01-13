@@ -14,6 +14,8 @@ namespace Game.Player {
         [SerializeField] private List<string> recursoCarta = new List<string>();
         [SerializeField] public int numSaude;
         [SerializeField] public int numEducacao;
+        [SerializeField] private int saudeRecurso;
+        [SerializeField] private int educacaoRecurso;
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
         float eleitoresNovos;
@@ -25,6 +27,8 @@ namespace Game.Player {
         public string ObjetivoCarta { get => objetivoCarta; }
         public string Nome { get => nome; }
         public int EleitoresTotais { get => eleitoresTotais; }
+        public int SaudeRecurso { get => saudeRecurso; }
+        public int EducacaoRecurso { get => educacaoRecurso; }
         private void Awake()
         {
             //para os clients inscreverem m�todos no initializePlayers
