@@ -25,8 +25,8 @@ namespace Game.UI
         //TODO: Remover quando n�o precisar mais dos bot�es
         private void Start()
         {
-            eduQuant=20;
-            saudeQuant=16;
+            //eduQuant=20;
+            //saudeQuant=16;
             //button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
         }
 
@@ -89,6 +89,8 @@ namespace Game.UI
         public void atualizarRecursoAposTroca(){
             playerStats.numSaude=saudeQuant;
             playerStats.numEducacao=eduQuant;
+            text_saudeCarta.SetText("Saúde: "+playerStats.numSaude.ToString());
+            text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());
         }
         
     }
