@@ -84,6 +84,10 @@ namespace Game.UI
             //}
             
         }
+        public void atualizarRecursoAposTroca(){
+            playerStats.numSaude=saudeQuant;
+            playerStats.numEducacao=eduQuant;
+        }
         
     }
 
