@@ -25,6 +25,8 @@ namespace Game.UI
         //TODO: Remover quando n�o precisar mais dos bot�es
         private void Start()
         {
+            eduQuant=20;
+            saudeQuant=16;
             //button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
         }
 

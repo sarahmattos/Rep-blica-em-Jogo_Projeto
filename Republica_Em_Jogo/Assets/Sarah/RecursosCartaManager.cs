@@ -11,6 +11,7 @@ public class RecursosCartaManager : MonoBehaviour
     [SerializeField] private GameObject semTroca;
     [SerializeField] private GameObject comTroca;
     [SerializeField] private GameObject avisoDistribuicao;
+    [SerializeField] private GameObject avisoDistribuicaoFinal;
     [SerializeField] private Button eduTrocaBtn;
     [SerializeField] private Button saudeTrocaBtn;
     [SerializeField] private TMP_Text text_edu;
@@ -18,13 +19,20 @@ public class RecursosCartaManager : MonoBehaviour
     [SerializeField] private TMP_Text text_recursoDistribuicao;
     public int novosEdu;
     public int novosSaude;
+    private bool chamarDistribuicao=false;
     void Start()
     {
         hs = FindObjectOfType<HudStatsJogador>();
     }
-
+    public void Update(){
+        if(chamarDistribuicao==true){
+            distribuiNovosRecursos();
+        }
+    }
     // Update is called once per frame
    public void conferirQuantidade(){
+         text_edu.SetText("+"+novosEdu);
+         text_saude.SetText("+"+novosSaude);
     if(hs.eduQuant>=3 || hs.saudeQuant>=3){
         comTroca.SetActive(true);
         if(hs.eduQuant>=3){
@@ -44,7 +52,11 @@ public class RecursosCartaManager : MonoBehaviour
    }
    public void panelFalse(GameObject panel){
         panel.SetActive(false);
-        distribuiNovosRecursos();
+       
+   }
+   public void distribuicaoChamada(){
+         chamarDistribuicao=true;
+         
    }
 
    public void trocarSaude(){
@@ -69,6 +81,10 @@ public class RecursosCartaManager : MonoBehaviour
     if(novosEdu>0||novosSaude>0){
         avisoDistribuicao.SetActive(true);
         text_recursoDistribuicao.SetText("Distribuia seus recursos! Clique no recurso do bairro que deseja adicionar!"+ "\n" +" Educação: "+novosEdu +" Saúde: "+novosSaude);
+    }else{
+        avisoDistribuicao.SetActive(false);
+        avisoDistribuicaoFinal.SetActive(true);
+        chamarDistribuicao=false;
     }
    }
 }
