@@ -29,12 +29,11 @@ namespace Game.Player {
         public int EleitoresTotais { get => eleitoresTotais; }
         public int SaudeRecurso { get => saudeRecurso; }
         public int EducacaoRecurso { get => educacaoRecurso; }
-        private void Awake()
+        public State InicialializaState => GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
+        private void Start()
         {
-            //para os clients inscreverem m�todos no initializePlayers
-            GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
-            
-
+            //para os clients inscreverem m�todos no initializePlayers          
+            InicialializaState.Saida += InitializeStats;
         }
        
         void OnGUI()
@@ -73,24 +72,25 @@ namespace Game.Player {
         public override void OnDestroy()
         {
             //para os clients desinscrever m�todos no initializePlayers
-            GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
+            
+            InicialializaState.Saida -= InitializeStats;
         }
 
 
-        
         public override void OnNetworkSpawn()
         {
-            GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
+            InicialializaState.Saida += InitializeStats;
         }
 
         public override void OnNetworkDespawn()
         {
-            GameStateHandler.Instance.gameplaySceneLoad -= InitializeStats;
+            InicialializaState.Saida -= InitializeStats;
 
         }
 
         public void InitializeStats()
         {
+            Tools.Logger.Instance.LogInfo("inicializando player stats");
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
             maxTerritorio = GameDataconfig.Instance.territoriosInScene;
             eleitoresTotais = maxTerritorio / /*clientsConnected.Count;*/  2;

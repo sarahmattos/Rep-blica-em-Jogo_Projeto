@@ -1,12 +1,11 @@
 using Game.Tools;
 using System;
 using Unity.Netcode;
-using UnityEngine;
 using Logger = Game.Tools.Logger;
 
 namespace Game
 {
-    public enum DesenvolState
+    public enum CoreLoopStae
     {
         DISTRIBUICAO,
         AVANCAR,
@@ -14,7 +13,8 @@ namespace Game
         RECOMPENSA
     }
 
-    public class DesenvolvimentoStateHandler : NetworkSingleton<DesenvolvimentoStateHandler>
+
+    public class CoreLoopStateHandler : NetworkSingleton<CoreLoopStateHandler>
     {
         public NetworkVariable<int> desenvStateIndex = new NetworkVariable<int>();
 
@@ -22,7 +22,7 @@ namespace Game
         public event Action avancar;//stateIndex = 1;
         public event Action projeto;//stateIndex = 2;
         public event Action recompensa;//stateIndex = 3;
-
+        public State InicializaState => GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
         private void Awake()
         {
             desenvStateIndex.OnValueChanged += OnDesenvStateChanged;
@@ -42,13 +42,13 @@ namespace Game
         public override void OnNetworkSpawn()
         {
             desenvStateIndex.OnValueChanged += OnDesenvStateChanged;
-            GameStateHandler.Instance.gameplaySceneLoad += onGameplayLoad;
+            InicializaState.Entrada += onGameplayLoad;
         }
 
         public override void OnNetworkDespawn()
         {
             desenvStateIndex.OnValueChanged -= OnDesenvStateChanged;
-            GameStateHandler.Instance.gameplaySceneLoad -= onGameplayLoad;
+            InicializaState.Entrada -= onGameplayLoad;
         }
 
 
@@ -82,7 +82,6 @@ namespace Game
         public void ChangeDesenvStateServerRpc(int state)
         {
 
-            Logger.Instance.LogWarning(string.Concat("Player ",TurnManager.Instance.GetCurrentPlayer, ", no Stado ", (DesenvolState)state));
             desenvStateIndex.Value = state;
         }
 
@@ -94,15 +93,13 @@ namespace Game
                 desenvStateIndex.Value = desenvStateIndex.Value + 1;
             } else
             {
-                //marcando aqui
-                Logger.Instance.LogWarning("next turn");
-                TurnManager.Instance.NextTurnServerRpc();
-                //marcando aqui
 
+                //TODO: aqui não ta legal
+                TurnManager.Instance.NextTurnServerRpc();
 
                 desenvStateIndex.Value = 0;
             }
-            Logger.Instance.LogWarning(string.Concat("Player ", TurnManager.Instance.GetCurrentPlayer, ", no Stado ", (DesenvolState)desenvStateIndex.Value));
+            Logger.Instance.LogWarning(string.Concat("Player ", TurnManager.Instance.GetCurrentPlayer, ", no Stado ", (CoreLoopStae)desenvStateIndex.Value));
 
 
         }

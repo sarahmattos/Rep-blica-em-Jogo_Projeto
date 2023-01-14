@@ -3,82 +3,55 @@ using Unity.Netcode;
 using Game.Tools;
 using Logger = Game.Tools.Logger;
 using System;
+using UnityEngine;
 
 namespace Game {
     public class TurnManager : NetworkSingleton<TurnManager>
     {
 
-
-        public NetworkList<int> playersOrder = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        private NetworkVariable<int> currentIndex = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        //Lembrar que: apenas Servers/Owners podem alterar NetworkVariables.
+        //Para fazer isso via client, pode ser usado métodos ServerRpc, assim como é feito nesta classe
+        private NetworkList<int> ordemPlayerID = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private NetworkVariable<int> indexPlayerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private NetworkVariable<int> connectedClientCount = new NetworkVariable<int>();
-        private NetworkVariable<int> currentPlayer = new NetworkVariable<int>();
-        public int GetCurrentPlayer => currentPlayer.Value;
+        private NetworkVariable<int> playerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        public int GetCurrentPlayer => playerAtual.Value;
         public int GetConnectedClientCount => connectedClientCount.Value;
         public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == GetCurrentPlayer);
 
         public event Action<bool> isLocalPlayerTurn;
-
+        public State InicializaState => GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
         private void Awake()
         {
-            Logger.Instance.LogWarning("we SERVER"+(!IsServer) );
-            currentIndex.OnValueChanged += UpdatePlayerTurn;
-            GameStateHandler.Instance.gameplaySceneLoad += UpdateClientscount;
-            GameStateHandler.Instance.desenvolvimento += GeneratePlayerOrder;
-        }
-
-
-
-        //só o server que fáz as atualizações 
-        public override void OnNetworkSpawn()
-        {
-            //currentIndex.OnValueChanged += UpdateCurrentPlayer;
-            Logger.Instance.LogWarning("in onNetworkSpawn");
-        }
-
-        public override void OnNetworkDespawn()
-        {
-            //currentIndex.OnValueChanged -= UpdateCurrentPlayer;
-
+            indexPlayerAtual.OnValueChanged += UpdatePlayerTurn;
+            InicializaState.Entrada += UpdateClientscount;
+            InicializaState.Entrada += DefineConfigIniciais;
         }
 
         public override void OnDestroy()
         {
-            currentIndex.OnValueChanged -= UpdatePlayerTurn;
-            GameStateHandler.Instance.gameplaySceneLoad -= UpdateClientscount;
-            GameStateHandler.Instance.desenvolvimento -= GeneratePlayerOrder;
+            indexPlayerAtual.OnValueChanged -= UpdatePlayerTurn;
+            InicializaState.Entrada-= UpdateClientscount;
+            InicializaState.Entrada -= DefineConfigIniciais;
 
         }
         private void UpdateClientscount()
         {
-            //if (!IsHost) return;
-            Logger.Instance.LogWarning("updateClientcont heeeeeeeeeeeeeeeee");
+            if (!IsHost) return;
             connectedClientCount.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
-
         }
 
-        //private void UpdateCurrentPlayer(int previousValue, int newValue)
-        //{
-        //    currentIndex.Value = newValue;
-        //}
 
-
-        //public override void OnDestroy()
-        //{
-        //    currentIndex.OnValueChanged -= UpdatePlayerTurn;
-        //}
-
-        private void UpdatePlayerTurn(int _, int _2)
+        private void UpdatePlayerTurn(int previousValue, int nextValue)
         {
-            currentPlayer.Value =  playersOrder[currentIndex.Value];
-            isLocalPlayerTurn?.Invoke(LocalIsCurrent);
+            bool value = ((int)NetworkManager.Singleton.LocalClientId == ordemPlayerID[nextValue]);
+
+            isLocalPlayerTurn?.Invoke(value);
         }
 
         private void GeneratePlayerOrder()
         {
             if (!IsHost) return;
-            Logger.Instance.LogInfo("generatying pdrer: " + GetConnectedClientCount);
-
             List<int> allClientID = new List<int>();
             for (int i = 0; i < GetConnectedClientCount; i++)
             {
@@ -88,47 +61,54 @@ namespace Game {
             allClientID.Shuffle();
             for (int i = 0; i < allClientID.Count; i++)
             {
-                Logger.Instance.LogInfo("id: " + allClientID[i]);
-                playersOrder.Add(allClientID[i]);
+                ordemPlayerID.Add(allClientID[i]);
 
             }
 
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        public void ChangePlayerTurnServerRpc(int value)
+        private void DefineConfigIniciais()
         {
-            currentIndex.Value = value;
+            GeneratePlayerOrder();
+            NextTurnServerRpc();
+
+        }
+
+        [ServerRpc(RequireOwnership =false)]
+        public void ChangePlayerTurnServerRpc(int clientId)
+        {
+            indexPlayerAtual.Value = clientId;
 
             Logger.Instance.LogInfo("turno atualizado. Player atual: " + GetCurrentPlayer);
             Logger.Instance.LogInfo("turno atualizado. SUA VEZ?: " + LocalIsCurrent);
 
         }
 
+
         [ServerRpc(RequireOwnership = false)]
         public void NextTurnServerRpc()
         {
-            // this will cause a replication over the network
-            // and ultimately invoke `OnValueChanged` on receivers
+            indexPlayerAtual.Value = (1 + indexPlayerAtual.Value) % (GetConnectedClientCount);
+            #region logica alternativa
+            //if (GetConnectedClientCount > 1)
+            //{
+            //    if (currentIndex.Value < GetConnectedClientCount - 1)
+            //    {
+            //        currentIndex.Value++;
+            //    } else
+            //    {
+            //        currentIndex.Value = 0;
+            //    }
 
-            //currentIndex.Value =  (1 + currentIndex.Value) % GetConnectedClientCount;
+            //}
+            //else
+            //{
+            //    currentIndex.Value = 0;
 
-            if (GetConnectedClientCount != 0)
-            {
-                if (currentIndex.Value < GetConnectedClientCount - 1)
-                {
-                    currentIndex.Value++;
-                } else
-                {
-                    currentIndex.Value = 0;
-                }
+            //}
+            #endregion
 
-            }
-            else
-            {
-                currentIndex.Value = 0;
-
-            }
+            playerAtual.Value = ordemPlayerID[indexPlayerAtual.Value];
 
             Logger.Instance.LogWarning(string.Concat("Player ", GetCurrentPlayer+" vai jogar."));
 
@@ -137,7 +117,22 @@ namespace Game {
         }
 
 
+        public void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.A))
+            {
+                for (int i = 0; i < ordemPlayerID.Count; i++)
+                {
+                    Logger.Instance.LogWarning("player order: " + ordemPlayerID[i]);
+
+                }
+            }
+        }
+
+
     }
+
+
 
 }
 

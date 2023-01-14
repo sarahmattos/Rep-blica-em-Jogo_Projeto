@@ -1,6 +1,4 @@
 using Game.Tools;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -13,118 +11,110 @@ namespace Game {
     {
         MENU_SCENE_LOAD,
         GAMEPLAY_SCENE_LOAD,
-        //INITIALIZE_PLAYERS,
-        INITIALIZE_TERRITORIO,
+        INICIALIZACAO,
         DESENVOLVIMENTO,
-        ELEICOES
+        ELEICOES,
+        //FIM_JOGO
 
     }
+
+
+    [RequireComponent(typeof(MenuLoadState))]
+    [RequireComponent(typeof(GameplayLoadState))]
+    [RequireComponent(typeof(InicializaState))]
+    [RequireComponent(typeof(DesenvState))]
+    [RequireComponent(typeof(EleicaoState))]
 
     public class GameStateHandler : NetworkSingleton<GameStateHandler>
     {
         private NetworkVariable<int> gameStateIndex = new NetworkVariable<int>();
-        //private GameState currentState = GameState.MenuSceneLoad;
+        private Dictionary<GameState, State> gameStatePairValue = new Dictionary<GameState, State>();
+        private State currentGameState;
+        public Dictionary<GameState, State> GameStatePairValue => gameStatePairValue;
 
-        public event Action menuSceneLoad; //stateIndex = 0;
-        public event Action gameplaySceneLoad;//stateIndex = 1;
-        public event Action initializeTerritorio;//stateIndex = 2;
-        public event Action desenvolvimento; // stateIndex = 3;
-        public event Action eleicoes; //stateIndex = 4;
         private void Awake()
         {
-            gameStateIndex.OnValueChanged += onStateIndexChanged;
-        }
+            InitGameStateParValue();
+            currentGameState = GameStatePairValue[GameState.MENU_SCENE_LOAD];
 
-        public override void OnDestroy()
-        {
-            gameStateIndex.OnValueChanged -= onStateIndexChanged;
         }
-
 
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
-        }
+            gameStateIndex.OnValueChanged += OnStateIndexChanged;
 
-        [ClientRpc]
-        public void ChangeStateClientRpc(int state)
+        }
+        public override void OnDestroy()
         {
-            Logger.Instance.LogWarning(string.Concat("Stado atual de jogo: ", (GameState)state));
-            gameStateIndex.Value = state;
+            gameStateIndex.OnValueChanged -= OnStateIndexChanged;
+        }
+
+        private void InitGameStateParValue()
+        {
+            GameStatePairValue.Add(GameState.MENU_SCENE_LOAD, GetComponent<MenuLoadState>());
+            GameStatePairValue.Add(GameState.GAMEPLAY_SCENE_LOAD, GetComponent< GameplayLoadState>());
+            GameStatePairValue.Add(GameState.INICIALIZACAO, GetComponent<InicializaState>());
+            GameStatePairValue.Add(GameState.DESENVOLVIMENTO, GetComponent<DesenvState>());
+            GameStatePairValue.Add(GameState.ELEICOES, GetComponent<EleicaoState>());
 
         }
 
-        //[ServerRpc(RequireOwnership = false)]
-        //public void NextStateServerRPC()
-        //{
-        //    gameStateIndex.Value++;
-        //    currentState = (GameState)((int)currentState + 1);
-        //}
+        [ServerRpc(RequireOwnership = false)]
+        public void ChangeStateServerRpc(int indexState)
+        {
+            gameStateIndex.Value = indexState;
+
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void NextStateServerRPC()
+        {
+            gameStateIndex.Value++;
+            //TODO: restringir o acrescimo de estado?
+        }
+
+
+
+        private void OnStateIndexChanged(int previous, int next)
+        {
+
+            currentGameState.InvokeSaida();
+            currentGameState = GameStatePairValue[(GameState)next];
+            currentGameState.InvokeEntrada();
+            Logger.Instance.LogWarning(string.Concat("Index de estado: ", next," ("+(GameState)next)+")");
+
+        }
+
 
         public override void OnNetworkSpawn()
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnLoadEventCompleted;
-            gameplaySceneLoad += OnGameplaySceneLoad;
+
         }
         public override void OnNetworkDespawn()
         {
-            gameStateIndex.OnValueChanged -= onStateIndexChanged;
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnLoadEventCompleted;
-            
-            gameplaySceneLoad -= OnGameplaySceneLoad;
-        }
-
-        private void onStateIndexChanged(int previous, int next)
-        {
-            switch(next)
-            {
-                case 0:
-                    menuSceneLoad?.Invoke();
-                    break;
-                case 1:
-                    gameplaySceneLoad?.Invoke();
-                    break;
-                case 2:
-                    initializeTerritorio?.Invoke();
-                    break;
-                case 3:
-                    desenvolvimento?.Invoke();
-                    break;
-            }
 
         }
+
 
         private void OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
         {
             if (sceneName == GameDataconfig.Instance.MenuSceneName)
             {
-                ChangeStateClientRpc((int)GameState.MENU_SCENE_LOAD);
+                ChangeStateServerRpc((int)GameState.MENU_SCENE_LOAD);
             }
 
             if (sceneName == GameDataconfig.Instance.GameSceneName)
             {
-                ChangeStateClientRpc((int)GameState.GAMEPLAY_SCENE_LOAD);
+                ChangeStateServerRpc((int)GameState.GAMEPLAY_SCENE_LOAD);
             }
         }
 
-        private void OnGameplaySceneLoad()
-        {
-            if (!IsServer) return;
-            StartCoroutine(Inicializacao_Territorio());
-        }
-
-        private IEnumerator Inicializacao_Territorio()
-        {
-            yield return new WaitForSeconds(1);
-            ChangeStateClientRpc((int)GameState.INITIALIZE_TERRITORIO);
-
-        }
-
-
-
-
-
     }
+
+
 
 }
 

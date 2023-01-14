@@ -28255,24 +28255,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7677490024804130841, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3977774904
-      objectReference: {fileID: 0}
     - target: {fileID: 7677490024804130843, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
       propertyPath: m_Name
       value: EventsHandler
       objectReference: {fileID: 0}
-    - target: {fileID: 7677490024804130843, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 7677490025015979988, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 445513585
       objectReference: {fileID: 0}
-    - target: {fileID: 7677490024804130846, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
-      propertyPath: intervaloTempo
-      value: 0.05
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7677490025015979989, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
+--- !u!1 &7677490025015979987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7677490024804130843, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
+  m_PrefabInstance: {fileID: 7677490025015979986}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7677490025015979988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7677490025015979987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4126a17027429a341a44bac0b9f429cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  desenvStateIndex:
+    m_InternalValue: 0
 --- !u!23 &7762067042134597817
 MeshRenderer:
   m_ObjectHideFlags: 0
