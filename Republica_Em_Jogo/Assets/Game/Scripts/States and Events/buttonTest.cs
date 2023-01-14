@@ -15,6 +15,7 @@ namespace  Game
         [SerializeField] private Button nextState;
         [SerializeField] private Button nextTurn;
         [SerializeField] private TMP_Text textState;
+        public State DesenvState => GameStateHandler.Instance.GameStatePairValue[GameState.DESENVOLVIMENTO];
 
 
         private void Awake()
@@ -22,25 +23,30 @@ namespace  Game
             nextState.gameObject.SetActive(false);
             nextTurn.gameObject.SetActive(false);
 
+        }
+
+        private void Start()
+        {
+
             nextTurn.onClick.AddListener(() => {
                 TurnManager.Instance.NextTurnServerRpc();
             });
 
             nextState.onClick.AddListener(() => {
-                DesenvolvimentoStateHandler.Instance.NextDesenvStateServerRpc();
+                CoreLoopStateHandler.Instance.NextDesenvStateServerRpc();
             });
 
             TurnManager.Instance.isLocalPlayerTurn += OnPlayerTurnUpdate;
-            GameStateHandler.Instance.desenvolvimento += OnDesenvolvimento;
-            DesenvolvimentoStateHandler.Instance.desenvStateIndex.OnValueChanged += UpdateTextDesenv;
+            DesenvState.Entrada += OnDesenvolvimento;
+            CoreLoopStateHandler.Instance.desenvStateIndex.OnValueChanged += UpdateTextDesenv;
         }
 
 
         private void OnDestroy()
         {
             TurnManager.Instance.isLocalPlayerTurn -= OnPlayerTurnUpdate;
-            GameStateHandler.Instance.desenvolvimento -= OnDesenvolvimento;
-            DesenvolvimentoStateHandler.Instance.desenvStateIndex.OnValueChanged -= UpdateTextDesenv;
+            DesenvState.Entrada -= OnDesenvolvimento;
+            CoreLoopStateHandler.Instance.desenvStateIndex.OnValueChanged -= UpdateTextDesenv;
 
         }
 
@@ -59,10 +65,16 @@ namespace  Game
 
         private void UpdateTextDesenv(int previousValue, int newValue)
         {
-            textState.SetText(string.Concat("Player ", TurnManager.Instance.GetCurrentPlayer, " no estado: ", (DesenvolState)DesenvolvimentoStateHandler.Instance.desenvStateIndex.Value));
+            textState.SetText(string.Concat("Player ", TurnManager.Instance.GetCurrentPlayer, " no estado: ", (CoreLoopStae)CoreLoopStateHandler.Instance.desenvStateIndex.Value));
         }
 
-
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.B))
+            {
+                Tools.Logger.Instance.LogError("on button Test: desenvState: " + DesenvState.name);
+            }
+        }
     }
 }
 

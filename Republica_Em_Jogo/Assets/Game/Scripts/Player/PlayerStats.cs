@@ -15,18 +15,19 @@ namespace Game.Player {
         [SerializeField] private int eleitoresTotais;
         float eleitoresNovos;
 
-        public int playerID => (int)NetworkManager.Singleton.LocalClientId;
+        public int playerID => (int)OwnerClientId;
 
         public Color Cor { get => cor; }
         public Objetivo Objetivo { get => objetivo; }
         public string ObjetivoCarta { get => objetivoCarta; }
         public string Nome { get => nome; }
         public int EleitoresTotais { get => eleitoresTotais; }
-        private void Awake()
-        {
-            //para os clients inscreverem m�todos no initializePlayers
-            GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
+        public State InicialializaState => GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
 
+        private void Start()
+        {
+            //para os clients inscreverem m�todos no initializePlayers          
+            InicialializaState.Saida += InitializeStats;
         }
         void OnGUI()
         {
@@ -47,24 +48,25 @@ namespace Game.Player {
         public override void OnDestroy()
         {
             //para os clients desinscrever m�todos no initializePlayers
-            GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
+            
+            InicialializaState.Saida -= InitializeStats;
         }
 
 
-        
         public override void OnNetworkSpawn()
         {
-            GameStateHandler.Instance.gameplaySceneLoad += InitializeStats;
+            InicialializaState.Saida += InitializeStats;
         }
 
         public override void OnNetworkDespawn()
         {
-            GameStateHandler.Instance.gameplaySceneLoad -= InitializeStats;
+            InicialializaState.Saida -= InitializeStats;
 
         }
 
         public void InitializeStats()
         {
+            Tools.Logger.Instance.LogInfo("inicializando player stats");
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
             maxTerritorio = GameDataconfig.Instance.territoriosInScene;
             eleitoresTotais = maxTerritorio / /*clientsConnected.Count;*/  2;
@@ -73,8 +75,6 @@ namespace Game.Player {
 
 
         }
-
-
 
     }
 }

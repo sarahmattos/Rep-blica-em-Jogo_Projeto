@@ -17,23 +17,18 @@ namespace Game.UI
         [SerializeField] private TMP_Text text_objetivo;
         [SerializeField] private PlayerStats playerStats;
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
-
-
-        //TODO: Remover quando n�o precisar mais dos bot�es
-        private void Start()
-        {
-            //button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
-        }
+        [SerializeField] private State state;
 
         public override void OnNetworkSpawn()
         {
-            GameStateHandler.Instance.initializeTerritorio += FindingLocalPlayerStats;
+            state = GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
+            GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO].Entrada += FindingLocalPlayerStats;
             //button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
         }
 
         public override void OnNetworkDespawn()
         {
-            GameStateHandler.Instance.initializeTerritorio -= FindingLocalPlayerStats;
+            GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO].Entrada -= FindingLocalPlayerStats;
         }
 
 
@@ -65,6 +60,15 @@ namespace Game.UI
             text_objetivo.SetText(playerStats.ObjetivoCarta);
         }
 
+
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                FindingLocalPlayerStats();
+            }
+        }
     }
 
 }
