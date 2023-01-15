@@ -32,7 +32,7 @@ namespace Game.Player {
         public State InicialializaState => GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
         private void Start()
         {
-            //para os clients inscreverem m�todos no initializePlayers          
+            //para os clients inscreverem m�todos no initializePlayers    
             InicialializaState.Saida += InitializeStats;
         }
        

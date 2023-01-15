@@ -8732,6 +8732,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5054763919248801903, guid: de14886f6b6430244b079d660b229168, type: 3}
+      propertyPath: teste
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5414194162143670396, guid: de14886f6b6430244b079d660b229168, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1252072344
@@ -22057,6 +22061,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132147482422342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22144,6 +22149,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132147669833841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22213,6 +22219,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132147680886793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22282,6 +22289,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132147695627759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22351,6 +22359,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132147877096225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22420,6 +22429,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148038255020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22489,6 +22499,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148043654493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22558,6 +22569,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148062634944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22650,6 +22662,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148176859919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22775,6 +22788,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148351202915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22844,6 +22858,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148428905090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22931,6 +22946,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148515894694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23018,6 +23034,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148547100265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23087,6 +23104,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148599340444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23156,6 +23174,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148624265258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23243,6 +23262,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148714080858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23312,6 +23332,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!1 &919132148750932468
 GameObject:
   m_ObjectHideFlags: 0
@@ -23365,6 +23386,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148750932471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23434,6 +23456,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148778282164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23503,6 +23526,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148810308559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23572,6 +23596,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148953456215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23641,6 +23666,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148973587676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23710,6 +23736,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132148980195184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23779,6 +23806,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!1 &919132149140963321
 GameObject:
   m_ObjectHideFlags: 0
@@ -23848,6 +23876,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132149169399735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23917,6 +23946,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &919132149332804732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24004,6 +24034,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!1 &919132149612793142
 GameObject:
   m_ObjectHideFlags: 0
@@ -26406,6 +26437,7 @@ MonoBehaviour:
   playerIDNoControl:
     m_InternalValue: -1
   setUpBairro: {fileID: 0}
+  teste: 0
 --- !u!114 &3469287838675173794
 MonoBehaviour:
   m_ObjectHideFlags: 0

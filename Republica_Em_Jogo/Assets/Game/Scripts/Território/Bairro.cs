@@ -17,6 +17,8 @@ namespace Game.Territorio
         [SerializeField] private SetUpBairro setUpBairro;
         public SetUpBairro SetUpBairro { get => setUpBairro; } 
         public event Action playerControlMuda;
+        private Educaçao edu;
+        private Saúde saude;
 
 
         private void Awake()
@@ -25,8 +27,8 @@ namespace Game.Territorio
             material = GetComponentInChildren<MeshRenderer>().material;
             setUpBairro = GetComponentInChildren<SetUpBairro>();
             material.color = Color.gray;
-
-            
+            edu = GetComponentInChildren<Educaçao>();
+            saude = GetComponentInChildren<Saúde>();
         }
 
         private void OnEnable()
@@ -57,7 +59,17 @@ namespace Game.Territorio
 
         }
 
-        
+        public void VerificaRecurso(){
+            if(playerIDNoControl.Value == (int)NetworkManager.Singleton.LocalClientId){
+                edu.playerControlRecurso=true;
+                saude.playerControlRecurso=true;
+                Debug.Log("seu bairro");
+            }else{
+                edu.playerControlRecurso=false;
+                saude.playerControlRecurso=false;
+                Debug.Log("nao possui esse bairro");
+            }
+        }
 
     }
 

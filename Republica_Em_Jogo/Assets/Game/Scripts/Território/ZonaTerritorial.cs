@@ -23,8 +23,6 @@ namespace Game.Territorio
         {
             foreach(Bairro bairro in bairros)
             {
-                 Debug.Log("cliente: "+(int)client);
-                 Debug.Log("playerIDNoControl: "+bairro.playerIDNoControl.Value);
                  
                 if(bairro.playerIDNoControl.Value == (int)client)
                 {

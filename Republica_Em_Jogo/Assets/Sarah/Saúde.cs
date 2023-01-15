@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.Netcode;
+ using Game.Territorio;
 
 public class Saúde : NetworkBehaviour
 {
     private NetworkVariable<int> quantidadeSaude = new NetworkVariable<int>(0);
      private TMP_Text text_saude;
     private RecursosCartaManager rc;
+    public bool playerControlRecurso =false;
+    private Bairro bairro;
 
     [ServerRpc(RequireOwnership = false)]
         public void AtualizarValorUIServerRpc()
@@ -20,13 +23,17 @@ public class Saúde : NetworkBehaviour
         {
             text_saude = GetComponentInChildren<TMP_Text>();
             rc = FindObjectOfType<RecursosCartaManager>();
+            bairro = GetComponentInParent<Bairro>();
         }
 
      private void OnMouseDown()
     {
-        if(rc.novosSaude>0){
-            rc.novosSaude--;
-            AtualizarValorUIServerRpc();
+        bairro.VerificaRecurso();
+         if(playerControlRecurso==true){
+            if(rc.novosSaude>0){
+                rc.novosSaude--;
+                AtualizarValorUIServerRpc();
+            }
         }
         
     }
