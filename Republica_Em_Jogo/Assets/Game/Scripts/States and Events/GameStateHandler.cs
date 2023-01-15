@@ -1,4 +1,5 @@
 using Game.Tools;
+using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -30,6 +31,7 @@ namespace Game {
         private NetworkVariable<int> gameStateIndex = new NetworkVariable<int>();
         private Dictionary<GameState, State> gameStatePairValue = new Dictionary<GameState, State>();
         private State currentGameState;
+        public Action<GameState> estadoMuda;
         public Dictionary<GameState, State> GameStatePairValue => gameStatePairValue;
 
         private void Awake()
@@ -42,12 +44,12 @@ namespace Game {
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
-            gameStateIndex.OnValueChanged += OnStateIndexChanged;
+            gameStateIndex.OnValueChanged += IndexEstadoJogoMuda;
 
         }
         public override void OnDestroy()
         {
-            gameStateIndex.OnValueChanged -= OnStateIndexChanged;
+            gameStateIndex.OnValueChanged -= IndexEstadoJogoMuda;
         }
 
         private void InitGameStateParValue()
@@ -57,7 +59,6 @@ namespace Game {
             GameStatePairValue.Add(GameState.INICIALIZACAO, GetComponent<InicializaState>());
             GameStatePairValue.Add(GameState.DESENVOLVIMENTO, GetComponent<DesenvState>());
             GameStatePairValue.Add(GameState.ELEICOES, GetComponent<EleicaoState>());
-
         }
 
         [ServerRpc(RequireOwnership = false)]
@@ -76,11 +77,12 @@ namespace Game {
 
 
 
-        private void OnStateIndexChanged(int previous, int next)
+        private void IndexEstadoJogoMuda(int previous, int next)
         {
 
             currentGameState.InvokeSaida();
             currentGameState = GameStatePairValue[(GameState)next];
+            estadoMuda?.Invoke((GameState)next);
             currentGameState.InvokeEntrada();
             Logger.Instance.LogWarning(string.Concat("Index de estado: ", next," ("+(GameState)next)+")");
 

@@ -80,7 +80,7 @@ namespace Game {
             indexPlayerAtual.Value = clientId;
 
             Logger.Instance.LogInfo("turno atualizado. Player atual: " + GetCurrentPlayer);
-            Logger.Instance.LogInfo("turno atualizado. SUA VEZ?: " + LocalIsCurrent);
+            Logger.Instance.LogInfo("SUA VEZ?: " + LocalIsCurrent);
 
         }
 
@@ -109,26 +109,9 @@ namespace Game {
             #endregion
 
             playerAtual.Value = ordemPlayerID[indexPlayerAtual.Value];
-
             Logger.Instance.LogWarning(string.Concat("Player ", GetCurrentPlayer+" vai jogar."));
 
-
-
         }
-
-
-        public void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.A))
-            {
-                for (int i = 0; i < ordemPlayerID.Count; i++)
-                {
-                    Logger.Instance.LogWarning("player order: " + ordemPlayerID[i]);
-
-                }
-            }
-        }
-
 
     }
 

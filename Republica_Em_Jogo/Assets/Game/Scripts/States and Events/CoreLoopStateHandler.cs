@@ -1,33 +1,48 @@
 using Game.Tools;
 using System;
+using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEngine;
 using Logger = Game.Tools.Logger;
 
 namespace Game
 {
-    public enum CoreLoopStae
+    public enum CoreLoopState
     {
         DISTRIBUICAO,
-        AVANCAR,
+        AVANCO,
         PROJETO,
         RECOMPENSA
     }
 
-
+    [RequireComponent(typeof(DistribuicaoState))]
+    [RequireComponent(typeof(AvancoState))]
+    [RequireComponent(typeof(ProjetoState))]
+    [RequireComponent(typeof(RecompensaState))]
     public class CoreLoopStateHandler : NetworkSingleton<CoreLoopStateHandler>
     {
-        public NetworkVariable<int> desenvStateIndex = new NetworkVariable<int>();
-
-        public event Action distribuicao; //stateIndex = 0;
-        public event Action avancar;//stateIndex = 1;
-        public event Action projeto;//stateIndex = 2;
-        public event Action recompensa;//stateIndex = 3;
-        public State InicializaState => GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
+        public NetworkVariable<int> coreLoopIndex = new NetworkVariable<int>();
+        private Dictionary<CoreLoopState, State> statePairValue = new Dictionary<CoreLoopState, State>();
+        private State currentState;
+        public Action<CoreLoopState> estadoMuda;
+        public Dictionary<CoreLoopState, State> StatePairValue => statePairValue;
         private void Awake()
         {
-            desenvStateIndex.OnValueChanged += OnDesenvStateChanged;
+            InitGameStateParValue();
+            //trocar por entrar em distribuição quando entrar no game state desenvolvState
+            currentState = statePairValue[CoreLoopState.DISTRIBUICAO];
+            coreLoopIndex.OnValueChanged += IndexEstadoLoopMuda;
 
         }
+        private void InitGameStateParValue()
+        {
+            StatePairValue.Add(CoreLoopState.DISTRIBUICAO, GetComponent<DistribuicaoState>());
+            StatePairValue.Add(CoreLoopState.AVANCO, GetComponent<AvancoState>());
+            StatePairValue.Add(CoreLoopState.PROJETO, GetComponent<ProjetoState>());
+            StatePairValue.Add(CoreLoopState.RECOMPENSA, GetComponent<RecompensaState>());
+        }
+
+        public State DesenvState => GameStateHandler.Instance.GameStatePairValue[GameState.DESENVOLVIMENTO];
 
         private void Start()
         {
@@ -35,46 +50,29 @@ namespace Game
         }
         public override void OnDestroy()
         {
-            desenvStateIndex.OnValueChanged -= OnDesenvStateChanged;
+            coreLoopIndex.OnValueChanged -= IndexEstadoLoopMuda;
         }
-
 
         public override void OnNetworkSpawn()
         {
-            desenvStateIndex.OnValueChanged += OnDesenvStateChanged;
-            InicializaState.Entrada += onGameplayLoad;
+            coreLoopIndex.OnValueChanged += IndexEstadoLoopMuda;
+            DesenvState.Entrada += () =>{ ChangeDesenvStateServerRpc(0); };
         }
 
         public override void OnNetworkDespawn()
         {
-            desenvStateIndex.OnValueChanged -= OnDesenvStateChanged;
-            InicializaState.Entrada -= onGameplayLoad;
+            coreLoopIndex.OnValueChanged -= IndexEstadoLoopMuda;
+            DesenvState.Entrada -= () => { ChangeDesenvStateServerRpc(0);};
         }
 
 
 
-        private void onGameplayLoad()
+        private void IndexEstadoLoopMuda(int previousValue, int newValue)
         {
-            ChangeDesenvStateServerRpc(0);
-        }
-
-        private void OnDesenvStateChanged(int previousValue, int newValue)
-        {
-            switch (newValue)
-            {
-                case 0:
-                    distribuicao?.Invoke();
-                    break;
-                case 1:
-                    avancar?.Invoke();
-                    break;
-                case 2:
-                    projeto?.Invoke();
-                    break;
-                case 3:
-                    recompensa?.Invoke();
-                    break;
-            }
+            currentState.InvokeSaida();
+            currentState = statePairValue[(CoreLoopState)newValue];
+            estadoMuda?.Invoke((CoreLoopState)newValue);
+            currentState.InvokeEntrada();
 
         }
 
@@ -82,24 +80,24 @@ namespace Game
         public void ChangeDesenvStateServerRpc(int state)
         {
 
-            desenvStateIndex.Value = state;
+            coreLoopIndex.Value = state;
         }
 
         [ServerRpc(RequireOwnership = false)]
         public void NextDesenvStateServerRpc()
         {
-            if (desenvStateIndex.Value < 3)
+            if (coreLoopIndex.Value < statePairValue.Count-1)
             {
-                desenvStateIndex.Value = desenvStateIndex.Value + 1;
+                coreLoopIndex.Value++;
             } else
             {
 
                 //TODO: aqui não ta legal
                 TurnManager.Instance.NextTurnServerRpc();
 
-                desenvStateIndex.Value = 0;
+                coreLoopIndex.Value = 0;
             }
-            Logger.Instance.LogWarning(string.Concat("Player ", TurnManager.Instance.GetCurrentPlayer, ", no Stado ", (CoreLoopStae)desenvStateIndex.Value));
+            Logger.Instance.LogWarning(string.Concat("Player ", TurnManager.Instance.GetCurrentPlayer, ", no Stado ", (CoreLoopState)coreLoopIndex.Value));
 
 
         }

@@ -26,7 +26,6 @@ namespace Game.UI
         {
             state = GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
             GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO].Entrada += FindingLocalPlayerStats;
-            //button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
         }
 
         public override void OnNetworkDespawn()
@@ -34,8 +33,6 @@ namespace Game.UI
             GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO].Entrada -= FindingLocalPlayerStats;
         }
 
-
-        //TODO: Remover quando n�o precisar mais dos bot�es
         public override void OnDestroy()
         {
             TurnManager.Instance.isLocalPlayerTurn -= (bool value) => { button.SetActive(value); };

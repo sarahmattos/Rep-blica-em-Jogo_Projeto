@@ -31,19 +31,7 @@ namespace Game.Tools
                 SceneManager.LoadScene(0);
 
             }
-            if(Input.GetKeyDown(KeyCode.N))
-            {
-                TurnManager.Instance.NextTurnServerRpc();
-            }
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                Logger.Instance.LogInfo(" connected count: " + TurnManager.Instance.GetConnectedClientCount);
-                Logger.Instance.LogInfo("currentPlayer:" + TurnManager.Instance.GetCurrentPlayer);
-                Logger.Instance.LogInfo("Player atual?: " + TurnManager.Instance.LocalIsCurrent);
-            }
 
-            
-       
 
             TimeUpdate();
 

@@ -8,6 +8,8 @@ namespace Game
 {
     public class GameplayLoadState : State
     {
+        private GameStateHandler stateHandler => GameStateHandler.Instance;
+
         public override void EnterState()
         {
             if (!IsServer) return;
