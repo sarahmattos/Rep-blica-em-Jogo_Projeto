@@ -2,29 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.Netcode;
 
-
-public class Saúde : MonoBehaviour
+public class Saúde : NetworkBehaviour
 {
+    private NetworkVariable<int> quantidadeSaude = new NetworkVariable<int>(0);
      private TMP_Text text_saude;
     private RecursosCartaManager rc;
-    int valor;
+
+    [ServerRpc(RequireOwnership = false)]
+        public void AtualizarValorUIServerRpc()
+        {
+            quantidadeSaude.Value++;
+        }
+
     private void Awake()
         {
             text_saude = GetComponentInChildren<TMP_Text>();
             rc = FindObjectOfType<RecursosCartaManager>();
-
         }
 
      private void OnMouseDown()
     {
-        Debug.Log("clicado");
         if(rc.novosSaude>0){
-            Debug.Log("clicado2");
             rc.novosSaude--;
-            valor++;
-            text_saude.SetText(valor.ToString());
+            AtualizarValorUIServerRpc();
         }
         
     }
+    private void OnEnable()
+        {
+            quantidadeSaude.OnValueChanged += (int  previousValue, int  newValue) =>
+            {
+                text_saude.SetText(newValue.ToString());
+            };
+        }
 }
