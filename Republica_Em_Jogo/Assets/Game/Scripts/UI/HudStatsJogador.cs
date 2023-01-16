@@ -23,10 +23,14 @@ namespace Game.UI
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
         [SerializeField] private State state;
 
+        void Update(){
+            AtualizaEleitoresText();
+        }
         public override void OnNetworkSpawn()
         {
             state = GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
             GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO].Entrada += FindingLocalPlayerStats;
+            
             //button.GetComponent<Button>().onClick.AddListener(() => { TurnManager.Instance.NextTurnServerRpc(); });
         }
 
@@ -85,11 +89,15 @@ namespace Game.UI
             text_saudeCarta.SetText("Saúde: "+playerStats.numSaude.ToString());
             text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());
         }
+
         public void AtualizarPlayerStatsBairro(){
             playerStats.bairrosTotais = bairroQuant;
-             text_bairros.SetText("Bairros: "+playerStats.bairrosTotais.ToString());
+            text_bairros.SetText("Bairros: "+playerStats.bairrosTotais.ToString());
         }
-        
+
+         public void AtualizaEleitoresText(){
+            text_eleitores.SetText(textToDisplayEleitores);
+         }
     }
 
 }

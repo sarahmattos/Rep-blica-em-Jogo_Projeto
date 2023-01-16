@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 using System.Collections.Generic;
+using Game.UI;
 
 namespace Game.Player {
 
@@ -19,10 +20,9 @@ namespace Game.Player {
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
         public int bairrosTotais;
-        float eleitoresNovos;
+        public float eleitoresNovos;
         public RecursoCartaObjeto recursoManager;
         public int playerID => (int)OwnerClientId;
-
         public Color Cor { get => cor; }
         public Objetivo Objetivo { get => objetivo; }
         public string ObjetivoCarta { get => objetivoCarta; }
@@ -35,18 +35,16 @@ namespace Game.Player {
         {
             //para os clients inscreverem m�todos no initializePlayers    
             InicialializaState.Saida += InitializeStats;
+            
         }
-       
         void OnGUI()
         {
-            //apenas teste
-            if (GUI.Button(new Rect(10, 10, 150, 100), "Distribuicao eleitores"))
+            if (GUI.Button(new Rect(10, 10, 100, 50), "eleitores"))
             {
-              inicioRodada();
-             }
-             
+               inicioRodada();
+            }
         }
-
+       
         public void recursoDistribuicao(int quantidade){
             for(int i = 0; i < quantidade; i++)
                 {
@@ -61,12 +59,11 @@ namespace Game.Player {
                 }
 
         }
-       
-        private void inicioRodada()
+        
+        public void inicioRodada()
          {
-             eleitoresNovos = eleitoresTotais / 2;
-             float eleitoresAdd = Mathf.Floor(eleitoresNovos);
-             eleitoresTotais += (int)eleitoresAdd;
+             eleitoresNovos = Mathf.Floor(bairrosTotais / 2);
+             eleitoresTotais += (int)eleitoresNovos;
              Debug.Log("eleitorestotais "+eleitoresTotais);
              
          }
@@ -95,9 +92,9 @@ namespace Game.Player {
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
             maxTerritorio = GameDataconfig.Instance.territoriosInScene;
             eleitoresTotais = maxTerritorio / /*clientsConnected.Count;*/  2;
+            //eleitoresTotais = bairrosTotais;
             nome = string.Concat("jogador ", playerID);
             objetivoCarta = objetivosDatabase.Instance.objetivoComplemento;
-
 
         }
         

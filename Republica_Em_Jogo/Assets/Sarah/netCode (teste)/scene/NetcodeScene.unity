@@ -1649,7 +1649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8162957967761636596, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -11
+      value: 16.32
       objectReference: {fileID: 0}
     - target: {fileID: 8162957967761636596, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1771,6 +1771,10 @@ PrefabInstance:
       propertyPath: text_objetivo
       value: 
       objectReference: {fileID: 1402552324}
+    - target: {fileID: 8162957968737513791, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
+      propertyPath: btnInicioRodada
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8162957968737513791, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: text_saudeCarta
       value: 
@@ -4196,7 +4200,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11, y: -27}
+  m_AnchoredPosition: {x: 10.46, y: -27}
   m_SizeDelta: {x: 185.6476, y: 28.4416}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &376869962

@@ -32,10 +32,10 @@ namespace Game.Territorio
             saude = GetComponentInChildren<Saúde>();
             hs = FindObjectOfType<HudStatsJogador>();
         }
-
         private void OnEnable()
         {
             playerIDNoControl.OnValueChanged += onPlayerControlMuda;
+            
         }
 
         private void OnDisable()
@@ -53,7 +53,7 @@ namespace Game.Territorio
         private void onPlayerControlMuda(int previousValue, int newValue)
         {
             material.color = GameDataconfig.Instance.PlayerColorOrder[newValue];
-            AtualizaQuantBairro();
+            AtualizaQuantBairro(newValue);
         }
 
         private void Start()
@@ -74,10 +74,10 @@ namespace Game.Territorio
             }
         }
 
-        public void AtualizaQuantBairro(){
-            if(playerIDNoControl.Value == (int)NetworkManager.Singleton.LocalClientId){
+        public void AtualizaQuantBairro(int id){
+            if(id == (int)NetworkManager.Singleton.LocalClientId){
                 hs.bairroQuant++;
-                Debug.Log("BairrosTotais "+hs.bairroQuant);
+                Debug.Log("BairrosTotais "+ Nome +" "+ hs.bairroQuant);
                 hs.AtualizarPlayerStatsBairro();
             }
         }
