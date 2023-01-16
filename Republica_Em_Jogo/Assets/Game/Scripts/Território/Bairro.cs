@@ -83,6 +83,12 @@ namespace Game.Territorio
         }
         private void OnMouseDown()
         {
+            if(nome=="Recreio"){
+                EscolherBairroEleitor();
+            }
+        
+        }
+        public void EscolherBairroEleitor(){
             if(playerIDNoControl.Value == (int)NetworkManager.Singleton.LocalClientId){
                 hs.valorEleitorNovo();
                 if(hs.eleitoresNovosAtual>0){
@@ -90,7 +96,6 @@ namespace Game.Territorio
                     setUpBairro.Eleitores?.MudaValorEleitores(1);
                 }
             }
-        
         }
         
         

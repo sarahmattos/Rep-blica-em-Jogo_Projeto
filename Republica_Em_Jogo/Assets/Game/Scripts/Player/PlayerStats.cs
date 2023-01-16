@@ -44,7 +44,7 @@ namespace Game.Player {
 
         void OnGUI()
         {
-            if (GUI.Button(new Rect(10, 10, 100, 50), "eleitores"))
+            if (GUI.Button(new Rect(10, 10*(playerID+1), 100, 50*(playerID+1)), "eleitores"))
             {
                inicioRodada();
             }
