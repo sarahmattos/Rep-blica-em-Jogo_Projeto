@@ -18,7 +18,8 @@ namespace Game.UI
         [SerializeField] private PlayerStats playerStats;
         [SerializeField] private TMP_Text text_saudeCarta;
         [SerializeField] private TMP_Text text_eduCarta;
-        public int eduQuant, saudeQuant;
+        [SerializeField] private TMP_Text text_bairros;
+        public int eduQuant, saudeQuant, bairroQuant;
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
         [SerializeField] private State state;
 
@@ -66,18 +67,16 @@ namespace Game.UI
 
         public void updateRecursoCartaUI(int quantidade)
         {
-            //if(playerStats.playerID==idTurno){
                 Debug.Log(quantidade +"quantidade");
                 if(quantidade>-1){
                     Debug.Log("entrou recurso");
                     playerStats.recursoDistribuicao(quantidade);
-                text_saudeCarta.SetText("Saúde: "+playerStats.numSaude.ToString());
-                text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());
-                saudeQuant=playerStats.numSaude;
-                eduQuant=playerStats.numEducacao;
+                    text_saudeCarta.SetText("Saúde: "+playerStats.numSaude.ToString());
+                    text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());
+                    saudeQuant=playerStats.numSaude;
+                    eduQuant=playerStats.numEducacao;
                 }
                 
-            //}
             
         }
         public void atualizarRecursoAposTroca(){
@@ -85,6 +84,10 @@ namespace Game.UI
             playerStats.numEducacao=eduQuant;
             text_saudeCarta.SetText("Saúde: "+playerStats.numSaude.ToString());
             text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());
+        }
+        public void AtualizarPlayerStatsBairro(){
+            playerStats.bairrosTotais = bairroQuant;
+             text_bairros.SetText("Bairros: "+playerStats.bairrosTotais.ToString());
         }
         
     }

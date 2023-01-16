@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using Game.UI;
 
 namespace Game.Territorio
 {
@@ -11,7 +12,7 @@ namespace Game.Territorio
         [SerializeField] private string nome;
         public NetworkVariable<int> playerIDNoControl = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         public string Nome { get => nome; }
-
+        private HudStatsJogador hs;
         private Material material;
         private TMP_Text text_nome;
         [SerializeField] private SetUpBairro setUpBairro;
@@ -29,6 +30,7 @@ namespace Game.Territorio
             material.color = Color.gray;
             edu = GetComponentInChildren<Educaçao>();
             saude = GetComponentInChildren<Saúde>();
+            hs = FindObjectOfType<HudStatsJogador>();
         }
 
         private void OnEnable()
@@ -51,6 +53,7 @@ namespace Game.Territorio
         private void onPlayerControlMuda(int previousValue, int newValue)
         {
             material.color = GameDataconfig.Instance.PlayerColorOrder[newValue];
+            AtualizaQuantBairro();
         }
 
         private void Start()
@@ -68,6 +71,14 @@ namespace Game.Territorio
                 edu.playerControlRecurso=false;
                 saude.playerControlRecurso=false;
                 Debug.Log("nao possui esse bairro");
+            }
+        }
+
+        public void AtualizaQuantBairro(){
+            if(playerIDNoControl.Value == (int)NetworkManager.Singleton.LocalClientId){
+                hs.bairroQuant++;
+                Debug.Log("BairrosTotais "+hs.bairroQuant);
+                hs.AtualizarPlayerStatsBairro();
             }
         }
 

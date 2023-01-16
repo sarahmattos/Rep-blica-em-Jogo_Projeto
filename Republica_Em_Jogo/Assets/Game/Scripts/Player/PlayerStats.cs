@@ -18,6 +18,7 @@ namespace Game.Player {
         [SerializeField] private int educacaoRecurso;
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
+        public int bairrosTotais;
         float eleitoresNovos;
         public RecursoCartaObjeto recursoManager;
         public int playerID => (int)OwnerClientId;
