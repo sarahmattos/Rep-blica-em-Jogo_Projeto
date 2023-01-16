@@ -12,6 +12,7 @@ namespace Game
 
         public override void ExitState()
         {
+            Game.Tools.Logger.Instance.LogError("Exit Recompensa State");
         }
     }
 

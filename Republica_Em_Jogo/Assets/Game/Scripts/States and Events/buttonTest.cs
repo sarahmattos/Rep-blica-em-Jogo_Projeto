@@ -15,7 +15,7 @@ namespace  Game
         [SerializeField] private Button nextState;
         [SerializeField] private Button nextTurn;
         [SerializeField] private TMP_Text textState;
-        public State DesenvState => GameStateHandler.Instance.GameStatePairValue[GameState.DESENVOLVIMENTO];
+        public State DesenvState => GameStateHandler.Instance.StatePairValue[GameState.DESENVOLVIMENTO];
 
 
         private void Awake()
@@ -33,7 +33,7 @@ namespace  Game
             });
 
             nextState.onClick.AddListener(() => {
-                CoreLoopStateHandler.Instance.NextDesenvStateServerRpc();
+                CoreLoopStateHandler.Instance.NextStateServerRpc();
             });
 
             TurnManager.Instance.isLocalPlayerTurn += OnPlayerTurnUpdate;

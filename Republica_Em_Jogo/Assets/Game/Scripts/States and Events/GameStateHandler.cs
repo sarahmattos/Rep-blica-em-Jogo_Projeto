@@ -16,9 +16,7 @@ namespace Game {
         DESENVOLVIMENTO,
         ELEICOES,
         //FIM_JOGO
-
     }
-
 
     [RequireComponent(typeof(MenuLoadState))]
     [RequireComponent(typeof(GameplayLoadState))]
@@ -29,21 +27,19 @@ namespace Game {
     public class GameStateHandler : NetworkSingleton<GameStateHandler>
     {
         private NetworkVariable<int> gameStateIndex = new NetworkVariable<int>();
-        private Dictionary<GameState, State> gameStatePairValue = new Dictionary<GameState, State>();
+        private Dictionary<GameState, State> statePairValue = new Dictionary<GameState, State>();
         private State currentGameState;
         public Action<GameState> estadoMuda;
-        public Dictionary<GameState, State> GameStatePairValue => gameStatePairValue;
+        //para acessar os gerais do jogo, basta acessar StateParValue[GameState.ESTADO];
+        public Dictionary<GameState, State> StatePairValue => statePairValue;
 
-        private void Awake()
-        {
-            InitGameStateParValue();
-            currentGameState = GameStatePairValue[GameState.MENU_SCENE_LOAD];
-
-        }
 
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
+            SetGameStatePairValues();
+            currentGameState = StatePairValue[GameState.MENU_SCENE_LOAD];
+
             gameStateIndex.OnValueChanged += IndexEstadoJogoMuda;
 
         }
@@ -52,13 +48,13 @@ namespace Game {
             gameStateIndex.OnValueChanged -= IndexEstadoJogoMuda;
         }
 
-        private void InitGameStateParValue()
+        private void SetGameStatePairValues()
         {
-            GameStatePairValue.Add(GameState.MENU_SCENE_LOAD, GetComponent<MenuLoadState>());
-            GameStatePairValue.Add(GameState.GAMEPLAY_SCENE_LOAD, GetComponent< GameplayLoadState>());
-            GameStatePairValue.Add(GameState.INICIALIZACAO, GetComponent<InicializaState>());
-            GameStatePairValue.Add(GameState.DESENVOLVIMENTO, GetComponent<DesenvState>());
-            GameStatePairValue.Add(GameState.ELEICOES, GetComponent<EleicaoState>());
+            StatePairValue.Add(GameState.MENU_SCENE_LOAD, GetComponent<MenuLoadState>());
+            StatePairValue.Add(GameState.GAMEPLAY_SCENE_LOAD, GetComponent< GameplayLoadState>());
+            StatePairValue.Add(GameState.INICIALIZACAO, GetComponent<InicializaState>());
+            StatePairValue.Add(GameState.DESENVOLVIMENTO, GetComponent<DesenvState>());
+            StatePairValue.Add(GameState.ELEICOES, GetComponent<EleicaoState>());
         }
 
         [ServerRpc(RequireOwnership = false)]
@@ -72,7 +68,7 @@ namespace Game {
         public void NextStateServerRPC()
         {
             gameStateIndex.Value++;
-            //TODO: restringir o acrescimo de estado?
+            //TODO: restrigir o acrescimo no index em relação ao número de estados que existem
         }
 
 
@@ -81,11 +77,9 @@ namespace Game {
         {
 
             currentGameState.InvokeSaida();
-            currentGameState = GameStatePairValue[(GameState)next];
+            currentGameState = StatePairValue[(GameState)next];
             estadoMuda?.Invoke((GameState)next);
             currentGameState.InvokeEntrada();
-            Logger.Instance.LogWarning(string.Concat("Index de estado: ", next," ("+(GameState)next)+")");
-
         }
 
 

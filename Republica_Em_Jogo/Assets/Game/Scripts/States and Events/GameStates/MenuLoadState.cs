@@ -11,7 +11,6 @@ namespace Game {
 
     public class MenuLoadState : State
     {
-        private GameStateHandler stateHandler => GameStateHandler.Instance;
 
         public override void EnterState()
         {

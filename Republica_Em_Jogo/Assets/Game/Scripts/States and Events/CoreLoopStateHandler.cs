@@ -22,47 +22,30 @@ namespace Game
     public class CoreLoopStateHandler : NetworkSingleton<CoreLoopStateHandler>
     {
         public NetworkVariable<int> coreLoopIndex = new NetworkVariable<int>();
-        private Dictionary<CoreLoopState, State> statePairValue = new Dictionary<CoreLoopState, State>();
+        private Dictionary<CoreLoopState, State> statePairValues = new Dictionary<CoreLoopState, State>();
         private State currentState;
         public Action<CoreLoopState> estadoMuda;
-        public Dictionary<CoreLoopState, State> StatePairValue => statePairValue;
-        private void Awake()
+       //para acessar os estados de loop do jogo, basta acessar StateParValue[CoreLoopState.ESTADO];
+        public Dictionary<CoreLoopState, State> StatePairValues => statePairValues;
+        private void SetLoopStatePairValues()
         {
-            InitGameStateParValue();
-            //trocar por entrar em distribuição quando entrar no game state desenvolvState
-            currentState = statePairValue[CoreLoopState.DISTRIBUICAO];
-            coreLoopIndex.OnValueChanged += IndexEstadoLoopMuda;
-
-        }
-        private void InitGameStateParValue()
-        {
-            StatePairValue.Add(CoreLoopState.DISTRIBUICAO, GetComponent<DistribuicaoState>());
-            StatePairValue.Add(CoreLoopState.AVANCO, GetComponent<AvancoState>());
-            StatePairValue.Add(CoreLoopState.PROJETO, GetComponent<ProjetoState>());
-            StatePairValue.Add(CoreLoopState.RECOMPENSA, GetComponent<RecompensaState>());
+            StatePairValues.Add(CoreLoopState.DISTRIBUICAO, GetComponent<DistribuicaoState>());
+            StatePairValues.Add(CoreLoopState.AVANCO, GetComponent<AvancoState>());
+            StatePairValues.Add(CoreLoopState.PROJETO, GetComponent<ProjetoState>());
+            StatePairValues.Add(CoreLoopState.RECOMPENSA, GetComponent<RecompensaState>());
         }
 
-        public State DesenvState => GameStateHandler.Instance.GameStatePairValue[GameState.DESENVOLVIMENTO];
 
         private void Start()
         {
-            DontDestroyOnLoad(gameObject);
+            SetLoopStatePairValues();
+            currentState = statePairValues[CoreLoopState.DISTRIBUICAO];
+           
+            coreLoopIndex.OnValueChanged += IndexEstadoLoopMuda;
         }
         public override void OnDestroy()
         {
             coreLoopIndex.OnValueChanged -= IndexEstadoLoopMuda;
-        }
-
-        public override void OnNetworkSpawn()
-        {
-            coreLoopIndex.OnValueChanged += IndexEstadoLoopMuda;
-            DesenvState.Entrada += () =>{ ChangeDesenvStateServerRpc(0); };
-        }
-
-        public override void OnNetworkDespawn()
-        {
-            coreLoopIndex.OnValueChanged -= IndexEstadoLoopMuda;
-            DesenvState.Entrada -= () => { ChangeDesenvStateServerRpc(0);};
         }
 
 
@@ -70,39 +53,25 @@ namespace Game
         private void IndexEstadoLoopMuda(int previousValue, int newValue)
         {
             currentState.InvokeSaida();
-            currentState = statePairValue[(CoreLoopState)newValue];
-            estadoMuda?.Invoke((CoreLoopState)newValue);
+            currentState = statePairValues[(CoreLoopState)newValue];
+
             currentState.InvokeEntrada();
+            estadoMuda?.Invoke((CoreLoopState)newValue);
 
         }
 
         [ServerRpc(RequireOwnership = false)]
-        public void ChangeDesenvStateServerRpc(int state)
+        public void ChangeStateServerRpc(int state)
         {
 
             coreLoopIndex.Value = state;
         }
 
         [ServerRpc(RequireOwnership = false)]
-        public void NextDesenvStateServerRpc()
+        public void NextStateServerRpc()
         {
-            if (coreLoopIndex.Value < statePairValue.Count-1)
-            {
-                coreLoopIndex.Value++;
-            } else
-            {
-
-                //TODO: aqui não ta legal
-                TurnManager.Instance.NextTurnServerRpc();
-
-                coreLoopIndex.Value = 0;
-            }
-            Logger.Instance.LogWarning(string.Concat("Player ", TurnManager.Instance.GetCurrentPlayer, ", no Stado ", (CoreLoopState)coreLoopIndex.Value));
-
-
+            coreLoopIndex.Value = (coreLoopIndex.Value+1) % (statePairValues.Count);
         }
-
-
     }
 
 }

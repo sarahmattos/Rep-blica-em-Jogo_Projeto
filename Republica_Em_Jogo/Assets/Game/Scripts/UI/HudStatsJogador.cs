@@ -24,13 +24,13 @@ namespace Game.UI
 
         public override void OnNetworkSpawn()
         {
-            state = GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
-            GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO].Entrada += FindingLocalPlayerStats;
+            state = GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
+            GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO].Entrada += FindingLocalPlayerStats;
         }
 
         public override void OnNetworkDespawn()
         {
-            GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO].Entrada -= FindingLocalPlayerStats;
+            GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO].Entrada -= FindingLocalPlayerStats;
         }
 
         public override void OnDestroy()

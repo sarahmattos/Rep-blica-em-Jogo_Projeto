@@ -29,13 +29,17 @@ namespace Game.Player {
         public int EleitoresTotais { get => eleitoresTotais; }
         public int SaudeRecurso { get => saudeRecurso; }
         public int EducacaoRecurso { get => educacaoRecurso; }
-        public State InicialializaState => GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
+        public State GameplayLoadState => GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD];
+       
         private void Start()
         {
-            //para os clients inscreverem m�todos no initializePlayers          
-            InicialializaState.Saida += InitializeStats;
+            GameplayLoadState.Saida += InicializaPlayerStats;
         }
-       
+        public override void OnDestroy()
+        {
+            GameplayLoadState.Saida -= InicializaPlayerStats;
+        }
+
         void OnGUI()
         {
             //apenas teste
@@ -62,33 +66,15 @@ namespace Game.Player {
         }
        
         private void inicioRodada()
-         {
+        {
              eleitoresNovos = eleitoresTotais / 2;
              float eleitoresAdd = Mathf.Floor(eleitoresNovos);
              eleitoresTotais += (int)eleitoresAdd;
-             Debug.Log("eleitorestotais "+eleitoresTotais);
-             
-         }
-        public override void OnDestroy()
-        {
-            //para os clients desinscrever m�todos no initializePlayers
-            
-            InicialializaState.Saida -= InitializeStats;
+             Debug.Log("eleitorestotais "+eleitoresTotais); 
         }
 
 
-        public override void OnNetworkSpawn()
-        {
-            InicialializaState.Saida += InitializeStats;
-        }
-
-        public override void OnNetworkDespawn()
-        {
-            InicialializaState.Saida -= InitializeStats;
-
-        }
-
-        public void InitializeStats()
+        public void InicializaPlayerStats()
         {
             Tools.Logger.Instance.LogInfo("inicializando player stats");
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];

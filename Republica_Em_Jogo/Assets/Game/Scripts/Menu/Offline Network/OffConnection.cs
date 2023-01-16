@@ -39,7 +39,7 @@ namespace Game.Connection
 
             NetworkManager.Singleton.OnTransportFailure += () =>
            {
-               Logger.Instance.LogError("fALHO ao CRIAR HOST VACILÃO.");
+               Logger.Instance.LogError("fALHO ao CRIAR HOST.");
            };
         }
 
