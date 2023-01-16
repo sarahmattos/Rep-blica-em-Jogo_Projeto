@@ -19,6 +19,7 @@ namespace Game.Player {
         [SerializeField] private int educacaoRecurso;
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
+        public int auxEleitores;
         public int bairrosTotais;
         public float eleitoresNovos;
         public RecursoCartaObjeto recursoManager;
@@ -63,8 +64,8 @@ namespace Game.Player {
         public void inicioRodada()
          {
              eleitoresNovos = Mathf.Floor(bairrosTotais / 2);
-             eleitoresTotais += (int)eleitoresNovos;
-             Debug.Log("eleitorestotais "+eleitoresTotais);
+             //eleitoresTotais += (int)eleitoresNovos;
+             Debug.Log("eleitoresNovos "+eleitoresNovos);
              
          }
         public override void OnDestroy()
@@ -98,7 +99,9 @@ namespace Game.Player {
 
         }
         
-
+        public void eleitoresAtualizar(){
+            eleitoresTotais++;
+        }
 
     }
 }

@@ -81,7 +81,19 @@ namespace Game.Territorio
                 hs.AtualizarPlayerStatsBairro();
             }
         }
-
+        private void OnMouseDown()
+        {
+            if(playerIDNoControl.Value == (int)NetworkManager.Singleton.LocalClientId){
+                hs.valorEleitorNovo();
+                if(hs.eleitoresNovosAtual>0){
+                    hs.atualizarEleitores();
+                    setUpBairro.Eleitores?.MudaValorEleitores(1);
+                }
+            }
+        
+        }
+        
+        
     }
 
 }

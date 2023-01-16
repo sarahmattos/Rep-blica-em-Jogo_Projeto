@@ -19,7 +19,8 @@ namespace Game.UI
         [SerializeField] private TMP_Text text_saudeCarta;
         [SerializeField] private TMP_Text text_eduCarta;
         [SerializeField] private TMP_Text text_bairros;
-        public int eduQuant, saudeQuant, bairroQuant;
+        public int eduQuant, saudeQuant, bairroQuant; 
+        public float eleitoresNovosAtual;
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
         [SerializeField] private State state;
 
@@ -97,6 +98,15 @@ namespace Game.UI
 
          public void AtualizaEleitoresText(){
             text_eleitores.SetText(textToDisplayEleitores);
+         }
+        
+         public void valorEleitorNovo(){
+            eleitoresNovosAtual = playerStats.eleitoresNovos;
+         }
+         public void atualizarEleitores(){
+            
+            playerStats.eleitoresNovos--;
+            playerStats.eleitoresAtualizar();
          }
     }
 
