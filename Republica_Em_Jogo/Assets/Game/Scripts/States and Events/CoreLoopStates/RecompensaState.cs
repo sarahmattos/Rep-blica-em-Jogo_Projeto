@@ -1,28 +1,19 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Tools;
-using UnityEngine.SceneManagement;
-using Unity.Netcode;
 
-namespace Game {
-
-
-    public class MenuLoadState : State
+namespace Game
+{
+    public class RecompensaState : State
     {
-
         public override void EnterState()
         {
         }
 
         public override void ExitState()
         {
+            Game.Tools.Logger.Instance.LogError("Exit Recompensa State");
         }
-
     }
 
-
 }
-
-

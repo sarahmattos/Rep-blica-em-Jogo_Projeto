@@ -15,7 +15,7 @@ namespace  Game
         [SerializeField] private Button nextState;
         [SerializeField] private Button nextTurn;
         [SerializeField] private TMP_Text textState;
-        public State DesenvState => GameStateHandler.Instance.GameStatePairValue[GameState.DESENVOLVIMENTO];
+        public State DesenvState => GameStateHandler.Instance.StatePairValue[GameState.DESENVOLVIMENTO];
 
 
         private void Awake()
@@ -33,12 +33,12 @@ namespace  Game
             });
 
             nextState.onClick.AddListener(() => {
-                CoreLoopStateHandler.Instance.NextDesenvStateServerRpc();
+                CoreLoopStateHandler.Instance.NextStateServerRpc();
             });
 
             TurnManager.Instance.isLocalPlayerTurn += OnPlayerTurnUpdate;
             DesenvState.Entrada += OnDesenvolvimento;
-            CoreLoopStateHandler.Instance.desenvStateIndex.OnValueChanged += UpdateTextDesenv;
+            CoreLoopStateHandler.Instance.estadoMuda += UpdateTextDesenv;
         }
 
 
@@ -46,7 +46,7 @@ namespace  Game
         {
             TurnManager.Instance.isLocalPlayerTurn -= OnPlayerTurnUpdate;
             DesenvState.Entrada -= OnDesenvolvimento;
-            CoreLoopStateHandler.Instance.desenvStateIndex.OnValueChanged -= UpdateTextDesenv;
+            CoreLoopStateHandler.Instance.estadoMuda -= UpdateTextDesenv;
 
         }
 
@@ -63,18 +63,11 @@ namespace  Game
             
         }
 
-        private void UpdateTextDesenv(int previousValue, int newValue)
+        private void UpdateTextDesenv(CoreLoopState state)
         {
-            textState.SetText(string.Concat("Player ", TurnManager.Instance.GetCurrentPlayer, " no estado: ", (CoreLoopStae)CoreLoopStateHandler.Instance.desenvStateIndex.Value));
+            textState.SetText(string.Concat("Player ", TurnManager.Instance.GetCurrentPlayer, " no estado: ",state));
         }
 
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.B))
-            {
-                Tools.Logger.Instance.LogError("on button Test: desenvState: " + DesenvState.name);
-            }
-        }
     }
 }
 

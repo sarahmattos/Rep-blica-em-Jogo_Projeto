@@ -31,13 +31,17 @@ namespace Game.Player {
         public int EleitoresTotais { get => eleitoresTotais; }
         public int SaudeRecurso { get => saudeRecurso; }
         public int EducacaoRecurso { get => educacaoRecurso; }
-        public State InicialializaState => GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
+        public State GameplayLoadState => GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD];
+       
         private void Start()
         {
-            //para os clients inscreverem m�todos no initializePlayers    
-            InicialializaState.Saida += InitializeStats;
-            
+            GameplayLoadState.Saida += InicializaPlayerStats;
         }
+        public override void OnDestroy()
+        {
+            GameplayLoadState.Saida -= InicializaPlayerStats;
+        }
+
         void OnGUI()
         {
             if (GUI.Button(new Rect(10, 10, 100, 50), "eleitores"))
@@ -68,26 +72,9 @@ namespace Game.Player {
              Debug.Log("eleitoresNovos "+eleitoresNovos);
              
          }
-        public override void OnDestroy()
-        {
-            //para os clients desinscrever m�todos no initializePlayers
-            
-            InicialializaState.Saida -= InitializeStats;
-        }
 
 
-        public override void OnNetworkSpawn()
-        {
-            InicialializaState.Saida += InitializeStats;
-        }
-
-        public override void OnNetworkDespawn()
-        {
-            InicialializaState.Saida -= InitializeStats;
-
-        }
-
-        public void InitializeStats()
+        public void InicializaPlayerStats()
         {
             Tools.Logger.Instance.LogInfo("inicializando player stats");
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];

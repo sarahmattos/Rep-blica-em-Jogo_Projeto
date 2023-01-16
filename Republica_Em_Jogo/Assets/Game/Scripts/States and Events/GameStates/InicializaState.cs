@@ -12,11 +12,14 @@ namespace Game
 
     public class InicializaState : State
     {
+        //TODO: isolar DISTRIBUIÇÃO nos bairros em outra classe
         [SerializeField] private float intervaloTempo = 0.5f;
         private ZonaTerritorial[] zonasTerritoriais;
 
+
         //OBS: embora não pareca ser necessario, sem SerializeField não funciona, por algum motivo.
         [SerializeField] private List<Bairro> todosBairros;
+        private GameStateHandler stateHandler => GameStateHandler.Instance;
 
         public override void EnterState()
         {

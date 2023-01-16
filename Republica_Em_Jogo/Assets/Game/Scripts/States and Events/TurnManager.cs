@@ -20,36 +20,42 @@ namespace Game {
         public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == GetCurrentPlayer);
 
         public event Action<bool> isLocalPlayerTurn;
-        public State InicializaState => GameStateHandler.Instance.GameStatePairValue[GameState.INICIALIZACAO];
-        private void Awake()
+        private State InicializaState => GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
+        private State RecompensaState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.RECOMPENSA];
+       
+        private void Start()
         {
-            indexPlayerAtual.OnValueChanged += UpdatePlayerTurn;
-            InicializaState.Entrada += UpdateClientscount;
+            playerAtual.OnValueChanged += UpdatePlayerTurn;
+            InicializaState.Entrada += UpdateClientsCount;
             InicializaState.Entrada += DefineConfigIniciais;
+            
+            RecompensaState.Saida += NextTurnServerRpc;
         }
 
         public override void OnDestroy()
         {
-            indexPlayerAtual.OnValueChanged -= UpdatePlayerTurn;
-            InicializaState.Entrada-= UpdateClientscount;
+            playerAtual.OnValueChanged += UpdatePlayerTurn;
+            InicializaState.Entrada-= UpdateClientsCount;
             InicializaState.Entrada -= DefineConfigIniciais;
-
+            
+            RecompensaState.Saida -= NextTurnServerRpc;
         }
-        private void UpdateClientscount()
+
+        private void UpdateClientsCount()
         {
             if (!IsHost) return;
             connectedClientCount.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
         }
 
-
-        private void UpdatePlayerTurn(int previousValue, int nextValue)
+        private void UpdatePlayerTurn(int previous, int next)
         {
-            bool value = ((int)NetworkManager.Singleton.LocalClientId == ordemPlayerID[nextValue]);
-
-            isLocalPlayerTurn?.Invoke(value);
+            bool nextIgualLocalID = ((int)NetworkManager.Singleton.LocalClientId == next);
+            isLocalPlayerTurn?.Invoke(nextIgualLocalID);
         }
 
-        private void GeneratePlayerOrder()
+
+
+        private void GerarPlayerOrdem()
         {
             if (!IsHost) return;
             List<int> allClientID = new List<int>();
@@ -69,18 +75,15 @@ namespace Game {
 
         private void DefineConfigIniciais()
         {
-            GeneratePlayerOrder();
-            NextTurnServerRpc();
-
+            GerarPlayerOrdem();
+            SetIndexPlayerTurnServerRpc(0);
         }
 
         [ServerRpc(RequireOwnership =false)]
-        public void ChangePlayerTurnServerRpc(int clientId)
+        public void SetIndexPlayerTurnServerRpc(int index)
         {
-            indexPlayerAtual.Value = clientId;
-
-            Logger.Instance.LogInfo("turno atualizado. Player atual: " + GetCurrentPlayer);
-            Logger.Instance.LogInfo("turno atualizado. SUA VEZ?: " + LocalIsCurrent);
+            indexPlayerAtual.Value = index;
+            playerAtual.Value = ordemPlayerID[indexPlayerAtual.Value];
 
         }
 
@@ -89,6 +92,7 @@ namespace Game {
         public void NextTurnServerRpc()
         {
             indexPlayerAtual.Value = (1 + indexPlayerAtual.Value) % (GetConnectedClientCount);
+            playerAtual.Value = ordemPlayerID[indexPlayerAtual.Value];
             #region logica alternativa
             //if (GetConnectedClientCount > 1)
             //{
@@ -108,31 +112,8 @@ namespace Game {
             //}
             #endregion
 
-            playerAtual.Value = ordemPlayerID[indexPlayerAtual.Value];
-
-            Logger.Instance.LogWarning(string.Concat("Player ", GetCurrentPlayer+" vai jogar."));
-
-
-
         }
-
-
-        public void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.A))
-            {
-                for (int i = 0; i < ordemPlayerID.Count; i++)
-                {
-                    Logger.Instance.LogWarning("player order: " + ordemPlayerID[i]);
-
-                }
-            }
-        }
-
-
     }
-
-
 
 }
 

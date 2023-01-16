@@ -9,7 +9,6 @@ namespace Game {
     
     public abstract class State : NetworkBehaviour
     {
-        protected GameStateHandler stateHandler => GameStateHandler.Instance;
         public  Action Entrada;
         public  Action Saida;
 
