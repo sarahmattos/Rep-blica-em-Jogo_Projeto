@@ -42,13 +42,7 @@ namespace Game.Player {
             GameplayLoadState.Saida -= InicializaPlayerStats;
         }
 
-        void OnGUI()
-        {
-            if (GUI.Button(new Rect(10, 10*(playerID+1), 100, 50*(playerID+1)), "eleitores"))
-            {
-               inicioRodada();
-            }
-        }
+        
        
         public void recursoDistribuicao(int quantidade){
             for(int i = 0; i < quantidade; i++)

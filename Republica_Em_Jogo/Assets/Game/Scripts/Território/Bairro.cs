@@ -32,6 +32,11 @@ namespace Game.Territorio
             saude = GetComponentInChildren<Saúde>();
             hs = FindObjectOfType<HudStatsJogador>();
         }
+        [ServerRpc(RequireOwnership = false)]
+        public void MudaValorEleitorServerRpc()
+        {
+            setUpBairro.Eleitores.MudaValorEleitores(1);
+        }
         private void OnEnable()
         {
             playerIDNoControl.OnValueChanged += onPlayerControlMuda;
@@ -81,19 +86,15 @@ namespace Game.Territorio
                 hs.AtualizarPlayerStatsBairro();
             }
         }
-        private void OnMouseDown()
-        {
-            if(nome=="Recreio"){
-                EscolherBairroEleitor();
-            }
         
-        }
         public void EscolherBairroEleitor(){
             if(playerIDNoControl.Value == (int)NetworkManager.Singleton.LocalClientId){
                 hs.valorEleitorNovo();
                 if(hs.eleitoresNovosAtual>0){
                     hs.atualizarEleitores();
-                    setUpBairro.Eleitores?.MudaValorEleitores(1);
+                    if(NetworkManager.Singleton.IsClient){ 
+                    MudaValorEleitorServerRpc();
+                    }
                 }
             }
         }

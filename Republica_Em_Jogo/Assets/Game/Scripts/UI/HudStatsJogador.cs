@@ -104,6 +104,10 @@ namespace Game.UI
             playerStats.eleitoresNovos--;
             playerStats.eleitoresAtualizar();
          }
+
+         public void ChamatPlayerInicioRodada(){
+            playerStats.inicioRodada();
+         }
     }
 
 }
