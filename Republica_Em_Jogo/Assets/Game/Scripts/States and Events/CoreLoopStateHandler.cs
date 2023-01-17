@@ -25,8 +25,11 @@ namespace Game
         private Dictionary<CoreLoopState, State> statePairValues = new Dictionary<CoreLoopState, State>();
         private State currentState;
         public Action<CoreLoopState> estadoMuda;
+        public State CurrentState => currentState;
        //para acessar os estados de loop do jogo, basta acessar StateParValue[CoreLoopState.ESTADO];
         public Dictionary<CoreLoopState, State> StatePairValues => statePairValues;
+        public State UltimoLoopState => StatePairValues[(CoreLoopState)StatePairValues.Count-1];
+
         private void SetLoopStatePairValues()
         {
             StatePairValues.Add(CoreLoopState.DISTRIBUICAO, GetComponent<DistribuicaoState>());
@@ -54,9 +57,9 @@ namespace Game
         {
             currentState.InvokeSaida();
             currentState = statePairValues[(CoreLoopState)newValue];
+            estadoMuda?.Invoke((CoreLoopState)newValue);
 
             currentState.InvokeEntrada();
-            estadoMuda?.Invoke((CoreLoopState)newValue);
 
         }
 

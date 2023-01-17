@@ -4,7 +4,7 @@ using Unity.Netcode;
 
 namespace Game.Tools
 {
-    public static class AlterarPropriedades
+    public static class Extensoes
     {
         public static void MudarCor(this Material material, Color color)
         {
@@ -48,6 +48,20 @@ namespace Game.Tools
             {
                 list.Add(values);
             }
+        }
+
+        public static T KeyByValue<T, W>(this Dictionary<T, W> dict, W val)
+        {
+            T key = default;
+            foreach (KeyValuePair<T, W> pair in dict)
+            {
+                if (EqualityComparer<W>.Default.Equals(pair.Value, val))
+                {
+                    key = pair.Key;
+                    break;
+                }
+            }
+            return key;
         }
 
         //public static void NextValue(this int value, int max)

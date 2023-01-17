@@ -33,7 +33,6 @@ namespace Game {
         //para acessar os gerais do jogo, basta acessar StateParValue[GameState.ESTADO];
         public Dictionary<GameState, State> StatePairValue => statePairValue;
 
-
         private void Start()
         {
             DontDestroyOnLoad(gameObject);

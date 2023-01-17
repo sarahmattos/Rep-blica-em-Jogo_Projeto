@@ -40,7 +40,7 @@ namespace Game.UI
 
         public override void OnDestroy()
         {
-            TurnManager.Instance.isLocalPlayerTurn -= (bool value) => { button.SetActive(value); };
+            TurnManager.Instance.vezDoPlayerLocal -= (bool value) => { button.SetActive(value); };
 
         }
 
