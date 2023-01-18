@@ -8,7 +8,7 @@ using Unity.Netcode;
 public class Saúde : NetworkBehaviour
 {
     private NetworkVariable<int> quantidadeSaude = new NetworkVariable<int>(0);
-     private TMP_Text text_saude;
+    private TMP_Text text_saude;
     private RecursosCartaManager rc;
     public bool playerControlRecurso =false;
     private Bairro bairro;
@@ -28,8 +28,7 @@ public class Saúde : NetworkBehaviour
 
      private void OnMouseDown()
     {
-        bairro.VerificaControl();
-         if(bairro.playerInControl==true){
+         if(bairro.VerificaControl()){
             if(rc.novosSaude>0){
                 rc.novosSaude--;
                 AtualizarValorUIServerRpc();

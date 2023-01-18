@@ -29,8 +29,7 @@ public class Educaçao : NetworkBehaviour
 
      private void OnMouseDown()
     {
-        bairro.VerificaControl();
-        if(bairro.playerInControl==true){
+        if(bairro.VerificaControl()){
             if(rc.novosEdu>0){
                 rc.novosEdu--;
                 AtualizarValorUIServerRpc();
