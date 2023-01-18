@@ -58,7 +58,9 @@ namespace Game.Territorio
         private void onPlayerControlMuda(int previousValue, int newValue)
         {
             material.color = GameDataconfig.Instance.PlayerColorOrder[newValue];
-            AtualizaQuantBairro(newValue);
+            if(newValue == (int)NetworkManager.Singleton.LocalClientId){
+                hs.AtualizarPlayerStatsBairro();
+            }
         }
 
         private void Start()
@@ -79,13 +81,7 @@ namespace Game.Territorio
             }
         }
 
-        public void AtualizaQuantBairro(int id){
-            if(id == (int)NetworkManager.Singleton.LocalClientId){
-                hs.bairroQuant++;
-                Debug.Log("BairrosTotais "+ Nome +" "+ hs.bairroQuant);
-                hs.AtualizarPlayerStatsBairro();
-            }
-        }
+        
         
         public void EscolherBairroEleitor(){
             if(playerIDNoControl.Value == (int)NetworkManager.Singleton.LocalClientId){

@@ -19,10 +19,10 @@ namespace Game.Player {
         [SerializeField] private int educacaoRecurso;
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
-        public int auxEleitores;
         public int bairrosTotais;
         public float eleitoresNovos;
         public RecursoCartaObjeto recursoManager;
+
         public int playerID => (int)OwnerClientId;
         public Color Cor { get => cor; }
         public Objetivo Objetivo { get => objetivo; }
@@ -42,8 +42,7 @@ namespace Game.Player {
             GameplayLoadState.Saida -= InicializaPlayerStats;
         }
 
-        
-       
+       //randomiza qual carta de recurso
         public void recursoDistribuicao(int quantidade){
             for(int i = 0; i < quantidade; i++)
                 {
@@ -56,25 +55,23 @@ namespace Game.Player {
                         numEducacao++;
                     }
                 }
-
         }
         
+        //divide numero de bairros para adicionar novos eleitores
         public void inicioRodada()
          {
              eleitoresNovos = Mathf.Floor(bairrosTotais / 2);
-             //eleitoresTotais += (int)eleitoresNovos;
              Debug.Log("eleitoresNovos "+eleitoresNovos);
-             
          }
-
 
         public void InicializaPlayerStats()
         {
             Tools.Logger.Instance.LogInfo("inicializando player stats");
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
             maxTerritorio = GameDataconfig.Instance.territoriosInScene;
-            eleitoresTotais = maxTerritorio / /*clientsConnected.Count;*/  2;
-            //eleitoresTotais = bairrosTotais;
+            /*tive que colocar em outro lugar :eleitoresAtualizar();
+            //eleitoresTotais = maxTerritorio / /*clientsConnected.Count; 2;
+            */
             nome = string.Concat("jogador ", playerID);
             objetivoCarta = objetivosDatabase.Instance.objetivoComplemento;
 
@@ -82,6 +79,9 @@ namespace Game.Player {
         
         public void eleitoresAtualizar(){
             eleitoresTotais++;
+        }
+        public void bairrosAtualizar(){
+            bairrosTotais++;
         }
 
     }
