@@ -20,23 +20,27 @@ using Unity.Collections;
         private NetworkVariable<int> votacaoRespostaFavor = new NetworkVariable<int>(0);
         private NetworkVariable<int> votacaoRespostaContra = new NetworkVariable<int>(0);
         private NetworkVariable<int> numPlayers = new NetworkVariable<int>(-1);
+
+        private HudStatsJogador hs;
         public ProjetoObject projetoManager;
+        private SetUpZona setUpZona;  
+        private ZonaTerritorial zt;  
+
         [SerializeField] private TMP_Text text_projetoCarta;
         [SerializeField] private TMP_Text text_avisoProjeto;
         [SerializeField] private TMP_Text text_avisoOutros;
-        private HudStatsJogador hs;
+        
         public GameObject projetoUI;
         public GameObject restoUI;
         public GameObject bntsUi, btns2, fecharBtn;
         public GameObject verProjetoBtn;
+
         public string proposta;
         public int numRecompensa, numRecompensaDefault;
         public string recompensaText, zonaNameLocal;
         public int clienteLocal= -1;
         public int sim , nao, numPlayer;
         private string mostrarResposta;
-        private SetUpZona setUpZona;  
-        private ZonaTerritorial zt;  
         private bool mostrouResultado=false;
         public bool playerInZona=false;
     
@@ -185,14 +189,12 @@ using Unity.Collections;
             votacaoRespostaFavor.OnValueChanged += (int  previousValue, int  newValue) =>
             {
                 sim=newValue;
-                
             };
 
             //votacao contra
             votacaoRespostaContra.OnValueChanged += (int  previousValue, int  newValue) =>
             {
                 nao=newValue;
-                
             };
         }
         public void Update(){

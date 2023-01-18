@@ -68,7 +68,6 @@ namespace Game.UI
         //distribui carta de recurso (chamada pela classe projeto)
         public void updateRecursoCartaUI(int quantidade)
         {   
-            //numero da recompensa do projeto
             if(quantidade>-1){
 
                 //chama a funcao que randomiza
@@ -97,22 +96,25 @@ namespace Game.UI
         
         //a distribuicao inicial dos bairros atualiza o valor de bairros e eleitores totais
         public void AtualizarPlayerStatsBairro(){
-            playerStats.eleitoresAtualizar();
-            playerStats.bairrosAtualizar();
-            text_bairros.SetText(" Bairros: "+playerStats.bairrosTotais.ToString());
-            AtualizaEleitoresText();
+            AtualizaBairros();
+            AtualizaEleitores();
         }
         
         //atualiza texto eleitores
-         public void AtualizaEleitoresText(){
+         public void AtualizaEleitores(){
+            playerStats.eleitoresAtualizar();
             text_eleitores.SetText(textToDisplayEleitores);
+         }
+         //atualiza texto bairros
+         public void AtualizaBairros(){
+            playerStats.bairrosAtualizar();
+            text_bairros.SetText(" Bairros: "+playerStats.bairrosTotais.ToString());
          }
         
         //quando o jogador distribui seus eleitores
-         public void atualizarEleitores(){
+         public void contagemEleitores(){
             playerStats.eleitoresNovos--;
-            playerStats.eleitoresAtualizar();
-            AtualizaEleitoresText();
+            AtualizaEleitores();
          }
 
         //para o bairro acessar quantos eleitores novos podem ser distribuidos

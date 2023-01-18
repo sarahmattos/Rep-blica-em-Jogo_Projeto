@@ -28,8 +28,8 @@ public class Saúde : NetworkBehaviour
 
      private void OnMouseDown()
     {
-        bairro.VerificaRecurso();
-         if(playerControlRecurso==true){
+        bairro.VerificaControl();
+         if(bairro.playerInControl==true){
             if(rc.novosSaude>0){
                 rc.novosSaude--;
                 AtualizarValorUIServerRpc();
