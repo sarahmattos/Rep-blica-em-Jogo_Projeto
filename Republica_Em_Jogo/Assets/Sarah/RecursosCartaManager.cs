@@ -19,7 +19,7 @@ public class RecursosCartaManager : MonoBehaviour
     [SerializeField] private TMP_Text text_recursoDistribuicao;
     public int novosEdu;
     public int novosSaude;
-    private bool chamarDistribuicao=false;
+    public bool chamarDistribuicao=false;
     void Start()
     {
         hs = FindObjectOfType<HudStatsJogador>();

@@ -29,7 +29,7 @@ namespace Game.UI
         private Projeto projeto; 
         private SetUpZona setUpZona; 
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
-        private bool playerRecebeEleitor=true;
+        public bool playerRecebeEleitor=true;
         [SerializeField] private State state;
 
         
