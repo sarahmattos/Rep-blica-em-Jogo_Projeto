@@ -69,7 +69,9 @@ public class Corrupcao : NetworkBehaviour
             };    
         }
         public void chamarPenalidade(){
-
+            hs.playerRecebeEleitor=true;
+            hs.playerDiminuiEleitor=true;
+            hs.ValorEleitoresNovos(penalidade);
         }
 
         public void panelFalse(GameObject panel){

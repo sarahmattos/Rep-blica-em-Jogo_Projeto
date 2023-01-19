@@ -953,7 +953,7 @@ GameObject:
   - component: {fileID: 88282645}
   - component: {fileID: 88282644}
   m_Layer: 0
-  m_Name: Text (TMP) (1)
+  m_Name: textFinalizacao
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2010,6 +2010,14 @@ PrefabInstance:
       propertyPath: acaboudistribuicaoUi
       value: 
       objectReference: {fileID: 138211029}
+    - target: {fileID: 8162957968737513791, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
+      propertyPath: text_distribuaEleitor
+      value: 
+      objectReference: {fileID: 1281295042}
+    - target: {fileID: 8162957968737513791, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
+      propertyPath: text_distribuaEleitorFinal
+      value: 
+      objectReference: {fileID: 88282644}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
 --- !u!224 &152117520 stripped
@@ -15031,7 +15039,7 @@ GameObject:
   - component: {fileID: 1281295043}
   - component: {fileID: 1281295042}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: textDistribua
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

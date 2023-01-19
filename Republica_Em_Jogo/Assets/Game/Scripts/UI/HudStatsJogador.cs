@@ -16,6 +16,8 @@ namespace Game.UI
         [SerializeField] private TMP_Text text_nomeJogador;
         [SerializeField] private TMP_Text text_eleitores;
         [SerializeField] private TMP_Text text_objetivo;
+        [SerializeField] private TMP_Text text_distribuaEleitor;
+        [SerializeField] private TMP_Text text_distribuaEleitorFinal;
         [SerializeField] private PlayerStats playerStats;
         [SerializeField] private TMP_Text text_saudeCarta;
         [SerializeField] private TMP_Text text_eduCarta;
@@ -30,6 +32,7 @@ namespace Game.UI
         private SetUpZona setUpZona; 
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
         public bool playerRecebeEleitor=true;
+        public bool playerDiminuiEleitor=false;
         [SerializeField] private State state;
 
         
@@ -111,9 +114,16 @@ namespace Game.UI
         
         //atualiza texto eleitores
          public void AtualizaEleitores(){
-            playerStats.eleitoresAtualizar();
+            
+            if(playerDiminuiEleitor==true){
+                playerStats.eleitoresDiminuir();
+            }else{
+                playerStats.eleitoresAtualizar();
+            }
+            
             text_eleitores.SetText(textToDisplayEleitores);
          }
+         
          //atualiza texto bairros
          public void AtualizaBairros(){
             playerStats.bairrosAtualizar();
@@ -128,6 +138,12 @@ namespace Game.UI
             if(playerStats.eleitoresNovos<=0){
                 distribuaEleitorUi.SetActive(false);
                 acaboudistribuicaoUi.SetActive(true);
+                if(playerDiminuiEleitor==true){
+                    text_distribuaEleitorFinal.SetText("Retirada de eleitores finalizada!");
+                }else{
+                    text_distribuaEleitorFinal.SetText("Distribuição de eleitores finalizada!");
+                }
+                
                 if(projeto.distribuicaoProjeto==true){
                     projeto.distribuicaoProjeto=false;
                     playerRecebeEleitor=true;
@@ -136,6 +152,7 @@ namespace Game.UI
                 }
             }
          }
+
 
         //para o bairro acessar quantos eleitores novos podem ser distribuidos
          public void valorEleitorNovo(){
@@ -155,6 +172,11 @@ namespace Game.UI
                 playerRecebeEleitor=false;
                 Debug.Log("eleitores novos: "+playerStats.eleitoresNovos);
                 distribuaEleitorUi.SetActive(true);
+                if(playerDiminuiEleitor==true){
+                    text_distribuaEleitor.SetText("Retire seus eleitores");
+                }else{
+                    text_distribuaEleitor.SetText("Distribua seus eleitores");
+                }
                 text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
             }
             

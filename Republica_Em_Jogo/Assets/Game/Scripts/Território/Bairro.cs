@@ -24,6 +24,7 @@ namespace Game.Territorio
         private HudStatsJogador hs;
         private Educaçao edu;
         private Saúde saude;
+        private int auxContagem=0;
 
         private void Update(){
             
@@ -43,7 +44,17 @@ namespace Game.Territorio
         public void MudaValorEleitorServerRpc()
         {
             //ainda tentando
-            setUpBairro.Eleitores.MudaValorEleitores(1);
+            if(hs.playerDiminuiEleitor==true){
+                auxContagem++;
+                setUpBairro.Eleitores.MudaValorEleitores(-1);
+                if(auxContagem>=2){
+                   hs.playerDiminuiEleitor=false;
+                   auxContagem=0;
+                }
+            }else{
+                setUpBairro.Eleitores.MudaValorEleitores(1);
+            }
+            
         }
         private void OnEnable()
         {
@@ -94,16 +105,19 @@ namespace Game.Territorio
         //chamado pelo "MostrarNomeBairro" qnd clicado em um bairro
         public void EscolherBairroEleitor(){
             if(VerificaControl()){
-                //recupera quantos eleitores novos
-                hs.valorEleitorNovo();
-                if(hs.eleitoresNovosAtual>0){
-                    //dimiui eleitor novo e aumenta eleito total
-                    hs.contagemEleitores();
-                    if(NetworkManager.Singleton.IsClient){ 
-                        //adicionar valor ao texto no bairro
-                        MudaValorEleitorServerRpc();
+                if(setUpBairro.Eleitores.eleitores.Value>0){
+                    //recupera quantos eleitores novos
+                    hs.valorEleitorNovo();
+                    if(hs.eleitoresNovosAtual>0){
+                        //dimiui eleitor novo e aumenta eleito total
+                        hs.contagemEleitores();
+                        if(NetworkManager.Singleton.IsClient){ 
+                            //adicionar valor ao texto no bairro
+                            MudaValorEleitorServerRpc();
+                        }
                     }
                 }
+                
             }
         }
         

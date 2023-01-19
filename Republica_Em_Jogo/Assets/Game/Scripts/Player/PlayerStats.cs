@@ -80,6 +80,9 @@ namespace Game.Player {
         public void eleitoresAtualizar(){
             eleitoresTotais++;
         }
+        public void eleitoresDiminuir(){
+            eleitoresTotais--;
+        }
         public void bairrosAtualizar(){
             bairrosTotais++;
         }
