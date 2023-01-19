@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Game.Player;
+ using Game.Territorio;
 using Logger = Game.Tools.Logger;
 
 namespace Game.UI
@@ -19,10 +20,16 @@ namespace Game.UI
         [SerializeField] private TMP_Text text_saudeCarta;
         [SerializeField] private TMP_Text text_eduCarta;
         [SerializeField] private TMP_Text text_bairros;
+        [SerializeField] private TMP_Text text_eleitoresNovos;
+        [SerializeField] private GameObject acaboudistribuicaoUi;
+        [SerializeField] private GameObject distribuaEleitorUi;
         //variaveis que passam valores para classe playerStats
         public int eduQuant, saudeQuant, bairroQuant; 
         public float eleitoresNovosAtual;
+        private Projeto projeto; 
+        private SetUpZona setUpZona; 
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
+        private bool playerRecebeEleitor=true;
         [SerializeField] private State state;
 
         
@@ -30,6 +37,8 @@ namespace Game.UI
         {
             state = GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
             GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO].Entrada += FindingLocalPlayerStats;
+            projeto = FindObjectOfType<Projeto>();
+            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
         }
 
         public override void OnNetworkDespawn()
@@ -114,7 +123,18 @@ namespace Game.UI
         //quando o jogador distribui seus eleitores
          public void contagemEleitores(){
             playerStats.eleitoresNovos--;
+            text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
             AtualizaEleitores();
+            if(playerStats.eleitoresNovos<=0){
+                distribuaEleitorUi.SetActive(false);
+                acaboudistribuicaoUi.SetActive(true);
+                if(projeto.distribuicaoProjeto==true){
+                    projeto.distribuicaoProjeto=false;
+                    playerRecebeEleitor=true;
+                    setUpZona.ChamarReseteBairroNaZona();
+                    
+                }
+            }
          }
 
         //para o bairro acessar quantos eleitores novos podem ser distribuidos
@@ -125,6 +145,19 @@ namespace Game.UI
          //botao chama funcao de distribuicao de eleitor no inicio das rodadas
          public void ChamatPlayerInicioRodada(){
             playerStats.inicioRodada();
+            distribuaEleitorUi.SetActive(true);
+            text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+         }
+
+         public void ValorEleitoresNovos(int valor){
+            if(playerRecebeEleitor==true){
+                playerStats.eleitoresNovos=valor;
+                playerRecebeEleitor=false;
+                Debug.Log("eleitores novos: "+playerStats.eleitoresNovos);
+                distribuaEleitorUi.SetActive(true);
+                text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+            }
+            
          }
     }
 

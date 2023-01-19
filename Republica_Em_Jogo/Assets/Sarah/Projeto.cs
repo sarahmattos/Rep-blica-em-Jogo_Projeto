@@ -43,6 +43,7 @@ using Unity.Collections;
         private string mostrarResposta;
         private bool mostrouResultado=false;
         public bool playerInZona=false;
+        public bool distribuicaoProjeto=false;
     
         //Client cashing
         private string clientDados;
@@ -229,10 +230,11 @@ using Unity.Collections;
         //chamado apos projeto ser aprovado
         public void eleitoresZonaFinal(){
 
-            //adiciona eleitores nos bairros da zona
-             if (NetworkManager.Singleton.IsServer){
+            //adiciona eleitores aos jogadores que tem bairros da zona
+             //if (NetworkManager.Singleton.IsServer){
+                distribuicaoProjeto=true;
                 setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
-             }
+             //}
             
             //verifica se player tem bairro na zona escolhida
             setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
@@ -247,6 +249,7 @@ using Unity.Collections;
             zonaNameLocal="";
             clienteLocal=-1;
             numRecompensa=-1;
+            
             }
             
          //ao apertar botao de fechar interface   
@@ -254,6 +257,8 @@ using Unity.Collections;
             //desatuva interface
             fecharBtn.SetActive(false);
             projetoUI.SetActive(false);
+            sim=0;
+            nao=0;
         }
 
         //reseta variaveis oou pede pro hosta fazer isso

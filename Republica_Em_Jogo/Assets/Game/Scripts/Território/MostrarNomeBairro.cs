@@ -9,12 +9,14 @@ public class MostrarNomeBairro : MonoBehaviour
     //[SerializeField] private Material highlightMaterial;
     [SerializeField] private GameObject nomeBairro;
     private Bairro bairro;
+    private Projeto projeto;
     //[SerializeField] private Material defaultMaterial;
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponent<Renderer>();
         bairro = GetComponentInParent<Bairro>();
+        projeto = FindObjectOfType<Projeto>();
     }
 
     // Update is called once per frame
@@ -34,6 +36,16 @@ public class MostrarNomeBairro : MonoBehaviour
     }
     private void OnMouseDown()
         {
-            bairro.EscolherBairroEleitor();
+            if(projeto.distribuicaoProjeto==true){
+                if(bairro.bairroNaZonaEscolhida==true){
+                    Debug.Log("projeto distribuicao");
+                bairro.EscolherBairroEleitor();
+                }
+            }else{
+                bairro.EscolherBairroEleitor();
+            }
+            
+            
+            
         }
 }

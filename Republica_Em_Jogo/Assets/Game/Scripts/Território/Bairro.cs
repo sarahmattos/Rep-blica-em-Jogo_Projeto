@@ -16,6 +16,7 @@ namespace Game.Territorio
         private TMP_Text text_nome;
         public event Action playerControlMuda;
         public bool playerInControl=false;
+        public bool bairroNaZonaEscolhida=false;
 
         [SerializeField] private SetUpBairro setUpBairro;
         public SetUpBairro SetUpBairro { get => setUpBairro; } 
@@ -24,6 +25,9 @@ namespace Game.Territorio
         private Educaçao edu;
         private Saúde saude;
 
+        private void Update(){
+            
+        }
 
         private void Awake()
         {

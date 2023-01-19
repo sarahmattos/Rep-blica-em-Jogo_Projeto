@@ -41,6 +41,13 @@ public class SetUpZona : MonoBehaviour
         public void chamar(){
             eleitoresZona(2,"Oeste1");
         }
+        public void ChamarReseteBairroNaZona(){
+            foreach(ZonaTerritorial zona in zonas)
+            {
+                zona.ResetarBairroNaZona();
+            }
+
+        }
         
 }
 }
