@@ -10,13 +10,17 @@ using Game.UI;
 public class MovimentosSociais : NetworkBehaviour
 {
     private NetworkVariable<FixedString4096Bytes> movimentoSocialNetworkTexto = new NetworkVariable<FixedString4096Bytes>();
+    private NetworkVariable<int> idPlayer = new NetworkVariable<int>(-1);
     public MovimentoSociaisObject MovimentoSociaisManager;
     private string movimento;
     private string recursoTipo;
     private int quantidadeRecurso;
     private int quantidadeEleitor;
     [SerializeField] private TMP_Text text_msCarta;
+    [SerializeField] private TMP_Text text_aviso;
     [SerializeField] private GameObject cartaMV;
+    [SerializeField] private GameObject btnFechar;
+    [SerializeField] private GameObject btnOk;
     private HudStatsJogador hs;
     private RecursosCartaManager rc;
     private bool distribuicaoRecompensaRecurso=false;
@@ -27,13 +31,13 @@ public class MovimentosSociais : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-        public void AtualizaTextoServerRpc(string textoTotal2)
+        public void AtualizaTextoServerRpc(string textoTotal2, int id)
         {
             movimentoSocialNetworkTexto.Value = textoTotal2;
+            idPlayer.Value= id;
         }
 
     public void sortearMS(){
-            //defaultValues();
             int aux= Random.Range(0, MovimentoSociaisManager.movimento.Length);
             movimento = MovimentoSociaisManager.movimento[aux];
             recursoTipo = MovimentoSociaisManager.recursoTipo[aux];
@@ -42,7 +46,8 @@ public class MovimentosSociais : NetworkBehaviour
             if(recursoTipo=="Educação") rc.novosEdu =quantidadeRecurso;
             if(recursoTipo=="Saúde") rc.novosSaude =quantidadeRecurso;
             string textoTotal= "\n"+movimento +"\n"+"\n"+"Ganhe "+ quantidadeRecurso+" recurso de "+recursoTipo.ToString()+" e "+ quantidadeEleitor+" eleitores";
-            AtualizaTextoServerRpc(textoTotal);
+            int id =(int)NetworkManager.Singleton.LocalClientId;
+            AtualizaTextoServerRpc(textoTotal, id);
 
             
         }
@@ -53,8 +58,22 @@ public class MovimentosSociais : NetworkBehaviour
                     if(newValue!=""){
                         cartaMV.SetActive(true);
                         text_msCarta.text =  newValue.ToString();
+                        
                     }
+                    
                 };
+                    idPlayer.OnValueChanged += (int  previousValue, int  newValue) =>
+                    {
+                        if(newValue!=(int)NetworkManager.Singleton.LocalClientId){
+                                btnOk.SetActive(false);
+                                btnFechar.SetActive(true);
+                                text_aviso.text="Movimento Social retirado pelo jogador: "+newValue;
+                        }else{
+                            text_aviso.text=" ";
+                            btnOk.SetActive(true);
+                            btnFechar.SetActive(false);
+                        }
+            };
         }
         public void chamarRecompensasEleitor(){
             distribuicaoRecompensaRecurso=true;
