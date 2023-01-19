@@ -6,7 +6,7 @@ using UnityEngine;
 public class CorrupcaoObject : ScriptableObject
 {
     public string[] corrupcao;
-    public string penalidade;
+    public int penalidade;
     //eleitor e cartas
     public string complementText;
 }
