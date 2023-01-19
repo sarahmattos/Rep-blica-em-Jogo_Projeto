@@ -24,6 +24,7 @@ namespace Game.UI
         [SerializeField] private TMP_Text text_bairros;
         [SerializeField] private TMP_Text text_eleitoresNovos;
         [SerializeField] private GameObject acaboudistribuicaoUi;
+        [SerializeField] private GameObject acaboudistribuicaoUi2;
         [SerializeField] private GameObject distribuaEleitorUi;
         //variaveis que passam valores para classe playerStats
         public int eduQuant, saudeQuant, bairroQuant; 
@@ -90,9 +91,12 @@ namespace Game.UI
                 text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());
 
                 //pega os valores da classe player stats, mais tarde é usado na troca
-                saudeQuant=playerStats.numSaude;
-                eduQuant=playerStats.numEducacao;
+                atualizarRecursoAntesTroca();
             }
+        }
+        public void atualizarRecursoAntesTroca(){
+            saudeQuant=playerStats.numSaude;
+            eduQuant=playerStats.numEducacao;
         }
         // chamada dps de troca de cartas pelo script: RecursosCartaManager
         public void atualizarRecursoAposTroca(){
@@ -137,11 +141,10 @@ namespace Game.UI
             AtualizaEleitores();
             if(playerStats.eleitoresNovos<=0){
                 distribuaEleitorUi.SetActive(false);
-                acaboudistribuicaoUi.SetActive(true);
                 if(playerDiminuiEleitor==true){
-                    text_distribuaEleitorFinal.SetText("Retirada de eleitores finalizada!");
+                    acaboudistribuicaoUi2.SetActive(true);
                 }else{
-                    text_distribuaEleitorFinal.SetText("Distribuição de eleitores finalizada!");
+                    acaboudistribuicaoUi.SetActive(true);
                 }
                 
                 if(projeto.distribuicaoProjeto==true){

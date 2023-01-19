@@ -12,14 +12,21 @@ public class RecursosCartaManager : MonoBehaviour
     [SerializeField] private GameObject comTroca;
     [SerializeField] private GameObject avisoDistribuicao;
     [SerializeField] private GameObject avisoDistribuicaoFinal;
+    [SerializeField] private GameObject avisoRetiradaFinal;
+    [SerializeField] private GameObject retirada;
+    [SerializeField] private GameObject semcarta;
     [SerializeField] private Button eduTrocaBtn;
+    [SerializeField] private Button eduTrocaBtn2;
     [SerializeField] private Button saudeTrocaBtn;
+    [SerializeField] private Button saudeTrocaBtn2;
     [SerializeField] private TMP_Text text_edu;
     [SerializeField] private TMP_Text text_saude;
     [SerializeField] private TMP_Text text_recursoDistribuicao;
+    [SerializeField] private TMP_Text text_quantidaderetirada;
     public int novosEdu;
     public int novosSaude;
     public bool chamarDistribuicao=false;
+    private int quantidade;
     void Start()
     {
         hs = FindObjectOfType<HudStatsJogador>();
@@ -27,6 +34,13 @@ public class RecursosCartaManager : MonoBehaviour
     public void Update(){
         if(chamarDistribuicao==true){
             distribuiNovosRecursos();
+        }
+        if(quantidade==1){
+            if(hs.saudeQuant<1 && hs.eduQuant<1){
+             semcarta.SetActive(true);
+             retirada.SetActive(false);
+             quantidade=0;
+            }
         }
     }
 
@@ -85,6 +99,57 @@ public class RecursosCartaManager : MonoBehaviour
             eduTrocaBtn.interactable = false;
         }
         hs.atualizarRecursoAposTroca();
+    }
+    public void perderEdu(){
+        hs.eduQuant-=1;
+        quantidade-=1;
+        text_quantidaderetirada.text= quantidade.ToString();
+        if(hs.eduQuant<1){
+            eduTrocaBtn2.interactable = false;
+        }
+        hs.atualizarRecursoAposTroca();
+        if(quantidade<=0){
+            avisoRetiradaFinal.SetActive(true);
+            retirada.SetActive(false);
+        }
+        
+    }
+    public void verificacaoInicial(int penalidade){
+        hs.atualizarRecursoAntesTroca();
+        if(hs.saudeQuant>0){
+              saudeTrocaBtn2.interactable = true;
+          }else{
+            saudeTrocaBtn2.interactable = false;
+         }
+         if(hs.eduQuant>0){
+                eduTrocaBtn2.interactable = true;
+            }else{
+                eduTrocaBtn2.interactable = false;
+            }
+            if(hs.eduQuant>0 || hs.saudeQuant>0){
+            //interface troca
+                retirada.SetActive(true);
+            }else{
+                semcarta.SetActive(true);
+            }
+        
+        quantidade=penalidade;
+        text_quantidaderetirada.text= quantidade.ToString();
+        
+    }
+    public void perderSaude(){
+        hs.saudeQuant-=1;//dimuinui carta
+        quantidade-=1;
+        text_quantidaderetirada.text= quantidade.ToString();
+        if(hs.saudeQuant<1){
+            saudeTrocaBtn2.interactable = false;
+        }
+        hs.atualizarRecursoAposTroca();
+        if(quantidade<=0){
+            avisoRetiradaFinal.SetActive(true);
+            retirada.SetActive(false);
+        }
+        
     }
 
     //distribui esses novos recursos (interface)

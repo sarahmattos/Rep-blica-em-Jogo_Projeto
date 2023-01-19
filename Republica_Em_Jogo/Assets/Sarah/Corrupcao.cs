@@ -14,6 +14,7 @@ public class Corrupcao : NetworkBehaviour
     public CorrupcaoObject CorrupcaoManager;
     private string corrupcao;
     private int penalidade;
+    private int penalidade2;
     private string complementText;
     [SerializeField] private TMP_Text text_CorrupcaoCarta;
     [SerializeField] private GameObject cartaCorrupcao;
@@ -40,6 +41,7 @@ public class Corrupcao : NetworkBehaviour
             corrupcao = CorrupcaoManager.corrupcao[Random.Range(0, CorrupcaoManager.corrupcao.Length)];
             complementText= CorrupcaoManager.complementText;
             penalidade =CorrupcaoManager.penalidade;
+            penalidade2=penalidade;
             string textoTotal= "\n"+corrupcao +"\n"+"\n"+ complementText;
             int id =(int)NetworkManager.Singleton.LocalClientId;
             AtualizaTextoServerRpc(textoTotal, id);
@@ -73,7 +75,10 @@ public class Corrupcao : NetworkBehaviour
             hs.playerDiminuiEleitor=true;
             hs.ValorEleitoresNovos(penalidade);
         }
-
+        public void chamarPenalidade2(){
+            rc.verificacaoInicial(penalidade2);
+        }
+            
         public void panelFalse(GameObject panel){
              panel.SetActive(false);
          }
