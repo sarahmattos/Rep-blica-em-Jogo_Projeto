@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Game.Player;
+ using Game.Territorio;
 using Logger = Game.Tools.Logger;
 
 namespace Game.UI
@@ -18,14 +19,26 @@ namespace Game.UI
         [SerializeField] private PlayerStats playerStats;
         [SerializeField] private TMP_Text text_saudeCarta;
         [SerializeField] private TMP_Text text_eduCarta;
-        public int eduQuant, saudeQuant;
+        [SerializeField] private TMP_Text text_bairros;
+        [SerializeField] private TMP_Text text_eleitoresNovos;
+        [SerializeField] private GameObject acaboudistribuicaoUi;
+        [SerializeField] private GameObject distribuaEleitorUi;
+        //variaveis que passam valores para classe playerStats
+        public int eduQuant, saudeQuant, bairroQuant; 
+        public float eleitoresNovosAtual;
+        private Projeto projeto; 
+        private SetUpZona setUpZona; 
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
+        private bool playerRecebeEleitor=true;
         [SerializeField] private State state;
 
+        
         public override void OnNetworkSpawn()
         {
             state = GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
             GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO].Entrada += FindingLocalPlayerStats;
+            projeto = FindObjectOfType<Projeto>();
+            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
         }
 
         public override void OnNetworkDespawn()
@@ -35,7 +48,7 @@ namespace Game.UI
 
         public override void OnDestroy()
         {
-            TurnManager.Instance.isLocalPlayerTurn -= (bool value) => { button.SetActive(value); };
+            TurnManager.Instance.vezDoPlayerLocal -= (bool value) => { button.SetActive(value); };
 
         }
 
@@ -61,29 +74,91 @@ namespace Game.UI
             
         }
 
+        //distribui carta de recurso (chamada pela classe projeto)
         public void updateRecursoCartaUI(int quantidade)
-        {
-            //if(playerStats.playerID==idTurno){
-                Debug.Log(quantidade +"quantidade");
-                if(quantidade>-1){
-                    Debug.Log("entrou recurso");
-                    playerStats.recursoDistribuicao(quantidade);
+        {   
+            if(quantidade>-1){
+
+                //chama a funcao que randomiza
+                playerStats.recursoDistribuicao(quantidade);
+
+                //muda a interface
                 text_saudeCarta.SetText("Saúde: "+playerStats.numSaude.ToString());
                 text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());
+
+                //pega os valores da classe player stats, mais tarde é usado na troca
                 saudeQuant=playerStats.numSaude;
                 eduQuant=playerStats.numEducacao;
-                }
-                
-            //}
-            
+            }
         }
+        // chamada dps de troca de cartas pelo script: RecursosCartaManager
         public void atualizarRecursoAposTroca(){
+
+            //valores do playerstats recebem o valor de volta
             playerStats.numSaude=saudeQuant;
             playerStats.numEducacao=eduQuant;
+            
+            //interface muda
             text_saudeCarta.SetText("Saúde: "+playerStats.numSaude.ToString());
             text_eduCarta.SetText("Edu: "+playerStats.numEducacao.ToString());
         }
         
+        //a distribuicao inicial dos bairros atualiza o valor de bairros e eleitores totais
+        public void AtualizarPlayerStatsBairro(){
+            AtualizaBairros();
+            AtualizaEleitores();
+        }
+        
+        //atualiza texto eleitores
+         public void AtualizaEleitores(){
+            playerStats.eleitoresAtualizar();
+            text_eleitores.SetText(textToDisplayEleitores);
+         }
+         //atualiza texto bairros
+         public void AtualizaBairros(){
+            playerStats.bairrosAtualizar();
+            text_bairros.SetText(" Bairros: "+playerStats.bairrosTotais.ToString());
+         }
+        
+        //quando o jogador distribui seus eleitores
+         public void contagemEleitores(){
+            playerStats.eleitoresNovos--;
+            text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+            AtualizaEleitores();
+            if(playerStats.eleitoresNovos<=0){
+                distribuaEleitorUi.SetActive(false);
+                acaboudistribuicaoUi.SetActive(true);
+                if(projeto.distribuicaoProjeto==true){
+                    projeto.distribuicaoProjeto=false;
+                    playerRecebeEleitor=true;
+                    setUpZona.ChamarReseteBairroNaZona();
+                    
+                }
+            }
+         }
+
+        //para o bairro acessar quantos eleitores novos podem ser distribuidos
+         public void valorEleitorNovo(){
+            eleitoresNovosAtual = playerStats.eleitoresNovos;
+         }
+
+         //botao chama funcao de distribuicao de eleitor no inicio das rodadas
+         public void ChamatPlayerInicioRodada(){
+            playerStats.inicioRodada();
+            distribuaEleitorUi.SetActive(true);
+            text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+         }
+
+         public void ValorEleitoresNovos(int valor){
+            if(playerRecebeEleitor==true){
+                playerStats.eleitoresNovos=valor;
+                playerRecebeEleitor=false;
+                Debug.Log("eleitores novos: "+playerStats.eleitoresNovos);
+                distribuaEleitorUi.SetActive(true);
+                text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+            }
+            
+         }
     }
 
 }

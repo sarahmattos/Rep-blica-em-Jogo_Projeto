@@ -2,29 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.Netcode;
+ using Game.Territorio;
 
-
-public class Saúde : MonoBehaviour
+public class Saúde : NetworkBehaviour
 {
-     private TMP_Text text_saude;
+    private NetworkVariable<int> quantidadeSaude = new NetworkVariable<int>(0);
+    private TMP_Text text_saude;
     private RecursosCartaManager rc;
-    int valor;
+    public bool playerControlRecurso =false;
+    private Bairro bairro;
+
+    [ServerRpc(RequireOwnership = false)]
+        public void AtualizarValorUIServerRpc()
+        {
+            quantidadeSaude.Value++;
+        }
+
     private void Awake()
         {
             text_saude = GetComponentInChildren<TMP_Text>();
             rc = FindObjectOfType<RecursosCartaManager>();
-
+            bairro = GetComponentInParent<Bairro>();
         }
 
      private void OnMouseDown()
     {
-        Debug.Log("clicado");
-        if(rc.novosSaude>0){
-            Debug.Log("clicado2");
-            rc.novosSaude--;
-            valor++;
-            text_saude.SetText(valor.ToString());
+         if(bairro.VerificaControl()){
+            if(rc.novosSaude>0){
+                rc.novosSaude--;
+                AtualizarValorUIServerRpc();
+            }
         }
         
     }
+    private void OnEnable()
+        {
+            quantidadeSaude.OnValueChanged += (int  previousValue, int  newValue) =>
+            {
+                text_saude.SetText(newValue.ToString());
+            };
+        }
 }

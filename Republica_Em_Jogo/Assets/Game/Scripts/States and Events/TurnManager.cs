@@ -4,6 +4,7 @@ using Game.Tools;
 using Logger = Game.Tools.Logger;
 using System;
 using UnityEngine;
+using UnityEditor;
 
 namespace Game {
     public class TurnManager : NetworkSingleton<TurnManager>
@@ -13,44 +14,51 @@ namespace Game {
         //Para fazer isso via client, pode ser usado métodos ServerRpc, assim como é feito nesta classe
         private NetworkList<int> ordemPlayerID = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private NetworkVariable<int> indexPlayerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-        private NetworkVariable<int> connectedClientCount = new NetworkVariable<int>();
+        private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
         private NetworkVariable<int> playerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-        public int GetCurrentPlayer => playerAtual.Value;
-        public int GetConnectedClientCount => connectedClientCount.Value;
-        public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == GetCurrentPlayer);
+        public int GetPlayerAtual => playerAtual.Value;
+        public int GetClientesCount => clientesCount.Value;
+        public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == GetPlayerAtual);
 
-        public event Action<bool> isLocalPlayerTurn;
+        public event Action<bool> vezDoPlayerLocal;
+        public event Action<int> PlayerTurnMuda;
         private State InicializaState => GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
-        private State RecompensaState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.RECOMPENSA];
-       
         private void Start()
         {
-            playerAtual.OnValueChanged += UpdatePlayerTurn;
+            playerAtual.OnValueChanged += PlayerAtualMuda;
             InicializaState.Entrada += UpdateClientsCount;
             InicializaState.Entrada += DefineConfigIniciais;
-            
-            RecompensaState.Saida += NextTurnServerRpc;
+
+            CoreLoopStateHandler.Instance.UltimoLoopState.Saida += NextTurnServerRpc;
         }
+
+        //private void QuandoCoreLoopStateMuda(CoreLoopState state)
+        //{
+        //    if(state == CoreLoopState.DISTRIBUICAO)  NextTurnServerRpc();
+        //}
 
         public override void OnDestroy()
         {
-            playerAtual.OnValueChanged += UpdatePlayerTurn;
+            playerAtual.OnValueChanged += PlayerAtualMuda;
             InicializaState.Entrada-= UpdateClientsCount;
             InicializaState.Entrada -= DefineConfigIniciais;
-            
-            RecompensaState.Saida -= NextTurnServerRpc;
+
+            CoreLoopStateHandler.Instance.UltimoLoopState.Saida -= NextTurnServerRpc;
+            //CoreLoopStateHandler.Instance.estadoMuda -= QuandoCoreLoopStateMuda;
+
         }
 
         private void UpdateClientsCount()
         {
             if (!IsHost) return;
-            connectedClientCount.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
+            clientesCount.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
         }
 
-        private void UpdatePlayerTurn(int previous, int next)
+        private void PlayerAtualMuda(int previous, int next)
         {
             bool nextIgualLocalID = ((int)NetworkManager.Singleton.LocalClientId == next);
-            isLocalPlayerTurn?.Invoke(nextIgualLocalID);
+            vezDoPlayerLocal?.Invoke(nextIgualLocalID);
+            PlayerTurnMuda?.Invoke(next);
         }
 
 
@@ -59,7 +67,7 @@ namespace Game {
         {
             if (!IsHost) return;
             List<int> allClientID = new List<int>();
-            for (int i = 0; i < GetConnectedClientCount; i++)
+            for (int i = 0; i < GetClientesCount; i++)
             {
                 allClientID.Add(i);
             }
@@ -91,7 +99,7 @@ namespace Game {
         [ServerRpc(RequireOwnership = false)]
         public void NextTurnServerRpc()
         {
-            indexPlayerAtual.Value = (1 + indexPlayerAtual.Value) % (GetConnectedClientCount);
+            indexPlayerAtual.Value = (1 + indexPlayerAtual.Value) % (GetClientesCount);
             playerAtual.Value = ordemPlayerID[indexPlayerAtual.Value];
             #region logica alternativa
             //if (GetConnectedClientCount > 1)
@@ -113,6 +121,8 @@ namespace Game {
             #endregion
 
         }
+
+
     }
 
 }

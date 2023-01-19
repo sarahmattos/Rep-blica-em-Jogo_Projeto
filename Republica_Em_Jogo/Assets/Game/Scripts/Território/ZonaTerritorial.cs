@@ -1,6 +1,7 @@
 
 using Game.Tools;
 using UnityEngine;
+ using Game.UI;
 
 namespace Game.Territorio
 {
@@ -13,18 +14,18 @@ namespace Game.Territorio
         public Bairro[] Bairros => bairros;
         public string Nome { get => nome; }
         private Projeto projeto;  
+        private HudStatsJogador hs;
         private void Awake()
         {
             bairros = GetComponentsInChildren<Bairro>();
-             projeto = GameObject.FindObjectOfType<Projeto>();
+             projeto = FindObjectOfType<Projeto>();
+             hs = FindObjectOfType<HudStatsJogador>();
         }
 
         public void verificarPlayerNasZonas(ulong client)
         {
             foreach(Bairro bairro in bairros)
             {
-                 Debug.Log("cliente: "+(int)client);
-                 Debug.Log("playerIDNoControl: "+bairro.playerIDNoControl.Value);
                  
                 if(bairro.playerIDNoControl.Value == (int)client)
                 {
@@ -39,7 +40,22 @@ namespace Game.Territorio
         public void adicionarEleitoresZona(int valor){
             foreach(Bairro bairro in bairros)
             {
-                bairro.SetUpBairro.Eleitores?.MudaValorEleitores(valor);
+                //bairro.SetUpBairro.Eleitores?.MudaValorEleitores(valor);
+                //ao inves de todos os bairros ja receberem eleitores,
+                //agora esse bairros so recebemuma confirmacao de que podem ser alocados eleitores la
+                //e os jogadores que o possuem recebem eleitores para distribuir
+                bairro.bairroNaZonaEscolhida=true;
+                if(bairro.VerificaControl()){
+                    hs.ValorEleitoresNovos(valor);
+                }
+            }
+
+        }
+
+        public void ResetarBairroNaZona(){
+            foreach(Bairro bairro in bairros){
+                bairro.bairroNaZonaEscolhida=false;
+                }
             }
 
         }
@@ -48,4 +64,4 @@ namespace Game.Territorio
     }
 
 
-}
+

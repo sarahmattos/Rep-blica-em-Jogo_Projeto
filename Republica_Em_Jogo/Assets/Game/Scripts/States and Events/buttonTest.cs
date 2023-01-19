@@ -1,3 +1,5 @@
+using Game.Tools;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,7 +38,7 @@ namespace  Game
                 CoreLoopStateHandler.Instance.NextStateServerRpc();
             });
 
-            TurnManager.Instance.isLocalPlayerTurn += OnPlayerTurnUpdate;
+            TurnManager.Instance.vezDoPlayerLocal += OnPlayerTurnUpdate;
             DesenvState.Entrada += OnDesenvolvimento;
             CoreLoopStateHandler.Instance.estadoMuda += UpdateTextDesenv;
         }
@@ -44,7 +46,7 @@ namespace  Game
 
         private void OnDestroy()
         {
-            TurnManager.Instance.isLocalPlayerTurn -= OnPlayerTurnUpdate;
+            TurnManager.Instance.vezDoPlayerLocal -= OnPlayerTurnUpdate;
             DesenvState.Entrada -= OnDesenvolvimento;
             CoreLoopStateHandler.Instance.estadoMuda -= UpdateTextDesenv;
 
@@ -61,11 +63,14 @@ namespace  Game
             nextState.gameObject.SetActive(value);
             nextTurn.gameObject.SetActive(value);
             
+
+            UpdateTextDesenv(Extensoes.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues, CoreLoopStateHandler.Instance.CurrentState)) ;
+
         }
 
         private void UpdateTextDesenv(CoreLoopState state)
         {
-            textState.SetText(string.Concat("Player ", TurnManager.Instance.GetCurrentPlayer, " no estado: ",state));
+            textState.SetText(string.Concat("Player ", TurnManager.Instance.GetPlayerAtual, " no estado: ",state));
         }
 
     }

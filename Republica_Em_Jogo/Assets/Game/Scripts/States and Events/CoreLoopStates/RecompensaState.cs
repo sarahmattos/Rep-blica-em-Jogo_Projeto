@@ -8,11 +8,11 @@ namespace Game
     {
         public override void EnterState()
         {
+            Tools.Logger.Instance.LogInfo("Enter State: RECOMPENSA");
         }
 
         public override void ExitState()
         {
-            Game.Tools.Logger.Instance.LogError("Exit Recompensa State");
         }
     }
 

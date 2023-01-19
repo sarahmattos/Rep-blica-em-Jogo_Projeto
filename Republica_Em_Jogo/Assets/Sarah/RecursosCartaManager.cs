@@ -29,54 +29,65 @@ public class RecursosCartaManager : MonoBehaviour
             distribuiNovosRecursos();
         }
     }
-    // Update is called once per frame
+
+    //funcao que mexe na interface na hora da troca chamada pelo botao
    public void conferirQuantidade(){
-         text_edu.SetText("+"+novosEdu);
-         text_saude.SetText("+"+novosSaude);
-    if(hs.eduQuant>=3 || hs.saudeQuant>=3){
-        comTroca.SetActive(true);
-        if(hs.eduQuant>=3){
-            eduTrocaBtn.interactable = true;
+        //interface na troca de carta por recurso
+        text_edu.SetText("+"+novosEdu);
+        text_saude.SetText("+"+novosSaude);
+
+        if(hs.eduQuant>=3 || hs.saudeQuant>=3){
+            //interface troca
+            comTroca.SetActive(true);
+
+            //deixar botao interagivel ou nao
+            if(hs.eduQuant>=3){
+                eduTrocaBtn.interactable = true;
+            }else{
+                eduTrocaBtn.interactable = false;
+            }
+            if(hs.saudeQuant>=3){
+                saudeTrocaBtn.interactable = true;
+            }else{
+                saudeTrocaBtn.interactable = false;
+            }
         }else{
-            eduTrocaBtn.interactable = false;
+            //interface sem troca
+            semTroca.SetActive(true);
         }
-        if(hs.saudeQuant>=3){
-            saudeTrocaBtn.interactable = true;
-        }else{
-            saudeTrocaBtn.interactable = false;
-        }
-    }else{
-        semTroca.SetActive(true);
-    }
     
    }
    public void panelFalse(GameObject panel){
         panel.SetActive(false);
        
    }
+   //chamada pelo botao de fechar e inicia a distribucao dps das trocas
    public void distribuicaoChamada(){
          chamarDistribuicao=true;
          
    }
-
+    //quando clicado no botao de troca
    public void trocarSaude(){
-        hs.saudeQuant-=3;
-        novosSaude++;
-        text_saude.SetText("+"+novosSaude);
+        hs.saudeQuant-=3;//dimuinui carta
+        novosSaude++;//ganha recurso
+        text_saude.SetText("+"+novosSaude);//atualiza interface
         if(hs.saudeQuant<3){
-         saudeTrocaBtn.interactable = false;
+            saudeTrocaBtn.interactable = false;
+        }
+        hs.atualizarRecursoAposTroca();
     }
-    hs.atualizarRecursoAposTroca();
-   }
-   public void trocarEdu(){
-    hs.eduQuant-=3;
-    novosEdu++;
-    text_edu.SetText("+"+novosEdu);
-    if(hs.eduQuant<3){
-         eduTrocaBtn.interactable = false;
+    //quando clicado no botao de troca
+    public void trocarEdu(){
+        hs.eduQuant-=3;
+        novosEdu++;
+        text_edu.SetText("+"+novosEdu);
+        if(hs.eduQuant<3){
+            eduTrocaBtn.interactable = false;
+        }
+        hs.atualizarRecursoAposTroca();
     }
-     hs.atualizarRecursoAposTroca();
-   }
+
+    //distribui esses novos recursos (interface)
    public void distribuiNovosRecursos(){
     if(novosEdu>0||novosSaude>0){
         avisoDistribuicao.SetActive(true);
