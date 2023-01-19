@@ -10,7 +10,7 @@ using Game.UI;
 public class MovimentosSociais : NetworkBehaviour
 {
     private NetworkVariable<FixedString4096Bytes> movimentoSocialNetworkTexto = new NetworkVariable<FixedString4096Bytes>();
-    private NetworkVariable<int> idPlayer = new NetworkVariable<int>(-1);
+    private NetworkVariable<int> idPlayerMS = new NetworkVariable<int>(-1);
     public MovimentoSociaisObject MovimentoSociaisManager;
     private string movimento;
     private string recursoTipo;
@@ -34,7 +34,7 @@ public class MovimentosSociais : NetworkBehaviour
         public void AtualizaTextoServerRpc(string textoTotal2, int id)
         {
             movimentoSocialNetworkTexto.Value = textoTotal2;
-            idPlayer.Value= id;
+            idPlayerMS.Value= id;
         }
 
     public void sortearMS(){
@@ -62,7 +62,7 @@ public class MovimentosSociais : NetworkBehaviour
                     }
                     
                 };
-                    idPlayer.OnValueChanged += (int  previousValue, int  newValue) =>
+                    idPlayerMS.OnValueChanged += (int  previousValue, int  newValue) =>
                     {
                         if(newValue!=(int)NetworkManager.Singleton.LocalClientId){
                                 btnOk.SetActive(false);
