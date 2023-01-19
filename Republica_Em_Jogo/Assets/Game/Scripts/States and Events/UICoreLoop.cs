@@ -12,29 +12,29 @@ using Logger = Game.Tools.Logger;
 
 namespace  Game 
 {
-    public class buttonTest : MonoBehaviour
+    public class UICoreLoop : MonoBehaviour
     {
-        [SerializeField] private Button nextState;
-        [SerializeField] private Button nextTurn;
-        [SerializeField] private TMP_Text textState;
+        [SerializeField] private Button nextStateButton;
+        [SerializeField] private Button nextTurnButton;
+        [SerializeField] private TMP_Text logStateText;
         public State DesenvState => GameStateHandler.Instance.StatePairValue[GameState.DESENVOLVIMENTO];
 
 
         private void Awake()
         {
-            nextState.gameObject.SetActive(false);
-            nextTurn.gameObject.SetActive(false);
+            nextStateButton.gameObject.SetActive(false);
+            nextTurnButton.gameObject.SetActive(false);
 
         }
 
         private void Start()
         {
 
-            nextTurn.onClick.AddListener(() => {
+            nextTurnButton.onClick.AddListener(() => {
                 TurnManager.Instance.NextTurnServerRpc();
             });
 
-            nextState.onClick.AddListener(() => {
+            nextStateButton.onClick.AddListener(() => {
                 CoreLoopStateHandler.Instance.NextStateServerRpc();
             });
 
@@ -55,13 +55,13 @@ namespace  Game
 
         private void OnDesenvolvimento()
         {
-            if (TurnManager.Instance.LocalIsCurrent) nextState.gameObject.SetActive(true);
+            if (TurnManager.Instance.LocalIsCurrent) nextStateButton.gameObject.SetActive(true);
         }
 
         private void OnPlayerTurnUpdate(bool value)
         {
-            nextState.gameObject.SetActive(value);
-            nextTurn.gameObject.SetActive(value);
+            nextStateButton.gameObject.SetActive(value);
+            nextTurnButton.gameObject.SetActive(value);
             
 
             UpdateTextDesenv(Extensoes.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues, CoreLoopStateHandler.Instance.CurrentState)) ;
@@ -70,7 +70,7 @@ namespace  Game
 
         private void UpdateTextDesenv(CoreLoopState state)
         {
-            textState.SetText(string.Concat("Player ", TurnManager.Instance.GetPlayerAtual, " no estado: ",state));
+            logStateText.SetText(string.Concat(GameDataconfig.Instance.TagParticipante," ", TurnManager.Instance.GetPlayerAtual, " no estado: ",state));
         }
 
     }

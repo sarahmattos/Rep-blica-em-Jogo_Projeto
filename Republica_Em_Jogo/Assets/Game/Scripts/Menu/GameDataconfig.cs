@@ -11,11 +11,14 @@ public class GameDataconfig : Singleton<GameDataconfig>
     [SerializeField] private string menuSceneName;
     [SerializeField] private string gameSceneName;
     [SerializeField] private List<Color> playerColorOrder;
-    public int territoriosInScene = 14;
+    [SerializeField] private string tagParticipante;
+    public int territoriosInScene;
     public int MaxConnections => maxConnections;
     public string GameSceneName => gameSceneName;
     public string MenuSceneName => menuSceneName;
     public List<Color> PlayerColorOrder  => playerColorOrder;
+
+    public string TagParticipante => tagParticipante; 
 
     private void Start()
     {
