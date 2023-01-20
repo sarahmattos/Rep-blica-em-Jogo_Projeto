@@ -12,40 +12,42 @@ namespace Game {
 
         //Lembrar que: apenas Servers/Owners podem alterar NetworkVariables.
         //Para fazer isso via client, pode ser usado métodos ServerRpc, assim como é feito nesta classe
-        private NetworkList<int> ordemPlayerID = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private NetworkList<int> ordemPlayersID = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private NetworkVariable<int> indexPlayerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
         private NetworkVariable<int> playerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private int turnCount = 0;
+        
         public int GetPlayerAtual => playerAtual.Value;
+        public int UltimoPlayer => ordemPlayersID[ordemPlayersID.Count-1];   
+        public bool UltimoIgualAtual => (GetPlayerAtual == UltimoPlayer);
         public int GetClientesCount => clientesCount.Value;
         public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == GetPlayerAtual);
-
         public event Action<bool> vezDoPlayerLocal;
         public event Action<int> PlayerTurnMuda;
+
         private State InicializaState => GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
+
+        public int TurnCount { get => turnCount; set => turnCount = value; }
+
         private void Start()
         {
             playerAtual.OnValueChanged += PlayerAtualMuda;
             InicializaState.Entrada += UpdateClientsCount;
             InicializaState.Entrada += DefineConfigIniciais;
 
+            if (!IsServer) return;
             CoreLoopStateHandler.Instance.UltimoLoopState.Saida += NextTurnServerRpc;
         }
 
-        //private void QuandoCoreLoopStateMuda(CoreLoopState state)
-        //{
-        //    if(state == CoreLoopState.DISTRIBUICAO)  NextTurnServerRpc();
-        //}
 
         public override void OnDestroy()
         {
             playerAtual.OnValueChanged += PlayerAtualMuda;
             InicializaState.Entrada-= UpdateClientsCount;
             InicializaState.Entrada -= DefineConfigIniciais;
-
+            if(!IsServer) return;
             CoreLoopStateHandler.Instance.UltimoLoopState.Saida -= NextTurnServerRpc;
-            //CoreLoopStateHandler.Instance.estadoMuda -= QuandoCoreLoopStateMuda;
-
         }
 
         private void UpdateClientsCount()
@@ -59,6 +61,7 @@ namespace Game {
             bool nextIgualLocalID = ((int)NetworkManager.Singleton.LocalClientId == next);
             vezDoPlayerLocal?.Invoke(nextIgualLocalID);
             PlayerTurnMuda?.Invoke(next);
+            turnCount++;
         }
 
 
@@ -75,7 +78,7 @@ namespace Game {
             allClientID.Shuffle();
             for (int i = 0; i < allClientID.Count; i++)
             {
-                ordemPlayerID.Add(allClientID[i]);
+                ordemPlayersID.Add(allClientID[i]);
 
             }
 
@@ -91,7 +94,7 @@ namespace Game {
         public void SetIndexPlayerTurnServerRpc(int index)
         {
             indexPlayerAtual.Value = index;
-            playerAtual.Value = ordemPlayerID[indexPlayerAtual.Value];
+            playerAtual.Value = ordemPlayersID[indexPlayerAtual.Value];
 
         }
 
@@ -100,7 +103,7 @@ namespace Game {
         public void NextTurnServerRpc()
         {
             indexPlayerAtual.Value = (1 + indexPlayerAtual.Value) % (GetClientesCount);
-            playerAtual.Value = ordemPlayerID[indexPlayerAtual.Value];
+            playerAtual.Value = ordemPlayersID[indexPlayerAtual.Value];
             #region logica alternativa
             //if (GetConnectedClientCount > 1)
             //{

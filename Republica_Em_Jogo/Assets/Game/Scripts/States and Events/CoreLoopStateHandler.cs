@@ -38,10 +38,13 @@ namespace Game
             StatePairValues.Add(CoreLoopState.RECOMPENSA, GetComponent<RecompensaState>());
         }
 
+        private void Awake()
+        {
+            SetLoopStatePairValues();
+        }
 
         private void Start()
         {
-            SetLoopStatePairValues();
             currentState = statePairValues[CoreLoopState.DISTRIBUICAO];
            
             coreLoopIndex.OnValueChanged += IndexEstadoLoopMuda;

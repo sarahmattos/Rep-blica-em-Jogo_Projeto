@@ -29,9 +29,10 @@ namespace  Game
 
         private void Start()
         {
-
             nextTurnButton.onClick.AddListener(() => {
                 TurnManager.Instance.NextTurnServerRpc();
+                CoreLoopStateHandler.Instance.ChangeStateServerRpc(0);
+
             });
 
             nextStateButton.onClick.AddListener(() => {
@@ -41,6 +42,7 @@ namespace  Game
             TurnManager.Instance.vezDoPlayerLocal += OnPlayerTurnUpdate;
             DesenvState.Entrada += OnDesenvolvimento;
             CoreLoopStateHandler.Instance.estadoMuda += UpdateTextDesenv;
+
         }
 
 

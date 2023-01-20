@@ -8,6 +8,7 @@ namespace Game
     {
         public override void EnterState()
         {
+            Tools.Logger.Instance.LogInfo("EnterState: DISTRIBUIÇÃO");
         }
 
         public override void ExitState()
