@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9162020892422878252}
   - component: {fileID: 9162020892422878253}
   m_Layer: 5
-  m_Name: MensagemStadoJogo
+  m_Name: log
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -65.36928, y: 0.000014305115}
-  m_SizeDelta: {x: 402.2807, y: 27.606}
+  m_AnchoredPosition: {x: -40.4147, y: 0.000014305115}
+  m_SizeDelta: {x: 451.5724, y: 27.606}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9162020892422878252
 CanvasRenderer:
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 9162020893180670989}
   - component: {fileID: 9162020893180670988}
   m_Layer: 5
-  m_Name: HUD Panel Log Estado
+  m_Name: UI CoreLoop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,9 +323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27168bb5aacd09c479f4bb442599910f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextState: {fileID: 9162020893764089941}
-  nextTurn: {fileID: 9162020893590092154}
-  textState: {fileID: 9162020892422878253}
+  nextStateButton: {fileID: 9162020893764089941}
+  nextTurnButton: {fileID: 9162020893590092154}
+  logStateText: {fileID: 9162020892422878253}
 --- !u!1 &9162020893368416502
 GameObject:
   m_ObjectHideFlags: 0

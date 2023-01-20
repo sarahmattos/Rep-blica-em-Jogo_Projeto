@@ -10,7 +10,7 @@ using Logger = Game.Tools.Logger;
 namespace Game
 {
 
-    public class InicializaState : State
+    public class InicializacaoState : State
     {
         //TODO: isolar DISTRIBUIÇÃO nos bairros em outra classe
         [SerializeField] private float intervaloTempo = 0.5f;

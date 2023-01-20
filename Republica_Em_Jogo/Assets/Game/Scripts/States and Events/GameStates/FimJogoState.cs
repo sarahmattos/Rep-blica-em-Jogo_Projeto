@@ -1,23 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using Game.Tools;
-
+using UnityEngine;
 
 namespace Game
 {
-    public class DesenvState : State
+    public class FimJogoState : State
     {
         public override void EnterState()
         {
-            Logger.Instance.LogInfo("Enter state: DesenvState");
-
+            Tools.Logger.Instance.LogInfo("EnterState: FIM_JOGO.");
         }
 
         public override void ExitState()
         {
-            Logger.Instance.LogInfo("Exit state: DesenvState");
-
         }
     }
-
 }
+

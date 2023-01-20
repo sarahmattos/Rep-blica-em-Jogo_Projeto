@@ -67,5 +67,10 @@ namespace Game.Tools
             }
         }
 
+        public void ResetLoggger()
+        {
+            debugAreaText.text = string.Empty;
+        }
+
     }
 }

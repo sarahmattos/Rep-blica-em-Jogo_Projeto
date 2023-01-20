@@ -15,15 +15,15 @@ namespace Game {
         INICIALIZACAO,
         DESENVOLVIMENTO,
         ELEICOES,
-        //FIM_JOGO
+        FIM_JOGO
     }
 
     [RequireComponent(typeof(MenuLoadState))]
     [RequireComponent(typeof(GameplayLoadState))]
-    [RequireComponent(typeof(InicializaState))]
-    [RequireComponent(typeof(DesenvState))]
+    [RequireComponent(typeof(InicializacaoState))]
+    [RequireComponent(typeof(DesenvolvimentoState))]
     [RequireComponent(typeof(EleicaoState))]
-
+    [RequireComponent(typeof(FimJogoState))]    
     public class GameStateHandler : NetworkSingleton<GameStateHandler>
     {
         private NetworkVariable<int> gameStateIndex = new NetworkVariable<int>();
@@ -33,10 +33,14 @@ namespace Game {
         //para acessar os gerais do jogo, basta acessar StateParValue[GameState.ESTADO];
         public Dictionary<GameState, State> StatePairValue => statePairValue;
 
+        private void Awake()
+        {
+            SetGameStatePairValues();
+        }
+
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
-            SetGameStatePairValues();
             currentGameState = StatePairValue[GameState.MENU_SCENE_LOAD];
 
             gameStateIndex.OnValueChanged += IndexEstadoJogoMuda;
@@ -51,9 +55,10 @@ namespace Game {
         {
             StatePairValue.Add(GameState.MENU_SCENE_LOAD, GetComponent<MenuLoadState>());
             StatePairValue.Add(GameState.GAMEPLAY_SCENE_LOAD, GetComponent< GameplayLoadState>());
-            StatePairValue.Add(GameState.INICIALIZACAO, GetComponent<InicializaState>());
-            StatePairValue.Add(GameState.DESENVOLVIMENTO, GetComponent<DesenvState>());
+            StatePairValue.Add(GameState.INICIALIZACAO, GetComponent<InicializacaoState>());
+            StatePairValue.Add(GameState.DESENVOLVIMENTO, GetComponent<DesenvolvimentoState>());
             StatePairValue.Add(GameState.ELEICOES, GetComponent<EleicaoState>());
+            statePairValue.Add(GameState.FIM_JOGO, GetComponent<FimJogoState>());
         }
 
         [ServerRpc(RequireOwnership = false)]

@@ -31,7 +31,7 @@ namespace Game.Tools
                 SceneManager.LoadScene(0);
 
             }
-
+            if (Input.GetKeyDown(KeyCode.Backspace)) Logger.Instance.ResetLoggger();
 
             TimeUpdate();
 

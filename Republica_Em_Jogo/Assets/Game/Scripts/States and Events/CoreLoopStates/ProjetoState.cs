@@ -8,7 +8,7 @@ namespace Game
     {
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("Enter State: RECOMPENSA");
+            Tools.Logger.Instance.LogInfo("Enter State: PROJETO");
 
         }
 
