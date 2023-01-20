@@ -35300,6 +35300,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1948351947983953492, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
+      propertyPath: baralho
+      value: 
+      objectReference: {fileID: 3469287838374786419}
     - target: {fileID: 7677490024804130840, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
       propertyPath: m_RootOrder
       value: 9

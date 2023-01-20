@@ -9,14 +9,14 @@ public class Baralho : MonoBehaviour
     private Projeto projeto;
 
     void Start(){
-    projeto= GameObject.FindObjectOfType<Projeto>();
-     renderer = GetComponent<Renderer>();
+         projeto = FindObjectOfType<Projeto>();
+         renderer = GetComponent<Renderer>();
     }
     
     private void OnMouseDown()
     {
         Debug.Log("clicado");
-        projeto.sortearProjeto();
+        projeto?.sortearProjeto();
         //cartaProjetoTrue();
     }
     
