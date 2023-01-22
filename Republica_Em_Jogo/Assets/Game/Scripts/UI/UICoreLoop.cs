@@ -57,7 +57,11 @@ namespace  Game
 
         private void OnDesenvolvimento()
         {
-            if (TurnManager.Instance.LocalIsCurrent) nextStateButton.gameObject.SetActive(true);
+            if (TurnManager.Instance.LocalIsCurrent)
+            {
+                nextStateButton.gameObject.SetActive(true);
+                nextStateButton.gameObject.SetActive(true);
+            }
         }
 
         private void OnPlayerTurnUpdate(bool value)

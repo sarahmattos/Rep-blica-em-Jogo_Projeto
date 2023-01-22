@@ -17,7 +17,9 @@ namespace Game {
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
         private NetworkVariable<int> playerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private int turnCount = 0;
-        
+
+        public NetworkVariable<int> PlayerAtual => playerAtual;
+
         public int GetPlayerAtual => playerAtual.Value;
         public int UltimoPlayer => ordemPlayersID[ordemPlayersID.Count-1];   
         public bool UltimoIgualAtual => (GetPlayerAtual == UltimoPlayer);
@@ -33,10 +35,10 @@ namespace Game {
         private void Start()
         {
             playerAtual.OnValueChanged += PlayerAtualMuda;
+            if (!IsHost) return;
             InicializaState.Entrada += UpdateClientsCount;
             InicializaState.Entrada += DefineConfigIniciais;
 
-            if (!IsServer) return;
             CoreLoopStateHandler.Instance.UltimoLoopState.Saida += NextTurnServerRpc;
         }
 
@@ -44,15 +46,14 @@ namespace Game {
         public override void OnDestroy()
         {
             playerAtual.OnValueChanged += PlayerAtualMuda;
+            if (!IsHost) return;
             InicializaState.Entrada-= UpdateClientsCount;
             InicializaState.Entrada -= DefineConfigIniciais;
-            if(!IsServer) return;
             CoreLoopStateHandler.Instance.UltimoLoopState.Saida -= NextTurnServerRpc;
         }
 
         private void UpdateClientsCount()
         {
-            if (!IsHost) return;
             clientesCount.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
         }
 
@@ -68,7 +69,6 @@ namespace Game {
 
         private void GerarPlayerOrdem()
         {
-            if (!IsHost) return;
             List<int> allClientID = new List<int>();
             for (int i = 0; i < GetClientesCount; i++)
             {
@@ -104,27 +104,8 @@ namespace Game {
         {
             indexPlayerAtual.Value = (1 + indexPlayerAtual.Value) % (GetClientesCount);
             playerAtual.Value = ordemPlayersID[indexPlayerAtual.Value];
-            #region logica alternativa
-            //if (GetConnectedClientCount > 1)
-            //{
-            //    if (currentIndex.Value < GetConnectedClientCount - 1)
-            //    {
-            //        currentIndex.Value++;
-            //    } else
-            //    {
-            //        currentIndex.Value = 0;
-            //    }
-
-            //}
-            //else
-            //{
-            //    currentIndex.Value = 0;
-
-            //}
-            #endregion
 
         }
-
 
     }
 
