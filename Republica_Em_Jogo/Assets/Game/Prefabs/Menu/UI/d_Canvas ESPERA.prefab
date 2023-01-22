@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 7113440598836726392}
   - component: {fileID: 7113440598836726395}
   m_Layer: 0
-  m_Name: Canvas ESPERA
+  m_Name: d_Canvas ESPERA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

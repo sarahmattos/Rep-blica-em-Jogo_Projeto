@@ -19,7 +19,7 @@ using Logger = Game.Tools.Logger;
 
 public class OnlineConnection : MonoBehaviour
 {
-    [SerializeField] private int m_MaxConnections = 4;
+    private int m_MaxConnections => GameDataconfig.Instance.MaxConnections;
     private string relayJoinCode;
     [SerializeField] private TMP_InputField inputFieldJoinCode;
     [SerializeField] private TMP_Text TextJoinCode;
