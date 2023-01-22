@@ -12,15 +12,15 @@ namespace Game
         public override void EnterState()
         {
            Tools.Logger.Instance.LogInfo("EnterState: DESENVOLVIMENTO");
-            if (!IsServer) return;
-            TurnManager.Instance.PlayerTurnMuda += TurnoMuda;
+            if (!IsHost) return;
+            TurnManager.Instance.PlayerAtual.OnValueChanged += TurnoMuda;
             rodada.Value = 0;
         }
 
         public override void ExitState()
         {
             if (!IsServer) return;
-            TurnManager.Instance.PlayerTurnMuda -= TurnoMuda;
+            TurnManager.Instance.PlayerAtual.OnValueChanged -= TurnoMuda;
 
 
         }
@@ -37,10 +37,14 @@ namespace Game
         }
 
 
-        private void TurnoMuda(int playerID)
+        private void TurnoMuda(int playerAnterior, int playerProximo)
         {
             //rodada.Value = (rodada.Value % maxRodada) + 1;
-            if ((TurnManager.Instance.TurnCount % TurnManager.Instance.GetClientesCount) == 0)
+            //if ((TurnManager.Instance.TurnCount % TurnManager.Instance.GetClientesCount) == 0)
+            //{
+            //    rodada.Value++;
+            //}
+            if(playerAnterior == TurnManager.Instance.UltimoPlayer)
             {
                 rodada.Value++;
             }
@@ -48,7 +52,7 @@ namespace Game
 
         private void RodadaMuda(int previousValue, int newValue)
         {
-            if (rodada.Value == maxRodada)
+            if (newValue == maxRodada)
             {
                 StateHandler.ChangeStateServerRpc((int)GameState.ELEICOES);
 

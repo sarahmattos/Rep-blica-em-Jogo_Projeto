@@ -29,6 +29,7 @@ namespace Game
        //para acessar os estados de loop do jogo, basta acessar StateParValue[CoreLoopState.ESTADO];
         public Dictionary<CoreLoopState, State> StatePairValues => statePairValues;
         public State UltimoLoopState => StatePairValues[(CoreLoopState)StatePairValues.Count-1];
+        public bool CurrentStateIgualUltimoState => currentState == UltimoLoopState;
 
         private void SetLoopStatePairValues()
         {

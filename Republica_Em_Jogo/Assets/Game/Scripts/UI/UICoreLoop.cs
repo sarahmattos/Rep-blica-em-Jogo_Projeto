@@ -24,26 +24,19 @@ namespace  Game
         {
             nextStateButton.gameObject.SetActive(false);
             nextTurnButton.gameObject.SetActive(false);
-
         }
 
         private void Start()
         {
-            nextTurnButton.onClick.AddListener(() => {
-                TurnManager.Instance.NextTurnServerRpc();
-                CoreLoopStateHandler.Instance.ChangeStateServerRpc(0);
-
-            });
-
-            nextStateButton.onClick.AddListener(() => {
-                CoreLoopStateHandler.Instance.NextStateServerRpc();
-            });
+            nextTurnButton.onClick.AddListener(OnNextTurnButtonClick);
+            nextStateButton.onClick.AddListener(OnNextStateButtonClick);
 
             TurnManager.Instance.vezDoPlayerLocal += OnPlayerTurnUpdate;
             DesenvState.Entrada += OnDesenvolvimento;
             CoreLoopStateHandler.Instance.estadoMuda += UpdateTextDesenv;
 
         }
+
 
 
         private void OnDestroy()
@@ -54,10 +47,32 @@ namespace  Game
 
         }
 
+        public void OnNextTurnButtonClick()
+        {
+            if (CoreLoopStateHandler.Instance.CurrentStateIgualUltimoState)
+            {
+                CoreLoopStateHandler.Instance.NextStateServerRpc();
+                return;
+            }
+            TurnManager.Instance.NextTurnServerRpc();
+            CoreLoopStateHandler.Instance.ChangeStateServerRpc(0);
+        }
+
+        public void OnNextStateButtonClick()
+        {
+            CoreLoopStateHandler.Instance.NextStateServerRpc();
+
+        }
+
 
         private void OnDesenvolvimento()
         {
-            if (TurnManager.Instance.LocalIsCurrent) nextStateButton.gameObject.SetActive(true);
+            if (TurnManager.Instance.LocalIsCurrent)
+            {
+                nextStateButton.gameObject.SetActive(true);
+                nextTurnButton.gameObject.SetActive(true);
+            }
+
         }
 
         private void OnPlayerTurnUpdate(bool value)
@@ -66,7 +81,8 @@ namespace  Game
             nextTurnButton.gameObject.SetActive(value);
             
 
-            UpdateTextDesenv(Extensoes.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues, CoreLoopStateHandler.Instance.CurrentState)) ;
+            UpdateTextDesenv(Extensoes.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues, 
+                CoreLoopStateHandler.Instance.CurrentState)) ;
 
         }
 
