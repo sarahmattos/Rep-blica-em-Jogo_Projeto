@@ -61,6 +61,7 @@ namespace Game.Tools
 
         private void ClearLines()
         {
+            return;
             if (debugAreaText.text.Split('\n').Count() >= maxLines)
             {
                 debugAreaText.text = string.Empty;

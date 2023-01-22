@@ -56,6 +56,7 @@ namespace Game.Connection
 
         private void OnClientConnect(ulong data)
         {
+            if (!NetworkManager.Singleton.IsServer) return;
             if (clientsConnected == GameDataconfig.Instance.MaxConnections)
             {
                 LoadGameplayScene();
