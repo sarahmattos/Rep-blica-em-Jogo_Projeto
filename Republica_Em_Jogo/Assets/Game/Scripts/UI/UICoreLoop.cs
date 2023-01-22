@@ -24,20 +24,12 @@ namespace  Game
         {
             nextStateButton.gameObject.SetActive(false);
             nextTurnButton.gameObject.SetActive(false);
-
         }
 
         private void Start()
         {
-            nextTurnButton.onClick.AddListener(() => {
-                TurnManager.Instance.NextTurnServerRpc();
-                CoreLoopStateHandler.Instance.ChangeStateServerRpc(0);
-
-            });
-
-            nextStateButton.onClick.AddListener(() => {
-                CoreLoopStateHandler.Instance.NextStateServerRpc();
-            });
+            nextTurnButton.onClick.AddListener(OnNextTurnButtonClick);
+            nextStateButton.onClick.AddListener(OnNextStateButtonClick);
 
             TurnManager.Instance.vezDoPlayerLocal += OnPlayerTurnUpdate;
             DesenvState.Entrada += OnDesenvolvimento;
@@ -46,11 +38,29 @@ namespace  Game
         }
 
 
+
         private void OnDestroy()
         {
             TurnManager.Instance.vezDoPlayerLocal -= OnPlayerTurnUpdate;
             DesenvState.Entrada -= OnDesenvolvimento;
             CoreLoopStateHandler.Instance.estadoMuda -= UpdateTextDesenv;
+
+        }
+
+        public void OnNextTurnButtonClick()
+        {
+            if (CoreLoopStateHandler.Instance.CurrentStateIgualUltimoState)
+            {
+                CoreLoopStateHandler.Instance.NextStateServerRpc();
+                return;
+            }
+            TurnManager.Instance.NextTurnServerRpc();
+            CoreLoopStateHandler.Instance.ChangeStateServerRpc(0);
+        }
+
+        public void OnNextStateButtonClick()
+        {
+            CoreLoopStateHandler.Instance.NextStateServerRpc();
 
         }
 
