@@ -59,6 +59,8 @@ namespace Game {
 
         private void PlayerAtualMuda(int previous, int next)
         {
+            Logger.Instance.LogWarning(string.Concat("Player ", previous, " encerrou o turno!"));
+            
             bool nextIgualLocalID = ((int)NetworkManager.Singleton.LocalClientId == next);
             vezDoPlayerLocal?.Invoke(nextIgualLocalID);
             PlayerTurnMuda?.Invoke(next);
@@ -104,7 +106,6 @@ namespace Game {
         {
             indexPlayerAtual.Value = (1 + indexPlayerAtual.Value) % (GetClientesCount);
             playerAtual.Value = ordemPlayersID[indexPlayerAtual.Value];
-
         }
 
     }

@@ -60,8 +60,9 @@ namespace  Game
             if (TurnManager.Instance.LocalIsCurrent)
             {
                 nextStateButton.gameObject.SetActive(true);
-                nextStateButton.gameObject.SetActive(true);
+                nextTurnButton.gameObject.SetActive(true);
             }
+
         }
 
         private void OnPlayerTurnUpdate(bool value)
@@ -70,7 +71,8 @@ namespace  Game
             nextTurnButton.gameObject.SetActive(value);
             
 
-            UpdateTextDesenv(Extensoes.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues, CoreLoopStateHandler.Instance.CurrentState)) ;
+            UpdateTextDesenv(Extensoes.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues, 
+                CoreLoopStateHandler.Instance.CurrentState)) ;
 
         }
 
