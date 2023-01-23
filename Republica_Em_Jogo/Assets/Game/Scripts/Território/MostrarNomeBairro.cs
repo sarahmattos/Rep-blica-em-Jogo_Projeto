@@ -39,6 +39,7 @@ public class MostrarNomeBairro : MonoBehaviour
     }
     private void OnMouseDown()
         {
+            if(hs.distribuicaoGeral==true){
             if(projeto.distribuicaoProjeto==true){
                 if(bairro.bairroNaZonaEscolhida==true){
                     Debug.Log("projeto distribuicao");
@@ -46,7 +47,7 @@ public class MostrarNomeBairro : MonoBehaviour
                 }
             }else{
                 //fazer restricao
-                if(hs.distribuicaoGeral==true){
+                
                     bairro.EscolherBairroEleitor();
                 }
                 

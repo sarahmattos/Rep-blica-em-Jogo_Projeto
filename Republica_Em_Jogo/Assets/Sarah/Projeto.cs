@@ -255,10 +255,12 @@ using Unity.Collections;
          //ao apertar botao de fechar interface   
         public void fechar(){
             //desatuva interface
+            
             fecharBtn.SetActive(false);
             projetoUI.SetActive(false);
             sim=0;
             nao=0;
+            hs.ValorEleitoresNovos(numRecompensaDefault);
         }
 
         //reseta variaveis oou pede pro hosta fazer isso

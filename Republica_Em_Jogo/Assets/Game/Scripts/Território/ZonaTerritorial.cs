@@ -45,9 +45,9 @@ namespace Game.Territorio
                 //agora esse bairros so recebemuma confirmacao de que podem ser alocados eleitores la
                 //e os jogadores que o possuem recebem eleitores para distribuir
                 bairro.bairroNaZonaEscolhida=true;
-                if(bairro.VerificaControl()){
-                    hs.ValorEleitoresNovos(valor);
-                }
+                //if(bairro.VerificaControl()){
+                    //hs.ValorEleitoresNovos(valor);
+                //}
             }
 
         }
