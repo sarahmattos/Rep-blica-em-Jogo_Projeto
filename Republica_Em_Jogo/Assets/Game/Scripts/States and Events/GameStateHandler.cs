@@ -41,14 +41,21 @@ namespace Game {
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
-            currentGameState = StatePairValue[GameState.MENU_SCENE_LOAD];
-
+            //currentGameState = StatePairValue[GameState.MENU_SCENE_LOAD];
             gameStateIndex.OnValueChanged += IndexEstadoJogoMuda;
 
+            NetworkManager.Singleton.OnServerStarted += () =>
+            {
+                ChangeStateServerRpc((int)GameState.MENU_SCENE_LOAD);
+            };
+
+
         }
+
         public override void OnDestroy()
         {
             gameStateIndex.OnValueChanged -= IndexEstadoJogoMuda;
+
         }
 
         private void SetGameStatePairValues()
@@ -79,8 +86,8 @@ namespace Game {
 
         private void IndexEstadoJogoMuda(int previous, int next)
         {
-
-            currentGameState.InvokeSaida();
+            Logger.Instance.LogInfo("INDEX MUDA");
+            currentGameState?.InvokeSaida();
             currentGameState = StatePairValue[(GameState)next];
             estadoMuda?.Invoke((GameState)next);
             currentGameState.InvokeEntrada();
@@ -95,7 +102,6 @@ namespace Game {
         public override void OnNetworkDespawn()
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnLoadEventCompleted;
-
         }
 
 

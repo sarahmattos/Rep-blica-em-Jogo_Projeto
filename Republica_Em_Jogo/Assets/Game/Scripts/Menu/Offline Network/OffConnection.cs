@@ -6,40 +6,33 @@ using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using Logger = Game.Tools.Logger;
 using UnityEngine.SceneManagement;
+using Game.Tools;
 
-namespace Game.Connection
+namespace Game.Networking
 {
-    [RequireComponent(typeof(IPManager))]
-    public class OffConnection : MonoBehaviour
+    public class OffConnection : Singleton<OffConnection>
     {
         [SerializeField] private TMP_InputField ipAddressInput;
-        [SerializeField] private TMP_InputField portInput;
-        [SerializeField] private PlayerNameHandler playerNameHandler;
-        private IPManager ipManager;
+        //[SerializeField] private TMP_InputField portInput;
+        private PlayerNameHandler playerNameHandler => PlayerNameHandler.Instance;
+        //[SerializeField] private TMP_Text ipHostingGameText;
+
+        //private IPManager ipManager => IPManager.Instance;
         private string IpHostingGame;
-        [SerializeField] private TMP_Text ipHostingGameText;
 
         public int clientsConnected => NetworkManager.Singleton.ConnectedClients.Count;
-        private void Awake()
-        {
-            ipManager = GetComponent<IPManager>();
-
-        }
 
         void Start()
         {
-
             ipAddressInput.onValueChanged.AddListener((string value) => { PlayerPrefs.SetString("ipAddressJoin", value); });
             ipAddressInput.text = PlayerPrefs.GetString("ipAddressJoin");
-            //if(NetworkManager.Singleton.IsHost)
-            //{
+
                 NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnect;
                 NetworkManager.Singleton.OnClientDisconnectCallback += OnClientdisconnect;
-            //}
-
+          
             NetworkManager.Singleton.OnTransportFailure += () =>
            {
-               Logger.Instance.LogError("fALHO ao CRIAR HOST.");
+               Logger.Instance.LogError("Falha ao criar conexão.");
            };
         }
 
@@ -89,7 +82,14 @@ namespace Game.Connection
             utp.SetConnectionData(ipaddress, (ushort)port);
             SetConnectionPayload(GetPlayerId(), playerName);
 
-            NetworkManager.Singleton.StartClient();
+            if(NetworkManager.Singleton.StartClient())
+            {
+                Logger.Instance.LogInfo(string.Concat("Conexão com o IP: ",ipAddressInput.text));
+                
+            } else
+            {
+                Logger.Instance.LogError(string.Concat("Falha na conexão com o IP: ", ipAddressInput.text));
+            }
         }
 
 
@@ -101,8 +101,10 @@ namespace Game.Connection
             SetConnectionPayload(GetPlayerId(), playerName);
             if (NetworkManager.Singleton.StartHost())
             {
-                IpHostingGame = ipaddress;
-                ipHostingGameText.SetText(IpHostingGame);
+                Logger.Instance.LogInfo("Criando sala Offline.");
+            } else
+            {
+                Logger.Instance.LogInfo("Falha ao criar sala.");
             }
 
         }

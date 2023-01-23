@@ -1,21 +1,11 @@
-using System;
-using System.Collections;
-using System.Linq;
-using System.Threading.Tasks;
 using Unity.Netcode;
-using Unity.Netcode.Transports.UTP;
-using Unity.Services.Authentication;
-using Unity.Services.Core;
-using Unity.Services.Relay;
-using Unity.Services.Relay.Models;
 using UnityEngine;
 using TMPro;
-using System.Text;
 using Logger = Game.Tools.Logger;
-using Unity.VisualScripting;
+using Game.Tools;
 
 namespace Game.Networking { 
-public class OnlineConnection : MonoBehaviour
+public class OnlineConnection : Singleton<OnlineConnection>
 {
 
         [SerializeField] private TMP_InputField inputJoinCode;

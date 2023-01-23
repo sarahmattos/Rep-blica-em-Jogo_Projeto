@@ -12,7 +12,7 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
 
-namespace Game
+namespace Game.Networking
 {
     public class OnlineRelayManager : Singleton<OnlineRelayManager>
     {

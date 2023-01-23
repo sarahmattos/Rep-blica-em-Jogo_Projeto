@@ -8,14 +8,14 @@ using UnityEngine;
 
 public class IPManager : Singleton<IPManager>
 {
-    [SerializeField] private TMP_Text text;
+    [SerializeField] private TMP_Text text_IP;
     [SerializeField] private List<string> allIpAddress;
 
     public int portDefault => 7777;
 
     private void Start()
     {
-        text.SetText("Seu IP: " + myIpAddress());
+        text_IP.SetText(myIpAddress());
 
         allIpAddress = AllIPAddresses();
         
