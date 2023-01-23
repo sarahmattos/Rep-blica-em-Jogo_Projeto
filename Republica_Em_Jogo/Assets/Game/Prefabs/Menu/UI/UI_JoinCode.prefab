@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 6621683697134810659}
   - component: {fileID: 6621683697134810661}
   m_Layer: 5
-  m_Name: UIJoinCode
+  m_Name: UI_JoinCode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

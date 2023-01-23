@@ -1,4 +1,6 @@
+using Game.Networking;
 using Game.Tools;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +18,24 @@ public class IPManager : Singleton<IPManager>
     private void Start()
     {
         text_IP.SetText(myIpAddress());
-
         allIpAddress = AllIPAddresses();
-        
+
+        OfflineConnection.Instance.conexaoIpEstabelecida += SetIpText;
+
     }
+
+    private void OnDestroy()
+    {
+        OfflineConnection.Instance.conexaoIpEstabelecida -= SetIpText;
+
+    }
+
+    private void SetIpText(string ipAddress)
+    {
+        text_IP.SetText(ipAddress);
+    }
+
+
     public List<string> AllIPAddresses()
     {
         List<string> ips = new List<string>();

@@ -3,31 +3,16 @@ using UnityEngine;
 using TMPro;
 using Logger = Game.Tools.Logger;
 using Game.Tools;
+using System;
 
 namespace Game.Networking { 
 public class OnlineConnection : Singleton<OnlineConnection>
 {
 
         [SerializeField] private TMP_InputField inputJoinCode;
-        [SerializeField] private TMP_Text textJoinCode;
 
-
-        public void Start()
-        {
-            OnlineRelayManager.Instance.joinCodeGenerated += OnJoinCodeGenerated;
-        }
-
-        private void OnDestroy()
-        {
-            OnlineRelayManager.Instance.joinCodeGenerated -= OnJoinCodeGenerated;
-        }
-
-        private void OnJoinCodeGenerated(string joinCode)
-        {
-            textJoinCode.SetText(joinCode);
-        }
-
-
+        public Action<bool> conexaoEstabelecida;
+        public Action<string> joinCodeConexaoEstabelecida;
         async public void CreateGame()
         {
             if(OnlineRelayManager.Instance.IsRelayEnalbed)
@@ -37,9 +22,12 @@ public class OnlineConnection : Singleton<OnlineConnection>
 
             if(NetworkManager.Singleton.StartHost())
             {
+                conexaoEstabelecida?.Invoke(true);
                 Logger.Instance.LogInfo("criando sala.");
+                
             } else
             {
+                conexaoEstabelecida?.Invoke(false);
                 Logger.Instance.LogInfo("falhao ao criar sala.");
             }
         }
@@ -54,10 +42,13 @@ public class OnlineConnection : Singleton<OnlineConnection>
 
             if (NetworkManager.Singleton.StartClient())
             {
+                conexaoEstabelecida?.Invoke(true);
+                joinCodeConexaoEstabelecida?.Invoke(inputJoinCode.text);
                 Logger.Instance.LogInfo("criando sala.");
             }
             else
             {
+                conexaoEstabelecida?.Invoke(false);
                 Logger.Instance.LogInfo("falhao ao criar sala.");
             }
 

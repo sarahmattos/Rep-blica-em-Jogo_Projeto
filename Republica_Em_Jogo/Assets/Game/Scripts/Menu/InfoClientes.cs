@@ -4,7 +4,7 @@ using Unity.Netcode;
 namespace Game.Networking
 {
 
-    public class InfoClientes : NetworkBehaviour
+    public class InfoClientes :  NetworkBehaviour
     {
         private TMP_Text text_contagemJogadores;
         private NetworkVariable<int> clientesConnectados = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -34,7 +34,7 @@ namespace Game.Networking
 
         private void OnClientConnectionUpdate(ulong obj)
         {
-            if (!NetworkManager.Singleton.IsServer) return;
+            if (!NetworkManager.Singleton.IsHost) return;
             clientesConnectados.Value = NetworkManager.Singleton.ConnectedClients.Count;
         }
 
