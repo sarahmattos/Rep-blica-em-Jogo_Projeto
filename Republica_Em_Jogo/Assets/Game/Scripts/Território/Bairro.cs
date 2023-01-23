@@ -41,21 +41,12 @@ namespace Game.Territorio
             hs = FindObjectOfType<HudStatsJogador>();
         }
         [ServerRpc(RequireOwnership = false)]
-        public void MudaValorEleitorServerRpc()
+        public void MudaValorEleitorServerRpc(int valor)
         {
-            //ainda tentando
-            if(hs.playerDiminuiEleitor==true){
-                auxContagem++;
-                setUpBairro.Eleitores.MudaValorEleitores(-1);
-                if(auxContagem>=2){
-                   hs.playerDiminuiEleitor=false;
-                   auxContagem=0;
-                }
-            }else{
-                setUpBairro.Eleitores.MudaValorEleitores(1);
-            }
-            
+            setUpBairro.Eleitores.MudaValorEleitores(valor);
         }
+       
+
         private void OnEnable()
         {
             playerIDNoControl.OnValueChanged += onPlayerControlMuda;
@@ -103,23 +94,31 @@ namespace Game.Territorio
         }
 
         //chamado pelo "MostrarNomeBairro" qnd clicado em um bairro
-        public void EscolherBairroEleitor(){
-            if(VerificaControl()){
-                if(setUpBairro.Eleitores.eleitores.Value>0){
-                    //recupera quantos eleitores novos
-                    hs.valorEleitorNovo();
-                    if(hs.eleitoresNovosAtual>0){
-                        //dimiui eleitor novo e aumenta eleito total
-                        hs.contagemEleitores();
-                        if(NetworkManager.Singleton.IsClient){ 
-                            //adicionar valor ao texto no bairro
-                            MudaValorEleitorServerRpc();
-                        }
-                    }
+    public void EscolherBairroEleitor(){
+        if(VerificaControl()){
+            if(setUpBairro.Eleitores.eleitores.Value>0){
+                //dimiui eleitor novo e aumenta eleito total
+                hs.contagemEleitores();
+                //recupera quantos eleitores novos
+                hs.valorEleitorNovo();
+                if(hs.playerDiminuiEleitor==true){
+                    auxContagem=-1;
+                }else{
+                    auxContagem=1;
                 }
-                
+                if(hs.eleitoresNovosAtual>0){
+
+                        if(NetworkManager.Singleton.IsClient){ 
+                            MudaValorEleitorServerRpc(auxContagem);
+                        }
+                    
+                }else{
+                    hs.AtualizaUIAposDistribuicao();
+                }
             }
+            
         }
+    }
         
     }
 

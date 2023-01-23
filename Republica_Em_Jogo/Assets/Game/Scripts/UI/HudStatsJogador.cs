@@ -138,11 +138,14 @@ namespace Game.UI
          public void contagemEleitores(){
             playerStats.eleitoresNovos--;
             text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+            //diminui valor eleitores na hud player
             AtualizaEleitores();
-            if(playerStats.eleitoresNovos<=0){
+         }
+        public void AtualizaUIAposDistribuicao(){
                 distribuaEleitorUi.SetActive(false);
                 if(playerDiminuiEleitor==true){
                     acaboudistribuicaoUi2.SetActive(true);
+                    playerDiminuiEleitor=false;
                 }else{
                     acaboudistribuicaoUi.SetActive(true);
                 }
@@ -153,9 +156,7 @@ namespace Game.UI
                     setUpZona.ChamarReseteBairroNaZona();
                     
                 }
-            }
-         }
-
+        }
 
         //para o bairro acessar quantos eleitores novos podem ser distribuidos
          public void valorEleitorNovo(){
@@ -166,6 +167,7 @@ namespace Game.UI
          public void ChamatPlayerInicioRodada(){
             playerStats.inicioRodada();
             distribuaEleitorUi.SetActive(true);
+            text_distribuaEleitor.SetText("Distribua seus eleitores");
             text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
          }
 
@@ -173,6 +175,7 @@ namespace Game.UI
             if(playerRecebeEleitor==true){
                 playerStats.eleitoresNovos=valor;
                 playerRecebeEleitor=false;
+                //
                 Debug.Log("eleitores novos: "+playerStats.eleitoresNovos);
                 distribuaEleitorUi.SetActive(true);
                 if(playerDiminuiEleitor==true){

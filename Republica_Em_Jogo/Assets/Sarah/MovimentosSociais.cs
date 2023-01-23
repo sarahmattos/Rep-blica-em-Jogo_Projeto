@@ -77,7 +77,9 @@ public class MovimentosSociais : NetworkBehaviour
         }
         public void chamarRecompensasEleitor(){
             distribuicaoRecompensaRecurso=true;
+            //receber valor uma vez
             hs.playerRecebeEleitor=true;
+            //chama funcao pra receber esse valor
             hs.ValorEleitoresNovos(quantidadeEleitor);
         }
         public void chamarRecompensasRecurso(){
