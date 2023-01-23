@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
  using Game.Territorio;
+ using Game.UI;
 
 public class MostrarNomeBairro : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MostrarNomeBairro : MonoBehaviour
     [SerializeField] private GameObject nomeBairro;
     private Bairro bairro;
     private Projeto projeto;
+    private HudStatsJogador hs;
     //[SerializeField] private Material defaultMaterial;
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,7 @@ public class MostrarNomeBairro : MonoBehaviour
         renderer = GetComponent<Renderer>();
         bairro = GetComponentInParent<Bairro>();
         projeto = FindObjectOfType<Projeto>();
+        hs = FindObjectOfType<HudStatsJogador>();
     }
 
     // Update is called once per frame
@@ -42,7 +45,11 @@ public class MostrarNomeBairro : MonoBehaviour
                 bairro.EscolherBairroEleitor();
                 }
             }else{
-                bairro.EscolherBairroEleitor();
+                //fazer restricao
+                if(hs.distribuicaoGeral==true){
+                    bairro.EscolherBairroEleitor();
+                }
+                
             }
             
             

@@ -34,6 +34,7 @@ namespace Game.UI
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
         public bool playerRecebeEleitor=true;
         public bool playerDiminuiEleitor=false;
+        public bool distribuicaoGeral=false;
         [SerializeField] private State state;
 
         
@@ -143,6 +144,7 @@ namespace Game.UI
          }
         public void AtualizaUIAposDistribuicao(){
                 distribuaEleitorUi.SetActive(false);
+                distribuicaoGeral=false;
                 if(playerDiminuiEleitor==true){
                     acaboudistribuicaoUi2.SetActive(true);
                     playerDiminuiEleitor=false;
@@ -167,6 +169,7 @@ namespace Game.UI
          public void ChamatPlayerInicioRodada(){
             playerStats.inicioRodada();
             distribuaEleitorUi.SetActive(true);
+            distribuicaoGeral=true;
             text_distribuaEleitor.SetText("Distribua seus eleitores");
             text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
          }
@@ -178,6 +181,7 @@ namespace Game.UI
                 //
                 Debug.Log("eleitores novos: "+playerStats.eleitoresNovos);
                 distribuaEleitorUi.SetActive(true);
+                distribuicaoGeral=true;
                 if(playerDiminuiEleitor==true){
                     text_distribuaEleitor.SetText("Retire seus eleitores");
                 }else{

@@ -96,24 +96,26 @@ namespace Game.Territorio
         //chamado pelo "MostrarNomeBairro" qnd clicado em um bairro
     public void EscolherBairroEleitor(){
         if(VerificaControl()){
-            if(setUpBairro.Eleitores.eleitores.Value>0){
-                //dimiui eleitor novo e aumenta eleito total
-                hs.contagemEleitores();
-                //recupera quantos eleitores novos
-                hs.valorEleitorNovo();
-                if(hs.playerDiminuiEleitor==true){
-                    auxContagem=-1;
-                }else{
-                    auxContagem=1;
-                }
-                if(hs.eleitoresNovosAtual>0){
-
-                        if(NetworkManager.Singleton.IsClient){ 
-                            MudaValorEleitorServerRpc(auxContagem);
-                        }
+            //retirar
+            if(hs.playerDiminuiEleitor==true){
+                if(setUpBairro.Eleitores.eleitores.Value>1){
+                    //dimiui eleitor novo e aumenta eleito total
+                    hs.contagemEleitores();
+                    //recupera quantos eleitores novos
+                    hs.valorEleitorNovo();
+                    if(NetworkManager.Singleton.IsClient) MudaValorEleitorServerRpc(-1);
+                    if(hs.eleitoresNovosAtual<1)hs.AtualizaUIAposDistribuicao();
                     
-                }else{
-                    hs.AtualizaUIAposDistribuicao();
+                }
+            }else{
+                //colocar
+                if(setUpBairro.Eleitores.eleitores.Value>0){
+                    hs.contagemEleitores();
+                    hs.valorEleitorNovo();
+
+                    if(NetworkManager.Singleton.IsClient) MudaValorEleitorServerRpc(1);
+                    if(hs.eleitoresNovosAtual<1) hs.AtualizaUIAposDistribuicao();
+                    
                 }
             }
             
