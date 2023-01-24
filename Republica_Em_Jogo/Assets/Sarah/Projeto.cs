@@ -215,7 +215,7 @@ using Unity.Collections;
                     if(sim>nao){
                         text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO APROVADO"+"\n"+"Recompensa: "+numRecompensaDefault+ " carta(s) e "+numRecompensaDefault+" eleitor(es)";
                         //parte da recompensa
-                        eleitoresZonaFinal();
+                        //eleitoresZonaFinal();
                     }
 
                     //se teve mais não ou empate, foi reprovado
@@ -231,25 +231,23 @@ using Unity.Collections;
         public void eleitoresZonaFinal(){
 
             //adiciona eleitores aos jogadores que tem bairros da zona
-             //if (NetworkManager.Singleton.IsServer){
-                distribuicaoProjeto=true;
-                setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
-             //}
-            
+             
             //verifica se player tem bairro na zona escolhida
-            setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
 
             //dá carta de recurso para jogadores que possuem bairros na zona
+            
+            //reseta algumas variáveis
+           
+            distribuicaoProjeto=true;
+            setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
+            setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
             if(playerInZona==true){
                 hs.updateRecursoCartaUI(numRecompensaDefault);
                 playerInZona=false;
             }
-            
-            //reseta algumas variáveis
             zonaNameLocal="";
             clienteLocal=-1;
             numRecompensa=-1;
-            
             }
             
          //ao apertar botao de fechar interface   
@@ -258,9 +256,12 @@ using Unity.Collections;
             
             fecharBtn.SetActive(false);
             projetoUI.SetActive(false);
+             if(sim>nao){
+                eleitoresZonaFinal();
+             }
+             
             sim=0;
             nao=0;
-            hs.ValorEleitoresNovos(numRecompensaDefault);
         }
 
         //reseta variaveis oou pede pro hosta fazer isso
