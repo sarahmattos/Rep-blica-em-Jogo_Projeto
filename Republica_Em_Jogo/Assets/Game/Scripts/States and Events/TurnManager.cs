@@ -11,7 +11,7 @@ namespace Game {
     {
 
         //Lembrar que: apenas Servers/Owners podem alterar NetworkVariables.
-        //Para fazer isso via client, pode ser usado métodos ServerRpc, assim como é feito nesta classe
+        //Para fazer isso via client, pode ser usado mï¿½todos ServerRpc, assim como ï¿½ feito nesta classe
         private NetworkList<int> ordemPlayersID = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private NetworkVariable<int> indexPlayerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();

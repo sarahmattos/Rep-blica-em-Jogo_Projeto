@@ -3763,7 +3763,7 @@ GameObject:
   - component: {fileID: 301483091}
   - component: {fileID: 301483090}
   m_Layer: 0
-  m_Name: finalDistribuicao (2)
+  m_Name: finalRetiradaEleitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16627,7 +16627,7 @@ GameObject:
   - component: {fileID: 1269535373}
   - component: {fileID: 1269535372}
   m_Layer: 0
-  m_Name: finalDistribuicao (1)
+  m_Name: finalRetiradaRecurso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19161,6 +19161,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1956478231}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 152117521}
+        m_TargetAssemblyTypeName: Game.UI.HudStatsJogador, Assembly-CSharp
+        m_MethodName: ChamatPlayerInicioRodada
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -22100,6 +22112,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 608195722}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 152117521}
+        m_TargetAssemblyTypeName: Game.UI.HudStatsJogador, Assembly-CSharp
+        m_MethodName: ChamatPlayerInicioRodada
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -25932,7 +25956,7 @@ GameObject:
   - component: {fileID: 1956478234}
   - component: {fileID: 1956478233}
   m_Layer: 0
-  m_Name: finalDistribuicao
+  m_Name: finalDistribuicaoRecurso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35403,6 +35427,10 @@ PrefabInstance:
       propertyPath: baralho
       value: 
       objectReference: {fileID: 3469287838374786419}
+    - target: {fileID: 2027808149034089224, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
+      propertyPath: rc
+      value: 
+      objectReference: {fileID: 1500818391}
     - target: {fileID: 7677490024804130840, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
       propertyPath: m_RootOrder
       value: 9

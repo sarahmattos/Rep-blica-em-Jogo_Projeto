@@ -63,6 +63,7 @@ using Unity.Collections;
             votacaoRespostaContra.Value=0;
             projetoNetworkTexto.Value="";
             zonaNetworkName.Value="";
+            idPlayer.Value= -1;
         }
 
         //pede pro host avaliar a votação
@@ -133,6 +134,7 @@ using Unity.Collections;
             //id jogador
             idPlayer.OnValueChanged += (int  previousValue, int  newValue) =>
             {
+                if(newValue!=-1){
                 //interface geral
                 clienteLocal=newValue;
                 projetoUI.SetActive(true);
@@ -144,9 +146,10 @@ using Unity.Collections;
                 text_avisoProjeto.text="Escolha uma zona:";
 
                 //interface para quem está esperando zona ser escolhida
-                if(newValue!=(int)NetworkManager.Singleton.LocalClientId){
-                        bntsUi.SetActive(false);
-                        text_avisoProjeto.text="Aguardando zona ser escolhida";
+                    if(newValue!=(int)NetworkManager.Singleton.LocalClientId){
+                            bntsUi.SetActive(false);
+                            text_avisoProjeto.text="Aguardando zona ser escolhida";
+                    }
                 }
             };
             //valor da recompensa

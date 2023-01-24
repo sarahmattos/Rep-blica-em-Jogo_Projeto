@@ -6,9 +6,11 @@ namespace Game
 {
     public class DistribuicaoState : State
     {
+        [SerializeField] private RecursosCartaManager rc;
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("EnterState: DISTRIBUIÇÃO");
+            Tools.Logger.Instance.LogInfo("EnterState: DISTRIBUIï¿½ï¿½O");
+            rc.conferirQuantidade();
         }
 
         public override void ExitState()
