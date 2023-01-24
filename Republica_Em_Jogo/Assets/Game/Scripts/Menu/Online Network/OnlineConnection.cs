@@ -23,12 +23,12 @@ public class OnlineConnection : Singleton<OnlineConnection>
             if(NetworkManager.Singleton.StartHost())
             {
                 conexaoEstabelecida?.Invoke(true);
-                Logger.Instance.LogInfo("criando sala.");
+                Logger.Instance.LogInfo("Sala criada.");
                 
             } else
             {
                 conexaoEstabelecida?.Invoke(false);
-                Logger.Instance.LogInfo("falhao ao criar sala.");
+                Logger.Instance.LogInfo("falha ao criar sala.");
             }
         }
 
@@ -37,6 +37,10 @@ public class OnlineConnection : Singleton<OnlineConnection>
             if (OnlineRelayManager.Instance.IsRelayEnalbed && !string.IsNullOrEmpty(inputJoinCode.text))
             {
                 await OnlineRelayManager.Instance.JoinRelay(inputJoinCode.text);
+            } else
+            {
+                conexaoEstabelecida?.Invoke(false);
+
             }
 
 
@@ -44,12 +48,12 @@ public class OnlineConnection : Singleton<OnlineConnection>
             {
                 conexaoEstabelecida?.Invoke(true);
                 joinCodeConexaoEstabelecida?.Invoke(inputJoinCode.text);
-                Logger.Instance.LogInfo("criando sala.");
+                Logger.Instance.LogInfo(string.Concat("Juntando-se a sala.",inputJoinCode.text));
             }
             else
             {
                 conexaoEstabelecida?.Invoke(false);
-                Logger.Instance.LogInfo("falhao ao criar sala.");
+                Logger.Instance.LogInfo("Falha ao entrar na sala.");
             }
 
         }

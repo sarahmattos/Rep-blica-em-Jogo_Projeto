@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using Unity.Netcode;
+using UnityEngine;
 
 namespace Game.Networking
 {
@@ -13,14 +15,13 @@ namespace Game.Networking
         {
             text_contagemJogadores = GetComponentInChildren<TMP_Text>();
         }
-        private void Start()
+        private void Start() 
         {
 
             clientesConnectados.OnValueChanged += UpdatePlayerCount;
 
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectionUpdate;
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientConnectionUpdate;
-            
         }
 
         public override void OnDestroy()
@@ -29,15 +30,21 @@ namespace Game.Networking
 
             NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnectionUpdate;
             NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientConnectionUpdate;
-            
+            StopAllCoroutines();
         }
 
         private void OnClientConnectionUpdate(ulong obj)
         {
             if (!NetworkManager.Singleton.IsHost) return;
-            clientesConnectados.Value = NetworkManager.Singleton.ConnectedClients.Count;
+           StartCoroutine(AtualizaCountJogadoresAtrasado(0.1f));
+
         }
 
+        private IEnumerator AtualizaCountJogadoresAtrasado(float s) { 
+            yield return new WaitForSeconds(s);
+            clientesConnectados.Value = NetworkManager.Singleton.ConnectedClients.Count;
+            yield return null;
+        }
 
         private void UpdatePlayerCount(int _, int next)
         {

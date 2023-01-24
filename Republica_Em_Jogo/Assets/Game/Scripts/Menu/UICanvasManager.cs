@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -10,19 +11,18 @@ namespace Game.Networking
     {
         [SerializeField] private Canvas CanvasInicial;
         [SerializeField] private Canvas CanvasPosConexao;
-
-        [SerializeField] private TMP_Text textModoConexao;
+        [SerializeField] private Canvas CanvasCarregamento;
 
         private void Start()
         {
-            CanvasPosConexao.enabled = false;
-            CanvasInicial.enabled = true;
+            ResetCanvasRenders();
 
             OfflineConnection.Instance.conexaoEstabelecida += OnConexaoEstabelecida;
             OfflineConnection.Instance.conexaoEstabelecida += OfflineSetup;
             OnlineConnection.Instance.conexaoEstabelecida += OnConexaoEstabelecida;
             OnlineConnection.Instance.conexaoEstabelecida += OnlineSetup;
-
+            OnConexao.Instance.Disconnect += ResetCanvasRenders;
+            OnlineRelayManager.Instance.connecting += OnConnecting;
         }
 
         private void OnDestroy()
@@ -31,13 +31,25 @@ namespace Game.Networking
             OfflineConnection.Instance.conexaoEstabelecida -= OfflineSetup;
             OnlineConnection.Instance.conexaoEstabelecida -= OnConexaoEstabelecida;
             OnlineConnection.Instance.conexaoEstabelecida -= OnlineSetup;
-
+            OnConexao.Instance.Disconnect -= ResetCanvasRenders;
+            OnlineRelayManager.Instance.connecting -= OnConnecting;
+            StopAllCoroutines();
         }
+
+        public void ResetCanvasRenders()
+        {
+            CanvasPosConexao.enabled = false;
+            CanvasInicial.enabled = true;
+            CanvasCarregamento.enabled = false;
+        }
+
 
         private void OnConexaoEstabelecida(bool value)
         {
             CanvasInicial.enabled = !value;
             CanvasPosConexao.enabled = value;
+
+            if(!value) CanvasCarregamento.enabled = false;
         }
 
         private void OnlineSetup(bool value)
@@ -51,6 +63,16 @@ namespace Game.Networking
             IPManager.Instance.gameObject.SetActive(value);
         }
 
+        private void OnConnecting(bool value)
+        {
+            CanvasCarregamento.enabled = value;
+            StartCoroutine(DesabilitaCarregamentoAtrasado(5));
+        }
+
+        private IEnumerator DesabilitaCarregamentoAtrasado(float s) {
+            yield return new WaitForSeconds(s);
+            CanvasCarregamento.enabled = false;
+        }
 
     }
 }

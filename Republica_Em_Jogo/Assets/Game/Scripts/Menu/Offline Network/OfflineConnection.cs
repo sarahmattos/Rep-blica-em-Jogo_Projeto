@@ -14,49 +14,16 @@ namespace Game.Networking
     {
         [SerializeField] private TMP_InputField ipAddressInput;
         private PlayerNameHandler playerNameHandler => PlayerNameHandler.Instance;
-        public int clientsConnected => NetworkManager.Singleton.ConnectedClients.Count;
         public Action<bool> conexaoEstabelecida;
         public Action<string> conexaoIpEstabelecida;
         void Start()
         {
             ipAddressInput.onValueChanged.AddListener((string value) => { PlayerPrefs.SetString("ipAddressJoin", value); });
             ipAddressInput.text = PlayerPrefs.GetString("ipAddressJoin");
-
-                NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnect;
-                NetworkManager.Singleton.OnClientDisconnectCallback += OnClientdisconnect;
           
-            NetworkManager.Singleton.OnTransportFailure += () =>
-           {
-               Logger.Instance.LogError("Falha ao criar conexão.");
-           };
-        }
-
-        private void OnDisable()
-        {
-            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnect;
-            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientdisconnect;
-        }
-
-        private void OnClientdisconnect(ulong data)
-        {
-        
-        }
-
-        private void OnClientConnect(ulong data)
-        {
-            if (!NetworkManager.Singleton.IsServer) return;
-            if (clientsConnected == GameDataconfig.Instance.MaxConnections)
-            {
-                LoadGameplayScene();
-            }
         }
 
 
-        public void LoadGameplayScene()
-        {
-            NetworkManager.Singleton.SceneManager.LoadScene(GameDataconfig.Instance.GameSceneName, LoadSceneMode.Single);
-        }
-  
 
         public void ConfigAndStartHostIP()
         {
