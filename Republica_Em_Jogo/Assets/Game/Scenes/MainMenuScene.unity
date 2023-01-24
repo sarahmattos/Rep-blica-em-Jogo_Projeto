@@ -1221,6 +1221,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 102900000, guid: 5b1b62b30f4afec4d9f17cd4c083e6a9, type: 3}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: menuScenePath
+      value: Assets/Game/Scenes/MainMenuScene.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxConnections
       value: 2
       objectReference: {fileID: 0}
@@ -1231,6 +1235,18 @@ PrefabInstance:
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: tagParticipante
       value: Jogador
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: gameplaySceneName
+      value: gameplayScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: gameplayScenePath
+      value: Assets/Game/Scenes/GameplayScene.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: menuScenePathName
+      value: menuScene
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxRodadasParaEleicoes

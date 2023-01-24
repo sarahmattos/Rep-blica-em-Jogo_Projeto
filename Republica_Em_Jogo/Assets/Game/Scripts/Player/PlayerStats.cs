@@ -67,8 +67,8 @@ namespace Game.Player {
         public void InicializaPlayerStats()
         {
             Tools.Logger.Instance.LogInfo("inicializando player stats");
-            cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
-            maxTerritorio = GameDataconfig.Instance.territoriosInScene;
+            cor = GameDataConfig.Instance.PlayerColorOrder[playerID];
+            maxTerritorio = GameDataConfig.Instance.territoriosInScene;
             /*tive que colocar em outro lugar :eleitoresAtualizar();
             //eleitoresTotais = maxTerritorio / /*clientsConnected.Count; 2;
             */
