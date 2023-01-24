@@ -12,7 +12,7 @@ namespace Game {
 
         //Lembrar que: apenas Servers/Owners podem alterar NetworkVariables.
         //Para fazer isso via client, pode ser usado m�todos ServerRpc, assim como � feito nesta classe
-        private NetworkList<int> ordemPlayersID = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private NetworkList<int> ordemPlayersID;
         private NetworkVariable<int> indexPlayerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
         private NetworkVariable<int> playerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -32,7 +32,12 @@ namespace Game {
 
         public int TurnCount { get => turnCount; set => turnCount = value; }
 
-        private void Start()
+        private void Awake()
+        {
+              ordemPlayersID = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
+        }
+    private void Start()
         {
             playerAtual.OnValueChanged += PlayerAtualMuda;
             if (!IsHost) return;

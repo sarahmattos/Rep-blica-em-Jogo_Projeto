@@ -1,4 +1,6 @@
+using Game.Networking;
 using Game.Tools;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +10,32 @@ using UnityEngine;
 
 public class IPManager : Singleton<IPManager>
 {
-    [SerializeField] private TMP_Text text;
+    [SerializeField] private TMP_Text text_IP;
     [SerializeField] private List<string> allIpAddress;
 
     public int portDefault => 7777;
 
     private void Start()
     {
-        text.SetText("Seu IP: " + myIpAddress());
-
+        text_IP.SetText(myIpAddress());
         allIpAddress = AllIPAddresses();
-        
+
+        OfflineConnection.Instance.conexaoIpEstabelecida += SetIpText;
+
     }
+
+    private void OnDestroy()
+    {
+        OfflineConnection.Instance.conexaoIpEstabelecida -= SetIpText;
+
+    }
+
+    private void SetIpText(string ipAddress)
+    {
+        text_IP.SetText(ipAddress);
+    }
+
+
     public List<string> AllIPAddresses()
     {
         List<string> ips = new List<string>();

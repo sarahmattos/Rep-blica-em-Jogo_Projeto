@@ -6,68 +6,24 @@ using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using Logger = Game.Tools.Logger;
 using UnityEngine.SceneManagement;
+using Game.Tools;
 
-namespace Game.Connection
+namespace Game.Networking
 {
-    [RequireComponent(typeof(IPManager))]
-    public class OffConnection : MonoBehaviour
+    public class OfflineConnection : Singleton<OfflineConnection>
     {
         [SerializeField] private TMP_InputField ipAddressInput;
-        [SerializeField] private TMP_InputField portInput;
-        [SerializeField] private PlayerNameHandler playerNameHandler;
-        private IPManager ipManager;
-        private string IpHostingGame;
-        [SerializeField] private TMP_Text ipHostingGameText;
-
-        public int clientsConnected => NetworkManager.Singleton.ConnectedClients.Count;
-        private void Awake()
-        {
-            ipManager = GetComponent<IPManager>();
-
-        }
-
+        private PlayerNameHandler playerNameHandler => PlayerNameHandler.Instance;
+        public Action<bool> conexaoEstabelecida;
+        public Action<string> conexaoIpEstabelecida;
         void Start()
         {
-
             ipAddressInput.onValueChanged.AddListener((string value) => { PlayerPrefs.SetString("ipAddressJoin", value); });
             ipAddressInput.text = PlayerPrefs.GetString("ipAddressJoin");
-            //if(NetworkManager.Singleton.IsHost)
-            //{
-                NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnect;
-                NetworkManager.Singleton.OnClientDisconnectCallback += OnClientdisconnect;
-            //}
-
-            NetworkManager.Singleton.OnTransportFailure += () =>
-           {
-               Logger.Instance.LogError("fALHO ao CRIAR HOST.");
-           };
-        }
-
-        private void OnDisable()
-        {
-            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnect;
-            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientdisconnect;
-        }
-
-        private void OnClientdisconnect(ulong data)
-        {
-        
-        }
-
-        private void OnClientConnect(ulong data)
-        {
-            if (clientsConnected == GameDataconfig.Instance.MaxConnections)
-            {
-                LoadGameplayScene();
-            }
+          
         }
 
 
-        public void LoadGameplayScene()
-        {
-            NetworkManager.Singleton.SceneManager.LoadScene(GameDataconfig.Instance.GameSceneName, LoadSceneMode.Single);
-        }
-  
 
         public void ConfigAndStartHostIP()
         {
@@ -88,7 +44,17 @@ namespace Game.Connection
             utp.SetConnectionData(ipaddress, (ushort)port);
             SetConnectionPayload(GetPlayerId(), playerName);
 
-            NetworkManager.Singleton.StartClient();
+            if(NetworkManager.Singleton.StartClient())
+            {
+                conexaoEstabelecida?.Invoke(true);
+                conexaoIpEstabelecida?.Invoke(ipaddress);
+                Logger.Instance.LogInfo(string.Concat("Conexão com o IP: ",ipAddressInput.text));
+                
+            } else
+            {
+                Logger.Instance.LogError(string.Concat("Falha na conexão com o IP: ", ipAddressInput.text));
+                conexaoEstabelecida?.Invoke(false);
+            }
         }
 
 
@@ -100,8 +66,14 @@ namespace Game.Connection
             SetConnectionPayload(GetPlayerId(), playerName);
             if (NetworkManager.Singleton.StartHost())
             {
-                IpHostingGame = ipaddress;
-                ipHostingGameText.SetText(IpHostingGame);
+                conexaoEstabelecida?.Invoke(true);
+                Logger.Instance.LogInfo("Criando sala Offline.");
+
+            } else
+            {
+                conexaoEstabelecida?.Invoke(false);
+
+                Logger.Instance.LogInfo("Falha ao criar sala.");
             }
 
         }
@@ -123,19 +95,10 @@ namespace Game.Connection
         string GetPlayerId()
         {
             return UnityEngine.Random.Range(0, 1000).ToString();
-            //if (UnityServices.State != ServicesInitializationState.Initialized)
-            //{
-            //    return ClientPrefs.GetGuid() + m_ProfileManager.Profile;
-            //}
-
-            //return AuthenticationService.Instance.IsSignedIn ? AuthenticationService.Instance.PlayerId : ClientPrefs.GetGuid() + m_ProfileManager.Profile;
+   
         }
 
     }
-
-
-
-
 
 
     [Serializable]

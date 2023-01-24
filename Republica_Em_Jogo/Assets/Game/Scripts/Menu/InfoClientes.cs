@@ -1,59 +1,55 @@
+using System.Collections;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
-
 namespace Game.Networking
 {
-    public class InfoClientes : MonoBehaviour
+
+    public class InfoClientes :  NetworkBehaviour
     {
-        [SerializeField] private TMP_Text text_contagemJogadores;
-        int clientsConnected => NetworkManager.Singleton.ConnectedClients.Count;
-        
-        private void Start()
+        private TMP_Text text_contagemJogadores;
+        private NetworkVariable<int> clientesConnectados = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
+        private void Awake()
         {
-            if (!NetworkManager.Singleton.IsServer)
-            {
-                NetworkManager.Singleton.OnClientConnectedCallback += OnClienteCallbackConnection;
-                NetworkManager.Singleton.OnClientDisconnectCallback += OnClienteCallbackConnection;
-            }
+            text_contagemJogadores = GetComponentInChildren<TMP_Text>();
+        }
+        private void Start() 
+        {
+
+            clientesConnectados.OnValueChanged += UpdatePlayerCount;
+
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectionUpdate;
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnClientConnectionUpdate;
+        }
+
+        public override void OnDestroy()
+        {
+            clientesConnectados.OnValueChanged -= UpdatePlayerCount;
+
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnectionUpdate;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientConnectionUpdate;
+            StopAllCoroutines();
+        }
+
+        private void OnClientConnectionUpdate(ulong obj)
+        {
+            if (!NetworkManager.Singleton.IsHost) return;
+           StartCoroutine(AtualizaCountJogadoresAtrasado(0.1f));
 
         }
 
-        private void OnDisable()
-        {
-            if (!NetworkManager.Singleton.IsServer)
-            {
-                NetworkManager.Singleton.OnClientConnectedCallback -= OnClienteCallbackConnection;
-                NetworkManager.Singleton.OnClientDisconnectCallback -= OnClienteCallbackConnection;
-            }
+        private IEnumerator AtualizaCountJogadoresAtrasado(float s) { 
+            yield return new WaitForSeconds(s);
+            clientesConnectados.Value = NetworkManager.Singleton.ConnectedClients.Count;
+            yield return null;
         }
 
-        private void OnClienteCallbackConnection(ulong obj)
+        private void UpdatePlayerCount(int _, int next)
         {
-            UpdatePlayerCount(clientsConnected);
-
+            text_contagemJogadores.SetText(string.Concat(next, "/",GameDataconfig.Instance.MaxConnections," jogadores."));
         }
-
-
-        private void UpdatePlayerCount(int value)
-        {
-            text_contagemJogadores.SetText(string.Concat(value, "/",GameDataconfig.Instance.MaxConnections," jogadores."));
-        }
-
-        //[ClientRpc]
-        //private void UpdatePlayerListClientRpc()
-        //{
-        //    text_jogadoresListados.text = "";
-        //    List<NetworkClient> networkClient = clientsConnected.Values.ToList();
-            
-        //    foreach (NetworkClient clients in networkClient)
-        //    {
-        //        text_jogadoresListados.text += clients.ClientId.ToString()+"\n";
-
-
-        //    }
-        //}
 
     }
 }

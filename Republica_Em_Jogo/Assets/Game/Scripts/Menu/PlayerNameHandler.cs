@@ -1,3 +1,4 @@
+using Game.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,7 +7,7 @@ using UnityEngine;
 namespace Game.Player
 {
     [RequireComponent(typeof(TMP_InputField))]
-    public class PlayerNameHandler : MonoBehaviour
+    public class PlayerNameHandler : Singleton<PlayerNameHandler>
     {
         //private string playerName;
         private TMP_InputField inputField;
