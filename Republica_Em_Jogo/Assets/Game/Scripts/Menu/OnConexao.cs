@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace Game.Networking
 {
+
     public class OnConexao : Singleton<OnConexao>
     {
         [SerializeField] private TMP_Text textModoConexao;
@@ -42,7 +43,10 @@ namespace Game.Networking
 
         public void LoadGameplayScene()
         {
-            NetworkManager.Singleton.SceneManager.LoadScene(GameDataconfig.Instance.GameSceneName, LoadSceneMode.Single);
+            //TODO: ver depois como desconectar e carregar cena inicial
+            //https://docs-multiplayer.unity3d.com/netcode/current/basics/scenemanagement/using-networkscenemanager/index.html
+            
+            NetworkManager.Singleton.SceneManager.LoadScene(GameDataconfig.Instance.GameplayScene.name, LoadSceneMode.Single);
         }
 
 
@@ -63,16 +67,9 @@ namespace Game.Networking
         {
             NetworkManager.Singleton.Shutdown();
             Disconnect?.Invoke();
-            LimpezaNetwork();
         }
 
-        public void LimpezaNetwork()
-        {
-            if(NetworkManager.Singleton != null)
-            {
-                Destroy(NetworkManager.Singleton.gameObject);
-            }
-        }
+
 
     }
 }

@@ -1,3 +1,4 @@
+using Game.Networking;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,10 +26,10 @@ namespace Game.Tools
                 Logger.Instance.gameObject.SetActive(!Logger.Instance.gameObject.activeSelf);
             }
             if (Input.GetKeyDown(KeyCode.F1))
-
             {
                 NetworkManager.Singleton.Shutdown();
-                SceneManager.LoadScene(0);
+                //NetworkManager.Singleton.SceneManager.UnloadScene(NetworkManager.Singleton.SceneManager.);
+                Destroy(Logger.Instance.gameObject);
 
             }
             if (Input.GetKeyDown(KeyCode.Backspace)) Logger.Instance.ResetLoggger();
@@ -63,7 +64,13 @@ namespace Game.Tools
             fixedDt += (Time.fixedDeltaTime - fixedDt);
         }
 
-
+        public void LimpezaNetwork()
+        {
+            if (NetworkManager.Singleton != null)
+            {
+                Destroy(NetworkManager.Singleton.gameObject);
+            }
+        }
 
     }
 

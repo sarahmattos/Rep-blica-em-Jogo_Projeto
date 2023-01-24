@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Game.Networking
 {
-    public class UIJoinCodeInfo : Singleton<UIJoinCodeInfo>
+    public class UIJoinCodeInfo : NetworkSingleton<UIJoinCodeInfo>
     {
         [SerializeField] private TMP_Text text_joinCode;
         public NetworkVariable<FixedString32Bytes> joincode = new NetworkVariable<FixedString32Bytes>();
