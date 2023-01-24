@@ -67,7 +67,7 @@ namespace Game.Territorio
 
         private void onPlayerControlMuda(int previousValue, int newValue)
         {
-            material.color = GameDataconfig.Instance.PlayerColorOrder[newValue];
+            material.color = GameDataConfig.Instance.PlayerColorOrder[newValue];
 
             //chama funcao pra atualizar bairro e eleitores na distribuicao inicial
             if(newValue == (int)NetworkManager.Singleton.LocalClientId){

@@ -35,7 +35,7 @@ namespace Game.Networking
         private void OnClientConnect(ulong data)
         {
             if (!NetworkManager.Singleton.IsHost) return;
-            if (clientsConnected == GameDataconfig.Instance.MaxConnections)
+            if (clientsConnected == GameDataConfig.Instance.MaxConnections)
             {
                 LoadGameplayScene();
             }
@@ -46,7 +46,7 @@ namespace Game.Networking
             //TODO: ver depois como desconectar e carregar cena inicial
             //https://docs-multiplayer.unity3d.com/netcode/current/basics/scenemanagement/using-networkscenemanager/index.html
             
-            NetworkManager.Singleton.SceneManager.LoadScene(GameDataconfig.Instance.GameplayScene.name, LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.LoadScene(GameDataConfig.Instance.GameplaySceneName, LoadSceneMode.Single);
         }
 
 

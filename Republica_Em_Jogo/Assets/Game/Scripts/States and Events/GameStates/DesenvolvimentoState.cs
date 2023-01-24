@@ -7,7 +7,7 @@ namespace Game
     public class DesenvolvimentoState : State
     {
         private NetworkVariable<int> rodada = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-        public int maxRodada => GameDataconfig.Instance.MaxRodadasParaEleicoes;
+        public int maxRodada => GameDataConfig.Instance.MaxRodadasParaEleicoes;
         private GameStateHandler StateHandler => GameStateHandler.Instance;        
         public override void EnterState()
         {
