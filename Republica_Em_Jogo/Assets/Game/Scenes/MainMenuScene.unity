@@ -1222,7 +1222,7 @@ PrefabInstance:
       objectReference: {fileID: 102900000, guid: 5b1b62b30f4afec4d9f17cd4c083e6a9, type: 3}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxConnections
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxLoopEleicoes

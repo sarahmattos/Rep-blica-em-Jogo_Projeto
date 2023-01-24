@@ -12,7 +12,7 @@ namespace Game
         public override void EnterState()
         {
             Tools.Logger.Instance.LogInfo("Enter State: PROJETO");
-            baralho.enabled = true;
+           
 
         }
 
@@ -25,6 +25,18 @@ namespace Game
         private void Start()
         {
             baralho.enabled = false;
+            TurnManager.Instance.vezDoPlayerLocal+= quandoVezPlayerLocal;
+        }
+
+         public void OnDestroy(){
+            TurnManager.Instance.vezDoPlayerLocal-= quandoVezPlayerLocal;
+        }
+
+        public void quandoVezPlayerLocal(bool value){
+            if(value){
+                 baralho.enabled = true;
+                Debug.Log("deu certo");
+            }
         }
     }
 

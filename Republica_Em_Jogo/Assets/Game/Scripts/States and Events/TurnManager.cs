@@ -15,7 +15,7 @@ namespace Game {
         private NetworkList<int> ordemPlayersID;
         private NetworkVariable<int> indexPlayerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
-        private NetworkVariable<int> playerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private NetworkVariable<int> playerAtual = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private int turnCount = 0;
 
         public NetworkVariable<int> PlayerAtual => playerAtual;
@@ -27,6 +27,7 @@ namespace Game {
         public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == GetPlayerAtual);
         public event Action<bool> vezDoPlayerLocal;
         public event Action<int> PlayerTurnMuda;
+        public bool nextIgualLocalID;
 
         private State InicializaState => GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
 
@@ -66,7 +67,7 @@ namespace Game {
         {
             Logger.Instance.LogWarning(string.Concat("Player ", previous, " encerrou o turno!"));
             
-            bool nextIgualLocalID = ((int)NetworkManager.Singleton.LocalClientId == next);
+            nextIgualLocalID = ((int)NetworkManager.Singleton.LocalClientId == next);
             vezDoPlayerLocal?.Invoke(nextIgualLocalID);
             PlayerTurnMuda?.Invoke(next);
             turnCount++;
