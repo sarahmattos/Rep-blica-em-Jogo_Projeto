@@ -46,7 +46,9 @@ namespace Game.Territorio
                 //e os jogadores que o possuem recebem eleitores para distribuir
                 bairro.bairroNaZonaEscolhida=true;
                 if(bairro.VerificaControl()){
+                    ControlePassarState.instance.distribuicaoProjeto=true;
                     hs.ValorEleitoresNovos(valor);
+                   
                 }
             }
 

@@ -176,6 +176,7 @@ namespace Game.UI
 
          public void ValorEleitoresNovos(int valor){
             if(playerRecebeEleitor==true){
+                if(ControlePassarState.instance.distribuicaoProjeto==true)ControlePassarState.instance.AumentaValServerRpc();
                 playerStats.eleitoresNovos=valor;
                 playerRecebeEleitor=false;
                 //
@@ -191,6 +192,8 @@ namespace Game.UI
             }
             
          }
+
+         
     }
 
 }
