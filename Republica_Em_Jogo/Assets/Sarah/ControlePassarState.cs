@@ -11,11 +11,13 @@ namespace Game
         public static ControlePassarState instance;
         public NetworkVariable<int> QuantidadePlayerRecompensa = new NetworkVariable<int>(0);
         public bool distribuicaoProjeto=false;
+        private RecursosCartaManager rc;
         void Start()
         {
             instance = this;
+            rc = FindObjectOfType<RecursosCartaManager>();
         }
-
+        
         [ServerRpc(RequireOwnership = false)]
         public void AumentaValServerRpc()
         {
@@ -34,23 +36,26 @@ namespace Game
             QuantidadePlayerRecompensa.OnValueChanged += (int  previousValue, int  newValue) =>
             {
                 if(newValue==0){
-                    CoreLoopStateHandler.Instance.NextStateServerRpc();
-                    distribuicaoProjeto=false;
-                }
+                    if(distribuicaoProjeto==true){
+                        CoreLoopStateHandler.Instance.NextStateServerRpc();
+                        distribuicaoProjeto=false;
+                        }
+                    }
+                    
             };
 
         }
-        void Update()
-        {
-        
-        }
+       
         public void passarState(){
             
             if(distribuicaoProjeto==true){
                  DiminuiValServerRpc();
             }else{
-                CoreLoopStateHandler.Instance.NextStateServerRpc();
-            }
+                if(rc.chamarDistribuicao==false){
+                    CoreLoopStateHandler.Instance.NextStateServerRpc();
+                    }
+                
+                }
            
          }
     }

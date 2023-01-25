@@ -15,11 +15,15 @@ namespace Game.Territorio
         public string Nome { get => nome; }
         private Projeto projeto;  
         private HudStatsJogador hs;
+        private ControlePassarState cp;
+         
+        bool jaContou =false;
         private void Awake()
         {
             bairros = GetComponentsInChildren<Bairro>();
              projeto = FindObjectOfType<Projeto>();
              hs = FindObjectOfType<HudStatsJogador>();
+             cp = FindObjectOfType<ControlePassarState>();
         }
 
         public void verificarPlayerNasZonas(ulong client)
@@ -37,6 +41,7 @@ namespace Game.Territorio
                 }
             }
         }
+       
         public void adicionarEleitoresZona(int valor){
             foreach(Bairro bairro in bairros)
             {
@@ -46,14 +51,13 @@ namespace Game.Territorio
                 //e os jogadores que o possuem recebem eleitores para distribuir
                 bairro.bairroNaZonaEscolhida=true;
                 if(bairro.VerificaControl()){
-                    ControlePassarState.instance.distribuicaoProjeto=true;
                     hs.ValorEleitoresNovos(valor);
                    
                 }
             }
 
         }
-
+        
         public void ResetarBairroNaZona(){
             foreach(Bairro bairro in bairros){
                 bairro.bairroNaZonaEscolhida=false;

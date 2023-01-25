@@ -36,8 +36,8 @@ public class SetUpZona : MonoBehaviour
                     zona.verificarPlayerNasZonas(valor);
                 }
             }
-
         }
+            
         public void chamar(){
             eleitoresZona(2,"Oeste1");
         }

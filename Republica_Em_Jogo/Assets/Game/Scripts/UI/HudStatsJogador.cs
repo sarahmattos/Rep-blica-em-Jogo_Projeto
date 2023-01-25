@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using Game.Player;
  using Game.Territorio;
+ using Game;
 using Logger = Game.Tools.Logger;
 
 namespace Game.UI
@@ -36,6 +37,8 @@ namespace Game.UI
         public bool playerDiminuiEleitor=false;
         public bool distribuicaoGeral=false;
         [SerializeField] private State state;
+
+        public ControlePassarState cp;
 
         
         public override void OnNetworkSpawn()
@@ -176,7 +179,6 @@ namespace Game.UI
 
          public void ValorEleitoresNovos(int valor){
             if(playerRecebeEleitor==true){
-                if(ControlePassarState.instance.distribuicaoProjeto==true)ControlePassarState.instance.AumentaValServerRpc();
                 playerStats.eleitoresNovos=valor;
                 playerRecebeEleitor=false;
                 //
@@ -193,6 +195,9 @@ namespace Game.UI
             
          }
 
+        public void teste(){
+            cp.AumentaValServerRpc();
+        }
          
     }
 

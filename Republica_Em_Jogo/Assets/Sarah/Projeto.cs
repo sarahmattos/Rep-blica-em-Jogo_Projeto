@@ -8,6 +8,7 @@ using Unity.Netcode;
 using Unity.Collections;
  using Game.Territorio;
  using Game.UI;
+ using Game;
 
 //namespace Game.Territorio
 //{
@@ -25,6 +26,7 @@ using Unity.Collections;
         public ProjetoObject projetoManager;
         private SetUpZona setUpZona;  
         private ZonaTerritorial zt;  
+        private ControlePassarState cp;
 
         [SerializeField] private TMP_Text text_projetoCarta;
         [SerializeField] private TMP_Text text_avisoProjeto;
@@ -44,6 +46,7 @@ using Unity.Collections;
         private bool mostrouResultado=false;
         public bool playerInZona=false;
         public bool distribuicaoProjeto=false;
+        public bool aprovado=false;
     
         //Client cashing
         private string clientDados;
@@ -52,6 +55,7 @@ using Unity.Collections;
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             zt = GameObject.FindObjectOfType<ZonaTerritorial>();
             hs = FindObjectOfType<HudStatsJogador>();
+            cp = FindObjectOfType<ControlePassarState>();
         }
 
         //reseta valores para nova busca
@@ -219,6 +223,14 @@ using Unity.Collections;
                         text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO APROVADO"+"\n"+"Recompensa: "+numRecompensaDefault+ " carta(s) e "+numRecompensaDefault+" eleitor(es)";
                         //parte da recompensa
                         //eleitoresZonaFinal();
+                        aprovado=true;
+                        setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
+                        if(playerInZona==true){
+                            cp.distribuicaoProjeto=true;
+                            cp.AumentaValServerRpc();
+                        }
+                        sim=0;
+                        nao=0;
                     }
 
                     //se teve mais não ou empate, foi reprovado
@@ -243,7 +255,7 @@ using Unity.Collections;
            
             distribuicaoProjeto=true;
             setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
-            setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
+            
             if(playerInZona==true){
                 hs.updateRecursoCartaUI(numRecompensaDefault);
                 playerInZona=false;
@@ -259,12 +271,12 @@ using Unity.Collections;
             
             fecharBtn.SetActive(false);
             projetoUI.SetActive(false);
-             if(sim>nao){
+             if(aprovado==true){
                 eleitoresZonaFinal();
+                aprovado=false;
              }
              
-            sim=0;
-            nao=0;
+            
         }
 
         //reseta variaveis oou pede pro hosta fazer isso

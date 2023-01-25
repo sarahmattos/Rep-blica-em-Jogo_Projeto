@@ -23,7 +23,7 @@ public class MovimentosSociais : NetworkBehaviour
     [SerializeField] private GameObject btnOk;
     private HudStatsJogador hs;
     private RecursosCartaManager rc;
-    private bool distribuicaoRecompensaRecurso=false;
+    public bool distribuicaoRecompensaRecurso=false;
 
     public void Start(){
         hs = FindObjectOfType<HudStatsJogador>();
