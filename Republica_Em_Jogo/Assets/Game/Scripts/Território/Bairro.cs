@@ -6,6 +6,7 @@ using Game.UI;
 
 namespace Game.Territorio
 {
+    
     public class Bairro : NetworkBehaviour
     {
 
@@ -17,18 +18,18 @@ namespace Game.Territorio
         public event Action playerControlMuda;
         public bool playerInControl=false;
         public bool bairroNaZonaEscolhida=false;
-
+        private Interagivel interagivel;
         [SerializeField] private SetUpBairro setUpBairro;
-        public SetUpBairro SetUpBairro { get => setUpBairro; } 
+        public SetUpBairro SetUpBairro { get => setUpBairro; }
+        public Interagivel Interagivel => interagivel; 
 
         private HudStatsJogador hs;
         private Educaçao edu;
         private Saúde saude;
+
         private int auxContagem=0;
 
-        private void Update(){
-            
-        }
+
 
         private void Awake()
         {
@@ -39,6 +40,8 @@ namespace Game.Territorio
             edu = GetComponentInChildren<Educaçao>();
             saude = GetComponentInChildren<Saúde>();
             hs = FindObjectOfType<HudStatsJogador>();
+            interagivel = GetComponentInChildren<Interagivel>();
+
         }
         [ServerRpc(RequireOwnership = false)]
         public void MudaValorEleitorServerRpc(int valor)
