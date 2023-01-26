@@ -22,7 +22,6 @@ namespace Game.Territorio
         [SerializeField] private SetUpBairro setUpBairro;
         public SetUpBairro SetUpBairro { get => setUpBairro; }
         public Interagivel Interagivel => interagivel; 
-
         private HudStatsJogador hs;
         private Educaçao edu;
         private Saúde saude;
@@ -33,6 +32,7 @@ namespace Game.Territorio
 
         private void Awake()
         {
+
             text_nome = GetComponentInChildren<TMP_Text>();
             material = GetComponentInChildren<MeshRenderer>().material;
             setUpBairro = GetComponentInChildren<SetUpBairro>();

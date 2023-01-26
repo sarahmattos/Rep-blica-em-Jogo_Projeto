@@ -12,21 +12,24 @@ namespace Game.Territorio
         public event Action click;
         public event Action mouseExit;
         public event Action mouseEnter;
-        
-        #region  apenas para testes
-        private Vector3 escalaInicial;
-        // public Vector3 targetScale => new Vector3(escalaInicial.x, escalaInicial.y, escalaInicial.z*3); 
+        private new Collider collider;
         public Color cor1;
         public Color cor2;
         private Material material;
-        #endregion
+
         void Start()
         {
             material = GetComponent<MeshRenderer>().material;
-            escalaInicial = transform.localScale;
         }
 
-        
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+
+            }
+        }
+
         void OnMouseEnter()
         {
             material.color = cor2;
@@ -41,17 +44,29 @@ namespace Game.Territorio
             // transform.localScale = escalaInicial;
 
         }
-        
+
         void OnMouseUpAsButton()
         {
             click?.Invoke();
         }
 
-        
+        private void Habilitar()
+        {
+
+        }
+
+        private void Desabilitar()
+        {
+
+        }
+
+        public void mostrar()
+        {
+            Debug.Log("oui");
+        }
 
 
 
 
- 
     }
 }
