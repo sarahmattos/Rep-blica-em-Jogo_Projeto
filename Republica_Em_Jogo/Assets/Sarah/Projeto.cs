@@ -46,7 +46,10 @@ using Unity.Collections;
         private bool mostrouResultado=false;
         public bool playerInZona=false;
         public bool distribuicaoProjeto=false;
+
         public bool aprovado=false;
+
+        public bool inVotacao=false;
     
         //Client cashing
         private string clientDados;
@@ -189,6 +192,7 @@ using Unity.Collections;
                     text_avisoProjeto.text = "\n"+"\n"+"Zona escolhida: "+newValue.ToString()+"\n"+"Vote: ";
                     btns2.SetActive(true);
                     }
+                    inVotacao=true;
                 }
                 
             };
@@ -206,9 +210,8 @@ using Unity.Collections;
             };
         }
         public void Update(){
-
-            //quantidade de jogadores conectados
-            if(numPlayer>1){
+            if(inVotacao==true){
+                if(numPlayer>1){
 
             //se todos votaram
                 if(sim+nao>=numPlayer-1 ){
@@ -228,17 +231,23 @@ using Unity.Collections;
                         if(playerInZona==true){
                             cp.distribuicaoProjeto=true;
                             cp.AumentaValServerRpc();
+                            Debug.Log("adicionou um");
                         }
-                        sim=0;
-                        nao=0;
+                        //sim=0;
+                        //nao=0;
+                        inVotacao=false;
                     }
 
                     //se teve mais não ou empate, foi reprovado
                     if(nao>=sim){
                     text_avisoProjeto.text="\n"+"\n"+"\n"+"PROJETO NÃO APROVADO";
+                        inVotacao=false;
                     }
                 }
             }
+            }
+            //quantidade de jogadores conectados
+            
             
         }
         
@@ -252,14 +261,17 @@ using Unity.Collections;
             //dá carta de recurso para jogadores que possuem bairros na zona
             
             //reseta algumas variáveis
-           
-            distribuicaoProjeto=true;
-            setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
-            
-            if(playerInZona==true){
+           if(playerInZona==true){
+                distribuicaoProjeto=true;
+                Debug.Log("playerINZOna TRUE");
+                hs.playerRecebeEleitor=true;
+                setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
                 hs.updateRecursoCartaUI(numRecompensaDefault);
                 playerInZona=false;
+            }else{
+                Debug.Log("playerINZOna false");
             }
+            
             zonaNameLocal="";
             clienteLocal=-1;
             numRecompensa=-1;
