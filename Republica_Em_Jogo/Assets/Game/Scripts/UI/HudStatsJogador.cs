@@ -36,6 +36,7 @@ namespace Game.UI
         public bool playerRecebeEleitor=true;
         public bool playerDiminuiEleitor=false;
         public bool distribuicaoGeral=false;
+        public bool distribuicaoInicial=false;
         [SerializeField] private State state;
 
         public ControlePassarState cp;
@@ -170,11 +171,15 @@ namespace Game.UI
 
          //botao chama funcao de distribuicao de eleitor no inicio das rodadas
          public void ChamatPlayerInicioRodada(){
-            playerStats.inicioRodada();
-            distribuaEleitorUi.SetActive(true);
-            distribuicaoGeral=true;
-            text_distribuaEleitor.SetText("Distribua seus eleitores");
-            text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+            if(distribuicaoInicial==true){
+                //se for state do inicio
+                playerStats.inicioRodada();
+                distribuaEleitorUi.SetActive(true);
+                distribuicaoGeral=true;
+                text_distribuaEleitor.SetText("Distribua seus eleitores");
+                text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+            }
+            
          }
 
          public void ValorEleitoresNovos(int valor){

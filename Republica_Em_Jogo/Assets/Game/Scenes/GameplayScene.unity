@@ -2638,7 +2638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: -129.07}
+  m_AnchoredPosition: {x: 0, y: -129.07}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &171311158
@@ -3720,6 +3720,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1587634169}
         m_TargetAssemblyTypeName: Game.ControlePassarState, Assembly-CSharp
         m_MethodName: passarState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1587634169}
+        m_TargetAssemblyTypeName: Game.ControlePassarState, Assembly-CSharp
+        m_MethodName: MudacomTroca
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20291,6 +20303,7 @@ MonoBehaviour:
   novosEdu: 0
   novosSaude: 0
   chamarDistribuicao: 0
+  comTrocaTrue: 0
 --- !u!4 &1500818392
 Transform:
   m_ObjectHideFlags: 0
@@ -20749,6 +20762,7 @@ MonoBehaviour:
   playerInZona: 0
   distribuicaoProjeto: 0
   aprovado: 0
+  inVotacao: 0
 --- !u!4 &1524242340
 Transform:
   m_ObjectHideFlags: 0
@@ -23968,6 +23982,7 @@ MonoBehaviour:
   cartaMV: {fileID: 1989993862}
   btnFechar: {fileID: 1873965175}
   btnOk: {fileID: 743792414}
+  distribuicaoRecompensaRecurso: 0
 --- !u!4 &1730917625
 Transform:
   m_ObjectHideFlags: 0
@@ -25178,7 +25193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1858974635
@@ -35544,6 +35559,10 @@ PrefabInstance:
       propertyPath: baralho
       value: 
       objectReference: {fileID: 3469287838374786419}
+    - target: {fileID: 2027808149034089224, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
+      propertyPath: hs
+      value: 
+      objectReference: {fileID: 152117521}
     - target: {fileID: 2027808149034089224, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
       propertyPath: rc
       value: 

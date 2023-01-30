@@ -27,6 +27,7 @@ public class RecursosCartaManager : MonoBehaviour
     public int novosSaude;
     public bool chamarDistribuicao=false;
     private int quantidade;
+    public bool comTrocaTrue=false;
     void Start()
     {
         hs = FindObjectOfType<HudStatsJogador>();
@@ -53,6 +54,7 @@ public class RecursosCartaManager : MonoBehaviour
         if(hs.eduQuant>=3 || hs.saudeQuant>=3){
             //interface troca
             comTroca.SetActive(true);
+            comTrocaTrue =true;
 
             //deixar botao interagivel ou nao
             if(hs.eduQuant>=3){
