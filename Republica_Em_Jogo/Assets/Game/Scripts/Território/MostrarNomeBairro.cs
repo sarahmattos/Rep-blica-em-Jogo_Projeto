@@ -1,5 +1,6 @@
 using UnityEngine;
 using Game.UI;
+using TMPro;
 
 namespace Game.Territorio
 {
@@ -7,12 +8,14 @@ namespace Game.Territorio
     {
         //[SerializeField] private Material highlightMaterial;
         [SerializeField] private GameObject nomeBairro;
+        private TMP_Text textNomeBairro;
         private Bairro bairro;
         private Projeto projeto;
         private HudStatsJogador hs;
         void Awake()
         {
             bairro = GetComponentInParent<Bairro>();
+            textNomeBairro = bairro.gameObject.GetComponent<TMP_Text>();
             projeto = FindObjectOfType<Projeto>();
             hs = FindObjectOfType<HudStatsJogador>();
 
@@ -22,6 +25,7 @@ namespace Game.Territorio
         void Start()
         {
             nomeBairro.SetActive(false);
+            textNomeBairro.SetText(bairro.Nome);
             bairro.Interagivel.click += EscolherBairroNoProjeto;
         }
 
