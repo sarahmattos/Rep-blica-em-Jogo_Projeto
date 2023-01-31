@@ -16,10 +16,11 @@ namespace Game.Territorio
         public event Action mouseEnter;    
 
         private new Collider collider;
-        public Color cor1;
-        public Color cor2;
+
         private Material material;
 
+        public Material Material  => material; 
+        
 
         void Start()
         {
@@ -38,7 +39,6 @@ namespace Game.Territorio
         {
             if(!habilitado) return;
             
-            material.color = cor2;
             mouseEnter?.Invoke();
             // transform.localScale =  targetScale;
         }
@@ -47,7 +47,6 @@ namespace Game.Territorio
         {
             if(!habilitado) return;
            
-            material.color = cor1;
             mouseExit?.Invoke();
             // transform.localScale = escalaInicial;
 

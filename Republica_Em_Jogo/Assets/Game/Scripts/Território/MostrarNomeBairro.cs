@@ -15,7 +15,7 @@ namespace Game.Territorio
         void Awake()
         {
             bairro = GetComponentInParent<Bairro>();
-            textNomeBairro = bairro.gameObject.GetComponent<TMP_Text>();
+            textNomeBairro = nomeBairro.gameObject.GetComponent<TMP_Text>();
             projeto = FindObjectOfType<Projeto>();
             hs = FindObjectOfType<HudStatsJogador>();
 
@@ -26,7 +26,7 @@ namespace Game.Territorio
         {
             nomeBairro.SetActive(false);
             textNomeBairro.SetText(bairro.Nome);
-            bairro.Interagivel.click += EscolherBairroNoProjeto;
+            // bairro.Interagivel.click += EscolherBairroNoProjeto;
         }
 
 
@@ -34,7 +34,7 @@ namespace Game.Territorio
 
         void OnDestroy()
         {
-            bairro.Interagivel.click -= EscolherBairroNoProjeto;
+            // bairro.Interagivel.click -= EscolherBairroNoProjeto;
         }
 
         private void OnMouseEnter()
