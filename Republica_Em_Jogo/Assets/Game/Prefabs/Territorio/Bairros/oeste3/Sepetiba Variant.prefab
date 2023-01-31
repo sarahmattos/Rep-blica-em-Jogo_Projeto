@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4931218026615815009}
   - component: {fileID: 4931218026615815008}
   - component: {fileID: 250808756758725109}
+  - component: {fileID: 645552470843854958}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Bairro
@@ -128,6 +129,24 @@ MonoBehaviour:
   habilitado: 0
   cor1: {r: 0, g: 0, b: 0, a: 0}
   cor2: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &645552470843854958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193423313841521169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &3818251426661342511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,6 +157,26 @@ PrefabInstance:
     - target: {fileID: 1739378843242955054, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 951099334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117644537522855679, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117644537522855679, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117644537522855679, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 2738785108984836155, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 2738785108984836155, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 6545227316165359405, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -154,6 +193,14 @@ PrefabInstance:
     - target: {fileID: 7411090384535796381, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: m_Name
       value: Sepetiba Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644880852727186705, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644880852727186705, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7644880853794251683, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: m_LocalScale.x
