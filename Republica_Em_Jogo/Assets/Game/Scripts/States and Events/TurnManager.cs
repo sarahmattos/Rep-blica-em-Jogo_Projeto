@@ -28,6 +28,7 @@ namespace Game {
         public event Action<bool> vezDoPlayerLocal;
         public event Action<int> PlayerTurnMuda;
         public bool nextIgualLocalID;
+        public int idPlayer;
 
         private State InicializaState => GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
 
@@ -36,8 +37,9 @@ namespace Game {
         private void Awake()
         {
               ordemPlayersID = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-
+              idPlayer=(int)NetworkManager.Singleton.LocalClientId;
         }
+           
     private void Start()
         {
             playerAtual.OnValueChanged += PlayerAtualMuda;
@@ -115,6 +117,7 @@ namespace Game {
         }
 
     }
+    
 
 }
 

@@ -12,8 +12,10 @@ namespace Game
         public override void EnterState()
         {
             Tools.Logger.Instance.LogInfo("Enter State: PROJETO");
-           
-
+           if(TurnManager.Instance.GetPlayerAtual==TurnManager.Instance.idPlayer){
+                baralho.enabled = true;
+                Debug.Log("deu certo");
+           }
         }
 
         public override void ExitState()
@@ -25,11 +27,11 @@ namespace Game
         private void Start()
         {
             baralho.enabled = false;
-            TurnManager.Instance.vezDoPlayerLocal+= quandoVezPlayerLocal;
+            //TurnManager.Instance.vezDoPlayerLocal+= quandoVezPlayerLocal;
         }
 
          public void OnDestroy(){
-            TurnManager.Instance.vezDoPlayerLocal-= quandoVezPlayerLocal;
+            //TurnManager.Instance.vezDoPlayerLocal-= quandoVezPlayerLocal;
         }
 
         public void quandoVezPlayerLocal(bool value){
@@ -38,6 +40,7 @@ namespace Game
                 Debug.Log("deu certo");
             }
         }
+        
     }
 
 }
