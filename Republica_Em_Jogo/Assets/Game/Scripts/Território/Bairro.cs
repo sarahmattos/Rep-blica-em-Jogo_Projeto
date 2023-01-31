@@ -24,7 +24,6 @@ namespace Game.Territorio
         private HudStatsJogador hs;
         private Educaçao edu;
         private Saúde saude;
-        private int auxContagem=0;
 
         private void Update(){
             

@@ -199,11 +199,6 @@ namespace Game.UI
             }
             
          }
-
-        public void teste(){
-            cp.AumentaValServerRpc();
-        }
-         
     }
 
 }

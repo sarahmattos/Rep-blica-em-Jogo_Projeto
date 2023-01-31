@@ -18,7 +18,7 @@ namespace Game
         {
             instance = this;
             rc = FindObjectOfType<RecursosCartaManager>();
-             hs = FindObjectOfType<HudStatsJogador>();
+            hs = FindObjectOfType<HudStatsJogador>();
         }
 
         
@@ -47,7 +47,6 @@ namespace Game
                             distribuicaoProjeto=false;
                         }
                     }
-                    
             };
 
         }
@@ -58,18 +57,15 @@ namespace Game
                  DiminuiValServerRpc();
             }else{
                 if(rc.chamarDistribuicao==false){
-                        if (rc.comTrocaTrue==false)
-                        {
-                            CoreLoopStateHandler.Instance.NextStateServerRpc();
-                        }
+                    if (rc.comTrocaTrue==false)
+                    {
+                        CoreLoopStateHandler.Instance.NextStateServerRpc();
                     }
-                    
-                    
-                
                 }
-           
+            }
          }
          public void MudacomTroca(){
+            //botao final distribuicao
             rc.comTrocaTrue=false;
          }
     }

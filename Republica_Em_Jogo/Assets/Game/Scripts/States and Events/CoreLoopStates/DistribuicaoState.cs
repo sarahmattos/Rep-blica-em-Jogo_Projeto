@@ -31,9 +31,7 @@ namespace Game
         public void quandoVezPlayerLocal(bool value){
             if(value){
                 hs.distribuicaoInicial=true;
-                //rc.chamarDistribuicao=true;
                 rc.conferirQuantidade();
-                Debug.Log("deu certo");
             }
         }
     }

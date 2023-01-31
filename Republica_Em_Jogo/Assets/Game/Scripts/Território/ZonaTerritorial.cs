@@ -17,7 +17,6 @@ namespace Game.Territorio
         private HudStatsJogador hs;
         private ControlePassarState cp;
          
-        bool jaContou =false;
         private void Awake()
         {
             bairros = GetComponentsInChildren<Bairro>();
@@ -30,14 +29,10 @@ namespace Game.Territorio
         {
             foreach(Bairro bairro in bairros)
             {
-                 
                 if(bairro.playerIDNoControl.Value == (int)client)
                 {
-                   
                     Debug.Log("bairroNome: "+bairro.Nome);
                     projeto.playerInZona=true;
-                    //x++;
-                    
                 }
             }
         }
@@ -45,15 +40,9 @@ namespace Game.Territorio
         public void adicionarEleitoresZona(int valor){
             foreach(Bairro bairro in bairros)
             {
-                //bairro.SetUpBairro.Eleitores?.MudaValorEleitores(valor);
-                //ao inves de todos os bairros ja receberem eleitores,
-                //agora esse bairros so recebemuma confirmacao de que podem ser alocados eleitores la
-                //e os jogadores que o possuem recebem eleitores para distribuir
                 bairro.bairroNaZonaEscolhida=true;
                 if(bairro.VerificaControl()){
-                    Debug.Log("verificou control "+valor);
-                    hs.ValorEleitoresNovos(valor);
-                   
+                hs.ValorEleitoresNovos(valor);
                 }
             }
 
