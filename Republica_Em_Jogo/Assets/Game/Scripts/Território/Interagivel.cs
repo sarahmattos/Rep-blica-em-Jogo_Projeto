@@ -27,29 +27,17 @@ namespace Game.Territorio
             material = GetComponent<MeshRenderer>().material;
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-
-            }
-        }
 
         void OnMouseEnter()
         {
             if(!habilitado) return;
-            
             mouseEnter?.Invoke();
-            // transform.localScale =  targetScale;
         }
 
         void OnMouseExit()
         {
             if(!habilitado) return;
-           
             mouseExit?.Invoke();
-            // transform.localScale = escalaInicial;
-
         }
 
         void OnMouseUpAsButton()
