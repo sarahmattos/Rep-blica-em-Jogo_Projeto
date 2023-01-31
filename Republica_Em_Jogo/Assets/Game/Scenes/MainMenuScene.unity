@@ -519,6 +519,7 @@ MonoBehaviour:
   playerInZona: 0
   distribuicaoProjeto: 0
   aprovado: 0
+  inVotacao: 0
 --- !u!114 &1526223905
 MonoBehaviour:
   m_ObjectHideFlags: 0
