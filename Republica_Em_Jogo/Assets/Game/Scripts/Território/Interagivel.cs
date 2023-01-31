@@ -9,13 +9,17 @@ namespace Game.Territorio
 
     public class Interagivel : MonoBehaviour
     {
+        [SerializeField]    private bool habilitado;
+
         public event Action click;
         public event Action mouseExit;
-        public event Action mouseEnter;
+        public event Action mouseEnter;    
+
         private new Collider collider;
         public Color cor1;
         public Color cor2;
         private Material material;
+
 
         void Start()
         {
@@ -32,6 +36,8 @@ namespace Game.Territorio
 
         void OnMouseEnter()
         {
+            if(!habilitado) return;
+            
             material.color = cor2;
             mouseEnter?.Invoke();
             // transform.localScale =  targetScale;
@@ -39,6 +45,8 @@ namespace Game.Territorio
 
         void OnMouseExit()
         {
+            if(!habilitado) return;
+           
             material.color = cor1;
             mouseExit?.Invoke();
             // transform.localScale = escalaInicial;
@@ -47,25 +55,14 @@ namespace Game.Territorio
 
         void OnMouseUpAsButton()
         {
+            if(!habilitado) return;
             click?.Invoke();
         }
 
-        private void Habilitar()
-        {
-
+        public void MudarHabilitado(bool value) {
+            habilitado = value;
+            if(!value) mouseExit?.Invoke();
         }
-
-        private void Desabilitar()
-        {
-
-        }
-
-        public void mostrar()
-        {
-            Debug.Log("oui");
-        }
-
-
 
 
     }
