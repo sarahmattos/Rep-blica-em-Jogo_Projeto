@@ -8,13 +8,20 @@ namespace Game
 {
     public class TurnManager : NetworkSingleton<TurnManager>
     {
-
         //Lembrar que: apenas Servers/Owners podem alterar NetworkVariables.
         //Para fazer isso via client, pode ser usado m�todos ServerRpc, assim como � feito nesta classe
-        private NetworkList<int> ordemPlayersID ;
-        private NetworkVariable<int> indexPlayerAtual = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private NetworkList<int> ordemPlayersID;
+        private NetworkVariable<int> indexPlayerAtual = new NetworkVariable<int>(
+            0,
+            NetworkVariableReadPermission.Everyone,
+            NetworkVariableWritePermission.Server
+        );
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
-        private NetworkVariable<int> playerAtual = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private NetworkVariable<int> playerAtual = new NetworkVariable<int>(
+            -1,
+            NetworkVariableReadPermission.Everyone,
+            NetworkVariableWritePermission.Server
+        );
         private int turnCount = 0;
 
         public NetworkVariable<int> PlayerAtual => playerAtual;
@@ -23,41 +30,50 @@ namespace Game
         public int UltimoPlayer => ordemPlayersID[ordemPlayersID.Count - 1];
         public bool UltimoIgualAtual => (GetPlayerAtual == UltimoPlayer);
         public int GetClientesCount => clientesCount.Value;
-        public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == GetPlayerAtual);
+        public bool LocalIsCurrent =>
+            ((int)NetworkManager.Singleton.LocalClientId == GetPlayerAtual);
         public event Action<bool> vezDoPlayerLocal;
         public event Action<int> PlayerTurnMuda;
         public bool nextIgualLocalID;
         public int idPlayer;
 
-        private State InicializaState => GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
+        private State InicializaState =>
+            GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
 
-        public int TurnCount { get => turnCount; set => turnCount = value; }
+        public int TurnCount
+        {
+            get => turnCount;
+            set => turnCount = value;
+        }
 
         private void Awake()
         {
-              ordemPlayersID = new NetworkList<int>(new List<int>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+            ordemPlayersID = new NetworkList<int>(
+                new List<int>(),
+                NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Server
+            );
+            
         }
-           
 
         private void Start()
         {
-
-            ordemPlayersID = new NetworkList<int>();
-                          idPlayer=(int)NetworkManager.Singleton.LocalClientId;
+            idPlayer = (int)NetworkManager.Singleton.LocalClientId;
 
             playerAtual.OnValueChanged += PlayerAtualMuda;
-            if (!IsHost) return;
+            if (!IsHost)
+                return;
             InicializaState.Entrada += UpdateClientsCount;
             InicializaState.Entrada += DefineConfigIniciais;
 
             CoreLoopStateHandler.Instance.UltimoLoopState.Saida += NextTurnServerRpc;
         }
 
-
         public override void OnDestroy()
         {
             playerAtual.OnValueChanged -= PlayerAtualMuda;
-            if (!IsHost) return;
+            if (!IsHost)
+                return;
             ordemPlayersID.Dispose();
             indexPlayerAtual.Dispose();
             clientesCount.Dispose();
@@ -65,7 +81,6 @@ namespace Game
             InicializaState.Entrada -= UpdateClientsCount;
             InicializaState.Entrada -= DefineConfigIniciais;
             CoreLoopStateHandler.Instance.UltimoLoopState.Saida -= NextTurnServerRpc;
-
         }
 
         private void UpdateClientsCount()
@@ -83,8 +98,6 @@ namespace Game
             turnCount++;
         }
 
-
-
         private void GerarPlayerOrdem()
         {
             List<int> allClientID = new List<int>();
@@ -97,9 +110,7 @@ namespace Game
             for (int i = 0; i < allClientID.Count; i++)
             {
                 ordemPlayersID.Add(allClientID[i]);
-
             }
-
         }
 
         private void DefineConfigIniciais()
@@ -113,9 +124,7 @@ namespace Game
         {
             indexPlayerAtual.Value = index;
             playerAtual.Value = ordemPlayersID[indexPlayerAtual.Value];
-
         }
-
 
         [ServerRpc(RequireOwnership = false)]
         public void NextTurnServerRpc()
@@ -123,10 +132,7 @@ namespace Game
             indexPlayerAtual.Value = (1 + indexPlayerAtual.Value) % (GetClientesCount);
             playerAtual.Value = ordemPlayersID[indexPlayerAtual.Value];
         }
-
     }
-    
-
 }
 
 
@@ -165,4 +171,3 @@ namespace Game
 
 
 //}
-
