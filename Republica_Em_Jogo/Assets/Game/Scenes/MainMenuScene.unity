@@ -963,9 +963,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6756490650274717501, guid: a93b2473a637c354ba3a69b00d90719a, type: 3}
+      propertyPath: RunInBackground
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756490650274717501, guid: a93b2473a637c354ba3a69b00d90719a, type: 3}
       propertyPath: NetworkConfig.PlayerPrefab
       value: 
       objectReference: {fileID: 1284737381127264875, guid: cf82ad2fd38579c438ac8d764d8e36ca, type: 3}
+    - target: {fileID: 6756490650274717501, guid: a93b2473a637c354ba3a69b00d90719a, type: 3}
+      propertyPath: NetworkConfig.ConnectionApproval
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6756490650274717501, guid: a93b2473a637c354ba3a69b00d90719a, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.size
       value: 6
@@ -1040,7 +1048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6756490650274717503, guid: a93b2473a637c354ba3a69b00d90719a, type: 3}
       propertyPath: m_ConnectTimeoutMS
-      value: 2000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 6756490650274717503, guid: a93b2473a637c354ba3a69b00d90719a, type: 3}
       propertyPath: m_DisconnectTimeoutMS
@@ -1226,7 +1234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxConnections
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxLoopEleicoes

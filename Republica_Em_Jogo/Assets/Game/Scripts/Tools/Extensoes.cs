@@ -42,8 +42,6 @@ namespace Game.Tools
 
         public static void AddAll<T>(this IList<T> list, IList<T> newValues)
         {
-            Debug.Log("List: "+list.Count);
-            Debug.Log("new list: " + newValues.Count);
             foreach (T values in newValues)
             {
                 list.Add(values);
