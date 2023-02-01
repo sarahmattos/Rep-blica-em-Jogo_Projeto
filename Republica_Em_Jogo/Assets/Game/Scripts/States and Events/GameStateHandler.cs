@@ -55,6 +55,9 @@ namespace Game {
         public override void OnDestroy()
         {
             gameStateIndex.OnValueChanged -= IndexEstadoJogoMuda;
+            statePairValue.Clear();
+            if(!IsHost) return;
+            gameStateIndex.Dispose();
 
         }
 
@@ -79,7 +82,7 @@ namespace Game {
         public void NextStateServerRPC()
         {
             gameStateIndex.Value++;
-            //TODO: restrigir o acrescimo no index em relação ao número de estados que existem
+            //TODO: restrigir o acrescimo no index em relaï¿½ï¿½o ao nï¿½mero de estados que existem
         }
 
 

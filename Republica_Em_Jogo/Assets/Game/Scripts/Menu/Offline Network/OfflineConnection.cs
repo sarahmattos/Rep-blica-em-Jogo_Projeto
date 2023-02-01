@@ -5,7 +5,6 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using Logger = Game.Tools.Logger;
-using UnityEngine.SceneManagement;
 using Game.Tools;
 
 namespace Game.Networking
@@ -48,11 +47,11 @@ namespace Game.Networking
             {
                 conexaoEstabelecida?.Invoke(true);
                 conexaoIpEstabelecida?.Invoke(ipaddress);
-                Logger.Instance.LogInfo(string.Concat("Conexão com o IP: ",ipAddressInput.text));
+                Logger.Instance.LogInfo(string.Concat("Conexï¿½o com o IP: ",ipAddressInput.text));
                 
             } else
             {
-                Logger.Instance.LogError(string.Concat("Falha na conexão com o IP: ", ipAddressInput.text));
+                Logger.Instance.LogError(string.Concat("Falha na conexï¿½o com o IP: ", ipAddressInput.text));
                 conexaoEstabelecida?.Invoke(false);
             }
         }
@@ -101,7 +100,7 @@ namespace Game.Networking
     }
 
 
-    [Serializable]
+
     public class ConnectionPayload
     {
         public string playerId;

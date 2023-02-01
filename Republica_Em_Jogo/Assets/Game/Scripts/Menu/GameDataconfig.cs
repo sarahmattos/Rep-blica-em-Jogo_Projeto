@@ -12,7 +12,6 @@ public class GameDataConfig : Singleton<GameDataConfig>
     [SerializeField] private string tagParticipante;
     [SerializeField] private int maxRodadasParaEleicoes;
 
-
     public int territoriosInScene;
     public int MaxConnections => maxConnections;
     public List<Color> PlayerColorOrder  => playerColorOrder;
@@ -22,8 +21,10 @@ public class GameDataConfig : Singleton<GameDataConfig>
     public string MenuSceneName  => menuSceneName;
     public string GameplaySceneName  => gameplaySceneName; 
 
+
     private void Start()
     {
+        
         DontDestroyOnLoad(gameObject);
     }
 

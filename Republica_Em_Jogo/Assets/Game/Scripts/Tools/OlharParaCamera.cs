@@ -5,21 +5,55 @@ using UnityEngine;
 public class OlharParaCamera : MonoBehaviour
 {
     [SerializeField] private bool active;
-   private Transform transformCam;
+    private float tempoAtualizaRotacao = 0.3f;
+    private Transform transformCam;
 
     private void Awake()
     {
         transformCam = FindObjectOfType<Camera>().transform;
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    private void Start()
     {
-        if(active)
-        {
-            Vector3 posicaoAlvo = transform.position + transformCam.forward;
-            transform.LookAt(posicaoAlvo, transformCam.up);
-        }
+        //SE A CAMERA ROTACIONA DURANTE O JOGO:
+        // StartCoroutine(LookRotationRotina());
+
+        //DO CONTRARIO, APENAS:
+        SetTransformLookAt();
 
     }
+    private void SetTransformLookAt()
+    {
+        Vector3 posicaoAlvo = transform.position + transformCam.forward;
+        transform.LookAt(posicaoAlvo, transformCam.up);
+    }
+
+
+    // private void OnDestroy()
+    // {
+    //     StopCoroutine(LookRotationRotina());
+
+    // }
+
+    // private IEnumerator LookRotationRotina()
+    // {
+    //     while (active)
+    //     {
+    //         yield return new WaitForSeconds(tempoAtualizaRotacao);
+    //         SetTransformLookAt();
+    //     }
+    // }
+
+
+
+
+    // void LateUpdate()
+    // {
+    //     if(active)
+    //     {
+
+    //     }
+
+    // }
+
 }

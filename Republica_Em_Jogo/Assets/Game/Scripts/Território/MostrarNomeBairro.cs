@@ -1,59 +1,82 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
- using Game.Territorio;
- using Game.UI;
+using Game.UI;
+using TMPro;
 
-public class MostrarNomeBairro : MonoBehaviour
+namespace Game.Territorio
 {
-    private Renderer renderer;
-    //[SerializeField] private Material highlightMaterial;
-    [SerializeField] private GameObject nomeBairro;
-    private Bairro bairro;
-    private Projeto projeto;
-    private HudStatsJogador hs;
-    //[SerializeField] private Material defaultMaterial;
-    // Start is called before the first frame update
-    void Start()
+    public class MostrarNomeBairro : MonoBehaviour
     {
-        renderer = GetComponent<Renderer>();
-        bairro = GetComponentInParent<Bairro>();
-        projeto = FindObjectOfType<Projeto>();
-        hs = FindObjectOfType<HudStatsJogador>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    private void OnMouseEnter()
-    {
-        //renderer.material = highlightMaterial;
-        nomeBairro.SetActive(true);
-    }
-    private void OnMouseExit()
-    {
-        //renderer.material = defaultMaterial;
-        nomeBairro.SetActive(false);
-    }
-    private void OnMouseDown()
+        //[SerializeField] private Material highlightMaterial;
+        [SerializeField] private GameObject nomeBairro;
+        private TMP_Text textNomeBairro;
+        private Bairro bairro;
+        private Projeto projeto;
+        private HudStatsJogador hs;
+        void Awake()
         {
-            if(hs.distribuicaoGeral==true){
-            if(projeto.distribuicaoProjeto==true){
-                if(bairro.bairroNaZonaEscolhida==true){
-                    Debug.Log("projeto distribuicao");
-                bairro.EscolherBairroEleitor();
+            bairro = GetComponentInParent<Bairro>();
+            textNomeBairro = nomeBairro.gameObject.GetComponent<TMP_Text>();
+            projeto = FindObjectOfType<Projeto>();
+            hs = FindObjectOfType<HudStatsJogador>();
+
+        }
+
+
+        void Start()
+        {
+            nomeBairro.SetActive(false);
+            textNomeBairro.SetText(bairro.Nome);
+            bairro.Interagivel.click += EscolherBairroNoProjeto;
+        }
+
+
+
+
+        void OnDestroy()
+        {
+            bairro.Interagivel.click -= EscolherBairroNoProjeto;
+        }
+
+        private void OnMouseEnter()
+        {
+            nomeBairro.SetActive(true);
+        }
+
+        private void OnMouseExit()
+        {
+            nomeBairro.SetActive(false);
+        }
+
+        private void HabilitandoNomeObj(bool value)
+        {
+            nomeBairro.SetActive(value);
+        }
+
+
+        //TODO: Realocar este metodo
+        private void EscolherBairroNoProjeto()
+        {
+            if (hs.distribuicaoGeral == true)
+            {
+                if (projeto.distribuicaoProjeto == true)
+                {
+                    if (bairro.bairroNaZonaEscolhida == true)
+                    {
+                        Debug.Log("projeto distribuicao");
+                        bairro.EscolherBairroEleitor();
+                    }
                 }
-            }else{
-                //fazer restricao
-                
+                else
+                {
+                    //fazer restricao
                     bairro.EscolherBairroEleitor();
                 }
-                
+
             }
-            
-            
-            
         }
+
+
+
+    }
+
 }

@@ -6,38 +6,35 @@ using Game.UI;
 
 namespace Game.Territorio
 {
+    
     public class Bairro : NetworkBehaviour
     {
 
         [SerializeField] private string nome;
         public NetworkVariable<int> playerIDNoControl = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         public string Nome { get => nome; }
-        private Material material;
-        private TMP_Text text_nome;
+        // private Material material;
         public event Action playerControlMuda;
         public bool playerInControl=false;
         public bool bairroNaZonaEscolhida=false;
-
+        private Interagivel interagivel;
         [SerializeField] private SetUpBairro setUpBairro;
-        public SetUpBairro SetUpBairro { get => setUpBairro; } 
-
+        public SetUpBairro SetUpBairro { get => setUpBairro; }
+        public Interagivel Interagivel => interagivel; 
         private HudStatsJogador hs;
         private Educaçao edu;
         private Saúde saude;
 
-        private void Update(){
-            
-        }
+        private int auxContagem=0;
 
         private void Awake()
         {
-            text_nome = GetComponentInChildren<TMP_Text>();
-            material = GetComponentInChildren<MeshRenderer>().material;
+            interagivel = GetComponentInChildren<Interagivel>();
             setUpBairro = GetComponentInChildren<SetUpBairro>();
-            material.color = Color.gray;
             edu = GetComponentInChildren<Educaçao>();
             saude = GetComponentInChildren<Saúde>();
             hs = FindObjectOfType<HudStatsJogador>();
+            // material = Interagivel.gameObject.GetComponent<MeshRenderer>().material;
         }
         [ServerRpc(RequireOwnership = false)]
         public void MudaValorEleitorServerRpc(int valor)
@@ -66,18 +63,12 @@ namespace Game.Territorio
 
         private void onPlayerControlMuda(int previousValue, int newValue)
         {
-            material.color = GameDataConfig.Instance.PlayerColorOrder[newValue];
+            Interagivel.Material.color = GameDataConfig.Instance.PlayerColorOrder[newValue];
 
             //chama funcao pra atualizar bairro e eleitores na distribuicao inicial
             if(newValue == (int)NetworkManager.Singleton.LocalClientId){
                 hs.AtualizarPlayerStatsBairro();
             }
-        }
-
-        private void Start()
-        {
-            text_nome.SetText(Nome);
-
         }
 
         //verifica se bairro pertence ao jogador
