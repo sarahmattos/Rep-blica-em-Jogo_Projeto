@@ -53,6 +53,8 @@ namespace Game
         public override void OnDestroy()
         {
             coreLoopIndex.OnValueChanged -= IndexEstadoLoopMuda;
+            if(!IsHost) return;
+            coreLoopIndex.Dispose();
         }
 
 

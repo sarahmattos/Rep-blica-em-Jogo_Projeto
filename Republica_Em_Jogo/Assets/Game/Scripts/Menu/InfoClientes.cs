@@ -27,7 +27,8 @@ namespace Game.Networking
         public override void OnDestroy()
         {
             clientesConnectados.OnValueChanged -= UpdatePlayerCount;
-
+           if (NetworkManager.Singleton == null) return;
+            clientesConnectados.Dispose();
             NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnectionUpdate;
             NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientConnectionUpdate;
             StopAllCoroutines();

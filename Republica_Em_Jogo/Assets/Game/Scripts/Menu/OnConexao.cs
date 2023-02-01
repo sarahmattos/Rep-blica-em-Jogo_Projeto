@@ -27,8 +27,10 @@ namespace Game.Networking
 
         private void OnDestroy()
         {
+
             OfflineConnection.Instance.conexaoEstabelecida -= OfflineConexao;
             OnlineConnection.Instance.conexaoEstabelecida -= OnlineConexao;
+            if (NetworkManager.Singleton == null) return;
             NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnect;
         }
 
