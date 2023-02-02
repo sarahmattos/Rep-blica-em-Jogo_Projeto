@@ -1,12 +1,15 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 namespace Game
 {
     public class UIeleicao : MonoBehaviour
     {
         [SerializeField] private GameObject UIeleicaoObjsParent;
+        [SerializeField] private TMP_Text cadeirasUi;
+
         private State eleicaoState => GameStateHandler.Instance.StatePairValue[GameState.ELEICOES];
 
        
@@ -16,6 +19,10 @@ namespace Game
             UIeleicaoObjsParent.SetActive(false);
             eleicaoState.Entrada += OnEleicaoEntrada;
             eleicaoState.Saida += OnEleicaoSaida;
+        }
+        private void Update()
+        {
+            cadeirasUi.text= EleicaoManager.Instance.cadeirasCamara.ToString();
         }
 
         private void OnDestroy()

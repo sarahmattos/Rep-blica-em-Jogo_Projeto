@@ -3,35 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Player;
 using Unity.Netcode;
+//using Game.UI;
 
 namespace Game
 {
-    public class EleicaoManager : NetworkManager
+    public class EleicaoManager : NetworkBehaviour
     {
-        private int somaEleitores;
-        private float cadeirasCamara;
+        public static EleicaoManager Instance;
+        public int somaEleitoresLocal;
+        public float cadeirasCamara;
         private int cadeirasTotais;
+        private int eleitoresLocal;
+        private int id;
+        private int aux;
+        public int jogadoreOn;
+
+        public NetworkVariable<int> somaEleitores = new NetworkVariable<int>(0);
+        public NetworkVariable<int> count = new NetworkVariable<int>(0);
+        //private HudStatsJogador hs;
         void Start()
         {
+           // hs = FindObjectOfType<HudStatsJogador>();
            cadeirasTotais=12;
+           Instance = this;
+           //CalculoEleicao();
         //server vai passar todos playerstats e primeiro somar todos os valores e dpsfazer o calculo
         }
-        private void SomaEleitoresPlayers()
-        {
-            PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
-            foreach (PlayerStats stats in allPlayerStats)
-            {
-                Debug.Log("player "+stats.playerID+": "+stats.EleitoresTotais);
-                somaEleitores =+ stats.EleitoresTotais;
-            }
+
+        [ServerRpc(RequireOwnership = false)]
+        private void SomaEleitoresPlayersServerRpc(int valor)
+        {   
+            Debug.Log("entrou no server deveria ser duas vezes");
+            count.Value =NetworkManager.Singleton.ConnectedClientsIds.Count;
+            somaEleitores.Value += valor;
+            
         }
-        private void CalculaNumeroEleicao(){
-            PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
-            foreach (PlayerStats stats in allPlayerStats)
+         private void OnEnable()
             {
-                cadeirasCamara= Mathf.Round((stats.EleitoresTotais*cadeirasTotais)/somaEleitores);
-                Debug.Log("player "+stats.playerID+" tem "+cadeirasCamara+" cadeiras.");
+                somaEleitores.OnValueChanged += (int previousValue, int newValue) =>
+                {
+                    aux++;
+                    Debug.Log(aux);
+                    Debug.Log(jogadoreOn);
+                    if(aux==jogadoreOn){
+                        Debug.Log("entrou");
+                        somaEleitoresLocal = newValue;
+                        CalculaNumeroEleicao();
+                        aux=0;
+                    }
+                    
+                };
+                count.OnValueChanged += (int previousValue, int newValue) =>
+                {
+                    jogadoreOn = newValue;
+                };
             }
+        private void CalculaNumeroEleicao(){
+           
+                cadeirasCamara= Mathf.Round((eleitoresLocal*cadeirasTotais)/somaEleitoresLocal);
+                Debug.Log("player "+id+" tem "+cadeirasCamara+" cadeiras.");
+            
         }
         // Update is called once per frame
         void Update()
@@ -40,10 +71,17 @@ namespace Game
         }
 
         public void CalculoEleicao(){
-            if(NetworkManager.Singleton.IsServer){
-                SomaEleitoresPlayers();
-                CalculaNumeroEleicao();
+            PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
+            foreach (PlayerStats stats in allPlayerStats)
+            {
+                if (stats.IsLocalPlayer)
+                {
+                    id=stats.playerID;
+                    eleitoresLocal=stats.EleitoresTotais;
+                   SomaEleitoresPlayersServerRpc(eleitoresLocal);
+                }
             }
+            
             
         }
     }
