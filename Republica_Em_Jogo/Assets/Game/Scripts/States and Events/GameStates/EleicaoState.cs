@@ -13,7 +13,7 @@ namespace Game
             StartCoroutine(EsperaEVai(3));
             Tools.Logger.Instance.LogWarning("EnterState: ELEICAO");
             //chamar conta
-            EleicaoManager.Instance.CalculoEleicao();
+            
         }
 
         public override void ExitState()

@@ -33,6 +33,7 @@ namespace Game
 
         private void OnEleicaoEntrada()
         {
+            EleicaoManager.Instance.CalculoEleicao();
             UIeleicaoObjsParent.SetActive(true);
         }
 
