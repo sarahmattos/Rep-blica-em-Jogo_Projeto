@@ -20,20 +20,16 @@ namespace Game
 
         public NetworkVariable<int> somaEleitores = new NetworkVariable<int>(0);
         public NetworkVariable<int> count = new NetworkVariable<int>(0);
-        //private HudStatsJogador hs;
         void Start()
         {
-           // hs = FindObjectOfType<HudStatsJogador>();
            cadeirasTotais=12;
            Instance = this;
-           //CalculoEleicao();
-        //server vai passar todos playerstats e primeiro somar todos os valores e dpsfazer o calculo
         }
 
         [ServerRpc(RequireOwnership = false)]
         private void SomaEleitoresPlayersServerRpc(int valor)
         {   
-            Debug.Log("entrou no server deveria ser duas vezes");
+            Debug.Log("entrou no server");
             count.Value =NetworkManager.Singleton.ConnectedClientsIds.Count;
             somaEleitores.Value += valor;
             
@@ -64,12 +60,7 @@ namespace Game
                 Debug.Log("player "+id+" tem "+cadeirasCamara+" cadeiras.");
             
         }
-        // Update is called once per frame
-        void Update()
-        {
         
-        }
-
         public void CalculoEleicao(){
             PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
             foreach (PlayerStats stats in allPlayerStats)

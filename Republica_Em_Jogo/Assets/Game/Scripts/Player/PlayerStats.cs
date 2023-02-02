@@ -32,20 +32,6 @@ namespace Game.Player {
         public int SaudeRecurso { get => saudeRecurso; }
         public int EducacaoRecurso { get => educacaoRecurso; }
         public State GameplayLoadState => GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD];
-        public NetworkVariable<int> eleitoresNetwork = new NetworkVariable<int>(-1);
-
-         private void OnEnable()
-            {
-                eleitoresNetwork.OnValueChanged += (int previousValue, int newValue) =>
-                {
-                    eleitoresTotais = newValue;
-                };
-            }
-        [ServerRpc(RequireOwnership = false)]
-        public void getEleitoresNetworkServerRpc(int eleitores)
-        { 
-            eleitoresNetwork.Value=eleitores;
-        }
 
         private void Start()
         {

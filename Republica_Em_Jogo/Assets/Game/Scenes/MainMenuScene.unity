@@ -1497,6 +1497,10 @@ PrefabInstance:
       value: CanvasCarregamento
       objectReference: {fileID: 0}
     - target: {fileID: 8714760898405765883, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -5.4000244
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714760898405765883, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.41357422
       objectReference: {fileID: 0}
