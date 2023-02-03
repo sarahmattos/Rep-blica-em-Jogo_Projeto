@@ -15,7 +15,7 @@ namespace Game
            if(TurnManager.Instance.GetPlayerAtual==TurnManager.Instance.idPlayer){
                 baralho.enabled = true;
            }
-           
+            //EleicaoManager.Instance.CalculoEleicao();
         }
 
         public override void ExitState()

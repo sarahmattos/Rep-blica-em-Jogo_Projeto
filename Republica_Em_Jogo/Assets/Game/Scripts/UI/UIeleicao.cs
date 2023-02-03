@@ -9,7 +9,7 @@ namespace Game
     {
         [SerializeField] private GameObject UIeleicaoObjsParent;
         [SerializeField] private TMP_Text cadeirasUi;
-
+        public static UIeleicao Instance;
         private State eleicaoState => GameStateHandler.Instance.StatePairValue[GameState.ELEICOES];
 
        
@@ -19,10 +19,11 @@ namespace Game
             UIeleicaoObjsParent.SetActive(false);
             eleicaoState.Entrada += OnEleicaoEntrada;
             eleicaoState.Saida += OnEleicaoSaida;
+            Instance = this;
         }
         private void Update()
         {
-            cadeirasUi.text= EleicaoManager.Instance.cadeirasCamara.ToString();
+           
         }
 
         private void OnDestroy()
@@ -41,7 +42,13 @@ namespace Game
         {
             UIeleicaoObjsParent.SetActive(false);
         }
-
+        public void MostrarCadeiras(string valor)
+        {
+            cadeirasUi.text = valor;
+            Debug.Log("entrou ui");
+            EleicaoManager.Instance.DefaultServerRpc();
+            EleicaoManager.Instance.resetauxs();
+        }
 
 
     }
