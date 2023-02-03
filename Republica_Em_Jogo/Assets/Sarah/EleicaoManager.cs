@@ -55,16 +55,20 @@ namespace Game
             {
                 somaEleitores.OnValueChanged += (int previousValue, int newValue) =>
                 {
-                    aux++;
-                    Debug.Log(aux);
-                    Debug.Log(jogadoreOn);
-                    if(aux==jogadoreOn){
-                        aux = 0;
-                        Debug.Log("entrou1");
-                        somaEleitoresLocal = newValue;
-                        Debug.Log("valor soma " + newValue);
-                        CalculaNumeroEleicao();
-                        
+                    if (newValue != 0)
+                    {
+                        aux++;
+                        Debug.Log(aux);
+                        Debug.Log(jogadoreOn);
+                        if (aux == jogadoreOn)
+                        {
+                            aux = 0;
+                            Debug.Log("entrou1");
+                            somaEleitoresLocal = newValue;
+                            Debug.Log("valor soma " + newValue);
+                            CalculaNumeroEleicao();
+
+                        }
                     }
                     
                 };
@@ -74,24 +78,30 @@ namespace Game
                 };
             cadeirasNetwork.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
             {
-                aux2++;
-                Debug.Log(aux2);
-                Debug.Log(jogadoreOn);
-                if (aux2 == jogadoreOn)
+                if (newValue != "")
                 {
-                    aux2 = 0;
-                    Debug.Log("entrou2");
-                    Debug.Log("valor final indo praui " + newValue.ToString());
-                    UIeleicao.Instance.MostrarCadeiras(newValue.ToString());
-                    
-                    
+                    aux2++;
+                    Debug.Log(aux2);
+                    Debug.Log(jogadoreOn);
+                    if (aux2 == jogadoreOn)
+                    {
+                        aux2 = 0;
+                        Debug.Log("entrou2");
+                        Debug.Log("valor final indo praui " + newValue.ToString());
+                        UIeleicao.Instance.MostrarCadeiras(newValue.ToString());
+
+
+                    }
                 }
+                
             };
         }
         private void CalculaNumeroEleicao(){
             Debug.Log("calculo");
             float soma = (eleitoresLocal * cadeirasTotais) / somaEleitoresLocal;
+            Debug.Log("soma");
             cadeirasCamara = Mathf.Round(soma);
+            Debug.Log("cadeirasCamara");
             string frase = "player " + id + " tem " + cadeirasCamara + " cadeiras." + "\n";
             Debug.Log(frase);
             MostrarUiServerRpc(frase);

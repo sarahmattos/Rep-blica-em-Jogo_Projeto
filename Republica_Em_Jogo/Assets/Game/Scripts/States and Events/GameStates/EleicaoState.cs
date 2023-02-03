@@ -10,7 +10,7 @@ namespace Game
 
         public override void EnterState()
         {
-            StartCoroutine(EsperaEVai(3));
+            StartCoroutine(EsperaEVai(10));
             Tools.Logger.Instance.LogWarning("EnterState: ELEICAO");
             //chamar conta
             
