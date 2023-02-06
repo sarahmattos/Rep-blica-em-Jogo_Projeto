@@ -140,7 +140,7 @@ namespace Game.UI
             playerStats.eleitoresNovos--;
             text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
             //diminui valor eleitores na hud player
-            AtualizaEleitores();
+            //AtualizarPlayerStatsBairro();
          }
         public void AtualizaUIAposDistribuicao(){
                 distribuaEleitorUi.SetActive(false);
