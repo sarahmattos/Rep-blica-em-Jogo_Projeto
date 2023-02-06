@@ -21,7 +21,6 @@ namespace Game.Player {
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
         public Bairro[] bairrosInControl;
-        //private SetUpZona setUpZona;
         public int bairrosTotais;
         public float eleitoresNovos;
         public RecursoCartaObjeto recursoManager;
@@ -34,13 +33,11 @@ namespace Game.Player {
         public int EleitoresTotais { get => eleitoresTotais; }
         public int SaudeRecurso { get => saudeRecurso; }
         public int EducacaoRecurso { get => educacaoRecurso; }
-        //public Bairro[] BairrosInControl { get => bairrosInControl; }
         public State GameplayLoadState => GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD];
        
         private void Start()
         {
             GameplayLoadState.Saida += InicializaPlayerStats;
-            //setUpZona = GameObject.FindObjectOfType<SetUpZona>();
         }
         
         public override void OnDestroy()
@@ -75,30 +72,17 @@ namespace Game.Player {
             Tools.Logger.Instance.LogInfo("inicializando player stats");
             cor = GameDataConfig.Instance.PlayerColorOrder[playerID];
             maxTerritorio = GameDataConfig.Instance.territoriosInScene;
-            /*tive que colocar em outro lugar :eleitoresAtualizar();
-            //eleitoresTotais = maxTerritorio / /*clientsConnected.Count; 2;
-            */
             nome = string.Concat("jogador ", playerID);
             objetivoCarta = objetivosDatabase.Instance.objetivoComplemento;
 
         }
         
-        public void eleitoresAtualizar(){
-            eleitoresTotais++;
-        }
-        public void eleitoresDiminuir(){
-            eleitoresTotais--;
-        }
-        public void bairrosAtualizar(){
-            bairrosTotais++;
-        }
         public void ContaEleitoresInBairros()
         {
             eleitoresTotais = 0;
             for (int i = 0; i < bairrosInControl.Length; i++)
             {
                 eleitoresTotais += bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores;
-                Debug.Log("bairroNome: " + bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores +" "+ i);
             }
            
         }

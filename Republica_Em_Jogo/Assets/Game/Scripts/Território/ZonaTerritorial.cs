@@ -61,7 +61,6 @@ namespace Game.Territorio
             {
                 if (bairro.playerIDNoControl.Value == _ps.playerID)
                 {
-                    //Debug.Log("bairroNome: " + bairro.Nome);
                     _listAux.Add(bairro);
                 }
             }

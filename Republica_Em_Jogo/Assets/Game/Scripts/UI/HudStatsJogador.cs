@@ -139,9 +139,8 @@ namespace Game.UI
          public void contagemEleitores(){
             playerStats.eleitoresNovos--;
             text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
-            //diminui valor eleitores na hud player
-            //AtualizarPlayerStatsBairro();
          }
+
         public void AtualizaUIAposDistribuicao(){
                 distribuaEleitorUi.SetActive(false);
                 distribuicaoGeral=false;

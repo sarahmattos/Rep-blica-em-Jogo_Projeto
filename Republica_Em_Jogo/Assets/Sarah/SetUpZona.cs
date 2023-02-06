@@ -23,16 +23,6 @@ public class SetUpZona : MonoBehaviour
             zonas = GetComponentsInChildren<ZonaTerritorial>();
             
         }
-        /*
-        public void Update()
-        {
-            if (Input.GetKeyDown("space"))
-            {
-                
-                ProcurarBairrosInZona();
-            }
-        }
-        */
         public void eleitoresZona(int valor, string nome){
             foreach(ZonaTerritorial zona in zonas)
             {
