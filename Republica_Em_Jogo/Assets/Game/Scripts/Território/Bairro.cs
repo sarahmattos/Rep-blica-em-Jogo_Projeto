@@ -67,7 +67,7 @@ namespace Game.Territorio
 
             //chama funcao pra atualizar bairro e eleitores na distribuicao inicial
             if(newValue == (int)NetworkManager.Singleton.LocalClientId){
-                hs.AtualizarPlayerStatsBairro();
+                //hs.AtualizarPlayerStatsBairro();
             }
         }
 
@@ -96,8 +96,8 @@ namespace Game.Territorio
                     hs.valorEleitorNovo();
                     if(NetworkManager.Singleton.IsClient) MudaValorEleitorServerRpc(-1);
                     if(hs.eleitoresNovosAtual<1)hs.AtualizaUIAposDistribuicao();
-                    
-                }
+                        hs.AtualizarPlayerStatsBairro();
+                    }
             }else{
                 //colocar
                 if(setUpBairro.Eleitores.eleitores.Value>0){
@@ -106,8 +106,8 @@ namespace Game.Territorio
 
                     if(NetworkManager.Singleton.IsClient) MudaValorEleitorServerRpc(1);
                     if(hs.eleitoresNovosAtual<1) hs.AtualizaUIAposDistribuicao();
-                    
-                }
+                        hs.AtualizarPlayerStatsBairro();
+                    }
             }
             
         }

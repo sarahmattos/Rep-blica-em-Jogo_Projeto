@@ -3,128 +3,94 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Player;
 using Unity.Netcode;
-using Unity.Collections;
-//using Game.UI;
+using Game.Territorio;
+using Game.Tools;
 
 namespace Game
 {
     public class EleicaoManager : NetworkBehaviour
     {
-        public static EleicaoManager Instance;
-        public int somaEleitoresLocal;
-        public float cadeirasCamara;
+        public int somaEleitores;
+        private float cadeirasCamara;
         private int cadeirasTotais;
-        private int eleitoresLocal;
-        private int id;
-        private int aux, aux2;
-        public int jogadoreOn;
-        public string valoresServer;
-
-        public NetworkVariable<int> somaEleitores = new NetworkVariable<int>(0);
-        public NetworkVariable<int> count = new NetworkVariable<int>(0);
-        public NetworkVariable<FixedString4096Bytes> cadeirasNetwork = new NetworkVariable<FixedString4096Bytes>("");
+        [SerializeField] private List<Bairro> todosBairros;
+        private ZonaTerritorial[] zonasTerritoriais;
+        public int numConectados;
+        public BairroArray[] bairrosPlayerSegmment;
+        public int[] eleitoresPlayers;
+        private SetUpZona setUpZona;
         void Start()
         {
            cadeirasTotais=12;
-           Instance = this;
-            aux2 = 0;
-        }
+           zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
+            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
 
-        [ServerRpc(RequireOwnership = false)]
-        private void SomaEleitoresPlayersServerRpc(int valor)
-        {   
-            Debug.Log("entrou no server");
-            count.Value =NetworkManager.Singleton.ConnectedClientsIds.Count;
-            somaEleitores.Value += valor;
-            
+            //server vai passar todos playerstats e primeiro somar todos os valores e dpsfazer o calculo
         }
-        [ServerRpc(RequireOwnership = false)]
-        private void MostrarUiServerRpc(string valor)
+        private void SomaEleitoresPlayers()
         {
-            Debug.Log("server recebe: "+valor);
-            cadeirasNetwork.Value += valor;
-            Debug.Log(cadeirasNetwork.Value);
-        }
-        [ServerRpc(RequireOwnership = false)]
-        public void DefaultServerRpc()
-        {
-            cadeirasNetwork.Value = "";
-            somaEleitores.Value = 0;
-        }
-        private void OnEnable()
-            {
-                somaEleitores.OnValueChanged += (int previousValue, int newValue) =>
-                {
-                    if (newValue != 0)
-                    {
-                        aux++;
-                        Debug.Log(aux);
-                        Debug.Log(jogadoreOn);
-                        if (aux == jogadoreOn)
-                        {
-                            aux = 0;
-                            Debug.Log("entrou1");
-                            somaEleitoresLocal = newValue;
-                            Debug.Log("valor soma " + newValue);
-                            CalculaNumeroEleicao();
-
-                        }
-                    }
-                    
-                };
-                count.OnValueChanged += (int previousValue, int newValue) =>
-                {
-                    jogadoreOn = newValue;
-                };
-            cadeirasNetwork.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
-            {
-                if (newValue != "")
-                {
-                    aux2++;
-                    Debug.Log(aux2);
-                    Debug.Log(jogadoreOn);
-                    if (aux2 == jogadoreOn)
-                    {
-                        aux2 = 0;
-                        Debug.Log("entrou2");
-                        Debug.Log("valor final indo praui " + newValue.ToString());
-                        UIeleicao.Instance.MostrarCadeiras(newValue.ToString());
-
-
-                    }
-                }
-                
-            };
-        }
-        private void CalculaNumeroEleicao(){
-            Debug.Log("calculo");
-            float soma = (eleitoresLocal * cadeirasTotais) / somaEleitoresLocal;
-            Debug.Log("soma");
-            cadeirasCamara = Mathf.Round(soma);
-            Debug.Log("cadeirasCamara");
-            string frase = "player " + id + " tem " + cadeirasCamara + " cadeiras." + "\n";
-            Debug.Log(frase);
-            MostrarUiServerRpc(frase);
-        }
-        
-        public void CalculoEleicao(){
             PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
             foreach (PlayerStats stats in allPlayerStats)
             {
-                if (stats.IsLocalPlayer)
-                {
-                    id=stats.playerID;
-                    eleitoresLocal=stats.EleitoresTotais;
-                   SomaEleitoresPlayersServerRpc(eleitoresLocal);
-                }
+                Debug.Log("player "+stats.playerID+": "+stats.EleitoresTotais);
+                somaEleitores =+ stats.EleitoresTotais;
+            }
+        }
+        private void CalculaNumeroEleicao(){
+            PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
+            foreach (PlayerStats stats in allPlayerStats)
+            {
+                cadeirasCamara= Mathf.Round((stats.EleitoresTotais*cadeirasTotais)/somaEleitores);
+                Debug.Log("player "+stats.playerID+" tem "+cadeirasCamara+" cadeiras.");
+            }
+        }
+        // Update is called once per frame
+        void Update()
+        {
+        
+        }
+        public void ContaTotalEleitores()
+        {
+            todosBairros = GetBairros();
+            somaEleitores = 0;
+            foreach (Bairro bairro in todosBairros)
+            {
+                somaEleitores += bairro.SetUpBairro.Eleitores.contaEleitores;
+            }
+
+        }
+        private List<Bairro> GetBairros()
+        {
+            List<Bairro> bairros = new List<Bairro>();
+            for (int i = 0; i < zonasTerritoriais.Length; i++)
+            {
+                bairros.AddAll(zonasTerritoriais[i].Bairros);
+            }
+
+            return bairros;
+
+        }
+        public void CalcularCadeiras()
+        {
+            numConectados = NetworkManager.Singleton.ConnectedClientsIds.Count;
+            //bairrosPlayerSegmment = new BairroArray[numConectados];
+            eleitoresPlayers = new int[numConectados];
+            //setUpZona.SepararBairrosPorPlayer(bairrosPlayerSegmment, numConectados);
+            setUpZona.SepararBairrosPorPlayer(eleitoresPlayers, numConectados);
+        }
+        public void CalculoEleicao(){
+            if(NetworkManager.Singleton.IsServer){
+                //SomaEleitoresPlayers();
+                //CalculaNumeroEleicao();
+                ContaTotalEleitores();
+                CalcularCadeiras();
             }
             
-            
         }
-        public void resetauxs()
-        {
-            aux = 0;
-            aux2 = 0;
-        }
+    }
+    [System.Serializable]
+    public struct BairroArray
+    {
+        public List<Bairro> BairrosPorPlayer;
     }
 }

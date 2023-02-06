@@ -2,6 +2,7 @@ using Unity.Netcode;
 using UnityEngine;
 using System.Collections.Generic;
 using Game.UI;
+using Game.Territorio;
 
 namespace Game.Player {
 
@@ -19,6 +20,7 @@ namespace Game.Player {
         [SerializeField] private int educacaoRecurso;
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
+        public Bairro[] bairrosInControl;
         public int bairrosTotais;
         public float eleitoresNovos;
         public RecursoCartaObjeto recursoManager;
@@ -37,6 +39,7 @@ namespace Game.Player {
         {
             GameplayLoadState.Saida += InicializaPlayerStats;
         }
+        
         public override void OnDestroy()
         {
             GameplayLoadState.Saida -= InicializaPlayerStats;
@@ -69,22 +72,24 @@ namespace Game.Player {
             Tools.Logger.Instance.LogInfo("inicializando player stats");
             cor = GameDataConfig.Instance.PlayerColorOrder[playerID];
             maxTerritorio = GameDataConfig.Instance.territoriosInScene;
-            /*tive que colocar em outro lugar :eleitoresAtualizar();
-            //eleitoresTotais = maxTerritorio / /*clientsConnected.Count; 2;
-            */
             nome = string.Concat("jogador ", playerID);
             objetivoCarta = objetivosDatabase.Instance.objetivoComplemento;
 
         }
         
-        public void eleitoresAtualizar(){
-            eleitoresTotais++;
+        public void ContaEleitoresInBairros()
+        {
+            eleitoresTotais = 0;
+            for (int i = 0; i < bairrosInControl.Length; i++)
+            {
+                eleitoresTotais += bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores;
+            }
+           
         }
-        public void eleitoresDiminuir(){
-            eleitoresTotais--;
-        }
-        public void bairrosAtualizar(){
-            bairrosTotais++;
+
+        public void ContaBairros()
+        {
+            bairrosTotais = bairrosInControl.Length;
         }
 
     }
