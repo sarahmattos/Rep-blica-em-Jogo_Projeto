@@ -83,7 +83,7 @@ namespace Game.Player {
             for (int i = 0; i < bairrosInControl.Length; i++)
             {
                 eleitoresTotais += bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores;
-                Debug.Log(bairrosInControl[i].Nome + " " + bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores);
+                //Debug.Log(bairrosInControl[i].Nome + " " + bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores);
             }
            
         }

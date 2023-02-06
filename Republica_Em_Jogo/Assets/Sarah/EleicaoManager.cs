@@ -11,44 +11,21 @@ namespace Game
     public class EleicaoManager : NetworkBehaviour
     {
         public int somaEleitores;
-        private float cadeirasCamara;
-        private int cadeirasTotais;
+        public float[] cadeirasCamara;
+        public int cadeirasTotais;
         [SerializeField] private List<Bairro> todosBairros;
         private ZonaTerritorial[] zonasTerritoriais;
         public int numConectados;
-        public BairroArray[] bairrosPlayerSegmment;
+        //public BairroArray[] bairrosPlayerSegmment;
         public int[] eleitoresPlayers;
         private SetUpZona setUpZona;
         void Start()
         {
            cadeirasTotais=12;
            zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
-            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
-
-            //server vai passar todos playerstats e primeiro somar todos os valores e dpsfazer o calculo
+           setUpZona = GameObject.FindObjectOfType<SetUpZona>();
         }
-        private void SomaEleitoresPlayers()
-        {
-            PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
-            foreach (PlayerStats stats in allPlayerStats)
-            {
-                Debug.Log("player "+stats.playerID+": "+stats.EleitoresTotais);
-                somaEleitores =+ stats.EleitoresTotais;
-            }
-        }
-        private void CalculaNumeroEleicao(){
-            PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
-            foreach (PlayerStats stats in allPlayerStats)
-            {
-                cadeirasCamara= Mathf.Round((stats.EleitoresTotais*cadeirasTotais)/somaEleitores);
-                Debug.Log("player "+stats.playerID+" tem "+cadeirasCamara+" cadeiras.");
-            }
-        }
-        // Update is called once per frame
-        void Update()
-        {
         
-        }
         public void ContaTotalEleitores()
         {
             todosBairros = GetBairros();
@@ -73,24 +50,31 @@ namespace Game
         public void CalcularCadeiras()
         {
             numConectados = NetworkManager.Singleton.ConnectedClientsIds.Count;
-            //bairrosPlayerSegmment = new BairroArray[numConectados];
             eleitoresPlayers = new int[numConectados];
-            //setUpZona.SepararBairrosPorPlayer(bairrosPlayerSegmment, numConectados);
+            cadeirasCamara = new float[numConectados];
             setUpZona.SepararBairrosPorPlayer(eleitoresPlayers, numConectados);
+            for (int i = 0; i < eleitoresPlayers.Length; i++)
+            {
+                float aux = ((float)eleitoresPlayers[i] * (float)cadeirasTotais) / (float)somaEleitores;
+                Debug.Log(aux);
+                cadeirasCamara[i] = Mathf.Round(aux);
+                Debug.Log(cadeirasCamara[i]);
+            }
+            //bairrosPlayerSegmment = new BairroArray[numConectados];
+            //setUpZona.SepararBairrosPorPlayer(bairrosPlayerSegmment, numConectados);
         }
         public void CalculoEleicao(){
             if(NetworkManager.Singleton.IsServer){
-                //SomaEleitoresPlayers();
-                //CalculaNumeroEleicao();
                 ContaTotalEleitores();
                 CalcularCadeiras();
             }
             
         }
     }
-    [System.Serializable]
+    /*[System.Serializable]
     public struct BairroArray
     {
         public List<Bairro> BairrosPorPlayer;
     }
+    */
 }
