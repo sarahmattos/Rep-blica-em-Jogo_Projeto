@@ -95,14 +95,17 @@ namespace Game.Player {
         public void ContaEleitoresInBairros()
         {
             eleitoresTotais = 0;
-            //setUpZona.ProcurarBairrosInZona(NetworkManager.Singleton.LocalClientId);
             for (int i = 0; i < bairrosInControl.Length; i++)
             {
-                //Debug.Log("bairroNome: " + bairrosInControl[i].Nome + i);
                 eleitoresTotais += bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores;
                 Debug.Log("bairroNome: " + bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores +" "+ i);
             }
            
+        }
+
+        public void ContaBairros()
+        {
+            bairrosTotais = bairrosInControl.Length;
         }
 
     }

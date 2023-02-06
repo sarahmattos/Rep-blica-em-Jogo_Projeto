@@ -118,26 +118,20 @@ namespace Game.UI
         //a distribuicao inicial dos bairros atualiza o valor de bairros e eleitores totais
         public void AtualizarPlayerStatsBairro(){
             setUpZona.ProcurarBairrosInZona();
-            AtualizaBairros();
             AtualizaEleitores();
+            AtualizaBairros();
+            
         }
         
         //atualiza texto eleitores
          public void AtualizaEleitores(){
-            /*
-            if(playerDiminuiEleitor==true){
-                playerStats.eleitoresDiminuir();
-            }else{
-                playerStats.eleitoresAtualizar();
-            }
-            */
             playerStats.ContaEleitoresInBairros();
             text_eleitores.SetText(textToDisplayEleitores);
          }
          
          //atualiza texto bairros
          public void AtualizaBairros(){
-            //playerStats.bairrosAtualizar();
+            playerStats.ContaBairros();
             text_bairros.SetText(" Bairros: "+playerStats.bairrosTotais.ToString());
          }
         
