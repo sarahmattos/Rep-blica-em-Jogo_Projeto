@@ -10,6 +10,7 @@ namespace Game
 {
     public class EleicaoManager : NetworkBehaviour
     {
+        public static EleicaoManager Instance;
         public int somaEleitores;
         public float[] cadeirasCamara;
         public int cadeirasTotais;
@@ -19,11 +20,13 @@ namespace Game
         //public BairroArray[] bairrosPlayerSegmment;
         public int[] eleitoresPlayers;
         private SetUpZona setUpZona;
+        private string cadeiras;
         void Start()
         {
            cadeirasTotais=12;
            zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
+            Instance = this;
         }
         
         public void ContaTotalEleitores()
@@ -58,7 +61,8 @@ namespace Game
                 float aux = ((float)eleitoresPlayers[i] * (float)cadeirasTotais) / (float)somaEleitores;
                 Debug.Log(aux);
                 cadeirasCamara[i] = Mathf.Round(aux);
-                Debug.Log(cadeirasCamara[i]);
+                cadeiras += "Player "+i+" tem: "+cadeirasCamara[i].ToString() +" cadeiras"+ "\n";
+                UIeleicao.Instance.MostrarCadeiras(cadeiras);
             }
             //bairrosPlayerSegmment = new BairroArray[numConectados];
             //setUpZona.SepararBairrosPorPlayer(bairrosPlayerSegmment, numConectados);

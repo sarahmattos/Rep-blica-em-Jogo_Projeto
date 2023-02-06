@@ -34,7 +34,7 @@ namespace Game
 
         private void OnEleicaoEntrada()
         {
-          //  EleicaoManager.Instance.CalculoEleicao();
+            EleicaoManager.Instance.CalculoEleicao();
             UIeleicaoObjsParent.SetActive(true);
         }
 
@@ -44,6 +44,7 @@ namespace Game
         }
         public void MostrarCadeiras(string valor)
         {
+            UIeleicaoObjsParent.SetActive(true);
             cadeirasUi.text ="cadeiras: "+ valor;
             Debug.Log("entrou ui");
            // EleicaoManager.Instance.DefaultServerRpc();
