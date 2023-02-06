@@ -48,7 +48,6 @@ namespace Game
                 bairros.AddAll(zonasTerritoriais[i].Bairros);
             }
 
-            bairros.Shuffle();
             return bairros;
 
         }

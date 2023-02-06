@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Player;
 using Unity.Netcode;
+using Game.Territorio;
+using Game.Tools;
 
 namespace Game
 {
-    public class EleicaoManager : NetworkManager
+    public class EleicaoManager : NetworkBehaviour
     {
-        private int somaEleitores;
+        public int somaEleitores;
         private float cadeirasCamara;
         private int cadeirasTotais;
+        [SerializeField] private List<Bairro> todosBairros;
+        private ZonaTerritorial[] zonasTerritoriais;
         void Start()
         {
            cadeirasTotais=12;
-        //server vai passar todos playerstats e primeiro somar todos os valores e dpsfazer o calculo
+           zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
+            //server vai passar todos playerstats e primeiro somar todos os valores e dpsfazer o calculo
         }
         private void SomaEleitoresPlayers()
         {
@@ -38,11 +43,32 @@ namespace Game
         {
         
         }
+        public void ContaTotalEleitores()
+        {
+            todosBairros = GetBairros();
+            somaEleitores = 0;
+            foreach (Bairro bairro in todosBairros)
+            {
+                somaEleitores += bairro.SetUpBairro.Eleitores.contaEleitores;
+            }
 
+        }
+        private List<Bairro> GetBairros()
+        {
+            List<Bairro> bairros = new List<Bairro>();
+            for (int i = 0; i < zonasTerritoriais.Length; i++)
+            {
+                bairros.AddAll(zonasTerritoriais[i].Bairros);
+            }
+
+            return bairros;
+
+        }
         public void CalculoEleicao(){
             if(NetworkManager.Singleton.IsServer){
-                SomaEleitoresPlayers();
-                CalculaNumeroEleicao();
+                //SomaEleitoresPlayers();
+                //CalculaNumeroEleicao();
+                ContaTotalEleitores();
             }
             
         }
