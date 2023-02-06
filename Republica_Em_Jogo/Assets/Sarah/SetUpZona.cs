@@ -1,23 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Game.Player;
+using Game.UI;
 namespace Game.Territorio
+
 {
 public class SetUpZona : MonoBehaviour
 {
     //public static SetUpZona instance;
     private ZonaTerritorial[] zonas;
     public ZonaTerritorial[] ZonaTerritorial => zonas;
-    void Start()
+    private HudStatsJogador hs;
+        void Start()
     {
-        //instance= this;
-    }
+            //instance= this;
+            hs = FindObjectOfType<HudStatsJogador>();
+        }
 
     private void Awake()
         {
             zonas = GetComponentsInChildren<ZonaTerritorial>();
             
+        }
+        public void Update()
+        {
+            if (Input.GetKeyDown("space"))
+            {
+                PlayerStats ps = hs.GetPlayerStats();
+                ProcurarBairrosInZona(ps);
+            }
         }
         public void eleitoresZona(int valor, string nome){
             foreach(ZonaTerritorial zona in zonas)
@@ -48,6 +60,14 @@ public class SetUpZona : MonoBehaviour
             }
 
         }
-        
-}
+        public void ProcurarBairrosInZona(PlayerStats _ps)
+        {
+            foreach (ZonaTerritorial zona in zonas)
+            {
+                    zona.ContarBairroInControl(_ps);
+            }
+
+        }
+
+    }
 }

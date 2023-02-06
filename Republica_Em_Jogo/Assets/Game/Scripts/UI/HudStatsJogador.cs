@@ -199,6 +199,10 @@ namespace Game.UI
             }
             
          }
+        public PlayerStats GetPlayerStats()
+        {
+           return playerStats;
+        }
     }
 
 }

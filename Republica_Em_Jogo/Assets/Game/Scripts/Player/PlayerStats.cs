@@ -2,6 +2,7 @@ using Unity.Netcode;
 using UnityEngine;
 using System.Collections.Generic;
 using Game.UI;
+using Game.Territorio;
 
 namespace Game.Player {
 
@@ -19,6 +20,9 @@ namespace Game.Player {
         [SerializeField] private int educacaoRecurso;
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
+        //[SerializeField] private Bairro[] bairrosInControl;
+        [SerializeField] private List<Bairro> bairrosInControl;
+        //private SetUpZona setUpZona;
         public int bairrosTotais;
         public float eleitoresNovos;
         public RecursoCartaObjeto recursoManager;
@@ -31,12 +35,15 @@ namespace Game.Player {
         public int EleitoresTotais { get => eleitoresTotais; }
         public int SaudeRecurso { get => saudeRecurso; }
         public int EducacaoRecurso { get => educacaoRecurso; }
+        public List<Bairro> BairrosInControl { get => bairrosInControl; }
         public State GameplayLoadState => GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD];
        
         private void Start()
         {
             GameplayLoadState.Saida += InicializaPlayerStats;
+            //setUpZona = GameObject.FindObjectOfType<SetUpZona>();
         }
+        
         public override void OnDestroy()
         {
             GameplayLoadState.Saida -= InicializaPlayerStats;
@@ -85,6 +92,10 @@ namespace Game.Player {
         }
         public void bairrosAtualizar(){
             bairrosTotais++;
+        }
+        public void ChamaBairrosInControl()
+        {
+            //setUpZona.ProcurarBairrosInZona(NetworkManager.Singleton.LocalClientId);
         }
 
     }
