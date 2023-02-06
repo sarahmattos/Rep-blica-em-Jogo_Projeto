@@ -66,6 +66,41 @@ namespace Game.Territorio
             }
            
         }
+        /*public void ContarBairroInControlTodosPlayers(BairroArray[] _bairrosPlayerSegmment, int numPlayer)
+        {
+
+            foreach (Bairro bairro in bairros)
+            {
+                for(int i=0;i< numPlayer;  i++)
+                {
+                    if (bairro.playerIDNoControl.Value == i)
+                    {
+                        // _bairrosTotais[i] = bairro;
+                        _bairrosPlayerSegmment[i].BairrosPorPlayer.Add(bairro);
+                    }
+                }
+                
+            }
+
+       } */
+        public void ContarBairroInControlTodosPlayers(int[] _eleitoresPlayers, int numPlayer)
+        {
+
+            foreach (Bairro bairro in bairros)
+            {
+                for (int i = 0; i < numPlayer; i++)
+                {
+                    if (bairro.playerIDNoControl.Value == i)
+                    {
+                    // _bairrosTotais[i] = bairro;
+                    //_bairrosPlayerSegmment[i].BairrosPorPlayer.Add(bairro);
+                    _eleitoresPlayers[i]+= bairro.SetUpBairro.Eleitores.contaEleitores;
+                }
+                }
+
+            }
+
+        }
     }
 
 

@@ -68,5 +68,23 @@ public class SetUpZona : MonoBehaviour
 
         }
 
+       /* public void SepararBairrosPorPlayer(BairroArray[] _bairrosPlayerSegmment, int numPlayer)
+        {
+            foreach (ZonaTerritorial zona in zonas)
+            {
+                zona.ContarBairroInControlTodosPlayers(_bairrosPlayerSegmment, numPlayer);
+            }
+            
+        }
+       */
+        public void SepararBairrosPorPlayer(int[] _eleitoresPlayers, int numPlayer)
+        {
+            foreach (ZonaTerritorial zona in zonas)
+            {
+                zona.ContarBairroInControlTodosPlayers(_eleitoresPlayers, numPlayer);
+            }
+
+        }
+
     }
 }

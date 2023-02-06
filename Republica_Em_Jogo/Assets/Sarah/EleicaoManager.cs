@@ -15,10 +15,16 @@ namespace Game
         private int cadeirasTotais;
         [SerializeField] private List<Bairro> todosBairros;
         private ZonaTerritorial[] zonasTerritoriais;
+        public int numConectados;
+        public BairroArray[] bairrosPlayerSegmment;
+        public int[] eleitoresPlayers;
+        private SetUpZona setUpZona;
         void Start()
         {
            cadeirasTotais=12;
            zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
+            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
+
             //server vai passar todos playerstats e primeiro somar todos os valores e dpsfazer o calculo
         }
         private void SomaEleitoresPlayers()
@@ -64,13 +70,27 @@ namespace Game
             return bairros;
 
         }
+        public void CalcularCadeiras()
+        {
+            numConectados = NetworkManager.Singleton.ConnectedClientsIds.Count;
+            //bairrosPlayerSegmment = new BairroArray[numConectados];
+            eleitoresPlayers = new int[numConectados];
+            //setUpZona.SepararBairrosPorPlayer(bairrosPlayerSegmment, numConectados);
+            setUpZona.SepararBairrosPorPlayer(eleitoresPlayers, numConectados);
+        }
         public void CalculoEleicao(){
             if(NetworkManager.Singleton.IsServer){
                 //SomaEleitoresPlayers();
                 //CalculaNumeroEleicao();
                 ContaTotalEleitores();
+                CalcularCadeiras();
             }
             
         }
+    }
+    [System.Serializable]
+    public struct BairroArray
+    {
+        public List<Bairro> BairrosPorPlayer;
     }
 }

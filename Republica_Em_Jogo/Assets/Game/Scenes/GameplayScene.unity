@@ -5638,6 +5638,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   somaEleitores: 0
   todosBairros: []
+  numConectados: 0
+  bairrosPlayers: []
 --- !u!4 &541562369
 Transform:
   m_ObjectHideFlags: 0
