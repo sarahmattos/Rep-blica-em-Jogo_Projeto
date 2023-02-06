@@ -82,7 +82,7 @@ namespace Game.UI
             text_objetivo.SetText(playerStats.ObjetivoCarta);
             
         }
-
+        
         //distribui carta de recurso (chamada pela classe projeto)
         public void updateRecursoCartaUI(int quantidade)
         {   
@@ -117,25 +117,27 @@ namespace Game.UI
         
         //a distribuicao inicial dos bairros atualiza o valor de bairros e eleitores totais
         public void AtualizarPlayerStatsBairro(){
+            setUpZona.ProcurarBairrosInZona();
             AtualizaBairros();
             AtualizaEleitores();
         }
         
         //atualiza texto eleitores
          public void AtualizaEleitores(){
-            
+            /*
             if(playerDiminuiEleitor==true){
                 playerStats.eleitoresDiminuir();
             }else{
                 playerStats.eleitoresAtualizar();
             }
-            
+            */
+            playerStats.ContaEleitoresInBairros();
             text_eleitores.SetText(textToDisplayEleitores);
          }
          
          //atualiza texto bairros
          public void AtualizaBairros(){
-            playerStats.bairrosAtualizar();
+            //playerStats.bairrosAtualizar();
             text_bairros.SetText(" Bairros: "+playerStats.bairrosTotais.ToString());
          }
         

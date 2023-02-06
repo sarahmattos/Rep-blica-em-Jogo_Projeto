@@ -67,7 +67,7 @@ namespace Game.Territorio
 
             //chama funcao pra atualizar bairro e eleitores na distribuicao inicial
             if(newValue == (int)NetworkManager.Singleton.LocalClientId){
-                hs.AtualizarPlayerStatsBairro();
+                //hs.AtualizarPlayerStatsBairro();
             }
         }
 

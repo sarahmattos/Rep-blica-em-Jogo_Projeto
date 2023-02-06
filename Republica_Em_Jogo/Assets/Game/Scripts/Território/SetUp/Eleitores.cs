@@ -6,6 +6,7 @@ namespace Game.Territorio
 {
     public class Eleitores : NetworkBehaviour
     {
+        public int contaEleitores;
         public NetworkVariable<int> eleitores = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         private TMP_Text text_eleitores;
@@ -28,7 +29,9 @@ namespace Game.Territorio
         }
         private void onEleitoresMuda(int previousValue, int newValue)
         {
+            
             text_eleitores.SetText(newValue.ToString());
+            contaEleitores = newValue;
         }
 
         public void MudaValorEleitores(int value)

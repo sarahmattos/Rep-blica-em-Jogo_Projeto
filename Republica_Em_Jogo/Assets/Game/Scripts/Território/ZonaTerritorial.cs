@@ -3,6 +3,7 @@ using Game.Tools;
 using UnityEngine;
  using Game.UI;
 using Game.Player;
+using System.Collections.Generic;
 namespace Game.Territorio
 {
     public class ZonaTerritorial : MonoBehaviour
@@ -16,7 +17,7 @@ namespace Game.Territorio
         private Projeto projeto;  
         private HudStatsJogador hs;
         private ControlePassarState cp;
-        //int i=0;
+        int i=0;
 
         private void Awake()
         {
@@ -54,18 +55,17 @@ namespace Game.Territorio
                 bairro.bairroNaZonaEscolhida=false;
                 }
             }
-        public void ContarBairroInControl(PlayerStats _ps) { 
+        public void ContarBairroInControl(PlayerStats _ps, List<Bairro> _listAux) {
             
             foreach (Bairro bairro in bairros)
             {
                 if (bairro.playerIDNoControl.Value == _ps.playerID)
                 {
-                    Debug.Log("bairroNome: " + bairro.Nome);
-                    //
-                    _ps.BairrosInControl.Add(bairro);
-                    
+                    //Debug.Log("bairroNome: " + bairro.Nome);
+                    _listAux.Add(bairro);
                 }
             }
+           
         }
     }
 

@@ -23,14 +23,16 @@ public class SetUpZona : MonoBehaviour
             zonas = GetComponentsInChildren<ZonaTerritorial>();
             
         }
+        /*
         public void Update()
         {
             if (Input.GetKeyDown("space"))
             {
-                PlayerStats ps = hs.GetPlayerStats();
-                ProcurarBairrosInZona(ps);
+                
+                ProcurarBairrosInZona();
             }
         }
+        */
         public void eleitoresZona(int valor, string nome){
             foreach(ZonaTerritorial zona in zonas)
             {
@@ -60,11 +62,18 @@ public class SetUpZona : MonoBehaviour
             }
 
         }
-        public void ProcurarBairrosInZona(PlayerStats _ps)
+        public void ProcurarBairrosInZona()
         {
+            PlayerStats ps = hs.GetPlayerStats();
+            List<Bairro> listaAux = new List<Bairro>();
             foreach (ZonaTerritorial zona in zonas)
             {
-                    zona.ContarBairroInControl(_ps);
+                zona.ContarBairroInControl(ps, listaAux);
+            }
+            ps.bairrosInControl = new Bairro[listaAux.Count];
+            for (int i = 0; i < ps.bairrosInControl.Length; i++)
+            {
+                ps.bairrosInControl[i] = listaAux[i];
             }
 
         }

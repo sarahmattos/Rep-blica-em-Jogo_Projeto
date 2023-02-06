@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using Logger = Game.Tools.Logger;
+using Game.UI;
 
 
 namespace Game
@@ -14,6 +15,7 @@ namespace Game
     {
         //TODO: isolar DISTRIBUIÇÃO nos bairros em outra classe
         [SerializeField] private float intervaloTempo = 0.5f;
+        [SerializeField] private HudStatsJogador hs;
         private ZonaTerritorial[] zonasTerritoriais;
 
 
@@ -23,6 +25,7 @@ namespace Game
 
         public override void EnterState()
         {
+            hs = FindObjectOfType<HudStatsJogador>();
             Logger.Instance.LogInfo("Enter state: Inicializa");
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
             todosBairros = GetBairros();
@@ -68,6 +71,7 @@ namespace Game
             }
 
             Logger.Instance.LogInfo("distribuição TERMINOU.");
+            hs.AtualizarPlayerStatsBairro();
             stateHandler.NextStateServerRPC();
 
 

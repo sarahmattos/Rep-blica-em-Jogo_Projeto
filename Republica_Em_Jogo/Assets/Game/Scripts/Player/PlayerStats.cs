@@ -20,8 +20,7 @@ namespace Game.Player {
         [SerializeField] private int educacaoRecurso;
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
-        //[SerializeField] private Bairro[] bairrosInControl;
-        [SerializeField] private List<Bairro> bairrosInControl;
+        public Bairro[] bairrosInControl;
         //private SetUpZona setUpZona;
         public int bairrosTotais;
         public float eleitoresNovos;
@@ -35,7 +34,7 @@ namespace Game.Player {
         public int EleitoresTotais { get => eleitoresTotais; }
         public int SaudeRecurso { get => saudeRecurso; }
         public int EducacaoRecurso { get => educacaoRecurso; }
-        public List<Bairro> BairrosInControl { get => bairrosInControl; }
+        //public Bairro[] BairrosInControl { get => bairrosInControl; }
         public State GameplayLoadState => GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD];
        
         private void Start()
@@ -93,9 +92,17 @@ namespace Game.Player {
         public void bairrosAtualizar(){
             bairrosTotais++;
         }
-        public void ChamaBairrosInControl()
+        public void ContaEleitoresInBairros()
         {
+            eleitoresTotais = 0;
             //setUpZona.ProcurarBairrosInZona(NetworkManager.Singleton.LocalClientId);
+            for (int i = 0; i < bairrosInControl.Length; i++)
+            {
+                //Debug.Log("bairroNome: " + bairrosInControl[i].Nome + i);
+                eleitoresTotais += bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores;
+                Debug.Log("bairroNome: " + bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores +" "+ i);
+            }
+           
         }
 
     }
