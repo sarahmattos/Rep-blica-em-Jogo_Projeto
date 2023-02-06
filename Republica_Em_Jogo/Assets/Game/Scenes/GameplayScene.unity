@@ -1440,8 +1440,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1929002169}
     m_Modifications:
     - target: {fileID: 8162957967438440490, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00060272217
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162957967438440490, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -2.5579925
+      value: -2.5579987
       objectReference: {fileID: 0}
     - target: {fileID: 8162957967592620714, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1469,11 +1473,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8162957968737513788, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8162957968737513788, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8162957968737513788, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: m_RootOrder
@@ -1533,11 +1537,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8162957968737513788, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -121.90744
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8162957968737513788, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 140.89313
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8162957968737513788, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5639,7 +5643,8 @@ MonoBehaviour:
   somaEleitores: 0
   todosBairros: []
   numConectados: 0
-  bairrosPlayers: []
+  bairrosPlayerSegmment: []
+  eleitoresPlayers: 
 --- !u!4 &541562369
 Transform:
   m_ObjectHideFlags: 0

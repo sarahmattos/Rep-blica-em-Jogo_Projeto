@@ -37,6 +37,7 @@ namespace Game
         {
             StopAllCoroutines();
             Logger.Instance.LogInfo("Exit state: Inicializa");
+            hs.AtualizarPlayerStatsBairro();
 
         }
 
@@ -70,7 +71,7 @@ namespace Game
             }
 
             Logger.Instance.LogInfo("distribuição TERMINOU.");
-            hs.AtualizarPlayerStatsBairro();
+            //hs.AtualizarPlayerStatsBairro();
             stateHandler.NextStateServerRPC();
 
 
