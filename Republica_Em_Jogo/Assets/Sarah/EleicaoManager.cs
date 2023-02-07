@@ -5,11 +5,13 @@ using Game.Player;
 using Unity.Netcode;
 using Game.Territorio;
 using Game.Tools;
+using Unity.Collections;
 
 namespace Game
 {
     public class EleicaoManager : NetworkBehaviour
     {
+        private NetworkVariable<FixedString4096Bytes> EleicaoText = new NetworkVariable<FixedString4096Bytes>();
         public static EleicaoManager Instance;
         public int somaEleitores;
         public float[] cadeirasCamara;
@@ -52,6 +54,7 @@ namespace Game
         }
         public void CalcularCadeiras()
         {
+            cadeiras="";
             numConectados = NetworkManager.Singleton.ConnectedClientsIds.Count;
             eleitoresPlayers = new int[numConectados];
             cadeirasCamara = new float[numConectados];
@@ -62,7 +65,7 @@ namespace Game
                 Debug.Log(aux);
                 cadeirasCamara[i] = Mathf.Round(aux);
                 cadeiras += "Player "+i+" tem: "+cadeirasCamara[i].ToString() +" cadeiras"+ "\n";
-                UIeleicao.Instance.MostrarCadeiras(cadeiras);
+                EleicaoText.Value = cadeiras;
             }
             //bairrosPlayerSegmment = new BairroArray[numConectados];
             //setUpZona.SepararBairrosPorPlayer(bairrosPlayerSegmment, numConectados);
@@ -74,6 +77,18 @@ namespace Game
             }
             
         }
+        private void OnEnable()
+    {
+        //jogadores conectados
+        EleicaoText.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
+        {
+            if (newValue != "")
+            {
+                UIeleicao.Instance.MostrarCadeiras(newValue.ToString());
+                Debug.Log(newValue.ToString());
+            }
+        };
+
     }
     /*[System.Serializable]
     public struct BairroArray
@@ -81,4 +96,5 @@ namespace Game
         public List<Bairro> BairrosPorPlayer;
     }
     */
+    }
 }
