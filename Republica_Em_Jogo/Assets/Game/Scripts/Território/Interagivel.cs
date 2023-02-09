@@ -25,6 +25,7 @@ namespace Game.Territorio
 
         void Start()
         {
+            // habilitado = false;
             material = GetComponent<MeshRenderer>().material;
             bairro = GetComponentInParent<Bairro>();
         }

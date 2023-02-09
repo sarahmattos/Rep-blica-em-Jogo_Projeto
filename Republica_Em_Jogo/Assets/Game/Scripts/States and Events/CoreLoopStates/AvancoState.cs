@@ -84,13 +84,6 @@ namespace Game
             avancoStateIndex.Value = (avancoStateIndex.Value + 1) % (statePairValues.Count);
         }
 
-        #region  para testar a troca de estado
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.O))
-                NextAvancoStateServerRpc();
-        }
-        #endregion
    
     }
 }
