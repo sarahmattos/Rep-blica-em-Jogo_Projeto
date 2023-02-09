@@ -11,13 +11,14 @@ namespace Game.Territorio
     {
         [SerializeField]    private bool habilitado;
 
-        public event Action click;
+        public event Action<Bairro> click;
         public event Action mouseExit;
         public event Action mouseEnter;    
 
         private new Collider collider;
 
         private Material material;
+        private Bairro bairro;
 
         public Material Material  => material; 
         
@@ -25,6 +26,7 @@ namespace Game.Territorio
         void Start()
         {
             material = GetComponent<MeshRenderer>().material;
+            bairro = GetComponentInParent<Bairro>();
         }
 
 
@@ -43,7 +45,7 @@ namespace Game.Territorio
         void OnMouseUpAsButton()
         {
             if(!habilitado) return;
-            click?.Invoke();
+            click?.Invoke(bairro);
         }
 
         public void MudarHabilitado(bool value) {
