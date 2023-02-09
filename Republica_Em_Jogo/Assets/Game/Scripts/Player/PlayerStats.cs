@@ -20,6 +20,7 @@ namespace Game.Player {
         [SerializeField] private int educacaoRecurso;
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
+        public float numCadeiras;
         public Bairro[] bairrosInControl;
         public int bairrosTotais;
         public float eleitoresNovos;
@@ -92,6 +93,7 @@ namespace Game.Player {
         {
             bairrosTotais = bairrosInControl.Length;
         }
+        
 
     }
 }

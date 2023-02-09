@@ -150,6 +150,7 @@ public class Projeto : NetworkBehaviour
         {
             if (newValue != -1)
             {
+                
                 //interface geral
                 clienteLocal = newValue;
                 projetoUI.SetActive(true);
@@ -198,6 +199,7 @@ public class Projeto : NetworkBehaviour
                 //interface para quem escolheu zona e está esperando votação
                 if (clienteLocal == (int)NetworkManager.Singleton.LocalClientId)
                 {
+                    //se tiver 7 cadeiras passa direto pra projeto aprovado
                     text_avisoProjeto.text = "\n" + "\n" + "\n" + "Zona escolhida: " + newValue.ToString() + "\n" + "Aguardando votação... ";
 
                     //interface para quem está votando

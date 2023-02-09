@@ -24,6 +24,7 @@ namespace Game.UI
         [SerializeField] private TMP_Text text_eduCarta;
         [SerializeField] private TMP_Text text_bairros;
         [SerializeField] private TMP_Text text_eleitoresNovos;
+        [SerializeField] private TMP_Text text_cadeiras;
         [SerializeField] private GameObject acaboudistribuicaoUi;
         [SerializeField] private GameObject acaboudistribuicaoUi2;
         [SerializeField] private GameObject distribuaEleitorUi;
@@ -31,6 +32,7 @@ namespace Game.UI
         public int eduQuant, saudeQuant, bairroQuant; 
         public float eleitoresNovosAtual;
         private Projeto projeto; 
+        private EleicaoManager eleicaoManager; 
         private SetUpZona setUpZona; 
         public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
         public bool playerRecebeEleitor=true;
@@ -48,8 +50,9 @@ namespace Game.UI
             GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO].Entrada += FindingLocalPlayerStats;
             projeto = FindObjectOfType<Projeto>();
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();
+            eleicaoManager =FindObjectOfType<EleicaoManager>();
         }
-
+        
         public override void OnNetworkDespawn()
         {
             GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO].Entrada -= FindingLocalPlayerStats;
@@ -198,6 +201,13 @@ namespace Game.UI
         {
            return playerStats;
         }
+        public void cadeirasUi(float valor){
+            Debug.Log(valor);
+            //numCadeiras=EleicaoManager.Instance.cadeirasCamara[(int)NetworkManager.Singleton.LocalClientId];
+            playerStats.numCadeiras = valor;
+            text_cadeiras.SetText(playerStats.numCadeiras.ToString());
+        }
+        
     }
 
 }

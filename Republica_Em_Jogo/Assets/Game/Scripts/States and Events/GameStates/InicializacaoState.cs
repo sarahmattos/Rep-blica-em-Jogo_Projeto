@@ -6,6 +6,7 @@ using UnityEngine;
 using Unity.Netcode;
 using Logger = Game.Tools.Logger;
 using Game.UI;
+using Game.Player;
 
 
 namespace Game
@@ -13,13 +14,13 @@ namespace Game
 
     public class InicializacaoState : State
     {
-        //TODO: isolar DISTRIBUIÇÃO nos bairros em outra classe
+        //TODO: isolar DISTRIBUIï¿½ï¿½O nos bairros em outra classe
         [SerializeField] private float intervaloTempo = 0.5f;
         [SerializeField] private HudStatsJogador hs;
         private ZonaTerritorial[] zonasTerritoriais;
 
 
-        //OBS: embora não pareca ser necessario, sem SerializeField não funciona, por algum motivo.
+        //OBS: embora nï¿½o pareca ser necessario, sem SerializeField nï¿½o funciona, por algum motivo.
         [SerializeField] private List<Bairro> todosBairros;
         private GameStateHandler stateHandler => GameStateHandler.Instance;
 
@@ -38,7 +39,7 @@ namespace Game
             StopAllCoroutines();
             Logger.Instance.LogInfo("Exit state: Inicializa");
             hs.AtualizarPlayerStatsBairro();
-
+            EleicaoManager.Instance.ClientsConectServerRpc();
         }
 
         private List<Bairro> GetBairros()
@@ -61,7 +62,7 @@ namespace Game
             int aux = 0;
 
 
-            Logger.Instance.LogInfo("distribuição COMECOU.");
+            Logger.Instance.LogInfo("distribuiï¿½ï¿½o COMECOU.");
             foreach (Bairro bairro in todosBairros)
             {
                 bairro.SetPlayerControl(aux);
@@ -70,7 +71,7 @@ namespace Game
                 yield return new WaitForSeconds(intervaloTempo);
             }
 
-            Logger.Instance.LogInfo("distribuição TERMINOU.");
+            Logger.Instance.LogInfo("distribuiï¿½ï¿½o TERMINOU.");
             //hs.AtualizarPlayerStatsBairro();
             stateHandler.NextStateServerRPC();
 
