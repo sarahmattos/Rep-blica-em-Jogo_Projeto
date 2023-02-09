@@ -117,7 +117,7 @@ namespace Game.UI
         
         //a distribuicao inicial dos bairros atualiza o valor de bairros e eleitores totais
         public void AtualizarPlayerStatsBairro(){
-            setUpZona.ProcurarBairrosInZona();
+            // setUpZona.ProcurarBairrosInZona();
             AtualizaEleitores();
             AtualizaBairros();
             
@@ -131,8 +131,8 @@ namespace Game.UI
          
          //atualiza texto bairros
          public void AtualizaBairros(){
-            playerStats.ContaBairros();
-            text_bairros.SetText(" Bairros: "+playerStats.bairrosTotais.ToString());
+            // playerStats.ContaBairros();
+            text_bairros.SetText(" Bairros: "+playerStats.BairrosInControl.Count.ToString());
          }
         
         //quando o jogador distribui seus eleitores

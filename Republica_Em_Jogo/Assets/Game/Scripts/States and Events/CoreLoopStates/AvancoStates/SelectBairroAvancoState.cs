@@ -21,7 +21,7 @@ namespace Game
         public override void EnterState()
         {
             if(!TurnManager.Instance.LocalIsCurrent) return;
-            BairrosInteragiveis.Clear();
+            BairrosInteragiveis?.Clear();
 
             //Se o player local é o player atual
             // PlayerAtualBairros = PlayerStats.Instantiate.meusBairros;

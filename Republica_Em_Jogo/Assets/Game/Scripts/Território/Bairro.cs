@@ -7,7 +7,7 @@ using Game.UI;
 namespace Game.Territorio
 {
     
-    public class Bairro : NetworkBehaviour
+    public class Bairro :  NetworkBehaviour
     {
 
         [SerializeField] private string nome;
@@ -15,6 +15,8 @@ namespace Game.Territorio
         public string Nome { get => nome; }
         // private Material material;
         public event Action playerControlMuda;
+        public event Action<Bairro, int> bairroPlayerLocalForaControl;
+        public event Action<Bairro, int> bairroPlayerLocalNoControl;
         public bool playerInControl=false;
         public bool bairroNaZonaEscolhida=false;
         private Interagivel interagivel;
@@ -65,12 +67,11 @@ namespace Game.Territorio
         private void onPlayerControlMuda(int previousValue, int newValue)
         {
             Interagivel.Material.color = GameDataConfig.Instance.PlayerColorOrder[newValue];
+            bairroPlayerLocalForaControl?.Invoke(this, previousValue);
+            bairroPlayerLocalNoControl?.Invoke(this, newValue);
 
-            //chama funcao pra atualizar bairro e eleitores na distribuicao inicial
-            if(newValue == (int)NetworkManager.Singleton.LocalClientId){
-                //hs.AtualizarPlayerStatsBairro();
-            }
         }
+
 
         //verifica se bairro pertence ao jogador
         public bool VerificaControl(){
