@@ -51,6 +51,13 @@ namespace Game.Territorio
         public void MudarHabilitado(bool value) {
             habilitado = value;
             if(!value) mouseExit?.Invoke();
+
+
+            //para visualizar os bairros com habilitados igual a true
+            if(value) transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z*3);
+            else transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z/3);
+    
+            
         }
 
 

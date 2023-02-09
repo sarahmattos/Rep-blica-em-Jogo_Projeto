@@ -38,8 +38,15 @@ namespace Game.Player {
         public int EducacaoRecurso { get => educacaoRecurso; }
         public State GameplayLoadState => GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD];
 
+
+        private void Awake()
+        {
+            bairrosInControl = new List<Bairro>();
+
+        }
         private void Start()
         {
+            
             GameplayLoadState.Saida += InicializaPlayerStats;
             GameplayLoadState.Saida += InscreveReceberbairrosPlayerIDControl;
         }

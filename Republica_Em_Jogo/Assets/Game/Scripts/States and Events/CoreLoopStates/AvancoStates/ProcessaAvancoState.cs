@@ -20,6 +20,8 @@ namespace Game
 
         public override void ExitState()
         {
+
+            //desabilhitar interagivel do bairroEscolhido e bairroAlvo;
         }
     }
 }

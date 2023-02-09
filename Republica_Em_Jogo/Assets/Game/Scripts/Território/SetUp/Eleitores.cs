@@ -7,11 +7,10 @@ namespace Game.Territorio
 {
     public class Eleitores : NetworkBehaviour
     {
-        public int contaEleitores;
         private HudStatsJogador hs;
-        public NetworkVariable<int> eleitores = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-
+        private NetworkVariable<int> eleitores = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private TMP_Text text_eleitores;
+        public int contaEleitores => eleitores.Value;
 
         private void Awake()
         {
@@ -34,7 +33,6 @@ namespace Game.Territorio
         {
             
             text_eleitores.SetText(newValue.ToString());
-            contaEleitores = newValue;
             hs.AtualizarPlayerStatsBairro();
         }
 

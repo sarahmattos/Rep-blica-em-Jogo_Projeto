@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Game.Player;
 using Game.Territorio;
 
@@ -6,31 +7,34 @@ namespace Game
 {
     public class SelectBairroAvancoState : State
     {
+        private  const int eleitoresBairoMinParaAvancar = 2;
         private AvancoState avancoState;
-
         private List<Bairro> bairrosInteragiveis;
         private Bairro bairroEscolhido;
-
         public List<Bairro> BairrosInteragiveis => bairrosInteragiveis; 
 
         private void Start()
         {
+            bairrosInteragiveis = new List<Bairro>();
             avancoState = GetComponent<AvancoState>();
         }
 
         public override void EnterState()
         {
             if(!TurnManager.Instance.LocalIsCurrent) return;
-            BairrosInteragiveis?.Clear();
-
-            //Se o player local é o player atual
-            // PlayerAtualBairros = PlayerStats.Instantiate.meusBairros;
+            bairrosInteragiveis.AddRange(GetBairrosPodemInteragir());
             HabilitarInteragivelBairros(true);
+            // ReceberBairroEscolhido Bairro Escolhido no click do Interagível
+            //mover o escolhido para bairroEscolhido;
+            
         }
 
         public override void ExitState()
         {
+            BairrosInteragiveis?.Clear();
             HabilitarInteragivelBairros(false);
+            // ReceberBairroEscolhido Bairro Escolhido no click do Interagível
+
         }
 
         private void HabilitarInteragivelBairros(bool value)
@@ -47,12 +51,11 @@ namespace Game
             bairroEscolhido = bairro;
         }
 
-        // private Bairro[] GetBairrosPodemInteragir() {
-        //     //pergar bairros playerStats do player loca
-        //     //Verificar se o bairro pode ser interagivel (se eleitores count > 1).
-        //     // return Bairro[]
-        //     // BairrosInteragiveis.Add();
-        // }
+        private List<Bairro> GetBairrosPodemInteragir() {
+            List<Bairro> bairrosInControl = PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;    
+            List<Bairro> bairrosPodemInteragir = bairrosInControl.Where(n => n.SetUpBairro.Eleitores.contaEleitores >= eleitoresBairoMinParaAvancar).Select(n => n).ToList();
+            return bairrosPodemInteragir;
+        }
 
 
 

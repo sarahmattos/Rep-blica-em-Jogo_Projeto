@@ -91,7 +91,7 @@ namespace Game.Territorio
         if(VerificaControl()){
             //retirar
             if(hs.playerDiminuiEleitor==true){
-                if(setUpBairro.Eleitores.eleitores.Value>1){
+                if(setUpBairro.Eleitores.contaEleitores>1){
                     if (NetworkManager.Singleton.IsClient) MudaValorEleitorServerRpc(-1);
                     //dimiui eleitor novo e aumenta eleito total
                     hs.contagemEleitores();
@@ -102,7 +102,7 @@ namespace Game.Territorio
                     }
             }else{
                 //colocar
-                if(setUpBairro.Eleitores.eleitores.Value>0){
+                if(setUpBairro.Eleitores.contaEleitores>0){
                     if (NetworkManager.Singleton.IsClient) MudaValorEleitorServerRpc(1);
                     hs.contagemEleitores();
                     hs.valorEleitorNovo();
