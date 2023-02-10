@@ -42,22 +42,22 @@ namespace Game.Territorio
         }
 
         private void MouseInVisualiza() {
-            material.color = colorMouseIn;
+            material.SetColor("_Color", colorMouseIn);
         }
 
         private void MouseOutVisualiza()
         {
-            material.color = colorMouseOut;            
+            material.SetColor("_Color", colorMouseOut);
         }
 
         private void MouseClickVisualiza(Bairro _) {
-            material.color = colorMouseClick;
+            material.SetColor("_Color", colorMouseClick);
         }
 
 
         private void ResetMouseOutColor(int _, int playerID) {
             colorMouseOut = GameDataConfig.Instance.PlayerColorOrder[playerID];
-            material.color = colorMouseOut;
+            material.SetColor("_Color", colorMouseOut);
 
         }
 
