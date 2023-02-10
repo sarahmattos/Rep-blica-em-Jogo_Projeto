@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using Game.Territorio;
 
 namespace Game
 {
@@ -25,12 +26,23 @@ namespace Game
         private State currentState;
         private Action<AvancoStatus> estadoMuda;
         private int contagemAvancosRodada;
+        private AvancoData avancoData = new AvancoData();
+        public AvancoData AvancoData => avancoData;
 
         private void SetPairValues()
         {
-            StatePairValues.Add( AvancoStatus.SELECT_BAIRRO, GetComponentInChildren<SelectBairroAvancoState>());
-            StatePairValues.Add(AvancoStatus.SELECT_VIZINHO, GetComponentInChildren<SelecVizinhoAvancoState>());
-            StatePairValues.Add(AvancoStatus.PROCESSAMENTO, GetComponentInChildren<ProcessaAvancoState>());
+            StatePairValues.Add(
+                AvancoStatus.SELECT_BAIRRO,
+                GetComponentInChildren<SelectBairroAvancoState>()
+            );
+            StatePairValues.Add(
+                AvancoStatus.SELECT_VIZINHO,
+                GetComponentInChildren<SelecVizinhoAvancoState>()
+            );
+            StatePairValues.Add(
+                AvancoStatus.PROCESSAMENTO,
+                GetComponentInChildren<ProcessaAvancoState>()
+            );
         }
 
         private void Start()
@@ -52,9 +64,7 @@ namespace Game
             SetAvancoStateServerRpc(0);
         }
 
-        public override void ExitState()
-        {            
-        }
+        public override void ExitState() { }
 
         private void AvancoIndexMuda(int previousValue, int newValue)
         {
@@ -63,7 +73,6 @@ namespace Game
             estadoMuda?.Invoke((AvancoStatus)newValue);
 
             currentState.InvokeEntrada();
-
             AcrescentaRodadaNaSaidaUltimoAvancoState(previousValue);
         }
 
@@ -73,6 +82,7 @@ namespace Game
             if (previousvalue == ultimoAvancoStateIndex)
             {
                 contagemAvancosRodada++;
+                avancoData.ClearData();
             }
         }
 
@@ -87,6 +97,6 @@ namespace Game
         {
             avancoStateIndex.Value = (avancoStateIndex.Value + 1) % (statePairValues.Count);
         }
-
     }
+
 }

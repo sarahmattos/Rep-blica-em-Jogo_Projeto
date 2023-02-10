@@ -28,7 +28,7 @@ namespace Game.Territorio
             interagivel.mouseExit += MouseOutVisualiza;
             interagivel.click += MouseClickVisualiza;
             interagivel.mudaHabilitado += OnMudaHabilitado;
-            bairro.playerIDNoControl.OnValueChanged += ResetMouseOutColor;
+            bairro.PlayerIDNoControl.OnValueChanged += ResetMouseOutColor;
         }
 
         private void OnDestroy()
@@ -37,7 +37,7 @@ namespace Game.Territorio
             interagivel.mouseExit -= MouseOutVisualiza;
             interagivel.click -= MouseClickVisualiza;
             interagivel.mudaHabilitado -= OnMudaHabilitado;
-            bairro.playerIDNoControl.OnValueChanged -= ResetMouseOutColor;
+            bairro.PlayerIDNoControl.OnValueChanged -= ResetMouseOutColor;
 
         }
 

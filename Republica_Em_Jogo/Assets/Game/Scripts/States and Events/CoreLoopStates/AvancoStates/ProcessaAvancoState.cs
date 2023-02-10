@@ -6,22 +6,30 @@ namespace Game
 {
     public class ProcessaAvancoState : State
     {
-        private State nextState;
+        private AvancoState avancoState;
+
 
         private void Start()
         {
-            nextState = GetComponent<SelectBairroAvancoState>();
+            avancoState = GetComponentInParent<AvancoState>();
         }
 
 
         public override void EnterState()
         {
+            //Provisório: só pra visualizar.
+            avancoState.AvancoData.BairroEscolhido.Interagivel.MudarHabilitado(true);
+            avancoState.AvancoData.VizinhoEscolhido.Interagivel.MudarHabilitado(true);
         }
 
         public override void ExitState()
         {
 
-            //desabilhitar interagivel do bairroEscolhido e bairroAlvo;
+
         }
+
+
+
+
     }
 }
