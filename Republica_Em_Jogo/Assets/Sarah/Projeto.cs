@@ -7,6 +7,7 @@ using TMPro;
 using Unity.Netcode;
 using Unity.Collections;
 using Game.Territorio;
+using Game.Player;
 using Game.UI;
 using Game;
 
@@ -200,14 +201,29 @@ public class Projeto : NetworkBehaviour
                 if (clienteLocal == (int)NetworkManager.Singleton.LocalClientId)
                 {
                     //se tiver 7 cadeiras passa direto pra projeto aprovado
-                    text_avisoProjeto.text = "\n" + "\n" + "\n" + "Zona escolhida: " + newValue.ToString() + "\n" + "Aguardando votação... ";
+                    PlayerStats ps = hs.GetPlayerStats();
+                    if(ps.numCadeiras>=EleicaoManager.Instance.minCadeirasVotacao){
+                        Debug.Log("eu tenho cadeiras suficientes");
+                        projetoAprovado();
+                    
+                    }else{
+                        text_avisoProjeto.text = "\n" + "\n" + "\n" + "Zona escolhida: " + newValue.ToString() + "\n" + "Aguardando votação... ";
+                    }
+                    
 
                     //interface para quem está votando
                 }
                 else
                 {
-                    text_avisoProjeto.text = "\n" + "\n" + "Zona escolhida: " + newValue.ToString() + "\n" + "Vote: ";
-                    btns2.SetActive(true);
+                    if(EleicaoManager.Instance.cadeirasCamara[clienteLocal]>=EleicaoManager.Instance.minCadeirasVotacao){
+                        Debug.Log("outro jogador tem cadeiras suficientes");
+                        projetoAprovado();
+                    }else{
+                        text_avisoProjeto.text = "\n" + "\n" + "Zona escolhida: " + newValue.ToString() + "\n" + "Vote: ";
+                        btns2.SetActive(true);
+                    }
+                    
+                    
                 }
                 inVotacao = true;
             }
@@ -245,20 +261,7 @@ public class Projeto : NetworkBehaviour
                     //se teve mais sim, foi aprovado
                     if (sim > nao)
                     {
-                        text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO APROVADO" + "\n" + "Recompensa: " + numRecompensaDefault + " carta(s) e " + numRecompensaDefault + " eleitor(es)";
-                        //parte da recompensa
-                        //eleitoresZonaFinal();
-                        aprovado = true;
-                        setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
-                        if (playerInZona == true)
-                        {
-                            cp.distribuicaoProjeto = true;
-                            cp.AumentaValServerRpc();
-                            Debug.Log("adicionou um");
-                        }
-                        //sim=0;
-                        //nao=0;
-                        inVotacao = false;
+                        projetoAprovado();
                     }
 
                     //se teve mais não ou empate, foi reprovado
@@ -309,7 +312,7 @@ public class Projeto : NetworkBehaviour
     public void fechar()
     {
         //desatuva interface
-
+        //se o projeto n foi aprovado e eu sou o client id eu passo de state
         fecharBtn.SetActive(false);
         projetoUI.SetActive(false);
         if (aprovado == true)
@@ -371,6 +374,19 @@ public class Projeto : NetworkBehaviour
         {
             text_avisoProjeto.text = "\n" + "\n" + "\n" + "Seu partido votou " + mostrarResposta + "\n" + "Aguardando outros partidos...";
         }
+    }
+    public void projetoAprovado(){
+        fecharBtn.SetActive(true);
+        text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO APROVADO" + "\n" + "Recompensa: " + numRecompensaDefault + " carta(s) e " + numRecompensaDefault + " eleitor(es)";
+        aprovado = true;
+        setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
+        if (playerInZona == true)
+        {
+            cp.distribuicaoProjeto = true;
+            cp.AumentaValServerRpc();
+            Debug.Log("adicionou um");
+        }
+        inVotacao = false;
     }
 }
 

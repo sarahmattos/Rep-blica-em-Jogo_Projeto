@@ -19,7 +19,7 @@ namespace Game
         public static EleicaoManager Instance;
         public int somaEleitores;
         public float[] cadeirasCamara;
-        public int cadeirasTotais;
+        public int cadeirasTotais, minCadeirasVotacao;
         [SerializeField] private List<Bairro> todosBairros;
         private ZonaTerritorial[] zonasTerritoriais;
         public int numConectados;
@@ -32,6 +32,7 @@ namespace Game
            zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             Instance = this;
+            minCadeirasVotacao=6;
             
         }
         [ServerRpc(RequireOwnership = false)]
