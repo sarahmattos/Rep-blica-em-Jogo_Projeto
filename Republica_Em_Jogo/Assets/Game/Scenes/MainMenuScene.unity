@@ -500,22 +500,13 @@ MonoBehaviour:
   projetoManager: {fileID: 11400000, guid: 2910fdc27ce7cdd489424b00e81158d5, type: 2}
   text_projetoCarta: {fileID: 0}
   text_avisoProjeto: {fileID: 0}
-  text_avisoOutros: {fileID: 0}
   projetoUI: {fileID: 0}
   restoUI: {fileID: 0}
   bntsUi: {fileID: 0}
   btns2: {fileID: 0}
   fecharBtn: {fileID: 0}
   verProjetoBtn: {fileID: 0}
-  proposta: 
-  numRecompensa: 0
-  numRecompensaDefault: 0
-  recompensaText: 
-  zonaNameLocal: 
   clienteLocal: -1
-  sim: 0
-  nao: 0
-  numPlayer: 0
   playerInZona: 0
   distribuicaoProjeto: 0
   aprovado: 0

@@ -62,7 +62,6 @@ namespace Game.Territorio
                 {
                     if (bairro.bairroNaZonaEscolhida == true)
                     {
-                        Debug.Log("projeto distribuicao");
                         bairro.EscolherBairroEleitor();
                     }
                 }

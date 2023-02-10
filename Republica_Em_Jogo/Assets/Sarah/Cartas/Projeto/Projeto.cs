@@ -34,10 +34,10 @@ public class Projeto : NetworkBehaviour
     [Header("Ui")]
     [SerializeField] private TMP_Text text_projetoCarta;
     [SerializeField] private TMP_Text text_avisoProjeto;
-    [SerializeField] private GameObject projetoUI;
+    public GameObject projetoUI;
     [SerializeField] private GameObject restoUI;
     [SerializeField] private GameObject bntsUi, btns2, fecharBtn;
-    [SerializeField] private GameObject verProjetoBtn;
+    public GameObject verProjetoBtn;
 
     [Header("Variaveis")]
     private int numRecompensa, numRecompensaDefault, sim, quantVotos, numPlayer;
@@ -273,7 +273,7 @@ public class Projeto : NetworkBehaviour
         {
             int id = (int)NetworkManager.Singleton.LocalClientId;
             UpdateClientPositionServerRpc(textoTotal2, id, numRecompensa);
-            Debug.Log("cliente");
+            //Debug.Log("cliente");
         }
         if (NetworkManager.Singleton.IsServer)
         {
@@ -281,7 +281,7 @@ public class Projeto : NetworkBehaviour
             idPlayer.Value = (int)NetworkManager.Singleton.LocalClientId;
             recompensaNetworkNum.Value = numRecompensa;
             numPlayers.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
-            Debug.Log("server");
+            //Debug.Log("server");
 
         }
     }

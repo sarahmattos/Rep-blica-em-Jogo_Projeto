@@ -101,7 +101,7 @@ namespace Game
             if (newValue != "")
             {
                 UIeleicao.Instance.MostrarCadeiras(newValue.ToString());
-                Debug.Log(newValue.ToString());
+                //Debug.Log(newValue.ToString());
             }
         };
         conectados.OnValueChanged += (int previousValue, int newValue) =>

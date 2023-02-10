@@ -65,7 +65,7 @@ namespace Game.Player {
         public void inicioRodada()
          {
              eleitoresNovos = Mathf.Floor(bairrosTotais / 2);
-             Debug.Log("eleitoresNovos "+eleitoresNovos);
+             //Debug.Log("eleitoresNovos "+eleitoresNovos);
          }
 
         public void InicializaPlayerStats()

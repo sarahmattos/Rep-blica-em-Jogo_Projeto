@@ -36,7 +36,7 @@ public class SetUpZona : MonoBehaviour
             foreach(ZonaTerritorial zona in zonas)
             {
                 if(zona.Nome==nome){
-                    Debug.Log("recursoNameZona: "+nome);
+                    //Debug.Log("recursoNameZona: "+nome);
                     zona.verificarPlayerNasZonas(valor);
                 }
             }

@@ -74,10 +74,10 @@ namespace Game.Territorio
         public bool VerificaControl(){
             if(playerIDNoControl.Value == (int)NetworkManager.Singleton.LocalClientId){
                 playerInControl=true;
-                Debug.Log("seu bairro");
+                //Debug.Log("seu bairro");
             }else{
                 playerInControl=false;
-                Debug.Log("nao possui esse bairro");
+                //Debug.Log("nao possui esse bairro");
             }
             return playerInControl;
         }

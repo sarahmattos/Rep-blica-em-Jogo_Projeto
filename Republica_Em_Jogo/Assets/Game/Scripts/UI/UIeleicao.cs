@@ -45,9 +45,6 @@ namespace Game
         public void MostrarCadeiras(string valor)
         {
             cadeirasUi.text = valor;
-            Debug.Log("entrou ui");
-           // EleicaoManager.Instance.DefaultServerRpc();
-            //EleicaoManager.Instance.resetauxs();
         }
 
 
