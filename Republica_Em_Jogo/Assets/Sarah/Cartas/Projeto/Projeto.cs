@@ -15,6 +15,7 @@ using Game;
 //{
 public class Projeto : NetworkBehaviour
 {
+    [Header("NetworkVariables")]
     private NetworkVariable<FixedString4096Bytes> projetoNetworkTexto = new NetworkVariable<FixedString4096Bytes>();
     private NetworkVariable<FixedString4096Bytes> zonaNetworkName = new NetworkVariable<FixedString4096Bytes>();
     private NetworkVariable<int> recompensaNetworkNum = new NetworkVariable<int>(-1);
@@ -23,38 +24,41 @@ public class Projeto : NetworkBehaviour
     private NetworkVariable<int> votacaoResposta = new NetworkVariable<int>(0);
     private NetworkVariable<int> numPlayers = new NetworkVariable<int>(-1);
 
+    [Header("Referencias")]
+    [SerializeField] private ProjetoObject projetoManager;
     private HudStatsJogador hs;
-    public ProjetoObject projetoManager;
     private SetUpZona setUpZona;
     private ZonaTerritorial zt;
     private ControlePassarState cp;
 
+    [Header("Ui")]
     [SerializeField] private TMP_Text text_projetoCarta;
     [SerializeField] private TMP_Text text_avisoProjeto;
-    [SerializeField] private TMP_Text text_avisoOutros;
+    [SerializeField] private GameObject projetoUI;
+    [SerializeField] private GameObject restoUI;
+    [SerializeField] private GameObject bntsUi, btns2, fecharBtn;
+    [SerializeField] private GameObject verProjetoBtn;
 
-    public GameObject projetoUI;
-    public GameObject restoUI;
-    public GameObject bntsUi, btns2, fecharBtn;
-    public GameObject verProjetoBtn;
-
-    public string proposta;
-    public int numRecompensa, numRecompensaDefault;
-    public string recompensaText, zonaNameLocal;
+    [Header("Variaveis")]
+    private int numRecompensa, numRecompensaDefault, sim, quantVotos, numPlayer;
+    private string recompensaText, zonaNameLocal, mostrarResposta, proposta;
+    [HideInInspector]
     public int clienteLocal = -1;
-    public int sim, nao, numPlayer;
-    private string mostrarResposta;
-    private bool mostrouResultado = false;
-    public bool playerInZona = false;
-    public bool distribuicaoProjeto = false;
     private bool projetoNaoAprovado=false;
+    [HideInInspector]
+    public bool playerInZona = false;
+    [HideInInspector]
+    public bool distribuicaoProjeto = false;
+    [HideInInspector]
     public bool aprovado = false;
-
+    [HideInInspector]
     public bool inVotacao = false;
 
     //Client cashing
     private string clientDados;
     private string textoTotal = "";
+
+
     public void Awake()
     {
         setUpZona = GameObject.FindObjectOfType<SetUpZona>();
@@ -63,6 +67,7 @@ public class Projeto : NetworkBehaviour
         cp = FindObjectOfType<ControlePassarState>();
     }
 
+//********Seção funções RPC**************************************************
     //reseta valores para nova busca
     [ServerRpc(RequireOwnership = false)]
     public void DefaultValuesServerRpc()
@@ -108,36 +113,8 @@ public class Projeto : NetworkBehaviour
         numPlayers.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
     }
 
-    //sortea os valores do projeto
-    public void sortearProjeto()
-    {
-        defaultValues();
-        proposta = projetoManager.proposta[Random.Range(0, projetoManager.proposta.Length)];
-        numRecompensa = projetoManager.numRecompensa[Random.Range(0, projetoManager.numRecompensa.Length)];
-        recompensaText = projetoManager.recompensaText;
-        textoTotal = proposta + "\n" + "\n" + recompensaText + "" + numRecompensa.ToString();
-        atualizarProjeto(textoTotal);
-
-    }
-    //atualiza a carta de projeto ou pede pro host fazer isso
-    public void atualizarProjeto(string textoTotal2)
-    {
-        if (NetworkManager.Singleton.IsClient)
-        {
-            int id = (int)NetworkManager.Singleton.LocalClientId;
-            UpdateClientPositionServerRpc(textoTotal2, id, numRecompensa);
-            Debug.Log("cliente");
-        }
-        if (NetworkManager.Singleton.IsServer)
-        {
-            projetoNetworkTexto.Value = textoTotal2;
-            idPlayer.Value = (int)NetworkManager.Singleton.LocalClientId;
-            recompensaNetworkNum.Value = numRecompensa;
-            numPlayers.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
-            Debug.Log("server");
-
-        }
-    }
+    
+//********Seção networkvariables onChange*******************************************
     //verifica valores das variaves network se mudaram
     private void OnEnable()
     {
@@ -204,7 +181,6 @@ public class Projeto : NetworkBehaviour
                     //se tiver 7 cadeiras passa direto pra projeto aprovado
                     PlayerStats ps = hs.GetPlayerStats();
                     if(ps.numCadeiras>=EleicaoManager.Instance.minCadeirasVotacao){
-                        Debug.Log("eu tenho cadeiras suficientes");
                         projetoAprovado();
                     
                     }else{
@@ -219,7 +195,6 @@ public class Projeto : NetworkBehaviour
                 else
                 {
                     if(EleicaoManager.Instance.cadeirasCamara[clienteLocal]>=EleicaoManager.Instance.minCadeirasVotacao){
-                        Debug.Log("outro jogador tem cadeiras suficientes");
                         projetoAprovado();
                     }else{
                         text_avisoProjeto.text = "\n" + "\n" + "Zona escolhida: " + newValue.ToString() + "\n" + "Vote: ";
@@ -243,18 +218,19 @@ public class Projeto : NetworkBehaviour
         //votacao contra
         votacaoResposta.OnValueChanged += (int previousValue, int newValue) =>
         {
-            nao = newValue;
+            quantVotos = newValue;
         };
     }
+ 
+ //********Seção update************************************************************
     public void Update()
     {
         if (inVotacao == true)
         {
             if (numPlayer > 1)
             {
-                Debug.Log("sim: "+sim);
                 //se todos votaram
-                if ( nao >= numPlayer )
+                if ( quantVotos >= numPlayer )
                 {
 
                     //desativa botão de votação
@@ -272,39 +248,58 @@ public class Projeto : NetworkBehaviour
                          inVotacao = false;
                          projetoNaoAprovado=true;
                     }
-
-                   
                 }
             }
         }
-        //quantidade de jogadores conectados
-
-
     }
 
+//********Seção funções player******************************************************
+    //sortea os valores do projeto
+    public void sortearProjeto()
+    {
+        defaultValues();
+        proposta = projetoManager.proposta[Random.Range(0, projetoManager.proposta.Length)];
+        numRecompensa = projetoManager.numRecompensa[Random.Range(0, projetoManager.numRecompensa.Length)];
+        recompensaText = projetoManager.recompensaText;
+        textoTotal = proposta + "\n" + "\n" + recompensaText + "" + numRecompensa.ToString();
+        atualizarProjeto(textoTotal);
+
+    }
+    
+    //atualiza a carta de projeto ou pede pro host fazer isso
+    public void atualizarProjeto(string textoTotal2)
+    {
+        if (NetworkManager.Singleton.IsClient)
+        {
+            int id = (int)NetworkManager.Singleton.LocalClientId;
+            UpdateClientPositionServerRpc(textoTotal2, id, numRecompensa);
+            Debug.Log("cliente");
+        }
+        if (NetworkManager.Singleton.IsServer)
+        {
+            projetoNetworkTexto.Value = textoTotal2;
+            idPlayer.Value = (int)NetworkManager.Singleton.LocalClientId;
+            recompensaNetworkNum.Value = numRecompensa;
+            numPlayers.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
+            Debug.Log("server");
+
+        }
+    }
+    
     //chamado apos projeto ser aprovado
     public void eleitoresZonaFinal()
     {
-
         //adiciona eleitores aos jogadores que tem bairros da zona
-
         //verifica se player tem bairro na zona escolhida
-
         //dá carta de recurso para jogadores que possuem bairros na zona
-
         //reseta algumas variáveis
         if (playerInZona == true)
         {
             distribuicaoProjeto = true;
-            Debug.Log("playerINZOna TRUE");
             hs.playerRecebeEleitor = true;
             setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
             hs.updateRecursoCartaUI(numRecompensaDefault);
             playerInZona = false;
-        }
-        else
-        {
-            Debug.Log("playerINZOna false");
         }
 
         zonaNameLocal = "";
@@ -340,8 +335,7 @@ public class Projeto : NetworkBehaviour
     public void defaultValues()
     {
         sim = 0;
-        nao = 0;
-        mostrouResultado = false;
+        quantVotos = 0;
         if (NetworkManager.Singleton.IsServer)
         {
             recompensaNetworkNum.Value = -1;
@@ -388,6 +382,8 @@ public class Projeto : NetworkBehaviour
             text_avisoProjeto.text = "\n" + "\n" + "\n" + "Seu partido votou " + mostrarResposta + "\n" + "Aguardando outros partidos...";
         }
     }
+    
+    //funcao ao projeto ser aprovado
     public void projetoAprovado(){
         fecharBtn.SetActive(true);
         text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO APROVADO na zona " +zonaNameLocal+ "\n" + "Recompensa: " + numRecompensaDefault + " carta(s) e " + numRecompensaDefault + " eleitor(es)";
@@ -397,7 +393,6 @@ public class Projeto : NetworkBehaviour
         {
             cp.distribuicaoProjeto = true;
             cp.AumentaValServerRpc();
-            Debug.Log("adicionou um");
         }
         inVotacao = false;
     }

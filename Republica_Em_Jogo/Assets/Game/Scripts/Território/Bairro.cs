@@ -25,8 +25,6 @@ namespace Game.Territorio
         private Educaçao edu;
         private Saúde saude;
 
-        private int auxContagem=0;
-
         private void Awake()
         {
             interagivel = GetComponentInChildren<Interagivel>();
@@ -77,7 +75,6 @@ namespace Game.Territorio
             if(playerIDNoControl.Value == (int)NetworkManager.Singleton.LocalClientId){
                 playerInControl=true;
                 Debug.Log("seu bairro");
-                Debug.Log("verificou control2");
             }else{
                 playerInControl=false;
                 Debug.Log("nao possui esse bairro");

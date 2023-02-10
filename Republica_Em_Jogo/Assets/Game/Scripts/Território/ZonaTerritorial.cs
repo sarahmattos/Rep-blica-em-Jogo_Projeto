@@ -30,7 +30,6 @@ namespace Game.Territorio
             {
                 if(bairro.playerIDNoControl.Value == (int)client)
                 {
-                    Debug.Log("bairroNome: "+bairro.Nome);
                     projeto.playerInZona=true;
                 }
             }

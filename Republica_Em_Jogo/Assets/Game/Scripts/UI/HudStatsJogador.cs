@@ -11,8 +11,8 @@ namespace Game.UI
 {
     public class HudStatsJogador : NetworkBehaviour
     {
+        [Header("Ui")]
         public GameObject button; //botao para testar
-
         [SerializeField] private Image iconJogador;
         [SerializeField] private TMP_Text text_nomeJogador;
         [SerializeField] private TMP_Text text_eleitores;
@@ -29,20 +29,29 @@ namespace Game.UI
         [SerializeField] private GameObject acaboudistribuicaoUi2;
         [SerializeField] private GameObject distribuaEleitorUi;
         [SerializeField] private GameObject btnsAux;
-        //variaveis que passam valores para classe playerStats
-        public int eduQuant, saudeQuant, bairroQuant; 
-        public float eleitoresNovosAtual;
+
+        [Header("Referencias")]
+        [SerializeField] private State state;
         private Projeto projeto; 
         private EleicaoManager eleicaoManager; 
         private SetUpZona setUpZona; 
-        public string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
-        public bool playerRecebeEleitor=true;
-        public bool playerDiminuiEleitor=false;
-        public bool distribuicaoGeral=false;
-        public bool distribuicaoInicial=false;
-        [SerializeField] private State state;
+        
 
-        public ControlePassarState cp;
+        [Header("Variaveis")]
+        public int eduQuant;
+        public int saudeQuant; 
+        public float eleitoresNovosAtual;
+        private string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
+        [HideInInspector]
+        public bool playerRecebeEleitor=true;
+        [HideInInspector]
+        public bool playerDiminuiEleitor=false;
+        [HideInInspector]
+        public bool distribuicaoGeral=false;
+        [HideInInspector]
+        public bool distribuicaoInicial=false;
+        
+
 
         private void Update()
         {
@@ -191,7 +200,6 @@ namespace Game.UI
                 playerStats.eleitoresNovos=valor;
                 playerRecebeEleitor=false;
                 //
-                Debug.Log("eleitores novos: "+playerStats.eleitoresNovos);
                 distribuaEleitorUi.SetActive(true);
                 distribuicaoGeral=true;
                 if(playerDiminuiEleitor==true){
