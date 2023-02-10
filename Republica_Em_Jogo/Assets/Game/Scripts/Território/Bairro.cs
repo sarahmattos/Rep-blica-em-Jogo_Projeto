@@ -36,8 +36,11 @@ namespace Game.Territorio
             edu = GetComponentInChildren<Educaçao>();
             saude = GetComponentInChildren<Saúde>();
             hs = FindObjectOfType<HudStatsJogador>();
-            // material = Interagivel.gameObject.GetComponent<MeshRenderer>().material;
         }
+        // private void Start()
+        // {
+        //     material = interagivel.Material;
+        // }
         [ServerRpc(RequireOwnership = false)]
         public void MudaValorEleitorServerRpc(int valor)
         {
@@ -66,7 +69,7 @@ namespace Game.Territorio
 
         private void onPlayerControlMuda(int previousValue, int newValue)
         {
-            Interagivel.Material.color = GameDataConfig.Instance.PlayerColorOrder[newValue];
+            // Interagivel.Material.color = GameDataConfig.Instance.PlayerColorOrder[newValue];
             bairroPlayerLocalForaControl?.Invoke(this, previousValue);
             bairroPlayerLocalNoControl?.Invoke(this, newValue);
 
