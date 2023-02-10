@@ -202,8 +202,6 @@ namespace Game.UI
            return playerStats;
         }
         public void cadeirasUi(float valor){
-            Debug.Log(valor);
-            //numCadeiras=EleicaoManager.Instance.cadeirasCamara[(int)NetworkManager.Singleton.LocalClientId];
             playerStats.numCadeiras = valor;
             text_cadeiras.SetText(playerStats.numCadeiras.ToString());
         }

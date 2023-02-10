@@ -10,14 +10,11 @@ namespace Game.Territorio
     {
         [SerializeField] private string nome;
         private Bairro[] bairros;
-        int x;
-
         public Bairro[] Bairros => bairros;
         public string Nome { get => nome; }
         private Projeto projeto;  
         private HudStatsJogador hs;
         private ControlePassarState cp;
-        int i=0;
 
         private void Awake()
         {
@@ -66,23 +63,6 @@ namespace Game.Territorio
             }
            
         }
-        /*public void ContarBairroInControlTodosPlayers(BairroArray[] _bairrosPlayerSegmment, int numPlayer)
-        {
-
-            foreach (Bairro bairro in bairros)
-            {
-                for(int i=0;i< numPlayer;  i++)
-                {
-                    if (bairro.playerIDNoControl.Value == i)
-                    {
-                        // _bairrosTotais[i] = bairro;
-                        _bairrosPlayerSegmment[i].BairrosPorPlayer.Add(bairro);
-                    }
-                }
-                
-            }
-
-       } */
         public void ContarBairroInControlTodosPlayers(int[] _eleitoresPlayers, int numPlayer)
         {
 
@@ -92,19 +72,13 @@ namespace Game.Territorio
                 {
                     if (bairro.playerIDNoControl.Value == i)
                     {
-                    // _bairrosTotais[i] = bairro;
-                    //_bairrosPlayerSegmment[i].BairrosPorPlayer.Add(bairro);
-                    _eleitoresPlayers[i]+= bairro.SetUpBairro.Eleitores.contaEleitores;
+                        _eleitoresPlayers[i]+= bairro.SetUpBairro.Eleitores.contaEleitores;
+                    }
                 }
-                }
-
             }
-
         }
     }
-
-
-    }
+}
 
 
 
