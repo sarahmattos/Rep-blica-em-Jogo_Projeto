@@ -28,6 +28,7 @@ namespace Game.UI
         [SerializeField] private GameObject acaboudistribuicaoUi;
         [SerializeField] private GameObject acaboudistribuicaoUi2;
         [SerializeField] private GameObject distribuaEleitorUi;
+        [SerializeField] private GameObject btnsAux;
         //variaveis que passam valores para classe playerStats
         public int eduQuant, saudeQuant, bairroQuant; 
         public float eleitoresNovosAtual;
@@ -43,7 +44,12 @@ namespace Game.UI
 
         public ControlePassarState cp;
 
-        
+        private void Update()
+        {
+            if (Input.GetKeyDown (KeyCode.E)){
+                BntsAuxiliares();
+            }
+        }
         public override void OnNetworkSpawn()
         {
             state = GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
@@ -203,7 +209,10 @@ namespace Game.UI
         }
         public void cadeirasUi(float valor){
             playerStats.numCadeiras = valor;
-            text_cadeiras.SetText(playerStats.numCadeiras.ToString());
+            text_cadeiras.SetText("Cadeiras: "+playerStats.numCadeiras.ToString());
+        }
+        public void BntsAuxiliares(){
+            btnsAux.SetActive(!btnsAux.activeSelf);
         }
         
     }

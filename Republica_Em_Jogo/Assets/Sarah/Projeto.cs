@@ -47,7 +47,7 @@ public class Projeto : NetworkBehaviour
     private bool mostrouResultado = false;
     public bool playerInZona = false;
     public bool distribuicaoProjeto = false;
-
+    private bool projetoNaoAprovado=false;
     public bool aprovado = false;
 
     public bool inVotacao = false;
@@ -208,7 +208,7 @@ public class Projeto : NetworkBehaviour
                         projetoAprovado();
                     
                     }else{
-                        text_avisoProjeto.text = "\n" + "\n" + "\n" + "Zona escolhida: " + newValue.ToString() + "\n" + "Aguardando votação... ";
+                        text_avisoProjeto.text = "\n" + "\n" + "\n" + "Zona: " + newValue.ToString() + "\n" + "Não possui cadeiras suficientes para aprovar sozinho(a)" +"\n" + "Aguardando votação... ";
                         UpdateVotacaoServerRpc(0,(int)ps.numCadeiras);
                         inVotacao = true;
                     }
@@ -270,6 +270,7 @@ public class Projeto : NetworkBehaviour
                         //se teve mais não ou empate, foi reprovado
                          text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO NÃO APROVADO";
                          inVotacao = false;
+                         projetoNaoAprovado=true;
                     }
 
                    
@@ -318,13 +319,21 @@ public class Projeto : NetworkBehaviour
         //se o projeto n foi aprovado e eu sou o client id eu passo de state
         fecharBtn.SetActive(false);
         projetoUI.SetActive(false);
+        if(projetoNaoAprovado){
+            if (clienteLocal == (int)NetworkManager.Singleton.LocalClientId){
+                CoreLoopStateHandler.Instance.NextStateServerRpc();
+            }
+            projetoNaoAprovado=false;
+            zonaNameLocal = "";
+            clienteLocal = -1;
+            numRecompensa = -1;
+        }
+        
         if (aprovado == true)
         {
             eleitoresZonaFinal();
             aprovado = false;
         }
-
-
     }
 
     //reseta variaveis oou pede pro hosta fazer isso
@@ -381,7 +390,7 @@ public class Projeto : NetworkBehaviour
     }
     public void projetoAprovado(){
         fecharBtn.SetActive(true);
-        text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO APROVADO" + "\n" + "Recompensa: " + numRecompensaDefault + " carta(s) e " + numRecompensaDefault + " eleitor(es)";
+        text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO APROVADO na zona " +zonaNameLocal+ "\n" + "Recompensa: " + numRecompensaDefault + " carta(s) e " + numRecompensaDefault + " eleitor(es)";
         aprovado = true;
         setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
         if (playerInZona == true)

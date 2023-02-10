@@ -17,7 +17,6 @@ namespace Game.Territorio
         
         private void OnMouseDown()
         {
-            /*
             if (!enabled) return;
             int rnd = Random.Range(0,100);
             Debug.Log(rnd);
@@ -25,8 +24,6 @@ namespace Game.Territorio
             if(rnd>=25 && rnd<50)movimentosSociais?.sortearMS();
             if(rnd>=50)projeto?.sortearProjeto();
             this.enabled = false;
-            */
-            projeto?.sortearProjeto();
         }
         
     }
