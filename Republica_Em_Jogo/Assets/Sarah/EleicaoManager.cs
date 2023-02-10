@@ -32,7 +32,7 @@ namespace Game
            zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             Instance = this;
-            minCadeirasVotacao=6;
+            minCadeirasVotacao=7;
             
         }
         [ServerRpc(RequireOwnership = false)]

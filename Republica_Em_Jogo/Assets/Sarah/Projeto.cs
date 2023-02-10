@@ -20,7 +20,7 @@ public class Projeto : NetworkBehaviour
     private NetworkVariable<int> recompensaNetworkNum = new NetworkVariable<int>(-1);
     private NetworkVariable<int> idPlayer = new NetworkVariable<int>(-1);
     private NetworkVariable<int> votacaoRespostaFavor = new NetworkVariable<int>(0);
-    private NetworkVariable<int> votacaoRespostaContra = new NetworkVariable<int>(0);
+    private NetworkVariable<int> votacaoResposta = new NetworkVariable<int>(0);
     private NetworkVariable<int> numPlayers = new NetworkVariable<int>(-1);
 
     private HudStatsJogador hs;
@@ -69,7 +69,7 @@ public class Projeto : NetworkBehaviour
     {
         recompensaNetworkNum.Value = -1;
         votacaoRespostaFavor.Value = 0;
-        votacaoRespostaContra.Value = 0;
+        votacaoResposta.Value = 0;
         projetoNetworkTexto.Value = "";
         zonaNetworkName.Value = "";
         idPlayer.Value = -1;
@@ -77,15 +77,16 @@ public class Projeto : NetworkBehaviour
 
     //pede pro host avaliar a votação
     [ServerRpc(RequireOwnership = false)]
-    public void UpdateVotacaoServerRpc(int valor)
+    public void UpdateVotacaoServerRpc(int valor,int _numcadeiras)
     {
         if (valor == 0)
         {
-            votacaoRespostaFavor.Value++;
+            votacaoRespostaFavor.Value+=_numcadeiras;
+            votacaoResposta.Value++;
         }
         if (valor == 1)
         {
-            votacaoRespostaContra.Value++;
+            votacaoResposta.Value++;
         }
 
     }
@@ -208,6 +209,8 @@ public class Projeto : NetworkBehaviour
                     
                     }else{
                         text_avisoProjeto.text = "\n" + "\n" + "\n" + "Zona escolhida: " + newValue.ToString() + "\n" + "Aguardando votação... ";
+                        UpdateVotacaoServerRpc(0,(int)ps.numCadeiras);
+                        inVotacao = true;
                     }
                     
 
@@ -221,11 +224,12 @@ public class Projeto : NetworkBehaviour
                     }else{
                         text_avisoProjeto.text = "\n" + "\n" + "Zona escolhida: " + newValue.ToString() + "\n" + "Vote: ";
                         btns2.SetActive(true);
+                        inVotacao = true;
                     }
                     
                     
                 }
-                inVotacao = true;
+                
             }
 
         };
@@ -237,7 +241,7 @@ public class Projeto : NetworkBehaviour
         };
 
         //votacao contra
-        votacaoRespostaContra.OnValueChanged += (int previousValue, int newValue) =>
+        votacaoResposta.OnValueChanged += (int previousValue, int newValue) =>
         {
             nao = newValue;
         };
@@ -248,9 +252,9 @@ public class Projeto : NetworkBehaviour
         {
             if (numPlayer > 1)
             {
-
+                Debug.Log("sim: "+sim);
                 //se todos votaram
-                if (sim + nao >= numPlayer - 1)
+                if ( nao >= numPlayer )
                 {
 
                     //desativa botão de votação
@@ -259,17 +263,16 @@ public class Projeto : NetworkBehaviour
                     fecharBtn.SetActive(true);
 
                     //se teve mais sim, foi aprovado
-                    if (sim > nao)
+                    if (sim > EleicaoManager.Instance.minCadeirasVotacao)
                     {
                         projetoAprovado();
+                    }else{
+                        //se teve mais não ou empate, foi reprovado
+                         text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO NÃO APROVADO";
+                         inVotacao = false;
                     }
 
-                    //se teve mais não ou empate, foi reprovado
-                    if (nao >= sim)
-                    {
-                        text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO NÃO APROVADO";
-                        inVotacao = false;
-                    }
+                   
                 }
             }
         }
@@ -334,7 +337,7 @@ public class Projeto : NetworkBehaviour
         {
             recompensaNetworkNum.Value = -1;
             votacaoRespostaFavor.Value = 0;
-            votacaoRespostaContra.Value = 0;
+            votacaoResposta.Value = 0;
             projetoNetworkTexto.Value = "";
             zonaNetworkName.Value = "";
         }
@@ -364,7 +367,8 @@ public class Projeto : NetworkBehaviour
 
         if (NetworkManager.Singleton.IsClient)
         {
-            UpdateVotacaoServerRpc(resposta);
+            PlayerStats ps = hs.GetPlayerStats();
+            UpdateVotacaoServerRpc(resposta,(int)ps.numCadeiras);
         }
         //texto interface recebe valores e botoees somem
         if (resposta == 0) mostrarResposta = "a favor";
