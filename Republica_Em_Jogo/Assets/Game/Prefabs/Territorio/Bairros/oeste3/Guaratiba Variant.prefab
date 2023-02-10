@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4931218026555752786}
   - component: {fileID: 783716341268939807}
   - component: {fileID: 4187407919128737697}
+  - component: {fileID: 2955284530613870279}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Bairro
@@ -127,8 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   habilitado: 0
-  cor1: {r: 0, g: 0, b: 0, a: 0}
-  cor2: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &4187407919128737697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +146,18 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &2955284530613870279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193423313097619487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4665286793754464860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,6 +176,34 @@ PrefabInstance:
     - target: {fileID: 7411090384535796376, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: nome
       value: Guaratiba
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411090384535796376, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: vizinhos.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411090384535796376, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: vizinhos.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411090384535796376, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: vizinhos.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411090384535796376, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: vizinhos.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411090384535796376, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: vizinhos.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411090384535796376, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: vizinhos.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411090384535796376, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: vizinhos.Array.data[5]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7411090384535796377, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: GlobalObjectIdHash

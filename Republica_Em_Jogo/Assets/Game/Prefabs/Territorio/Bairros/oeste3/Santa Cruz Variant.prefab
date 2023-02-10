@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1482392972370257963}
   - component: {fileID: 2260922221025024607}
   - component: {fileID: 5325357541213883367}
+  - component: {fileID: 8099478741460581836}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -145,6 +146,18 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &8099478741460581836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7774467880408677561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3146800212240223414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -212,6 +225,22 @@ PrefabInstance:
       propertyPath: setUpBairro
       value: 
       objectReference: {fileID: 7518156795373600309}
+    - target: {fileID: 7411090384535796376, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: vizinhos.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411090384535796376, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: vizinhos.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411090384535796376, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: vizinhos.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411090384535796376, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: vizinhos.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7411090384535796377, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 951099334

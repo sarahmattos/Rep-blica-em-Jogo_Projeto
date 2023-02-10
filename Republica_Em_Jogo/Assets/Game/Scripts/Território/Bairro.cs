@@ -11,9 +11,11 @@ namespace Game.Territorio
     {
 
         [SerializeField] private string nome;
-        public NetworkVariable<int> playerIDNoControl = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private NetworkVariable<int> playerIDNoControl = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         public string Nome { get => nome; }
-        // private Material material;
+        public NetworkVariable<int> PlayerIDNoControl => playerIDNoControl;
+        [SerializeField] private Bairro[] vizinhos;
+        public Bairro[] Vizinhos => vizinhos;
         public event Action playerControlMuda;
         public event Action<Bairro, int> bairroPlayerLocalForaControl;
         public event Action<Bairro, int> bairroPlayerLocalNoControl;
