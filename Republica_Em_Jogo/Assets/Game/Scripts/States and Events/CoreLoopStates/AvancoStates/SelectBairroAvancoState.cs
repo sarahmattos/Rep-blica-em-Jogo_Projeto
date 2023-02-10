@@ -16,7 +16,7 @@ namespace Game
         private void Start()
         {
             bairrosInteragiveis = new List<Bairro>();
-            avancoState = GetComponent<AvancoState>();
+            avancoState = GetComponentInParent<AvancoState>();
         }
 
         public override void EnterState()
@@ -24,7 +24,7 @@ namespace Game
             Tools.Logger.Instance.LogInfo("Enter State: SELECT BAIRRO.");
             if (!TurnManager.Instance.LocalIsCurrent)
                 return;
-            bairrosInteragiveis.AddRange(GetBairrosPodemInteragir());
+            bairrosInteragiveis = GetBairrosPodemInteragir();
             HabilitarInteragivelBairros(BairrosInteragiveis, true);
             foreach (Bairro bairro in bairrosInteragiveis)
             {
@@ -67,8 +67,7 @@ namespace Game
         private void OnBairroClicado(Bairro bairro)
         {
             bairroEscolhido = bairro;
-            bairrosInteragiveis.Remove(bairroEscolhido);
-
+            // bairrosInteragiveis.Remove(bairroEscolhido);
             avancoState.NextAvancoStateServerRpc();
         }
 

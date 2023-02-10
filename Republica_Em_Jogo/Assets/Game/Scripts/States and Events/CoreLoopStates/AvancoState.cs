@@ -12,9 +12,6 @@ namespace Game
         PROCESSAMENTO
     }
 
-    [RequireComponent(typeof(SelectBairroAvancoState))]
-    [RequireComponent(typeof(SelecVizinhoAvancoState))]
-    [RequireComponent(typeof(ProcessaAvancoState))]
     public class AvancoState : State
     {
         private NetworkVariable<int> avancoStateIndex = new NetworkVariable<int>(
@@ -31,15 +28,9 @@ namespace Game
 
         private void SetPairValues()
         {
-            StatePairValues.Add(
-                AvancoStatus.SELECT_BAIRRO,
-                GetComponent<SelectBairroAvancoState>()
-            );
-            StatePairValues.Add(
-                AvancoStatus.SELECT_VIZINHO,
-                GetComponent<SelecVizinhoAvancoState>()
-            );
-            StatePairValues.Add(AvancoStatus.PROCESSAMENTO, GetComponent<ProcessaAvancoState>());
+            StatePairValues.Add( AvancoStatus.SELECT_BAIRRO, GetComponentInChildren<SelectBairroAvancoState>());
+            StatePairValues.Add(AvancoStatus.SELECT_VIZINHO, GetComponentInChildren<SelecVizinhoAvancoState>());
+            StatePairValues.Add(AvancoStatus.PROCESSAMENTO, GetComponentInChildren<ProcessaAvancoState>());
         }
 
         private void Start()
@@ -62,9 +53,7 @@ namespace Game
         }
 
         public override void ExitState()
-        {
-            Tools.Logger.Instance.LogInfo("Enter State: AVAN�O");
-            
+        {            
         }
 
         private void AvancoIndexMuda(int previousValue, int newValue)

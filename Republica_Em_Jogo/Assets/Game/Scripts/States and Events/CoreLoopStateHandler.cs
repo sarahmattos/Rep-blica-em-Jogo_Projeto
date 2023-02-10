@@ -15,10 +15,6 @@ namespace Game
         RECOMPENSA
     }
 
-    [RequireComponent(typeof(DistribuicaoState))]
-    [RequireComponent(typeof(AvancoState))]
-    [RequireComponent(typeof(ProjetoState))]
-    [RequireComponent(typeof(RecompensaState))]
     public class CoreLoopStateHandler : NetworkSingleton<CoreLoopStateHandler>
     {
         private NetworkVariable<int> coreLoopIndex = new NetworkVariable<int>(-1);
@@ -37,10 +33,10 @@ namespace Game
 
         private void SetLoopStatePairValues()
         {
-            StatePairValues.Add(CoreLoopState.DISTRIBUICAO, GetComponent<DistribuicaoState>());
-            StatePairValues.Add(CoreLoopState.AVANCO, GetComponent<AvancoState>());
-            StatePairValues.Add(CoreLoopState.PROJETO, GetComponent<ProjetoState>());
-            StatePairValues.Add(CoreLoopState.RECOMPENSA, GetComponent<RecompensaState>());
+            StatePairValues.Add(CoreLoopState.DISTRIBUICAO, GetComponentInChildren<DistribuicaoState>());
+            StatePairValues.Add(CoreLoopState.AVANCO, GetComponentInChildren<AvancoState>());
+            StatePairValues.Add(CoreLoopState.PROJETO, GetComponentInChildren<ProjetoState>());
+            StatePairValues.Add(CoreLoopState.RECOMPENSA, GetComponentInChildren<RecompensaState>());
         }
 
         private void Awake()

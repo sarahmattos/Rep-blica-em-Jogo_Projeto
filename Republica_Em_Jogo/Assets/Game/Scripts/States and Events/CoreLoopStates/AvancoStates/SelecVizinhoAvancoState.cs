@@ -6,11 +6,11 @@ namespace Game
 {
     public class SelecVizinhoAvancoState : State
     {
-        private State nextState;
+        private State avancoState;
 
         private void Start()
         {
-            nextState = GetComponent<ProcessaAvancoState>();
+            avancoState = GetComponentInParent<AvancoState>();
         }
 
         public override void EnterState()
