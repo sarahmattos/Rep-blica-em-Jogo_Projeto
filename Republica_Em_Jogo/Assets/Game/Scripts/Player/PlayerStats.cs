@@ -54,7 +54,7 @@ namespace Game.Player {
         public override void OnDestroy()
         {
             GameplayLoadState.Saida -= InicializaPlayerStats;
-            GameplayLoadState.Saida -= InscreveReceberbairrosPlayerIDControl;
+            GameplayLoadState.Saida -= DesinscreveReceberbairrosPlayerIDControl;
         }
 
         private void InscreveReceberbairrosPlayerIDControl() {

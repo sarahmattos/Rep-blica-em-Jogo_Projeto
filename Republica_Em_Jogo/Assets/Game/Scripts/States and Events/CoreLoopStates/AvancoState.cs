@@ -29,6 +29,19 @@ namespace Game
         private Action<AvancoStatus> estadoMuda;
         private int contagemAvancosRodada;
 
+        private void SetPairValues()
+        {
+            StatePairValues.Add(
+                AvancoStatus.SELECT_BAIRRO,
+                GetComponent<SelectBairroAvancoState>()
+            );
+            StatePairValues.Add(
+                AvancoStatus.SELECT_VIZINHO,
+                GetComponent<SelecVizinhoAvancoState>()
+            );
+            StatePairValues.Add(AvancoStatus.PROCESSAMENTO, GetComponent<ProcessaAvancoState>());
+        }
+
         private void Start()
         {
             statePairValues = new Dictionary<AvancoStatus, State>();
@@ -44,23 +57,14 @@ namespace Game
         public override void EnterState()
         {
             Tools.Logger.Instance.LogInfo("Enter State: AVAN�O");
-            SetAvancoStateServerRpc(0);
             contagemAvancosRodada = 0;
+            SetAvancoStateServerRpc(0);
         }
 
-        public override void ExitState() { }
-
-        private void SetPairValues()
+        public override void ExitState()
         {
-            StatePairValues.Add(
-                AvancoStatus.SELECT_BAIRRO,
-                GetComponent<SelectBairroAvancoState>()
-            );
-            StatePairValues.Add(
-                AvancoStatus.SELECT_VIZINHO,
-                GetComponent<SelecVizinhoAvancoState>()
-            );
-            StatePairValues.Add(AvancoStatus.PROCESSAMENTO, GetComponent<ProcessaAvancoState>());
+            Tools.Logger.Instance.LogInfo("Enter State: AVAN�O");
+            
         }
 
         private void AvancoIndexMuda(int previousValue, int newValue)
@@ -70,6 +74,17 @@ namespace Game
             estadoMuda?.Invoke((AvancoStatus)newValue);
 
             currentState.InvokeEntrada();
+
+            AcrescentaRodadaNaSaidaUltimoAvancoState(previousValue);
+        }
+
+        private void AcrescentaRodadaNaSaidaUltimoAvancoState(int previousvalue)
+        {
+            int ultimoAvancoStateIndex = (int)AvancoStatus.PROCESSAMENTO;
+            if (previousvalue == ultimoAvancoStateIndex)
+            {
+                contagemAvancosRodada++;
+            }
         }
 
         [ServerRpc(RequireOwnership = false)]
@@ -84,6 +99,5 @@ namespace Game
             avancoStateIndex.Value = (avancoStateIndex.Value + 1) % (statePairValues.Count);
         }
 
-   
     }
 }

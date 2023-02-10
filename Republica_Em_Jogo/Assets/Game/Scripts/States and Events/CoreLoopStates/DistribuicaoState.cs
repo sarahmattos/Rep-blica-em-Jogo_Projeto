@@ -24,7 +24,7 @@ namespace Game
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("EnterState: DISTRIBUI��O");
+            Tools.Logger.Instance.LogInfo("EnterState: DISTRIBUICAO");
             bairrosDoPlayerAtual.AddRange(
                 PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl
             );

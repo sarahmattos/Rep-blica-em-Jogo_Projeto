@@ -21,6 +21,7 @@ namespace Game
 
         public override void EnterState()
         {
+            Tools.Logger.Instance.LogInfo("Enter State: SELECT BAIRRO.");
             if (!TurnManager.Instance.LocalIsCurrent)
                 return;
             bairrosInteragiveis.AddRange(GetBairrosPodemInteragir());
@@ -33,6 +34,8 @@ namespace Game
 
         public override void ExitState()
         {
+            Tools.Logger.Instance.LogInfo("Exit State: SELECT BAIRRO.");
+
             foreach (Bairro bairro in bairrosInteragiveis)
             {
                 bairro.Interagivel.click -= OnBairroClicado;

@@ -64,7 +64,7 @@ namespace Game.Territorio
         private void OnMudaHabilitado(bool value) {
             transform.localScale = value ? 
                 new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z*3) : 
-                new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z/3);
+                new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z);
         }
 
 

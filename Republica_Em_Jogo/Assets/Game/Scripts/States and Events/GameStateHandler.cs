@@ -89,7 +89,6 @@ namespace Game {
 
         private void IndexEstadoJogoMuda(int previous, int next)
         {
-            Logger.Instance.LogInfo("INDEX MUDA");
             currentGameState?.InvokeSaida();
             currentGameState = StatePairValue[(GameState)next];
             estadoMuda?.Invoke((GameState)next);

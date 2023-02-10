@@ -1931,9 +1931,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &171311156
 GameObject:
   m_ObjectHideFlags: 0
@@ -2392,9 +2389,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &234516072
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,9 +2443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &283854392
 GameObject:
   m_ObjectHideFlags: 0
@@ -3332,9 +3323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &333340380
 GameObject:
   m_ObjectHideFlags: 0
@@ -3869,9 +3857,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!20 &375258113 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 8796984675176579441, guid: 301034db2c0754d40a0b114c7a0af507, type: 3}
@@ -5736,9 +5721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &537164293 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1152282500213423842, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
@@ -5756,9 +5738,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &541562367
 GameObject:
   m_ObjectHideFlags: 0
@@ -6790,9 +6769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &680938295
 GameObject:
   m_ObjectHideFlags: 0
@@ -7080,9 +7056,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &739782291 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6569110713981972248, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
@@ -7100,9 +7073,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &740653463
 GameObject:
   m_ObjectHideFlags: 0
@@ -7346,9 +7316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &774977903
 GameObject:
   m_ObjectHideFlags: 0
@@ -9038,9 +9005,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &988829268
 GameObject:
   m_ObjectHideFlags: 0
@@ -12161,9 +12125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1290500527
 GameObject:
   m_ObjectHideFlags: 0
@@ -14840,9 +14801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1538514017 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3665307556176107136, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
@@ -14860,9 +14818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1538830900
 GameObject:
   m_ObjectHideFlags: 0
@@ -15878,9 +15833,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1609435292
 GameObject:
   m_ObjectHideFlags: 0
@@ -16475,9 +16427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1690386524 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1368996901593382740, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
@@ -16495,9 +16444,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1692914571 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1260047940373804646, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
@@ -16515,9 +16461,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1701916731
 GameObject:
   m_ObjectHideFlags: 0
@@ -16912,9 +16855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1726238197
 GameObject:
   m_ObjectHideFlags: 0
@@ -17271,9 +17211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1762445145 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5017134340459830308, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
@@ -17291,9 +17228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1788296980
 GameObject:
   m_ObjectHideFlags: 0
@@ -17649,9 +17583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1832264315
 GameObject:
   m_ObjectHideFlags: 0
@@ -18061,9 +17992,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1873965175
 GameObject:
   m_ObjectHideFlags: 0
@@ -18214,9 +18142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1924707521
 GameObject:
   m_ObjectHideFlags: 0
@@ -18375,9 +18300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1956478231
 GameObject:
   m_ObjectHideFlags: 0
@@ -18780,9 +18702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &2014396849
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18999,9 +18918,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorMouseIn: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseOut: {r: 0, g: 0, b: 0, a: 0}
-  colorMouseClick: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2037851081
 GameObject:
   m_ObjectHideFlags: 0

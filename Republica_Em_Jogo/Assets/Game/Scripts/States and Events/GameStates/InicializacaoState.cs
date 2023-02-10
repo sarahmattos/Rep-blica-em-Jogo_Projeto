@@ -13,13 +13,13 @@ namespace Game
 
     public class InicializacaoState : State
     {
-        //TODO: isolar DISTRIBUIÇÃO nos bairros em outra classe
+        //TODO: isolar DISTRIBUIï¿½ï¿½O nos bairros em outra classe
         [SerializeField] private float intervaloTempo = 0.5f;
         [SerializeField] private HudStatsJogador hs;
         private ZonaTerritorial[] zonasTerritoriais;
 
 
-        //OBS: embora não pareca ser necessario, sem SerializeField não funciona, por algum motivo.
+        //OBS: embora nï¿½o pareca ser necessario, sem SerializeField nï¿½o funciona, por algum motivo.
         [SerializeField] private List<Bairro> todosBairros;
         private GameStateHandler stateHandler => GameStateHandler.Instance;
 
@@ -44,11 +44,10 @@ namespace Game
         private List<Bairro> GetBairros()
         {
             List<Bairro> bairros = new List<Bairro>();
-            for (int i = 0; i < zonasTerritoriais.Length; i++)
+            foreach (ZonaTerritorial zonas  in zonasTerritoriais)
             {
-                bairros.AddAll(zonasTerritoriais[i].Bairros);
+                bairros.AddAll(zonas.Bairros);
             }
-
             return bairros;
 
         }
@@ -60,8 +59,6 @@ namespace Game
             int clients = NetworkManager.Singleton.ConnectedClientsIds.Count;
             int aux = 0;
 
-
-            Logger.Instance.LogInfo("distribuição COMECOU.");
             foreach (Bairro bairro in todosBairros)
             {
                 bairro.SetPlayerControl(aux);
@@ -69,9 +66,6 @@ namespace Game
 
                 yield return new WaitForSeconds(intervaloTempo);
             }
-
-            Logger.Instance.LogInfo("distribuição TERMINOU.");
-            //hs.AtualizarPlayerStatsBairro();
             stateHandler.NextStateServerRPC();
 
 

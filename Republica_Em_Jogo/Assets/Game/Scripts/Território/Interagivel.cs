@@ -31,6 +31,11 @@ namespace Game.Territorio
             bairro = GetComponentInParent<Bairro>();
         }
 
+        private void Start()
+        {
+            MudarHabilitado(false);
+        }
+
         void OnMouseEnter()
         {
             if (!habilitado)
