@@ -31,10 +31,7 @@ namespace Game
 
         private void SetPairValues()
         {
-            StatePairValues.Add(
-                AvancoStatus.SELECT_BAIRRO,
-                GetComponentInChildren<SelectBairroAvancoState>()
-            );
+            StatePairValues.Add( AvancoStatus.SELECT_BAIRRO, GetComponentInChildren<SelectBairroAvancoState>());
             StatePairValues.Add(
                 AvancoStatus.SELECT_VIZINHO,
                 GetComponentInChildren<SelecVizinhoAvancoState>()
@@ -60,11 +57,17 @@ namespace Game
         public override void EnterState()
         {
             Tools.Logger.Instance.LogInfo("Enter State: AVAN�O");
+            if (!TurnManager.Instance.LocalIsCurrent)
+                return;
             contagemAvancosRodada = 0;
             SetAvancoStateServerRpc(0);
         }
 
-        public override void ExitState() { }
+        public override void ExitState()
+        {
+            if (!TurnManager.Instance.LocalIsCurrent)
+                return;
+        }
 
         private void AvancoIndexMuda(int previousValue, int newValue)
         {
@@ -98,5 +101,4 @@ namespace Game
             avancoStateIndex.Value = (avancoStateIndex.Value + 1) % (statePairValues.Count);
         }
     }
-
 }

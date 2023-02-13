@@ -21,8 +21,6 @@ namespace Game
         public override void EnterState()
         {
             Tools.Logger.Instance.LogInfo("Enter State: SELECT BAIRRO.");
-            if (!TurnManager.Instance.LocalIsCurrent)
-                return;
             bairrosInteragiveis = GetBairrosPodemInteragir();
             InscreverClickInteragivelBairros(bairrosInteragiveis);
             MudarHabilitadoInteragivelBairros(BairrosInteragiveis, true);
@@ -33,7 +31,6 @@ namespace Game
         public override void ExitState()
         {
             Tools.Logger.Instance.LogInfo("Exit State: SELECT BAIRRO.");
-            if(!TurnManager.Instance.LocalIsCurrent) return;
             DesinscreverClickInteragivelBairros(bairrosInteragiveis);
             // DesabilitarInteragivelDosBairrosNaoEscolhidos();
             MudarHabilitadoInteragivelBairros(bairrosInteragiveis, false);
@@ -47,6 +44,7 @@ namespace Game
             }
         }
         private void DesinscreverClickInteragivelBairros(List<Bairro> bairros) {
+            
             foreach (Bairro bairro in bairrosInteragiveis)
             {
                 bairro.Interagivel.click -= OnBairroClicado;
@@ -64,15 +62,21 @@ namespace Game
 
         private List<Bairro> GetBairrosPodemInteragir()
         {
-            List<Bairro> bairrosInControl = PlayerStatsManager.Instance
-                .GetPlayerStatsDoPlayerAtual()
-                .BairrosInControl;
+            // List<Bairro> bairrosInControl => PlayerStatsManager.Instance
+            //     .GetPlayerStatsDoPlayerAtual()
+            //     .BairrosInControl;
             
-            List<Bairro> bairrosPodemInteragir = bairrosInControl
-                .Where(n => n.SetUpBairro.Eleitores.contaEleitores >= eleitoresBairroMinParaAvancar)
-                .Select(n => n)
-                .ToList();
-            return bairrosPodemInteragir;
+            // List<Bairro> bairrosPodemInteragir = bairrosInControl
+            //     .Where(n => n.SetUpBairro.Eleitores.contaEleitores >= eleitoresBairroMinParaAvancar)
+            //     .Select(n => n)
+            //     .ToList();
+            // return bairrosPodemInteragir;
+
+             return (
+                from Bairro bairro in PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl
+                where bairro.SetUpBairro.Eleitores.contaEleitores >= eleitoresBairroMinParaAvancar 
+                select bairro
+            ).ToList();
         }
 
         private void OnBairroClicado(Bairro bairro)
@@ -80,12 +84,6 @@ namespace Game
             avancoState.AvancoData.BairroEscolhido = bairro;
             avancoState.NextAvancoStateServerRpc();
         }
-
-        // private void DesabilitarInteragivelDosBairrosNaoEscolhidos()
-        // {
-        //     MudarHabilitadoInteragivelBairros(bairrosInteragiveis, false);
-        // }
-
 
 
 

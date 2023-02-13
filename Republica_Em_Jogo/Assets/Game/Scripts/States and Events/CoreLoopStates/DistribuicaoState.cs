@@ -25,6 +25,7 @@ namespace Game
         public override void EnterState()
         {
             Tools.Logger.Instance.LogInfo("EnterState: DISTRIBUICAO");
+            if(!TurnManager.Instance.LocalIsCurrent) return;
             bairrosDoPlayerAtual.AddRange(
                 PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl
             );
@@ -36,6 +37,7 @@ namespace Game
 
         public override void ExitState()
         {
+            if(!TurnManager.Instance.LocalIsCurrent) return;
             hs.distribuicaoInicial = false;
             foreach (Bairro bairro in bairrosDoPlayerAtual)
             {

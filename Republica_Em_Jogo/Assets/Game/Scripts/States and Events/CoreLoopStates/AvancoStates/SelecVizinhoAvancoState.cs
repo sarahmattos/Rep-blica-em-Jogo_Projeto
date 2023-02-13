@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Game.Territorio;
 using System.Linq;
-using System;
 
 namespace Game
 {
@@ -21,9 +18,9 @@ namespace Game
 
         public override void EnterState()
         {
+            //a algorithm sort in c#
             Tools.Logger.Instance.LogInfo("Enter State: SELECT VIZINHO.");
-            if (!TurnManager.Instance.LocalIsCurrent)
-                return;
+
             VizinhosInimigos = GetBairrosInimigos();
             MudaHabilitadoInteragivelBairros(VizinhosInimigos, true);
             InscreverClickInteragivelBairros(VizinhosInimigos);
@@ -32,8 +29,7 @@ namespace Game
         public override void ExitState()
         {
             Tools.Logger.Instance.LogInfo("Exit State: SELECT VIZINHO.");
-            if (!TurnManager.Instance.LocalIsCurrent)
-                return;
+
             DesinscreverClickInteragivelBairros(VizinhosInimigos);
             MudaHabilitadoInteragivelBairros(VizinhosInimigos, false);
             VizinhosInimigos.Clear();

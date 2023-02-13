@@ -8,12 +8,10 @@ namespace Game
     {
         private AvancoState avancoState;
 
-
         private void Start()
         {
             avancoState = GetComponentInParent<AvancoState>();
         }
-
 
         public override void EnterState()
         {
@@ -24,12 +22,6 @@ namespace Game
 
         public override void ExitState()
         {
-
-
         }
-
-
-
-
     }
 }
