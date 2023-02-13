@@ -18,7 +18,6 @@ namespace Game
 
         public override void EnterState()
         {
-            //a algorithm sort in c#
             Tools.Logger.Instance.LogInfo("Enter State: SELECT VIZINHO.");
 
             VizinhosInimigos = GetBairrosInimigos();

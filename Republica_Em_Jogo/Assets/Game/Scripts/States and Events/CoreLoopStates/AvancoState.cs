@@ -31,42 +31,35 @@ namespace Game
 
         private void SetPairValues()
         {
-            StatePairValues.Add( AvancoStatus.SELECT_BAIRRO, GetComponentInChildren<SelectBairroAvancoState>());
-            StatePairValues.Add(
-                AvancoStatus.SELECT_VIZINHO,
-                GetComponentInChildren<SelecVizinhoAvancoState>()
-            );
-            StatePairValues.Add(
-                AvancoStatus.PROCESSAMENTO,
-                GetComponentInChildren<ProcessaAvancoState>()
-            );
+            StatePairValues.Add(AvancoStatus.SELECT_BAIRRO , GetComponentInChildren<SelectBairroAvancoState>());
+            StatePairValues.Add(AvancoStatus.SELECT_VIZINHO ,GetComponentInChildren<SelecVizinhoAvancoState>());
+            StatePairValues.Add(AvancoStatus.PROCESSAMENTO , GetComponentInChildren<ProcessaAvancoState>());
         }
 
         private void Start()
         {
             statePairValues = new Dictionary<AvancoStatus, State>();
             SetPairValues();
-            avancoStateIndex.OnValueChanged += AvancoIndexMuda;
         }
 
-        private void OnDestroy()
-        {
-            avancoStateIndex.OnValueChanged -= AvancoIndexMuda;
-        }
+        // private void OnDestroy()
+        // {
+        // }
 
         public override void EnterState()
         {
             Tools.Logger.Instance.LogInfo("Enter State: AVAN�O");
-            if (!TurnManager.Instance.LocalIsCurrent)
-                return;
+            if (!TurnManager.Instance.LocalIsCurrent)return;
+            avancoStateIndex.OnValueChanged += AvancoIndexMuda;
             contagemAvancosRodada = 0;
             SetAvancoStateServerRpc(0);
         }
 
         public override void ExitState()
         {
-            if (!TurnManager.Instance.LocalIsCurrent)
-                return;
+            if (!TurnManager.Instance.LocalIsCurrent) return;
+           avancoStateIndex.OnValueChanged -= AvancoIndexMuda;
+
         }
 
         private void AvancoIndexMuda(int previousValue, int newValue)
@@ -81,7 +74,7 @@ namespace Game
 
         private void AcrescentaRodadaNaSaidaUltimoAvancoState(int previousvalue)
         {
-            int ultimoAvancoStateIndex = (int)AvancoStatus.PROCESSAMENTO;
+            int ultimoAvancoStateIndex = (statePairValues.Count-1);
             if (previousvalue == ultimoAvancoStateIndex)
             {
                 contagemAvancosRodada++;
