@@ -9,16 +9,21 @@ namespace Game.Territorio
     {
         private Interagivel interagivel;
         private Bairro bairro;
-        private Material material;
+        private MeshRenderer meshRenderer;
         private Color colorMouseIn = Color.cyan;
         private Color colorMouseOut;
         private Color colorMouseClick = Color.white;
+        private MaterialPropertyBlock propertyBlock;
+        private static readonly int colorID = Shader.PropertyToID("_Color");
+        
+        //Apenas para testes
         private Vector3 scalaInicial;
         private void Awake()
         {
             interagivel = GetComponent<Interagivel>();
-            material = GetComponent<MeshRenderer>().material;
+            meshRenderer = GetComponent<MeshRenderer>();
             bairro = GetComponentInParent<Bairro>();
+            propertyBlock = new MaterialPropertyBlock();
         }
 
         private void Start()
@@ -42,29 +47,35 @@ namespace Game.Territorio
         }
 
         private void MouseInVisualiza() {
-            material.SetColor("_Color", colorMouseIn);
+            SetColor(colorMouseIn);
         }
 
         private void MouseOutVisualiza()
         {
-            material.SetColor("_Color", colorMouseOut);
+            SetColor(colorMouseOut);
         }
 
         private void MouseClickVisualiza(Bairro _) {
-            material.SetColor("_Color", colorMouseClick);
+           SetColor(colorMouseClick);
         }
 
 
         private void ResetMouseOutColor(int _, int playerID) {
             colorMouseOut = GameDataConfig.Instance.PlayerColorOrder[playerID];
-            material.SetColor("_Color", colorMouseOut);
+            SetColor(colorMouseOut);
 
         }
 
+        //Apenas para testes
         private void OnMudaHabilitado(bool value) {
             transform.localScale = value ? 
                 new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z*3) : 
                 new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z);
+        }
+
+        private void SetColor(Color color) {
+            propertyBlock.SetColor(colorID, color);
+            meshRenderer.SetPropertyBlock(propertyBlock);
         }
 
 
