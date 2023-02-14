@@ -66,7 +66,6 @@ namespace Game
 
         private void IndexEstadoLoopMuda(int previousValue, int newValue)
         {
-            Tools.Logger.Instance.LogWarning(string.Concat("era index: ", previousValue, " agora é: ", newValue));
             currentState?.InvokeSaida();
             currentState = statePairValues[(CoreLoopState)newValue];
             currentState.InvokeEntrada();
@@ -76,8 +75,6 @@ namespace Game
         [ServerRpc(RequireOwnership = false)]
         public void ChangeStateServerRpc(int state)
         {
-            Tools.Logger.Instance.LogInfo("core loo state muda .......ii");
-
             coreLoopIndex.Value = state;
         }
 

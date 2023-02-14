@@ -32,8 +32,8 @@ namespace Game
         {
             Eleitores eleitoresParaAvanco = bairroEscolhido.SetUpBairro.Eleitores;
             Eleitores eleitoresVizinho = vizinhoEscolhido.SetUpBairro.Eleitores;
-            Tools.Logger.Instance.LogInfo("Meus: "+QntdDados(eleitoresParaAvanco));
-            Tools.Logger.Instance.LogInfo("Meus: "+QntdDados(eleitoresVizinho));
+            Tools.Logger.Instance.LogInfo("Meu bairro: "+QntdDados(eleitoresParaAvanco));
+            Tools.Logger.Instance.LogInfo("vizinho: "+QntdDados(eleitoresVizinho));
 
         }
 
