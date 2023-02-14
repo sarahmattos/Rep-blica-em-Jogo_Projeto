@@ -9,6 +9,7 @@ namespace Game
     {
         private const int eleitoresBairroMinParaAvancar = 2;
         private AvancoState avancoState;
+        private List<Bairro> BairrosInControl => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
         private List<Bairro> bairrosInteragiveis;
         public List<Bairro> BairrosInteragiveis => bairrosInteragiveis;
 
@@ -62,21 +63,27 @@ namespace Game
 
         private List<Bairro> GetBairrosPodemInteragir()
         {
-            // List<Bairro> bairrosInControl => PlayerStatsManager.Instance
-            //     .GetPlayerStatsDoPlayerAtual()
-            //     .BairrosInControl;
-            
-            // List<Bairro> bairrosPodemInteragir = bairrosInControl
-            //     .Where(n => n.SetUpBairro.Eleitores.contaEleitores >= eleitoresBairroMinParaAvancar)
-            //     .Select(n => n)
-            //     .ToList();
-            // return bairrosPodemInteragir;
-
              return (
-                from Bairro bairro in PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl
-                where bairro.SetUpBairro.Eleitores.contaEleitores >= eleitoresBairroMinParaAvancar 
+                from Bairro bairro in BairrosInControl
+                where TemEleitoresParaAvancar(bairro) && TemVizinhoInimigo(bairro)
                 select bairro
             ).ToList();
+        }
+
+        private bool TemEleitoresParaAvancar(Bairro bairro) {
+            if(bairro.SetUpBairro.Eleitores.contaEleitores >= eleitoresBairroMinParaAvancar) return true;
+            else return false;
+        }
+
+        private bool TemVizinhoInimigo(Bairro bairro)
+        {
+            foreach (Bairro vizinho in bairro.Vizinhos)
+            {
+                if (vizinho.PlayerIDNoControl.Value != bairro.PlayerIDNoControl.Value)
+                    return true;
+            }
+
+            return false;
         }
 
         private void OnBairroClicado(Bairro bairro)

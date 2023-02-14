@@ -29,6 +29,7 @@ namespace Game
             Logger.Instance.LogInfo("Enter state: Inicializa");
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
             todosBairros = GetBairros();
+            todosBairros.Shuffle();            
             if (!IsServer) return;
             StartCoroutine(DistribuirBairros());
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.Territorio;
 using UnityEngine;
 
 namespace Game
@@ -7,6 +8,8 @@ namespace Game
     public class ProcessaAvancoState : State
     {
         private AvancoState avancoState;
+        private Bairro bairroEscolhido => avancoState.AvancoData.BairroEscolhido;
+        private Bairro vizinhoEscolhido => avancoState.AvancoData.BairroEscolhido;
 
         private void Start()
         {
@@ -18,10 +21,25 @@ namespace Game
             //Provisório: só pra visualizar.
             avancoState.AvancoData.BairroEscolhido.Interagivel.MudarHabilitado(true);
             avancoState.AvancoData.VizinhoEscolhido.Interagivel.MudarHabilitado(true);
+            
+            
+            LancarDados();
         }
 
-        public override void ExitState()
+        public override void ExitState() { }
+
+        private void LancarDados()
         {
+            Eleitores eleitoresParaAvanco = bairroEscolhido.SetUpBairro.Eleitores;
+            Eleitores eleitoresVizinho = vizinhoEscolhido.SetUpBairro.Eleitores;
+            Tools.Logger.Instance.LogInfo("Meus: "+QntdDados(eleitoresParaAvanco));
+            Tools.Logger.Instance.LogInfo("Meus: "+QntdDados(eleitoresVizinho));
+
+        }
+
+        private int QntdDados(Eleitores eleitores)
+        {
+            return (eleitores.contaEleitores > 3) ? 3 : eleitores.contaEleitores - 1;
         }
     }
 }
