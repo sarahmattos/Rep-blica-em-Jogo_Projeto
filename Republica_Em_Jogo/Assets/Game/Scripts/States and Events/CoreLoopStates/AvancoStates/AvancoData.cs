@@ -7,21 +7,22 @@ namespace Game
     [Serializable]
     public class AvancoData
     {
-        private Bairro bairroEscolhido;
-        private Bairro vizinhoEscolhido;
-        public Bairro BairroEscolhido
+        private Bairro bairroPlayer;
+        private Bairro bairroVizinho;
+        public Bairro BairroPlayer
         {
-            get => bairroEscolhido;
-            set => bairroEscolhido = value;
+            get => bairroPlayer;
+            set => bairroPlayer = value;
         }
-        public Bairro VizinhoEscolhido
+        public Bairro BairroVizinho
         {
-            get => vizinhoEscolhido;
-            set => vizinhoEscolhido = value;
+            get => bairroVizinho;
+            set => bairroVizinho = value;
         }
-        private int bairroEleitorDiscount;
-        private int vizinhoEleitorDiscount;
-        // dadosLancados?.Invoke();
+        private int eleitorDiscountPlayer;
+        public int EleitorDiscountPlayer => eleitorDiscountPlayer;
+        private int eleitorDiscountVizinho;
+        public int EleitorDiscountVizinho => eleitorDiscountVizinho;
         public event Action dadosLancados;
 
         private List<int> dadosPlayerAtual = new List<int>();
@@ -31,20 +32,20 @@ namespace Game
 
         public void ClearData()
         {
-            bairroEscolhido = null;
-            vizinhoEscolhido = null;
-            bairroEleitorDiscount = 0;
-            vizinhoEleitorDiscount = 0;
+            bairroPlayer = null;
+            bairroVizinho = null;
+            eleitorDiscountPlayer = 0;
+            eleitorDiscountVizinho = 0;
             dadosPlayerAtual.Clear();
             dadosVizinhos.Clear();
         }
 
-        public void BairroEleitorDiscount() {
-            bairroEleitorDiscount--;
+        public void PlayerEleitorDiscount() {
+            eleitorDiscountPlayer--;
         }
 
         public void VizinhoEleitorDiscount() {
-            vizinhoEleitorDiscount--;
+            eleitorDiscountVizinho--;
         }
 
         public void SetDados(List<int> dadosPlayerAtual, List<int> dadosVizinhos) {
@@ -52,6 +53,7 @@ namespace Game
             this.dadosVizinhos = dadosVizinhos;
             dadosLancados?.Invoke();
         }
+
 
         public int QntdMenorDados()
         {

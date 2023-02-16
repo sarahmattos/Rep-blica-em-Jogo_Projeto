@@ -10,7 +10,8 @@ namespace Game
     {
         SELECT_BAIRRO,
         SELECT_VIZINHO,
-        PROCESSAMENTO
+        LANCA_DADOS,
+        MIGRACAO
     }
 
     public class AvancoState : State
@@ -33,7 +34,8 @@ namespace Game
         {
             StatePairValues.Add(AvancoStatus.SELECT_BAIRRO , GetComponentInChildren<SelectBairroAvancoState>());
             StatePairValues.Add(AvancoStatus.SELECT_VIZINHO ,GetComponentInChildren<SelecVizinhoAvancoState>());
-            StatePairValues.Add(AvancoStatus.PROCESSAMENTO , GetComponentInChildren<ProcessaAvancoState>());
+            StatePairValues.Add(AvancoStatus.LANCA_DADOS , GetComponentInChildren<LancamentoDadosAvancoState>());
+            StatePairValues.Add(AvancoStatus.MIGRACAO , GetComponentInChildren<MigraEleitorAvancoState>());
         }
 
         private void Start()

@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.Territorio;
 using UnityEngine;
-using System.Linq;
-using System;
 
 namespace Game
 {
-    public class ProcessaAvancoState : State
+    public class LancamentoDadosAvancoState : State
     {
         private AvancoState avancoState;
-        private Bairro bairroPlayerAtual => avancoState.AvancoData.BairroEscolhido;
-        private Bairro bairroVizinho => avancoState.AvancoData.VizinhoEscolhido;
+        private Bairro bairroPlayerAtual => avancoState.AvancoData.BairroPlayer;
+        private Bairro bairroVizinho => avancoState.AvancoData.BairroVizinho;
 
         private int randomDiceValue => UnityEngine.Random.Range(1, 7);
 
@@ -22,14 +20,20 @@ namespace Game
 
         public override void EnterState()
         {
+            Tools.Logger.Instance.LogInfo("Enter State Lancam. Dados");
             StartCoroutine(LancarDados());
 
             //Provisório: só pra visualizar.
-            avancoState.AvancoData.BairroEscolhido.Interagivel.MudarHabilitado(true);
-            avancoState.AvancoData.VizinhoEscolhido.Interagivel.MudarHabilitado(true);
+            avancoState.AvancoData.BairroPlayer.Interagivel.MudarHabilitado(true);
+            avancoState.AvancoData.BairroVizinho.Interagivel.MudarHabilitado(true);
         }
 
-        public override void ExitState() { }
+        public override void ExitState() 
+        {
+            //Provisório: só pra visualizar.
+            avancoState.AvancoData.BairroPlayer.Interagivel.MudarHabilitado(false);
+            avancoState.AvancoData.BairroVizinho.Interagivel.MudarHabilitado(false);
+         }
 
         private IEnumerator LancarDados()
         {
@@ -42,8 +46,10 @@ namespace Game
             dadosVizinhos.Sort();
             dadosVizinhos.Reverse();
             avancoState.AvancoData.SetDados(dadosPlayerAtual, dadosVizinhos);
-            CalculaAvanco();
-            yield return null;
+            CalcularDiscountAvanco();
+            yield return new WaitForSeconds(1);
+             
+            avancoState.NextAvancoStateServerRpc();
         }
 
         private List<int> GerarDados(Bairro bairro) {
@@ -56,7 +62,7 @@ namespace Game
             return dados;
         }
 
-        private void CalculaAvanco()
+        private void CalcularDiscountAvanco()
         {
             for (int i = 0; i < avancoState.AvancoData.QntdMenorDados(); i++)
             {
@@ -68,18 +74,18 @@ namespace Game
         {
             if (ValorDadoPlayerMaior(diceIndex))
             {
-                avancoState.AvancoData.BairroEleitorDiscount();
+                avancoState.AvancoData.VizinhoEleitorDiscount();
             }
             else
             {
-                avancoState.AvancoData.VizinhoEleitorDiscount();
+                avancoState.AvancoData.PlayerEleitorDiscount();
             }
         }
 
         private bool ValorDadoPlayerMaior(int dado)
         {
             AvancoData avancoData = avancoState.AvancoData;
-            if (avancoData.DadosPlayerAtual[dado] < avancoData.DadosVizinhos[dado])
+            if (avancoData.DadosPlayerAtual[dado] > avancoData.DadosVizinhos[dado])
                 return true;
             else
                 return false;

@@ -7,7 +7,7 @@ namespace Game
     public class SelecVizinhoAvancoState : State
     {
         private AvancoState avancoState;
-        private List<Bairro> BairrosVizinhos => avancoState.AvancoData.BairroEscolhido.Vizinhos.ToList();
+        private List<Bairro> BairrosVizinhos => avancoState.AvancoData.BairroPlayer.Vizinhos.ToList();
         private List<Bairro> VizinhosInimigos;
 
         private void Start()
@@ -60,7 +60,7 @@ namespace Game
 
         private void OnBairroClicado(Bairro bairro)
         {
-            avancoState.AvancoData.VizinhoEscolhido = bairro;
+            avancoState.AvancoData.BairroVizinho = bairro;
             avancoState.NextAvancoStateServerRpc();
         }
 

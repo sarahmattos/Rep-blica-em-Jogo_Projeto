@@ -88,7 +88,7 @@ namespace Game
 
         private void OnBairroClicado(Bairro bairro)
         {
-            avancoState.AvancoData.BairroEscolhido = bairro;
+            avancoState.AvancoData.BairroPlayer = bairro;
             avancoState.NextAvancoStateServerRpc();
         }
 
