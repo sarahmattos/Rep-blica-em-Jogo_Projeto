@@ -20,7 +20,6 @@ namespace Game
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("Enter State Lancam. Dados");
             StartCoroutine(LancarDados());
 
             //Provisório: só pra visualizar.
@@ -30,6 +29,7 @@ namespace Game
 
         public override void ExitState() 
         {
+            StopCoroutine(LancarDados());
             //Provisório: só pra visualizar.
             avancoState.AvancoData.BairroPlayer.Interagivel.MudarHabilitado(false);
             avancoState.AvancoData.BairroVizinho.Interagivel.MudarHabilitado(false);
@@ -47,8 +47,9 @@ namespace Game
             dadosVizinhos.Reverse();
             avancoState.AvancoData.SetDados(dadosPlayerAtual, dadosVizinhos);
             CalcularDiscountAvanco();
+            AplicaDiscountPlayer();
+            AplicaDiscountVizinho();
             yield return new WaitForSeconds(1);
-             
             avancoState.NextAvancoStateServerRpc();
         }
 
@@ -99,6 +100,22 @@ namespace Game
                 512
             );
         }
+
+        private void AplicaDiscountPlayer()
+        {
+            int eleitorDiscountPlayer = avancoState.AvancoData.EleitorDiscountPlayer;
+            avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.MudaValorEleitores(
+                eleitorDiscountPlayer
+            );
+        }
+
+        private void AplicaDiscountVizinho() {
+            int eleitorDiscountVizinho = avancoState.AvancoData.EleitorDiscountVizinho;
+            avancoState.AvancoData.BairroVizinho.SetUpBairro.Eleitores.MudaValorEleitores(
+                eleitorDiscountVizinho
+            );
+        }
+
 
 
     }

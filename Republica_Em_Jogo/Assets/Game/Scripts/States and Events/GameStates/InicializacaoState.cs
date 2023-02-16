@@ -63,6 +63,7 @@ namespace Game
             foreach (Bairro bairro in todosBairros)
             {
                 bairro.SetPlayerControl(aux);
+                bairro.SetUpBairro.Eleitores.MudaValorEleitores(1);
                 aux = (1 + aux) % (clients);
 
                 yield return new WaitForSeconds(intervaloTempo);

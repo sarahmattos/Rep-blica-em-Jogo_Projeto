@@ -21,7 +21,6 @@ namespace Game
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("Enter State: SELECT BAIRRO.");
             bairrosInteragiveis = GetBairrosPodemInteragir();
             InscreverClickInteragivelBairros(bairrosInteragiveis);
             MudarHabilitadoInteragivelBairros(BairrosInteragiveis, true);
@@ -31,7 +30,6 @@ namespace Game
 
         public override void ExitState()
         {
-            Tools.Logger.Instance.LogInfo("Exit State: SELECT BAIRRO.");
             DesinscreverClickInteragivelBairros(bairrosInteragiveis);
             // DesabilitarInteragivelDosBairrosNaoEscolhidos();
             MudarHabilitadoInteragivelBairros(bairrosInteragiveis, false);

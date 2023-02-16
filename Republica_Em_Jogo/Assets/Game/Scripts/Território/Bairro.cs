@@ -65,7 +65,7 @@ namespace Game.Territorio
         public void SetPlayerControl(int playerID)
         {
             playerIDNoControl.Value = playerID;
-            setUpBairro.Eleitores?.MudaValorEleitores(1);
+            // setUpBairro.Eleitores?.MudaValorEleitores(1);
         }
         
 

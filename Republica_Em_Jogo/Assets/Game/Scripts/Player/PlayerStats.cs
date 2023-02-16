@@ -114,7 +114,7 @@ namespace Game.Player {
             Tools.Logger.Instance.LogInfo("inicializando player stats");
             cor = GameDataConfig.Instance.PlayerColorOrder[playerID];
             maxTerritorio = GameDataConfig.Instance.territoriosInScene;
-            nome = string.Concat("jogador ", playerID);
+            nome = string.Concat(GameDataConfig.Instance.TagParticipante," ", playerID);
             objetivoCarta = objetivosDatabase.Instance.objetivoComplemento;
 
         }

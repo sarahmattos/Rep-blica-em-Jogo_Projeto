@@ -38,7 +38,6 @@ namespace Game.Territorio
 
         public void MudaValorEleitores(int value)
         {
-            //TODO: tratamento para evitar que o valor seja menor q 0;
             eleitores.Value += value;
         }
     }
