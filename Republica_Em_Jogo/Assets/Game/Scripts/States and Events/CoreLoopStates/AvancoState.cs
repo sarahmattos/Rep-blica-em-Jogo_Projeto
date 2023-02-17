@@ -61,6 +61,7 @@ namespace Game
         {
             if (!TurnManager.Instance.LocalIsCurrent) return;
            avancoStateIndex.OnValueChanged -= AvancoIndexMuda;
+           avancoData.ClearData();
 
         }
 
@@ -74,10 +75,10 @@ namespace Game
             AcrescentaRodadaNaSaidaUltimoAvancoState(previousValue);
         }
 
-        private void AcrescentaRodadaNaSaidaUltimoAvancoState(int previousvalue)
+        private void AcrescentaRodadaNaSaidaUltimoAvancoState(int previousValue)
         {
             int ultimoAvancoStateIndex = (statePairValues.Count-1);
-            if (previousvalue == ultimoAvancoStateIndex)
+            if (previousValue == ultimoAvancoStateIndex)
             {
                 contagemAvancosRodada++;
                 avancoData.ClearData();

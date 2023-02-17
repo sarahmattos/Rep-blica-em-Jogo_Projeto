@@ -9,15 +9,15 @@ namespace Game
 {
     public class MigraEleitorAvancoState : State
     {
-        private const int minEleitoresMigrar = 1;
-        private const int maxEleitoresMigrar = 3;
+        private const int minEleitores = 1;
+        private const int maxEleitores = 3;
         private AvancoState avancoState;
         public event Action<int,Bairro> migraEleitores;
         public int MaxQntdEleitoresMigrar =>   
             Math.Clamp(
                 (avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.contaEleitores-1), 
-                minEleitoresMigrar, 
-                maxEleitoresMigrar
+                minEleitores, 
+                maxEleitores
             );
 
         public bool PodeMigrar => 
@@ -34,28 +34,26 @@ namespace Game
 
         public override void EnterState()
         {
-            if(PodeMigrar) {
-                StartCoroutine(Migrar());
-                return;
-            }
-            avancoState.NextAvancoStateServerRpc();
+            if(!PodeMigrar) avancoState.NextAvancoStateServerRpc();
+            Tools.Logger.Instance.LogInfo("Aperte 1 ou 2 ou 3 para escolher.");
+            Debug.Log("max eleitores migrar: "+ maxEleitores);
+            Debug.Log("eleitores: "+avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.contaEleitores);
+            StartCoroutine(InputReceiver());
 
-            
         }
 
         public override void ExitState() 
         { 
-            StopCoroutine(Migrar());
-
+            StopAllCoroutines();
         }
 
 
         //Por equanto, ainda é automatico. 
         //TODO: definir como sera a feito
-        private void MigrarEleitores() {
+        private void MigrarEleitores(int eleitores) {
             int eleitoresMigrar = MaxQntdEleitoresMigrar;
-            avancoState.AvancoData.BairroVizinho.SetUpBairro.Eleitores.MudaValorEleitores(eleitoresMigrar);
-            avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.MudaValorEleitores(-eleitoresMigrar);
+            avancoState.AvancoData.BairroVizinho.SetUpBairro.Eleitores.MudaValorEleitores(eleitores);
+            avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.MudaValorEleitores(-eleitores);
         
         }
 
@@ -64,13 +62,26 @@ namespace Game
             avancoState.AvancoData.BairroVizinho.SetPlayerControl(playerID);
         }
 
-        public IEnumerator Migrar() 
+        public IEnumerator Migrar(int eleitores) 
         {
             MudaVizinhoControl();
-            MigrarEleitores();
-            migraEleitores?.Invoke(MaxQntdEleitoresMigrar, avancoState.AvancoData.BairroVizinho);
-            yield return new WaitForSeconds(1);
+            MigrarEleitores(eleitores);
+            migraEleitores?.Invoke(eleitores, avancoState.AvancoData.BairroVizinho);
+            yield return new WaitForSeconds(0.1f);
             avancoState.NextAvancoStateServerRpc();
+
+        }
+
+
+        //Provisório: só para testes
+        private IEnumerator InputReceiver()
+        {
+            while(true) {
+                if(MaxQntdEleitoresMigrar >= 1 && Input.GetKeyDown(KeyCode.Alpha1))  StartCoroutine(Migrar(1));
+                if(MaxQntdEleitoresMigrar >= 2 && Input.GetKeyDown(KeyCode.Alpha2))  StartCoroutine(Migrar(2));
+                if(MaxQntdEleitoresMigrar >= 3 && Input.GetKeyDown(KeyCode.Alpha3))  StartCoroutine(Migrar(3));
+                yield return null;
+            }
 
         }
 

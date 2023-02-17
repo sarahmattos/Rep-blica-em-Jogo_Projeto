@@ -29,10 +29,11 @@ namespace Game
 
         public override void ExitState() 
         {
-            StopCoroutine(LancarDados());
             //Provisório: só pra visualizar.
             avancoState.AvancoData.BairroPlayer.Interagivel.MudarHabilitado(false);
             avancoState.AvancoData.BairroVizinho.Interagivel.MudarHabilitado(false);
+            StopCoroutine(LancarDados());
+
          }
 
         private IEnumerator LancarDados()
