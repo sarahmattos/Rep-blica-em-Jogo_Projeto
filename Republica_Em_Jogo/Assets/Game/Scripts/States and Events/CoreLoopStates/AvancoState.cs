@@ -22,11 +22,9 @@ namespace Game
             NetworkVariableWritePermission.Server
         );
         private Dictionary<AvancoStatus, State> statePairValues;
-
         public Dictionary<AvancoStatus, State> StatePairValues => statePairValues;
         private State currentState;
         private Action<AvancoStatus> estadoMuda;
-        private int contagemAvancosRodada;
         private AvancoData avancoData = new AvancoData();
         public AvancoData AvancoData => avancoData;
 
@@ -44,24 +42,20 @@ namespace Game
             SetPairValues();
         }
 
-        // private void OnDestroy()
-        // {
-        // }
-
         public override void EnterState()
         {
             Tools.Logger.Instance.LogInfo("Enter State: AVAN�O");
             if (!TurnManager.Instance.LocalIsCurrent)return;
             avancoStateIndex.OnValueChanged += AvancoIndexMuda;
-            contagemAvancosRodada = 0;
+            avancoData.ResetData();
             SetAvancoStateServerRpc(0);
+
         }
 
         public override void ExitState()
         {
             if (!TurnManager.Instance.LocalIsCurrent) return;
            avancoStateIndex.OnValueChanged -= AvancoIndexMuda;
-           avancoData.ClearData();
 
         }
 
@@ -72,16 +66,17 @@ namespace Game
             estadoMuda?.Invoke((AvancoStatus)newValue);
 
             currentState.InvokeEntrada();
-            AcrescentaRodadaNaSaidaUltimoAvancoState(previousValue);
+            SaindoUltimoState(previousValue);
         }
 
-        private void AcrescentaRodadaNaSaidaUltimoAvancoState(int previousValue)
+        private void SaindoUltimoState(int previousValue)
         {
             int ultimoAvancoStateIndex = (statePairValues.Count-1);
             if (previousValue == ultimoAvancoStateIndex)
             {
-                contagemAvancosRodada++;
-                avancoData.ClearData();
+                Debug.Log("Passamos pela última rodada");
+                avancoData.ContagemRodadaAvanco++;
+                avancoData.ClearRodadaData();
             }
         }
 

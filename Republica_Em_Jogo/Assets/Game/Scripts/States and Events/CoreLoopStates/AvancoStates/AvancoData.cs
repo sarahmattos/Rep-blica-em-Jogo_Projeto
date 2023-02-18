@@ -29,8 +29,15 @@ namespace Game
         private List<int> dadosVizinhos = new List<int>();        
         public List<int> DadosPlayerAtual => dadosPlayerAtual;
         public List<int> DadosVizinhos => dadosVizinhos;
+        private int contagemRodadaAvanco;
+        public int ContagemRodadaAvanco { get => contagemRodadaAvanco; set => contagemRodadaAvanco = value; }
 
-        public void ClearData()
+        public void ResetData() {
+            ContagemRodadaAvanco = 0;
+            ClearRodadaData();
+        }
+
+        public void ClearRodadaData()
         {
             bairroPlayer = null;
             bairroVizinho = null;
