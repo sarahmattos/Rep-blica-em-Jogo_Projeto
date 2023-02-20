@@ -20,23 +20,19 @@ namespace Game
 
         public override void EnterState()
         {
-            StartCoroutine(LancarDados());
 
-            //Provisório: só pra visualizar.
-            avancoState.AvancoData.BairroPlayer.Interagivel.MudarHabilitado(true);
-            avancoState.AvancoData.BairroVizinho.Interagivel.MudarHabilitado(true);
+            LancarDados();
+            ProcessarDescontagemEleitores();           
+            avancoState.NextAvancoStateServerRpc();
+
         }
 
         public override void ExitState() 
         {
-            //Provisório: só pra visualizar.
-            avancoState.AvancoData.BairroPlayer.Interagivel.MudarHabilitado(false);
-            avancoState.AvancoData.BairroVizinho.Interagivel.MudarHabilitado(false);
-            StopCoroutine(LancarDados());
 
-         }
+        }
 
-        private IEnumerator LancarDados()
+        private void LancarDados()
         {
             List<int> dadosPlayerAtual = new List<int>();
             List<int> dadosVizinhos = new List<int>();
@@ -47,11 +43,12 @@ namespace Game
             dadosVizinhos.Sort();
             dadosVizinhos.Reverse();
             avancoState.AvancoData.SetDados(dadosPlayerAtual, dadosVizinhos);
+        }
+
+        private void ProcessarDescontagemEleitores() {
             CalcularDiscountAvanco();
             AplicaDiscountPlayer();
             AplicaDiscountVizinho();
-            yield return new WaitForSeconds(1);
-            avancoState.NextAvancoStateServerRpc();
         }
 
         private List<int> GerarDados(Bairro bairro) {
@@ -105,14 +102,14 @@ namespace Game
         private void AplicaDiscountPlayer()
         {
             int eleitorDiscountPlayer = avancoState.AvancoData.EleitorDiscountPlayer;
-            avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.MudaValorEleitores(
+            avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.AcrescentaEleitorServerRpc(
                 eleitorDiscountPlayer
             );
         }
 
         private void AplicaDiscountVizinho() {
             int eleitorDiscountVizinho = avancoState.AvancoData.EleitorDiscountVizinho;
-            avancoState.AvancoData.BairroVizinho.SetUpBairro.Eleitores.MudaValorEleitores(
+            avancoState.AvancoData.BairroVizinho.SetUpBairro.Eleitores.AcrescentaEleitorServerRpc(
                 eleitorDiscountVizinho
             );
         }

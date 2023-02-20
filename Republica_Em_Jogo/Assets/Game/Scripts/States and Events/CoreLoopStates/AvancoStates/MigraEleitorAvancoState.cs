@@ -25,7 +25,7 @@ namespace Game
         private void Start()
         {
             avancoState = GetComponentInParent<AvancoState>();
-            migraEleitores += (eleitores, bairro) => Tools.Logger.Instance.LogWarning("Até "+eleitores+" eleitores para "+bairro.Nome);
+            migraEleitores += (eleitores, bairro) => Tools.Logger.Instance.LogWarning(eleitores+" eleitores para "+bairro.Nome);
 
         }
 
@@ -34,9 +34,15 @@ namespace Game
 
         public override void EnterState()
         {
-            if(!PodeMigrar) avancoState.NextAvancoStateServerRpc();
+            Tools.Logger.Instance.LogInfo("pode migrar: "+PodeMigrar);
+
+            if(!PodeMigrar) {
+                
+                avancoState.NextAvancoStateServerRpc();
+                return;
+            }
             Tools.Logger.Instance.LogInfo("Aperte 1 ou 2 ou 3 para escolher.");
-            Debug.Log("max eleitores migrar: "+ maxEleitores);
+            Debug.Log("max eleitores migrar: "+ MaxQntdEleitoresMigrar);
             Debug.Log("eleitores: "+avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.contaEleitores);
             StartCoroutine(InputReceiver());
 
@@ -52,14 +58,14 @@ namespace Game
         //TODO: definir como sera a feito
         private void MigrarEleitores(int eleitores) {
             int eleitoresMigrar = MaxQntdEleitoresMigrar;
-            avancoState.AvancoData.BairroVizinho.SetUpBairro.Eleitores.MudaValorEleitores(eleitores);
-            avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.MudaValorEleitores(-eleitores);
+            avancoState.AvancoData.BairroVizinho.SetUpBairro.Eleitores.AcrescentaEleitorServerRpc(eleitores);
+            avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.AcrescentaEleitorServerRpc(-eleitores);
         
         }
 
         private void MudaVizinhoControl() {
             int playerID = avancoState.AvancoData.BairroPlayer.PlayerIDNoControl.Value;
-            avancoState.AvancoData.BairroVizinho.SetPlayerControl(playerID);
+            avancoState.AvancoData.BairroVizinho.SetPlayerControlServerRpc(playerID);
         }
 
         public IEnumerator Migrar(int eleitores) 

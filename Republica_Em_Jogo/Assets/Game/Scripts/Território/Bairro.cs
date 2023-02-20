@@ -43,10 +43,10 @@ namespace Game.Territorio
         // {
         //     material = interagivel.Material;
         // }
-        [ServerRpc(RequireOwnership = false)]
-        public void MudaValorEleitorServerRpc(int valor)
+        
+        public void MudaValorEleitor(int valor)
         {
-            setUpBairro.Eleitores.MudaValorEleitores(valor);
+            setUpBairro.Eleitores.AcrescentaEleitorServerRpc(valor);
             //hs.AtualizarPlayerStatsBairro();
         }
        
@@ -62,7 +62,8 @@ namespace Game.Territorio
             playerIDNoControl.OnValueChanged -= onPlayerControlMuda;
         }
 
-        public void SetPlayerControl(int playerID)
+        [ServerRpc(RequireOwnership = false)]
+        public void SetPlayerControlServerRpc(int playerID)
         {
             playerIDNoControl.Value = playerID;
             // setUpBairro.Eleitores?.MudaValorEleitores(1);
@@ -97,7 +98,7 @@ namespace Game.Territorio
             //retirar
             if(hs.playerDiminuiEleitor==true){
                 if(setUpBairro.Eleitores.contaEleitores>1){
-                    if (NetworkManager.Singleton.IsClient) MudaValorEleitorServerRpc(-1);
+                    if (NetworkManager.Singleton.IsClient) MudaValorEleitor(-1);
                     //dimiui eleitor novo e aumenta eleito total
                     hs.contagemEleitores();
                     //recupera quantos eleitores novos
@@ -108,7 +109,7 @@ namespace Game.Territorio
             }else{
                 //colocar
                 if(setUpBairro.Eleitores.contaEleitores>0){
-                    if (NetworkManager.Singleton.IsClient) MudaValorEleitorServerRpc(1);
+                    if (NetworkManager.Singleton.IsClient) MudaValorEleitor(1);
                     hs.contagemEleitores();
                     hs.valorEleitorNovo();
                     if(hs.eleitoresNovosAtual<1) hs.AtualizaUIAposDistribuicao();

@@ -36,7 +36,9 @@ namespace Game.Territorio
             hs.AtualizarPlayerStatsBairro();
         }
 
-        public void MudaValorEleitores(int value)
+        
+        [ServerRpc(RequireOwnership = false)]
+        public void AcrescentaEleitorServerRpc(int value)
         {
             eleitores.Value += value;
         }
