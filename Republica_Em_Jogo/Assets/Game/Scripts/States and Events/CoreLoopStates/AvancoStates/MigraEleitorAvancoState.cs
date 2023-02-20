@@ -60,6 +60,7 @@ namespace Game
             int eleitoresMigrar = MaxQntdEleitoresMigrar;
             avancoState.AvancoData.BairroVizinho.SetUpBairro.Eleitores.AcrescentaEleitorServerRpc(eleitores);
             avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.AcrescentaEleitorServerRpc(-eleitores);
+            avancoState.AvancoData.BairrosAdquiridos++;
         
         }
 
