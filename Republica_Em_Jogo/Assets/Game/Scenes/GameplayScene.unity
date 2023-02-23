@@ -1585,6 +1585,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 376869962}
     - target: {fileID: 8162957968737513791, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
+      propertyPath: text_cadeiras
+      value: 
+      objectReference: {fileID: 1398860458}
+    - target: {fileID: 8162957968737513791, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: text_eduCarta
       value: 
       objectReference: {fileID: 315734390}
@@ -5649,9 +5653,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37820ef33e753644fac1587f17df20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hs: {fileID: 152117521}
   somaEleitores: 0
   cadeirasCamara: []
   cadeirasTotais: 0
+  minCadeirasVotacao: 0
   todosBairros: []
   numConectados: 0
   eleitoresPlayers: 
@@ -14517,22 +14523,13 @@ MonoBehaviour:
   projetoManager: {fileID: 11400000, guid: 2910fdc27ce7cdd489424b00e81158d5, type: 2}
   text_projetoCarta: {fileID: 1443612458}
   text_avisoProjeto: {fileID: 870134278}
-  text_avisoOutros: {fileID: 0}
   projetoUI: {fileID: 1417987892}
   restoUI: {fileID: 38161727}
   bntsUi: {fileID: 180597197}
   btns2: {fileID: 1641261927}
   fecharBtn: {fileID: 1558210513}
   verProjetoBtn: {fileID: 214221300}
-  proposta: 
-  numRecompensa: 0
-  numRecompensaDefault: 0
-  recompensaText: 
-  zonaNameLocal: 
   clienteLocal: -1
-  sim: 0
-  nao: 0
-  numPlayer: 0
   playerInZona: 0
   distribuicaoProjeto: 0
   aprovado: 0

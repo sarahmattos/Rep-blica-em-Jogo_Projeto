@@ -22,7 +22,7 @@ namespace Game.Player {
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
         public float numCadeiras;
-        public int bairrosTotais;
+        public int bairrosTotais => bairrosInControl.Count;
         private List<Bairro> bairrosInControl = new List<Bairro>();
         public List<Bairro> BairrosInControl { get => bairrosInControl; set => bairrosInControl = value; }
 
@@ -132,10 +132,10 @@ namespace Game.Player {
 
         }
 
-        public void ContaBairros()
-        {
-            bairrosTotais = BairrosInControl.Count;
-        }
+        // public void ContaBairros()
+        // {
+        //     bairrosTotais = BairrosInControl.Count;
+        // }
         
 
     }
