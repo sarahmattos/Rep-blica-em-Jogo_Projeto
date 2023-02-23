@@ -24,7 +24,8 @@ namespace Game.Player {
         public float numCadeiras;
         public int bairrosTotais;
         private List<Bairro> bairrosInControl = new List<Bairro>();
-        public List<Bairro> BairrosInControl => bairrosInControl;
+        public List<Bairro> BairrosInControl { get => bairrosInControl; set => bairrosInControl = value; }
+
         public float eleitoresNovos;
         public RecursoCartaObjeto recursoManager;
 
@@ -41,7 +42,7 @@ namespace Game.Player {
 
         private void Awake()
         {
-            bairrosInControl = new List<Bairro>();
+            BairrosInControl = new List<Bairro>();
 
         }
         private void Start()
@@ -123,9 +124,9 @@ namespace Game.Player {
         {
             eleitoresTotais = 0;
 
-            for (int i = 0; i < bairrosInControl.Count; i++)
+            for (int i = 0; i < BairrosInControl.Count; i++)
             {
-                eleitoresTotais += bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores;
+                eleitoresTotais += BairrosInControl[i].SetUpBairro.Eleitores.contaEleitores;
                 //Debug.Log(bairrosInControl[i].Nome + " " + bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores);
             }
 
@@ -133,7 +134,7 @@ namespace Game.Player {
 
         public void ContaBairros()
         {
-            bairrosTotais = bairrosInControl.Length;
+            bairrosTotais = BairrosInControl.Count;
         }
         
 

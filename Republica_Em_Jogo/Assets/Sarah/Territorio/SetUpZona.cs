@@ -67,10 +67,10 @@ namespace Game.Territorio
             {
                 zona.ContarBairroInControl(ps, listaAux);
             }
-            ps.bairrosInControl = new Bairro[listaAux.Count];
-            for (int i = 0; i < ps.bairrosInControl.Length; i++)
+            ps.BairrosInControl = new List<Bairro>();
+            for (int i = 0; i < ps.BairrosInControl.Count; i++)
             {
-                ps.bairrosInControl[i] = listaAux[i];
+                ps.BairrosInControl[i] = listaAux[i];
             }
 
         }
