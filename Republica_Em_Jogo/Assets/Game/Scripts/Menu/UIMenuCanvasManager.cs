@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Game.Networking
 {
 
-    public class UICanvasManager : MonoBehaviour
+    public class UIMenuCanvasManager : MonoBehaviour
     {
         [SerializeField] private Canvas CanvasInicial;
         [SerializeField] private Canvas CanvasPosConexao;

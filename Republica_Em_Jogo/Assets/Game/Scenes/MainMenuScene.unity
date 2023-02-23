@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -318,7 +318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 469151284}
   m_Layer: 0
-  m_Name: CavasManipulador
+  m_Name: Cavas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1369,10 +1369,6 @@ PrefabInstance:
     - target: {fileID: 7887484138069535951, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7887484138301063674, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -13.371094
       objectReference: {fileID: 0}
     - target: {fileID: 7887484138484641834, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchorMax.x

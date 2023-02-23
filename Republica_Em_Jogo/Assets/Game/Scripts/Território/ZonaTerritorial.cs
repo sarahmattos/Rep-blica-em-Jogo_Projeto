@@ -28,7 +28,7 @@ namespace Game.Territorio
         {
             foreach(Bairro bairro in bairros)
             {
-                if(bairro.playerIDNoControl.Value == (int)client)
+                if(bairro.PlayerIDNoControl.Value == (int)client)
                 {
                     projeto.playerInZona=true;
                 }
@@ -55,7 +55,7 @@ namespace Game.Territorio
             
             foreach (Bairro bairro in bairros)
             {
-                if (bairro.playerIDNoControl.Value == _ps.playerID)
+                if (bairro.PlayerIDNoControl.Value == _ps.playerID)
                 {
                     _listAux.Add(bairro);
                 }
@@ -69,7 +69,7 @@ namespace Game.Territorio
             {
                 for (int i = 0; i < numPlayer; i++)
                 {
-                    if (bairro.playerIDNoControl.Value == i)
+                    if (bairro.PlayerIDNoControl.Value == i)
                     {
                         _eleitoresPlayers[i]+= bairro.SetUpBairro.Eleitores.contaEleitores;
                     }

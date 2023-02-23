@@ -12,7 +12,7 @@ namespace Game
         public override void EnterState()
         {
             Tools.Logger.Instance.LogInfo("Enter State: PROJETO");
-           if(TurnManager.Instance.GetPlayerAtual==TurnManager.Instance.idPlayer){
+           if(TurnManager.Instance.LocalIsCurrent){
                 baralho.enabled = true;
            }
             //EleicaoManager.Instance.CalculoEleicao();

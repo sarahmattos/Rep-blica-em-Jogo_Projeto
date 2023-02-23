@@ -30,6 +30,7 @@ namespace Game
             Logger.Instance.LogInfo("Enter state: Inicializa");
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
             todosBairros = GetBairros();
+            todosBairros.Shuffle();            
             if (!IsServer) return;
             StartCoroutine(DistribuirBairros());
         }
@@ -45,11 +46,10 @@ namespace Game
         private List<Bairro> GetBairros()
         {
             List<Bairro> bairros = new List<Bairro>();
-            for (int i = 0; i < zonasTerritoriais.Length; i++)
+            foreach (ZonaTerritorial zonas  in zonasTerritoriais)
             {
-                bairros.AddAll(zonasTerritoriais[i].Bairros);
+                bairros.AddAll(zonas.Bairros);
             }
-
             return bairros;
 
         }
@@ -61,18 +61,14 @@ namespace Game
             int clients = NetworkManager.Singleton.ConnectedClientsIds.Count;
             int aux = 0;
 
-
-            Logger.Instance.LogInfo("distribui��o COMECOU.");
             foreach (Bairro bairro in todosBairros)
             {
-                bairro.SetPlayerControl(aux);
+                bairro.SetPlayerControlServerRpc(aux);
+                bairro.SetUpBairro.Eleitores.AcrescentaEleitorServerRpc(1);
                 aux = (1 + aux) % (clients);
 
                 yield return new WaitForSeconds(intervaloTempo);
             }
-
-            Logger.Instance.LogInfo("distribui��o TERMINOU.");
-            //hs.AtualizarPlayerStatsBairro();
             stateHandler.NextStateServerRPC();
 
 

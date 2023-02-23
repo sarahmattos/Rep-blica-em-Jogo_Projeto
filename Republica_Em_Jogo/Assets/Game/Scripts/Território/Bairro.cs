@@ -7,14 +7,18 @@ using Game.UI;
 namespace Game.Territorio
 {
     
-    public class Bairro : NetworkBehaviour
+    public class Bairro :  NetworkBehaviour
     {
 
         [SerializeField] private string nome;
-        public NetworkVariable<int> playerIDNoControl = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private NetworkVariable<int> playerIDNoControl = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         public string Nome { get => nome; }
-        // private Material material;
+        public NetworkVariable<int> PlayerIDNoControl => playerIDNoControl;
+        [SerializeField] private Bairro[] vizinhos;
+        public Bairro[] Vizinhos => vizinhos;
         public event Action playerControlMuda;
+        public event Action<Bairro, int> bairroPlayerLocalForaControl;
+        public event Action<Bairro, int> bairroPlayerLocalNoControl;
         public bool playerInControl=false;
         public bool bairroNaZonaEscolhida=false;
         private Interagivel interagivel;
@@ -32,12 +36,15 @@ namespace Game.Territorio
             edu = GetComponentInChildren<Educaçao>();
             saude = GetComponentInChildren<Saúde>();
             hs = FindObjectOfType<HudStatsJogador>();
-            // material = Interagivel.gameObject.GetComponent<MeshRenderer>().material;
         }
-        [ServerRpc(RequireOwnership = false)]
-        public void MudaValorEleitorServerRpc(int valor)
+        // private void Start()
+        // {
+        //     material = interagivel.Material;
+        // }
+        
+        public void MudaValorEleitor(int valor)
         {
-            setUpBairro.Eleitores.MudaValorEleitores(valor);
+            setUpBairro.Eleitores.AcrescentaEleitorServerRpc(valor);
             //hs.AtualizarPlayerStatsBairro();
         }
        
@@ -53,22 +60,22 @@ namespace Game.Territorio
             playerIDNoControl.OnValueChanged -= onPlayerControlMuda;
         }
 
-        public void SetPlayerControl(int playerID)
+        [ServerRpc(RequireOwnership = false)]
+        public void SetPlayerControlServerRpc(int playerID)
         {
             playerIDNoControl.Value = playerID;
-            setUpBairro.Eleitores?.MudaValorEleitores(1);
+            // setUpBairro.Eleitores?.MudaValorEleitores(1);
         }
         
 
         private void onPlayerControlMuda(int previousValue, int newValue)
         {
-            Interagivel.Material.color = GameDataConfig.Instance.PlayerColorOrder[newValue];
+            // Interagivel.Material.color = GameDataConfig.Instance.PlayerColorOrder[newValue];
+            bairroPlayerLocalForaControl?.Invoke(this, previousValue);
+            bairroPlayerLocalNoControl?.Invoke(this, newValue);
 
-            //chama funcao pra atualizar bairro e eleitores na distribuicao inicial
-            if(newValue == (int)NetworkManager.Singleton.LocalClientId){
-                //hs.AtualizarPlayerStatsBairro();
-            }
         }
+
 
         //verifica se bairro pertence ao jogador
         public bool VerificaControl(){
@@ -87,8 +94,8 @@ namespace Game.Territorio
         if(VerificaControl()){
             //retirar
             if(hs.playerDiminuiEleitor==true){
-                if(setUpBairro.Eleitores.eleitores.Value>1){
-                    if (NetworkManager.Singleton.IsClient) MudaValorEleitorServerRpc(-1);
+                if(setUpBairro.Eleitores.contaEleitores>1){
+                    if (NetworkManager.Singleton.IsClient) MudaValorEleitor(-1);
                     //dimiui eleitor novo e aumenta eleito total
                     hs.contagemEleitores();
                     //recupera quantos eleitores novos
@@ -98,8 +105,8 @@ namespace Game.Territorio
                     }
             }else{
                 //colocar
-                if(setUpBairro.Eleitores.eleitores.Value>0){
-                    if (NetworkManager.Singleton.IsClient) MudaValorEleitorServerRpc(1);
+                if(setUpBairro.Eleitores.contaEleitores>0){
+                    if (NetworkManager.Singleton.IsClient) MudaValorEleitor(1);
                     hs.contagemEleitores();
                     hs.valorEleitorNovo();
                     if(hs.eleitoresNovosAtual<1) hs.AtualizaUIAposDistribuicao();

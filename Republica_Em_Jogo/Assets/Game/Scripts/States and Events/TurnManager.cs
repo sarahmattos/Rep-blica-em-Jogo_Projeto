@@ -35,8 +35,6 @@ namespace Game
         public event Action<bool> vezDoPlayerLocal;
         public event Action<int> PlayerTurnMuda;
         public bool nextIgualLocalID;
-        public int idPlayer;
-
         private State InicializaState =>
             GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
 
@@ -58,8 +56,6 @@ namespace Game
 
         private void Start()
         {
-            idPlayer = (int)NetworkManager.Singleton.LocalClientId;
-
             playerAtual.OnValueChanged += PlayerAtualMuda;
             if (!IsHost)
                 return;
