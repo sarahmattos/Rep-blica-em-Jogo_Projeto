@@ -67,9 +67,12 @@ namespace Game
         }
 
         private void OnClick(Bairro bairro) {
+            if(AplicouTodosEleitores) {
+                Tools.Logger.Instance.LogInfo("Recompensas aplicadas.");
+                return;
+            }
             AplicarRecompensa(bairro);
 
-            if(AplicouTodosEleitores)  CoreLoopStateHandler.Instance.NextStateServerRpc();
             
         }
 
