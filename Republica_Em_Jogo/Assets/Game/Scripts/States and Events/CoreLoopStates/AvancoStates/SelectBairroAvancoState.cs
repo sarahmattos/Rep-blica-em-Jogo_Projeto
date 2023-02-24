@@ -27,7 +27,7 @@ namespace Game
             Tools.Logger.Instance.LogInfo("Enter Select Bairro State");
             if (bairrosInteragiveis.Count == 0)
             {
-                CoreLoopStateHandler.Instance.NextStateServerRpc();
+                // CoreLoopStateHandler.Instance.NextStateServerRpc();
                 Tools.Logger.Instance.LogWarning("Nenhum bairro disponível para avançar.");
                 return;
             }
