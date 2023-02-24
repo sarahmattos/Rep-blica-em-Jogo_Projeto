@@ -17,12 +17,12 @@ namespace Game
         public bool TemRecompensa =>  (avancoData.BairrosAdquiridos) > 0 ? true : false;
         public bool AplicouTodosEleitores => qntdEleitorAplicado == recompensaEleitores;
         public PlayerStats PlayerStatsAtual =>  PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual();
-        public List<Bairro> bairrosDoPlayer => PlayerStatsAtual.BairrosInControl;
+        public List<Bairro> bairrosDoPlayer => PlayerStatsAtual?.BairrosInControl;
         
 
         public override void EnterState()
         {
-            if(!TurnManager.Instance.LocalIsCurrent) return;
+            Tools.Logger.Instance.LogInfo("Enter State: RECOMPENSA");
             if(!TemRecompensa) {
                 CoreLoopStateHandler.Instance.NextStateServerRpc();
                 Tools.Logger.Instance.LogInfo("Como não avançou em nenhum bairro, não há recompensa nesta rodada.");

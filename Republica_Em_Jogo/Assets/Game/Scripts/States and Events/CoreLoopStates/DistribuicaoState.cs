@@ -26,8 +26,9 @@ namespace Game
         {
             Tools.Logger.Instance.LogInfo("EnterState: DISTRIBUICAO");
             if(!TurnManager.Instance.LocalIsCurrent) return;
-            bairrosDoPlayerAtual = PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
-            
+            bairrosDoPlayerAtual.AddRange(
+                PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl
+            );
             foreach (Bairro bairro in bairrosDoPlayerAtual)
             {
                 bairro.Interagivel.MudarHabilitado(true);
