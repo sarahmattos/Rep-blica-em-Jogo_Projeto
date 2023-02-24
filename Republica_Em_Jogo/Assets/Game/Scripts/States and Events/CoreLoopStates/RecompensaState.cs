@@ -24,7 +24,6 @@ namespace Game
         {
             Tools.Logger.Instance.LogInfo("Enter State: RECOMPENSA");
             if(!TemRecompensa) {
-                CoreLoopStateHandler.Instance.NextStateServerRpc();
                 Tools.Logger.Instance.LogInfo("Como não avançou em nenhum bairro, não há recompensa nesta rodada.");
                 return;
             } 
