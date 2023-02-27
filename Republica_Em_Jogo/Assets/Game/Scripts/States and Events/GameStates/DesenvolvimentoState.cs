@@ -37,27 +37,35 @@ namespace Game
         }
 
 
-        private void OnTurnoMuda( int playerID)
+        private void OnTurnoMuda(int previousPlayer, int nextPlayer)
         {
             //rodada.Value = (rodada.Value % maxRodada) + 1;
             //if ((TurnManager.Instance.TurnCount % TurnManager.Instance.GetClientesCount) == 0)
             //{
             //    rodada.Value++;
             //}
-            if((playerID-1) == TurnManager.Instance.UltimoPlayer)
+            Debug.Log("Player anterior: "+previousPlayer);
+            Debug.Log("next player: "+nextPlayer);
+
+            if((previousPlayer) == TurnManager.Instance.UltimoPlayer)
             {
                 rodada.Value++;
+            }
+
+            if(nextPlayer % (TurnManager.Instance.GetClientesCount-1) == 0) {
+                Debug.Log("inicio de uma rodada");
             }
         }
 
         private void RodadaMuda(int previousValue, int newValue)
         {
-            if (newValue == maxRodada)
+            if (previousValue == maxRodada)
             {
                 StateHandler.ChangeStateServerRpc((int)GameState.ELEICOES);
 
             }
         }
+
 
 
 
