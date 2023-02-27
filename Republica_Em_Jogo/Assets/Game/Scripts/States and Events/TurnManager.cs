@@ -3,6 +3,7 @@ using Unity.Netcode;
 using Game.Tools;
 using Logger = Game.Tools.Logger;
 using System;
+using UnityEngine;
 
 namespace Game
 {
@@ -10,33 +11,24 @@ namespace Game
     {
         //Lembrar que: apenas Servers/Owners podem alterar NetworkVariables.
         //Para fazer isso via client, pode ser usado m�todos ServerRpc, assim como � feito nesta classe
-        private NetworkList<int> ordemPlayersID;
-        private NetworkVariable<int> indexPlayerAtual = new NetworkVariable<int>(
-            0,
-            NetworkVariableReadPermission.Everyone,
-            NetworkVariableWritePermission.Server
-        );
+        public NetworkList<int> ordemPlayersID;
+        private int indexPlayerAtual = 0;
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
-        private NetworkVariable<int> playerAtual = new NetworkVariable<int>(
-            -1,
-            NetworkVariableReadPermission.Everyone,
-            NetworkVariableWritePermission.Server
-        );
         private int turnCount = 0;
 
-        public NetworkVariable<int> PlayerAtual => playerAtual;
-
-        public int GetPlayerAtual => playerAtual.Value;
+        public int PlayerAtual => ordemPlayersID[indexPlayerAtual];
         public int UltimoPlayer => ordemPlayersID[ordemPlayersID.Count - 1];
-        public bool UltimoIgualAtual => (GetPlayerAtual == UltimoPlayer);
+
+        //public bool UltimoIgualAtual => (PlayerAtual == UltimoPlayer);
         public int GetClientesCount => clientesCount.Value;
-        public bool LocalIsCurrent =>
-            ((int)NetworkManager.Singleton.LocalClientId == GetPlayerAtual);
+        public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == PlayerAtual);
         public event Action<bool> vezDoPlayerLocal;
-        public event Action<int> PlayerTurnMuda;
+        public event Action<int> turnoMuda;
         public bool nextIgualLocalID;
         private State InicializaState =>
             GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
+        
+        private State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.DISTRIBUICAO];
 
         public int TurnCount
         {
@@ -51,32 +43,30 @@ namespace Game
                 NetworkVariableReadPermission.Everyone,
                 NetworkVariableWritePermission.Server
             );
-            
         }
 
         private void Start()
         {
-            playerAtual.OnValueChanged += PlayerAtualMuda;
+            turnoMuda += OnTurnoMuda;
+            DistribuicaoState.Entrada += NextTurn;
+
             if (!IsHost)
                 return;
             InicializaState.Entrada += UpdateClientsCount;
             InicializaState.Entrada += DefineConfigIniciais;
-
-            CoreLoopStateHandler.Instance.UltimoLoopState.Saida += NextTurnServerRpc;
         }
 
         public override void OnDestroy()
         {
-            playerAtual.OnValueChanged -= PlayerAtualMuda;
+            turnoMuda -= OnTurnoMuda;
+            DistribuicaoState.Entrada -= NextTurn;
+
             if (!IsHost)
                 return;
             ordemPlayersID.Dispose();
-            indexPlayerAtual.Dispose();
             clientesCount.Dispose();
-            playerAtual.Dispose();
             InicializaState.Entrada -= UpdateClientsCount;
             InicializaState.Entrada -= DefineConfigIniciais;
-            CoreLoopStateHandler.Instance.UltimoLoopState.Saida -= NextTurnServerRpc;
         }
 
         private void UpdateClientsCount()
@@ -84,14 +74,18 @@ namespace Game
             clientesCount.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
         }
 
-        private void PlayerAtualMuda(int previous, int next)
+        private void OnTurnoMuda(int playerID)
         {
-            Logger.Instance.LogWarning(string.Concat("Player ", previous, " encerrou o turno!"));
+            Logger.Instance.LogWarning(string.Concat("vez do player: ", playerID));
 
-            nextIgualLocalID = ((int)NetworkManager.Singleton.LocalClientId == next);
-            vezDoPlayerLocal?.Invoke(nextIgualLocalID);
-            PlayerTurnMuda?.Invoke(next);
+            // nextIgualLocalID = ((int)NetworkManager.Singleton.LocalClientId == playerID);
+            vezDoPlayerLocal?.Invoke(LocalIsCurrent);
             turnCount++;
+        }
+
+        private void DefineConfigIniciais()
+        {
+            GerarPlayerOrdem();
         }
 
         private void GerarPlayerOrdem()
@@ -109,24 +103,16 @@ namespace Game
             }
         }
 
-        private void DefineConfigIniciais()
+        public void SetIndexPlayerTurn(int index)
         {
-            GerarPlayerOrdem();
-            SetIndexPlayerTurnServerRpc(0);
+            indexPlayerAtual = index;
+            turnoMuda?.Invoke(PlayerAtual);
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        public void SetIndexPlayerTurnServerRpc(int index)
+        public void NextTurn()
         {
-            indexPlayerAtual.Value = index;
-            playerAtual.Value = ordemPlayersID[indexPlayerAtual.Value];
-        }
-
-        [ServerRpc(RequireOwnership = false)]
-        public void NextTurnServerRpc()
-        {
-            indexPlayerAtual.Value = (1 + indexPlayerAtual.Value) % (GetClientesCount);
-            playerAtual.Value = ordemPlayersID[indexPlayerAtual.Value];
+            indexPlayerAtual = (1 + indexPlayerAtual) % (GetClientesCount);
+            turnoMuda?.Invoke(PlayerAtual);
         }
     }
 }

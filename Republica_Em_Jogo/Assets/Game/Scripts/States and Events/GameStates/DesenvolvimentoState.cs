@@ -13,14 +13,14 @@ namespace Game
         {
            Tools.Logger.Instance.LogInfo("EnterState: DESENVOLVIMENTO");
             if (!IsHost) return;
-            TurnManager.Instance.PlayerAtual.OnValueChanged += TurnoMuda;
+            TurnManager.Instance.turnoMuda += OnTurnoMuda;
             rodada.Value = 0;
         }
 
         public override void ExitState()
         {
-            if (!IsServer) return;
-            TurnManager.Instance.PlayerAtual.OnValueChanged -= TurnoMuda;
+            if (!IsHost) return;
+            TurnManager.Instance.turnoMuda -= OnTurnoMuda;
 
 
         }
@@ -37,14 +37,14 @@ namespace Game
         }
 
 
-        private void TurnoMuda(int playerAnterior, int playerProximo)
+        private void OnTurnoMuda( int playerID)
         {
             //rodada.Value = (rodada.Value % maxRodada) + 1;
             //if ((TurnManager.Instance.TurnCount % TurnManager.Instance.GetClientesCount) == 0)
             //{
             //    rodada.Value++;
             //}
-            if(playerAnterior == TurnManager.Instance.UltimoPlayer)
+            if((playerID-1) == TurnManager.Instance.UltimoPlayer)
             {
                 rodada.Value++;
             }

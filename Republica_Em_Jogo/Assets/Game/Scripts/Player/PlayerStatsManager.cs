@@ -17,7 +17,7 @@ namespace Game.Player
         {
             foreach (PlayerStats playerStats in AllPlayerStats)
             {
-                if (playerStats.playerID == TurnManager.Instance.GetPlayerAtual)
+                if (playerStats.playerID == TurnManager.Instance.PlayerAtual)
                 {
                     return playerStats;
                 }
