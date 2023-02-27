@@ -12,7 +12,18 @@ namespace Game.Player
         private State gameplayLoadState => GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD];
         private PlayerStats[] allPlayerStats;
         public PlayerStats[] AllPlayerStats => allPlayerStats;
+        public PlayerStats GetLocalPlayerStats() {
+            foreach(PlayerStats playerStats in AllPlayerStats) {
+                if(playerStats.IsLocalPlayer) {
+                    return playerStats;
+                }
+            }
+            Tools.Logger.Instance.LogError("Falha ao enviar o PlayerStats do player local como referência.");
 
+            return null;
+        }
+            
+        
         public PlayerStats GetPlayerStatsDoPlayerAtual()
         {
             foreach (PlayerStats playerStats in AllPlayerStats)

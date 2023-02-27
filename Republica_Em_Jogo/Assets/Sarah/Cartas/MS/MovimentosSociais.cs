@@ -6,6 +6,8 @@ using TMPro;
 using Unity.Netcode;
 using Unity.Collections;
 using Game.UI;
+using Game.Territorio;
+using Game.Player;
 
 public class MovimentosSociais : NetworkBehaviour
 {
@@ -23,74 +25,94 @@ public class MovimentosSociais : NetworkBehaviour
     [SerializeField] private GameObject btnOk;
     private HudStatsJogador hs;
     private RecursosCartaManager rc;
-    public bool distribuicaoRecompensaRecurso=false;
+    public bool distribuicaoRecompensaRecurso = false;
 
-    public void Start(){
+    public void Start()
+    {
         hs = FindObjectOfType<HudStatsJogador>();
         rc = FindObjectOfType<RecursosCartaManager>();
     }
 
     [ServerRpc(RequireOwnership = false)]
-        public void AtualizaTextoServerRpc(string textoTotal2, int id)
-        {
-            movimentoSocialNetworkTexto.Value = textoTotal2;
-            idPlayerMS.Value= id;
-        }
+    public void AtualizaTextoServerRpc(string textoTotal2, int id)
+    {
+        movimentoSocialNetworkTexto.Value = textoTotal2;
+        idPlayerMS.Value = id;
+    }
 
-    public void sortearMS(){
-            int aux= Random.Range(0, MovimentoSociaisManager.movimento.Length);
-            movimento = MovimentoSociaisManager.movimento[aux];
-            recursoTipo = MovimentoSociaisManager.recursoTipo[aux];
-            quantidadeRecurso = MovimentoSociaisManager.quantidadeRecurso;
-            quantidadeEleitor = MovimentoSociaisManager.quantidadeEleitor;
-            if(recursoTipo=="Educação") rc.novosEdu =quantidadeRecurso;
-            if(recursoTipo=="Saúde") rc.novosSaude =quantidadeRecurso;
-            string textoTotal= "\n"+movimento +"\n"+"\n"+"Ganhe "+ quantidadeRecurso+" recurso de "+recursoTipo.ToString()+" e "+ quantidadeEleitor+" eleitores";
-            int id =(int)NetworkManager.Singleton.LocalClientId;
-            AtualizaTextoServerRpc(textoTotal, id);
+    public void sortearMS()
+    {
+        HabilitarBairrosPlayerAtual(true);
+        int aux = Random.Range(0, MovimentoSociaisManager.movimento.Length);
+        movimento = MovimentoSociaisManager.movimento[aux];
+        recursoTipo = MovimentoSociaisManager.recursoTipo[aux];
+        quantidadeRecurso = MovimentoSociaisManager.quantidadeRecurso;
+        quantidadeEleitor = MovimentoSociaisManager.quantidadeEleitor;
+        if (recursoTipo == "Educação") rc.novosEdu = quantidadeRecurso;
+        if (recursoTipo == "Saúde") rc.novosSaude = quantidadeRecurso;
+        string textoTotal = "\n" + movimento + "\n" + "\n" + "Ganhe " + quantidadeRecurso + " recurso de " + recursoTipo.ToString() + " e " + quantidadeEleitor + " eleitores";
+        int id = (int)NetworkManager.Singleton.LocalClientId;
+        AtualizaTextoServerRpc(textoTotal, id);
 
-            
-        }
-        private void OnEnable()
-        {
-            movimentoSocialNetworkTexto.OnValueChanged += (FixedString4096Bytes  previousValue, FixedString4096Bytes  newValue) =>
+
+    }
+    private void OnEnable()
+    {
+        movimentoSocialNetworkTexto.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
+            {
+                if (newValue != "")
                 {
-                    if(newValue!=""){
-                        cartaMV.SetActive(true);
-                        text_msCarta.text =  newValue.ToString();
-                        
-                    }
-                    
-                };
-                    idPlayerMS.OnValueChanged += (int  previousValue, int  newValue) =>
-                    {
-                        if(newValue!=(int)NetworkManager.Singleton.LocalClientId){
-                                btnOk.SetActive(false);
-                                btnFechar.SetActive(true);
-                                text_aviso.text="Movimento Social retirado pelo jogador: "+newValue;
-                        }else{
-                            text_aviso.text=" ";
-                            btnOk.SetActive(true);
-                            btnFechar.SetActive(false);
-                        }
+                    cartaMV.SetActive(true);
+                    text_msCarta.text = newValue.ToString();
+
+                }
+
             };
-        }
-        public void chamarRecompensasEleitor(){
-            distribuicaoRecompensaRecurso=true;
-            //receber valor uma vez
-            hs.playerRecebeEleitor=true;
-            //chama funcao pra receber esse valor
-            hs.ValorEleitoresNovos(quantidadeEleitor);
-        }
-        public void chamarRecompensasRecurso(){
-            if(distribuicaoRecompensaRecurso==true){
-                rc.distribuicaoChamada();
-                distribuicaoRecompensaRecurso=false;
+        idPlayerMS.OnValueChanged += (int previousValue, int newValue) =>
+        {
+            if (newValue != (int)NetworkManager.Singleton.LocalClientId)
+            {
+                btnOk.SetActive(false);
+                btnFechar.SetActive(true);
+                text_aviso.text = "Movimento Social retirado pelo jogador: " + newValue;
             }
-            
+            else
+            {
+                text_aviso.text = " ";
+                btnOk.SetActive(true);
+                btnFechar.SetActive(false);
+            }
+        };
+    }
+    public void chamarRecompensasEleitor()
+    {
+        distribuicaoRecompensaRecurso = true;
+        //receber valor uma vez
+        hs.playerRecebeEleitor = true;
+        //chama funcao pra receber esse valor
+        hs.ValorEleitoresNovos(quantidadeEleitor);
+    }
+    public void chamarRecompensasRecurso()
+    {
+        if (distribuicaoRecompensaRecurso == true)
+        {
+            rc.distribuicaoChamada();
+            distribuicaoRecompensaRecurso = false;
         }
 
-        public void panelFalse(GameObject panel){
-             panel.SetActive(false);
-         }
+    }
+
+    public void panelFalse(GameObject panel)
+    {
+        panel.SetActive(false);
+    }
+
+    private void HabilitarBairrosPlayerAtual(bool value)
+    {
+        List<Bairro> bairros = PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
+        foreach (Bairro bairro in bairros)
+        {
+            bairro.Interagivel.MudarHabilitado(value);
+        }
+    }
 }

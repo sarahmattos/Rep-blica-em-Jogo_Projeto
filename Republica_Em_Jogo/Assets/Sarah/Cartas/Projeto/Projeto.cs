@@ -44,7 +44,7 @@ public class Projeto : NetworkBehaviour
     private string recompensaText, zonaNameLocal, mostrarResposta, proposta;
     [HideInInspector]
     public int clienteLocal = -1;
-    private bool projetoNaoAprovado=false;
+    private bool projetoNaoAprovado = false;
     [HideInInspector]
     public bool playerInZona = false;
     [HideInInspector]
@@ -67,7 +67,7 @@ public class Projeto : NetworkBehaviour
         cp = FindObjectOfType<ControlePassarState>();
     }
 
-//********Seção funções RPC**************************************************
+    //********Seção funções RPC**************************************************
     //reseta valores para nova busca
     [ServerRpc(RequireOwnership = false)]
     public void DefaultValuesServerRpc()
@@ -82,11 +82,11 @@ public class Projeto : NetworkBehaviour
 
     //pede pro host avaliar a votação
     [ServerRpc(RequireOwnership = false)]
-    public void UpdateVotacaoServerRpc(int valor,int _numcadeiras)
+    public void UpdateVotacaoServerRpc(int valor, int _numcadeiras)
     {
         if (valor == 0)
         {
-            votacaoRespostaFavor.Value+=_numcadeiras;
+            votacaoRespostaFavor.Value += _numcadeiras;
             votacaoResposta.Value++;
         }
         if (valor == 1)
@@ -113,8 +113,8 @@ public class Projeto : NetworkBehaviour
         numPlayers.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
     }
 
-    
-//********Seção networkvariables onChange*******************************************
+
+    //********Seção networkvariables onChange*******************************************
     //verifica valores das variaves network se mudaram
     private void OnEnable()
     {
@@ -129,7 +129,7 @@ public class Projeto : NetworkBehaviour
         {
             if (newValue != -1)
             {
-                
+
                 //interface geral
                 clienteLocal = newValue;
                 projetoUI.SetActive(true);
@@ -180,31 +180,37 @@ public class Projeto : NetworkBehaviour
                 {
                     //se tiver 7 cadeiras passa direto pra projeto aprovado
                     PlayerStats ps = hs.GetPlayerStats();
-                    if(ps.numCadeiras>=EleicaoManager.Instance.minCadeirasVotacao){
+                    if (ps.numCadeiras >= EleicaoManager.Instance.minCadeirasVotacao)
+                    {
                         projetoAprovado();
-                    
-                    }else{
-                        text_avisoProjeto.text = "\n" + "\n" + "\n" + "Zona: " + newValue.ToString() + "\n" + "Não possui cadeiras suficientes para aprovar sozinho(a)" +"\n" + "Aguardando votação... ";
-                        UpdateVotacaoServerRpc(0,(int)ps.numCadeiras);
+
+                    }
+                    else
+                    {
+                        text_avisoProjeto.text = "\n" + "\n" + "\n" + "Zona: " + newValue.ToString() + "\n" + "Não possui cadeiras suficientes para aprovar sozinho(a)" + "\n" + "Aguardando votação... ";
+                        UpdateVotacaoServerRpc(0, (int)ps.numCadeiras);
                         inVotacao = true;
                     }
-                    
+
 
                     //interface para quem está votando
                 }
                 else
                 {
-                    if(EleicaoManager.Instance.cadeirasCamara[clienteLocal]>=EleicaoManager.Instance.minCadeirasVotacao){
+                    if (EleicaoManager.Instance.cadeirasCamara[clienteLocal] >= EleicaoManager.Instance.minCadeirasVotacao)
+                    {
                         projetoAprovado();
-                    }else{
+                    }
+                    else
+                    {
                         text_avisoProjeto.text = "\n" + "\n" + "Zona escolhida: " + newValue.ToString() + "\n" + "Vote: ";
                         btns2.SetActive(true);
                         inVotacao = true;
                     }
-                    
-                    
+
+
                 }
-                
+
             }
 
         };
@@ -221,8 +227,8 @@ public class Projeto : NetworkBehaviour
             quantVotos = newValue;
         };
     }
- 
- //********Seção update************************************************************
+
+    //********Seção update************************************************************
     public void Update()
     {
         if (inVotacao == true)
@@ -230,7 +236,7 @@ public class Projeto : NetworkBehaviour
             if (numPlayer > 1)
             {
                 //se todos votaram
-                if ( quantVotos >= numPlayer )
+                if (quantVotos >= numPlayer)
                 {
 
                     //desativa botão de votação
@@ -242,18 +248,20 @@ public class Projeto : NetworkBehaviour
                     if (sim > EleicaoManager.Instance.minCadeirasVotacao)
                     {
                         projetoAprovado();
-                    }else{
+                    }
+                    else
+                    {
                         //se teve mais não ou empate, foi reprovado
-                         text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO NÃO APROVADO";
-                         inVotacao = false;
-                         projetoNaoAprovado=true;
+                        text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO NÃO APROVADO";
+                        inVotacao = false;
+                        projetoNaoAprovado = true;
                     }
                 }
             }
         }
     }
 
-//********Seção funções player******************************************************
+    //********Seção funções player******************************************************
     //sortea os valores do projeto
     public void sortearProjeto()
     {
@@ -265,7 +273,7 @@ public class Projeto : NetworkBehaviour
         atualizarProjeto(textoTotal);
 
     }
-    
+
     //atualiza a carta de projeto ou pede pro host fazer isso
     public void atualizarProjeto(string textoTotal2)
     {
@@ -285,7 +293,7 @@ public class Projeto : NetworkBehaviour
 
         }
     }
-    
+
     //chamado apos projeto ser aprovado
     public void eleitoresZonaFinal()
     {
@@ -314,16 +322,18 @@ public class Projeto : NetworkBehaviour
         //se o projeto n foi aprovado e eu sou o client id eu passo de state
         fecharBtn.SetActive(false);
         projetoUI.SetActive(false);
-        if(projetoNaoAprovado){
-            if (clienteLocal == (int)NetworkManager.Singleton.LocalClientId){
+        if (projetoNaoAprovado)
+        {
+            if (clienteLocal == (int)NetworkManager.Singleton.LocalClientId)
+            {
                 CoreLoopStateHandler.Instance.NextStateServerRpc();
             }
-            projetoNaoAprovado=false;
+            projetoNaoAprovado = false;
             zonaNameLocal = "";
             clienteLocal = -1;
             numRecompensa = -1;
         }
-        
+
         if (aprovado == true)
         {
             eleitoresZonaFinal();
@@ -371,7 +381,7 @@ public class Projeto : NetworkBehaviour
         if (NetworkManager.Singleton.IsClient)
         {
             PlayerStats ps = hs.GetPlayerStats();
-            UpdateVotacaoServerRpc(resposta,(int)ps.numCadeiras);
+            UpdateVotacaoServerRpc(resposta, (int)ps.numCadeiras);
         }
         //texto interface recebe valores e botoees somem
         if (resposta == 0) mostrarResposta = "a favor";
@@ -382,11 +392,13 @@ public class Projeto : NetworkBehaviour
             text_avisoProjeto.text = "\n" + "\n" + "\n" + "Seu partido votou " + mostrarResposta + "\n" + "Aguardando outros partidos...";
         }
     }
-    
+
     //funcao ao projeto ser aprovado
-    public void projetoAprovado(){
+    public void projetoAprovado()
+    {
+        HabilitarBairrosPlayerLocal(true);
         fecharBtn.SetActive(true);
-        text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO APROVADO na zona " +zonaNameLocal+ "\n" + "Recompensa: " + numRecompensaDefault + " carta(s) e " + numRecompensaDefault + " eleitor(es)";
+        text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO APROVADO na zona " + zonaNameLocal + "\n" + "Recompensa: " + numRecompensaDefault + " carta(s) e " + numRecompensaDefault + " eleitor(es)";
         aprovado = true;
         setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
         if (playerInZona == true)
@@ -396,5 +408,16 @@ public class Projeto : NetworkBehaviour
         }
         inVotacao = false;
     }
+
+    private void HabilitarBairrosPlayerLocal(bool value)
+    {
+        List<Bairro> bairros = PlayerStatsManager.Instance.GetLocalPlayerStats().BairrosInControl;
+        foreach (Bairro bairro in bairros)
+        {
+            bairro.Interagivel.MudarHabilitado(value);
+        }
+    }
+
+    
 }
 

@@ -6,6 +6,8 @@ using TMPro;
 using Unity.Netcode;
 using Unity.Collections;
 using Game.UI;
+using Game.Player;
+using Game.Territorio;
 
 public class Corrupcao : NetworkBehaviour
 {
@@ -24,62 +26,81 @@ public class Corrupcao : NetworkBehaviour
     private HudStatsJogador hs;
     private RecursosCartaManager rc;
 
-    public void Start(){
+    public void Start()
+    {
         hs = FindObjectOfType<HudStatsJogador>();
         rc = FindObjectOfType<RecursosCartaManager>();
     }
 
     [ServerRpc(RequireOwnership = false)]
-        public void AtualizaTextoServerRpc(string textoTotal2, int id)
-        {
-            corrupcaoNetworkTexto.Value = textoTotal2;
-            idPlayerCorrupcao.Value= id;
-        }
+    public void AtualizaTextoServerRpc(string textoTotal2, int id)
+    {
+        corrupcaoNetworkTexto.Value = textoTotal2;
+        idPlayerCorrupcao.Value = id;
+    }
 
-    public void sortearCorrupcao(){
-            //defaultValues();
-            corrupcao = CorrupcaoManager.corrupcao[Random.Range(0, CorrupcaoManager.corrupcao.Length)];
-            complementText= CorrupcaoManager.complementText;
-            penalidade =CorrupcaoManager.penalidade;
-            penalidade2=penalidade;
-            string textoTotal= "\n"+corrupcao +"\n"+"\n"+ complementText;
-            int id =(int)NetworkManager.Singleton.LocalClientId;
-            AtualizaTextoServerRpc(textoTotal, id);
+    public void sortearCorrupcao()
+    {
+        //defaultValues();
+        HabilitarBairrosPlayerAtual(true);
+        corrupcao = CorrupcaoManager.corrupcao[Random.Range(0, CorrupcaoManager.corrupcao.Length)];
+        complementText = CorrupcaoManager.complementText;
+        penalidade = CorrupcaoManager.penalidade;
+        penalidade2 = penalidade;
+        string textoTotal = "\n" + corrupcao + "\n" + "\n" + complementText;
+        int id = (int)NetworkManager.Singleton.LocalClientId;
+        AtualizaTextoServerRpc(textoTotal, id);
 
-            
-        }
-        private void OnEnable()
-        {
-            corrupcaoNetworkTexto.OnValueChanged += (FixedString4096Bytes  previousValue, FixedString4096Bytes  newValue) =>
+
+    }
+    private void OnEnable()
+    {
+        corrupcaoNetworkTexto.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
+            {
+                if (newValue != "")
                 {
-                    if(newValue!=""){
-                        cartaCorrupcao.SetActive(true);
-                        text_CorrupcaoCarta.text =  newValue.ToString();
-                    }
-                };
-            idPlayerCorrupcao.OnValueChanged += (int  previousValue, int  newValue) =>
+                    cartaCorrupcao.SetActive(true);
+                    text_CorrupcaoCarta.text = newValue.ToString();
+                }
+            };
+        idPlayerCorrupcao.OnValueChanged += (int previousValue, int newValue) =>
+             {
+                 if (newValue != (int)NetworkManager.Singleton.LocalClientId)
                  {
-                    if(newValue!=(int)NetworkManager.Singleton.LocalClientId){
-                        btnOk.SetActive(false);
-                        btnFechar.SetActive(true);
-                        text_aviso.text="Corrupção retirado pelo jogador: "+newValue;
-                    }else{
-                         text_aviso.text=" ";
-                         btnOk.SetActive(true);
-                         btnFechar.SetActive(false);
-                    }
-            };    
+                     btnOk.SetActive(false);
+                     btnFechar.SetActive(true);
+                     text_aviso.text = "Corrupção retirado pelo jogador: " + newValue;
+                 }
+                 else
+                 {
+                     text_aviso.text = " ";
+                     btnOk.SetActive(true);
+                     btnFechar.SetActive(false);
+                 }
+             };
+    }
+    public void chamarPenalidade()
+    {
+        hs.playerRecebeEleitor = true;
+        hs.playerDiminuiEleitor = true;
+        hs.ValorEleitoresNovos(penalidade);
+    }
+    public void chamarPenalidade2()
+    {
+        rc.verificacaoInicial(penalidade2);
+    }
+
+    public void panelFalse(GameObject panel)
+    {
+        panel.SetActive(false);
+    }
+
+    private void HabilitarBairrosPlayerAtual(bool value)
+    {
+        List<Bairro> bairros = PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
+        foreach (Bairro bairro in bairros)
+        {
+            bairro.Interagivel.MudarHabilitado(value);
         }
-        public void chamarPenalidade(){
-            hs.playerRecebeEleitor=true;
-            hs.playerDiminuiEleitor=true;
-            hs.ValorEleitoresNovos(penalidade);
-        }
-        public void chamarPenalidade2(){
-            rc.verificacaoInicial(penalidade2);
-        }
-            
-        public void panelFalse(GameObject panel){
-             panel.SetActive(false);
-         }
+    }
 }

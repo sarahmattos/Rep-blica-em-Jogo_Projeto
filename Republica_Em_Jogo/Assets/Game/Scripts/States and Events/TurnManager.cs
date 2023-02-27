@@ -12,7 +12,7 @@ namespace Game
         //Lembrar que: apenas Servers/Owners podem alterar NetworkVariables.
         //Para fazer isso via client, pode ser usado m�todos ServerRpc, assim como � feito nesta classe
         public NetworkList<int> ordemPlayersID;
-        private int indexPlayerAtual = -1;
+        private int indexPlayerAtual = 0 ;
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
         private int turnCount;
         public int PlayerAtual => ordemPlayersID[indexPlayerAtual] ;

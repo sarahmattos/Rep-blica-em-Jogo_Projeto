@@ -1,3 +1,4 @@
+using Game.Player;
 using Game.Territorio;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,14 +13,17 @@ namespace Game
         public override void EnterState()
         {
             Tools.Logger.Instance.LogInfo("Enter State: PROJETO");
-           if(TurnManager.Instance.LocalIsCurrent){
+            if (TurnManager.Instance.LocalIsCurrent)
+            {
                 baralho.enabled = true;
-           }
+            }
+
             //EleicaoManager.Instance.CalculoEleicao();
         }
 
         public override void ExitState()
         {
+            HabilitarBairrosPlayerLocal(false);
             baralho.enabled = false;
 
         }
@@ -27,15 +31,24 @@ namespace Game
         private void Start()
         {
             baralho.enabled = false;
-           
+
         }
 
-         public void OnDestroy(){
-           
+        public void OnDestroy()
+        {
+
         }
 
-       
-        
+
+        private void HabilitarBairrosPlayerLocal(bool value)
+        {
+            List<Bairro> bairros = PlayerStatsManager.Instance.GetLocalPlayerStats().BairrosInControl;
+            foreach (Bairro bairro in bairros)
+            {
+                bairro.Interagivel.MudarHabilitado(value);
+            }
+        }
+
     }
 
 }
