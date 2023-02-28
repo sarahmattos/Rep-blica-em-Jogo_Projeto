@@ -12,10 +12,14 @@ namespace Game
         //Lembrar que: apenas Servers/Owners podem alterar NetworkVariables.
         //Para fazer isso via client, pode ser usado m�todos ServerRpc, assim como � feito nesta classe
         public NetworkList<int> ordemPlayersID;
-        private int indexPlayerAtual = 0 ;
+        private int indexPlayerAtual = -1;
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
         private int turnCount;
-        public int PlayerAtual => ordemPlayersID[indexPlayerAtual] ;
+        public event Action FirstPlayerTurn;
+
+        public int PlayerAtual => ordemPlayersID[indexPlayerAtual];
+
+
         public int UltimoPlayer => ordemPlayersID[clientesCount.Value - 1];
         public int GetClientesCount => clientesCount.Value;
         public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == PlayerAtual);
@@ -24,7 +28,7 @@ namespace Game
         public bool nextIgualLocalID;
         private State InicializaState =>
             GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
-        
+
         private State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.DISTRIBUICAO];
 
         public int TurnCount
@@ -71,13 +75,18 @@ namespace Game
             clientesCount.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
         }
 
-        private void OnTurnoMuda(int previousPlayer, int nextPlayer)
+        private void OnTurnoMuda(int _, int nextPlayer)
         {
             Logger.Instance.LogWarning(string.Concat("vez do player: ", nextPlayer));
 
             // nextIgualLocalID = ((int)NetworkManager.Singleton.LocalClientId == playerID);
             vezDoPlayerLocal?.Invoke(LocalIsCurrent);
             turnCount++;
+
+            if (nextPlayer == ordemPlayersID[0])
+            {
+                FirstPlayerTurn?.Invoke();
+            }
         }
 
         private void DefineConfigIniciais()
@@ -102,14 +111,26 @@ namespace Game
 
         public void SetIndexPlayerTurn(int index)
         {
+            Debug.Log("Set player turn");
             int previousPlayer = PlayerAtual;
             indexPlayerAtual = index;
             turnoMuda?.Invoke(previousPlayer, PlayerAtual);
         }
 
+        private void OnDistribuicaoEntrada()
+        {
+            if (turnCount == 0)
+            {
+                SetIndexPlayerTurn(0);
+                return;
+            }
+            NextTurn();
+
+        }
+
         public void NextTurn()
         {
-            int previousPlayer = PlayerAtual;
+            int previousPlayer = (indexPlayerAtual != -1) ? indexPlayerAtual : 0;
             indexPlayerAtual = (1 + indexPlayerAtual) % (GetClientesCount);
             turnoMuda?.Invoke(previousPlayer, PlayerAtual);
         }
