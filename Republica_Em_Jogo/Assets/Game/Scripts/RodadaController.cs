@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Game
 {
-    [Serializable]
     public class RodadaController : MonoBehaviour
     {
         private int rodada = 0;
