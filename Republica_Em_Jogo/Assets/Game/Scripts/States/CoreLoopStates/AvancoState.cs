@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using Game.Territorio;
+using Game.Player;
 
 namespace Game
 {
@@ -28,12 +29,14 @@ namespace Game
         private AvancoData avancoData = new AvancoData();
         public AvancoData AvancoData => avancoData;
 
+        public List<Bairro> bairrosPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
+
         private void SetPairValues()
         {
-            StatePairValues.Add(AvancoStatus.SELECT_BAIRRO , GetComponentInChildren<SelectBairroAvancoState>());
-            StatePairValues.Add(AvancoStatus.SELECT_VIZINHO ,GetComponentInChildren<SelecVizinhoAvancoState>());
-            StatePairValues.Add(AvancoStatus.LANCA_DADOS , GetComponentInChildren<LancamentoDadosAvancoState>());
-            StatePairValues.Add(AvancoStatus.MIGRACAO , GetComponentInChildren<MigraEleitorAvancoState>());
+            StatePairValues.Add(AvancoStatus.SELECT_BAIRRO, GetComponentInChildren<SelectBairroAvancoState>());
+            StatePairValues.Add(AvancoStatus.SELECT_VIZINHO, GetComponentInChildren<SelecVizinhoAvancoState>());
+            StatePairValues.Add(AvancoStatus.LANCA_DADOS, GetComponentInChildren<LancamentoDadosAvancoState>());
+            StatePairValues.Add(AvancoStatus.MIGRACAO, GetComponentInChildren<MigraEleitorAvancoState>());
         }
 
         private void Start()
@@ -54,8 +57,10 @@ namespace Game
 
         public override void ExitState()
         {
+
             if (!TurnManager.Instance.LocalIsCurrent) return;
-           avancoStateIndex.OnValueChanged -= AvancoIndexMuda;
+            avancoStateIndex.OnValueChanged -= AvancoIndexMuda;
+            HabilitarBairrosPlayerAtual(false);
 
         }
 
@@ -71,7 +76,7 @@ namespace Game
 
         private void SaindoUltimoState(int previousValue)
         {
-            int ultimoAvancoStateIndex = (statePairValues.Count-1);
+            int ultimoAvancoStateIndex = (statePairValues.Count - 1);
             if (previousValue == ultimoAvancoStateIndex)
             {
                 Debug.Log("Passamos pela última rodada");
@@ -90,6 +95,14 @@ namespace Game
         public void NextAvancoStateServerRpc()
         {
             avancoStateIndex.Value = (avancoStateIndex.Value + 1) % (statePairValues.Count);
+        }
+
+        public void HabilitarBairrosPlayerAtual(bool value)
+        {
+            foreach (Bairro bairro in bairrosPlayerAtual)
+            {
+                bairro.Interagivel.MudarHabilitado(value);
+            }
         }
     }
 }
