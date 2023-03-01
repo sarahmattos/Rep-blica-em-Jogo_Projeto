@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18365,6 +18365,7 @@ RectTransform:
   - {fileID: 1499836766}
   - {fileID: 152117520}
   - {fileID: 822401325}
+  - {fileID: 4769691101933998918}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21361,6 +21362,124 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &4769691101933998917
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1929002169}
+    m_Modifications:
+    - target: {fileID: 353758482791766018, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_Name
+      value: Text rodada
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 109.82062
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 26.690002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 54.91031
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -13.350037
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5825005744377700068, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_Name
+      value: HUD Rodada
+      objectReference: {fileID: 0}
+    - target: {fileID: 8545416031107301490, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8545416031107301490, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8545416031107301490, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 57.1172
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+--- !u!224 &4769691101933998918 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1246410260228119323, guid: 96d6c4a2c7027b546a9ab24b2821aca1, type: 3}
+  m_PrefabInstance: {fileID: 4769691101933998917}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4865064391220065095
 Transform:
   m_ObjectHideFlags: 0
@@ -22784,6 +22903,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 451325919873062468, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
+      propertyPath: hudStatsJogador
+      value: 
+      objectReference: {fileID: 152117521}
     - target: {fileID: 2758895162441606457, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
       propertyPath: hs
       value: 
