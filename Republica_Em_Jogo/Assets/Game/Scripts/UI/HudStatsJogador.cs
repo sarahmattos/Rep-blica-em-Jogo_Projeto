@@ -217,7 +217,7 @@ namespace Game.UI
         }
         public void cadeirasUi(float valor){
             playerStats.numCadeiras = valor;
-            text_cadeiras.SetText("Cadeiras: "+playerStats.numCadeiras.ToString());
+            text_cadeiras.SetText("Cadeiras: "+"\n" +playerStats.numCadeiras.ToString());
         }
         public void BntsAuxiliares(){
             btnsAux.SetActive(!btnsAux.activeSelf);
