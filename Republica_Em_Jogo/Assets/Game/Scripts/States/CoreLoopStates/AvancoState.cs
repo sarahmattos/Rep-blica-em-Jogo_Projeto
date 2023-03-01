@@ -88,7 +88,7 @@ namespace Game
             {
                 Debug.Log("Passamos pela última rodada");
                 avancoData.ContagemRodada++;
-                avancoData.ClearRodadaDataServerRpc();
+                avancoData.ClearRodadaData();
             }
         }
 

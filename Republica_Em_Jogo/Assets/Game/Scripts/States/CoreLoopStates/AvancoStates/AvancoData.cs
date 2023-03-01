@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Game.Territorio;
-using Unity.Netcode;
 
 namespace Game
 {
@@ -25,15 +24,11 @@ namespace Game
         private int eleitorDiscountVizinho;
         public int EleitorDiscountVizinho => eleitorDiscountVizinho;
         public event Action dadosLancados;
-        
-        private NetworkList<int> dadosPlayerAtual = new NetworkList<int>(new List<int>(),
-                NetworkVariableReadPermission.Everyone,
-                NetworkVariableWritePermission.Server);
-        private NetworkList<int> dadosVizinhos = new NetworkList<int>(new List<int>(),
-                NetworkVariableReadPermission.Everyone,
-                NetworkVariableWritePermission.Server);        
-        public NetworkList<int> DadosPlayerAtual => dadosPlayerAtual;
-        public NetworkList<int> DadosVizinhos => dadosVizinhos;
+
+        private List<int> dadosPlayerAtual = new List<int>();
+        private List<int> dadosVizinhos = new List<int>();        
+        public List<int> DadosPlayerAtual => dadosPlayerAtual;
+        public List<int> DadosVizinhos => dadosVizinhos;
         private int contagemRodada;
         public int ContagemRodada { get => contagemRodada; set => contagemRodada = value; }
         private int bairrosAdquiridos;
@@ -42,10 +37,10 @@ namespace Game
         public void ResetData() {
             ContagemRodada = 0;
             BairrosAdquiridos = 0;
-            ClearRodadaDataServerRpc();
+            ClearRodadaData();
         }
-        [ServerRpc(RequireOwnership=false)]
-        public void ClearRodadaDataServerRpc()
+
+        public void ClearRodadaData()
         {
             bairroPlayer = null;
             bairroVizinho = null;
@@ -63,15 +58,9 @@ namespace Game
             eleitorDiscountVizinho--;
         }
 
-        [ServerRpc(RequireOwnership=false)]
-        public void SetDadosServerRpc(List<int> dadosPlayerAtual, List<int> dadosVizinhos) {
-            for(int i =0;i<dadosPlayerAtual.Count;i++){
-                this.dadosPlayerAtual.Add(dadosPlayerAtual[i]);
-            }
-            for(int i =0;i<dadosVizinhos.Count;i++){
-                this.dadosVizinhos.Add(dadosVizinhos[i]);
-            }
-            
+        public void SetDados(List<int> dadosPlayerAtual, List<int> dadosVizinhos) {
+            this.dadosPlayerAtual = dadosPlayerAtual;
+            this.dadosVizinhos = dadosVizinhos;
             dadosLancados?.Invoke();
         }
 

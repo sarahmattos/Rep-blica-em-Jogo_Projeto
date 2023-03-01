@@ -44,7 +44,7 @@ namespace Game
             dadosPlayerAtual.Reverse();
             dadosVizinhos.Sort();
             dadosVizinhos.Reverse();
-            avancoState.AvancoData.SetDadosServerRpc(dadosPlayerAtual, dadosVizinhos);
+            avancoState.AvancoData.SetDados(dadosPlayerAtual, dadosVizinhos);
         }
 
         private void ProcessarDescontagemEleitores() {
