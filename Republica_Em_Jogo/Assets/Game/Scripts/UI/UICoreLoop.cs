@@ -15,7 +15,6 @@ namespace  Game
     public class UICoreLoop : MonoBehaviour
     {
         [SerializeField] private Button nextStateButton;
-        [SerializeField] private Button nextTurnButton;
         [SerializeField] private TMP_Text logStateText;
         public State DesenvState => GameStateHandler.Instance.StatePairValue[GameState.DESENVOLVIMENTO];
 
@@ -23,12 +22,10 @@ namespace  Game
         private void Awake()
         {
             nextStateButton.gameObject.SetActive(false);
-            nextTurnButton.gameObject.SetActive(false);
         }
 
         private void Start()
         {
-            nextTurnButton.onClick.AddListener(OnNextTurnButtonClick);
             nextStateButton.onClick.AddListener(OnNextStateButtonClick);
 
             TurnManager.Instance.vezDoPlayerLocal += OnPlayerTurnUpdate;
@@ -70,7 +67,6 @@ namespace  Game
             if (TurnManager.Instance.LocalIsCurrent)
             {
                 nextStateButton.gameObject.SetActive(true);
-                nextTurnButton.gameObject.SetActive(true);
             }
 
         }
@@ -78,7 +74,6 @@ namespace  Game
         private void OnPlayerTurnUpdate(bool value)
         {
             nextStateButton.gameObject.SetActive(value);
-            nextTurnButton.gameObject.SetActive(value);
             
 
             UpdateTextDesenv(Extensoes.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues, 
