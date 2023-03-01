@@ -61,17 +61,24 @@ namespace Game
             if (!TurnManager.Instance.LocalIsCurrent) return;
             avancoStateIndex.OnValueChanged -= AvancoIndexMuda;
             HabilitarBairrosPlayerAtual(false);
+            SetAvancoStateServerRpc(-1);
+
 
         }
 
-        private void AvancoIndexMuda(int previousValue, int newValue)
+
+        private void AvancoIndexMuda(int previousValue, int nextValue)
+        {
+            InvokeEventosStates(previousValue, nextValue);
+            SaindoUltimoState(previousValue);
+        }
+
+        private void InvokeEventosStates(int previousValue, int nextValue)
         {
             currentState?.InvokeSaida();
-            currentState = statePairValues[(AvancoStatus)newValue];
-            estadoMuda?.Invoke((AvancoStatus)newValue);
-
+            currentState = statePairValues[(AvancoStatus)nextValue];
+            estadoMuda?.Invoke((AvancoStatus)nextValue);
             currentState.InvokeEntrada();
-            SaindoUltimoState(previousValue);
         }
 
         private void SaindoUltimoState(int previousValue)

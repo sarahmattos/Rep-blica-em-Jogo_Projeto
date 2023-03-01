@@ -18,6 +18,7 @@ namespace Game
 
         public override void EnterState()
         {
+            Tools.Logger.Instance.LogInfo("Enter selec vizinho.");
             VizinhosInimigos = GetBairrosInimigos();
             MudaHabilitadoInteragivelBairros(VizinhosInimigos, true);
             InscreverClickInteragivelBairros(VizinhosInimigos);
@@ -25,6 +26,8 @@ namespace Game
 
         public override void ExitState()
         {
+            Tools.Logger.Instance.LogInfo("Exit selec vizinho.");
+
             DesinscreverClickInteragivelBairros(VizinhosInimigos);
             MudaHabilitadoInteragivelBairros(VizinhosInimigos, false);
             VizinhosInimigos.Clear();

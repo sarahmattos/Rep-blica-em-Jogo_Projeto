@@ -37,13 +37,11 @@ namespace Game
             Tools.Logger.Instance.LogInfo("pode migrar: "+PodeMigrar);
 
             if(!PodeMigrar) {
-                
+                Tools.Logger.Instance.LogWarning("Não há avanço.");
                 avancoState.NextAvancoStateServerRpc();
                 return;
             }
             Tools.Logger.Instance.LogInfo("Aperte 1 ou 2 ou 3 para escolher.");
-            Debug.Log("max eleitores migrar: "+ MaxQntdEleitoresMigrar);
-            Debug.Log("eleitores: "+avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.contaEleitores);
             StartCoroutine(InputReceiver());
 
         }
