@@ -23,8 +23,8 @@ namespace Game.UI
         }
 
         private void UpdateTextDados() {
-            string dadosPlayerAtual = "Seus: \n";
-            string dadosVizinhos = "Vizinho: \n";
+            string dadosPlayerAtual = "Ataque: \n";
+            string dadosVizinhos = "Defesa: \n";
             foreach(int value in AvancoData.DadosPlayerAtual)
                 dadosPlayerAtual = string.Concat(dadosPlayerAtual, value, "\n");
             foreach(int value in AvancoData.DadosVizinhos)
