@@ -27,6 +27,7 @@ namespace Game.UI
         public void OnDesenvolvimentoStateEnter()
         {
             rodadaController = FindObjectOfType<RodadaController>();
+            rodada_Text.SetText(string.Concat("Rodada: ", rodadaController.Rodada));
             rodadaController.rodadaMuda += UpdateTextRodada;
 
         }

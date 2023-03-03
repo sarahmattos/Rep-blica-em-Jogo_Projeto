@@ -21,8 +21,6 @@ namespace Game
 
             if (!IsHost) return;
             rodadaController.rodadaMaxAlcancada += GoToEleicao;
-
-
         }
 
         public override void ExitState()
@@ -30,6 +28,7 @@ namespace Game
             rodadaController.DesinscreverEvents();
             if (!IsHost) return;
             rodadaController.rodadaMaxAlcancada += GoToEleicao;
+
 
 
 

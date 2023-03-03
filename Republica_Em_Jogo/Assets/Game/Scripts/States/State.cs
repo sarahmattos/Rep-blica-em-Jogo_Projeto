@@ -3,28 +3,31 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Game {
+namespace Game
+{
 
 
-    
+
     public abstract class State : NetworkBehaviour
     {
-        public  Action Entrada;
-        public  Action Saida;
+        public Action Entrada;
+        public Action Saida;
 
         public abstract void EnterState();
         public abstract void ExitState();
 
         public void InvokeEntrada()
         {
-            Entrada?.Invoke();
             EnterState();
+            Entrada?.Invoke();
+
         }
 
         public void InvokeSaida()
         {
-            Saida?.Invoke();
             ExitState();
+            Saida?.Invoke();
+
 
         }
 

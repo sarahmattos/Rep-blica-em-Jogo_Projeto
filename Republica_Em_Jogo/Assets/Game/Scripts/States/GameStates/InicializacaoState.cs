@@ -26,7 +26,6 @@ namespace Game
 
         public override void EnterState()
         {
-            hs = FindObjectOfType<HudStatsJogador>();
             Logger.Instance.LogInfo("Enter state: Inicializa");
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
             todosBairros = GetBairros();
@@ -39,7 +38,6 @@ namespace Game
         {
             StopAllCoroutines();
             Logger.Instance.LogInfo("Exit state: Inicializa");
-            hs.AtualizarPlayerStatsBairro();
             EleicaoManager.Instance.ClientsConectServerRpc();
         }
 

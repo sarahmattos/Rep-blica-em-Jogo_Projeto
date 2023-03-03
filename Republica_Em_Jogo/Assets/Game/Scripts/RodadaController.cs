@@ -7,7 +7,8 @@ namespace Game
 {
     public class RodadaController : MonoBehaviour
     {
-        private int rodada = 0;
+        private int rodada = 1;
+        public int Rodada => rodada;
         public int maxRodada => GameDataConfig.Instance.MaxRodadasParaEleicoes;
         public event Action<int> rodadaMuda;
         public Action rodadaMaxAlcancada;
@@ -33,7 +34,7 @@ namespace Game
 
         private void OnRodadaMuda(int rodada)
         {
-            if (rodada % maxRodada == 0)
+            if (rodada % maxRodada == 1)
             {
                 rodadaMaxAlcancada?.Invoke();
             }
