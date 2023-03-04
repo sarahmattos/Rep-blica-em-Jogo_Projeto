@@ -318,7 +318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 469151284}
   m_Layer: 0
-  m_Name: Cavas
+  m_Name: Cavases
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1268,7 +1268,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7887484137661636566, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000002861023
+      value: 11.946051
       objectReference: {fileID: 0}
     - target: {fileID: 7887484137943697647, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1382,18 +1382,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7887484138912928827, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
-      propertyPath: m_Elasticity
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7887484138912928827, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
-      propertyPath: m_DecelerationRate
-      value: 0.001
-      objectReference: {fileID: 0}
-    - target: {fileID: 7887484138912928827, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
-      propertyPath: m_ScrollSensitivity
-      value: 40
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
 --- !u!1001 &8714760898127747292
@@ -1403,10 +1391,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 469151284}
     m_Modifications:
+    - target: {fileID: 979778101, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -88.26697
+      objectReference: {fileID: 0}
     - target: {fileID: 8714760897532645801, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 422421207}
+    - target: {fileID: 8714760897532645801, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8714760897532645802, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1494,14 +1490,6 @@ PrefabInstance:
     - target: {fileID: 8714760897532645806, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
       propertyPath: m_Name
       value: CanvasCarregamento
-      objectReference: {fileID: 0}
-    - target: {fileID: 8714760898405765883, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -5.4000244
-      objectReference: {fileID: 0}
-    - target: {fileID: 8714760898405765883, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.41357422
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
