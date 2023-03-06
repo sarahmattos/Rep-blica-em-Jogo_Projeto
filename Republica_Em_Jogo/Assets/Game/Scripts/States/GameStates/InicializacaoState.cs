@@ -67,7 +67,7 @@ namespace Game
 
                 yield return new WaitForSeconds(intervaloTempo);
             }
-            stateHandler.ChangeStateServerRpc((int)GameState.DESENVOLVIMENTO);
+            stateHandler.StateMachineController.ChangeStateServerRpc((int)GameState.DESENVOLVIMENTO);
 
 
 

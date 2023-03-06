@@ -16,7 +16,7 @@ namespace  Game
     {
         [SerializeField] private Button nextStateButton;
         [SerializeField] private TMP_Text logStateText;
-        public State DesenvState => GameStateHandler.Instance.StatePairValue[GameState.DESENVOLVIMENTO];
+        public State DesenvState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
 
 
         private void Awake()

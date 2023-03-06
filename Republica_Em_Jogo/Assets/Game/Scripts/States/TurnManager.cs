@@ -19,7 +19,7 @@ namespace Game
         public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == PlayerAtual);
         public event Action<bool> vezDoPlayerLocal;
         public event Action<int, int> turnoMuda;
-        private State InicializacaoState => GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
+        private State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
         private State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.RECOMPENSA];
         public int TurnCount
         {

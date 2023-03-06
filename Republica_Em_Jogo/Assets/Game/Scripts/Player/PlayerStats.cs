@@ -37,7 +37,7 @@ namespace Game.Player {
         public int EleitoresTotais { get => eleitoresTotais; }
         public int SaudeRecurso { get => saudeRecurso; }
         public int EducacaoRecurso { get => educacaoRecurso; }
-        public State GameplayLoadState => GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD];
+        public State GameplayLoadState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD);
 
 
         private void Awake()

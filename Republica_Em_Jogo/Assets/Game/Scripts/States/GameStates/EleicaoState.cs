@@ -25,7 +25,7 @@ namespace Game
         private IEnumerator EsperaEVai(int s)
         {
             yield return new WaitForSeconds(s);
-            gameStateHandler.ChangeStateServerRpc((int)GameState.DESENVOLVIMENTO);
+            gameStateHandler.StateMachineController.ChangeStateServerRpc((int)GameState.DESENVOLVIMENTO);
         }
     }
 

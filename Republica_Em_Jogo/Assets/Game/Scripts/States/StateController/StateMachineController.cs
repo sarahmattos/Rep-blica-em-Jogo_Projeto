@@ -7,10 +7,9 @@ using UnityEngine;
 
 namespace Game
 {
-    [Serializable]
     public class StateMachineController : NetworkBehaviour
     {
-        private NetworkVariable<int> indexState = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private NetworkVariable<int> indexState = new NetworkVariable<int>();
         private List<State> states;
         [SerializeField] private State currentState;
         public event Action<int> estadoMuda;
@@ -29,13 +28,11 @@ namespace Game
         }
 
 
-        public StateMachineController(List<State> statesOrdenados)
-        {
-            states = statesOrdenados;
-        }
 
-        public void Initialize()
+
+        public void Initialize(List<State> statesOrdenados)
         {
+            this.states = statesOrdenados;
             Debug.Log("initialize. State machine controller.");
             indexState.OnValueChanged += OnIndexStateMuda;
 
@@ -43,7 +40,7 @@ namespace Game
 
         public void Finish()
         {
-            indexState.OnValueChanged += OnIndexStateMuda;
+            indexState.OnValueChanged -= OnIndexStateMuda;
             if (!NetworkManager.Singleton.IsHost) return;
             indexState.Dispose();
         }

@@ -12,7 +12,7 @@ namespace Game
         [SerializeField] private TMP_Text LoadingMessageText;
         [SerializeField] private string message;
 
-        public State GameplaySceneLoad => GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD];
+        public State GameplaySceneLoad => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD);
 
         private void Start()
         {

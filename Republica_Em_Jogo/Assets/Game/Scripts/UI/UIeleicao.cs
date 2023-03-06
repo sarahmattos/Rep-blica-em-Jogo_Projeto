@@ -10,9 +10,8 @@ namespace Game
         [SerializeField] private GameObject UIeleicaoObjsParent;
         [SerializeField] private TMP_Text cadeirasUi;
         public static UIeleicao Instance;
-        private State eleicaoState => GameStateHandler.Instance.StatePairValue[GameState.ELEICOES];
+        private State eleicaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.ELEICOES);
 
-       
         
         private void Start()
         {
@@ -21,11 +20,6 @@ namespace Game
             eleicaoState.Saida += OnEleicaoSaida;
             Instance = this;
         }
-        private void Update()
-        {
-           
-        }
-
         private void OnDestroy()
         {
             eleicaoState.Entrada -= OnEleicaoEntrada;

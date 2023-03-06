@@ -21,7 +21,7 @@ namespace Game
         private Dictionary<CoreLoopState, State> statePairValues;
         private State currentState;
         public State DesenvolvimentoState =>
-            GameStateHandler.Instance.StatePairValue[GameState.DESENVOLVIMENTO];
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
         public Action<CoreLoopState> estadoMuda;
 
         public State CurrentState => currentState;
