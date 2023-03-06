@@ -21,26 +21,23 @@ namespace Game
         // public bool AplicouTodosEleitores => qntdEleitorAplicado == recompensaEleitores;
         public PlayerStats PlayerStatsAtual =>  PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual();
         public List<Bairro> bairrosDoPlayer => PlayerStatsAtual?.BairrosInControl;
-
         
 
         public override void EnterState()
         {
+            hudStatsJogador.checaZonasInteiras();
             Tools.Logger.Instance.LogInfo("Enter State: RECOMPENSA");
             if(!TemRecompensa) {
                 Tools.Logger.Instance.LogInfo("Como não avançou em nenhum bairro, não há recompensa nesta rodada.");
                 return;
             }
             hudStatsJogador.updateRecursoCartaUI(qntdRecurso);
-            
-
-            
             // qntdEleitorAplicado = 0;
             // HabilitarBairros(true);
             // InscreverBairros();
 
         }
-
+        
         public override void ExitState()
         {
             Tools.Logger.Instance.LogInfo("Exit RECOMPENSA");

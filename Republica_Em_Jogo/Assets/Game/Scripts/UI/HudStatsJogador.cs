@@ -248,6 +248,9 @@ namespace Game.UI
         {
             btnsAux.SetActive(!btnsAux.activeSelf);
         }
+        public void checaZonasInteiras(){
+            setUpZona.PlayerTemZonaInteira(playerStats.playerID);
+        }
 
     }
 

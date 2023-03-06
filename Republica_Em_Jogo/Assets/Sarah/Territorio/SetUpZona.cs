@@ -82,5 +82,16 @@ namespace Game.Territorio
                 zona.ContarBairroInControlTodosPlayers(_eleitoresPlayers, numPlayer);
             }
         }
+        public void PlayerTemZonaInteira(int client){
+            foreach (ZonaTerritorial zona in zonas)
+            {
+               if(zona.checaSePlayerTemTodosBairrosDeUmaZona(client)!=null){
+                List<ZonaTerritorial> zonaInteira = new List<ZonaTerritorial>();
+                zonaInteira.Add(zona.checaSePlayerTemTodosBairrosDeUmaZona(client));
+                //funcao q pasa lista
+                FimDeJogoManager.Instance.TenhoUmaZonaInteria(zonaInteira);
+               } 
+            }
+        }
     }
 }

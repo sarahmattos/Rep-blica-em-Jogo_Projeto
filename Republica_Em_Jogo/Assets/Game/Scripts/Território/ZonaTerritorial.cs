@@ -15,6 +15,7 @@ namespace Game.Territorio
         private Projeto projeto;  
         private HudStatsJogador hs;
         private ControlePassarState cp;
+        private int soma;
 
         private void Awake()
         {
@@ -74,6 +75,23 @@ namespace Game.Territorio
                         _eleitoresPlayers[i]+= bairro.SetUpBairro.Eleitores.contaEleitores;
                     }
                 }
+            }
+        }
+
+        public ZonaTerritorial checaSePlayerTemTodosBairrosDeUmaZona(int client)
+        {
+            soma=0;
+            foreach(Bairro bairro in bairros)
+            {
+                if(bairro.PlayerIDNoControl.Value ==client)
+                {
+                    soma++;
+                }
+            }
+            if(soma==bairros.Length){
+                return this;
+            }else{
+                return null;
             }
         }
     }
