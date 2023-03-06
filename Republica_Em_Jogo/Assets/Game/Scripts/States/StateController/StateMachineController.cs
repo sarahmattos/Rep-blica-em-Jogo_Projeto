@@ -11,7 +11,7 @@ namespace Game
     {
         private NetworkVariable<int> indexState = new NetworkVariable<int>();
         private List<State> states;
-        [SerializeField] private State currentState;
+        private State currentState;
         public event Action<int> estadoMuda;
 
         public State GetState(int index)
@@ -33,7 +33,6 @@ namespace Game
         public void Initialize(List<State> statesOrdenados)
         {
             this.states = statesOrdenados;
-            Debug.Log("initialize. State machine controller.");
             indexState.OnValueChanged += OnIndexStateMuda;
 
         }

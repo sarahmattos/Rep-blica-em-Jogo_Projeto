@@ -62,7 +62,6 @@ namespace Game.UI
         }
         public override void OnNetworkSpawn()
         {
-            Debug.Log("on network spanw. hud stats jogador");
             state = GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
             GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD).Saida += FindingLocalPlayerStats;
             projeto = FindObjectOfType<Projeto>();

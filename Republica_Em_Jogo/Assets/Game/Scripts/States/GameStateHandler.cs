@@ -19,12 +19,6 @@ namespace Game
         FIM_JOGO
     }
 
-    [RequireComponent(typeof(MenuLoadState))]
-    [RequireComponent(typeof(GameplayLoadState))]
-    [RequireComponent(typeof(InicializacaoState))]
-    [RequireComponent(typeof(DesenvolvimentoState))]
-    [RequireComponent(typeof(EleicaoState))]
-    [RequireComponent(typeof(FimJogoState))]
     public class GameStateHandler : NetworkSingleton<GameStateHandler>
     {
         // private NetworkVariable<int> gameStateIndex = new NetworkVariable<int>();
