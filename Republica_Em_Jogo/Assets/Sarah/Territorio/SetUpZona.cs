@@ -12,6 +12,7 @@ namespace Game.Territorio
         private ZonaTerritorial[] zonas;
         public ZonaTerritorial[] Zonas => zonas;
         private HudStatsJogador hs;
+        public List<ZonaTerritorial> tenhoZona;
 
         void Start()
         {
@@ -83,13 +84,11 @@ namespace Game.Territorio
             }
         }
         public void PlayerTemZonaInteira(int client){
+            tenhoZona = new List<ZonaTerritorial>();
             foreach (ZonaTerritorial zona in zonas)
             {
                if(zona.checaSePlayerTemTodosBairrosDeUmaZona(client)!=null){
-                List<ZonaTerritorial> zonaInteira = new List<ZonaTerritorial>();
-                zonaInteira.Add(zona.checaSePlayerTemTodosBairrosDeUmaZona(client));
-                //funcao q pasa lista
-                FimDeJogoManager.Instance.TenhoUmaZonaInteria(zonaInteira);
+                tenhoZona.Add(zona.checaSePlayerTemTodosBairrosDeUmaZona(client));
                } 
             }
         }

@@ -23150,6 +23150,26 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 4138702143
       objectReference: {fileID: 0}
+    - target: {fileID: 5851105735579249270, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
+      propertyPath: eleitoresAdicionais
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5851105735706402273, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
+      propertyPath: eleitoresAdicionais
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5851105735915676760, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
+      propertyPath: eleitoresAdicionais
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5851105736024568143, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
+      propertyPath: eleitoresAdicionais
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5851105736040669858, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
+      propertyPath: eleitoresAdicionais
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5851105736387691552, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -23197,6 +23217,14 @@ PrefabInstance:
     - target: {fileID: 5851105736387691559, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
       propertyPath: m_Name
       value: Territorios
+      objectReference: {fileID: 0}
+    - target: {fileID: 5851105737469822512, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
+      propertyPath: eleitoresAdicionais
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5851105737481752157, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}
+      propertyPath: eleitoresAdicionais
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00dce4b074a3b994aa4cba37bbdb0696, type: 3}

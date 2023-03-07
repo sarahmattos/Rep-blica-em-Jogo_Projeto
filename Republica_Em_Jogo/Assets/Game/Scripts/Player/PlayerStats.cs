@@ -104,10 +104,9 @@ namespace Game.Player {
         }
 
         //divide numero de bairros para adicionar novos eleitores
-        public void inicioRodada()
+        public void inicioRodada(int eleitoresAdicionais)
          {
-             eleitoresNovos = Mathf.Floor(bairrosTotais / 2);
-             //Debug.Log("eleitoresNovos "+eleitoresNovos);
+             eleitoresNovos = (Mathf.Floor(bairrosTotais / 2))+eleitoresAdicionais;
          }
 
         public void InicializaPlayerStats()

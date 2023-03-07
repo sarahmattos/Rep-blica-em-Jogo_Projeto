@@ -16,6 +16,8 @@ namespace Game.Territorio
         private HudStatsJogador hs;
         private ControlePassarState cp;
         private int soma;
+        
+        public int eleitoresAdicionais;
 
         private void Awake()
         {

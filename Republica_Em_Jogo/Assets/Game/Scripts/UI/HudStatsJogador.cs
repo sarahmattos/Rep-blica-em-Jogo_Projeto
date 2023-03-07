@@ -35,7 +35,7 @@ namespace Game.UI
         private Projeto projeto;
         private EleicaoManager eleicaoManager;
         private SetUpZona setUpZona;
-
+        int eleitoresAdicionais;
 
         [Header("Variaveis")]
         public int eduQuant;
@@ -202,10 +202,16 @@ namespace Game.UI
         //botao chama funcao de distribuicao de eleitor no inicio das rodadas
         public void ChamatPlayerInicioRodada()
         {
+            checaZonasInteiras();
+            eleitoresAdicionais=0;
             if (distribuicaoInicial == true)
             {
                 //se for state do inicio
-                playerStats.inicioRodada();
+                for(int i=0;i<setUpZona.tenhoZona.Count;i++){
+                    eleitoresAdicionais += setUpZona.tenhoZona[i].eleitoresAdicionais;
+                    Debug.Log("voce possui "+setUpZona.tenhoZona[i].eleitoresAdicionais+ " eleitore(s) adicionais por conquistar a zona "+setUpZona.tenhoZona[i].Nome+ " inteira!");
+                }
+                playerStats.inicioRodada(eleitoresAdicionais);
                 distribuaEleitorUi.SetActive(true);
                 distribuicaoGeral = true;
                 text_distribuaEleitor.SetText("Distribua seus eleitores");
