@@ -8,6 +8,7 @@ using Unity.Networking.Transport;
 public class objetivosDatabase : Singleton<objetivosDatabase>
 {
     public string objetivoComplemento;
+    public string objetivoZona;
     public string[] zonasNome;
     int indice;
     void Start()
@@ -31,7 +32,8 @@ public class objetivosDatabase : Singleton<objetivosDatabase>
     
     public void gerarObjetivo(string zonaComplemento)
     {
-        objetivoComplemento = "Objetivo: Conquistar a zona "+ zonaComplemento + " acrescentando nela dois recursos de educação e de saúde";
+        objetivoZona=zonaComplemento;
+        objetivoComplemento = "Objetivo: Conquistar a zona "+ objetivoZona + " acrescentando nela dois recursos de educaï¿½ï¿½o e de saï¿½de";
     }
     
 }

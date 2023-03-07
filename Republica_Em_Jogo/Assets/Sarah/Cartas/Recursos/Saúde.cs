@@ -12,6 +12,7 @@ public class Saúde : NetworkBehaviour
     private RecursosCartaManager rc;
     public bool playerControlRecurso =false;
     private Bairro bairro;
+    private Recursos recurso;
 
     [ServerRpc(RequireOwnership = false)]
         public void AtualizarValorUIServerRpc()
@@ -24,6 +25,7 @@ public class Saúde : NetworkBehaviour
             text_saude = GetComponentInChildren<TMP_Text>();
             rc = FindObjectOfType<RecursosCartaManager>();
             bairro = GetComponentInParent<Bairro>();
+            recurso = GetComponentInParent<Recursos>();
         }
 
      private void OnMouseDown()
@@ -40,6 +42,7 @@ public class Saúde : NetworkBehaviour
         {
             quantidadeSaude.OnValueChanged += (int  previousValue, int  newValue) =>
             {
+                recurso.saude =newValue;
                 text_saude.SetText(newValue.ToString());
             };
         }

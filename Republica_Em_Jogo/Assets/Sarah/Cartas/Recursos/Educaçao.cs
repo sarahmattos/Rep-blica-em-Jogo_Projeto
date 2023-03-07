@@ -13,6 +13,7 @@ public class Educaçao : NetworkBehaviour
     private RecursosCartaManager rc;
     public bool playerControlRecurso=false;
     private Bairro bairro;
+    private Recursos recurso;
 
     [ServerRpc(RequireOwnership = false)]
         public void AtualizarValorUIServerRpc()
@@ -24,6 +25,7 @@ public class Educaçao : NetworkBehaviour
             text_edu = GetComponentInChildren<TMP_Text>();
             rc = FindObjectOfType<RecursosCartaManager>();
             bairro = GetComponentInParent<Bairro>();
+            recurso = GetComponentInParent<Recursos>();
 
         }
 
@@ -42,6 +44,7 @@ public class Educaçao : NetworkBehaviour
         {
             quantidadeEducação.OnValueChanged += (int  previousValue, int  newValue) =>
             {
+                recurso.educacao =newValue;
                 text_edu.SetText(newValue.ToString());
             };
         }

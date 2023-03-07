@@ -8,14 +8,14 @@ namespace Game.Territorio
     public class Recursos : NetworkBehaviour
     {
 
-        public NetworkVariable<int> saude = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-        public NetworkVariable<int> educacao = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        public int saude;
+        public int educacao;
 
         [SerializeField] private TMP_Text text_saude;
         [SerializeField] private TMP_Text text_edu;
         [SerializeField] private GameObject obj_saude;
         [SerializeField] private GameObject obj_edu;
-
+    /*
         private void OnEnable()
         {
             saude.OnValueChanged += onSaudeMuda;
@@ -48,7 +48,7 @@ namespace Game.Territorio
             text_edu.SetText(newValue.ToString());
         }
 
-
+*/
 
     }
 

@@ -207,6 +207,7 @@ namespace Game.UI
             if (distribuicaoInicial == true)
             {
                 //se for state do inicio
+                //tem zona inteira ganha adicional
                 for(int i=0;i<setUpZona.tenhoZona.Count;i++){
                     eleitoresAdicionais += setUpZona.tenhoZona[i].eleitoresAdicionais;
                     Debug.Log("voce possui "+setUpZona.tenhoZona[i].eleitoresAdicionais+ " eleitore(s) adicionais por conquistar a zona "+setUpZona.tenhoZona[i].Nome+ " inteira!");

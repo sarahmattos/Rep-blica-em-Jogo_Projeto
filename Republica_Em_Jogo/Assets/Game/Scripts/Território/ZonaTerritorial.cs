@@ -15,7 +15,7 @@ namespace Game.Territorio
         private Projeto projeto;  
         private HudStatsJogador hs;
         private ControlePassarState cp;
-        private int soma;
+        private int soma, soma2, soma3;
         
         public int eleitoresAdicionais;
 
@@ -96,6 +96,21 @@ namespace Game.Territorio
                 return null;
             }
         }
+
+        public int ContaRecursosEducacao(){
+            soma2=0;
+            foreach(Bairro bairro in bairros){
+                   soma2 += bairro.checaNumerodeEducacao();
+                }
+                return soma2;
+            }
+            public int ContaRecursosSaude(){
+            soma3=0;
+            foreach(Bairro bairro in bairros){
+                   soma3 += bairro.checaNumerodeSaude();
+                }
+                return soma3;
+            }
     }
 }
 

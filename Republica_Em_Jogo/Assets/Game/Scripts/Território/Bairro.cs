@@ -28,6 +28,7 @@ namespace Game.Territorio
         private HudStatsJogador hs;
         private Educaçao edu;
         private Saúde saude;
+        private Recursos recurso;
 
         private void Awake()
         {
@@ -36,6 +37,7 @@ namespace Game.Territorio
             edu = GetComponentInChildren<Educaçao>();
             saude = GetComponentInChildren<Saúde>();
             hs = FindObjectOfType<HudStatsJogador>();
+            recurso = GetComponentInChildren<Recursos>();
         }
         // private void Start()
         // {
@@ -115,6 +117,12 @@ namespace Game.Territorio
             }
             
         }
+    }
+    public int checaNumerodeEducacao(){
+        return recurso.educacao;
+    }
+    public int checaNumerodeSaude(){
+        return recurso.saude;
     }
         
     }

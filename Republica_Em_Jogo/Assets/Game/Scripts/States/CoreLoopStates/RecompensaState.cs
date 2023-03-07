@@ -11,6 +11,7 @@ namespace Game
     public class RecompensaState : State
     {
         [SerializeField] private HudStatsJogador hudStatsJogador;
+        [SerializeField] private FimDeJogoManager fimDeJogoManager;
 
         [SerializeField] private AvancoState avancoState;
         [SerializeField] private int qntdRecurso = 1;
@@ -26,6 +27,7 @@ namespace Game
         public override void EnterState()
         {
             hudStatsJogador.checaZonasInteiras();
+            fimDeJogoManager.zonaObtidaEObjetivo();
             Tools.Logger.Instance.LogInfo("Enter State: RECOMPENSA");
             if(!TemRecompensa) {
                 Tools.Logger.Instance.LogInfo("Como não avançou em nenhum bairro, não há recompensa nesta rodada.");
