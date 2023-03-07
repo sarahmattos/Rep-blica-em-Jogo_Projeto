@@ -23,11 +23,10 @@ namespace Game
             return currentState;
         }
 
-        public void ResetMachineState() {
+        public void ResetMachineState()
+        {
             ChangeStateServerRpc(-1);
         }
-
-
 
 
         public void Initialize(List<State> statesOrdenados)
@@ -62,7 +61,7 @@ namespace Game
         [ServerRpc(RequireOwnership = false)]
         public void NextStateServerRpc()
         {
-            indexState.Value = (indexState.Value +1) % states.Count;
+            indexState.Value = (indexState.Value + 1) % states.Count;
 
         }
 

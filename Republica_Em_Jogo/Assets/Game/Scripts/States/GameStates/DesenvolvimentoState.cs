@@ -8,7 +8,7 @@ namespace Game
     public class DesenvolvimentoState : State
     {
         private RodadaController rodadaController;
-        private GameStateHandler StateHandler => GameStateHandler.Instance;
+        private GameStateHandler gameState => GameStateHandler.Instance;
 
         private void Start()
         {
@@ -37,7 +37,7 @@ namespace Game
 
         private void GoToEleicao()
         {
-            StateHandler.StateMachineController.ChangeStateServerRpc((int)GameState.ELEICOES);
+            gameState.StateMachineController.ChangeStateServerRpc((int)GameState.ELEICOES);
         }
 
 

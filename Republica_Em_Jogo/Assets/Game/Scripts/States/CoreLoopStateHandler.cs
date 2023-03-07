@@ -11,6 +11,7 @@ namespace Game
     {
         DISTRIBUICAO,
         AVANCO,
+        REMANEJAMENTO,
         PROJETO,
         RECOMPENSA
     }
@@ -35,6 +36,7 @@ namespace Game
         {
             StatePairValues.Add(CoreLoopState.DISTRIBUICAO, GetComponentInChildren<DistribuicaoState>());
             StatePairValues.Add(CoreLoopState.AVANCO, GetComponentInChildren<AvancoState>());
+            statePairValues.Add(CoreLoopState.REMANEJAMENTO, GetComponentInChildren<RemanejamentoState>());
             StatePairValues.Add(CoreLoopState.PROJETO, GetComponentInChildren<ProjetoState>());
             StatePairValues.Add(CoreLoopState.RECOMPENSA, GetComponentInChildren<RecompensaState>());
         }
