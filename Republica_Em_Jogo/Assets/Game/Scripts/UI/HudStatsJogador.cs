@@ -63,18 +63,18 @@ namespace Game.UI
         }
         public override void OnNetworkSpawn()
         {
-            state = GameStateHandler.Instance.StatePairValue[GameState.INICIALIZACAO];
-            GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD].Saida += FindingLocalPlayerStats;
+            state = GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD).Saida += FindingLocalPlayerStats;
             projeto = FindObjectOfType<Projeto>();
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             eleicaoManager = FindObjectOfType<EleicaoManager>();
-            GameStateHandler.Instance.StatePairValue[GameState.DESENVOLVIMENTO].Entrada += AtualizarPlayerStatsBairro;
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO).Entrada += AtualizarPlayerStatsBairro;
         }
 
         public override void OnNetworkDespawn()
         {
-            GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD].Saida -= FindingLocalPlayerStats;
-            GameStateHandler.Instance.StatePairValue[GameState.DESENVOLVIMENTO].Entrada += AtualizarPlayerStatsBairro;
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD).Saida -= FindingLocalPlayerStats;
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO).Entrada += AtualizarPlayerStatsBairro;
 
         }
 

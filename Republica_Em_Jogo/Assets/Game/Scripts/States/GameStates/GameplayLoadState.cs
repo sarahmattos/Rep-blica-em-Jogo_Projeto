@@ -27,7 +27,7 @@ namespace Game
         private IEnumerator SperaEVai(float seconds)
         {
             yield return new WaitForSeconds(seconds);
-            stateHandler.NextStateServerRPC();
+            stateHandler.StateMachineController.NextStateServerRpc();
 
         }
 

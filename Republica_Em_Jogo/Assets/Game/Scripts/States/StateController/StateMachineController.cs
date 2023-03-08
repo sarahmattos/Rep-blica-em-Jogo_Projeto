@@ -7,12 +7,11 @@ using UnityEngine;
 
 namespace Game
 {
-    [Serializable]
     public class StateMachineController : NetworkBehaviour
     {
-        private NetworkVariable<int> indexState = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private NetworkVariable<int> indexState = new NetworkVariable<int>();
         private List<State> states;
-        [SerializeField] private State currentState;
+        private State currentState;
         public event Action<int> estadoMuda;
 
         public State GetState(int index)
@@ -24,26 +23,22 @@ namespace Game
             return currentState;
         }
 
-        public void ResetMachineState() {
+        public void ResetMachineState()
+        {
             ChangeStateServerRpc(-1);
         }
 
 
-        public StateMachineController(List<State> statesOrdenados)
+        public void Initialize(List<State> statesOrdenados)
         {
-            states = statesOrdenados;
-        }
-
-        public void Initialize()
-        {
-            Debug.Log("initialize. State machine controller.");
+            this.states = statesOrdenados;
             indexState.OnValueChanged += OnIndexStateMuda;
 
         }
 
         public void Finish()
         {
-            indexState.OnValueChanged += OnIndexStateMuda;
+            indexState.OnValueChanged -= OnIndexStateMuda;
             if (!NetworkManager.Singleton.IsHost) return;
             indexState.Dispose();
         }
@@ -66,7 +61,7 @@ namespace Game
         [ServerRpc(RequireOwnership = false)]
         public void NextStateServerRpc()
         {
-            indexState.Value = (indexState.Value +1) % states.Count;
+            indexState.Value = (indexState.Value + 1) % states.Count;
 
         }
 

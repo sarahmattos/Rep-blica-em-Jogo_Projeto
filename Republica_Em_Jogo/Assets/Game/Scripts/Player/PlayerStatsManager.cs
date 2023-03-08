@@ -9,7 +9,7 @@ namespace Game.Player
 {
     public class PlayerStatsManager : Singleton<PlayerStatsManager>
     {
-        private State gameplayLoadState => GameStateHandler.Instance.StatePairValue[GameState.GAMEPLAY_SCENE_LOAD];
+        private State gameplayLoadState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD);
         private PlayerStats[] allPlayerStats;
         public PlayerStats[] AllPlayerStats => allPlayerStats;
         public PlayerStats GetLocalPlayerStats() {

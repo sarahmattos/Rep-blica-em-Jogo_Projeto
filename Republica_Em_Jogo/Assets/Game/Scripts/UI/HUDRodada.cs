@@ -15,12 +15,12 @@ namespace Game.UI
 
         private void Start()
         {
-            GameStateHandler.Instance.StatePairValue[GameState.DESENVOLVIMENTO].Entrada += OnDesenvolvimentoStateEnter;
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO).Entrada += OnDesenvolvimentoStateEnter;
         }
 
         private void OnDestroy()
         {
-            GameStateHandler.Instance.StatePairValue[GameState.DESENVOLVIMENTO].Entrada -= OnDesenvolvimentoStateEnter;
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO).Entrada -= OnDesenvolvimentoStateEnter;
             rodadaController.rodadaMuda -= UpdateTextRodada;
         }
 
