@@ -25,6 +25,7 @@ namespace Game.UI
         [SerializeField] private TMP_Text text_bairros;
         [SerializeField] private TMP_Text text_eleitoresNovos;
         [SerializeField] private TMP_Text text_cadeiras;
+        [SerializeField] public TMP_Text text_naotemeleitorpraretirar;
         [SerializeField] private GameObject acaboudistribuicaoUi;
         [SerializeField] private GameObject acaboudistribuicaoUi2;
         [SerializeField] private GameObject distribuaEleitorUi;
@@ -178,6 +179,7 @@ namespace Game.UI
             {
                 acaboudistribuicaoUi2.SetActive(true);
                 playerDiminuiEleitor = false;
+                
             }
             else
             {

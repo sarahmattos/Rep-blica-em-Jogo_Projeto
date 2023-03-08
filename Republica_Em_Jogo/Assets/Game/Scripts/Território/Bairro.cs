@@ -3,6 +3,7 @@ using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using Game.UI;
+using Game.Player ;
 
 namespace Game.Territorio
 {
@@ -102,8 +103,15 @@ namespace Game.Territorio
                     hs.contagemEleitores();
                     //recupera quantos eleitores novos
                     hs.valorEleitorNovo();
+                    hs.text_naotemeleitorpraretirar.text="Retirada de eleitores finalizada!";
                     if(hs.eleitoresNovosAtual<1)hs.AtualizaUIAposDistribuicao();
-                     //hs.AtualizarPlayerStatsBairro();
+                    
+                     //teste
+                     PlayerStats ps = hs.GetPlayerStats();
+                    if(ps.EleitoresTotais<=ps.BairrosInControl.Count){
+                      hs.text_naotemeleitorpraretirar.text="Não possui eleitores suficientes para retirada!";
+                      hs.AtualizaUIAposDistribuicao();
+                     }
                     }
             }else{
                 //colocar

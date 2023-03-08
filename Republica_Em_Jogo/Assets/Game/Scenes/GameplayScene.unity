@@ -1677,6 +1677,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8162957968737513791, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
+      propertyPath: btnsAux
+      value: 
+      objectReference: {fileID: 2057351757}
+    - target: {fileID: 8162957968737513791, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
       propertyPath: playerStats
       value: 
       objectReference: {fileID: 0}
@@ -1728,6 +1732,10 @@ PrefabInstance:
       propertyPath: text_distribuaEleitorFinal
       value: 
       objectReference: {fileID: 88282644}
+    - target: {fileID: 8162957968737513791, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
+      propertyPath: text_naotemeleitorpraretirar
+      value: 
+      objectReference: {fileID: 879842855}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a0a9fc3e50a2b945a3de2714801bfc0, type: 3}
 --- !u!224 &152117520 stripped
@@ -19413,7 +19421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2057351758
 RectTransform:
   m_ObjectHideFlags: 0
