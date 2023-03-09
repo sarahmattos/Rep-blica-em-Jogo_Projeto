@@ -33,6 +33,12 @@ namespace Game
         {
             QuantidadePlayerRecompensa.Value--;
         }
+        [ServerRpc(RequireOwnership = false)]
+        public void PassarProjetoServerRpc()
+        {
+           CoreLoopStateHandler.Instance.NextStateServerRpc();
+        }
+
 
         private void OnEnable()
         {
@@ -40,13 +46,11 @@ namespace Game
             QuantidadePlayerRecompensa.OnValueChanged += (int  previousValue, int  newValue) =>
             {
                 if(newValue==0){
-                    if(distribuicaoProjeto==true){
-                         if (NetworkManager.Singleton.IsServer){
-                            CoreLoopStateHandler.Instance.NextStateServerRpc();
-                         }
-                            distribuicaoProjeto=false;
-                        }
+                    if (NetworkManager.Singleton.IsServer){
+                    Debug.Log("passa projeto");
+                    PassarProjetoServerRpc();
                     }
+                }
             };
 
         }
@@ -55,6 +59,7 @@ namespace Game
             
             if(distribuicaoProjeto==true){
                  DiminuiValServerRpc();
+                 distribuicaoProjeto=false;
             }else{
                 if(rc.chamarDistribuicao==false){
                     if (rc.comTrocaTrue==false)
