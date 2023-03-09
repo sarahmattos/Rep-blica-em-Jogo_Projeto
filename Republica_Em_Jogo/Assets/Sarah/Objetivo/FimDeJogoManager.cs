@@ -31,15 +31,16 @@ namespace Game
         */
         public void zonaObtidaEObjetivo(){
             ps = hs.GetPlayerStats();
+            if(setUpZona.tenhoZona.Count==0)Debug.Log("Não ganhou ainda!");
             for(int i=0;i<setUpZona.tenhoZona.Count;i++){
                 if(setUpZona.tenhoZona[i].Nome==ps.Objetivo){
                     if(setUpZona.tenhoZona[i].ContaRecursosEducacao()>=2 && setUpZona.tenhoZona[i].ContaRecursosSaude()>=2){
                           vitoriaPlayer();
                     }else{
-                        Debug.Log("Não ganhou ainda!");
+                        Debug.Log("Não tem recursos suficientes na zona de objetivo ainda!");
                     }
             
-                }
+                }Debug.Log("Não tem zona do objetivo ainda!");
             }
             
         }
