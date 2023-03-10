@@ -10,11 +10,14 @@ namespace Game.UI
         [SerializeField] private TMP_Text text_dadosVizinhos;
         [SerializeField] private TMP_Text text_dadosPlayerAtual;
         [SerializeField] private AvancoState avancoState;
+        DadosUiGeral dadosUiGeral;
         public AvancoData AvancoData => avancoState.AvancoData;
 
         private void Start()
         {
             AvancoData.dadosLancados += UpdateTextDados;
+            dadosUiGeral=FindObjectOfType<DadosUiGeral>();
+            dadosUiGeral.resetaUiDadosServerRpc();
         }
         private void OnDestroy()
         {
@@ -23,16 +26,23 @@ namespace Game.UI
         }
 
         private void UpdateTextDados() {
-            string dadosPlayerAtual = "Seus: \n";
-            string dadosVizinhos = "Vizinho: \n";
+            string dadosPlayerAtual = "Ataque: \n";
+            string dadosVizinhos = "Defesa: \n";
             foreach(int value in AvancoData.DadosPlayerAtual)
                 dadosPlayerAtual = string.Concat(dadosPlayerAtual, value, "\n");
             foreach(int value in AvancoData.DadosVizinhos)
                 dadosVizinhos = string.Concat(dadosVizinhos, value, "\n");
             
-            text_dadosPlayerAtual.SetText(dadosPlayerAtual);
-            text_dadosVizinhos.SetText(dadosVizinhos);   
+            //text_dadosPlayerAtual.SetText(dadosPlayerAtual);
+            //text_dadosVizinhos.SetText(dadosVizinhos);   
+            Debug.Log("passou aqui");
+            dadosUiGeral.atualizaUiDadosServerRpc(dadosPlayerAtual,dadosVizinhos);
 
+        }
+        public void UpdateTextDados2(string _p,string _v){
+            Debug.Log("fez update");
+            text_dadosPlayerAtual.SetText(_p);
+            text_dadosVizinhos.SetText(_v);   
         }
 
     }

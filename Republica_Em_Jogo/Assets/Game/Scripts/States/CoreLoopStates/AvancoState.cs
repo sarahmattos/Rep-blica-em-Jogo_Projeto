@@ -28,6 +28,7 @@ namespace Game
         private Action<AvancoStatus> estadoMuda;
         private AvancoData avancoData = new AvancoData();
         public AvancoData AvancoData => avancoData;
+        DadosUiGeral dadosUiGeral;
 
         public List<Bairro> bairrosPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
 
@@ -43,6 +44,7 @@ namespace Game
         {
             statePairValues = new Dictionary<AvancoStatus, State>();
             SetPairValues();
+            dadosUiGeral=FindObjectOfType<DadosUiGeral>();
         }
 
         public override void EnterState()
@@ -62,6 +64,7 @@ namespace Game
             avancoStateIndex.OnValueChanged -= AvancoIndexMuda;
             HabilitarBairrosPlayerAtual(false);
             SetAvancoStateServerRpc(-1);
+            dadosUiGeral.resetaUiDadosServerRpc();
 
 
         }
