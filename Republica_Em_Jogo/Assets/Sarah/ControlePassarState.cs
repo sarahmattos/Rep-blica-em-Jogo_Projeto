@@ -47,7 +47,6 @@ namespace Game
             {
                 if(newValue==0){
                     if (NetworkManager.Singleton.IsServer){
-                    Debug.Log("passa projeto");
                     PassarProjetoServerRpc();
                     }
                 }

@@ -44,16 +44,16 @@ namespace  Game
 
         }
 
-        public void OnNextTurnButtonClick()
-        {
-            if (CoreLoopStateHandler.Instance.CurrentStateIgualUltimoState)
-            {
-                CoreLoopStateHandler.Instance.NextStateServerRpc();
-                return;
-            }
-            TurnManager.Instance.NextTurn();
-            CoreLoopStateHandler.Instance.ChangeStateServerRpc(0);
-        }
+        // public void OnNextTurnButtonClick()
+        // {
+        //     if (CoreLoopStateHandler.Instance.CurrentStateIgualUltimoState)
+        //     {
+        //         CoreLoopStateHandler.Instance.NextStateServerRpc();
+        //         return;
+        //     }
+        //     TurnManager.Instance.NextTurn();
+        //     CoreLoopStateHandler.Instance.ChangeStateServerRpc(0);
+        // }
 
         public void OnNextStateButtonClick()
         {

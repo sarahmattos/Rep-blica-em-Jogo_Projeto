@@ -89,7 +89,6 @@ namespace Game
             int ultimoAvancoStateIndex = (statePairValues.Count - 1);
             if (previousValue == ultimoAvancoStateIndex)
             {
-                Debug.Log("Passamos pela última rodada");
                 avancoData.ContagemRodada++;
                 avancoData.ClearRodadaData();
             }

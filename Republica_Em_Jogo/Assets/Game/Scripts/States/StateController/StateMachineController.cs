@@ -45,9 +45,15 @@ namespace Game
 
         private void OnIndexStateMuda(int previous, int next)
         {
-            currentState?.InvokeSaida();
-            currentState = states[next];
-            currentState.InvokeEntrada();
+            if (previous != -1) 
+            { 
+                currentState?.InvokeSaida();
+            }
+            if (next != -1)
+            {
+                currentState = states[next];
+                currentState.InvokeEntrada();
+            }
             estadoMuda?.Invoke(next);
 
         }

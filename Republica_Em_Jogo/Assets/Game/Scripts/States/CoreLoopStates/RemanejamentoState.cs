@@ -24,9 +24,9 @@ namespace Game
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("Enter: Remanejamento state");
-
+            Tools.Logger.Instance.LogInfo("Enter: Remanejamento");
             if(!TurnManager.Instance.LocalIsCurrent) return;
+
             remanejamentoData.ClearData();
             remanejamentoData.ArmazenarBairrosRemanejaveis();
             stateMachineController.ChangeStateServerRpc(0);

@@ -84,6 +84,7 @@ namespace Game
         public void NextStateServerRpc()
         {
             coreLoopIndex.Value = (coreLoopIndex.Value + 1) % (statePairValues.Count);
+
         }
     }
 }
