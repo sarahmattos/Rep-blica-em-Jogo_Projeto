@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIeleicaoObjsParent: {fileID: 2960947595373710499}
-  cadeirasUi: {fileID: 0}
+  cadeirasUi: {fileID: 7907894199032144002}
 --- !u!1 &2960947595373710499
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,7 +67,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7136162673192473709
 RectTransform:
   m_ObjectHideFlags: 0
