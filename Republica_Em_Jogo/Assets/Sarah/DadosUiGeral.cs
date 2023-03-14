@@ -29,8 +29,14 @@ namespace Game
         [ServerRpc(RequireOwnership = false)]
         public void resetaUiDadosServerRpc()
         {
-            dadosPlayerServer.Value = "Ataque: \n";;
+            dadosPlayerServer.Value = "Ataque: \n";
             dadosVizinhoServer.Value= "Defesa: \n";
+        }
+        [ServerRpc(RequireOwnership = false)]
+        public void reseta2UiDadosServerRpc()
+        {
+            dadosPlayerServer.Value = " ";
+            dadosVizinhoServer.Value= " ";
         }
          private void OnEnable()
             {
@@ -38,21 +44,22 @@ namespace Game
         
             dadosPlayerServer.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
             {
-               
+                if(newValue!=" "){
                     aux++;
                     player=newValue.ToString();
-                    Debug.Log("player: "+player);
                     atualizaUiDados();
+                }
+                    
                 
                 
             };
             dadosVizinhoServer.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
             {
-              
+              if(newValue!=" "){
                     aux++;
                     vizinho=newValue.ToString();
-                     Debug.Log("vizinho: "+vizinho);
                     atualizaUiDados();
+              }
                 
             };
         

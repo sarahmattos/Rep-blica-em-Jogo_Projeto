@@ -17,7 +17,6 @@ namespace Game.UI
         {
             AvancoData.dadosLancados += UpdateTextDados;
             dadosUiGeral=FindObjectOfType<DadosUiGeral>();
-            dadosUiGeral.resetaUiDadosServerRpc();
         }
         private void OnDestroy()
         {
@@ -34,15 +33,15 @@ namespace Game.UI
                 dadosVizinhos = string.Concat(dadosVizinhos, value, "\n");
             
             //text_dadosPlayerAtual.SetText(dadosPlayerAtual);
-            //text_dadosVizinhos.SetText(dadosVizinhos);   
-            Debug.Log("passou aqui");
+            //text_dadosVizinhos.SetText(dadosVizinhos);  
+            dadosUiGeral.reseta2UiDadosServerRpc();
             dadosUiGeral.atualizaUiDadosServerRpc(dadosPlayerAtual,dadosVizinhos);
 
         }
         public void UpdateTextDados2(string _p,string _v){
-            Debug.Log("fez update");
             text_dadosPlayerAtual.SetText(_p);
             text_dadosVizinhos.SetText(_v);   
+            
         }
 
     }
