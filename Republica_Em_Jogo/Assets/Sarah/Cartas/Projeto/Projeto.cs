@@ -30,6 +30,7 @@ public class Projeto : NetworkBehaviour
     private SetUpZona setUpZona;
     private ZonaTerritorial zt;
     private ControlePassarState cp;
+    private Baralho baralho;
 
     [Header("Ui")]
     [SerializeField] private TMP_Text text_projetoCarta;
@@ -65,6 +66,7 @@ public class Projeto : NetworkBehaviour
         zt = GameObject.FindObjectOfType<ZonaTerritorial>();
         hs = FindObjectOfType<HudStatsJogador>();
         cp = FindObjectOfType<ControlePassarState>();
+        baralho = FindObjectOfType<Baralho>();
     }
 
     //********Seção funções RPC**************************************************
@@ -271,6 +273,7 @@ public class Projeto : NetworkBehaviour
         recompensaText = projetoManager.recompensaText;
         textoTotal = proposta + "\n" + "\n" + recompensaText + "" + numRecompensa.ToString();
         atualizarProjeto(textoTotal);
+        baralho.enabled = false;
 
     }
 

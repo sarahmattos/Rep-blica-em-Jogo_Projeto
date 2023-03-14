@@ -19,12 +19,12 @@ namespace Game.Territorio
 
         private void OnMouseDown()
         {
+            
             if (!enabled) return;
             int rnd = Random.Range(0, 100);
             if (rnd >= 0 && rnd < 25) corrupcao?.sortearCorrupcao();
             if (rnd >= 25 && rnd < 50) movimentosSociais?.sortearMS();
             if (rnd >= 50) projeto?.sortearProjeto();
-            this.enabled = false;
 
         }
         public void cartaProjetoTrue()

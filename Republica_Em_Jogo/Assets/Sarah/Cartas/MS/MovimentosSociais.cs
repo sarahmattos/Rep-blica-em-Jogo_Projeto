@@ -25,12 +25,14 @@ public class MovimentosSociais : NetworkBehaviour
     [SerializeField] private GameObject btnOk;
     private HudStatsJogador hs;
     private RecursosCartaManager rc;
+    private Baralho baralho;
     public bool distribuicaoRecompensaRecurso = false;
 
     public void Start()
     {
         hs = FindObjectOfType<HudStatsJogador>();
         rc = FindObjectOfType<RecursosCartaManager>();
+        baralho = FindObjectOfType<Baralho>();
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -53,7 +55,7 @@ public class MovimentosSociais : NetworkBehaviour
         string textoTotal = "\n" + movimento + "\n" + "\n" + "Ganhe " + quantidadeRecurso + " recurso de " + recursoTipo.ToString() + " e " + quantidadeEleitor + " eleitores";
         int id = (int)NetworkManager.Singleton.LocalClientId;
         AtualizaTextoServerRpc(textoTotal, id);
-
+        baralho.enabled = false;
 
     }
     private void OnEnable()
