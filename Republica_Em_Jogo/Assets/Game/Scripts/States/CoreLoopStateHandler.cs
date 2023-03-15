@@ -52,10 +52,7 @@ namespace Game
             // currentState = statePairValues[CoreLoopState.DISTRIBUICAO];
             coreLoopIndex.OnValueChanged += IndexEstadoLoopMuda;
             if (!IsHost) return;
-            DesenvolvimentoState.Entrada += () =>
-            {
-                ChangeStateServerRpc(0);
-            };
+            DesenvolvimentoState.Entrada += () => ChangeStateServerRpc(0);
         }
 
         public override void OnDestroy()
@@ -77,6 +74,7 @@ namespace Game
         [ServerRpc(RequireOwnership = false)]
         public void ChangeStateServerRpc(int state)
         {
+            Tools.Logger.Instance.LogError("change state server rpc coreloopHandler");
             coreLoopIndex.Value = state;
         }
 

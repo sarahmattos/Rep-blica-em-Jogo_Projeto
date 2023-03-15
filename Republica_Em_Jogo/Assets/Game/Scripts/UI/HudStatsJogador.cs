@@ -49,8 +49,8 @@ namespace Game.UI
         public bool playerDiminuiEleitor = false;
         [HideInInspector]
         public bool distribuicaoGeral = false;
-        [HideInInspector]
-        public bool distribuicaoInicial = false;
+
+        public bool distribuicaoInicial = true;
 
 
 
@@ -204,9 +204,10 @@ namespace Game.UI
         //botao chama funcao de distribuicao de eleitor no inicio das rodadas
         public void ChamatPlayerInicioRodada()
         {
+            Tools.Logger.Instance.LogInfo("Chamar inicio rodada OK");
             checaZonasInteiras();
             eleitoresAdicionais=0;
-            if (distribuicaoInicial == true)
+            if (distribuicaoInicial == true )
             {
                 //se for state do inicio
                 //tem zona inteira ganha adicional

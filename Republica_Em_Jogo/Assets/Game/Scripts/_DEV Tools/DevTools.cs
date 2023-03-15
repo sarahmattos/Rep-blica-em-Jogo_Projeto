@@ -39,6 +39,11 @@ namespace Game.Tools
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
+                string s = "orderm dos players: ";
+                foreach(int value in TurnManager.Instance.ordemPlayersID) {
+                    s += value+" ";
+                }
+                Tools.Logger.Instance.LogInfo(s);
 
             }
 

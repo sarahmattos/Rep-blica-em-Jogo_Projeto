@@ -17,10 +17,12 @@ namespace Game
         public int PlayerAtual => ordemPlayersID[indexPlayerAtual];
         public int GetClientesCount => clientesCount.Value;
         public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == PlayerAtual);
+        public bool CurrentIsUltimo => (PlayerAtual == ordemPlayersID.Count - 1);
+
         public event Action<bool> vezDoPlayerLocal;
         public event Action<int, int> turnoMuda;
         private State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
-        private State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.RECOMPENSA];
+        private State RecompensaState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.RECOMPENSA];
         public int TurnCount
         {
             get => turnCount;
@@ -39,8 +41,7 @@ namespace Game
         private void Start()
         {
             turnoMuda += OnTurnoMuda;
-            DistribuicaoState.Saida += UpdateTurn;
-            InicializacaoState.Saida += UpdateTurn;
+            RecompensaState.Saida += UpdateTurn;
 
             if (!IsHost)
                 return;
@@ -50,14 +51,15 @@ namespace Game
         public override void OnDestroy()
         {
             turnoMuda -= OnTurnoMuda;
-            DistribuicaoState.Saida -= UpdateTurn;
-            InicializacaoState.Saida -= UpdateTurn;
+            RecompensaState.Saida -= UpdateTurn;
+
 
             if (!IsHost)
                 return;
             ordemPlayersID.Dispose();
             clientesCount.Dispose();
             InicializacaoState.Entrada -= DefineConfigIniciais;
+
         }
 
         private void OnTurnoMuda(int _, int nextPlayer)
@@ -98,8 +100,9 @@ namespace Game
         }
 
 
-        private void UpdateTurn()
+        public void UpdateTurn()
         {
+
             int previousPlayer = (indexPlayerAtual != -1) ? indexPlayerAtual : 0;
             if (turnCount == 0)
             {
@@ -109,7 +112,7 @@ namespace Game
             {
                 NextTurn();
             }
-
+            Tools.Logger.Instance.LogWarning("Update turn");
             TurnCount++;
             turnoMuda?.Invoke(previousPlayer, PlayerAtual);
 
@@ -119,7 +122,6 @@ namespace Game
         {
             indexPlayerAtual = index;
         }
-
         public void NextTurn()
         {
             indexPlayerAtual = (1 + indexPlayerAtual) % (GetClientesCount);

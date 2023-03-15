@@ -45,6 +45,7 @@ namespace Game
 
         private void OnIndexStateMuda(int previous, int next)
         {
+            Tools.Logger.Instance.LogError(string.Concat("previous",previous," next", next));
             if (previous != -1) 
             { 
                 currentState?.InvokeSaida();
