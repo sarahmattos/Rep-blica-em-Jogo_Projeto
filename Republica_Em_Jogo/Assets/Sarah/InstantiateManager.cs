@@ -15,11 +15,12 @@ namespace Game
             Instance=this;
         }
 
-        public void instanciarUi(GameObject go, Transform _pai,Color cor){
+        public GameObject instanciarUi(GameObject go, Transform _pai,Color cor){
             GameObject _go = Instantiate(go,go.transform.position,go.transform.rotation);
             _go.transform.SetParent(_pai, false);
              img = _go.GetComponent<Image>();  
             img.color=cor;
+            return _go;
         }
     }
 }

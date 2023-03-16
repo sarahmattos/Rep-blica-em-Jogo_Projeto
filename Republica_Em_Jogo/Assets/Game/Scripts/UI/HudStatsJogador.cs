@@ -50,6 +50,7 @@ namespace Game.UI
         public float eleitoresNovosAtual;
         public List<int> ordemId;
         [SerializeField] List<Color> cor;
+        [SerializeField] List<GameObject> objetosCores;
         private string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
         [HideInInspector]
         public bool playerRecebeEleitor = true;
@@ -59,6 +60,7 @@ namespace Game.UI
         public bool distribuicaoGeral = false;
         [HideInInspector]
         public bool distribuicaoInicial = false;
+        private int aux;
 
 
 
@@ -70,20 +72,38 @@ namespace Game.UI
             }
         }
         public void testeCor(){
-             PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
+            Debug.Log("testeColor");
+            Debug.Log(ordemId.Count);
+            if(aux==0){
+                 PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
              for(int i=0;i<ordemId.Count;i++){
-                foreach (PlayerStats stats in allPlayerStats)
-                {
-                    if(stats.playerID==ordemId[i]){
-                        cor.Add(stats.Cor);
-                       InstantiateManager.Instance.instanciarUi(corUi,corUiPai,stats.Cor);
-                    }
-                }
+                 foreach (PlayerStats stats in allPlayerStats)
+                 {
+                     if(ordemId[i]==stats.playerID){
+                        //cor.Add(stats.Cor);
+                      objetosCores.Add(InstantiateManager.Instance.instanciarUi(corUi,corUiPai,stats.Cor));
+                     }
+                 }
+                
              }
+            }
+            aux++;
+            
              
              // Sprite sprite = _go.GetComponent<Sprite>();
               //sprite.image. .cor=cor[0];
               //_go.image.cor=cor[0];
+        }
+        public void respostaVisualOrdem(int turnId){
+            for(int i=0;i<ordemId.Count;i++){
+                if(ordemId[i]!=turnId){
+                     objetosCores[i].transform.localScale= new Vector3(0.3f,0.3f,0.3f);
+                 }else{
+                    objetosCores[i].transform.localScale=new Vector3(0.4f,0.4f,0.4f);
+                 }
+            }
+            //salvar o indice do objeto cores
+            
         }
         public override void OnNetworkSpawn()
         {

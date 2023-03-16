@@ -117,6 +117,7 @@ namespace Game
             TurnCount++;
             turnoMuda?.Invoke(previousPlayer, PlayerAtual);
             hs.testeCor();
+            hs.respostaVisualOrdem(PlayerAtual);
 
         }
 
