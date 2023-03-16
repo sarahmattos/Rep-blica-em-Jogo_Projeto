@@ -1,4 +1,6 @@
 using Unity.Netcode;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -37,11 +39,14 @@ namespace Game.UI
         private EleicaoManager eleicaoManager;
         private SetUpZona setUpZona;
         int eleitoresAdicionais;
+        
 
         [Header("Variaveis")]
         public int eduQuant;
         public int saudeQuant;
         public float eleitoresNovosAtual;
+        public List<int> ordemId;
+        [SerializeField] List<Color> cor;
         private string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
         [HideInInspector]
         public bool playerRecebeEleitor = true;
@@ -60,6 +65,17 @@ namespace Game.UI
             {
                 BntsAuxiliares();
             }
+        }
+        public void testeCor(){
+             PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
+             for(int i=0;i<ordemId.Count;i++){
+                foreach (PlayerStats stats in allPlayerStats)
+                {
+                    if(stats.playerID==ordemId[i]){
+                        cor.Add(stats.Cor);
+                    }
+                }
+             }
         }
         public override void OnNetworkSpawn()
         {
@@ -103,7 +119,7 @@ namespace Game.UI
             text_nomeJogador.SetText(playerStats.Nome);
             text_eleitores.SetText(textToDisplayEleitores);
             text_objetivo.SetText(playerStats.ObjetivoCarta);
-
+            
         }
 
         //distribui carta de recurso (chamada pela classe projeto)

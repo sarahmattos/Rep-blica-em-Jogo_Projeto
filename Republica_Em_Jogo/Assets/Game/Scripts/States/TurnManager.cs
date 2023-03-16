@@ -3,12 +3,14 @@ using Unity.Netcode;
 using Game.Tools;
 using Logger = Game.Tools.Logger;
 using System;
+using Game.UI;
 namespace Game
 {
     public class TurnManager : NetworkSingleton<TurnManager>
     {
         //Lembrar que: apenas Servers/Owners podem alterar NetworkVariables.
         //Para fazer isso via client, pode ser usado m�todos ServerRpc, assim como � feito nesta classe
+        private HudStatsJogador hs;
         public NetworkList<int> ordemPlayersID;
         private int indexPlayerAtual = -1;
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
@@ -38,6 +40,7 @@ namespace Game
 
         private void Start()
         {
+            hs = FindObjectOfType<HudStatsJogador>();
             turnoMuda += OnTurnoMuda;
             DistribuicaoState.Saida += UpdateTurn;
             InicializacaoState.Saida += UpdateTurn;
@@ -93,6 +96,7 @@ namespace Game
             allClientID.Shuffle();
             for (int i = 0; i < allClientID.Count; i++)
             {
+                hs.ordemId.Add(allClientID[i]);
                 ordemPlayersID.Add(allClientID[i]);
             }
         }
@@ -112,6 +116,7 @@ namespace Game
 
             TurnCount++;
             turnoMuda?.Invoke(previousPlayer, PlayerAtual);
+            hs.testeCor();
 
         }
 
