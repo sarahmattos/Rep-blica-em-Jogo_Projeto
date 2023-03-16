@@ -74,9 +74,9 @@ namespace Game.UI
         public void testeCor(){
             Debug.Log("testeColor");
             Debug.Log(ordemId.Count);
-            if(aux==0){
+            
+                for(int i=0;i<ordemId.Count;i++){
                  PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
-             for(int i=0;i<ordemId.Count;i++){
                  foreach (PlayerStats stats in allPlayerStats)
                  {
                      if(ordemId[i]==stats.playerID){
@@ -86,8 +86,7 @@ namespace Game.UI
                  }
                 
              }
-            }
-            aux++;
+            
             
              
              // Sprite sprite = _go.GetComponent<Sprite>();
