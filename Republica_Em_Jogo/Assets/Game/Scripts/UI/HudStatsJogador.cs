@@ -7,6 +7,7 @@ using TMPro;
 using Game.Player;
 using Game.Territorio;
 using Game;
+using TMPro;
 using Logger = Game.Tools.Logger;
 
 namespace Game.UI
@@ -32,6 +33,8 @@ namespace Game.UI
         [SerializeField] private GameObject acaboudistribuicaoUi2;
         [SerializeField] private GameObject distribuaEleitorUi;
         [SerializeField] private GameObject btnsAux;
+        [SerializeField] private GameObject corUi;
+        [SerializeField] private Transform corUiPai;
 
         [Header("Referencias")]
         [SerializeField] private State state;
@@ -73,9 +76,14 @@ namespace Game.UI
                 {
                     if(stats.playerID==ordemId[i]){
                         cor.Add(stats.Cor);
+                       InstantiateManager.Instance.instanciarUi(corUi,corUiPai,stats.Cor);
                     }
                 }
              }
+             
+             // Sprite sprite = _go.GetComponent<Sprite>();
+              //sprite.image. .cor=cor[0];
+              //_go.image.cor=cor[0];
         }
         public override void OnNetworkSpawn()
         {
