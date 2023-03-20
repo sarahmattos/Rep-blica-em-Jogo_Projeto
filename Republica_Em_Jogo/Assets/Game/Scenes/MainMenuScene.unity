@@ -1263,7 +1263,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7887484137661636566, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4.2289844
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7887484137943697647, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1489,6 +1489,10 @@ PrefabInstance:
     - target: {fileID: 8714760897532645806, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
       propertyPath: m_Name
       value: CanvasCarregamento
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714760898405765883, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -5.4001465
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
