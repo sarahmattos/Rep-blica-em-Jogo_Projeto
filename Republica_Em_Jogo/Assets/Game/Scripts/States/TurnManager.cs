@@ -14,7 +14,6 @@ namespace Game
         public NetworkList<int> ordemPlayersID;
         private int indexPlayerAtual = -1;
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
-        private NetworkVariable<int> ordemAux = new NetworkVariable<int>();
         private int turnCount;
         public event Action FirstPlayerTurn;
         public int PlayerAtual => ordemPlayersID[indexPlayerAtual];
@@ -24,7 +23,6 @@ namespace Game
         public event Action<int, int> turnoMuda;
         private State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
         private State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.RECOMPENSA];
-        int aux=0;
         public int TurnCount
         {
             get => turnCount;
@@ -39,24 +37,7 @@ namespace Game
                 NetworkVariableWritePermission.Server
             );
         }
-        [ServerRpc(RequireOwnership = false)]
-        public void ContarOrdemServerRpc(int valor)
-        {
-           ordemAux.Value = valor;
-        }
-        private void OnEnable()
-        {
-            ordemAux.OnValueChanged += (int  previousValue, int  newValue) =>
-            {
-                hs.ordemId.Add(newValue);
-                aux++;
-                if(aux==NetworkManager.Singleton.ConnectedClientsIds.Count){
-                    hs.testeCor();
-                    hs.respostaVisualOrdem(PlayerAtual);
-                }
-            };
 
-        }
         private void Start()
         {
             hs = FindObjectOfType<HudStatsJogador>();
@@ -115,8 +96,7 @@ namespace Game
             allClientID.Shuffle();
             for (int i = 0; i < allClientID.Count; i++)
             {
-                //hs.ordemId.Add(allClientID[i]);
-                ContarOrdemServerRpc(allClientID[i]);
+                hs.ordemId.Add(allClientID[i]);
                 ordemPlayersID.Add(allClientID[i]);
             }
         }
@@ -136,7 +116,7 @@ namespace Game
 
             TurnCount++;
             turnoMuda?.Invoke(previousPlayer, PlayerAtual);
-            //hs.testeCor();
+            hs.testeCor();
             hs.respostaVisualOrdem(PlayerAtual);
 
         }
