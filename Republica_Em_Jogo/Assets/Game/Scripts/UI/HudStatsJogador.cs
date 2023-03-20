@@ -94,13 +94,16 @@ namespace Game.UI
               //_go.image.cor=cor[0];
         }
         public void respostaVisualOrdem(int turnId){
-            for(int i=0;i<ordemId.Count;i++){
+            if(ordemId.Count>0){
+                for(int i=0;i<ordemId.Count;i++){
                 if(ordemId[i]!=turnId){
                      objetosCores[i].transform.localScale= new Vector3(0.3f,0.3f,0.3f);
                  }else{
                     objetosCores[i].transform.localScale=new Vector3(0.4f,0.4f,0.4f);
                  }
             }
+            }
+            
             //salvar o indice do objeto cores
             
         }
