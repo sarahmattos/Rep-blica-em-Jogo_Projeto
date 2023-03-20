@@ -12,7 +12,7 @@ namespace Game.Networking
     public class OfflineConnection : Singleton<OfflineConnection>
     {
         [SerializeField] private TMP_InputField ipAddressInput;
-        //private PlayerNameHandler playerNameHandler => PlayerNameHandler.Instance;
+        private PlayerNameHandler playerNameHandler => PlayerNameHandler.Instance;
         public Action<bool> conexaoEstabelecida;
         public Action<string> conexaoIpEstabelecida;
         void Start()
@@ -26,21 +26,22 @@ namespace Game.Networking
 
         public void ConfigAndStartHostIP()
         {
-            StartHostIP(PlayerDataPreferences.NewClientName, PlayerDataPreferences.GetClientGUID(), IPManager.Instance.myIpAddress(), IPManager.Instance.portDefault);
+            StartHostIP(playerNameHandler.GetPlayerName, IPManager.Instance.myIpAddress(), IPManager.Instance.portDefault);
         }
 
         public void ConfigAndStartClientIP()
         {
-            StartClientIP(PlayerDataPreferences.NewClientName, PlayerDataPreferences.GetClientGUID(), ipAddressInput.text, IPManager.Instance.portDefault);
+
+            StartClientIP(playerNameHandler.GetPlayerName, ipAddressInput.text, IPManager.Instance.portDefault);
         }
 
 
 
-        public void StartClientIP(string playerName, string playerGuid, string ipaddress, int port)
+        public void StartClientIP(string playerName, string ipaddress, int port)
         {
             var utp = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
             utp.SetConnectionData(ipaddress, (ushort)port);
-            SetConnectionPayload(playerName, playerGuid);
+            SetConnectionPayload(GetPlayerId(), playerName);
 
             if(NetworkManager.Singleton.StartClient())
             {
@@ -56,12 +57,12 @@ namespace Game.Networking
         }
 
 
-        public void StartHostIP(string playerName,string playerGuid,  string ipaddress, int port)
+        public void StartHostIP(string playerName, string ipaddress, int port)
         {
 
             var utp = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
             utp.SetConnectionData(ipaddress, (ushort)port);
-            SetConnectionPayload(playerName, playerGuid);
+            SetConnectionPayload(GetPlayerId(), playerName);
             if (NetworkManager.Singleton.StartHost())
             {
                 conexaoEstabelecida?.Invoke(true);
@@ -76,13 +77,12 @@ namespace Game.Networking
 
         }
 
-        private void SetConnectionPayload(string playerName, string playerGuid)
+        private void SetConnectionPayload(string playerId, string playerName)
         {
             var payload = JsonUtility.ToJson(new ConnectionPayload()
             {
-                //playerId = playerId,
+                playerId = playerId,
                 playerName = playerName,
-                guid = playerGuid,
                 isDebug = Debug.isDebugBuild
             });
 
@@ -91,6 +91,11 @@ namespace Game.Networking
             NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
         }
 
+        string GetPlayerId()
+        {
+            return UnityEngine.Random.Range(0, 1000).ToString();
+   
+        }
 
     }
 
@@ -98,9 +103,8 @@ namespace Game.Networking
 
     public class ConnectionPayload
     {
-        //public string playerId;
+        public string playerId;
         public string playerName;
-        public string guid;
         public bool isDebug;
     }
 
