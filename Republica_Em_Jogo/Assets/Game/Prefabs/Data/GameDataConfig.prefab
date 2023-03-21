@@ -44,12 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81c1033ebf964e4e815e2e75efa4e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxConnections: 1
+  maxConnections: 2
   menuSceneName: MainMenuScene
-  gameSceneName: NetcodeScene
+  gameplaySceneName: GameplayScene
   playerColorOrder:
   - {r: 1, g: 0.545098, b: 0.5803921, a: 1}
   - {r: 0.6745098, g: 0.8705883, b: 0.6666667, a: 1}
   - {r: 0.6627451, g: 0.8980393, b: 0.89019614, a: 1}
   - {r: 0.9528302, g: 0.78357273, b: 0.5788893, a: 1}
+  tagParticipante: Jogador
+  maxRodadasParaEleicoes: 2
   territoriosInScene: 28
