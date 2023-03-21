@@ -34,7 +34,7 @@ namespace Game.Networking
             }
 
             //Gerando e alocando os dados da partida
-            Allocation allocation = await Relay.Instance.CreateAllocationAsync(GameDataConfig.Instance.MaxConnections);
+            Allocation allocation = await Relay.Instance.CreateAllocationAsync(GameDataconfig.Instance.MaxConnections);
 
             RelayHostData relayHostData = new RelayHostData
             {
@@ -53,7 +53,7 @@ namespace Game.Networking
                 relayHostData.Key, relayHostData.ConnectionData);
 
             Tools.Logger.Instance.LogInfo($"AllocationID: {relayHostData.AllocationID}");
-            Tools.Logger.Instance.LogInfo($"Código da sala: {relayHostData.JoinCode}");
+            Tools.Logger.Instance.LogInfo($"Cï¿½digo da sala: {relayHostData.JoinCode}");
             
             joinCodeGenerated?.Invoke(relayHostData.JoinCode);
             connecting?.Invoke(false);

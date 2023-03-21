@@ -9,7 +9,7 @@ namespace Game
     {
         private int rodada = 1;
         public int Rodada => rodada;
-        public int maxRodada => GameDataConfig.Instance.MaxRodadasParaEleicoes;
+        public int maxRodada => GameDataconfig.Instance.MaxRodadasParaEleicoes;
         public event Action<int> rodadaMuda;
         public Action rodadaMaxAlcancada;
 

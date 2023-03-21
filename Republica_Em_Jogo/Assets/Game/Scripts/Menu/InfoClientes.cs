@@ -49,7 +49,7 @@ namespace Game.Networking
 
         private void UpdatePlayerCount(int _, int next)
         {
-            text_contagemJogadores.SetText(string.Concat(next, "/", GameDataConfig.Instance.MaxConnections, " jogadores."));
+            text_contagemJogadores.SetText(string.Concat(next, "/", GameDataconfig.Instance.MaxConnections, " jogadores."));
         }
 
     }

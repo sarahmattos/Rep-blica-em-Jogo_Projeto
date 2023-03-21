@@ -8,6 +8,7 @@ using Game.Player;
 using Game.Territorio;
 using Game;
 using TMPro;
+using System.Linq;
 using Logger = Game.Tools.Logger;
 
 namespace Game.UI
@@ -42,7 +43,7 @@ namespace Game.UI
         private EleicaoManager eleicaoManager;
         private SetUpZona setUpZona;
         int eleitoresAdicionais;
-        
+
 
         [Header("Variaveis")]
         public int eduQuant;
@@ -62,8 +63,28 @@ namespace Game.UI
         public bool distribuicaoInicial = false;
         private int aux;
 
+        private State inicalizacao => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
+        private State desenvolvimentoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
 
 
+        private void Start()
+        {
+            inicalizacao.Saida += testeCor;
+            TurnManager.Instance.turnoMuda += respostaVisualOrdem;
+            desenvolvimentoState.Entrada += () => respostaVisualOrdem(-1, TurnManager.Instance.PlayerAtual);
+
+        }
+
+        public override void OnDestroy()
+        {
+            TurnManager.Instance.vezDoPlayerLocal -= (bool value) => { button.SetActive(value); };
+            inicalizacao.Saida -= testeCor;
+            TurnManager.Instance.turnoMuda -= respostaVisualOrdem;
+            desenvolvimentoState.Entrada -= () => respostaVisualOrdem(-1, TurnManager.Instance.PlayerAtual);
+
+
+            base.OnDestroy();
+        }
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -71,48 +92,71 @@ namespace Game.UI
                 BntsAuxiliares();
             }
         }
-        public void testeCor(){
+
+        private List<int> getOrdemPlayersID()
+        {
+            List<int> aux = new List<int>();
+            foreach (int id in TurnManager.Instance.ordemPlayersID)
+            {
+                aux.Add(id);
+            }
+            return aux;
+        }
+
+
+        public void testeCor()
+        {
+            ordemId = new List<int>();
+            ordemId = getOrdemPlayersID();
             Debug.Log("testeColor");
             Debug.Log(ordemId.Count);
-            if(aux==0){
-                for(int i=0;i<ordemId.Count;i++){
-                 PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
-                 foreach (PlayerStats stats in allPlayerStats)
-                 {
-                     if(ordemId[i]==stats.playerID){
-                        //cor.Add(stats.Cor);
-                      objetosCores.Add(InstantiateManager.Instance.instanciarUi(corUi,corUiPai,stats.Cor));
-                     }
-                 }
-                
-             }
+            if (aux == 0)
+            {
+                for (int i = 0; i < ordemId.Count; i++)
+                {
+                    PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
+                    foreach (PlayerStats stats in allPlayerStats)
+                    {
+                        if (ordemId[i] == stats.playerID)
+                        {
+                            //cor.Add(stats.Cor);
+                            objetosCores.Add(InstantiateManager.Instance.instanciarUi(corUi, corUiPai, stats.Cor));
+                        }
+                    }
+
+                }
             }
-                
-            
-             aux++;
-            
-             
-             // Sprite sprite = _go.GetComponent<Sprite>();
-              //sprite.image. .cor=cor[0];
-              //_go.image.cor=cor[0];
+
+
+            aux++;
+
+            // Sprite sprite = _go.GetComponent<Sprite>();
+            //sprite.image. .cor=cor[0];
+            //_go.image.cor=cor[0];
         }
-        public void respostaVisualOrdem(int turnId){
-            if(ordemId.Count>0){
+        public void respostaVisualOrdem(int _, int turnId)
+        {
+            if (ordemId.Count > 0)
+            {
                 Debug.Log("entrou respostaVisual");
-                Debug.Log(turnId+ " index");
-                
-                 for(int i=0;i<ordemId.Count;i++){
-                if(ordemId[i]!=turnId){
-                     objetosCores[i].transform.localScale= new Vector3(0.3f,0.3f,0.3f);
-                 }else{
-                    Debug.Log(objetosCores[i]+" ficou maior");
-                    objetosCores[i].transform.localScale=new Vector3(0.4f,0.4f,0.4f);
-                 }
+                Debug.Log(turnId + " index");
+
+                for (int i = 0; i < ordemId.Count; i++)
+                {
+                    if (ordemId[i] != turnId)
+                    {
+                        objetosCores[i].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                    }
+                    else
+                    {
+                        Debug.Log(objetosCores[i] + " ficou maior");
+                        objetosCores[i].transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+                    }
+                }
             }
-            }
-           
+
             //salvar o indice do objeto cores
-            
+
         }
         public override void OnNetworkSpawn()
         {
@@ -128,12 +172,6 @@ namespace Game.UI
         {
             GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD).Saida -= FindingLocalPlayerStats;
             GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO).Entrada += AtualizarPlayerStatsBairro;
-
-        }
-
-        public override void OnDestroy()
-        {
-            TurnManager.Instance.vezDoPlayerLocal -= (bool value) => { button.SetActive(value); };
 
         }
 
@@ -156,7 +194,7 @@ namespace Game.UI
             text_nomeJogador.SetText(playerStats.Nome);
             text_eleitores.SetText(textToDisplayEleitores);
             text_objetivo.SetText(playerStats.ObjetivoCarta);
-            
+
         }
 
         //distribui carta de recurso (chamada pela classe projeto)
@@ -232,7 +270,7 @@ namespace Game.UI
             {
                 acaboudistribuicaoUi2.SetActive(true);
                 playerDiminuiEleitor = false;
-                
+
             }
             else
             {
@@ -258,14 +296,15 @@ namespace Game.UI
         public void ChamatPlayerInicioRodada()
         {
             checaZonasInteiras();
-            eleitoresAdicionais=0;
+            eleitoresAdicionais = 0;
             if (distribuicaoInicial == true)
             {
                 //se for state do inicio
                 //tem zona inteira ganha adicional
-                for(int i=0;i<setUpZona.tenhoZona.Count;i++){
+                for (int i = 0; i < setUpZona.tenhoZona.Count; i++)
+                {
                     eleitoresAdicionais += setUpZona.tenhoZona[i].eleitoresAdicionais;
-                    Debug.Log("voce possui "+setUpZona.tenhoZona[i].eleitoresAdicionais+ " eleitore(s) adicionais por conquistar a zona "+setUpZona.tenhoZona[i].Nome+ " inteira!");
+                    Debug.Log("voce possui " + setUpZona.tenhoZona[i].eleitoresAdicionais + " eleitore(s) adicionais por conquistar a zona " + setUpZona.tenhoZona[i].Nome + " inteira!");
                 }
                 playerStats.inicioRodada(eleitoresAdicionais);
                 distribuaEleitorUi.SetActive(true);
@@ -310,7 +349,8 @@ namespace Game.UI
         {
             btnsAux.SetActive(!btnsAux.activeSelf);
         }
-        public void checaZonasInteiras(){
+        public void checaZonasInteiras()
+        {
             setUpZona.PlayerTemZonaInteira(playerStats.playerID);
         }
 

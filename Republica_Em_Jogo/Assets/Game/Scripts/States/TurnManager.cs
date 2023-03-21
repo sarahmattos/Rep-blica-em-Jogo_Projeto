@@ -19,7 +19,7 @@ namespace Game
         private int turnCount;
         public event Action FirstPlayerTurn;
         public int PlayerAtual => ordemPlayersID[indexPlayerAtual];
-        public int PlayerAtual2 ;
+        // public int PlayerAtual2 ;
         public int GetClientesCount => clientesCount.Value;
         public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == PlayerAtual);
         public event Action<bool> vezDoPlayerLocal;
@@ -45,6 +45,8 @@ namespace Game
 
         private void Start()
         {
+            ordemPlayersID.Initialize(this);
+
             hs = FindObjectOfType<HudStatsJogador>();
             turnoMuda += OnTurnoMuda;
             DistribuicaoState.Saida += UpdateTurn;
@@ -55,37 +57,35 @@ namespace Game
                 return;
             InicializacaoState.Entrada += DefineConfigIniciais;
             //clientesAtual.Value = 1;
-            
-            
         }
          
-        private void OnOrdemIdChanged(NetworkListEvent<int> changeEvent)
-        {
-                aux++;
-                teste=changeEvent.Value;
-                teste2=changeEvent.Index;
-                hs.ordemId.Add(changeEvent.Value);
-                if(aux== NetworkManager.Singleton.ConnectedClientsIds.Count){
-                    hs.testeCor();
-                    }
+        // private void OnOrdemIdChanged(NetworkListEvent<int> changeEvent)
+        // {
+        //         aux++;
+        //         teste=changeEvent.Value;
+        //         teste2=changeEvent.Index;
+        //         hs.ordemId.Add(changeEvent.Value);
+        //         if(aux== NetworkManager.Singleton.ConnectedClientsIds.Count){
+        //             hs.testeCor();
+        //         }
            
            
-        }
+        // }
        // private void OnPlayerAtualChanged(int previousValue, int newValue)
         //{
        //    playerNow=newValue;
            
         //}
-        private void OnEnable()
-        {
-            ordemPlayersID.OnListChanged += OnOrdemIdChanged;
+        // private void OnEnable()
+        // {
+        //     ordemPlayersID.OnListChanged += OnOrdemIdChanged;
 
-        }
-        private void OnDisable()
-        {
-            ordemPlayersID.OnListChanged -= OnOrdemIdChanged;
+        // }
+        // private void OnDisable()
+        // {
+        //     ordemPlayersID.OnListChanged -= OnOrdemIdChanged;
 
-        }
+        // }
 
         public override void OnDestroy()
         {
@@ -154,8 +154,8 @@ namespace Game
             TurnCount++;
             turnoMuda?.Invoke(previousPlayer, PlayerAtual);
             //hs.testeCor();
-            PlayerAtual2 = hs.ordemId[indexPlayerAtual];
-            hs.respostaVisualOrdem(PlayerAtual2);
+            // PlayerAtual2 = hs.ordemId[indexPlayerAtual];
+            // hs.respostaVisualOrdem(PlayerAtual2);
 
         }
 

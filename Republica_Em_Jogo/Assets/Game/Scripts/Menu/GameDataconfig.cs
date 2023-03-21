@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameDataConfig : Singleton<GameDataConfig> 
+public class GameDataconfig : Singleton<GameDataconfig> 
 {
     [SerializeField] private int maxConnections;
     [SerializeField] private string menuSceneName;
