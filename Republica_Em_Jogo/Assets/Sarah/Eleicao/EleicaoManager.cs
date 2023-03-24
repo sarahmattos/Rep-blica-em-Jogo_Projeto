@@ -26,6 +26,8 @@ namespace Game
         public int[] eleitoresPlayers;
         private SetUpZona setUpZona;
         private string cadeiras;
+         float valorPeao;
+        [SerializeField] GameObject[] peosCamara;
         void Start()
         {
            cadeirasTotais=12;
@@ -33,6 +35,7 @@ namespace Game
            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             Instance = this;
             minCadeirasVotacao=7;
+            Material material = peosCamara[0].GetComponent<MeshRenderer>().material;
             
         }
         [ServerRpc(RequireOwnership = false)]
@@ -48,6 +51,7 @@ namespace Game
                         hs.cadeirasUi(cadeirasCamara[i]);
                     }
                 }
+                ColorirPeao();
         }
         public void ContaTotalEleitores()
         {
@@ -93,6 +97,29 @@ namespace Game
                 CalcularCadeiras();
             
         }
+        public void ColorirPeao(){
+            Debug.Log("coloriu");
+            for(int i=0;i<cadeirasCamara.Length;i++){
+                        if(i==0){
+                                valorPeao =cadeirasCamara[i] * i;
+                            }else{
+                                valorPeao =cadeirasCamara[i-1] * i;
+                        }
+                                    
+                        PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
+                        foreach (PlayerStats stats in allPlayerStats)
+                        {
+                            if (stats.playerID==i)
+                            {
+                                 for(int j=0;j<cadeirasCamara[i];j++){
+                                    
+                                 Material material = peosCamara[j+(int)valorPeao].GetComponent<MeshRenderer>().material;
+                                material.SetColor("_Color", stats.Cor); 
+                                }
+                            }
+                        }
+                    }
+                }
         private void OnEnable()
     {
         //jogadores conectados
@@ -101,6 +128,7 @@ namespace Game
             if (newValue != "")
             {
                 UIeleicao.Instance.MostrarCadeiras(newValue.ToString());
+                ColorirPeao();
                 //Debug.Log(newValue.ToString());
             }
         };
