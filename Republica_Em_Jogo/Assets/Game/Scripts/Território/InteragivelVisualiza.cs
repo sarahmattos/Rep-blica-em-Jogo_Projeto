@@ -61,7 +61,7 @@ namespace Game.Territorio
 
 
         private void ResetMouseOutColor(int _, int playerID) {
-            colorMouseOut = GameDataConfig.Instance.PlayerColorOrder[playerID];
+            colorMouseOut = GameDataconfig.Instance.PlayerColorOrder[playerID];
             SetColor(colorMouseOut);
 
         }

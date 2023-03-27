@@ -25,6 +25,7 @@ namespace Game
 
         public void ResetMachineState()
         {
+            Tools.Logger.Instance.LogInfo("Reset state Machine");
             ChangeStateServerRpc(-1);
         }
 
@@ -62,13 +63,19 @@ namespace Game
         [ServerRpc(RequireOwnership = false)]
         public void ChangeStateServerRpc(int newIndex)
         {
+            Tools.Logger.Instance.LogInfo("Change state: " + newIndex);
             indexState.Value = newIndex;
+            Debug.Log("mudou estado" + currentState?.name);
+
         }
 
         [ServerRpc(RequireOwnership = false)]
         public void NextStateServerRpc()
         {
+            Tools.Logger.Instance.LogInfo("Next state");
             indexState.Value = (indexState.Value + 1) % states.Count;
+            Debug.Log("mudou estado" + currentState?.name);
+
 
         }
 

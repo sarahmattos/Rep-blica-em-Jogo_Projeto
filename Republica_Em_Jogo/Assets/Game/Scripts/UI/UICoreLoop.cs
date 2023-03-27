@@ -84,7 +84,7 @@ namespace Game
 
         private void UpdateTextDesenv(CoreLoopState state)
         {
-            logStateText.SetText(string.Concat(GameDataConfig.Instance.TagParticipante, " ", TurnManager.Instance.PlayerAtual, " no estado: ", state));
+            logStateText.SetText(string.Concat(GameDataconfig.Instance.TagParticipante, " ", TurnManager.Instance.PlayerAtual, " no estado: ", state));
         }
 
     }

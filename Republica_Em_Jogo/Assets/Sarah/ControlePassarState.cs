@@ -90,6 +90,7 @@ namespace Game
                     {
                         if (rc.comTrocaTrue == false)
                         {
+                            Tools.Logger.Instance.LogInfo("não é a primeira distribuição. ");
                             CoreLoopStateHandler.Instance.NextStateServerRpc();
                         }
                     }
@@ -108,7 +109,9 @@ namespace Game
                     }
                     else
                     {
+
                         Tools.Logger.Instance.LogWarning(" ÚLTIMO");
+                        //GameStateHandler.Instance.StateMachineController.ResetMachineState();
                         GameStateHandler.Instance.StateMachineController.ChangeStateServerRpc((int)GameState.DESENVOLVIMENTO);
                     }
 

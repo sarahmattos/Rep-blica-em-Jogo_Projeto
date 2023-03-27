@@ -34,7 +34,7 @@ namespace Game.Networking
             }
 
             //Gerando e alocando os dados da partida
-            Allocation allocation = await Relay.Instance.CreateAllocationAsync(GameDataConfig.Instance.MaxConnections);
+            Allocation allocation = await Relay.Instance.CreateAllocationAsync(GameDataconfig.Instance.MaxConnections);
 
             RelayHostData relayHostData = new RelayHostData
             {

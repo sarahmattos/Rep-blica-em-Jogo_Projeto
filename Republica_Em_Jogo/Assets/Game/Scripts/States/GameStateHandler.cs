@@ -68,12 +68,12 @@ namespace Game
 
         private void OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
         {
-            if (sceneName == GameDataConfig.Instance.MenuSceneName)
+            if (sceneName == GameDataconfig.Instance.MenuSceneName)
             {
                 stateMachineController.ChangeStateServerRpc((int)GameState.MENU_SCENE_LOAD);
             }
 
-            if (sceneName == GameDataConfig.Instance.GameplaySceneName)
+            if (sceneName == GameDataconfig.Instance.GameplaySceneName)
             {
                 stateMachineController.ChangeStateServerRpc((int)GameState.GAMEPLAY_SCENE_LOAD);
             }
