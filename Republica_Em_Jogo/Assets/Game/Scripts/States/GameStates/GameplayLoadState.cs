@@ -13,7 +13,6 @@ namespace Game
         private GameStateHandler stateHandler => GameStateHandler.Instance;
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("Enter State: GAMELPLAY SCENE.");
             if (!IsServer) return;
             //stateHandler.NextStateServerRPC();
             StartCoroutine(SperaEVai(1));

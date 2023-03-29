@@ -24,7 +24,7 @@ namespace Game
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("EnterState: DISTRIBUICAO");
+            Tools.Logger.Instance.LogPlayerAction("Distribuindo eleitores");
             if(!TurnManager.Instance.LocalIsCurrent) return;
             bairrosDoPlayerAtual.AddRange(
                 PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl
@@ -46,8 +46,9 @@ namespace Game
             bairrosDoPlayerAtual.Clear();
         }
 
-        public void OnDestroy()
+        public override void OnDestroy()
         {
+            base.OnDestroy();
             TurnManager.Instance.vezDoPlayerLocal -= quandoVezPlayerLocal;
         }
 

@@ -19,7 +19,6 @@ namespace Game
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("Escolha um bairro para remanejar.");
             if (!TurnManager.Instance.LocalIsCurrent) return;
 
             remanejamentoData.ResetSelectedBairros();

@@ -49,7 +49,7 @@ namespace Game
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("Enter State: AVAN�O");
+            Tools.Logger.Instance.LogPlayerAction("Avançando.");
             avancoData.ResetData();
             if (!TurnManager.Instance.LocalIsCurrent) return;
             avancoStateIndex.OnValueChanged += AvancoIndexMuda;

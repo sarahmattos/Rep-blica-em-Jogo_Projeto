@@ -20,8 +20,6 @@ namespace Game
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("ENTER Process dados");
-
             LancarDados();
             ProcessarDescontagemEleitores();           
             avancoState.NextAvancoStateServerRpc();
@@ -30,8 +28,6 @@ namespace Game
 
         public override void ExitState() 
         {
-            Tools.Logger.Instance.LogInfo("EXIT Process dados");
-
         }
 
         private void LancarDados()

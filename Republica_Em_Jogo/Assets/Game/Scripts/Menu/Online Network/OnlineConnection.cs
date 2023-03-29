@@ -22,13 +22,10 @@ public class OnlineConnection : Singleton<OnlineConnection>
 
             if(NetworkManager.Singleton.StartHost())
             {
-                conexaoEstabelecida?.Invoke(true);
-                Logger.Instance.LogInfo("Sala criada.");
-                
+                conexaoEstabelecida?.Invoke(true);                
             } else
             {
                 conexaoEstabelecida?.Invoke(false);
-                Logger.Instance.LogInfo("falha ao criar sala.");
             }
         }
 
@@ -48,12 +45,12 @@ public class OnlineConnection : Singleton<OnlineConnection>
             {
                 conexaoEstabelecida?.Invoke(true);
                 joinCodeConexaoEstabelecida?.Invoke(inputJoinCode.text);
-                Logger.Instance.LogInfo(string.Concat("Juntando-se a sala.",inputJoinCode.text));
+                Logger.Instance.LogInfo(string.Concat("Entrando na sala: ",inputJoinCode.text));
             }
             else
             {
                 conexaoEstabelecida?.Invoke(false);
-                Logger.Instance.LogInfo("Falha ao entrar na sala.");
+                Logger.Instance.LogInfo(string.Concat("Falha ao entrar na sala: ",inputJoinCode.text));
             }
 
         }

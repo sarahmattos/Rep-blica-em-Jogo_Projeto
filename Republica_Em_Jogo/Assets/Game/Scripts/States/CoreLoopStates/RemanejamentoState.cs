@@ -24,7 +24,7 @@ namespace Game
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("Enter: Remanejamento");
+            Tools.Logger.Instance.LogPlayerAction("Remanejando eleitores.");
             if(!TurnManager.Instance.LocalIsCurrent) return;
 
             remanejamentoData.ClearData();
