@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Game
+namespace Game.Tools
 {
     public class InfoLogButton : MonoBehaviour
     {

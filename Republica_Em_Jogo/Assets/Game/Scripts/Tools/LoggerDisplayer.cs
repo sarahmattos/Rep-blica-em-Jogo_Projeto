@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game
+namespace Game.Tools
 {
     public class LoggerDisplayer : MonoBehaviour
     {
