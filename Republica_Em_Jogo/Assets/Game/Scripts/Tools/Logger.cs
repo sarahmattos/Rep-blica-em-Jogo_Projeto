@@ -31,7 +31,7 @@ namespace Game.Tools
 
             if (enabled)
             {
-                debugAreaText.text += $"<color=\"white\"> {this.GetType().Name} enabled</color>\n";
+                debugAreaText.text += "\n";
             }
 
             DontDestroyOnLoad(gameObject);
@@ -41,12 +41,9 @@ namespace Game.Tools
         {
             ClearLines();
             int playerID = TurnManager.Instance.PlayerAtual;
-            // string playerColor = (GameDataconfig.Instance.PlayerColorOrder[playerID]);
-            // ColorUtility
-            string playerColor = "yellow";
-            debugAreaText.text += $"<color=\"{playerColor}\">{string.Concat(GameDataconfig.Instance.TagParticipante," ",playerID," : ")}</color>";
-            debugAreaText.text += $"<color=\"white\"> {message} </color> \n";
-
+            string playerHexColor = ColorUtility.ToHtmlStringRGB((GameDataconfig.Instance.PlayerColorOrder[playerID]));
+            debugAreaText.text += string.Format("<color=#{0}>{1}</color>",playerHexColor, string.Concat(GameDataconfig.Instance.TagParticipante," ",playerID," : "));
+            debugAreaText.text += string.Format("<color=#{0}>{1}</color>","#fff", string.Concat(message,"\n"));
         }
 
 
@@ -66,7 +63,7 @@ namespace Game.Tools
         public void LogWarning(string message)
         {
             ClearLines();
-            debugAreaText.text += $"<color=\"yellow\">{message}</color>\n";
+            debugAreaText.text += $"<color=\"green\">{message}</color>\n";
         }
 
         private void ClearLines()
