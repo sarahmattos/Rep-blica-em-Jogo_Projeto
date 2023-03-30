@@ -69,7 +69,7 @@ namespace Game.Networking
             } else
             {
                 conexaoEstabelecida?.Invoke(false);
-                Logger.Instance.LogWarning("Falha ao criar sala.");
+                Logger.Instance.LogError("Falha ao criar sala.");
             }
 
         }

@@ -24,7 +24,7 @@ namespace Game
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogPlayerAction("Distribuindo eleitores");
+            // Tools.Logger.Instance.LogPlayerAction("Distribuindo eleitores");
             if(!TurnManager.Instance.LocalIsCurrent) return;
             bairrosDoPlayerAtual.AddRange(
                 PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl

@@ -18,6 +18,8 @@ namespace Game
         }
         public override void EnterState()
         {
+            Tools.Logger.Instance.LogPlayerAction("Moveu 1 eleitor para "+remanejamentoData.VizinhoEscolhido);
+
             if (!TurnManager.Instance.LocalIsCurrent) return;
             StartCoroutine(TaskProcessaRemanejamento());
 
@@ -56,7 +58,6 @@ namespace Game
             {
                 remanejamentoData.RemoveBairro(remanejamentoData.BairroEscolhido);
             }
-
             yield return new WaitForSeconds(0.3f);
 
             remanejamentoState.StateMachineController.NextStateServerRpc();
