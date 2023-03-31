@@ -252,7 +252,7 @@ namespace Game.UI
         public void AtualizaBairros()
         {
             // playerStats.ContaBairros();
-            text_bairros.SetText(" Bairros: " + playerStats.BairrosInControl.Count.ToString());
+            text_bairros.SetText("Bairros: " + playerStats.BairrosInControl.Count.ToString());
         }
 
         //quando o jogador distribui seus eleitores
