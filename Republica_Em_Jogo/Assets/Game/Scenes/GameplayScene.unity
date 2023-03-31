@@ -281,6 +281,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7820855}
   m_Mesh: {fileID: -6991745101117706009, guid: 39b9c398a1a14ca4bbf8fe5f7e2d32b3, type: 3}
+--- !u!1 &8212509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8212510}
+  - component: {fileID: 8212511}
+  m_Layer: 5
+  m_Name: BaralhoManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8212510
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8212509}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 790569242}
+  m_Father: {fileID: 1929002169}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -400.00003, y: -178.33334}
+  m_SizeDelta: {x: 80, y: 120}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8212511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8212509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8b705262b032d4da9dd3c992878888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baralho2D: {fileID: 790569241}
 --- !u!1 &30594159
 GameObject:
   m_ObjectHideFlags: 0
@@ -2856,8 +2907,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3469287838374786419}
-        m_TargetAssemblyTypeName: Baralho, Assembly-CSharp
+      - m_Target: {fileID: 8212511}
+        m_TargetAssemblyTypeName: Game.Territorio.Baralho, Assembly-CSharp
         m_MethodName: cartaProjetoTrue
         m_Mode: 1
         m_Arguments:
@@ -10241,6 +10292,139 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783583607}
   m_CullTransparentMesh: 1
+--- !u!1 &790569241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 790569242}
+  - component: {fileID: 790569245}
+  - component: {fileID: 790569244}
+  - component: {fileID: 790569243}
+  m_Layer: 5
+  m_Name: Baralho2d
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &790569242
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790569241}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 4, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8212510}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 39.99997, y: 60.000004}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &790569243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790569241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 790569244}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8212511}
+        m_TargetAssemblyTypeName: Game.Territorio.Baralho, Assembly-CSharp
+        m_MethodName: sortearAcao
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &790569244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790569241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.7169812, g: 0.49038807, b: 0.49038807, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &790569245
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790569241}
+  m_CullTransparentMesh: 1
 --- !u!1 &790805493
 GameObject:
   m_ObjectHideFlags: 0
@@ -10725,8 +10909,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3469287838374786419}
-        m_TargetAssemblyTypeName: Baralho, Assembly-CSharp
+      - m_Target: {fileID: 8212511}
+        m_TargetAssemblyTypeName: Game.Territorio.Baralho, Assembly-CSharp
         m_MethodName: cartaProjetoFalse
         m_Mode: 1
         m_Arguments:
@@ -24621,7 +24805,7 @@ Transform:
   - {fileID: 2128842284}
   - {fileID: 1173233761}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1808351460
 GameObject:
@@ -25713,7 +25897,7 @@ Transform:
   - {fileID: 1647241553}
   - {fileID: 1344005821}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1902386142
 GameObject:
@@ -26024,6 +26208,7 @@ RectTransform:
   - {fileID: 822401325}
   - {fileID: 4769691101933998918}
   - {fileID: 7130727418840219124}
+  - {fileID: 8212510}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -26792,7 +26977,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 102119898713761344, guid: 8c2afeb0d6e0d3846a413e620a8d6e2c, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 102119898713761344, guid: 8c2afeb0d6e0d3846a413e620a8d6e2c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30985,21 +31170,6 @@ Transform:
   m_Father: {fileID: 1307589228}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!4 &543450652310141655
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148304584813}
-  m_LocalRotation: {x: -0.50425625, y: 0.4957042, z: 0.4955312, w: 0.50443226}
-  m_LocalPosition: {x: -9.890001, y: -0.71692693, z: -7.85}
-  m_LocalScale: {x: 54.610138, y: 32.1187, z: 20.176945}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: -89.98, y: 89, z: 0}
 --- !u!4 &543450652974664755
 Transform:
   m_ObjectHideFlags: 0
@@ -31109,7 +31279,7 @@ Transform:
   - {fileID: 8616956409375479682}
   - {fileID: 2743864971181352945}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &610531265402315622
 MonoBehaviour:
@@ -32289,26 +32459,6 @@ GameObject:
   - component: {fileID: 1711813854355486994}
   m_Layer: 0
   m_Name: peaoAmarelo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &919132148304584813
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 543450652310141655}
-  - component: {fileID: 3469287838374786418}
-  - component: {fileID: 1711813854381048248}
-  - component: {fileID: 3469287838374786419}
-  - component: {fileID: 3469287838374786420}
-  m_Layer: 0
-  m_Name: baralho
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34252,48 +34402,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!23 &1711813854381048248
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148304584813}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: -6478536213147159724, guid: 6788463982046214c977858c9475b595, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!23 &1711813854390047087
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -36015,7 +36123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5930915927673793196, guid: f82ae2104388b134987d00a6072cb94a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -5.3999023
+      value: -5.4000244
       objectReference: {fileID: 0}
     - target: {fileID: 5930915927673793196, guid: f82ae2104388b134987d00a6072cb94a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -36297,40 +36405,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148296636615}
   m_Mesh: {fileID: -462981019419857548, guid: 56ced0bb7bd6d6045b1f4ce21b5083ba, type: 3}
---- !u!33 &3469287838374786418
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148304584813}
-  m_Mesh: {fileID: -5495902117074765545, guid: 6788463982046214c977858c9475b595, type: 3}
---- !u!114 &3469287838374786419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148304584813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c8b705262b032d4da9dd3c992878888, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!64 &3469287838374786420
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148304584813}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: 6788463982046214c977858c9475b595, type: 3}
 --- !u!33 &3469287838390888135
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -95864,7 +95938,7 @@ PrefabInstance:
       objectReference: {fileID: 8714760898358469774}
     - target: {fileID: 4508504388700894050, guid: ea7651a6721e75541a8ea5d12f98d323, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4508504388700894050, guid: ea7651a6721e75541a8ea5d12f98d323, type: 3}
       propertyPath: m_LocalPosition.x
@@ -96652,7 +96726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2975253272573854462, guid: 55ec50d0d786cea4cbadee4579f6fba5, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2975253272573854462, guid: 55ec50d0d786cea4cbadee4579f6fba5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -99878,7 +99952,7 @@ Transform:
   - {fileID: 5851105735804124285}
   - {fileID: 5851105736609853243}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5851105736595788329
 MonoBehaviour:
@@ -105471,7 +105545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7677490024804130840, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7677490024804130840, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
       propertyPath: m_LocalPosition.x
@@ -105524,7 +105598,7 @@ PrefabInstance:
     - target: {fileID: 8743070054750033842, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
       propertyPath: baralho
       value: 
-      objectReference: {fileID: 3469287838374786419}
+      objectReference: {fileID: 0}
     - target: {fileID: 8743070054750033842, guid: 8c6ad9c9144ea544e8a7796197ab4910, type: 3}
       propertyPath: explicaTexto
       value: "Voc\xEA est\xE1 no estado Projeto: Retire uma carta de a\xE7\xE3o:

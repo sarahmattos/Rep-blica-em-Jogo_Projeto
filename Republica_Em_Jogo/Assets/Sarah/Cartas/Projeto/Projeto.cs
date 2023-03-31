@@ -273,7 +273,7 @@ public class Projeto : NetworkBehaviour
         recompensaText = projetoManager.recompensaText;
         textoTotal = proposta + "\n" + "\n" + recompensaText + "" + numRecompensa.ToString();
         atualizarProjeto(textoTotal);
-        baralho.enabled = false;
+        baralho.baralhoManager(false);
 
     }
 

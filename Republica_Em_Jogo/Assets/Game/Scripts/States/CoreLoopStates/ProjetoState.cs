@@ -17,7 +17,8 @@ namespace Game
             Tools.Logger.Instance.LogInfo("Enter State: PROJETO");
             if (TurnManager.Instance.LocalIsCurrent)
             {
-                baralho.enabled = true;
+                //baralho.enabled = true;
+                baralho.baralhoManager(true);
                 uiCore.ExplicaStateText.text = explicaTexto;
             }
             
@@ -27,13 +28,12 @@ namespace Game
         public override void ExitState()
         {
             HabilitarBairrosPlayerLocal(false);
-            baralho.enabled = false;
 
         }
 
         private void Start()
-        {
-            baralho.enabled = false;
+        {   
+            baralho = FindObjectOfType<Baralho>();
             uiCore = FindObjectOfType<UICoreLoop>();
         }
 
