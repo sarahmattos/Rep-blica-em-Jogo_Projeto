@@ -9,6 +9,8 @@ namespace Game
     public class ProjetoState : State
     {
         [SerializeField] private Baralho baralho;
+        public string explicaTexto;
+        private UICoreLoop uiCore;
 
         public override void EnterState()
         {
@@ -16,8 +18,9 @@ namespace Game
             if (TurnManager.Instance.LocalIsCurrent)
             {
                 baralho.enabled = true;
+                uiCore.ExplicaStateText.text = explicaTexto;
             }
-
+            
             //EleicaoManager.Instance.CalculoEleicao();
         }
 
@@ -31,7 +34,7 @@ namespace Game
         private void Start()
         {
             baralho.enabled = false;
-
+            uiCore = FindObjectOfType<UICoreLoop>();
         }
 
         public void OnDestroy()

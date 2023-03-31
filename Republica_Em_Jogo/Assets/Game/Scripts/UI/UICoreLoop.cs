@@ -16,6 +16,8 @@ namespace  Game
     {
         [SerializeField] private Button nextStateButton;
         [SerializeField] private TMP_Text logStateText;
+        [SerializeField] public TMP_Text ExplicaStateText;
+        [SerializeField] public  GameObject ExplicaStateUi;
         public State DesenvState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
 
 
@@ -84,6 +86,7 @@ namespace  Game
         private void UpdateTextDesenv(CoreLoopState state)
         {
             logStateText.SetText(string.Concat(GameDataconfig.Instance.TagParticipante," ", TurnManager.Instance.PlayerAtual, " no estado: ",state));
+            if(TurnManager.Instance.LocalIsCurrent)ExplicaStateUi.SetActive(true);
         }
 
     }

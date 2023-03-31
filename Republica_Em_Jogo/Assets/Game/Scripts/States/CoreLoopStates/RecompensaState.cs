@@ -22,13 +22,18 @@ namespace Game
         // public bool AplicouTodosEleitores => qntdEleitorAplicado == recompensaEleitores;
         public PlayerStats PlayerStatsAtual =>  PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual();
         public List<Bairro> bairrosDoPlayer => PlayerStatsAtual?.BairrosInControl;
-        
+        public string explicaTexto;
+        private UICoreLoop uiCore;
 
         public override void EnterState()
         {
             hudStatsJogador.checaZonasInteiras();
             fimDeJogoManager.zonaObtidaEObjetivo();
             Tools.Logger.Instance.LogInfo("Enter State: RECOMPENSA");
+             if(TurnManager.Instance.LocalIsCurrent){
+                 uiCore.ExplicaStateText.text = explicaTexto;
+             }
+            
             if(!TemRecompensa) {
                 Tools.Logger.Instance.LogInfo("Como não avançou em nenhum bairro, não há recompensa nesta rodada.");
                 return;
@@ -39,7 +44,10 @@ namespace Game
             // InscreverBairros();
 
         }
-        
+        private void Start()
+        {
+            uiCore = FindObjectOfType<UICoreLoop>();
+        }
         public override void ExitState()
         {
             Tools.Logger.Instance.LogInfo("Exit RECOMPENSA");

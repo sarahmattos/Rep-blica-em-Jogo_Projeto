@@ -28,6 +28,9 @@ namespace Game
         private string cadeiras;
          float valorPeao;
         [SerializeField] GameObject[] peosCamara;
+        
+        public string explicaTexto;
+        private UICoreLoop uiCore;
         void Start()
         {
            cadeirasTotais=12;
@@ -36,6 +39,7 @@ namespace Game
             Instance = this;
             minCadeirasVotacao=7;
             Material material = peosCamara[0].GetComponent<MeshRenderer>().material;
+            uiCore = FindObjectOfType<UICoreLoop>();
             
         }
         [ServerRpc(RequireOwnership = false)]
@@ -93,9 +97,21 @@ namespace Game
             }
         }
         public void CalculoEleicao(){
-                ContaTotalEleitores();
-                CalcularCadeiras();
             
+            ContaTotalEleitores();
+            CalcularCadeiras();
+            
+            
+        }
+        public void explicarEleicao(){
+            uiCore.ExplicaStateUi.SetActive(true);
+            uiCore.ExplicaStateText.text = explicaTexto;
+            EsperaEVai2(2);
+        }
+        private IEnumerator EsperaEVai2(int s)
+        {
+            yield return new WaitForSeconds(s);
+            uiCore.ExplicaStateUi.SetActive(false);
         }
         public void ColorirPeao(){
             Debug.Log("coloriu");

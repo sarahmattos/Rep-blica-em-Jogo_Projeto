@@ -12,7 +12,6 @@ namespace Game
     {
         public Action Entrada;
         public Action Saida;
-
         public abstract void EnterState();
         public abstract void ExitState();
 

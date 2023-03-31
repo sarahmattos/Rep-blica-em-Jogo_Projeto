@@ -29,6 +29,8 @@ namespace Game
         private AvancoData avancoData = new AvancoData();
         public AvancoData AvancoData => avancoData;
         DadosUiGeral dadosUiGeral;
+        public string explicaTexto;
+        private UICoreLoop uiCore;
 
         public List<Bairro> bairrosPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
 
@@ -45,6 +47,7 @@ namespace Game
             statePairValues = new Dictionary<AvancoStatus, State>();
             SetPairValues();
             dadosUiGeral=FindObjectOfType<DadosUiGeral>();
+             uiCore = FindObjectOfType<UICoreLoop>();
         }
 
         public override void EnterState()
@@ -54,6 +57,7 @@ namespace Game
             if (!TurnManager.Instance.LocalIsCurrent) return;
             avancoStateIndex.OnValueChanged += AvancoIndexMuda;
             SetAvancoStateServerRpc(0);
+            uiCore.ExplicaStateText.text = explicaTexto;
 
         }
 

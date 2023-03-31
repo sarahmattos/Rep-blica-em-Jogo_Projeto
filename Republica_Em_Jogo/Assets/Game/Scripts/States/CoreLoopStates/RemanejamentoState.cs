@@ -14,12 +14,15 @@ namespace Game
         public StateMachineController StateMachineController => stateMachineController;
         private RemanejamentoData remanejamentoData = new RemanejamentoData();
         public RemanejamentoData RemanejamentoData => remanejamentoData;
+        public string explicaTexto;
+        private UICoreLoop uiCore;
 
         private void Start()
         {
             stateMachineController =  GetComponent<StateMachineController>();
             stateMachineController.Initialize(subStates);
             stateMachineController.ResetMachineState();
+            uiCore = FindObjectOfType<UICoreLoop>();
         }
 
         public override void EnterState()
@@ -30,6 +33,7 @@ namespace Game
             remanejamentoData.ClearData();
             remanejamentoData.ArmazenarBairrosRemanejaveis();
             stateMachineController.ChangeStateServerRpc(0);
+            uiCore.ExplicaStateText.text = explicaTexto;
 
         }
 

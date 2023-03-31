@@ -344,6 +344,7 @@ namespace Game.UI
         {
             playerStats.numCadeiras = valor;
             text_cadeiras.SetText("Cadeiras: " + "\n" + playerStats.numCadeiras.ToString());
+           eleicaoManager.explicarEleicao();
         }
         public void BntsAuxiliares()
         {

@@ -11,6 +11,9 @@ namespace Game
     {
         [SerializeField]
         private RecursosCartaManager rc;
+        
+        public string explicaTexto;
+        private UICoreLoop uiCore;
 
         [SerializeField]
         private HudStatsJogador hs;
@@ -20,6 +23,7 @@ namespace Game
         {
             bairrosDoPlayerAtual = new List<Bairro>();
             TurnManager.Instance.vezDoPlayerLocal += quandoVezPlayerLocal;
+            uiCore = FindObjectOfType<UICoreLoop>();
         }
 
         public override void EnterState()
@@ -33,8 +37,8 @@ namespace Game
             {
                 bairro.Interagivel.MudarHabilitado(true);
             }
+            uiCore.ExplicaStateText.text = explicaTexto;
         }
-
         public override void ExitState()
         {
             if(!TurnManager.Instance.LocalIsCurrent) return;
