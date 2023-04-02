@@ -16,7 +16,6 @@ namespace Game
         }
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("EnterState: DESENVOLVIMENTO");
             rodadaController.InscreverEvents();
 
             if (!IsHost) return;

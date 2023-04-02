@@ -24,11 +24,9 @@ namespace Game
         public override void EnterState()
         {
             bairrosInteragiveis = GetBairrosPodemInteragir();
-            Tools.Logger.Instance.LogInfo("Enter Select Bairro State");
             if (bairrosInteragiveis.Count == 0)
             {
                 // CoreLoopStateHandler.Instance.NextStateServerRpc();
-                Tools.Logger.Instance.LogWarning("Nenhum bairro disponível para avançar.");
                 return;
             }
             InscreverClickInteragivelBairros(bairrosInteragiveis);

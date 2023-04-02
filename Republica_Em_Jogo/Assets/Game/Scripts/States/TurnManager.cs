@@ -102,7 +102,7 @@ namespace Game
 
         private void OnTurnoMuda(int _, int nextPlayer)
         {
-            Logger.Instance.LogWarning(string.Concat("vez do player: ", nextPlayer));
+            // Logger.Instance.LogWarning(string.Concat("Turno Atualizado. Vez do jogador: ", nextPlayer));
             vezDoPlayerLocal?.Invoke(LocalIsCurrent);
 
             if (nextPlayer == ordemPlayersID[0])

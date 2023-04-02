@@ -52,8 +52,8 @@ namespace Game.Networking
             Transport.SetRelayServerData(relayHostData.IPv4Address, relayHostData.Port, relayHostData.AllocationIDBytes,
                 relayHostData.Key, relayHostData.ConnectionData);
 
-            Tools.Logger.Instance.LogInfo($"AllocationID: {relayHostData.AllocationID}");
-            Tools.Logger.Instance.LogInfo($"C�digo da sala: {relayHostData.JoinCode}");
+            // Tools.Logger.Instance.LogInfo($"AllocationID: {relayHostData.AllocationID}");
+            // Tools.Logger.Instance.LogInfo($"C�digo da sala: {relayHostData.JoinCode}");
             
             joinCodeGenerated?.Invoke(relayHostData.JoinCode);
             connecting?.Invoke(false);
@@ -96,7 +96,7 @@ namespace Game.Networking
                 relayJoinData.Key, relayJoinData.ConnectionData, relayJoinData.HostConnectionData);
 
 
-           Tools.Logger.Instance.LogInfo($"Connectado: {joinCode}");
+        //    Tools.Logger.Instance.LogInfo($"Connectado: {joinCode}");
             connecting?.Invoke(false);
 
             return relayJoinData;

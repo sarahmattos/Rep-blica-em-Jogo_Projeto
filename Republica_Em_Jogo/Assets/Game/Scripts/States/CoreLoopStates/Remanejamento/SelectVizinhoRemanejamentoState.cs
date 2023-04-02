@@ -23,8 +23,6 @@ namespace Game
 
         public override void EnterState()
         {
-
-            Tools.Logger.Instance.LogInfo("Escolha um bairro vizinho para receber eleitores.");
             if (!TurnManager.Instance.LocalIsCurrent) return;
             vizinhosDoPlayerAtual = GetVizinhosDoPlayerAtual();
             InscreverClickInteragivelBairros();

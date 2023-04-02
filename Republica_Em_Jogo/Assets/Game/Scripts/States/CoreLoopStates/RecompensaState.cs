@@ -30,14 +30,14 @@ namespace Game
             hudStatsJogador.checaZonasInteiras();
             fimDeJogoManager.zonaObtidaEObjetivo();
             Tools.Logger.Instance.LogInfo("Enter State: RECOMPENSA");
-             if(TurnManager.Instance.LocalIsCurrent){
-                 uiCore.ExplicaStateText.text = explicaTexto;
-             }
+            if(TurnManager.Instance.LocalIsCurrent){
+                uiCore.ExplicaStateText.text = explicaTexto;
+            }
             
             if(!TemRecompensa) {
-                Tools.Logger.Instance.LogInfo("Como não avançou em nenhum bairro, não há recompensa nesta rodada.");
+                // Tools.Logger.Instance.LogInfo("Como não avançou em nenhum bairro, não há recompensa nesta rodada.");
                 return;
-            }
+            } 
             hudStatsJogador.updateRecursoCartaUI(qntdRecurso);
             // qntdEleitorAplicado = 0;
             // HabilitarBairros(true);
@@ -50,7 +50,6 @@ namespace Game
         }
         public override void ExitState()
         {
-            Tools.Logger.Instance.LogInfo("Exit RECOMPENSA");
             // HabilitarBairros(false);
             // DesincreverBairros();
         }
