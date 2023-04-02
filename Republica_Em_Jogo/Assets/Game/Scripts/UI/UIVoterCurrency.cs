@@ -7,8 +7,8 @@ namespace Game.UI
     public class UIVoterCurrency : MonoBehaviour
     {
         private Animator animator;
-        public State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[(int)CoreLoopState.DISTRIBUICAO];
-        public State ProjetoState => CoreLoopStateHandler.Instance.StatePairValues[(int)CoreLoopState.DISTRIBUICAO];
+        public State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.DISTRIBUICAO];
+        public State ProjetoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.PROJETO];
         private void Awake()
         {
             animator = GetComponent<Animator>();
