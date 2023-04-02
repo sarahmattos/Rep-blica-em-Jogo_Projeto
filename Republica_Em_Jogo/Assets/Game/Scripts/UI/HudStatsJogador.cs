@@ -10,10 +10,12 @@ using Game;
 using TMPro;
 using System.Linq;
 using Logger = Game.Tools.Logger;
+using System;
+using Game.Tools;
 
 namespace Game.UI
 {
-    public class HudStatsJogador : NetworkBehaviour
+    public class HudStatsJogador : NetworkSingleton<HudStatsJogador>
     {
         [Header("Ui")]
         public GameObject button; //botao para testar
@@ -62,10 +64,9 @@ namespace Game.UI
         [HideInInspector]
         public bool distribuicaoInicial = false;
         private int aux;
-
+        public event Action eleitoresNovosDeProjeto;
         private State inicalizacao => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
         private State desenvolvimentoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
-
 
         private void Start()
         {
@@ -260,6 +261,7 @@ namespace Game.UI
         {
             playerStats.eleitoresNovos--;
             text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
+
         }
 
         public void AtualizaUIAposDistribuicao()
@@ -311,6 +313,8 @@ namespace Game.UI
                 distribuicaoGeral = true;
                 text_distribuaEleitor.SetText("Distribua seus eleitores");
                 text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
+                eleitoresNovosDeProjeto?.Invoke();
+
             }
 
         }
@@ -333,6 +337,7 @@ namespace Game.UI
                     text_distribuaEleitor.SetText("Distribua seus eleitores");
                 }
                 text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
+                eleitoresNovosDeProjeto?.Invoke();
             }
 
         }
@@ -344,7 +349,7 @@ namespace Game.UI
         {
             playerStats.numCadeiras = valor;
             text_cadeiras.SetText("Cadeiras: " + "\n" + playerStats.numCadeiras.ToString());
-           eleicaoManager.explicarEleicao();
+            eleicaoManager.explicarEleicao();
         }
         public void BntsAuxiliares()
         {

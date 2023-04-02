@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -7,7 +8,7 @@ namespace Game.UI
     {
         private Animator animator;
         public State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[(int)CoreLoopState.DISTRIBUICAO];
-
+        public State ProjetoState => CoreLoopStateHandler.Instance.StatePairValues[(int)CoreLoopState.DISTRIBUICAO];
         private void Awake()
         {
             animator = GetComponent<Animator>();
@@ -15,13 +16,21 @@ namespace Game.UI
         private void Start()
         {
             DistribuicaoState.Entrada += OnEnterState;
+            HudStatsJogador.Instance.eleitoresNovosDeProjeto += OnEnterState;
+
             DistribuicaoState.Saida += OnExitState;
+            ProjetoState.Saida += OnExitState;
         }
 
         private void OnDestroy()
         {
             DistribuicaoState.Entrada -= OnEnterState;
+            HudStatsJogador.Instance.eleitoresNovosDeProjeto -= OnEnterState;
+
+
             DistribuicaoState.Saida -= OnExitState;
+            ProjetoState.Saida += OnExitState;
+
         }
 
         private void OnEnterState()
