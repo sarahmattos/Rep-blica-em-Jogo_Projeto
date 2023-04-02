@@ -259,7 +259,7 @@ namespace Game.UI
         public void contagemEleitores()
         {
             playerStats.eleitoresNovos--;
-            text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+            text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
         }
 
         public void AtualizaUIAposDistribuicao()
@@ -310,7 +310,7 @@ namespace Game.UI
                 distribuaEleitorUi.SetActive(true);
                 distribuicaoGeral = true;
                 text_distribuaEleitor.SetText("Distribua seus eleitores");
-                text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+                text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
             }
 
         }
@@ -332,7 +332,7 @@ namespace Game.UI
                 {
                     text_distribuaEleitor.SetText("Distribua seus eleitores");
                 }
-                text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+                text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
             }
 
         }
