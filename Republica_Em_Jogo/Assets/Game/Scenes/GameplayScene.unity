@@ -31956,6 +31956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509226933035524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31969,6 +31970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227006128483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31982,6 +31984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227053349621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31995,6 +31998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227142352787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32008,6 +32012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227170965973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32021,6 +32026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227208703619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32034,6 +32040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227266288541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32047,6 +32054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227322074070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32060,6 +32068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227401169536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32073,6 +32082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227410641376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32086,6 +32096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227508782972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32099,6 +32110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227527290797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32112,6 +32124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227733590642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32125,6 +32138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227754633145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32138,6 +32152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509227991685479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32151,6 +32166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509228030440957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32164,6 +32180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509228144824551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32177,6 +32194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509228217694764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32190,6 +32208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509228283600830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32203,6 +32222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509228422192126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32216,6 +32236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509228468227964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32229,6 +32250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509228487707817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32242,6 +32264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509228589013888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32255,6 +32278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509228606699776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32268,6 +32292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509228660693064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32281,6 +32306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509228816307008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32294,6 +32320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!114 &824509228951451583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32307,6 +32334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  saudeIcone: []
 --- !u!1 &832149484149354700
 GameObject:
   m_ObjectHideFlags: 0
@@ -37575,6 +37603,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801125003791305}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093128746714067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37646,6 +37676,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801124919707471}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093128797376341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37717,6 +37749,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801124950792366}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093128874704162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37738,6 +37772,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801125140198713}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093128874704163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37813,6 +37849,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801125170303871}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093128913787749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37869,6 +37907,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801125053038687}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093128930248773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37924,6 +37964,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801124743369015}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093129006881069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37961,6 +38003,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801124671194153}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093129077345331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38034,6 +38078,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801124881379370}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!1 &4029093129135487028
 GameObject:
   m_ObjectHideFlags: 0
@@ -38088,6 +38134,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801124871908170}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!1 &4029093129142854484
 GameObject:
   m_ObjectHideFlags: 0
@@ -38161,6 +38209,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801124784052604}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!1 &4029093129261583641
 GameObject:
   m_ObjectHideFlags: 0
@@ -38201,6 +38251,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801124453270791}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093129261583645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38278,6 +38330,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801124433767894}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093129608401090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38315,6 +38369,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801124137916632}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!1 &4029093129608401094
 GameObject:
   m_ObjectHideFlags: 0
@@ -38353,6 +38409,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801124158557459}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093129621177609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38425,6 +38483,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801123858588621}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093129858116567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38480,6 +38540,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801123882749783}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093129898952525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38549,6 +38611,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801124069048454}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!1 &4029093130019775059
 GameObject:
   m_ObjectHideFlags: 0
@@ -38588,6 +38652,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801123995118157}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093130019775063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38659,6 +38725,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801123600229652}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!1 &4029093130202545608
 GameObject:
   m_ObjectHideFlags: 0
@@ -38718,6 +38786,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801123784701398}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093130230545944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38741,6 +38811,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801123820008963}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093130230545945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38835,6 +38907,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801123755499860}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093130329745712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38870,6 +38944,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801123382894890}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!1 &4029093130329745716
 GameObject:
   m_ObjectHideFlags: 0
@@ -38927,6 +39003,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801123403219882}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!1 &4029093130349513652
 GameObject:
   m_ObjectHideFlags: 0
@@ -38981,6 +39059,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801123454083810}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!1 &4029093130527255292
 GameObject:
   m_ObjectHideFlags: 0
@@ -39037,6 +39117,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801123059132906}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!1 &4029093130693353972
 GameObject:
   m_ObjectHideFlags: 0
@@ -39093,6 +39175,8 @@ MonoBehaviour:
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 1354801123192687893}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &4029093130828481807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108431,6 +108515,10 @@ PrefabInstance:
     - target: {fileID: 4997438595795647153, guid: 17b18b8d455364e468fdbff6cc89183d, type: 3}
       propertyPath: m_Name
       value: saude
+      objectReference: {fileID: 0}
+    - target: {fileID: 4997438595795647153, guid: 17b18b8d455364e468fdbff6cc89183d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7908241628952720016, guid: 17b18b8d455364e468fdbff6cc89183d, type: 3}
       propertyPath: m_RootOrder

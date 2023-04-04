@@ -13,6 +13,7 @@ public class Saúde : NetworkBehaviour
     public bool playerControlRecurso =false;
     private Bairro bairro;
     private Recursos recurso;
+    public GameObject[] saudeIcone;
 
     [ServerRpc(RequireOwnership = false)]
         public void AtualizarValorUIServerRpc()
@@ -26,8 +27,44 @@ public class Saúde : NetworkBehaviour
             rc = FindObjectOfType<RecursosCartaManager>();
             bairro = GetComponentInParent<Bairro>();
             recurso = GetComponentInParent<Recursos>();
+            //saudeIcone[] = this.gameObject.transform.GetChild(0).GetChild(0).gameObject;
+            
+            
+            
+            
+        }
+        private void Start()
+        {
+            //saudeIcone = new List<GameObject>();
+            //saudeIcone = getChildrens();
+            //for (int i=0;i<saudeIcone.Count;i++){
+             //   saudeIcone[i].SetActive(false);
+            //}
+            saudeIcone = new GameObject[2];
+            for (int i=0;i<2;i++){
+                saudeIcone[i]=this.transform.GetChild(i).gameObject;
+            }
+             for (int i=0;i<saudeIcone.Length;i++){
+               saudeIcone[i].SetActive(false);
+            }
         }
 
+     /*public List<GameObject> getChildrens(){
+       
+        Debug.Log("get");
+            List<GameObject> gs = new List<GameObject>();
+            Transform[] ts = gameObject.GetComponentsInChildren<Transform>();
+            if (ts == null){
+                Debug.Log(" null");
+                return gs;
+            }
+            foreach (GameObject t in ts) {
+                if (t != null )gs.Add(t);
+            }
+            Debug.Log("not null");
+            return gs;
+
+    }*/
      private void OnMouseDown()
     {
         //adicionarSaude();
@@ -36,6 +73,9 @@ public class Saúde : NetworkBehaviour
          if(bairro.VerificaControl()){
             if(rc.novosSaude>0){
                 rc.novosSaude--;
+                for (int i=0;i<saudeIcone.Length;i++){
+                saudeIcone[i].SetActive(true);
+            }
                 AtualizarValorUIServerRpc();
             }
         }
