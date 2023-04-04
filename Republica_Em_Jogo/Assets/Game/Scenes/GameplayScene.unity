@@ -14261,11 +14261,11 @@ RectTransform:
   m_Father: {fileID: 1675552988}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000023842, y: -7}
-  m_SizeDelta: {x: 229.2676, y: 50}
-  m_Pivot: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1143327088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14286,7 +14286,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\"Distribua seu(s) recurso(s) de sa\xFAde! Clique no bairro que deseja
+    adicionar!\"+ \"\\n\" +\" Sa\xFAde:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14295,8 +14296,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -14313,15 +14314,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 12.8
+  m_fontSizeBase: 12.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -22845,10 +22846,10 @@ RectTransform:
   m_Father: {fileID: 345388445}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -35.93988, y: -12.700012}
-  m_SizeDelta: {x: 234.7601, y: 153.468}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -19.3, y: 97.0093}
+  m_SizeDelta: {x: 128.2171, y: 97.0093}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1675552989
 MonoBehaviour:
@@ -22863,7 +22864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8352941}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -30601,6 +30602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286413281582167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30614,6 +30616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286413432215391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30627,6 +30630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286413608908311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30640,6 +30644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286413628937367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30653,6 +30658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286413659182313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30666,6 +30672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286413728924606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30679,6 +30686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286413772390507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30692,6 +30700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286413822677161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30705,6 +30714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286413956472816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30718,6 +30728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286414025176379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30731,6 +30742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286414077033194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30744,6 +30756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286414101091952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30757,6 +30770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286414338029742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30770,6 +30784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286414350544229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30783,6 +30798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286414591334507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30796,6 +30812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286414714663098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30809,6 +30826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286414777920705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30822,6 +30840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286414823458199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30835,6 +30854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286414832869111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30848,6 +30868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286414899425684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30861,6 +30882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286414952850570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30874,6 +30896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286415045998050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30887,6 +30910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286415062984386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30900,6 +30924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286415101542532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30913,6 +30938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286415156473107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30926,6 +30952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286415179395826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30939,6 +30966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!114 &496286415229533812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30952,6 +30980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlRecurso: 0
+  eduIcone: {fileID: 0}
 --- !u!33 &501281953771944541
 MeshFilter:
   m_ObjectHideFlags: 0

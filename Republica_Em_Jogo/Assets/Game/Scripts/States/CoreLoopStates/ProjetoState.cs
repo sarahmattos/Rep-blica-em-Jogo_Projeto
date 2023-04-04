@@ -28,7 +28,7 @@ namespace Game
         public override void ExitState()
         {
             HabilitarBairrosPlayerLocal(false);
-
+            baralho.baralhoManager(false);
         }
 
         private void Start()
