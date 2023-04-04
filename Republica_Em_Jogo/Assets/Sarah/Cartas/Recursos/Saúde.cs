@@ -35,11 +35,6 @@ public class Saúde : NetworkBehaviour
         }
         private void Start()
         {
-            //saudeIcone = new List<GameObject>();
-            //saudeIcone = getChildrens();
-            //for (int i=0;i<saudeIcone.Count;i++){
-             //   saudeIcone[i].SetActive(false);
-            //}
             saudeIcone = new GameObject[2];
             for (int i=0;i<2;i++){
                 saudeIcone[i]=this.transform.GetChild(i).gameObject;
@@ -49,22 +44,7 @@ public class Saúde : NetworkBehaviour
             }
         }
 
-     /*public List<GameObject> getChildrens(){
-       
-        Debug.Log("get");
-            List<GameObject> gs = new List<GameObject>();
-            Transform[] ts = gameObject.GetComponentsInChildren<Transform>();
-            if (ts == null){
-                Debug.Log(" null");
-                return gs;
-            }
-            foreach (GameObject t in ts) {
-                if (t != null )gs.Add(t);
-            }
-            Debug.Log("not null");
-            return gs;
-
-    }*/
+     
      private void OnMouseDown()
     {
         //adicionarSaude();
@@ -86,6 +66,11 @@ public class Saúde : NetworkBehaviour
             {
                 recurso.saude =newValue;
                 text_saude.SetText(newValue.ToString());
+                if(newValue<=0){
+                    for (int i=0;i<saudeIcone.Length;i++){
+                     saudeIcone[i].SetActive(false);
+                 }
+                }
             };
         }
 }

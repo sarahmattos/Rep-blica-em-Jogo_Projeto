@@ -14,6 +14,7 @@ public class Educaçao : NetworkBehaviour
     public bool playerControlRecurso=false;
     private Bairro bairro;
     private Recursos recurso;
+    public GameObject eduIcone;
 
     [ServerRpc(RequireOwnership = false)]
         public void AtualizarValorUIServerRpc()
@@ -28,7 +29,11 @@ public class Educaçao : NetworkBehaviour
             recurso = GetComponentInParent<Recursos>();
 
         }
-
+        private void Start()
+        {
+                eduIcone=this.transform.GetChild(0).gameObject;
+               eduIcone.SetActive(false);
+        }
      private void OnMouseDown()
     {
         //adicionarEdu
@@ -38,6 +43,7 @@ public class Educaçao : NetworkBehaviour
         if(bairro.VerificaControl()){
             if(rc.novosEdu>0){
                 rc.novosEdu--;
+                eduIcone.SetActive(true);
                 AtualizarValorUIServerRpc();
             }
         }
@@ -48,6 +54,10 @@ public class Educaçao : NetworkBehaviour
             {
                 recurso.educacao =newValue;
                 text_edu.SetText(newValue.ToString());
+                if(newValue<=0){
+                    eduIcone.SetActive(false);
+                 }
+                
             };
         }
 }
