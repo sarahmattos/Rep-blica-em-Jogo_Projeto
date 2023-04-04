@@ -30,13 +30,15 @@ public class Saúde : NetworkBehaviour
 
      private void OnMouseDown()
     {
+        //adicionarSaude();
+    }
+    public void adicionarSaude(){
          if(bairro.VerificaControl()){
             if(rc.novosSaude>0){
                 rc.novosSaude--;
                 AtualizarValorUIServerRpc();
             }
         }
-        
     }
     private void OnEnable()
         {

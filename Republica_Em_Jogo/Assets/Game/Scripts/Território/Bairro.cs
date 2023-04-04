@@ -27,8 +27,8 @@ namespace Game.Territorio
         public SetUpBairro SetUpBairro { get => setUpBairro; }
         public Interagivel Interagivel => interagivel; 
         private HudStatsJogador hs;
-        private Educaçao edu;
-        private Saúde saude;
+        public Educaçao edu;
+        public Saúde saude;
         private Recursos recurso;
 
         private void Awake()

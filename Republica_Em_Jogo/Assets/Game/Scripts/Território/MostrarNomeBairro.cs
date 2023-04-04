@@ -12,6 +12,7 @@ namespace Game.Territorio
         private Bairro bairro;
         private Projeto projeto;
         private HudStatsJogador hs;
+        private RecursosCartaManager rc;
         void Awake()
         {
             bairro = GetComponentInParent<Bairro>();
@@ -27,6 +28,7 @@ namespace Game.Territorio
             nomeBairro.SetActive(false);
             textNomeBairro.SetText(bairro.Nome);
             bairro.Interagivel.click += EscolherBairroNoProjeto;
+            rc = FindObjectOfType<RecursosCartaManager>();
         }
 
 
@@ -56,22 +58,30 @@ namespace Game.Territorio
         //TODO: Realocar este metodo; MostarNomeBairro deveria estar encarregado de somente "mostrar o nome do bairro"
         private void EscolherBairroNoProjeto(Bairro _)
         {
-            if (hs.distribuicaoGeral == true)
-            {
-                if (projeto.distribuicaoProjeto == true)
+            if(!rc.chamarDistribuicao){
+                if (hs.distribuicaoGeral == true)
                 {
-                    if (bairro.bairroNaZonaEscolhida == true)
+                    if (projeto.distribuicaoProjeto == true)
                     {
-                        bairro.EscolherBairroEleitor();
+                        if (bairro.bairroNaZonaEscolhida == true)
+                        {
+                            bairro.EscolherBairroEleitor();
+                        }
                     }
+                    else
+                    {
+                        //fazer restricao
+                            bairro.EscolherBairroEleitor();
+                        
+                        
+                    }
+                    
                 }
-                else
-                {
-                    //fazer restricao
-                    bairro.EscolherBairroEleitor();
-                }
-
+            }else{
+                   bairro.saude.adicionarSaude();
+                   bairro.edu.adicionarEdu();
             }
+             
         }
 
 

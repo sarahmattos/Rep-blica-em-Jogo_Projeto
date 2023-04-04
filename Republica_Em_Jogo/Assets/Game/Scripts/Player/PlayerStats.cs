@@ -47,7 +47,6 @@ namespace Game.Player {
         }
         private void Start()
         {
-            
             GameplayLoadState.Saida += InicializaPlayerStats;
             GameplayLoadState.Saida += InscreveReceberbairrosPlayerIDControl;
         }

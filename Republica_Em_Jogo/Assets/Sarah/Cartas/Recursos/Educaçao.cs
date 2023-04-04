@@ -31,14 +31,16 @@ public class Educaçao : NetworkBehaviour
 
      private void OnMouseDown()
     {
+        //adicionarEdu
+        
+    }
+    public void adicionarEdu(){
         if(bairro.VerificaControl()){
             if(rc.novosEdu>0){
                 rc.novosEdu--;
                 AtualizarValorUIServerRpc();
             }
         }
-        
-        
     }
     private void OnEnable()
         {
