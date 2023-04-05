@@ -53,9 +53,6 @@ public class Saúde : NetworkBehaviour
          if(bairro.VerificaControl()){
             if(rc.novosSaude>0){
                 rc.novosSaude--;
-                for (int i=0;i<saudeIcone.Length;i++){
-                saudeIcone[i].SetActive(true);
-            }
                 AtualizarValorUIServerRpc();
             }
         }
@@ -66,9 +63,13 @@ public class Saúde : NetworkBehaviour
             {
                 recurso.saude =newValue;
                 text_saude.SetText(newValue.ToString());
-                if(newValue<=0){
+                if(newValue>0){
+                    saudeIcone = new GameObject[2];
+                    for (int i=0;i<2;i++){
+                        saudeIcone[i]=this.transform.GetChild(i).gameObject;
+                    }
                     for (int i=0;i<saudeIcone.Length;i++){
-                     saudeIcone[i].SetActive(false);
+                     saudeIcone[i].SetActive(true);
                  }
                 }
             };
