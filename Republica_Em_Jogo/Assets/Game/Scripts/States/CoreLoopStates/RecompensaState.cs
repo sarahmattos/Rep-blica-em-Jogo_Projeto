@@ -33,18 +33,22 @@ namespace Game
             fimDeJogoManager.zonaObtidaEObjetivo();
             Tools.Logger.Instance.LogInfo("Enter State: RECOMPENSA");
             if(TurnManager.Instance.LocalIsCurrent){
+                 recompensaAviso.SetActive(true);
+                 GameObject go =recompensaAviso.transform.GetChild(0).gameObject;
+                TMP_Text textoAviso = go.GetComponent<TMP_Text>();
                 uiCore.ExplicaStateText.text = explicaTexto;
-            }
-            recompensaAviso.SetActive(true);
-            GameObject go =recompensaAviso.transform.GetChild(0).gameObject;
-            TMP_Text textoAviso = go.GetComponent<TMP_Text>();
-            if(!TemRecompensa) {
+
+                if(!TemRecompensa) {
                 // Tools.Logger.Instance.LogInfo("Como não avançou em nenhum bairro, não há recompensa nesta rodada.");
                 textoAviso.text="Não recebe recompensa pois não influenciou um novo bairro!";
                 return;
-            } 
+                 } 
             hudStatsJogador.updateRecursoCartaUI(qntdRecurso);
             textoAviso.text="Você ganhou uma carta de recurso por ter influenciado um novo bairro!";
+            }
+           
+            
+            
             // qntdEleitorAplicado = 0;
             // HabilitarBairros(true);
             // InscreverBairros();

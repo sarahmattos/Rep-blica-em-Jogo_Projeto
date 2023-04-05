@@ -63,6 +63,7 @@ namespace Game
                 if(rc.chamarDistribuicao==false){
                     if (rc.comTrocaTrue==false)
                     {
+                        Debug.Log("passou estado");
                         CoreLoopStateHandler.Instance.NextStateServerRpc();
                     }
                 }

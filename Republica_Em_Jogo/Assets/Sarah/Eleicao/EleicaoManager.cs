@@ -106,11 +106,8 @@ namespace Game
         public void explicarEleicao(){
             uiCore.ExplicaStateUi.SetActive(true);
             uiCore.ExplicaStateText.text = explicaTexto;
-            EsperaEVai2(2);
         }
-        private IEnumerator EsperaEVai2(int s)
-        {
-            yield return new WaitForSeconds(s);
+        public void escondeExplicarEleicao(){
             uiCore.ExplicaStateUi.SetActive(false);
         }
         public void ColorirPeao(){

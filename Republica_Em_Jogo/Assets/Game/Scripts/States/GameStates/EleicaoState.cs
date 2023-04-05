@@ -11,6 +11,8 @@ namespace Game
         public override void EnterState()
         {
             StartCoroutine(EsperaEVai(5));
+            
+           EleicaoManager.Instance.explicarEleicao();
             //chamar conta
             
         }
@@ -29,6 +31,7 @@ namespace Game
         private IEnumerator EsperaEVai(int s)
         {
             yield return new WaitForSeconds(s);
+            EleicaoManager.Instance.escondeExplicarEleicao();
             gameStateHandler.StateMachineController.ChangeStateServerRpc((int)GameState.DESENVOLVIMENTO);
         }
     }
