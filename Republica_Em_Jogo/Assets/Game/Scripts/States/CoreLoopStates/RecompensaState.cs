@@ -5,6 +5,7 @@ using Game.Territorio;
 using UnityEngine;
 using System.Linq;
 using Game.UI;
+using TMPro;
 
 namespace Game
 {
@@ -24,6 +25,7 @@ namespace Game
         public List<Bairro> bairrosDoPlayer => PlayerStatsAtual?.BairrosInControl;
         public string explicaTexto;
         private UICoreLoop uiCore;
+        [SerializeField] GameObject recompensaAviso;
 
         public override void EnterState()
         {
@@ -33,12 +35,16 @@ namespace Game
             if(TurnManager.Instance.LocalIsCurrent){
                 uiCore.ExplicaStateText.text = explicaTexto;
             }
-            
+            recompensaAviso.SetActive(true);
+            GameObject go =recompensaAviso.transform.GetChild(0).gameObject;
+            TMP_Text textoAviso = go.GetComponent<TMP_Text>();
             if(!TemRecompensa) {
                 // Tools.Logger.Instance.LogInfo("Como não avançou em nenhum bairro, não há recompensa nesta rodada.");
+                textoAviso.text="Não recebe recompensa pois não influenciou um novo bairro!";
                 return;
             } 
             hudStatsJogador.updateRecursoCartaUI(qntdRecurso);
+            textoAviso.text="Você ganhou uma carta de recurso por ter influenciado um novo bairro!";
             // qntdEleitorAplicado = 0;
             // HabilitarBairros(true);
             // InscreverBairros();
