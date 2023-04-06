@@ -66,17 +66,16 @@ namespace  Game
 
         private void OnDesenvolvimento()
         {
-            if (TurnManager.Instance.LocalIsCurrent)
-            {
+            // if (TurnManager.Instance.LocalIsCurrent)
+            // {
                 nextStateButton.gameObject.SetActive(true);
-            }
+            // }
 
         }
 
         private void OnPlayerTurnUpdate(bool value)
         {
             nextStateButton.gameObject.SetActive(value);
-            
 
             UpdateTextDesenv(Extensoes.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues, 
                 CoreLoopStateHandler.Instance.CurrentState)) ;
