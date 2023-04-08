@@ -1,23 +1,19 @@
-using Unity.Netcode;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Game.Player;
 using Game.Territorio;
-using Game;
-using TMPro;
-using System.Linq;
-using Logger = Game.Tools.Logger;
+using System;
+using Game.Tools;
 
 namespace Game.UI
 {
-    public class HudStatsJogador : NetworkBehaviour
+    public class HudStatsJogador : NetworkSingleton<HudStatsJogador>
     {
         [Header("Ui")]
         public GameObject button; //botao para testar
-        [SerializeField] private Image iconJogador;
+        // [SerializeField] private Image iconJogador;
         [SerializeField] private TMP_Text text_nomeJogador;
         [SerializeField] private TMP_Text text_eleitores;
         [SerializeField] private TMP_Text text_objetivo;
@@ -27,7 +23,8 @@ namespace Game.UI
         [SerializeField] private TMP_Text text_saudeCarta;
         [SerializeField] private TMP_Text text_eduCarta;
         [SerializeField] private TMP_Text text_bairros;
-        [SerializeField] private TMP_Text text_eleitoresNovos;
+        // [SerializeField] private TMP_Text text_eleitoresNovos;
+        [SerializeField] private UIVoterCurrency uIVoterCurrency;
         [SerializeField] private TMP_Text text_cadeiras;
         [SerializeField] public TMP_Text text_naotemeleitorpraretirar;
         [SerializeField] private GameObject acaboudistribuicaoUi;
@@ -62,10 +59,9 @@ namespace Game.UI
         [HideInInspector]
         public bool distribuicaoInicial = false;
         private int aux;
-
+        public event Action eleitoresNovosDeProjeto;
         private State inicalizacao => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
         private State desenvolvimentoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
-
 
         private void Start()
         {
@@ -190,7 +186,7 @@ namespace Game.UI
 
         private void InitializeHudStats()
         {
-            iconJogador.color = playerStats.Cor;
+            // iconJogador.color = playerStats.Cor;
             text_nomeJogador.SetText(playerStats.Nome);
             text_eleitores.SetText(textToDisplayEleitores);
             text_objetivo.SetText(playerStats.ObjetivoCarta);
@@ -259,7 +255,9 @@ namespace Game.UI
         public void contagemEleitores()
         {
             playerStats.eleitoresNovos--;
-            text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+            //text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
+            uIVoterCurrency.ShowNegativeNovosEleitores((int)playerStats.eleitoresNovos);
+
         }
 
         public void AtualizaUIAposDistribuicao()
@@ -310,7 +308,10 @@ namespace Game.UI
                 distribuaEleitorUi.SetActive(true);
                 distribuicaoGeral = true;
                 text_distribuaEleitor.SetText("Distribua seus eleitores");
-                text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+                //text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
+                uIVoterCurrency.ShowPositiveNovosEleitores((int)playerStats.eleitoresNovos);
+                eleitoresNovosDeProjeto?.Invoke();
+
             }
 
         }
@@ -327,12 +328,18 @@ namespace Game.UI
                 if (playerDiminuiEleitor == true)
                 {
                     text_distribuaEleitor.SetText("Retire seus eleitores");
+                    uIVoterCurrency.ShowNegativeNovosEleitores((int)playerStats.eleitoresNovos);
+
                 }
                 else
                 {
                     text_distribuaEleitor.SetText("Distribua seus eleitores");
+                    uIVoterCurrency.ShowPositiveNovosEleitores((int)playerStats.eleitoresNovos);
+
                 }
-                text_eleitoresNovos.SetText(playerStats.eleitoresNovos.ToString());
+                //text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
+                // uIVoterCurrency.ShowPositiveNovosEleitores((int)playerStats.eleitoresNovos);
+                eleitoresNovosDeProjeto?.Invoke();
             }
 
         }
@@ -344,6 +351,7 @@ namespace Game.UI
         {
             playerStats.numCadeiras = valor;
             text_cadeiras.SetText("Cadeiras: " + "\n" + playerStats.numCadeiras.ToString());
+            eleicaoManager.explicarEleicao();
         }
         public void BntsAuxiliares()
         {
