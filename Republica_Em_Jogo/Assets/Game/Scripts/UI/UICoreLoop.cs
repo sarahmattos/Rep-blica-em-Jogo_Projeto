@@ -10,15 +10,22 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Logger = Game.Tools.Logger;
 
-namespace  Game 
+namespace Game.UI
 {
     public class UICoreLoop : MonoBehaviour
     {
         [SerializeField] private Button nextStateButton;
         [SerializeField] private TMP_Text logStateText;
         [SerializeField] public TMP_Text ExplicaStateText;
-        [SerializeField] public  GameObject ExplicaStateUi;
+        [SerializeField] public GameObject ExplicaStateUi;
         public State DesenvState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
+
+        private string TagPlayerAtualStilizado{
+            get {
+                return string.Concat(GameDataconfig.Instance.TagParticipante, " ", TurnManager.Instance.PlayerAtual);
+
+            }
+        }
 
 
         private void Awake()
@@ -68,7 +75,7 @@ namespace  Game
         {
             // if (TurnManager.Instance.LocalIsCurrent)
             // {
-                nextStateButton.gameObject.SetActive(true);
+            nextStateButton.gameObject.SetActive(true);
             // }
 
         }
@@ -77,16 +84,21 @@ namespace  Game
         {
             nextStateButton.gameObject.SetActive(value);
 
-            UpdateTextDesenv(Extensoes.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues, 
-                CoreLoopStateHandler.Instance.CurrentState)) ;
+            UpdateTextDesenv(Extensoes.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues,
+                CoreLoopStateHandler.Instance.CurrentState));
 
         }
 
         private void UpdateTextDesenv(CoreLoopState state)
         {
-            logStateText.SetText(string.Concat(GameDataconfig.Instance.TagParticipante," ", TurnManager.Instance.PlayerAtual, " no estado: ",state));
-            if(TurnManager.Instance.LocalIsCurrent)ExplicaStateUi.SetActive(true);
+            logStateText.SetText(
+                string.Concat(
+                    GameDataconfig.Instance.TagPlayerAtualColorizada(), 
+                    " no estado: ", state));
+            if (TurnManager.Instance.LocalIsCurrent) ExplicaStateUi.SetActive(true);
         }
+
+
 
     }
 }

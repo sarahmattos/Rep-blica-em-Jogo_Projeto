@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using Game.Player;
 using Game.Territorio;
+using Game.UI;
 using UnityEngine;
 
 namespace Game

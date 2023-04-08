@@ -6026,6 +6026,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIVoterCurrency
       objectReference: {fileID: 0}
+    - target: {fileID: 3718754250875635900, guid: 450e5ecaecc1b75459c6d579dceff46f, type: 3}
+      propertyPath: m_text
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718754250875635900, guid: 450e5ecaecc1b75459c6d579dceff46f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718754250875635900, guid: 450e5ecaecc1b75459c6d579dceff46f, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718754251578753486, guid: 450e5ecaecc1b75459c6d579dceff46f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.09925958
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718754251578753486, guid: 450e5ecaecc1b75459c6d579dceff46f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.10199149
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718754251578753486, guid: 450e5ecaecc1b75459c6d579dceff46f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.107
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 450e5ecaecc1b75459c6d579dceff46f, type: 3}
 --- !u!224 &441961996 stripped
@@ -20641,6 +20665,10 @@ PrefabInstance:
     - target: {fileID: 9162020893180670990, guid: 4f47b9fd5e142564488b116242f12d32, type: 3}
       propertyPath: m_Name
       value: UI CoreLoop
+      objectReference: {fileID: 0}
+    - target: {fileID: 9162020893180670990, guid: 4f47b9fd5e142564488b116242f12d32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f47b9fd5e142564488b116242f12d32, type: 3}
@@ -107353,7 +107381,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 0}
-  iconJogador: {fileID: 0}
   text_nomeJogador: {fileID: 8162957967286454564}
   text_eleitores: {fileID: 8162957967913737722}
   text_objetivo: {fileID: 1402552324}
