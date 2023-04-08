@@ -55,7 +55,7 @@ public class MovimentosSociais : NetworkBehaviour
         string textoTotal = "\n" + movimento + "\n" + "\n" + "Ganhe " + quantidadeRecurso + " recurso de " + recursoTipo.ToString() + " e " + quantidadeEleitor + " eleitores";
         int id = (int)NetworkManager.Singleton.LocalClientId;
         AtualizaTextoServerRpc(textoTotal, id);
-        baralho.baralhoManager(false);
+        // baralho.baralhoManager(false);
 
     }
     private void OnEnable()

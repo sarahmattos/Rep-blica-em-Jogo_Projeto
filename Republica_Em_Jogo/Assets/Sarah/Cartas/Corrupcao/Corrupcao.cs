@@ -52,7 +52,7 @@ public class Corrupcao : NetworkBehaviour
         string textoTotal = "\n" + corrupcao + "\n" + "\n" + complementText;
         int id = (int)NetworkManager.Singleton.LocalClientId;
         AtualizaTextoServerRpc(textoTotal, id);
-        baralho.baralhoManager(false);
+        // baralho.baralhoManager(false);
 
     }
     private void OnEnable()
