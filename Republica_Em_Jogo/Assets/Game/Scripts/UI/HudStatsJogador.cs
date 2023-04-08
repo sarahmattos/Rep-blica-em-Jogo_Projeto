@@ -256,7 +256,15 @@ namespace Game.UI
         {
             playerStats.eleitoresNovos--;
             //text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
-            uIVoterCurrency.ShowNegativeNovosEleitores((int)playerStats.eleitoresNovos);
+            if (playerDiminuiEleitor)
+            {
+                uIVoterCurrency.ShowNegativeNovosEleitores((int)playerStats.eleitoresNovos);
+            }
+            else
+            {
+                uIVoterCurrency.ShowPositiveNovosEleitores((int)playerStats.eleitoresNovos);
+
+            }
 
         }
 
