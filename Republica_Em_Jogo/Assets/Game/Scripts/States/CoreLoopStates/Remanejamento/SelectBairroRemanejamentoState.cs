@@ -40,7 +40,7 @@ namespace Game
         {
             foreach (Bairro bairro in remanejamentoData.ParBairroEleitor.Keys)
             {
-                bairro.Interagivel.click += OnBairroClicado;
+                bairro.Interagivel.Click += OnBairroClicado;
             }
         }
 
@@ -49,7 +49,7 @@ namespace Game
         {
             foreach (Bairro bairro in remanejamentoData.ParBairroEleitor.Keys)
             {
-                bairro.Interagivel.click -= OnBairroClicado;
+                bairro.Interagivel.Click -= OnBairroClicado;
             }
         }
 

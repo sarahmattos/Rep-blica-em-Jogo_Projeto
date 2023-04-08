@@ -2,32 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Game.Territorio
 {
     [RequireComponent(typeof(InteragivelVisualiza))]
-    public class Interagivel : MonoBehaviour
+    public class Interagivel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         [SerializeField]
         private bool habilitado;
 
-        public event Action<Bairro> click;
-        public event Action<bool> mudaHabilitado;
-        public event Action mouseExit;
-        public event Action mouseEnter;
-
-        private new Collider collider;
-
-        private Material material;
+        public event Action<Bairro> Click;
+        public event Action<bool> MudaHabilitado;
+        public event Action MouseExit;
+        public event Action MouseEnter;
         private Bairro bairro;
         private InteragivelVisualiza interagivelVisualiza;
 
-        public Material Material => material;
 
         void Awake()
         {
-            // habilitado = false;
-            material = GetComponent<MeshRenderer>().material;
             bairro = GetComponentInParent<Bairro>();
         }
 
@@ -36,33 +30,32 @@ namespace Game.Territorio
             MudarHabilitado(false);
         }
 
-        void OnMouseEnter()
-        {
-            if (!habilitado)
-                return;
-            mouseEnter?.Invoke();
-        }
-
-        void OnMouseExit()
-        {
-            if (!habilitado) return;
-            mouseExit?.Invoke();
-        }
-
-        void OnMouseUpAsButton()
-        {
-            if (!habilitado)
-                return;
-            click?.Invoke(bairro);
-        }
-
         public void MudarHabilitado(bool value)
         {
-            mudaHabilitado?.Invoke(value);
+            MudaHabilitado?.Invoke(value);
             habilitado = value;
             if (!value)
-                mouseExit?.Invoke();
+                MouseExit?.Invoke();
 
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+
+            if (!habilitado) return;
+            MouseEnter?.Invoke();
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (!habilitado) return;
+            Click?.Invoke(bairro);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (!habilitado) return;
+            MouseExit?.Invoke();
         }
     }
 }

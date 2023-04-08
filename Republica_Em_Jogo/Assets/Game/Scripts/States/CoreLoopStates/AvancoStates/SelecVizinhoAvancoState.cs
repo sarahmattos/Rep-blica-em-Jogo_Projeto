@@ -42,7 +42,7 @@ namespace Game
         {
             foreach (Bairro bairro in bairrosVizinhos)
             {
-                bairro.Interagivel.click += OnBairroClicado;
+                bairro.Interagivel.Click += OnBairroClicado;
             }
         }
 
@@ -50,7 +50,7 @@ namespace Game
         {
             foreach (Bairro bairro in bairrosVizinhos)
             {
-                bairro.Interagivel.click -= OnBairroClicado;
+                bairro.Interagivel.Click -= OnBairroClicado;
             }
         }
 

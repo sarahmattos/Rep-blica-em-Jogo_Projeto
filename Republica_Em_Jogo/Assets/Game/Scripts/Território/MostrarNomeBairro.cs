@@ -27,7 +27,7 @@ namespace Game.Territorio
         {
             nomeBairro.SetActive(false);
             textNomeBairro.SetText(bairro.Nome);
-            bairro.Interagivel.click += EscolherBairroNoProjeto;
+            bairro.Interagivel.Click += EscolherBairroNoProjeto;
             rc = FindObjectOfType<RecursosCartaManager>();
         }
 
@@ -36,7 +36,7 @@ namespace Game.Territorio
 
         void OnDestroy()
         {
-            bairro.Interagivel.click -= EscolherBairroNoProjeto;
+            bairro.Interagivel.Click -= EscolherBairroNoProjeto;
         }
 
         private void OnMouseEnter()

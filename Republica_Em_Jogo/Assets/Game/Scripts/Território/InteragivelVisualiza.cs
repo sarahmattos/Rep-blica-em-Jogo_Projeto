@@ -29,19 +29,19 @@ namespace Game.Territorio
         private void Start()
         {
             scalaInicial = transform.localScale;
-            interagivel.mouseEnter += MouseInVisualiza;
-            interagivel.mouseExit += MouseOutVisualiza;
-            interagivel.click += MouseClickVisualiza;
-            interagivel.mudaHabilitado += OnMudaHabilitado;
+            interagivel.MouseEnter += MouseInVisualiza;
+            interagivel.MouseExit += MouseOutVisualiza;
+            interagivel.Click += MouseClickVisualiza;
+            interagivel.MudaHabilitado += OnMudaHabilitado;
             bairro.PlayerIDNoControl.OnValueChanged += ResetMouseOutColor;
         }
 
         private void OnDestroy()
         {
-            interagivel.mouseEnter -= MouseInVisualiza;
-            interagivel.mouseExit -= MouseOutVisualiza;
-            interagivel.click -= MouseClickVisualiza;
-            interagivel.mudaHabilitado -= OnMudaHabilitado;
+            interagivel.MouseEnter -= MouseInVisualiza;
+            interagivel.MouseExit -= MouseOutVisualiza;
+            interagivel.Click -= MouseClickVisualiza;
+            interagivel.MudaHabilitado -= OnMudaHabilitado;
             bairro.PlayerIDNoControl.OnValueChanged -= ResetMouseOutColor;
 
         }
