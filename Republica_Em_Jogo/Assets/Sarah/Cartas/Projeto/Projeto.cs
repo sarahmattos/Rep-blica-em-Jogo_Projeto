@@ -34,10 +34,11 @@ public class Projeto : NetworkBehaviour
 
     [Header("Ui")]
     [SerializeField] private TMP_Text text_projetoCarta;
-    [SerializeField] private TMP_Text text_avisoProjeto;
+    [SerializeField] private TMP_Text text_avisoAprovacaoProjeto;
     public GameObject projetoUI;
     [SerializeField] private GameObject restoUI;
     [SerializeField] private GameObject bntsUi, btns2, fecharBtn;
+    [SerializeField] private GameObject verMapaBtn;
     public GameObject verProjetoBtn;
 
     [Header("Variaveis")]
@@ -59,6 +60,7 @@ public class Projeto : NetworkBehaviour
     private string clientDados;
     private string textoTotal = "";
 
+    public TMP_Text Text_avisoAprovacaoProjeto => text_avisoAprovacaoProjeto; 
 
     public void Awake()
     {
@@ -140,13 +142,14 @@ public class Projeto : NetworkBehaviour
 
                 //interface para quem está escolhendo zona
                 bntsUi.SetActive(true);
-                text_avisoProjeto.text = "Escolha uma zona:";
+                // text_avisoAprovacaoProjeto.text = "Escolha uma zona:";
 
                 //interface para quem está esperando zona ser escolhida
                 if (newValue != (int)NetworkManager.Singleton.LocalClientId)
                 {
                     bntsUi.SetActive(false);
-                    text_avisoProjeto.text = "Aguardando zona ser escolhida";
+                    text_avisoAprovacaoProjeto.text = "Aguardando zona ser escolhida.";
+                    text_avisoAprovacaoProjeto.gameObject.SetActive(true);
                 }
             }
         };
@@ -189,7 +192,10 @@ public class Projeto : NetworkBehaviour
                     }
                     else
                     {
-                        text_avisoProjeto.text = "\n" + "\n" + "\n" + "Zona: " + newValue.ToString() + "\n" + "Não possui cadeiras suficientes para aprovar sozinho(a)" + "\n" + "Aguardando votação... ";
+                        text_avisoAprovacaoProjeto.text = "ZONA ESCOLHIDA: \n\n " + newValue.ToString() + "\n \n" + "Aguardando votação... ";
+                        text_avisoAprovacaoProjeto.gameObject.SetActive(true);
+                        verMapaBtn.SetActive(false);
+                        verProjetoBtn.SetActive(false);
                         UpdateVotacaoServerRpc(0, (int)ps.numCadeiras);
                         inVotacao = true;
                     }
@@ -205,7 +211,8 @@ public class Projeto : NetworkBehaviour
                     }
                     else
                     {
-                        text_avisoProjeto.text = "\n" + "\n" + "Zona escolhida: " + newValue.ToString() + "\n" + "Vote: ";
+                        text_avisoAprovacaoProjeto.text = "ZONA ESCOLHIDA: \n\n " + newValue.ToString() + "\n \n" + "VOTE: ";
+                        text_avisoAprovacaoProjeto.gameObject.SetActive(true);
                         btns2.SetActive(true);
                         inVotacao = true;
                     }
@@ -254,7 +261,8 @@ public class Projeto : NetworkBehaviour
                     else
                     {
                         //se teve mais não ou empate, foi reprovado
-                        text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO NÃO APROVADO";
+                        text_avisoAprovacaoProjeto.text = "PROJETO NÃO APROVADO";
+                        verMapaBtn.SetActive(true);
                         inVotacao = false;
                         projetoNaoAprovado = true;
                     }
@@ -271,9 +279,9 @@ public class Projeto : NetworkBehaviour
         proposta = projetoManager.proposta[Random.Range(0, projetoManager.proposta.Length)];
         numRecompensa = projetoManager.numRecompensa[Random.Range(0, projetoManager.numRecompensa.Length)];
         recompensaText = projetoManager.recompensaText;
-        textoTotal = proposta + "\n" + "\n" + recompensaText + "" + numRecompensa.ToString();
+        textoTotal = proposta + "\n \n" + recompensaText + "" + numRecompensa.ToString();
         atualizarProjeto(textoTotal);
-        // baralho.baralhoManager(false);
+        text_avisoAprovacaoProjeto.gameObject.SetActive(false);
 
     }
 
@@ -392,7 +400,10 @@ public class Projeto : NetworkBehaviour
         btns2.SetActive(false);
         if (numPlayer > 2)
         {
-            text_avisoProjeto.text = "\n" + "\n" + "\n" + "Seu partido votou " + mostrarResposta + "\n" + "Aguardando outros partidos...";
+            text_avisoAprovacaoProjeto.text = "Seu partido votou: \n\n" + mostrarResposta + "\n\n" + "Aguardando outros partidos...";
+            text_avisoAprovacaoProjeto.gameObject.SetActive(true);
+            verMapaBtn.SetActive(false);
+
         }
     }
 
@@ -401,7 +412,10 @@ public class Projeto : NetworkBehaviour
     {
         HabilitarBairrosPlayerLocal(true);
         fecharBtn.SetActive(true);
-        text_avisoProjeto.text = "\n" + "\n" + "\n" + "PROJETO APROVADO na zona " + zonaNameLocal + "\n" + "Recompensa: " + numRecompensaDefault + " carta(s) e " + numRecompensaDefault + " eleitor(es)";
+        text_avisoAprovacaoProjeto.text = "PROJETO APROVADO \n Zona escolhida: \n\n" + zonaNameLocal + "\n\n" + "RECOMPENSA \n" + numRecompensaDefault + " carta(s) e " + numRecompensaDefault + " eleitor(es)";
+        verMapaBtn.SetActive(true);
+        text_avisoAprovacaoProjeto.gameObject.SetActive(true);
+
         aprovado = true;
         setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
         if (playerInZona == true)
@@ -421,6 +435,6 @@ public class Projeto : NetworkBehaviour
         }
     }
 
-    
+
 }
 

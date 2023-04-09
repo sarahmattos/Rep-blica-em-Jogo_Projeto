@@ -500,12 +500,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projetoManager: {fileID: 11400000, guid: 2910fdc27ce7cdd489424b00e81158d5, type: 2}
   text_projetoCarta: {fileID: 0}
-  text_avisoProjeto: {fileID: 0}
+  text_avisoAprovacaoProjeto: {fileID: 0}
   projetoUI: {fileID: 0}
   restoUI: {fileID: 0}
   bntsUi: {fileID: 0}
   btns2: {fileID: 0}
   fecharBtn: {fileID: 0}
+  verMapaBtn: {fileID: 0}
   verProjetoBtn: {fileID: 0}
   clienteLocal: -1
   playerInZona: 0
@@ -1222,7 +1223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxConnections
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxLoopEleicoes

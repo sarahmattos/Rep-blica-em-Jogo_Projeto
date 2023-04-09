@@ -37,10 +37,13 @@ namespace Game.Tools
 
             TimeUpdate();
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-
+                CoreLoopStateHandler.Instance.NextStateServerRpc();
             }
+            // if(Input.GetKeyDown(KeyCode.Return)) {
+
+            // }
 
         }
 
