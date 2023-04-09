@@ -71,6 +71,7 @@ namespace Game
 
         private void OnBairroClicado(Bairro bairro)
         {
+            bairro.Interagivel.ChangeSelectedBairro(true);
             remanejamentoData.VizinhoEscolhido = bairro;
             remanejamentoState.StateMachineController.NextStateServerRpc();
         }

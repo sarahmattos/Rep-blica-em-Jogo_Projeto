@@ -42,6 +42,9 @@ namespace Game
 
         public void ClearRodadaData()
         {
+            
+            BairroPlayer?.Interagivel.ChangeSelectedBairro(false);
+            BairroVizinho?.Interagivel.ChangeSelectedBairro(false);
             bairroPlayer = null;
             bairroVizinho = null;
             eleitorDiscountPlayer = 0;

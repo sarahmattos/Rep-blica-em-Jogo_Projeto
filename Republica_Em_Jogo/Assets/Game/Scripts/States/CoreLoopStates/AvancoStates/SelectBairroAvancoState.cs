@@ -95,6 +95,7 @@ namespace Game
 
         private void OnBairroClicado(Bairro bairro)
         {
+            bairro.Interagivel.ChangeSelectedBairro(true);
             avancoState.AvancoData.BairroPlayer = bairro;
             avancoState.NextAvancoStateServerRpc();
         }

@@ -30,6 +30,9 @@ namespace Game
 
         public void ResetSelectedBairros()
         {
+            
+            bairroEscolhido?.Interagivel.ChangeSelectedBairro(false);
+            VizinhoEscolhido?.Interagivel.ChangeSelectedBairro(false);
             BairroEscolhido = null;
             VizinhoEscolhido = null;
         }

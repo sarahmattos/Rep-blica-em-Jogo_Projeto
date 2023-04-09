@@ -15,7 +15,7 @@ namespace Game.Territorio
         private Color colorMouseClick = Color.white;
         private MaterialPropertyBlock propertyBlock;
         private static readonly int colorID = Shader.PropertyToID("_Color");
-        
+
         //Apenas para testes
         private Vector3 scalaInicial;
         private void Awake()
@@ -33,7 +33,9 @@ namespace Game.Territorio
             interagivel.MouseExit += MouseOutVisualiza;
             interagivel.Click += MouseClickVisualiza;
             interagivel.MudaHabilitado += OnMudaHabilitado;
+            interagivel.SelectBairro += OnSelectBairro;
             bairro.PlayerIDNoControl.OnValueChanged += ResetMouseOutColor;
+
         }
 
         private void OnDestroy()
@@ -42,11 +44,13 @@ namespace Game.Territorio
             interagivel.MouseExit -= MouseOutVisualiza;
             interagivel.Click -= MouseClickVisualiza;
             interagivel.MudaHabilitado -= OnMudaHabilitado;
+            interagivel.SelectBairro -= OnSelectBairro;
             bairro.PlayerIDNoControl.OnValueChanged -= ResetMouseOutColor;
 
         }
 
-        private void MouseInVisualiza() {
+        private void MouseInVisualiza()
+        {
             SetColor(colorMouseIn);
         }
 
@@ -55,27 +59,36 @@ namespace Game.Territorio
             SetColor(colorMouseOut);
         }
 
-        private void MouseClickVisualiza(Bairro _) {
-           SetColor(colorMouseClick);
+        private void MouseClickVisualiza(Bairro _)
+        {
+            SetColor(colorMouseClick);
         }
 
 
-        private void ResetMouseOutColor(int _, int playerID) {
+        private void ResetMouseOutColor(int _, int playerID)
+        {
             colorMouseOut = GameDataconfig.Instance.PlayerColorOrder[playerID];
             SetColor(colorMouseOut);
 
         }
 
         //Apenas para testes
-        private void OnMudaHabilitado(bool value) {
-            transform.localScale = value ? 
-                new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z*1.4f) : 
+        private void OnMudaHabilitado(bool value)
+        {
+            transform.localScale = value ?
+                new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z * 1.4f) :
                 new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z);
         }
 
-        private void SetColor(Color color) {
+        private void SetColor(Color color)
+        {
             propertyBlock.SetColor(colorID, color);
             meshRenderer.SetPropertyBlock(propertyBlock);
+        }
+
+        private void OnSelectBairro(bool value)
+        {
+            Tools.Logger.Instance.LogPlayerAction("Selecionou o bairro "+value+" : " + bairro.Nome);
         }
 
 

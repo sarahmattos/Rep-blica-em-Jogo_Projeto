@@ -49,7 +49,6 @@ namespace Game
 
         private void Start()
         {
-            // currentState = statePairValues[CoreLoopState.DISTRIBUICAO];
             coreLoopIndex.OnValueChanged += IndexEstadoLoopMuda;
             if (!IsHost) return;
             DesenvolvimentoState.Entrada += () =>

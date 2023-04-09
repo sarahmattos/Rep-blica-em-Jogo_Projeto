@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,14 +12,12 @@ namespace Game.Territorio
     {
         [SerializeField]
         private bool habilitado;
-
         public event Action<Bairro> Click;
         public event Action<bool> MudaHabilitado;
         public event Action MouseExit;
         public event Action MouseEnter;
         private Bairro bairro;
-        private InteragivelVisualiza interagivelVisualiza;
-
+        public event Action<bool> SelectBairro;
 
         void Awake()
         {
@@ -28,7 +27,20 @@ namespace Game.Territorio
         private void Start()
         {
             MudarHabilitado(false);
+            bairro.selected.OnValueChanged += OnChangeSelectBairro;
         }
+
+        private void OnDestroy()
+        {
+            bairro.selected.OnValueChanged += OnChangeSelectBairro;
+
+        }
+
+        private void OnChangeSelectBairro(bool previousBool, bool nextBool)
+        {
+            SelectBairro?.Invoke(nextBool);
+        }
+
 
         public void MudarHabilitado(bool value)
         {
@@ -36,7 +48,11 @@ namespace Game.Territorio
             habilitado = value;
             if (!value)
                 MouseExit?.Invoke();
+        }
 
+        public void ChangeSelectedBairro(bool value)
+        {
+            bairro.ChangeSelectBairroServerRpc(value);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -57,5 +73,10 @@ namespace Game.Territorio
             if (!habilitado) return;
             MouseExit?.Invoke();
         }
+
+
+
+
+
     }
 }

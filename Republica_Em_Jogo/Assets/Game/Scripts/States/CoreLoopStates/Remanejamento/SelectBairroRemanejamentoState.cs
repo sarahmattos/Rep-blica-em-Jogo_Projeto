@@ -55,6 +55,7 @@ namespace Game
 
         private void OnBairroClicado(Bairro bairro)
         {
+            bairro.Interagivel.ChangeSelectedBairro(true);
             remanejamentoData.BairroEscolhido = bairro;
             remanejamentoState.StateMachineController.NextStateServerRpc();
 
