@@ -58,7 +58,7 @@ namespace Game
             if (!TurnManager.Instance.LocalIsCurrent) return;
             avancoStateIndex.OnValueChanged += AvancoIndexMuda;
             SetAvancoStateServerRpc(0);
-            uiCore.ExplicaStateText.text = explicaTexto;
+            uiCore.MostrarAvisoEstado(explicaTexto);
 
         }
 

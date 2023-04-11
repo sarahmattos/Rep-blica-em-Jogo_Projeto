@@ -18,6 +18,7 @@ namespace Game.UI
         [SerializeField] private TMP_Text logStateText;
         [SerializeField] public TMP_Text ExplicaStateText;
         [SerializeField] public GameObject ExplicaStateUi;
+        private RodadaController rodadaController;
         public State DesenvState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
 
         private string TagPlayerAtualStilizado{
@@ -95,7 +96,16 @@ namespace Game.UI
                 string.Concat(
                     GameDataconfig.Instance.TagPlayerAtualColorizada(), 
                     " no estado: ", state));
-            if (TurnManager.Instance.LocalIsCurrent) ExplicaStateUi.SetActive(true);
+            
+            
+        }
+        public void MostrarAvisoEstado(string aviso){
+            rodadaController = FindObjectOfType<RodadaController>();
+            int rodada = rodadaController.Rodada;
+            if(rodada<=1){
+                ExplicaStateText.text = aviso;
+                if (TurnManager.Instance.LocalIsCurrent) ExplicaStateUi.SetActive(true);
+            }
         }
 
 

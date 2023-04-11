@@ -32,7 +32,7 @@ namespace Game
             remanejamentoData.ClearData();
             remanejamentoData.ArmazenarBairrosRemanejaveis();
             stateMachineController.ChangeStateServerRpc(0);
-            uiCore.ExplicaStateText.text = explicaTexto;
+             uiCore.MostrarAvisoEstado(explicaTexto);
 
         }
 

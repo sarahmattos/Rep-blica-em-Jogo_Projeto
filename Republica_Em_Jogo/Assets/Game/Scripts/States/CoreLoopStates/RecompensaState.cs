@@ -36,7 +36,7 @@ namespace Game
                  recompensaAviso.SetActive(true);
                  GameObject go =recompensaAviso.transform.GetChild(0).gameObject;
                 TMP_Text textoAviso = go.GetComponent<TMP_Text>();
-                uiCore.ExplicaStateText.text = explicaTexto;
+                uiCore.MostrarAvisoEstado(explicaTexto);
 
                 if(!TemRecompensa) {
                 // Tools.Logger.Instance.LogInfo("Como não avançou em nenhum bairro, não há recompensa nesta rodada.");

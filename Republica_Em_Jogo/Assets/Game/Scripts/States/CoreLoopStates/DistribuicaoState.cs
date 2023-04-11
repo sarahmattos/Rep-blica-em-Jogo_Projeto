@@ -18,6 +18,7 @@ namespace Game
         [SerializeField]
         private HudStatsJogador hs;
         private List<Bairro> bairrosDoPlayerAtual;
+        private RodadaController rodadaController;
 
         public void Start()
         {
@@ -37,7 +38,10 @@ namespace Game
             {
                 bairro.Interagivel.MudarHabilitado(true);
             }
-            uiCore.ExplicaStateText.text = explicaTexto;
+             rodadaController = FindObjectOfType<RodadaController>();
+            
+            
+            uiCore.MostrarAvisoEstado(explicaTexto);
         }
         public override void ExitState()
         {

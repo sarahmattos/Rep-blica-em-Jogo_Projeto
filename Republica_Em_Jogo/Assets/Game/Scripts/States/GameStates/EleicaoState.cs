@@ -7,12 +7,16 @@ namespace Game
     public class EleicaoState : State
     {
         private GameStateHandler gameStateHandler => GameStateHandler.Instance;
-
+        private bool mostrouAviso=false;
         public override void EnterState()
         {
             StartCoroutine(EsperaEVai(5));
-            
-           EleicaoManager.Instance.explicarEleicao();
+            Debug.Log(mostrouAviso);
+           if(mostrouAviso==false){
+                mostrouAviso=true;
+                EleicaoManager.Instance.explicarEleicao();
+                Debug.Log("entrou aqui");
+            }
             //chamar conta
             
         }

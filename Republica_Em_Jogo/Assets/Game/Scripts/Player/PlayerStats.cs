@@ -43,6 +43,7 @@ namespace Game.Player {
         private void Awake()
         {
             BairrosInControl = new List<Bairro>();
+            
 
         }
         private void Start()

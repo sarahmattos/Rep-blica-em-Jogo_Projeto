@@ -20,7 +20,7 @@ namespace Game
             {
                 //baralho.enabled = true;
                 baralho.baralhoManager(true);
-                uiCore.ExplicaStateText.text = explicaTexto;
+                uiCore.MostrarAvisoEstado(explicaTexto);
             }
             
             //EleicaoManager.Instance.CalculoEleicao();
