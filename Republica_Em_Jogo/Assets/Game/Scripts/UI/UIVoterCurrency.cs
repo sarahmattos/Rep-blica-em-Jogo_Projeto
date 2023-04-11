@@ -56,5 +56,9 @@ namespace Game.UI
             textEleitoresNovos.SetText(string.Concat("-",value));
         }
 
+        public void SetVoterCurrentText(string value) {
+            textEleitoresNovos.SetText(value);
+        }
+
     }
 }
