@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4931218026797582659}
   - component: {fileID: 2330314284147826341}
   - component: {fileID: 1120223302817210112}
+  - component: {fileID: 9193152324092748565}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Bairro
@@ -127,8 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   habilitado: 0
-  cor1: {r: 0, g: 0, b: 0, a: 0}
-  cor2: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1120223302817210112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +146,18 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &9193152324092748565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193423313859014668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1079493171016055290
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -165,6 +165,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 802582153566928796, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 1739378843242955054, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 951099334
@@ -225,6 +229,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 7644880853625759734, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+    - target: {fileID: 7644880853717312504, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 7644880853794251683, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.37127197

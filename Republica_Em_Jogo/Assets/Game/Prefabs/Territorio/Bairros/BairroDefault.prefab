@@ -48,11 +48,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nome: Santa Cruz
-  playerIDNoControl:
-    m_InternalValue: -1
+  vizinhos: []
+  selected:
+    m_InternalValue: 0
   playerInControl: 0
   bairroNaZonaEscolhida: 0
   setUpBairro: {fileID: 4899483028559852163}
+  edu: {fileID: 0}
+  saude: {fileID: 0}
 --- !u!114 &7411090384535796377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,10 +333,22 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 951099334
       objectReference: {fileID: 0}
+    - target: {fileID: 1933483776407877837, guid: de14886f6b6430244b079d660b229168, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 5414194162143670396, guid: de14886f6b6430244b079d660b229168, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 951099334
       objectReference: {fileID: 0}
+    - target: {fileID: 8930171690158481575, guid: de14886f6b6430244b079d660b229168, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+    - target: {fileID: 8930171690267731113, guid: de14886f6b6430244b079d660b229168, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 8930171690327893234, guid: de14886f6b6430244b079d660b229168, type: 3}
       propertyPath: m_RootOrder
       value: 1

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3469287838675173795}
   - component: {fileID: 5933967089920597832}
   - component: {fileID: 7744836454937372805}
+  - component: {fileID: 5391998864574983248}
   m_Layer: 0
   m_Name: plane
   m_TagString: Bairro
@@ -145,8 +146,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   habilitado: 0
-  cor1: {r: 0, g: 0, b: 0, a: 0}
-  cor2: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &5391998864574983248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148071289984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9130551241707142291
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -154,6 +165,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 802582153566928796, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 1739378843242955054, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 951099334
@@ -174,6 +189,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Recreio Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7644880853625759734, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+    - target: {fileID: 7644880853717312504, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 7895562062177361959, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: m_RootOrder
       value: 0

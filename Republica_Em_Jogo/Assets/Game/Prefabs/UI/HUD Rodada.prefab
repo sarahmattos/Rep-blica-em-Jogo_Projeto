@@ -225,4 +225,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de25f9d48166b6f4e9176974a91eb01f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rodadaController: {fileID: 0}
