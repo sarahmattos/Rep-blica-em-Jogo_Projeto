@@ -1249,6 +1249,174 @@ PrefabInstance:
       propertyPath: maxRodadasParaEleicoes
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[0].b
+      value: 0.7803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[0].g
+      value: 0.6431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[0].r
+      value: 0.6431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[1].b
+      value: 0.45882356
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[1].g
+      value: 0.9803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[1].r
+      value: 0.9960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[2].b
+      value: 0.16470589
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[2].g
+      value: 0.043137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[2].r
+      value: 0.94117653
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[3].b
+      value: 0.4784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[3].g
+      value: 0.73333335
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[3].r
+      value: 0.42352945
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[4].b
+      value: 0.9333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[4].g
+      value: 0.76470596
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[4].r
+      value: 0.46274513
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[5].b
+      value: 0.7607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[5].g
+      value: 0.48627454
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[6].b
+      value: 0.16862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[6].g
+      value: 0.4784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: ZonaColorOutline.Array.data[6].r
+      value: 0.94117653
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[0].b
+      value: 0.7803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[0].g
+      value: 0.6431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[0].r
+      value: 0.6431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[1].b
+      value: 0.45882356
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[1].g
+      value: 0.9803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[1].r
+      value: 0.9960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[2].b
+      value: 0.16470589
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[2].g
+      value: 0.043137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[2].r
+      value: 0.94117653
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[3].b
+      value: 0.4784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[3].g
+      value: 0.73333335
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[3].r
+      value: 0.42352945
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[4].b
+      value: 0.9333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[4].g
+      value: 0.76470596
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[4].r
+      value: 0.46274513
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[5].b
+      value: 0.7607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[5].g
+      value: 0.48627454
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[6].b
+      value: 0.16862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[6].g
+      value: 0.4784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: zonaColorOutline.Array.data[6].r
+      value: 0.94117653
+      objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608621, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: m_Name
       value: GameData

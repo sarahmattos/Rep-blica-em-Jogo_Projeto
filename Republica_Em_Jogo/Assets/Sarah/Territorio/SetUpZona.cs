@@ -4,6 +4,7 @@ using UnityEngine;
 using Game.Player;
 using Game.UI;
 using Game.Tools;
+ using UnityEngine.UI;
 
 namespace Game.Territorio
 {
@@ -12,13 +13,32 @@ namespace Game.Territorio
         private ZonaTerritorial[] zonas;
         public ZonaTerritorial[] Zonas => zonas;
         private HudStatsJogador hs;
-        public List<ZonaTerritorial> tenhoZona;
+        public List<ZonaTerritorial> tenhoZona;  
+         private MaterialPropertyBlock propertyBlock;
+        private static readonly int colorID = Shader.PropertyToID("_Color");
 
         void Start()
         {
             hs = FindObjectOfType<HudStatsJogador>();
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO).Entrada+=CorOutline;
+           
         }
-
+        private void OnDestroy()
+        {
+             GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO).Saida-=CorOutline;
+        }
+        public void CorOutline(){
+            for(int i=0 ; i< Zonas.Length;i++)
+            {
+                foreach(Outline outline in Zonas[i].outlines)
+                {
+                    Color _cor = new Color(GameDataconfig.Instance.ZonaColorOutline[i].r,GameDataconfig.Instance.ZonaColorOutline[i].g,GameDataconfig.Instance.ZonaColorOutline[i].b);
+                    outline.OutlineColor= _cor;
+                    Debug.Log(GameDataconfig.Instance.ZonaColorOutline[i]+Zonas[i].Nome);
+                }
+            }
+        }
+       
         private void Awake()
         {
             zonas = GetComponentsInChildren<ZonaTerritorial>();

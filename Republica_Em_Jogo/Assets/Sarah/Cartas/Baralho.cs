@@ -40,10 +40,10 @@ namespace Game.UI
 
         public void sortearAcao()
         {
-            // int rnd = Random.Range(0, 100);
-            // if (rnd >= 0 && rnd < 25) corrupcao?.sortearCorrupcao();
-            // if (rnd >= 25 && rnd < 50) movimentosSociais?.sortearMS();
-            // if (rnd >= 50) 
+            int rnd = Random.Range(0, 100);
+            if (rnd >= 0 && rnd < 25) corrupcao?.sortearCorrupcao();
+            if (rnd >= 25 && rnd < 50) movimentosSociais?.sortearMS();
+            if (rnd >= 50) 
             projeto?.sortearProjeto();
         }
         public void baralhoManager(bool valor)

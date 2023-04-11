@@ -16,7 +16,7 @@ namespace Game.Territorio
         private HudStatsJogador hs;
         private ControlePassarState cp;
         private int soma, soma2, soma3;
-        
+        public List<Outline> outlines;
         public int eleitoresAdicionais;
 
         private void Awake()
@@ -37,7 +37,13 @@ namespace Game.Territorio
                 }
             }
         }
-       
+       private void Start()
+       {    
+           foreach(Bairro bairro in bairros){
+               Outline outline = bairro.GetComponentInChildren<Outline>();
+                outlines.Add(outline);
+           }
+       }
         public void adicionarEleitoresZona(int valor){
             foreach(Bairro bairro in bairros)
             {

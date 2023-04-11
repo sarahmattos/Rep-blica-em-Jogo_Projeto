@@ -117,9 +117,10 @@ namespace Game.Player {
             nome = string.Concat(GameDataconfig.Instance.TagParticipante," ", playerID);
             objetivoCarta = objetivosDatabase.Instance.objetivoComplemento;
             objetivo =objetivosDatabase.Instance.objetivoZona;
+            
 
         }
-
+        
         public void ContaEleitoresInBairros()
         {
             eleitoresTotais = 0;

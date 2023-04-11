@@ -12,10 +12,12 @@ public class GameDataconfig : Singleton<GameDataconfig>
     [SerializeField] private List<Color> playerColorOrder;
     [SerializeField] private string tagParticipante;
     [SerializeField] private int maxRodadasParaEleicoes;
+    [SerializeField] private List<Color> zonaColorOutline;
 
     public int territoriosInScene;
     public int MaxConnections => maxConnections;
     public List<Color> PlayerColorOrder => playerColorOrder;
+    public List<Color> ZonaColorOutline => zonaColorOutline;
     public string TagParticipante => tagParticipante;
     public int MaxRodadasParaEleicoes => maxRodadasParaEleicoes;
 
