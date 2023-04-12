@@ -141,7 +141,7 @@ namespace Game
                                  for(int j=0;j<cadeirasCamara[i];j++){
                                     
                                  Material material = peosCamara[j+(int)valorPeao].GetComponent<MeshRenderer>().material;
-                                material.SetColor("_Color", stats.Cor); 
+                                material.SetColor("_BaseColor", stats.Cor); 
                                 }
                             }
                         }
