@@ -18,24 +18,9 @@ EditorUserSettings:
       value: 183b144645154b790c0d07271e271d4a564654406c6866706f0d1420f2ec3521c1e83bf9e8343a322d36f62c017c5b7ff40b0518f36117
       flags: 0
     RecentlyUsedSceneGuid-0:
-      value: 5a03575452515a0f5f5a0d7715200e4414154e782f717f66752b1836e1e2646d
-      flags: 0
-    RecentlyUsedSceneGuid-1:
-      value: 5a5757560101590a5d0c0e24427b5d44434e4c7a7b7a23677f2b4565b7b5353a
-      flags: 0
-    RecentlyUsedSceneGuid-2:
-      value: 57010551070d59085b58547a162206444115492f782e72642f7e1e6ae7b7313b
-      flags: 0
-    RecentlyUsedSceneGuid-3:
-      value: 02005557540d5f035e575e7116735a4441161a722a7f71327a2c4d60b4e2353b
-      flags: 0
-    RecentlyUsedSceneGuid-4:
-      value: 5655015e06000d085d575f2614705d44144f41282e2a22632b784d37e7e16439
-      flags: 0
-    RecentlyUsedSceneGuid-5:
       value: 5653050453070b085d08582316265c44124e1e7b7b2b22642e794560e7b63561
       flags: 0
-    RecentlyUsedSceneGuid-6:
+    RecentlyUsedSceneGuid-1:
       value: 520306525d535a0c590a0f7441250944474e4e2e7f2d25667c7a1e64e1b9306e
       flags: 0
     Systems Window Settings:
@@ -49,8 +34,8 @@ EditorUserSettings:
   m_VCDebugCmd: 0
   m_VCDebugOut: 0
   m_SemanticMergeMode: 2
-  m_DesiredImportWorkerCount: 1
-  m_StandbyImportWorkerCount: 1
+  m_DesiredImportWorkerCount: 2
+  m_StandbyImportWorkerCount: 2
   m_IdleImportWorkerShutdownDelay: 60000
   m_VCShowFailedCheckout: 1
   m_VCOverwriteFailedCheckoutAssets: 1

@@ -127,7 +127,7 @@ Material:
     - _ColorMask: 15
     - _ConnectedAlpha: 0
     - _Cull: 2
-    - _Cutoff: 0.5
+    - _Cutoff: 0.745
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 10

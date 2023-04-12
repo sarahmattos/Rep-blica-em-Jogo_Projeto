@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nome: Oeste2
+  outlines: []
   eleitoresAdicionais: 2
 --- !u!1 &5851105735706402272
 GameObject:
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nome: Oeste3
+  outlines: []
   eleitoresAdicionais: 2
 --- !u!1 &5851105735915676766
 GameObject:
@@ -149,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nome: Sul
+  outlines: []
   eleitoresAdicionais: 1
 --- !u!1 &5851105736024568141
 GameObject:
@@ -199,6 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nome: Norte2
+  outlines: []
   eleitoresAdicionais: 1
 --- !u!1 &5851105736040669856
 GameObject:
@@ -249,6 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nome: Centro
+  outlines: []
   eleitoresAdicionais: 1
 --- !u!1 &5851105736387691559
 GameObject:
@@ -351,6 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nome: Norte1
+  outlines: []
   eleitoresAdicionais: 1
 --- !u!1 &5851105737481752147
 GameObject:
@@ -401,6 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nome: Oeste1
+  outlines: []
   eleitoresAdicionais: 2
 --- !u!1001 &126879661297666462
 PrefabInstance:
