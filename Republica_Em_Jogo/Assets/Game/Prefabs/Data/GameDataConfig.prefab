@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81c1033ebf964e4e815e2e75efa4e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxConnections: 2
+  maxConnections: 1
   menuSceneName: MainMenuScene
   gameplaySceneName: GameplayScene
   playerColorOrder:

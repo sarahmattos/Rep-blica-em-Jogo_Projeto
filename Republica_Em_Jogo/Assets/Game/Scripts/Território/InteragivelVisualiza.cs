@@ -9,19 +9,20 @@ namespace Game.Territorio
     {
         private Interagivel interagivel;
         private Bairro bairro;
-        private MeshRenderer meshRenderer;
+        private Renderer meshRenderer;
+        [SerializeField] private Color defaultColor = new Color(58, 58, 58);
         private Color colorMouseIn = Color.cyan;
         private Color colorMouseOut;
         private Color colorMouseClick = Color.white;
         private MaterialPropertyBlock propertyBlock;
-        private static readonly int colorID = Shader.PropertyToID("_Color");
+        private static readonly int colorID = Shader.PropertyToID("_BaseColor");
 
         //Apenas para testes
         private Vector3 scalaInicial;
         private void Awake()
         {
             interagivel = GetComponent<Interagivel>();
-            meshRenderer = GetComponent<MeshRenderer>();
+            meshRenderer = GetComponent<Renderer>();
             bairro = GetComponentInParent<Bairro>();
             propertyBlock = new MaterialPropertyBlock();
         }
@@ -36,8 +37,10 @@ namespace Game.Territorio
             interagivel.SelectBairro += OnSelectBairro;
             bairro.PlayerIDNoControl.OnValueChanged += ResetMouseOutColor;
 
-        }
 
+            SetColor(defaultColor);
+
+        }
         private void OnDestroy()
         {
             interagivel.MouseEnter -= MouseInVisualiza;
@@ -88,8 +91,10 @@ namespace Game.Territorio
 
         private void OnSelectBairro(bool value)
         {
-            Tools.Logger.Instance.LogPlayerAction("Selecionou o bairro "+value+" : " + bairro.Nome);
+            Tools.Logger.Instance.LogPlayerAction("Selecionou o bairro " + value + " : " + bairro.Nome);
         }
+
+
 
 
 

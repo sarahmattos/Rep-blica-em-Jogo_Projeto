@@ -440,10 +440,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 0}
-  iconJogador: {fileID: 8162957967592620715}
   text_nomeJogador: {fileID: 8162957967438440491}
   text_eleitores: {fileID: 8162957967761636597}
+  text_objetivo: {fileID: 0}
+  text_distribuaEleitor: {fileID: 0}
+  text_distribuaEleitorFinal: {fileID: 0}
   playerStats: {fileID: 0}
+  text_saudeCarta: {fileID: 0}
+  text_eduCarta: {fileID: 0}
+  text_bairros: {fileID: 0}
+  uIVoterCurrency: {fileID: 0}
+  text_cadeiras: {fileID: 0}
+  text_naotemeleitorpraretirar: {fileID: 0}
+  acaboudistribuicaoUi: {fileID: 0}
+  acaboudistribuicaoUi2: {fileID: 0}
+  distribuaEleitorUi: {fileID: 0}
+  btnsAux: {fileID: 0}
+  corUi: {fileID: 0}
+  corUiPai: {fileID: 0}
+  state: {fileID: 0}
+  eduQuant: 0
+  saudeQuant: 0
+  eleitoresNovosAtual: 0
+  ordemId: 
+  cor: []
+  objetosCores: []
+  playerRecebeEleitor: 1
+  playerDiminuiEleitor: 0
+  distribuicaoGeral: 0
+  distribuicaoInicial: 0
 --- !u!114 &8162957968737513760
 MonoBehaviour:
   m_ObjectHideFlags: 0

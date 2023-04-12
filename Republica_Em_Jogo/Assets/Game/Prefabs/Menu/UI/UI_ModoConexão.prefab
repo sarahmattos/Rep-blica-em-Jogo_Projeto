@@ -195,3 +195,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textModoConexao: {fileID: 4177733747790943475}
+  offlineModeColor: {r: 0, g: 0, b: 0, a: 0}
+  onlineModeColor: {r: 0, g: 0, b: 0, a: 0}
