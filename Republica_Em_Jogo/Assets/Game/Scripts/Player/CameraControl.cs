@@ -65,9 +65,10 @@ public class CameraControl : MonoBehaviour
             transform.position =Vector3.Lerp(
                 transform.position,
              new Vector3(posX,transform.position.y,posZ),
-             Time.deltaTime* 50
+             Time.deltaTime* 20000
              );;
-            
+             
+             //transform.position=new Vector3(posX,transform.position.y,posZ);
         }
     }
     private void Zoom(float zoomDiff)
