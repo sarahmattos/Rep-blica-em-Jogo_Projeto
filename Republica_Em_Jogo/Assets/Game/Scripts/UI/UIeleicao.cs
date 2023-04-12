@@ -35,6 +35,7 @@ namespace Game
         private void OnEleicaoSaida()
         {   
             EleicaoManager.Instance.setCameraPosition(false);
+            EleicaoManager.Instance.inEleicao=false;
             UIeleicaoObjsParent.SetActive(false);
         }
         public void MostrarCadeiras(string valor)

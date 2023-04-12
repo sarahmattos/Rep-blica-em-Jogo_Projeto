@@ -43,6 +43,7 @@ namespace Game
             
             uiCore.MostrarAvisoEstado(explicaTexto);
         }
+       
         public override void ExitState()
         {
             if(!TurnManager.Instance.LocalIsCurrent) return;
@@ -62,10 +63,26 @@ namespace Game
 
         public void quandoVezPlayerLocal(bool value)
         {
+             StartCoroutine(Espera3(1,value));
+        }
+         private IEnumerator EsperaEVai2(int s)
+        {
+            yield return new WaitForSeconds(s);
+             hs.distribuicaoInicial = true;
+            rc.conferirQuantidade();
+        }
+        private IEnumerator Espera3(int s, bool value)
+        {
+            yield return new WaitForSeconds(s);
             if (value)
             {
-                hs.distribuicaoInicial = true;
-                rc.conferirQuantidade();
+                if(EleicaoManager.Instance.inEleicao){
+                    StartCoroutine(EsperaEVai2(5));
+                }else{
+                    hs.distribuicaoInicial = true;
+                    rc.conferirQuantidade();
+                }
+                
             }
         }
     }

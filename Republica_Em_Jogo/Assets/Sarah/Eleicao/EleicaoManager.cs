@@ -29,6 +29,7 @@ namespace Game
          float valorPeao;
         [SerializeField] GameObject[] peosCamara;
         [SerializeField] GameObject[] Cameras;
+        public bool inEleicao=false;
         ///[SerializeField] Transform posicaoCameraEleicao;
         //public Vector3 posicaoAntiga;
         
@@ -104,6 +105,7 @@ namespace Game
             ContaTotalEleitores();
             CalcularCadeiras();
             setCameraPosition(true);
+            inEleicao=true;
         }
         public void setCameraPosition(bool _eleicao){
             if(_eleicao){

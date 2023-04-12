@@ -2983,7 +2983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 26.451}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 55, y: 695}
+  m_AnchoredPosition: {x: 68, y: 687}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &286765023
@@ -6545,6 +6545,7 @@ MonoBehaviour:
   Cameras:
   - {fileID: 8796984675473653107}
   - {fileID: 1950127158}
+  inEleicao: 0
   explicaTexto: "Voc\xEA est\xE1 na Elei\xE7\xE3o: Baseado na sua quantidade de eleitores
     voc\xEA ganha ou perde cadeiras na c\xE2mara, que te ajudam a aprovar projetos. "
 --- !u!4 &541562369
@@ -7029,7 +7030,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -182, y: 292}
+  m_AnchoredPosition: {x: -190, y: 212}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &632603835
@@ -7690,7 +7691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2590, y: 392}
+  m_AnchoredPosition: {x: -2648, y: 375}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &671571932
@@ -23862,7 +23863,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0017089844, y: -2.0363312}
+  m_AnchoredPosition: {x: -0.0017089844, y: -2.036316}
   m_SizeDelta: {x: 0.9000244, y: 4.230011}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1974423162
@@ -25285,7 +25286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1094, y: 133}
+  m_AnchoredPosition: {x: -1100, y: 70}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2125575372

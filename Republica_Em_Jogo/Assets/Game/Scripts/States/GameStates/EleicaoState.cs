@@ -10,6 +10,7 @@ namespace Game
         private bool mostrouAviso=false;
         public override void EnterState()
         {
+            EleicaoManager.Instance.inEleicao=true;
             StartCoroutine(EsperaEVai(5));
             Debug.Log(mostrouAviso);
            if(mostrouAviso==false){
