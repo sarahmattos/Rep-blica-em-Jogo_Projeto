@@ -33,7 +33,8 @@ namespace Game
         }
 
         private void OnEleicaoSaida()
-        {
+        {   
+            EleicaoManager.Instance.setCameraPosition(false);
             UIeleicaoObjsParent.SetActive(false);
         }
         public void MostrarCadeiras(string valor)

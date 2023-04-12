@@ -28,6 +28,9 @@ namespace Game
         private string cadeiras;
          float valorPeao;
         [SerializeField] GameObject[] peosCamara;
+        [SerializeField] GameObject[] Cameras;
+        ///[SerializeField] Transform posicaoCameraEleicao;
+        //public Vector3 posicaoAntiga;
         
         public string explicaTexto;
         private UICoreLoop uiCore;
@@ -100,7 +103,16 @@ namespace Game
             
             ContaTotalEleitores();
             CalcularCadeiras();
-            
+            setCameraPosition(true);
+        }
+        public void setCameraPosition(bool _eleicao){
+            if(_eleicao){
+                Cameras[0].SetActive(false);
+                Cameras[1].SetActive(true);
+            }else{
+                Cameras[0].SetActive(true);
+                Cameras[1].SetActive(false);
+            }
             
         }
         public void explicarEleicao(){
