@@ -65,7 +65,7 @@ namespace Game.UI
 
         private void Start()
         {
-            inicalizacao.Saida += testeCor;
+            // inicalizacao.Saida += testeCor;
             TurnManager.Instance.turnoMuda += respostaVisualOrdem;
             desenvolvimentoState.Entrada += () => respostaVisualOrdem(-1, TurnManager.Instance.PlayerAtual);
 
@@ -74,7 +74,7 @@ namespace Game.UI
         public override void OnDestroy()
         {
             TurnManager.Instance.vezDoPlayerLocal -= (bool value) => { button.SetActive(value); };
-            inicalizacao.Saida -= testeCor;
+            // inicalizacao.Saida -= testeCor;
             TurnManager.Instance.turnoMuda -= respostaVisualOrdem;
             desenvolvimentoState.Entrada -= () => respostaVisualOrdem(-1, TurnManager.Instance.PlayerAtual);
 
@@ -116,7 +116,7 @@ namespace Game.UI
                         if (ordemId[i] == stats.playerID)
                         {
                             //cor.Add(stats.Cor);
-                            objetosCores.Add(InstantiateManager.Instance.instanciarUi(corUi, corUiPai, stats.Cor));
+                            // objetosCores.Add(InstantiateManager.Instance.InstanciarUi(stats.Cor, stats.playerID));
                         }
                     }
 
@@ -130,28 +130,16 @@ namespace Game.UI
             //sprite.image. .cor=cor[0];
             //_go.image.cor=cor[0];
         }
-        public void respostaVisualOrdem(int _, int turnId)
+        public void respostaVisualOrdem(int previousPlayer, int nextPlayer)
         {
-            if (ordemId.Count > 0)
-            {
-                Debug.Log("entrou respostaVisual");
-                Debug.Log(turnId + " index");
+            // if (ordemId.Count < 0) return;
 
-                for (int i = 0; i < ordemId.Count; i++)
-                {
-                    if (ordemId[i] != turnId)
-                    {
-                        objetosCores[i].transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-                    }
-                    else
-                    {
-                        Debug.Log(objetosCores[i] + " ficou maior");
-                        objetosCores[i].transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
-                    }
-                }
-            }
+            // Rect _previousPlayerRect = objetosCores[previousPlayer].GetComponent<RectTransform>().rect;
+            // _previousPlayerRect.width = objetosCores[previousPlayer].GetComponent<RectTransform>().parent.gameObject.GetComponent<RectTransform>().rect.width / 2;
 
-            //salvar o indice do objeto cores
+            // Rect _nextPlayerRect = objetosCores[nextPlayer].GetComponent<RectTransform>().rect;
+            // _nextPlayerRect.width = objetosCores[nextPlayer].GetComponent<RectTransform>().parent.gameObject.GetComponent<RectTransform>().rect.width - 5;
+
 
         }
         public override void OnNetworkSpawn()

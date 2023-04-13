@@ -141,7 +141,7 @@ namespace Game
 
         private void UpdateTurn()
         {
-            int previousPlayer = (indexPlayerAtual != -1) ? indexPlayerAtual : 0;
+            int previousPlayer = (indexPlayerAtual == -1) ? 0 : PlayerAtual;
             if (turnCount == 0)
             {
                 SetIndexPlayerTurn(0);

@@ -21,11 +21,6 @@ namespace Game
             //chamar conta
             
         }
-        private void Start()
-        {
-            
-            Debug.Log(transform.parent.gameObject.name);
-        }
 
         public override void ExitState()
         {

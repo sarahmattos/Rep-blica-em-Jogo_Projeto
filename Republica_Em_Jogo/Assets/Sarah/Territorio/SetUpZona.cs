@@ -34,7 +34,7 @@ namespace Game.Territorio
                 {
                     Color _cor = new Color(GameDataconfig.Instance.ZonaColorOutline[i].r,GameDataconfig.Instance.ZonaColorOutline[i].g,GameDataconfig.Instance.ZonaColorOutline[i].b);
                     outline.OutlineColor= _cor;
-                    Debug.Log(GameDataconfig.Instance.ZonaColorOutline[i]+Zonas[i].Nome);
+                    // Debug.Log(GameDataconfig.Instance.ZonaColorOutline[i]+Zonas[i].Nome);
                 }
             }
         }

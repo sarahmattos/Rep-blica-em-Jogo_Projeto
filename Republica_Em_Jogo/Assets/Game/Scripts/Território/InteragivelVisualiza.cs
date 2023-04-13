@@ -78,18 +78,14 @@ namespace Game.Territorio
         {
             SetHoverColor(colorMasks.MouseIn);
         }
-
         private void MouseOutVisualiza()
         {
             SetHoverColor(colorMasks.MouseOut);
         }
-
         private async void MouseClickVisualiza(Bairro _)
         {
             await SetClickColorTaks(0.1f);
         }
-
-
         private async void SetBairroColorFromPlayer(int _, int playerID)
         {
             Color playerColor = GameDataconfig.Instance.PlayerColorOrder[playerID];
@@ -97,21 +93,17 @@ namespace Game.Territorio
             await SetColorTaks(baseMaterial, playerColor, 0.5f);
 
         }
-
         private async void SetHoverColor(Color color)
         {
             await SetMouseColorTaks(hoverMaterial, color, 0.1f);
         }
-
         private void OnSelectBairro(bool value)
         {
             Tools.Logger.Instance.LogPlayerAction("Selecionou o bairro " + value + " : " + bairro.Nome);
         }
-
-
+        
         private void OnMudaHabilitado(bool value)
         {
-
             transform.localScale = value ?
                 new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z * 1.4f) :
                 new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z);
@@ -164,6 +156,7 @@ namespace Game.Territorio
             material.SetColor(baseColorID, ColorByPointerState);
         }
 
+
         private async Task SetColorTaks(Material material, Color color, float time)
         {
 
@@ -183,6 +176,17 @@ namespace Game.Territorio
             }
         }
 
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.I)) {
+                TakeAnimationClientRpc();
+            }
+        }
+
+        [ClientRpc]
+        public void TakeAnimationClientRpc() {
+            Tools.Logger.Instance.LogInfo("animation");
+        }
 
     }
 

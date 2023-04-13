@@ -1,25 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game
+namespace Game.UI
 {
     public class InstantiateManager : MonoBehaviour
     {
         public static InstantiateManager Instance;
+        [SerializeField] private GameObject UiIconeCorJogador;
         // Start is called before the first frame update
-        Image img;
+        public State Inicializacaostate => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
+
+
         void Start()
         {
-            Instance=this;
+            Instance = this;
+            Inicializacaostate.Saida += OnInicializacaoStateSaida;
+
         }
 
-        public GameObject instanciarUi(GameObject go, Transform _pai,Color cor){
-            GameObject _go = Instantiate(go,go.transform.position,go.transform.rotation);
-            _go.transform.SetParent(_pai, false);
-             img = _go.GetComponent<Image>();  
-            img.color=cor;
+        private void OnInicializacaoStateSaida()
+        {
+            foreach (PlayerStats playerStats in PlayerStatsManager.Instance.AllPlayerStats)
+            {
+                InstanciarUi(playerStats.Cor, playerStats.playerID);
+            }
+
+        }
+
+
+
+        public GameObject InstanciarUi(Color cor, int playerID)
+        {
+            GameObject _go = Instantiate(UiIconeCorJogador, transform);
+            _go.GetComponent<UIIconeCorJogador>().Intialize(cor, playerID);
+            // _go.transform.SetParent(_pai, false);
+            // Image img = _go.GetComponent<Image>();  
+            // img.color = cor;
             return _go;
         }
     }
