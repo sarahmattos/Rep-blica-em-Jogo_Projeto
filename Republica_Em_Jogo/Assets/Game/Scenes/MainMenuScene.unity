@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1244,7 +1244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxConnections
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxLoopEleicoes
@@ -1359,6 +1359,38 @@ PrefabInstance:
       value: 0.94117653
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[0].b
+      value: 0.36078432
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[0].g
+      value: 0.40784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[2].b
+      value: 0.8862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[2].g
+      value: 0.38039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[2].r
+      value: 0.52156866
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[3].b
+      value: 0.36078432
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[3].g
+      value: 0.9019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[3].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: zonaColorOutline.Array.data[0].b
       value: 0.7803922
       objectReference: {fileID: 0}
@@ -1372,15 +1404,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: zonaColorOutline.Array.data[1].b
-      value: 0.45882356
+      value: 0.9126724
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: zonaColorOutline.Array.data[1].g
-      value: 0.9803922
+      value: 0.4588235
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: zonaColorOutline.Array.data[1].r
-      value: 0.9960785
+      value: 0.99607843
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: zonaColorOutline.Array.data[2].b

@@ -7,17 +7,23 @@ using UnityEngine.EventSystems;
 
 namespace Game.Territorio
 {
+    public enum PointerState {
+        ENTER,
+        EXIT
+    }
     [RequireComponent(typeof(InteragivelVisualiza))]
-    public class Interagivel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+    public class Interagivel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler
     {
         [SerializeField]
         private bool habilitado;
         public event Action<Bairro> Click;
+        public event Action<Bairro> MouseDown;
         public event Action<bool> MudaHabilitado;
         public event Action MouseExit;
         public event Action MouseEnter;
         private Bairro bairro;
         public event Action<bool> SelectBairro;
+        public PointerState PointerState { get; set;}
 
         void Awake()
         {
@@ -26,8 +32,8 @@ namespace Game.Territorio
 
         private void Start()
         {
-            MudarHabilitado(false);
             bairro.selected.OnValueChanged += OnChangeSelectBairro;
+            PointerState = PointerState.EXIT;
         }
 
         private void OnDestroy()
@@ -60,10 +66,13 @@ namespace Game.Territorio
 
             if (!habilitado) return;
             MouseEnter?.Invoke();
+            PointerState = PointerState.ENTER;
+
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
+
             if (!habilitado) return;
             Click?.Invoke(bairro);
         }
@@ -72,11 +81,18 @@ namespace Game.Territorio
         {
             if (!habilitado) return;
             MouseExit?.Invoke();
+            PointerState = PointerState.EXIT;
+
         }
 
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if(!habilitado) return;
+            MouseDown?.Invoke(bairro);
+        }
 
+        
 
-
-
+        
     }
 }
