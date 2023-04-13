@@ -111,3 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 0
+  MinWidthPercentage: 0.5
+  MaxWidthPercentage: 0.93
+  rectTransform: {fileID: 0}
+  parentRectTransform: {fileID: 0}
+  velocityDamp: {x: 1, y: 1}
+  timeInterval: 10
