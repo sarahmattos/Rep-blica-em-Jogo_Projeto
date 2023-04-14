@@ -37,11 +37,12 @@ namespace Game.Territorio
             PointerState = PointerState.EXIT;
             MudaHabilitado(false);
             bairro.selected.OnValueChanged += OnChangeSelectBairro;
+
         }
 
         private void OnDestroy()
         {
-            bairro.selected.OnValueChanged += OnChangeSelectBairro;
+            bairro.selected.OnValueChanged -= OnChangeSelectBairro;
 
         }
 

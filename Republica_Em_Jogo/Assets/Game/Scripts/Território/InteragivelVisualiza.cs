@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Game.Territorio
 {
-    public class InteragivelVisualiza : MonoBehaviour
+    public class InteragivelVisualiza : NetworkBehaviour
     {
         private Interagivel interagivel;
         private Bairro bairro;
@@ -105,7 +105,7 @@ namespace Game.Territorio
         private void OnMudaHabilitado(bool value)
         {
             transform.localScale = value ?
-                new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z * 4f) :
+                new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z * 1.4f) :
                 new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z);
 
             if (!value)
