@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using System.Threading.Tasks;
 
 namespace Game.Tools
 {
@@ -61,6 +62,59 @@ namespace Game.Tools
             }
             return key;
         }
+
+        // public static async void SetFloatSmooth(this float current, float target) {
+
+        //     Vector2 targetSizeDelta = T.sizeDelta;
+        //     targetSizeDelta.x = width;
+        //     Vector2 velocityDamp = Vector2.one;
+        //     float elapsedTime = 0f;
+        //     float timeInterval = 0.5f;
+
+        //     while (elapsedTime < timeInterval)
+        //     {
+        //         rectTransform.sizeDelta = Vector2.SmoothDamp(
+        //             rectTransform.sizeDelta,
+        //             targetSizeDelta,
+        //             ref velocityDamp,
+        //             timeInterval*timeInterval*100*Time.deltaTime
+        //         );
+
+        //         elapsedTime += Time.deltaTime;
+        //         await Task.Delay((int)(Time.deltaTime * 1000));
+        //     }
+
+        // } 
+
+
+        public static async Task SetRectTransfomSizeDeltaSmoothAsync(this RectTransform rectTransform, Vector2 target) {
+            Vector2 velocityDamp = Vector2.one;
+            float elapsedTime = 0f;
+            float timeInterval = 0.5f;
+
+            while (elapsedTime < timeInterval)
+            {
+                rectTransform.sizeDelta = Vector2.SmoothDamp(
+                    rectTransform.sizeDelta,
+                    target,
+                    ref velocityDamp,
+                    timeInterval*timeInterval*100*Time.deltaTime
+                );
+
+                elapsedTime += Time.deltaTime;
+                await Task.Delay((int)(Time.deltaTime * 1000));
+            }
+
+        } 
+
+
+
+
+
+
+
+
+
 
         //public static void NextValue(this int value, int max)
         //{

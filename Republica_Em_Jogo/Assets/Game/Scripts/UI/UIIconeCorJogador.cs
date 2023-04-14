@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Game.Player;
+using Game.Tools;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +33,7 @@ namespace Game.UI
 
         private void Start()
         {
-            TurnManager.Instance.turnoMuda += OnTurnoMuda;
+            TurnManager.Instance.turnoMuda += OnTurnoMudaAsync;
 
             // if(transform.childCount == 0) return;
             // for (int i = 0; i < transform.childCount; i++)
@@ -44,87 +45,61 @@ namespace Game.UI
 
         private void OnDestroy()
         {
-            TurnManager.Instance.turnoMuda -= OnTurnoMuda;
+            TurnManager.Instance.turnoMuda -= OnTurnoMudaAsync;
         }
 
 
 
-        public void Intialize(Color color, int playerIndex)
+        public async void Intialize(Color color, int playerIndex)
         {
             GetReferenceComponents();
             image.color = color;
             this.playerID = playerIndex;
 
             //Set RectTransform largura inicial de acordo com o player Atual
-            if (TurnManager.Instance.PlayerAtual != playerID) SetRectWidth(MinWidth);
-            else SetRectWidth(MaxWidth);
+            if (TurnManager.Instance.PlayerAtual != playerID) await SetRectWidthAsync(MinWidth);
+            else await SetRectWidthAsync(MaxWidth);
 
         }
 
 
-        private void UpdateRectTransform()
+        private async void UpdateRectTransform()
         {
             if (PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().playerID == playerID)
             {
-                SetRectWidth(MaxWidth);
+                await SetRectWidthAsync(MaxWidth);
             }
             else
-                SetRectWidth(MinWidth);
+                await SetRectWidthAsync(MinWidth);
         }
 
 
-        private void OnTurnoMuda(int previousPlayerID, int nextPlayerID)
+        private async void OnTurnoMudaAsync(int previousPlayerID, int nextPlayerID)
         {
             //     Tools.Logger.Instance.LogInfo("Player atual :"+TurnManager.Instance.PlayerAtual);
             //     Tools.Logger.Instance.LogInfo(string.Concat("turno muda ", previousPlayerID, " : ", nextPlayerID));
             if (playerID == nextPlayerID)
             {
-                SetRectWidth(MaxWidth);
+                await SetRectWidthAsync(MaxWidth);
                 return;
             }
             if (playerID == previousPlayerID)
             {
-                SetRectWidth(MinWidth);
+                await SetRectWidthAsync(MinWidth);
                 return;
             }
 
         }
 
-        private async void SetRectWidth(float width)
+        private async Task SetRectWidthAsync(float width)
         {
 
-            Vector2 targetSizeDelta = rectTransform.sizeDelta;
-            targetSizeDelta.x = width;
-            Vector2 velocityDamp = Vector2.one;
-            float elapsedTime = 0f;
-            float timeInterval = 0.5f;
-
-            while (elapsedTime < timeInterval)
-            {
-                rectTransform.sizeDelta = Vector2.SmoothDamp(
-                    rectTransform.sizeDelta,
-                    targetSizeDelta,
-                    ref velocityDamp,
-                    timeInterval*timeInterval*100*Time.deltaTime
-                );
-
-                elapsedTime += Time.deltaTime;
-                await Task.Delay((int)(Time.deltaTime * 1000));
-            }
+            Vector2 sizeDelta = new Vector2(width, rectTransform.sizeDelta.y);
+            await rectTransform.SetRectTransfomSizeDeltaSmoothAsync(sizeDelta);
 
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                SetRectWidth(MinWidth);
-            }
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                SetRectWidth(MaxWidth);
-            }
-        }
+
 
     }
 }
