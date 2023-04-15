@@ -2005,7 +2005,7 @@ GameObject:
   - component: {fileID: 478030486642351356}
   - component: {fileID: 478030486642351359}
   - component: {fileID: 478030486642351358}
-  - component: {fileID: 478030486642351353}
+  - component: {fileID: 7213033357397558200}
   m_Layer: 5
   m_Name: Legenda Zonas
   m_TagString: Untagged
@@ -2085,7 +2085,7 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &478030486642351353
+--- !u!114 &7213033357397558200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2094,14 +2094,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 478030486642351355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 11500000, guid: 162ed5757db704c47b2df4b9f40e2bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &478030486678883657
 GameObject:
   m_ObjectHideFlags: 0

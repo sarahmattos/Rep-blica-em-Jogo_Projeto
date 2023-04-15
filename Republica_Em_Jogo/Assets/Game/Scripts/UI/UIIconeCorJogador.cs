@@ -98,17 +98,17 @@ namespace Game.UI
         }
 
 
-        private async void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                await SetRectWidthAsync(MinWidth);
-            }
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                await SetRectWidthAsync(MaxWidth);
-            }
-        }
+        // private async void Update()
+        // {
+        //     if (Input.GetKeyDown(KeyCode.N))
+        //     {
+        //         await SetRectWidthAsync(MinWidth);
+        //     }
+        //     if (Input.GetKeyDown(KeyCode.M))
+        //     {
+        //         await SetRectWidthAsync(MaxWidth);
+        //     }
+        // }
 
 
 
