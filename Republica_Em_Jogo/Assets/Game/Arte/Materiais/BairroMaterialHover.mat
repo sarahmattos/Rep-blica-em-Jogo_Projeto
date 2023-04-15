@@ -183,8 +183,8 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _BASE_COLOR: {r: 0, g: 0, b: 0, a: 1}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 0.5686275}
+    - _Color: {r: 0, g: 0, b: 0, a: 0.5686275}
     - _DepthGradientDeep: {r: 0.08599999, g: 0.40699998, b: 1, a: 0.749}
     - _DepthGradientShallow: {r: 0.32499996, g: 0.807, b: 0.971, a: 0.725}
     - _EMISSION_COLOR: {r: 0, g: 0, b: 0, a: 0}

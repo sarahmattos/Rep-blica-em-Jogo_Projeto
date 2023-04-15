@@ -43,8 +43,8 @@ namespace Game.Territorio
             recurso = GetComponentInChildren<Recursos>();
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        public void ChangeSelectBairroServerRpc(bool value)
+        [ClientRpc]
+        public void ChangeSelectBairroClientRpc(bool value)
         {
             selected.Value = value;
         }

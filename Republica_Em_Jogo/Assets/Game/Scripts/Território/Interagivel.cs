@@ -12,6 +12,7 @@ namespace Game.Territorio
         ENTER,
         EXIT
     }
+
     [RequireComponent(typeof(InteragivelVisualiza))]
     public class Interagivel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
     {
@@ -25,7 +26,9 @@ namespace Game.Territorio
         public event Action MouseUp;
         private Bairro bairro;
         public event Action<bool> SelectBairro;
+        public event Action<bool> Inactivity;
         public PointerState PointerState { get; set; }
+
 
         void Awake()
         {
@@ -35,9 +38,7 @@ namespace Game.Territorio
         private void Start()
         {
             PointerState = PointerState.EXIT;
-            MudaHabilitado(false);
             bairro.selected.OnValueChanged += OnChangeSelectBairro;
-
         }
 
         private void OnDestroy()
@@ -58,11 +59,12 @@ namespace Game.Territorio
             habilitado = value;
             if (!value)
                 MouseExit?.Invoke();
+                // Inactivity?.Invoke(false);
         }
 
         public void ChangeSelectedBairro(bool value)
         {
-            bairro.ChangeSelectBairroServerRpc(value);
+            bairro.ChangeSelectBairroClientRpc(value);
         }
 
         public void OnPointerEnter(PointerEventData eventData)

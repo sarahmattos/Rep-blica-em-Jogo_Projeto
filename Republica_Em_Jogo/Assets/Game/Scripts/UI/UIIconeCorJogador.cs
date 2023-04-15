@@ -76,8 +76,6 @@ namespace Game.UI
 
         private async void OnTurnoMudaAsync(int previousPlayerID, int nextPlayerID)
         {
-            //     Tools.Logger.Instance.LogInfo("Player atual :"+TurnManager.Instance.PlayerAtual);
-            //     Tools.Logger.Instance.LogInfo(string.Concat("turno muda ", previousPlayerID, " : ", nextPlayerID));
             if (playerID == nextPlayerID)
             {
                 await SetRectWidthAsync(MaxWidth);
@@ -97,6 +95,19 @@ namespace Game.UI
             Vector2 sizeDelta = new Vector2(width, rectTransform.sizeDelta.y);
             await rectTransform.SetRectTransfomSizeDeltaSmoothAsync(sizeDelta);
 
+        }
+
+
+        private async void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                await SetRectWidthAsync(MinWidth);
+            }
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                await SetRectWidthAsync(MaxWidth);
+            }
         }
 
 

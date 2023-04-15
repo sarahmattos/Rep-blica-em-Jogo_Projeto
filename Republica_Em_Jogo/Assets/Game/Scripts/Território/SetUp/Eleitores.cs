@@ -11,6 +11,7 @@ namespace Game.Territorio
         private NetworkVariable<int> eleitores = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private TMP_Text text_eleitores;
         public int contaEleitores => eleitores.Value;
+        public NetworkVariable<int> NumeroEleitores => eleitores;
 
         private void Awake()
         {

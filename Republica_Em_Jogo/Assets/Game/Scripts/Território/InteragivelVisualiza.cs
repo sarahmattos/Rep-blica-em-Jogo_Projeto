@@ -10,98 +10,90 @@ namespace Game.Territorio
 {
     public class InteragivelVisualiza : NetworkBehaviour
     {
-        private Interagivel interagivel;
-        private Bairro bairro;
-        private new Renderer renderer;
-        private Material baseMaterial;
-        private Material hoverMaterial;
-        [SerializeField] private Color _defaultColor = new Color(58, 58, 58);
-
-        [SerializeField] private InteragivelColorMasks colorMasks;
-
-        private static readonly int baseColorID = Shader.PropertyToID("_BaseColor");
-        // private MaterialPropertyBlock
-
-        private Color ColorByPointerState => interagivel.PointerState == PointerState.ENTER ?
-                        colorMasks.MouseIn :
-                        colorMasks.MouseOut;
-
+        public Interagivel interagivel;
+        public Bairro bairro;
+        public BairroColorModificador bairroColorModificador;
         //Apenas para testes
         private Vector3 scalaInicial;
+
         private void Awake()
         {
             interagivel = GetComponent<Interagivel>();
-            renderer = GetComponent<Renderer>();
             bairro = GetComponentInParent<Bairro>();
+            bairroColorModificador = GetComponent<BairroColorModificador>();
             // propertyBlockABase = new MaterialPropertyBlock();
-
-
 
         }
 
         private void Start()
         {
-            baseMaterial = renderer.materials[0];
-            hoverMaterial = renderer.materials[1];
+
             scalaInicial = transform.localScale;
 
-            interagivel.MouseEnter += MouseInVisualiza;
+            interagivel.MouseEnter += MouseEnterVisualiza;
             interagivel.MouseExit += MouseOutVisualiza;
-            interagivel.Click += MouseClickVisualiza;
+            // interagivel.Click += OnClickBairro;
             interagivel.MudaHabilitado += OnMudaHabilitado;
             interagivel.SelectBairro += OnSelectBairro;
-            bairro.PlayerIDNoControl.OnValueChanged += SetBairroColorFromPlayer;
-            
-            //await SetMouseColorTaks(baseMaterial, _defaultColor, 0.1f);
+            bairro.SetUpBairro.Eleitores.NumeroEleitores.OnValueChanged += OnNumeroEleitoresMuda;
+            bairro.PlayerIDNoControl.OnValueChanged += bairroColorModificador.SetBairroColorByPlayer;
+            interagivel.Inactivity += bairroColorModificador.SetInativityColor;
 
-            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO).Entrada += () => {
-                GetComponent<Outline>().enabled = true;
-            };
-
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO).Entrada += Initialize;
         }
+
 
         private void OnDestroy()
         {
-            interagivel.MouseEnter -= MouseInVisualiza;
+            interagivel.MouseEnter -= MouseEnterVisualiza;
             interagivel.MouseExit -= MouseOutVisualiza;
-            interagivel.Click -= MouseClickVisualiza;
+            //interagivel.Click -= OnClickBairro;
             interagivel.MudaHabilitado -= OnMudaHabilitado;
             interagivel.SelectBairro -= OnSelectBairro;
-            bairro.PlayerIDNoControl.OnValueChanged -= SetBairroColorFromPlayer;
+            bairro.SetUpBairro.Eleitores.NumeroEleitores.OnValueChanged -= OnNumeroEleitoresMuda;
+            bairro.PlayerIDNoControl.OnValueChanged -= bairroColorModificador.SetBairroColorByPlayer;
+            interagivel.Inactivity -= bairroColorModificador.SetInativityColor;
 
-                        GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO).Entrada += () => {
-                GetComponent<Outline>().enabled = true;
-            };
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO).Entrada -= Initialize;
         }
 
-        private void MouseInVisualiza()
+        private void Initialize()
         {
-            SetHoverColor(colorMasks.MouseIn);
+            GetComponent<Outline>().enabled = true;
+            bairroColorModificador.ResetColorMasking();
+        }
+
+
+
+        private void MouseEnterVisualiza()
+        {
+            bairroColorModificador.SetMouseEnterColor();
         }
         private void MouseOutVisualiza()
         {
-            SetHoverColor(colorMasks.MouseOut);
+            bairroColorModificador.SetMouseOutColor();
         }
-        private async void MouseClickVisualiza(Bairro _)
+
+
+        //quando o número de eleitores muda, significa que algum jogador clicou no bairro correspondente
+        //ajuda a visualizar quando o número de eleitores mudou
+        private void OnNumeroEleitoresMuda(int _, int __)
         {
-            await SetClickColorTaks(0.1f);
-        }
-        private async void SetBairroColorFromPlayer(int _, int playerID)
-        {
-            Color playerColor = GameDataconfig.Instance.PlayerColorOrder[playerID];
-            // SetBairroColor(colorMasks.MouseOut);
-            await SetColorTaks(baseMaterial, playerColor, 0.5f);
+            BlinkBairro();
 
         }
-        private async void SetHoverColor(Color color)
+
+        private async void BlinkBairro()
         {
-            await SetMouseColorTaks(hoverMaterial, color, 0.1f);
+            await bairroColorModificador.BlinkBairroColorTask();
+
         }
+
         private void OnSelectBairro(bool value)
         {
             Tools.Logger.Instance.LogPlayerAction("Selecionou o bairro " + value + " : " + bairro.Nome);
         }
-        
+
         private void OnMudaHabilitado(bool value)
         {
             transform.localScale = value ?
@@ -110,98 +102,12 @@ namespace Game.Territorio
 
             if (!value)
             {
-                SetHoverColor(colorMasks.MouseOut);
+                bairroColorModificador.SetMouseOutColor();
             }
         }
 
-
-        private async Task SetClickColorTaks(float time)
-        {
-            float elapsedTime = 0f;
-            hoverMaterial.SetColor(baseColorID, colorMasks.MouseClick);
-            while (elapsedTime < time)
-            {
-                hoverMaterial.SetColor(baseColorID,
-                    Color.LerpUnclamped(hoverMaterial.color,
-                    colorMasks.MouseIn,
-                    elapsedTime / time
-                    )
-                );
-
-                elapsedTime += Time.deltaTime;
-                await Task.Delay((int)(Time.deltaTime * 1000));
-
-            }
-            hoverMaterial.SetColor(baseColorID, ColorByPointerState);
-
-        }
-
-        private async Task SetMouseColorTaks(Material material, Color color, float time)
-        {
-
-            float elapsedTime = 0f;
-            while (elapsedTime < time)
-            {
-                material.SetColor(baseColorID,
-                    Color.LerpUnclamped(material.color,
-                    color,
-                    elapsedTime / time
-                    )
-                );
-
-                elapsedTime += Time.deltaTime;
-                await Task.Delay((int)(Time.deltaTime * 1000));
-
-            }
-            material.SetColor(baseColorID, ColorByPointerState);
-        }
-
-
-        private async Task SetColorTaks(Material material, Color color, float time)
-        {
-
-            float elapsedTime = 0f;
-            while (elapsedTime < time)
-            {
-                material.SetColor(baseColorID,
-                    Color.LerpUnclamped(material.color,
-                    color,
-                    elapsedTime / time
-                    )
-                );
-
-                elapsedTime += Time.deltaTime;
-                await Task.Delay((int)(Time.deltaTime * 1000));
-
-            }
-        }
-
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.I)) {
-                TakeAnimationClientRpc();
-            }
-        }
-
-        [ClientRpc]
-        public void TakeAnimationClientRpc() {
-            Tools.Logger.Instance.LogInfo("animation");
-        }
 
     }
 
 
-
-    [Serializable]
-    public class InteragivelColorMasks
-    {
-
-        [SerializeField] private Color mouseIn = new Color(255, 255, 255, 45);
-        [SerializeField] private Color mouseOut = new Color(255, 255, 255, 0);
-        [SerializeField] private Color mouseClick = new Color(255, 255, 255, 180);
-
-        public Color MouseIn { get => mouseIn; set => mouseIn = value; }
-        public Color MouseOut { get => mouseOut; set => mouseOut = value; }
-        public Color MouseClick { get => mouseClick; set => mouseClick = value; }
-    }
 }

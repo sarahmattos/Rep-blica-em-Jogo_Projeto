@@ -98,11 +98,11 @@ namespace Game.Tools
                     rectTransform.sizeDelta,
                     target,
                     ref velocityDamp,
-                    timeInterval*timeInterval*100*Time.deltaTime
+                    timeInterval*timeInterval*5*Time.fixedDeltaTime
                 );
 
-                elapsedTime += Time.deltaTime;
-                await Task.Delay((int)(Time.deltaTime * 1000));
+                elapsedTime += Time.fixedDeltaTime;
+                await Task.Delay((int)(Time.fixedDeltaTime * 1000));
             }
 
         } 
