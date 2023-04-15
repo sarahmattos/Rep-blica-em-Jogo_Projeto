@@ -2394,6 +2394,7 @@ PrefabInstance:
     - {fileID: 6056986067213524010, guid: 54e9234e003a62c4f9a8b25ec6c39067, type: 3}
     - {fileID: 5139783187191125857, guid: 54e9234e003a62c4f9a8b25ec6c39067, type: 3}
     - {fileID: 8717405481505350189, guid: 54e9234e003a62c4f9a8b25ec6c39067, type: 3}
+    - {fileID: 2637744276476407632, guid: 54e9234e003a62c4f9a8b25ec6c39067, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 54e9234e003a62c4f9a8b25ec6c39067, type: 3}
 --- !u!114 &4029093130142297029 stripped
 MonoBehaviour:
@@ -3133,7 +3134,8 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 951099334
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1006299821192561772, guid: 36f960b4dc0773340879e5252ef3fb8c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 36f960b4dc0773340879e5252ef3fb8c, type: 3}
 --- !u!114 &4029093129794810974 stripped
 MonoBehaviour:
