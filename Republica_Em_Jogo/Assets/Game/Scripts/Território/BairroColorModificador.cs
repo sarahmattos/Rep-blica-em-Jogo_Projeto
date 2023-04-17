@@ -5,6 +5,13 @@ using UnityEngine;
 
 namespace Game.Territorio
 {
+    //controla a modificação de 3 materiais aplicados ao bairro.
+    //base: material que define a cor do bairro (cor dos jogadores/times)
+    //hover: material que define modificação da variação da cor base quando o jogador interage com o bairro pelo interagivelVisualiza)
+    //faz isso adicionado variações de cores brancas com alpha reduzido.
+    //as interações são: quando o jogador coloca o mouse sobre o bairro ou quando clica.
+    //inativity: quando o jogador precisa interagir com o bairro, o bairros que NÃO podem interagir são assinalados como inativos, pelo interagivel.
+    //como respostas, bairros inativos também recem modificações adicionaod variações de cores escuras com alpha reduzido. 
     public class BairroColorModificador : MonoBehaviour
     {
         private new Renderer renderer;
@@ -15,9 +22,9 @@ namespace Game.Territorio
         [SerializeField] private InteragivelColorMasks colorMasks;
         private static readonly int baseColorID = Shader.PropertyToID("_BaseColor");
         public InteragivelColorMasks ColorMasks => colorMasks;
-        private Color ColorByPointerState => interagivel.PointerState == PointerState.ENTER ?
-                                                ColorMasks.MouseEnter :
-                                                ColorMasks.MouseExit;
+        // private Color ColorByPointerState => interagivel.PointerState == PointerState.ENTER ?
+        //                                         ColorMasks.MouseEnter :
+        //                                         ColorMasks.MouseExit;
         private void Start()
         {
             interagivel = GetComponent<Interagivel>();
@@ -38,62 +45,82 @@ namespace Game.Territorio
         {
             Color playerColor = GameDataconfig.Instance.PlayerColorOrder[nextPlayerID];
             // SetColor(baseMaterial, playerColor);
-            await SetColorLerpTaks(baseMaterial, playerColor, 0.5f);
+            await SetColorLerp(baseMaterial, playerColor);
 
         }
 
         public void SetMouseEnterColor()
         {
-            SetColor(hoverMaterial, colorMasks.MouseEnter);
+            hoverMaterial.SetColor(baseColorID, colorMasks.MouseEnter);
         }
         public void SetMouseOutColor()
         {
-            SetColor(hoverMaterial, colorMasks.MouseExit);
+            hoverMaterial.SetColor(baseColorID, colorMasks.MouseExit);
 
         }
 
+        public void SetHoverColor(Color color)
+        {
+            hoverMaterial.SetColor(baseColorID, color);
+        }
 
         public void SetInativityColor(bool value)
         {
-            if (value) SetColor(inativityMaterial, colorMasks.InativityColor);
-            else SetColor(inativityMaterial, colorMasks.ActivityColor);
+            if (value)
+            {
+                inativityMaterial.SetColor(baseColorID, colorMasks.InativityColor);
+            }
+            else
+            {
+                inativityMaterial.SetColor(baseColorID, colorMasks.ActivityColor);
+            }
         }
 
-        public void SetColor(Material material, Color color)
-        {
-            material.SetColor(baseColorID, color);
-        }
 
         public async Task BlinkBairroColorTask()
         {
             float elapsedTime = 0f;
-            float maxTime = 0.1f;
+            float maxTime = 0.3f;
             hoverMaterial.SetColor(baseColorID, colorMasks.BlinkColor);
             while (elapsedTime < maxTime)
             {
                 hoverMaterial.SetColor(baseColorID,
                     Color.Lerp(hoverMaterial.color,
-                            colorMasks.MouseEnter,
+                            colorMasks.MouseExit,
                             maxTime
                     )
                 );
                 elapsedTime += Time.fixedDeltaTime;
                 await Task.Delay((int)(Time.fixedDeltaTime * 1000));
             }
-            hoverMaterial.SetColor(baseColorID, ColorByPointerState);
 
+            SetHoverColorByPointerState();
         }
 
-        public async Task SetColorLerpTaks(Material material, Color color, float time)
+        public void SetHoverColorByPointerState()
+        {
+            //ajustar aqui
+            if (interagivel.PointerState == PointerState.ENTER)
+            {
+                hoverMaterial.SetColor(baseColorID, colorMasks.MouseEnter);
+            }
+            else
+            {
+                hoverMaterial.SetColor(baseColorID, colorMasks.MouseExit);
+            }
+        }
+
+        public async Task SetColorLerp(Material material, Color color)
         {
 
             float elapsedTime = 0f;
-            while (elapsedTime < time)
+            float maxTime = 0.5f;
+            while (elapsedTime < maxTime)
             {
                 material.SetColor(baseColorID,
                     Color.Lerp(material.color,
                             color,
-                            time
+                            maxTime
                     )
                 );
 

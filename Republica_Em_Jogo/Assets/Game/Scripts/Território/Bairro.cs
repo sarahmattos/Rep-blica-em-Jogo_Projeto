@@ -20,7 +20,7 @@ namespace Game.Territorio
         public event Action playerControlMuda;
         public event Action<Bairro, int> bairroPlayerLocalForaControl;
         public event Action<Bairro, int> bairroPlayerLocalNoControl;
-        public NetworkVariable<bool> selected = new NetworkVariable<bool>(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        public NetworkVariable<bool> OnFocus = new NetworkVariable<bool>(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         public bool playerInControl = false;
         public bool bairroNaZonaEscolhida = false;
@@ -43,10 +43,10 @@ namespace Game.Territorio
             recurso = GetComponentInChildren<Recursos>();
         }
 
-        [ClientRpc]
-        public void ChangeSelectBairroClientRpc(bool value)
+        [ServerRpc(RequireOwnership = false)]
+        public void ChangeSelectBairroServerRpc(bool value)
         {
-            selected.Value = value;
+            OnFocus.Value = value;
         }
 
         public void MudaValorEleitor(int valor)

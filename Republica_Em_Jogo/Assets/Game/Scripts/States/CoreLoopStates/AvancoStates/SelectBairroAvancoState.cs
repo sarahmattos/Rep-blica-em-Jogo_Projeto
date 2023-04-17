@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Player;
 using Game.Territorio;
+using Game.UI;
 using UnityEngine;
 
 namespace Game
@@ -23,6 +24,7 @@ namespace Game
 
         public override void EnterState()
         {
+            // UICoreLoop.Instance.UpdateTitleTextWithPlayerTag(" escolha um bairro para avançar.");
             bairrosInteragiveis = GetBairrosPodemInteragir();
             if (bairrosInteragiveis.Count == 0)
             {
@@ -31,6 +33,8 @@ namespace Game
             }
             InscreverClickInteragivelBairros(bairrosInteragiveis);
             MudarHabilitadoInteragivelBairros(BairrosInteragiveis, true);
+            SetBairrosInativity(GetBairroNaoPodemInteragir(), true);
+
         }
 
         public override void ExitState()
@@ -39,6 +43,8 @@ namespace Game
             // DesabilitarInteragivelDosBairrosNaoEscolhidos();
             MudarHabilitadoInteragivelBairros(bairrosInteragiveis, false);
             BairrosInteragiveis.Clear();
+            SetBairrosInativity(SetUpZona.Instance.AllBairros, false);
+
         }
 
         private void InscreverClickInteragivelBairros(List<Bairro> bairros)
@@ -74,6 +80,20 @@ namespace Game
             ).ToList();
         }
 
+        private List<Bairro> GetBairroNaoPodemInteragir()
+        {
+            List<Bairro> bairros = SetUpZona.Instance.AllBairros;
+            Debug.Log("conta de bairros: "+bairros);
+            Debug.Log("diferença: "+ bairros.Except(GetBairrosPodemInteragir()).ToList().Count);
+            return bairros.Except(GetBairrosPodemInteragir()).ToList();
+
+            //             return (
+            //     from Bairro bairro in BairrosInControl
+            //     where !TemEleitoresParaAvancar(bairro)
+            //     select bairro
+            // ).ToList();
+        }
+
         private bool TemEleitoresParaAvancar(Bairro bairro)
         {
             if (bairro.SetUpBairro.Eleitores.contaEleitores >= eleitoresBairroMinParaAvancar)
@@ -98,6 +118,15 @@ namespace Game
             bairro.Interagivel.ChangeSelectedBairro(true);
             avancoState.AvancoData.BairroPlayer = bairro;
             avancoState.NextAvancoStateServerRpc();
+        }
+
+        private void SetBairrosInativity(List<Bairro> bairros, bool value)
+        {
+            foreach (Bairro bairro in bairros)
+            {
+                bairro.Interagivel.MudarInativity(value);
+            }
+
         }
     }
 }

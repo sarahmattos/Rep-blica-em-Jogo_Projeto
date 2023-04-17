@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Game.Territorio;
 using System.Linq;
+using Game.Player;
+using Game.UI;
 
 namespace Game
 {
@@ -8,26 +10,37 @@ namespace Game
     {
         private AvancoState avancoState;
         private List<Bairro> BairrosVizinhos => avancoState.AvancoData.BairroPlayer.Vizinhos.ToList();
-        private List<Bairro> VizinhosInimigos;
-
+        public List<Bairro> VizinhosInimigos
+        {
+            get
+            {
+                return (from Bairro bairro in BairrosVizinhos
+                        where bairro.PlayerIDNoControl.Value != TurnManager.Instance.PlayerAtual
+                        select bairro
+                ).ToList();
+            }
+        }
         private void Start()
         {
             avancoState = GetComponentInParent<AvancoState>();
-            VizinhosInimigos = new List<Bairro>();
+            // VizinhosInimigos = new List<Bairro>();
         }
 
         public override void EnterState()
         {
-            VizinhosInimigos = GetBairrosInimigos();
+            // UICoreLoop.Instance.UpdateTitleTextWithPlayerTag(", agora escolha um vizinho.");
+
             MudaHabilitadoInteragivelBairros(VizinhosInimigos, true);
             InscreverClickInteragivelBairros(VizinhosInimigos);
+            SetBairrosInativity(GetVizinhosInimigosNaoPodemInteragir(), true);
         }
 
         public override void ExitState()
         {
             DesinscreverClickInteragivelBairros(VizinhosInimigos);
             MudaHabilitadoInteragivelBairros(VizinhosInimigos, false);
-            VizinhosInimigos.Clear();
+            SetBairrosInativity(SetUpZona.Instance.AllBairros, false);
+
         }
 
         private void MudaHabilitadoInteragivelBairros(List<Bairro> bairros, bool value)
@@ -61,13 +74,24 @@ namespace Game
             avancoState.NextAvancoStateServerRpc();
         }
 
-        private List<Bairro> GetBairrosInimigos()
+        private List<Bairro> GetVizinhosInimigosNaoPodemInteragir()
         {
-            return (
-                from Bairro bairro in BairrosVizinhos
-                where bairro.PlayerIDNoControl.Value != TurnManager.Instance.PlayerAtual
-                select bairro
-            ).ToList();
+            List<Bairro> bairros = SetUpZona.Instance.AllBairros;
+            Tools.Logger.Instance.LogInfo("Bairros totais: " + bairros.Count);
+            // int playerIdVizinho = BairrosVizinhos[0].PlayerIDNoControl.Value;
+            // List<Bairro> bairrosPlayerVizinho = PlayerStatsManager.Instance.GetPlayerStats(playerIdVizinho).BairrosInControl;
+            return bairros.Except(VizinhosInimigos).ToList();
         }
+
+        private void SetBairrosInativity(List<Bairro> bairros, bool value)
+        {
+            foreach (Bairro bairro in bairros)
+            {
+                bairro.Interagivel.MudarInativity(value);
+            }
+        }
+
+
+
     }
 }

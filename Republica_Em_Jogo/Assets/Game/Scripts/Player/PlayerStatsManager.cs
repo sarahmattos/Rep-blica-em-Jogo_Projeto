@@ -22,6 +22,14 @@ namespace Game.Player
 
             return null;
         }
+
+        public PlayerStats GetPlayerStats(int playerID) {
+            foreach(PlayerStats playerStats in AllPlayerStats) {
+                if(playerStats.playerID == playerID) 
+                    return playerStats;
+            }
+            throw new ArgumentOutOfRangeException("PlayerID parameter nao encontrado");
+        }
             
         
         public PlayerStats GetPlayerStatsDoPlayerAtual()

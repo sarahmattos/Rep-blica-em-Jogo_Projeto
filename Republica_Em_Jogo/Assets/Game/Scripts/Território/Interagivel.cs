@@ -25,9 +25,10 @@ namespace Game.Territorio
         public event Action MouseDown;
         public event Action MouseUp;
         private Bairro bairro;
-        public event Action<bool> SelectBairro;
+        public event Action<bool> OnFocus;
         public event Action<bool> Inactivity;
         public PointerState PointerState { get; set; }
+        public bool Habilitado => habilitado;
 
 
         void Awake()
@@ -38,18 +39,18 @@ namespace Game.Territorio
         private void Start()
         {
             PointerState = PointerState.EXIT;
-            bairro.selected.OnValueChanged += OnChangeSelectBairro;
+            bairro.OnFocus.OnValueChanged += OnChangeSelectBairro;
         }
 
         private void OnDestroy()
         {
-            bairro.selected.OnValueChanged -= OnChangeSelectBairro;
+            bairro.OnFocus.OnValueChanged -= OnChangeSelectBairro;
 
         }
 
         private void OnChangeSelectBairro(bool previousBool, bool nextBool)
         {
-            SelectBairro?.Invoke(nextBool);
+            OnFocus?.Invoke(nextBool);
         }
 
 
@@ -59,20 +60,25 @@ namespace Game.Territorio
             habilitado = value;
             if (!value)
                 MouseExit?.Invoke();
-                // Inactivity?.Invoke(false);
+            // Inactivity?.Invoke(false);
+        }
+
+        public void MudarInativity(bool value)
+        {
+            Inactivity?.Invoke(value);
         }
 
         public void ChangeSelectedBairro(bool value)
         {
-            bairro.ChangeSelectBairroClientRpc(value);
+            bairro.ChangeSelectBairroServerRpc(value);
+
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-
+            PointerState = PointerState.ENTER;
             if (!habilitado) return;
             MouseEnter?.Invoke();
-            PointerState = PointerState.ENTER;
 
         }
 
@@ -85,9 +91,9 @@ namespace Game.Territorio
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            PointerState = PointerState.EXIT;
             if (!habilitado) return;
             MouseExit?.Invoke();
-            PointerState = PointerState.EXIT;
 
         }
 

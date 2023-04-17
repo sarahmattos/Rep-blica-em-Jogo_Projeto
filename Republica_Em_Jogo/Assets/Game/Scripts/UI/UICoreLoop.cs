@@ -12,7 +12,7 @@ using Logger = Game.Tools.Logger;
 
 namespace Game.UI
 {
-    public class UICoreLoop : MonoBehaviour
+    public class UICoreLoop : Singleton<UICoreLoop>
     {
         [SerializeField] private Button nextStateButton;
         [SerializeField] private TMP_Text logStateText;
@@ -21,8 +21,10 @@ namespace Game.UI
         private RodadaController rodadaController;
         public State DesenvState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
 
-        private string TagPlayerAtualStilizado{
-            get {
+        private string TagPlayerAtualStilizado
+        {
+            get
+            {
                 return string.Concat(GameDataconfig.Instance.TagParticipante, " ", TurnManager.Instance.PlayerAtual);
 
             }
@@ -92,24 +94,33 @@ namespace Game.UI
 
         private void UpdateTextDesenv(CoreLoopState state)
         {
-            logStateText.SetText(
-                string.Concat(
-                    GameDataconfig.Instance.TagPlayerAtualColorizada(), 
-                    " no estado: ", state));
-            
-            
+            UpdateTitleTextWithPlayerTag(string.Concat(" entrou no estado ", state));
         }
-        public void MostrarAvisoEstado(string aviso){
+
+        public void MostrarAvisoEstado(string aviso)
+        {
             rodadaController = FindObjectOfType<RodadaController>();
             int rodada = rodadaController.Rodada;
-            if(rodada<=1){
+            if (rodada <= 1)
+            {
                 ExplicaStateText.text = aviso;
                 if (TurnManager.Instance.LocalIsCurrent) ExplicaStateUi.SetActive(true);
             }
         }
 
+        public void UpdateTitleText(string message)
+        {
+            logStateText.SetText(message);
+        }
+
+        public void UpdateTitleTextWithPlayerTag(string message)
+        {
+            UpdateTitleText(string.Concat(GameDataconfig.Instance.TagPlayerAtualColorizada(), message));
+        }
+
 
 
     }
+
 }
 

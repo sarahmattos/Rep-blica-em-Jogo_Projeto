@@ -5,6 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using System.Threading.Tasks;
 using System.Threading;
+using Game.Tools;
 
 namespace Game.Territorio
 {
@@ -13,8 +14,10 @@ namespace Game.Territorio
         public Interagivel interagivel;
         public Bairro bairro;
         public BairroColorModificador bairroColorModificador;
-        //Apenas para testes
-        private Vector3 scalaInicial;
+        
+        [Header("Bairro on focus Property")]
+        private Vector3 scaleInitial;
+        [SerializeField] private float zPlus = 2;
 
         private void Awake()
         {
@@ -28,13 +31,13 @@ namespace Game.Territorio
         private void Start()
         {
 
-            scalaInicial = transform.localScale;
+            scaleInitial = transform.localScale;
 
             interagivel.MouseEnter += MouseEnterVisualiza;
             interagivel.MouseExit += MouseOutVisualiza;
             // interagivel.Click += OnClickBairro;
             interagivel.MudaHabilitado += OnMudaHabilitado;
-            interagivel.SelectBairro += OnSelectBairro;
+            interagivel.OnFocus += OnFocusBairroMuda;
             bairro.SetUpBairro.Eleitores.NumeroEleitores.OnValueChanged += OnNumeroEleitoresMuda;
             bairro.PlayerIDNoControl.OnValueChanged += bairroColorModificador.SetBairroColorByPlayer;
             interagivel.Inactivity += bairroColorModificador.SetInativityColor;
@@ -49,7 +52,7 @@ namespace Game.Territorio
             interagivel.MouseExit -= MouseOutVisualiza;
             //interagivel.Click -= OnClickBairro;
             interagivel.MudaHabilitado -= OnMudaHabilitado;
-            interagivel.SelectBairro -= OnSelectBairro;
+            interagivel.OnFocus -= OnFocusBairroMuda;
             bairro.SetUpBairro.Eleitores.NumeroEleitores.OnValueChanged -= OnNumeroEleitoresMuda;
             bairro.PlayerIDNoControl.OnValueChanged -= bairroColorModificador.SetBairroColorByPlayer;
             interagivel.Inactivity -= bairroColorModificador.SetInativityColor;
@@ -80,31 +83,41 @@ namespace Game.Territorio
         private void OnNumeroEleitoresMuda(int _, int __)
         {
             BlinkBairro();
-
         }
 
         private async void BlinkBairro()
         {
             await bairroColorModificador.BlinkBairroColorTask();
-
         }
 
-        private void OnSelectBairro(bool value)
+        private void OnFocusBairroMuda(bool value)
         {
-            Tools.Logger.Instance.LogPlayerAction("Selecionou o bairro " + value + " : " + bairro.Nome);
+            // Tools.Logger.Instance.LogPlayerAction("Selecionou o bairro " + value + " : " + bairro.Nome);
+            Vector3 targetScale = Vector3.zero;
+            if(value) {
+                targetScale = new Vector3(scaleInitial.x, scaleInitial.y, scaleInitial.z*zPlus);
+            }
+            else {
+                targetScale = new Vector3(scaleInitial.x, scaleInitial.y, scaleInitial.z);
+                bairroColorModificador.ResetColorMasking();
+            }
+            SetScale(targetScale);
         }
 
         private void OnMudaHabilitado(bool value)
         {
-            transform.localScale = value ?
-                new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z * 1.4f) :
-                new Vector3(scalaInicial.x, scalaInicial.y, scalaInicial.z);
 
             if (!value)
             {
                 bairroColorModificador.SetMouseOutColor();
             }
         }
+
+        private async void SetScale(Vector3 targetScale) {
+            await transform.ScaleSmoothDamp(targetScale);
+
+        }
+
 
 
     }

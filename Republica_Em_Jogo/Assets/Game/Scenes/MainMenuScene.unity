@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 422421208}
   - component: {fileID: 422421207}
   - component: {fileID: 422421206}
+  - component: {fileID: 422421209}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -309,6 +310,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &422421209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422421205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &469151283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,7 +1278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxConnections
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxLoopEleicoes
@@ -1367,16 +1401,28 @@ PrefabInstance:
       value: 0.40784314
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
-      propertyPath: playerColorOrder.Array.data[2].b
+      propertyPath: playerColorOrder.Array.data[1].b
       value: 0.8862745
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
-      propertyPath: playerColorOrder.Array.data[2].g
+      propertyPath: playerColorOrder.Array.data[1].g
       value: 0.38039216
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
-      propertyPath: playerColorOrder.Array.data[2].r
+      propertyPath: playerColorOrder.Array.data[1].r
       value: 0.52156866
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[2].b
+      value: 0.6666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[2].g
+      value: 0.8705883
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: playerColorOrder.Array.data[2].r
+      value: 0.6745098
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: playerColorOrder.Array.data[3].b
@@ -1404,15 +1450,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: zonaColorOutline.Array.data[1].b
-      value: 0.9126724
+      value: 0.45882356
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: zonaColorOutline.Array.data[1].g
-      value: 0.4588235
+      value: 0.9803922
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: zonaColorOutline.Array.data[1].r
-      value: 0.99607843
+      value: 0.9960785
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: zonaColorOutline.Array.data[2].b
@@ -1485,7 +1531,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7887484137661636566, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0030985686
+      value: 54.92315
       objectReference: {fileID: 0}
     - target: {fileID: 7887484137943697647, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1614,7 +1660,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 979778101, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -88.267
+      value: -88.26703
       objectReference: {fileID: 0}
     - target: {fileID: 8714760897532645801, guid: 1eb4f73b3dc6e434a90c086acfc75dde, type: 3}
       propertyPath: m_Camera

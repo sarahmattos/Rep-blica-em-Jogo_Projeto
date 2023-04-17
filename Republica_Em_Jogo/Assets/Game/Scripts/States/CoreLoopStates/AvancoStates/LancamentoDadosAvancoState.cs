@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Game.Territorio;
+using Game.UI;
 using UnityEngine;
 
 namespace Game
@@ -20,6 +21,8 @@ namespace Game
 
         public override void EnterState()
         {
+            // UICoreLoop.Instance.UpdateTitleText("Rolando Dados...");
+
             LancarDados();
             ProcessarDescontagemEleitores();           
             avancoState.NextAvancoStateServerRpc();
