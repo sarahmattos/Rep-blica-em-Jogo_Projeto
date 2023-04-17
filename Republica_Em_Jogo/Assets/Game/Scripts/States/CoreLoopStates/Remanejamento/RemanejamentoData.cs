@@ -11,26 +11,26 @@ namespace Game
     public class RemanejamentoData
     {
 
-        private Dictionary<Bairro, int> parBairroEleitor = new Dictionary<Bairro, int>();
-        private PlayerStats playerStatsAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual();
+        private Dictionary<Bairro, int> parBairroEleitorigualUm = new Dictionary<Bairro, int>();
+        public List<Bairro> BairrosPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
 
         private Bairro bairroEscolhido;
         private Bairro vizinhoEscolhido;
 
-        public Dictionary<Bairro, int> ParBairroEleitor => parBairroEleitor;
+        public Dictionary<Bairro, int> ParBairroEleitor => parBairroEleitorigualUm;
         public Bairro BairroEscolhido { get => bairroEscolhido; set => bairroEscolhido = value; }
         public Bairro VizinhoEscolhido { get => vizinhoEscolhido; set => vizinhoEscolhido = value; }
 
 
         public void ClearData()
         {
-            parBairroEleitor.Clear();
+            parBairroEleitorigualUm.Clear();
             ResetSelectedBairros();
         }
 
         public void ResetSelectedBairros()
         {
-            
+
             bairroEscolhido?.Interagivel.ChangeSelectedBairro(false);
             VizinhoEscolhido?.Interagivel.ChangeSelectedBairro(false);
             BairroEscolhido = null;
@@ -39,16 +39,22 @@ namespace Game
 
         public void ArmazenarBairrosRemanejaveis()
         {
-            foreach (Bairro bairro in playerStatsAtual.BairrosInControl)
+            foreach (Bairro bairro in BairrosPlayerAtual)
             {
                 if (bairro.SetUpBairro.Eleitores.contaEleitores <= 1) continue;
-                parBairroEleitor.Add(bairro, bairro.SetUpBairro.Eleitores.contaEleitores - 1);
+                parBairroEleitorigualUm.Add(bairro, bairro.SetUpBairro.Eleitores.contaEleitores - 1);
             }
         }
 
-        public void RemoveBairro(Bairro bairro)
+        public List<Bairro> BairrosNaoRemanejaveis()
         {
-            parBairroEleitor.Remove(bairro);
+            return BairrosPlayerAtual.Except(ParBairroEleitor.Keys).ToList();
+
+        }
+
+        public void RemoveBairroParBairroEleitor(Bairro bairro)
+        {
+            parBairroEleitorigualUm.Remove(bairro);
         }
 
         // public int GetIndexInParBairroEleitor(Bairro bairro)

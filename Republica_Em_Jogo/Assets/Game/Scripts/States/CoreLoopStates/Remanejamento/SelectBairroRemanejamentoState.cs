@@ -14,8 +14,8 @@ namespace Game
         {
             remanejamentoState = GetComponentInParent<RemanejamentoState>();
             remanejamentoData = remanejamentoState.RemanejamentoData;
-
         }
+
 
         public override void EnterState()
         {
@@ -24,6 +24,7 @@ namespace Game
             remanejamentoData.ResetSelectedBairros();
             MudarHabilitadoInteragivelBairros(true);
             InscreverClickInteragivelBairros();
+            SetBairrosInativity(remanejamentoData.BairrosNaoRemanejaveis(), true);
 
 
         }
@@ -34,6 +35,7 @@ namespace Game
 
             MudarHabilitadoInteragivelBairros(false);
             DesinscreverClickInteragivelBairros();
+
         }
 
         private void InscreverClickInteragivelBairros()
@@ -69,5 +71,12 @@ namespace Game
             }
         }
 
+        private void SetBairrosInativity(List<Bairro> bairros, bool value)
+        {
+            foreach (Bairro bairro in bairros)
+            {
+                bairro.Interagivel.MudarInativity(value);
+            }
+        }
     }
 }

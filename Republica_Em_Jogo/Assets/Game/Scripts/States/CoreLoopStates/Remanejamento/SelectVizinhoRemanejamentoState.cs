@@ -27,6 +27,7 @@ namespace Game
             vizinhosDoPlayerAtual = GetVizinhosDoPlayerAtual();
             InscreverClickInteragivelBairros();
             MudaHabilitadoInteragivelBairros(true);
+            SetBairrosInativity(vizinhosDoPlayerAtual, false);
         }
 
         public override void ExitState()
@@ -75,6 +76,16 @@ namespace Game
             remanejamentoData.VizinhoEscolhido = bairro;
             remanejamentoState.StateMachineController.NextStateServerRpc();
         }
+
+        private void SetBairrosInativity(List<Bairro> bairros, bool value)
+        {
+            foreach (Bairro bairro in bairros)
+            {
+                bairro.Interagivel.MudarInativity(value);
+            }
+        }
+
+
 
 
     }

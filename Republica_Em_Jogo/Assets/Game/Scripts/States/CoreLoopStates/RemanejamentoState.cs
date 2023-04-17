@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Player;
 using Game.Territorio;
 using Game.UI;
 using UnityEngine;
@@ -16,9 +17,10 @@ namespace Game
         public string explicaTexto;
         private UICoreLoop uiCore;
 
+
         private void Start()
         {
-            stateMachineController =  GetComponent<StateMachineController>();
+            stateMachineController = GetComponent<StateMachineController>();
             stateMachineController.Initialize(subStates);
             stateMachineController.ResetMachineState();
             uiCore = FindObjectOfType<UICoreLoop>();
@@ -27,12 +29,12 @@ namespace Game
         public override void EnterState()
         {
             // Tools.Logger.Instance.LogPlayerAction("Remanejando eleitores.");
-            if(!TurnManager.Instance.LocalIsCurrent) return;
+            if (!TurnManager.Instance.LocalIsCurrent) return;
 
             remanejamentoData.ClearData();
             remanejamentoData.ArmazenarBairrosRemanejaveis();
             stateMachineController.ChangeStateServerRpc(0);
-             uiCore.MostrarAvisoEstado(explicaTexto);
+            uiCore.MostrarAvisoEstado(explicaTexto);
 
         }
 
@@ -42,7 +44,8 @@ namespace Game
             if (!TurnManager.Instance.LocalIsCurrent) return;
             MudarHabilitadoInteragivelBairros(false);
             stateMachineController.ResetMachineState();
-            
+            SetBairrosInativity(remanejamentoData.BairrosPlayerAtual,false);
+
         }
 
         public override void OnNetworkDespawn()
@@ -50,9 +53,17 @@ namespace Game
             stateMachineController.Finish();
         }
 
-        public void MudarHabilitadoInteragivelBairros(bool value) {
-            foreach(Bairro bairro in remanejamentoData.ParBairroEleitor.Keys) {
+        public void MudarHabilitadoInteragivelBairros(bool value)
+        {
+            foreach (Bairro bairro in remanejamentoData.ParBairroEleitor.Keys)
+            {
                 bairro.Interagivel.MudarHabilitado(value);
+            }
+        }
+
+        private void SetBairrosInativity(List<Bairro> bairros, bool value) {
+            foreach(Bairro bairro in bairros) {
+                bairro.Interagivel.MudarInativity(value);
             }
         }
 

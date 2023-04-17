@@ -73,6 +73,7 @@ namespace Game.Territorio
             else
             {
                 inativityMaterial.SetColor(baseColorID, colorMasks.ActivityColor);
+                hoverMaterial.SetColor(baseColorID, ColorMasks.MouseExit);
             }
         }
 

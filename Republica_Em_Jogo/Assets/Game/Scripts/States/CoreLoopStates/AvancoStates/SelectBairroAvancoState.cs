@@ -126,7 +126,7 @@ namespace Game
             {
                 bairro.Interagivel.MudarInativity(value);
             }
-
         }
+        
     }
 }

@@ -50,15 +50,14 @@ namespace Game
 
         private IEnumerator TaskProcessaRemanejamento()
         {
-            yield return new WaitForSeconds(0.1f);
             RemoveEleitorBairroEscolhido();
             AdicionaEleitorVizinhoEscolhido();
             DecrementaEleitorInBairroDictionary();
             if (remanejamentoData.GetEleitor(remanejamentoData.BairroEscolhido) < 1)
             {
-                remanejamentoData.RemoveBairro(remanejamentoData.BairroEscolhido);
+                remanejamentoData.RemoveBairroParBairroEleitor(remanejamentoData.BairroEscolhido);
             }
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
 
             remanejamentoState.StateMachineController.NextStateServerRpc();
         }
