@@ -32,7 +32,7 @@ namespace Game.Territorio
 
             // Atribuir a rotação ao objeto
            // transform.rotation = rotation;
-           transform.localRotation  = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+          // transform.localRotation  = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
         }
 
     }
