@@ -49,7 +49,7 @@ namespace Game.UI
         public List<int> ordemId;
         [SerializeField] List<Color> cor;
         [SerializeField] List<GameObject> objetosCores;
-        private string textToDisplayEleitores => string.Concat("Eleitores: ", playerStats.EleitoresTotais);
+        private string textToDisplayEleitores => string.Concat("", playerStats.EleitoresTotais);
         [HideInInspector]
         public bool playerRecebeEleitor = true;
         [HideInInspector]
@@ -191,8 +191,8 @@ namespace Game.UI
                 playerStats.recursoDistribuicao(quantidade);
 
                 //muda a interface
-                text_saudeCarta.SetText("Saúde: " + playerStats.numSaude.ToString());
-                text_eduCarta.SetText("Edu: " + playerStats.numEducacao.ToString());
+                text_saudeCarta.SetText(playerStats.numSaude.ToString());//"Saúde: " + 
+                text_eduCarta.SetText( playerStats.numEducacao.ToString());//"Edu: " +
 
                 //pega os valores da classe player stats, mais tarde é usado na troca
                 atualizarRecursoAntesTroca();
@@ -212,8 +212,8 @@ namespace Game.UI
             playerStats.numEducacao = eduQuant;
 
             //interface muda
-            text_saudeCarta.SetText("Saúde: " + playerStats.numSaude.ToString());
-            text_eduCarta.SetText("Edu: " + playerStats.numEducacao.ToString());
+            text_saudeCarta.SetText(playerStats.numSaude.ToString());//"Saúde: " +
+            text_eduCarta.SetText(playerStats.numEducacao.ToString());//"Edu: " + 
         }
 
         //a distribuicao inicial dos bairros atualiza o valor de bairros e eleitores totais
@@ -236,7 +236,7 @@ namespace Game.UI
         public void AtualizaBairros()
         {
             // playerStats.ContaBairros();
-            text_bairros.SetText("Bairros: " + playerStats.BairrosInControl.Count.ToString());
+            text_bairros.SetText(playerStats.BairrosInControl.Count.ToString());//"Bairros: " + 
         }
 
         //quando o jogador distribui seus eleitores
@@ -346,7 +346,7 @@ namespace Game.UI
         public void cadeirasUi(float valor)
         {
             playerStats.numCadeiras = valor;
-            text_cadeiras.SetText("Cadeiras: " + "\n" + playerStats.numCadeiras.ToString());
+            text_cadeiras.SetText(playerStats.numCadeiras.ToString());//"Cadeiras: " + "\n" + 
         }
         public void BntsAuxiliares()
         {
