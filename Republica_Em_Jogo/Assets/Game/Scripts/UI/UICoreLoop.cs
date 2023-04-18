@@ -16,7 +16,8 @@ namespace Game.UI
     {
         [SerializeField] private Button nextStateButton;
         [SerializeField] private TMP_Text logStateText;
-        [SerializeField] public TMP_Text ExplicaStateText;
+        [SerializeField] public TMP_Text ExplicaStateTextTitulo;
+        [SerializeField] public TMP_Text ExplicaStateTextCorpo;
         [SerializeField] public GameObject ExplicaStateUi;
         private RodadaController rodadaController;
         public State DesenvState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
@@ -97,13 +98,14 @@ namespace Game.UI
             UpdateTitleTextWithPlayerTag(string.Concat(" entrou no estado ", state));
         }
 
-        public void MostrarAvisoEstado(string aviso)
+        public void MostrarAvisoEstado(string avisoTitulo,string avisoCorpo)
         {
             rodadaController = FindObjectOfType<RodadaController>();
             int rodada = rodadaController.Rodada;
             if (rodada <= 1)
             {
-                ExplicaStateText.text = aviso;
+                ExplicaStateTextTitulo.text = avisoTitulo;
+                ExplicaStateTextCorpo.text = avisoCorpo;
                 if (TurnManager.Instance.LocalIsCurrent) ExplicaStateUi.SetActive(true);
             }
         }

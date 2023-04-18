@@ -12,7 +12,7 @@ namespace Game
         [SerializeField]
         private RecursosCartaManager rc;
         
-        public string explicaTexto;
+        public string explicaTexto,explicaTextoCorpo;
         private UICoreLoop uiCore;
 
         [SerializeField]
@@ -41,7 +41,7 @@ namespace Game
              rodadaController = FindObjectOfType<RodadaController>();
             
             
-            uiCore.MostrarAvisoEstado(explicaTexto);
+            uiCore.MostrarAvisoEstado(explicaTexto,explicaTextoCorpo);
         }
        
         public override void ExitState()

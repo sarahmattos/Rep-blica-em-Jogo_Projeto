@@ -14,7 +14,7 @@ namespace Game
         public StateMachineController StateMachineController => stateMachineController;
         private RemanejamentoData remanejamentoData = new RemanejamentoData();
         public RemanejamentoData RemanejamentoData => remanejamentoData;
-        public string explicaTexto;
+        public string explicaTexto,explicaTextoCorpo;
         private UICoreLoop uiCore;
 
 
@@ -34,7 +34,7 @@ namespace Game
             remanejamentoData.ClearData();
             remanejamentoData.ArmazenarBairrosRemanejaveis();
             stateMachineController.ChangeStateServerRpc(0);
-            uiCore.MostrarAvisoEstado(explicaTexto);
+            uiCore.MostrarAvisoEstado(explicaTexto,explicaTextoCorpo);
 
         }
 

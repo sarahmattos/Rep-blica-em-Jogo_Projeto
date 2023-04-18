@@ -33,7 +33,7 @@ namespace Game
         ///[SerializeField] Transform posicaoCameraEleicao;
         //public Vector3 posicaoAntiga;
         
-        public string explicaTexto;
+        public string explicaTexto,explicaTextoCorpo;
         private UICoreLoop uiCore;
         void Start()
         {
@@ -119,7 +119,8 @@ namespace Game
         }
         public void explicarEleicao(){
             uiCore.ExplicaStateUi.SetActive(true);
-            uiCore.ExplicaStateText.text = explicaTexto;
+            uiCore.ExplicaStateTextTitulo.text = explicaTexto;
+            uiCore.ExplicaStateTextCorpo.text = explicaTextoCorpo;
         }
         public void escondeExplicarEleicao(){
             uiCore.ExplicaStateUi.SetActive(false);

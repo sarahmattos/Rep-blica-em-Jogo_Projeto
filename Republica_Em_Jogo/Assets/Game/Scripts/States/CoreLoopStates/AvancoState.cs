@@ -30,7 +30,7 @@ namespace Game
         private AvancoData avancoData = new AvancoData();
         public AvancoData AvancoData => avancoData;
         DadosUiGeral dadosUiGeral;
-        public string explicaTexto;
+        public string explicaTexto,explicaTextoCorpo;
         private UICoreLoop uiCore;
 
         public List<Bairro> bairrosPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
@@ -57,7 +57,7 @@ namespace Game
             if (!TurnManager.Instance.LocalIsCurrent) return;
             avancoStateIndex.OnValueChanged += AvancoIndexMuda;
             SetAvancoStateServerRpc(0);
-            uiCore.MostrarAvisoEstado(explicaTexto);
+            uiCore.MostrarAvisoEstado(explicaTexto,explicaTextoCorpo);
 
         }
 

@@ -23,7 +23,7 @@ namespace Game
         // public bool AplicouTodosEleitores => qntdEleitorAplicado == recompensaEleitores;
         public PlayerStats PlayerStatsAtual =>  PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual();
         public List<Bairro> bairrosDoPlayer => PlayerStatsAtual?.BairrosInControl;
-        public string explicaTexto;
+        public string explicaTexto,explicaTextoCorpo;
         private UICoreLoop uiCore;
         [SerializeField] GameObject recompensaAviso;
 
@@ -36,7 +36,7 @@ namespace Game
                  recompensaAviso.SetActive(true);
                  GameObject go =recompensaAviso.transform.GetChild(0).gameObject;
                 TMP_Text textoAviso = go.GetComponent<TMP_Text>();
-                uiCore.MostrarAvisoEstado(explicaTexto);
+                uiCore.MostrarAvisoEstado(explicaTexto,explicaTextoCorpo);
 
                 if(!TemRecompensa) {
                 // Tools.Logger.Instance.LogInfo("Como não avançou em nenhum bairro, não há recompensa nesta rodada.");

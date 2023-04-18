@@ -10,7 +10,7 @@ namespace Game
     public class ProjetoState : State
     {
         [SerializeField] private Baralho baralho;
-        public string explicaTexto;
+        public string explicaTexto,explicaTextoCorpo;
         private UICoreLoop uiCore;
 
         public override void EnterState()
@@ -20,7 +20,7 @@ namespace Game
             {
                 //baralho.enabled = true;
                 baralho.baralhoManager(true);
-                uiCore.MostrarAvisoEstado(explicaTexto);
+                uiCore.MostrarAvisoEstado(explicaTexto,explicaTextoCorpo);
             }
             
             //EleicaoManager.Instance.CalculoEleicao();
