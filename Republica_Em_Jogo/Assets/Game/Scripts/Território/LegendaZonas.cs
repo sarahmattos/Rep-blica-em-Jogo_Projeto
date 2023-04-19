@@ -31,7 +31,7 @@ namespace Game.Territorio
 
         private async void SetMaxCanvasGroup()
         {
-            await canvasGroup.AlphaSmoothDamp(1);
+            await canvasGroup.EaseOutAlpha(1);
         }
 
 

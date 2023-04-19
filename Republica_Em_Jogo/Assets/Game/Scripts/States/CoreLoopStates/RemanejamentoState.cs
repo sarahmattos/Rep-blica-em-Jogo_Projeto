@@ -42,7 +42,8 @@ namespace Game
         {
             if (!TurnManager.Instance.LocalIsCurrent) return;
             remanejamentoData.ParBairroEleitorigualUm.Keys.MudarHabilitado(false);
-            remanejamentoData.BairrosPlayerAtual.MudarInativity(false);
+            SetUpZona.Instance.AllBairros.MudarInativity(false);
+            SetUpZona.Instance.AllBairros.MudarHabilitado(false);
             stateMachineController.ResetMachineState();
 
         }

@@ -93,22 +93,8 @@ namespace Game.UI
         {
 
             Vector2 sizeDelta = new Vector2(width, rectTransform.sizeDelta.y);
-            await rectTransform.SizeDeltaSmoothDamp(sizeDelta);
+            await rectTransform.EaseOutQuadraticSizeDelta(sizeDelta);
 
-        }
-
-
-        //TODO: REMOVER DEPOIS
-        private async void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                await SetRectWidthAsync(MinWidth);
-            }
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                await SetRectWidthAsync(MaxWidth);
-            }
         }
 
 

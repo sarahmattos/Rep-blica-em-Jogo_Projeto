@@ -88,7 +88,6 @@ namespace Game.Territorio
 
         private void OnFocusBairroMuda(bool value)
         {
-            // Tools.Logger.Instance.LogPlayerAction("Selecionou o bairro " + value + " : " + bairro.Nome);
             Vector3 targetScale = Vector3.zero;
             if (value)
             {
@@ -113,7 +112,7 @@ namespace Game.Territorio
 
         private async void SetScale(Vector3 targetScale)
         {
-            await transform.ScaleSmoothDamp(targetScale);
+            await transform.EaseOutScale(targetScale);
 
         }
 
