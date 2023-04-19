@@ -4,6 +4,7 @@ using Game.Player;
 using Game.Territorio;
 using Game.UI;
 using UnityEngine;
+using Game.Tools;
 
 namespace Game
 {
@@ -11,45 +12,63 @@ namespace Game
     {
         private const int eleitoresBairroMinParaAvancar = 2;
         private AvancoState avancoState;
-        private List<Bairro> BairrosInControl =>
-            PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
-        private List<Bairro> bairrosInteragiveis;
-        public List<Bairro> BairrosInteragiveis => bairrosInteragiveis;
+        private List<Bairro> BairrosInControl => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
+
+
+        public List<Bairro> BairrosInteragiveis
+        {
+            get
+            {
+                return (
+                    from Bairro bairro in BairrosInControl
+                    where TemEleitoresParaAvancar(bairro) && TemVizinhoInimigo(bairro)
+                    select bairro
+                ).ToList();
+            }
+        }
+
+        private List<Bairro> bairroNaoPodemInteragir
+        {
+            get
+            {
+                List<Bairro> bairros = SetUpZona.Instance.AllBairros;
+                return bairros.Except(BairrosInteragiveis).ToList();
+            }
+        }
 
         private void Start()
         {
-            bairrosInteragiveis = new List<Bairro>();
             avancoState = GetComponentInParent<AvancoState>();
         }
 
         public override void EnterState()
         {
-            // UICoreLoop.Instance.UpdateTitleTextWithPlayerTag(" escolha um bairro para avançar.");
-            bairrosInteragiveis = GetBairrosPodemInteragir();
-            if (bairrosInteragiveis.Count == 0)
+            if (BairrosInteragiveis.Count == 0)
             {
-                // CoreLoopStateHandler.Instance.NextStateServerRpc();
+                //TODO: retornar para o jogador alguma interface indicando que nao ha bairros para avancar
                 return;
             }
-            InscreverClickInteragivelBairros(bairrosInteragiveis);
-            MudarHabilitadoInteragivelBairros(BairrosInteragiveis, true);
-            SetBairrosInativity(GetBairroNaoPodemInteragir(), true);
+            BairrosInteragiveis.MudarHabilitado(true);
+            bairroNaoPodemInteragir.MudarInativity(true);
+            InscreverClickInteragivelBairros(BairrosInteragiveis);
 
         }
 
         public override void ExitState()
         {
-            DesinscreverClickInteragivelBairros(bairrosInteragiveis);
-            // DesabilitarInteragivelDosBairrosNaoEscolhidos();
-            MudarHabilitadoInteragivelBairros(bairrosInteragiveis, false);
-            BairrosInteragiveis.Clear();
-            SetBairrosInativity(SetUpZona.Instance.AllBairros, false);
+            if (BairrosInteragiveis.Count == 0) return;
+
+            BairrosInteragiveis.MudarHabilitado(false);
+            // BairrosInteragiveis.Clear();
+            SetUpZona.Instance.AllBairros.MudarInativity(false);
+            DesinscreverClickInteragivelBairros(BairrosInteragiveis);
+
 
         }
 
         private void InscreverClickInteragivelBairros(List<Bairro> bairros)
         {
-            foreach (Bairro bairro in bairrosInteragiveis)
+            foreach (Bairro bairro in BairrosInteragiveis)
             {
                 bairro.Interagivel.Click += OnBairroClicado;
             }
@@ -57,41 +76,10 @@ namespace Game
 
         private void DesinscreverClickInteragivelBairros(List<Bairro> bairros)
         {
-            foreach (Bairro bairro in bairrosInteragiveis)
+            foreach (Bairro bairro in BairrosInteragiveis)
             {
                 bairro.Interagivel.Click -= OnBairroClicado;
             }
-        }
-
-        private void MudarHabilitadoInteragivelBairros(List<Bairro> bairros, bool value)
-        {
-            foreach (Bairro bairro in bairros)
-            {
-                bairro.Interagivel.MudarHabilitado(value);
-            }
-        }
-
-        private List<Bairro> GetBairrosPodemInteragir()
-        {
-            return (
-                from Bairro bairro in BairrosInControl
-                where TemEleitoresParaAvancar(bairro) && TemVizinhoInimigo(bairro)
-                select bairro
-            ).ToList();
-        }
-
-        private List<Bairro> GetBairroNaoPodemInteragir()
-        {
-            List<Bairro> bairros = SetUpZona.Instance.AllBairros;
-            Debug.Log("conta de bairros: "+bairros);
-            Debug.Log("diferença: "+ bairros.Except(GetBairrosPodemInteragir()).ToList().Count);
-            return bairros.Except(GetBairrosPodemInteragir()).ToList();
-
-            //             return (
-            //     from Bairro bairro in BairrosInControl
-            //     where !TemEleitoresParaAvancar(bairro)
-            //     select bairro
-            // ).ToList();
         }
 
         private bool TemEleitoresParaAvancar(Bairro bairro)
@@ -109,7 +97,6 @@ namespace Game
                 if (vizinho.PlayerIDNoControl.Value != bairro.PlayerIDNoControl.Value)
                     return true;
             }
-
             return false;
         }
 
@@ -120,13 +107,6 @@ namespace Game
             avancoState.NextAvancoStateServerRpc();
         }
 
-        private void SetBairrosInativity(List<Bairro> bairros, bool value)
-        {
-            foreach (Bairro bairro in bairros)
-            {
-                bairro.Interagivel.MudarInativity(value);
-            }
-        }
-        
+
     }
 }

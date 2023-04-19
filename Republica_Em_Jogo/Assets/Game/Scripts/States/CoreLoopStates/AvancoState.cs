@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Unity.Netcode;
-using UnityEngine;
 using Game.Territorio;
 using Game.Player;
 using Game.UI;
+using Game.Tools;
 
 namespace Game
 {
@@ -30,7 +30,7 @@ namespace Game
         private AvancoData avancoData = new AvancoData();
         public AvancoData AvancoData => avancoData;
         DadosUiGeral dadosUiGeral;
-        public string explicaTexto,explicaTextoCorpo;
+        public string explicaTexto, explicaTextoCorpo;
         private UICoreLoop uiCore;
 
         public List<Bairro> bairrosPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
@@ -47,8 +47,8 @@ namespace Game
         {
             statePairValues = new Dictionary<AvancoStatus, State>();
             SetPairValues();
-            dadosUiGeral=FindObjectOfType<DadosUiGeral>();
-             uiCore = FindObjectOfType<UICoreLoop>();
+            dadosUiGeral = FindObjectOfType<DadosUiGeral>();
+            uiCore = FindObjectOfType<UICoreLoop>();
         }
 
         public override void EnterState()
@@ -57,7 +57,7 @@ namespace Game
             if (!TurnManager.Instance.LocalIsCurrent) return;
             avancoStateIndex.OnValueChanged += AvancoIndexMuda;
             SetAvancoStateServerRpc(0);
-            uiCore.MostrarAvisoEstado(explicaTexto,explicaTextoCorpo);
+            uiCore.MostrarAvisoEstado(explicaTexto, explicaTextoCorpo);
 
         }
 
@@ -66,7 +66,7 @@ namespace Game
 
             if (!TurnManager.Instance.LocalIsCurrent) return;
             avancoStateIndex.OnValueChanged -= AvancoIndexMuda;
-            HabilitarBairrosPlayerAtual(false);
+            bairrosPlayerAtual.MudarInteragivel(false);
             SetAvancoStateServerRpc(-1);
             dadosUiGeral.resetaUiDadosServerRpc();
 
@@ -110,12 +110,6 @@ namespace Game
             avancoStateIndex.Value = (avancoStateIndex.Value + 1) % (statePairValues.Count);
         }
 
-        public void HabilitarBairrosPlayerAtual(bool value)
-        {
-            foreach (Bairro bairro in bairrosPlayerAtual)
-            {
-                bairro.Interagivel.MudarHabilitado(value);
-            }
-        }
+
     }
 }

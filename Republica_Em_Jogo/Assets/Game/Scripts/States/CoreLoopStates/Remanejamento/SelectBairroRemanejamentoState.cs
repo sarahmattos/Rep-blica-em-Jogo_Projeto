@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Game.Territorio;
+using Game.Tools;
 using UnityEngine;
 
 namespace Game
@@ -16,31 +17,27 @@ namespace Game
             remanejamentoData = remanejamentoState.RemanejamentoData;
         }
 
-
         public override void EnterState()
         {
             if (!TurnManager.Instance.LocalIsCurrent) return;
-
-            remanejamentoData.ResetSelectedBairros();
-            MudarHabilitadoInteragivelBairros(true);
+            remanejamentoData.ParBairroEleitorigualUm.Keys.MudarHabilitado(true);
+            remanejamentoData.ParBairroEleitorigualUm.Keys.MudarInativity(false);
+            remanejamentoData.BairrosNaoRemanejaveis.MudarInativity(true);
             InscreverClickInteragivelBairros();
-            SetBairrosInativity(remanejamentoData.BairrosNaoRemanejaveis(), true);
-
 
         }
 
         public override void ExitState()
         {
             if (!TurnManager.Instance.LocalIsCurrent) return;
-
-            MudarHabilitadoInteragivelBairros(false);
+            remanejamentoData.ParBairroEleitorigualUm.Keys.MudarHabilitado(false);
             DesinscreverClickInteragivelBairros();
 
         }
 
         private void InscreverClickInteragivelBairros()
         {
-            foreach (Bairro bairro in remanejamentoData.ParBairroEleitor.Keys)
+            foreach (Bairro bairro in remanejamentoData.ParBairroEleitorigualUm.Keys)
             {
                 bairro.Interagivel.Click += OnBairroClicado;
             }
@@ -49,7 +46,7 @@ namespace Game
 
         private void DesinscreverClickInteragivelBairros()
         {
-            foreach (Bairro bairro in remanejamentoData.ParBairroEleitor.Keys)
+            foreach (Bairro bairro in remanejamentoData.ParBairroEleitorigualUm.Keys)
             {
                 bairro.Interagivel.Click -= OnBairroClicado;
             }
@@ -60,23 +57,8 @@ namespace Game
             bairro.Interagivel.ChangeSelectedBairro(true);
             remanejamentoData.BairroEscolhido = bairro;
             remanejamentoState.StateMachineController.NextStateServerRpc();
-
         }
 
-        private void MudarHabilitadoInteragivelBairros(bool value)
-        {
-            foreach (Bairro bairro in remanejamentoData.ParBairroEleitor.Keys)
-            {
-                bairro.Interagivel.MudarHabilitado(value);
-            }
-        }
 
-        private void SetBairrosInativity(List<Bairro> bairros, bool value)
-        {
-            foreach (Bairro bairro in bairros)
-            {
-                bairro.Interagivel.MudarInativity(value);
-            }
-        }
     }
 }

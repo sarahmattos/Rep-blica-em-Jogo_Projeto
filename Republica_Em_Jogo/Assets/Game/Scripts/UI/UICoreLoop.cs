@@ -88,7 +88,7 @@ namespace Game.UI
         {
             nextStateButton.gameObject.SetActive(value);
 
-            UpdateTextDesenv(Extensoes.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues,
+            UpdateTextDesenv(Tools.CollectionExtensions.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues,
                 CoreLoopStateHandler.Instance.CurrentState));
 
         }
