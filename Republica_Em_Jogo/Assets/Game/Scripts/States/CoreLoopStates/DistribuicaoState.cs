@@ -4,6 +4,7 @@ using UnityEngine;
 using Game.UI;
 using Game.Territorio;
 using Game.Player;
+using Game.Tools;
 
 namespace Game
 {
@@ -11,48 +12,34 @@ namespace Game
     {
         [SerializeField]
         private RecursosCartaManager rc;
-        
-        public string explicaTexto,explicaTextoCorpo;
+
+        public string explicaTexto, explicaTextoCorpo;
         private UICoreLoop uiCore;
 
         [SerializeField]
         private HudStatsJogador hs;
-        private List<Bairro> bairrosDoPlayerAtual;
+        private List<Bairro> BairrosDoPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
         private RodadaController rodadaController;
 
         public void Start()
         {
-            bairrosDoPlayerAtual = new List<Bairro>();
             TurnManager.Instance.vezDoPlayerLocal += quandoVezPlayerLocal;
             uiCore = FindObjectOfType<UICoreLoop>();
         }
 
         public override void EnterState()
         {
-            // Tools.Logger.Instance.LogPlayerAction("Distribuindo eleitores");
-            if(!TurnManager.Instance.LocalIsCurrent) return;
-            bairrosDoPlayerAtual.AddRange(
-                PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl
-            );
-            foreach (Bairro bairro in bairrosDoPlayerAtual)
-            {
-                bairro.Interagivel.MudarHabilitado(true);
-            }
-             rodadaController = FindObjectOfType<RodadaController>();
-            
-            
-            uiCore.MostrarAvisoEstado(explicaTexto,explicaTextoCorpo);
+            if (!TurnManager.Instance.LocalIsCurrent) return;
+            BairrosDoPlayerAtual.MudarHabilitado(true);
+            rodadaController = FindObjectOfType<RodadaController>();
+            uiCore.MostrarAvisoEstado(explicaTexto, explicaTextoCorpo);
         }
-       
+
         public override void ExitState()
         {
-            if(!TurnManager.Instance.LocalIsCurrent) return;
+            if (!TurnManager.Instance.LocalIsCurrent) return;
             hs.distribuicaoInicial = false;
-            foreach (Bairro bairro in bairrosDoPlayerAtual)
-            {
-                bairro.Interagivel.MudarHabilitado(false);
-            }
-            bairrosDoPlayerAtual.Clear();
+            BairrosDoPlayerAtual.MudarHabilitado(false);
         }
 
         public override void OnDestroy()
@@ -63,12 +50,12 @@ namespace Game
 
         public void quandoVezPlayerLocal(bool value)
         {
-             StartCoroutine(Espera3(1,value));
+            StartCoroutine(Espera3(1, value));
         }
-         private IEnumerator EsperaEVai2(int s)
+        private IEnumerator EsperaEVai2(int s)
         {
             yield return new WaitForSeconds(s);
-             hs.distribuicaoInicial = true;
+            hs.distribuicaoInicial = true;
             rc.conferirQuantidade();
         }
         private IEnumerator Espera3(int s, bool value)
@@ -76,13 +63,16 @@ namespace Game
             yield return new WaitForSeconds(s);
             if (value)
             {
-                if(EleicaoManager.Instance.inEleicao){
+                if (EleicaoManager.Instance.inEleicao)
+                {
                     StartCoroutine(EsperaEVai2(5));
-                }else{
+                }
+                else
+                {
                     hs.distribuicaoInicial = true;
                     rc.conferirQuantidade();
                 }
-                
+
             }
         }
     }
