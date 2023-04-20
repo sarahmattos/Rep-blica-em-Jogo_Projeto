@@ -84,7 +84,7 @@ namespace Game.Territorio
 
         public void OnPointerClick(PointerEventData eventData)
         {
-
+            if (!(eventData.button == PointerEventData.InputButton.Left)) return;
             if (!habilitado) return;
             Click?.Invoke(bairro);
         }
