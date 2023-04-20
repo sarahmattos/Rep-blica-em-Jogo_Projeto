@@ -64,6 +64,24 @@ namespace Game.Tools
 
             transform.localScale = scale;
         }
+        public static async Task EaseOutLocalPosition(this Transform transform, Vector3 targetPosition)
+        {
+
+            Vector3 start = transform.localPosition;
+            float elapsedTime = 0;
+            float timeInterval = 0.1f;
+
+            while (elapsedTime < timeInterval)
+            {
+                float t = TimeInterpolation.EaseOutQuad(elapsedTime, timeInterval);
+                transform.localPosition = Vector3.Lerp(start, targetPosition, t);
+
+                elapsedTime += (float)Time.deltaTime;
+                await Task.Delay((int)(Time.deltaTime * 1000));
+            }
+
+            transform.localPosition = targetPosition;
+        }
 
 
         public static async Task EaseOutColor(this Material material, Color finalColor, float timeInterval)

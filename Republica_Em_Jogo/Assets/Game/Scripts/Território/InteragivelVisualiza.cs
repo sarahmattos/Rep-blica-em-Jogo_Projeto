@@ -17,8 +17,11 @@ namespace Game.Territorio
         public BairroColorModificador bairroColorModificador;
 
         [Header("Bairro on focus Property")]
-        private Vector3 scaleInitial;
-        [SerializeField] private float zPlus = 2;
+        private Vector3 bairroScaleInitial;
+        private Vector3 setupPositionInitial;
+
+        [SerializeField] private float zBairroScalePlus = 2;
+        [SerializeField] private float ySetupBairroPositionPlus = 3.5f;
 
         private void Awake()
         {
@@ -31,7 +34,8 @@ namespace Game.Territorio
         private void Start()
         {
 
-            scaleInitial = transform.localScale;
+            bairroScaleInitial = transform.localScale;
+            setupPositionInitial = bairro.SetUpBairro.transform.localPosition;
 
             interagivel.MouseEnter += MouseEnterVisualiza;
             interagivel.MouseExit += MouseOutVisualiza;
@@ -88,17 +92,22 @@ namespace Game.Territorio
 
         private void OnFocusBairroMuda(bool value)
         {
-            Vector3 targetScale = Vector3.zero;
+            Vector3 bairroTargetScale = Vector3.zero;
+            Vector3 setupTargetPosition = Vector3.zero;
             if (value)
             {
-                targetScale = new Vector3(scaleInitial.x, scaleInitial.y, scaleInitial.z * zPlus);
+                bairroTargetScale = new Vector3(bairroScaleInitial.x, bairroScaleInitial.y, bairroScaleInitial.z * zBairroScalePlus);
+                setupTargetPosition = new Vector3(setupPositionInitial.x, setupPositionInitial.y * ySetupBairroPositionPlus, setupPositionInitial.z);
             }
             else
             {
-                targetScale = new Vector3(scaleInitial.x, scaleInitial.y, scaleInitial.z);
+                bairroTargetScale = new Vector3(bairroScaleInitial.x, bairroScaleInitial.y, bairroScaleInitial.z);
+                setupTargetPosition = new Vector3(setupPositionInitial.x, setupPositionInitial.y, setupPositionInitial.z);
+
                 bairroColorModificador.ResetColorMasking();
             }
-            SetScale(targetScale);
+            SetBairroScale(bairroTargetScale);
+            SetSetupBairroPosition(setupTargetPosition);
         }
 
         private void OnMudaHabilitado(bool value)
@@ -110,13 +119,17 @@ namespace Game.Territorio
             }
         }
 
-        private async void SetScale(Vector3 targetScale)
+        private async void SetBairroScale(Vector3 targetScale)
         {
             await transform.EaseOutScale(targetScale);
 
         }
 
+        private async void SetSetupBairroPosition(Vector3 targetPosition)
+        {
+            await bairro.SetUpBairro.transform.EaseOutLocalPosition(targetPosition);
 
+        }
     }
 
 
