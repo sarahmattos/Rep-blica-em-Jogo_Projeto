@@ -25,7 +25,7 @@ namespace Game
 
             LancarDados();
             ProcessarDescontagemEleitores();           
-            avancoState.NextAvancoStateServerRpc();
+            avancoState.StateMachineController.NextStateServerRpc();
 
         }
 

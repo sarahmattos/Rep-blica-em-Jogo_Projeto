@@ -70,7 +70,7 @@ namespace Game
         {
             bairro.Interagivel.ChangeSelectedBairro(true);
             avancoState.AvancoData.BairroVizinho = bairro;
-            avancoState.NextAvancoStateServerRpc();
+            avancoState.StateMachineController.NextStateServerRpc();
         }
 
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Game.Tools;
 using UnityEngine;
 
 namespace Game.Territorio
@@ -41,11 +42,11 @@ namespace Game.Territorio
             hoverMaterial.SetColor(baseColorID, ColorMasks.MouseExit);
         }
 
-        public async void SetBairroColorByPlayer(int previousPlayerID, int nextPlayerID)
+        public void SetBairroColorByPlayer(int previousPlayerID, int nextPlayerID)
         {
             Color playerColor = GameDataconfig.Instance.PlayerColorOrder[nextPlayerID];
             // SetColor(baseMaterial, playerColor);
-            await SetColorLerp(baseMaterial, playerColor);
+            SetColorLerp(baseMaterial, playerColor, 0.5f);
 
         }
 
@@ -78,28 +79,19 @@ namespace Game.Territorio
         }
 
 
-        public async Task BlinkBairroColorTask()
+        public void BlinkBairroColorTask()
         {
-            float elapsedTime = 0f;
-            float maxTime = 0.3f;
             hoverMaterial.SetColor(baseColorID, colorMasks.BlinkColor);
-            while (elapsedTime < maxTime)
-            {
-                hoverMaterial.SetColor(baseColorID,
-                    Color.Lerp(hoverMaterial.color,
-                            colorMasks.MouseExit,
-                            maxTime
-                    )
-                );
-                elapsedTime += Time.fixedDeltaTime;
-                await Task.Delay((int)(Time.fixedDeltaTime * 1000));
-            }
-
+            SetColorLerp(hoverMaterial, colorMasks.MouseExit, 0.1f);
             SetHoverColorByPointerState();
         }
 
         public void SetHoverColorByPointerState()
         {
+            if(!interagivel.Habilitado) {
+                hoverMaterial.SetColor(baseColorID,colorMasks.MouseExit);
+                return;
+            }
             //ajustar aqui
             if (interagivel.PointerState == PointerState.ENTER)
             {
@@ -111,24 +103,9 @@ namespace Game.Territorio
             }
         }
 
-        public async Task SetColorLerp(Material material, Color color)
+        public async void SetColorLerp(Material material, Color color, float time)
         {
-
-            float elapsedTime = 0f;
-            float maxTime = 0.5f;
-            while (elapsedTime < maxTime)
-            {
-                material.SetColor(baseColorID,
-                    Color.Lerp(material.color,
-                            color,
-                            maxTime
-                    )
-                );
-
-                elapsedTime += Time.fixedDeltaTime;
-                await Task.Delay((int)(Time.fixedDeltaTime * 1000));
-
-            }
+            await material.EaseOutColor(color, time);
         }
 
 

@@ -81,9 +81,9 @@ namespace Game.Territorio
             BlinkBairro();
         }
 
-        private async void BlinkBairro()
+        private void BlinkBairro()
         {
-            await bairroColorModificador.BlinkBairroColorTask();
+            bairroColorModificador.BlinkBairroColorTask();
         }
 
         private void OnFocusBairroMuda(bool value)

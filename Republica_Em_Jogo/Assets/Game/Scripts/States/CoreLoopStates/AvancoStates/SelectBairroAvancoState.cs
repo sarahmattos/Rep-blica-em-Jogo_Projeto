@@ -59,7 +59,6 @@ namespace Game
             if (BairrosInteragiveis.Count == 0) return;
 
             BairrosInteragiveis.MudarHabilitado(false);
-            // BairrosInteragiveis.Clear();
             SetUpZona.Instance.AllBairros.MudarInativity(false);
             DesinscreverClickInteragivelBairros(BairrosInteragiveis);
 
@@ -104,7 +103,7 @@ namespace Game
         {
             bairro.Interagivel.ChangeSelectedBairro(true);
             avancoState.AvancoData.BairroPlayer = bairro;
-            avancoState.NextAvancoStateServerRpc();
+            avancoState.StateMachineController.NextStateServerRpc();
         }
 
 

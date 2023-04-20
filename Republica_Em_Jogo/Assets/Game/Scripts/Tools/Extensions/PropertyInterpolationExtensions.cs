@@ -18,7 +18,8 @@ namespace Game.Tools
             float timeInterval = 0.5f;
             while (elapsedTime < timeInterval)
             {
-                rectTransform.sizeDelta = Vector2.Lerp(start, sizeDelta, TimeInterpolation.EaseInOutQuad(elapsedTime, timeInterval));
+                float t = TimeInterpolation.EaseInOutQuad(elapsedTime, timeInterval);
+                rectTransform.sizeDelta = Vector2.Lerp(start, sizeDelta, t);
 
                 elapsedTime += (float)Time.deltaTime;
                 await Task.Delay((int)(Time.deltaTime * 1000));
@@ -35,7 +36,8 @@ namespace Game.Tools
 
             while (elapsedTime < timeInterval)
             {
-                canvasGroup.alpha = Mathf.Lerp(start, alpha, TimeInterpolation.EaseOutQuad(elapsedTime, timeInterval));
+                float t = TimeInterpolation.EaseOutQuad(elapsedTime, timeInterval);
+                canvasGroup.alpha = Mathf.Lerp(start, alpha, t);
 
                 elapsedTime += (float)Time.deltaTime;
                 await Task.Delay((int)(Time.deltaTime * 1000));
@@ -53,7 +55,8 @@ namespace Game.Tools
 
             while (elapsedTime < timeInterval)
             {
-                transform.localScale = Vector3.Lerp(start, scale, TimeInterpolation.EaseOutQuad(elapsedTime, timeInterval));
+                float t = TimeInterpolation.EaseOutQuad(elapsedTime, timeInterval);
+                transform.localScale = Vector3.Lerp(start, scale, t);
 
                 elapsedTime += (float)Time.deltaTime;
                 await Task.Delay((int)(Time.deltaTime * 1000));
@@ -62,6 +65,25 @@ namespace Game.Tools
             transform.localScale = scale;
         }
 
+
+        public static async Task EaseOutColor(this Material material, Color finalColor, float timeInterval)
+        {
+            int PropertyToID = Shader.PropertyToID("_BaseColor");
+            Color startColor = material.GetColor(PropertyToID);
+            float elapsedTime = 0;
+
+            while (elapsedTime < timeInterval)
+            {
+                float t = TimeInterpolation.EaseOutQuad(elapsedTime, timeInterval);
+                material.SetColor(PropertyToID, Color.Lerp(startColor, finalColor, t));
+
+                elapsedTime += (float)Time.deltaTime;
+                await Task.Delay((int)(Time.deltaTime * 1000));
+            }
+
+            material.SetColor(PropertyToID, finalColor);
+
+        }
 
 
 

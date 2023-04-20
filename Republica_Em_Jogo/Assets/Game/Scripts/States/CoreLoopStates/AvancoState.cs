@@ -5,6 +5,7 @@ using Game.Territorio;
 using Game.Player;
 using Game.UI;
 using Game.Tools;
+using UnityEngine;
 
 namespace Game
 {
@@ -16,8 +17,11 @@ namespace Game
         MIGRACAO
     }
 
+    [RequireComponent(typeof(StateMachineController))]
     public class AvancoState : State
     {
+        [SerializeField] private List<State> subStates;
+
         private NetworkVariable<int> avancoStateIndex = new NetworkVariable<int>(
             -1,
             NetworkVariableReadPermission.Everyone,
@@ -33,6 +37,9 @@ namespace Game
         public string explicaTexto, explicaTextoCorpo;
         private UICoreLoop uiCore;
 
+        private StateMachineController stateMachineController;
+        public StateMachineController StateMachineController => stateMachineController;
+
         public List<Bairro> bairrosPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
 
         private void SetPairValues()
@@ -45,6 +52,10 @@ namespace Game
 
         private void Start()
         {
+            stateMachineController = GetComponent<StateMachineController>();
+            stateMachineController.Initialize(subStates);
+            stateMachineController.ResetMachineState();
+            
             statePairValues = new Dictionary<AvancoStatus, State>();
             SetPairValues();
             dadosUiGeral = FindObjectOfType<DadosUiGeral>();
@@ -55,8 +66,10 @@ namespace Game
         {
             avancoData.ResetData();
             if (!TurnManager.Instance.LocalIsCurrent) return;
-            avancoStateIndex.OnValueChanged += AvancoIndexMuda;
-            SetAvancoStateServerRpc(0);
+            stateMachineController.ChangeStateServerRpc(0);
+            stateMachineController.saidaUltimoStado += AcrescentaRodada;
+            //avancoStateIndex.OnValueChanged += AvancoIndexMuda;
+            //SetAvancoStateServerRpc(0);
             uiCore.MostrarAvisoEstado(explicaTexto, explicaTextoCorpo);
 
         }
@@ -65,50 +78,48 @@ namespace Game
         {
 
             if (!TurnManager.Instance.LocalIsCurrent) return;
-            avancoStateIndex.OnValueChanged -= AvancoIndexMuda;
+            stateMachineController.ChangeStateServerRpc(-1);
+            //SetAvancoStateServerRpc(-1);
+            stateMachineController.saidaUltimoStado -= AcrescentaRodada;
             bairrosPlayerAtual.MudarInteragivel(false);
-            SetAvancoStateServerRpc(-1);
             dadosUiGeral.resetaUiDadosServerRpc();
 
+        }
 
+        public override void OnNetworkDespawn()
+        {
+            stateMachineController.Finish();
         }
 
 
-        private void AvancoIndexMuda(int previousValue, int nextValue)
-        {
-            InvokeEventosStates(previousValue, nextValue);
-            SaindoUltimoState(previousValue);
-        }
+        //private void AvancoIndexMuda(int nextValue)
+        //{
+        //    //InvokeEventosStates(previousValue, nextValue);
+        //    SaindoUltimoState();
+        //}
 
-        private void InvokeEventosStates(int previousValue, int nextValue)
-        {
-            currentState?.InvokeSaida();
-            currentState = statePairValues[(AvancoStatus)nextValue];
-            estadoMuda?.Invoke((AvancoStatus)nextValue);
-            currentState.InvokeEntrada();
-        }
 
-        private void SaindoUltimoState(int previousValue)
+        private void AcrescentaRodada()
         {
-            int ultimoAvancoStateIndex = (statePairValues.Count - 1);
-            if (previousValue == ultimoAvancoStateIndex)
-            {
+            //int ultimoAvancoStateIndex = (statePairValues.Count - 1);
+            //if (previousValue == ultimoAvancoStateIndex)
+            //{
                 avancoData.ContagemRodada++;
                 avancoData.ClearRodadaData();
-            }
+            //}
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        public void SetAvancoStateServerRpc(int index)
-        {
-            avancoStateIndex.Value = index;
-        }
+        //[ServerRpc(RequireOwnership = false)]
+        //public void SetAvancoStateServerRpc(int index)
+        //{
+        //    avancoStateIndex.Value = index;
+        //}
 
-        [ServerRpc(RequireOwnership = false)]
-        public void NextAvancoStateServerRpc()
-        {
-            avancoStateIndex.Value = (avancoStateIndex.Value + 1) % (statePairValues.Count);
-        }
+        //[ServerRpc(RequireOwnership = false)]
+        //public void NextAvancoStateServerRpc()
+        //{
+        //    avancoStateIndex.Value = (avancoStateIndex.Value + 1) % (statePairValues.Count);
+        //}
 
 
     }

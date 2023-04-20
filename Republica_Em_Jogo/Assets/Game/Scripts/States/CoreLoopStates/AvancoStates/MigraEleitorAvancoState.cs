@@ -41,7 +41,7 @@ namespace Game
         {
             if (!PodeMigrar)
             {
-                avancoState.NextAvancoStateServerRpc();
+                avancoState.StateMachineController.NextStateServerRpc();
                 return;
             }
             Tools.Logger.Instance.LogPlayerAction("Aperte 1 ou 2 ou 3 para escolher.");
@@ -78,7 +78,7 @@ namespace Game
             MigrarEleitores(eleitores);
             migraEleitores?.Invoke(eleitores, avancoState.AvancoData.BairroVizinho);
             yield return new WaitForSeconds(0.1f);
-            avancoState.NextAvancoStateServerRpc();
+            avancoState.StateMachineController.NextStateServerRpc();
 
         }
 

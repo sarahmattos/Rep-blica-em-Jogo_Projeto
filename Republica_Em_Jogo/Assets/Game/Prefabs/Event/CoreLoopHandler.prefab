@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 7018205475970536399}
   - component: {fileID: 4426548914482518964}
   m_Layer: 0
-  m_Name: ProcessaAvancoState
+  m_Name: MigraEleitorAvancoState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9048786227140658247}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4426548914482518964
 MonoBehaviour:
@@ -496,6 +496,7 @@ GameObject:
   - component: {fileID: 9048786227140658247}
   - component: {fileID: 6455126395022951460}
   - component: {fileID: 3293170153377813013}
+  - component: {fileID: 3347355860370370990}
   m_Layer: 0
   m_Name: AvancoState
   m_TagString: Untagged
@@ -517,8 +518,8 @@ Transform:
   m_Children:
   - {fileID: 2455354048244936061}
   - {fileID: 2231912323342625003}
-  - {fileID: 7018205475970536399}
   - {fileID: 5356792239897812448}
+  - {fileID: 7018205475970536399}
   m_Father: {fileID: 7677490024804130840}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -534,6 +535,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a7dec1dc6143e48a97bc923910eed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  subStates:
+  - {fileID: 1488523545332775419}
+  - {fileID: 4167922049000378505}
+  - {fileID: 2553095162717818238}
+  - {fileID: 4426548914482518964}
   explicaTexto: "Voc\xEA est\xE1 no estado Avan\xE7o"
   explicaTextoCorpo: "Neste estado voc\xEA escolhe uma zona sua para tentar conquistar
     uma zona inimiga. A conquista se d\xE1 pela disputa de dados correspondente a
@@ -555,6 +561,18 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &3347355860370370990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8368842500771979407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8bd2d7bb9deab4a83bdeeb79fe1f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8380813538036934128
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,7 +603,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9048786227140658247}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2553095162717818238
 MonoBehaviour:
