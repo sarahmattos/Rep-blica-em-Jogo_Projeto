@@ -23,10 +23,18 @@ namespace Game.UI
 
         private void OnInicializacaoStateSaida()
         {
-            foreach (PlayerStats playerStats in PlayerStatsManager.Instance.AllPlayerStats)
-            {
-                InstanciarUi(playerStats.Cor, playerStats.playerID);
+            Debug.Log("quantidade: "+ TurnManager.Instance.ordemPlayersID.Count);
+            for(int i =0;i<TurnManager.Instance.ordemPlayersID.Count;i++){
+                foreach (PlayerStats playerStats in PlayerStatsManager.Instance.AllPlayerStats)
+                {
+                    if(playerStats.playerID == TurnManager.Instance.ordemPlayersID[i]){
+                         Debug.Log("player: "+playerStats.playerID+" igual " +TurnManager.Instance.ordemPlayersID[i]);
+                        InstanciarUi(playerStats.Cor, playerStats.playerID);
+                    }
+                    
+                }
             }
+            
 
         }
 
