@@ -175,7 +175,7 @@ namespace Game.UI
         private void InitializeHudStats()
         {
             // iconJogador.color = playerStats.Cor;
-            text_nomeJogador.SetText(playerStats.Nome);
+            text_nomeJogador.SetText(GameDataconfig.Instance.TagPlayerColorizada(playerStats.playerID));
             text_eleitores.SetText(textToDisplayEleitores);
             text_objetivo.SetText(playerStats.ObjetivoCarta);
 
