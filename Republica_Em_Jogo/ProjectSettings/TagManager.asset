@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Selectable
   - Bairro
+  - Particula
   layers:
   - Default
   - TransparentFX

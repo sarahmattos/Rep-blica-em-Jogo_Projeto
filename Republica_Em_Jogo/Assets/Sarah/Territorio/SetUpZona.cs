@@ -112,7 +112,7 @@ namespace Game.Territorio
                 zona.ContarBairroInControlTodosPlayers(_eleitoresPlayers, numPlayer);
             }
         }
-        public void PlayerTemZonaInteira(int client)
+        public void PlayerTemZonaInteira(int client, bool valor)
         {
             tenhoZona = new List<ZonaTerritorial>();
             foreach (ZonaTerritorial zona in zonas)
@@ -120,7 +120,17 @@ namespace Game.Territorio
                 if (zona.checaSePlayerTemTodosBairrosDeUmaZona(client) != null)
                 {
                     tenhoZona.Add(zona.checaSePlayerTemTodosBairrosDeUmaZona(client));
+                    //
+                    if(valor)zona.setParticulaUi(true);
                 }
+            }
+        }
+
+        public void resetaParticulaUI(){
+            foreach (ZonaTerritorial zona in zonas)
+            {
+                zona.setParticulaUi(false);
+                
             }
         }
 

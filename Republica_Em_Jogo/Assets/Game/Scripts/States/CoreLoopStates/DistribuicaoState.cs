@@ -20,11 +20,13 @@ namespace Game
         private HudStatsJogador hs;
         private List<Bairro> BairrosDoPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
         private RodadaController rodadaController;
+        private SetUpZona setUpZona;
 
         public void Start()
         {
             TurnManager.Instance.vezDoPlayerLocal += quandoVezPlayerLocal;
             uiCore = FindObjectOfType<UICoreLoop>();
+            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
         }
 
         public override void EnterState()
@@ -40,6 +42,7 @@ namespace Game
             if (!TurnManager.Instance.LocalIsCurrent) return;
             hs.distribuicaoInicial = false;
             BairrosDoPlayerAtual.MudarHabilitado(false);
+            setUpZona.resetaParticulaUI();
         }
 
         public override void OnDestroy()

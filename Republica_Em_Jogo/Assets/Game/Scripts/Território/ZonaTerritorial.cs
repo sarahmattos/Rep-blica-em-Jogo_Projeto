@@ -3,12 +3,14 @@ using Game.Tools;
 using UnityEngine;
  using Game.UI;
 using Game.Player;
+using TMPro;
 using System.Collections.Generic;
 namespace Game.Territorio
 {
     public class ZonaTerritorial : MonoBehaviour
     {
         [SerializeField] private string nome;
+        [SerializeField] GameObject quantidadeGanhaParticula;
         private Bairro[] bairros;
         public Bairro[] Bairros => bairros;
         public string Nome { get => nome; }
@@ -116,6 +118,9 @@ namespace Game.Territorio
                    soma3 += bairro.checaNumerodeSaude();
                 }
                 return soma3;
+            }
+            public void setParticulaUi(bool valor){
+                quantidadeGanhaParticula.SetActive(valor);
             }
     }
 }
