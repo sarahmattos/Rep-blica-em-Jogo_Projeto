@@ -4,11 +4,13 @@ using System;
 using System.Collections;
 using Game.Territorio;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game
 {
     public class MigraEleitorAvancoState : State
     {
+        [SerializeField] GameObject avisoPassaEleitor;
         private const int minEleitores = 1;
         private const int maxEleitores = 3;
         private AvancoState avancoState;
@@ -45,6 +47,7 @@ namespace Game
                 return;
             }
             Tools.Logger.Instance.LogPlayerAction("Aperte 1 ou 2 ou 3 para escolher.");
+            avisoPassaEleitor.SetActive(true);
             StartCoroutine(InputReceiver());
 
         }
@@ -76,6 +79,7 @@ namespace Game
         {
             MudaVizinhoControl();
             MigrarEleitores(eleitores);
+            avisoPassaEleitor.SetActive(false);
             migraEleitores?.Invoke(eleitores, avancoState.AvancoData.BairroVizinho);
             yield return new WaitForSeconds(0.1f);
             avancoState.StateMachineController.NextStateServerRpc();
