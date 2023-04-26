@@ -19,7 +19,7 @@ namespace Game
 
         private void Start()
         {
-            camera = Camera.main;
+            camera = Camera.main.gameObject.GetComponent<Camera>();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
