@@ -364,6 +364,7 @@ public class Projeto : NetworkBehaviour
             votacaoResposta.Value = 0;
             projetoNetworkTexto.Value = "";
             zonaNetworkName.Value = "";
+            idPlayer.Value = -1;
         }
         if (NetworkManager.Singleton.IsClient)
         {

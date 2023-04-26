@@ -41,9 +41,12 @@ public class MovimentosSociais : NetworkBehaviour
         movimentoSocialNetworkTexto.Value = textoTotal2;
         idPlayerMS.Value = id;
     }
+    
 
     public void sortearMS()
     {
+        //reseta
+        AtualizaTextoServerRpc("", 0);
         HabilitarBairrosPlayerAtual(true);
         int aux = Random.Range(0, MovimentoSociaisManager.movimento.Length);
         movimento = MovimentoSociaisManager.movimento[aux];
@@ -72,18 +75,21 @@ public class MovimentosSociais : NetworkBehaviour
             };
         idPlayerMS.OnValueChanged += (int previousValue, int newValue) =>
         {
-            if (newValue != (int)NetworkManager.Singleton.LocalClientId)
-            {
-                btnOk.SetActive(false);
-                btnFechar.SetActive(true);
-                text_aviso.text = "Movimento Social retirado pelo jogador: " + newValue;
-            }
+             if (newValue != 0){
+                if (newValue != (int)NetworkManager.Singleton.LocalClientId)
+                {
+                    btnOk.SetActive(false);
+                    btnFechar.SetActive(true);
+                    text_aviso.text = "Movimento Social retirado pelo jogador: " + newValue;
+                }
             else
-            {
-                text_aviso.text = " ";
-                btnOk.SetActive(true);
-                btnFechar.SetActive(false);
-            }
+                {
+                    text_aviso.text = " ";
+                    btnOk.SetActive(true);
+                    btnFechar.SetActive(false);
+                }
+             }
+            
         };
     }
     public void chamarRecompensasEleitor()

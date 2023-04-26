@@ -44,6 +44,7 @@ public class Corrupcao : NetworkBehaviour
     public void sortearCorrupcao()
     {
         //defaultValues();
+        AtualizaTextoServerRpc("", 0);
         HabilitarBairrosPlayerAtual(true);
         corrupcao = CorrupcaoManager.corrupcao[Random.Range(0, CorrupcaoManager.corrupcao.Length)];
         complementText = CorrupcaoManager.complementText;
@@ -67,18 +68,20 @@ public class Corrupcao : NetworkBehaviour
             };
         idPlayerCorrupcao.OnValueChanged += (int previousValue, int newValue) =>
              {
-                 if (newValue != (int)NetworkManager.Singleton.LocalClientId)
-                 {
-                     btnOk.SetActive(false);
-                     btnFechar.SetActive(true);
-                     text_aviso.text = "Corrupção retirado pelo jogador: " + newValue;
-                 }
-                 else
-                 {
-                     text_aviso.text = " ";
-                     btnOk.SetActive(true);
-                     btnFechar.SetActive(false);
-                 }
+                if (newValue != 0){
+                    if (newValue != (int)NetworkManager.Singleton.LocalClientId)
+                    {
+                        btnOk.SetActive(false);
+                        btnFechar.SetActive(true);
+                        text_aviso.text = "Corrupção retirado pelo jogador: " + newValue;
+                    }
+                    else
+                    {
+                        text_aviso.text = " ";
+                        btnOk.SetActive(true);
+                        btnFechar.SetActive(false);
+                    }
+                }
              };
     }
     public void chamarPenalidade()

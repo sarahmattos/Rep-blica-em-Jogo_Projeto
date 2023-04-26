@@ -20,6 +20,7 @@ namespace Game.UI
         public void PuxarCartaAnimation()
         {
             animator.Play("PuxarCarta");
+            
         }
 
 
@@ -43,8 +44,8 @@ namespace Game.UI
             int rnd = Random.Range(0, 100);
             if (rnd >= 0 && rnd < 25) corrupcao?.sortearCorrupcao();
             if (rnd >= 25 && rnd < 50) movimentosSociais?.sortearMS();
-            if (rnd >= 50) 
-            projeto?.sortearProjeto();
+            if (rnd >= 50) projeto?.sortearProjeto();
+            
         }
         public void baralhoManager(bool valor)
         {
