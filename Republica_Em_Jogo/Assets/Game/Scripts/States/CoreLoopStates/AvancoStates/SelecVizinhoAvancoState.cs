@@ -37,6 +37,7 @@ namespace Game
 
         public override void EnterState()
         {
+            if (!TurnManager.Instance.LocalIsCurrent) return;
             VizinhosInimigos.MudarHabilitado(true);
             InscreverClickInteragivelBairros(VizinhosInimigos);
             VizinhosInimigosNaoPodemInteragir.MudarInativity(true);
@@ -44,6 +45,7 @@ namespace Game
 
         public override void ExitState()
         {
+            if (!TurnManager.Instance.LocalIsCurrent) return;
             DesinscreverClickInteragivelBairros(VizinhosInimigos);
             VizinhosInimigos.MudarHabilitado(false);
             SetUpZona.Instance.AllBairros.MudarInativity(false);

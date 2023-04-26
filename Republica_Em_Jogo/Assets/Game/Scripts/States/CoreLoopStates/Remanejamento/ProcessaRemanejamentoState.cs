@@ -19,7 +19,6 @@ namespace Game
         public override void EnterState()
         {
             Tools.Logger.Instance.LogPlayerAction("Moveu 1 eleitor para " + remanejamentoData.VizinhoEscolhido);
-
             if (!TurnManager.Instance.LocalIsCurrent) return;
             StartCoroutine(ProcessarRemanejamento());
 

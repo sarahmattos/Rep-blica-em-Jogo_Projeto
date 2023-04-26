@@ -22,23 +22,24 @@ namespace Game
         public override void EnterState()
         {
             // UICoreLoop.Instance.UpdateTitleText("Rolando Dados...");
-
+            if (!TurnManager.Instance.LocalIsCurrent) return;
             LancarDados();
-            ProcessarDescontagemEleitores();           
+            ProcessarDescontagemEleitores();
             avancoState.StateMachineController.NextStateServerRpc();
 
         }
 
-        public override void ExitState() 
+        public override void ExitState()
         {
+            if (!TurnManager.Instance.LocalIsCurrent) return;
         }
 
         private void LancarDados()
         {
             List<int> dadosPlayerAtual = new List<int>();
             List<int> dadosVizinhos = new List<int>();
-            dadosPlayerAtual = GerarDados(bairroPlayerAtual,1);
-            dadosVizinhos = GerarDados(bairroVizinho,0);
+            dadosPlayerAtual = GerarDados(bairroPlayerAtual, 1);
+            dadosVizinhos = GerarDados(bairroVizinho, 0);
             dadosPlayerAtual.Sort();
             dadosPlayerAtual.Reverse();
             dadosVizinhos.Sort();
@@ -46,16 +47,18 @@ namespace Game
             avancoState.AvancoData.SetDados(dadosPlayerAtual, dadosVizinhos);
         }
 
-        private void ProcessarDescontagemEleitores() {
+        private void ProcessarDescontagemEleitores()
+        {
             CalcularDiscountAvanco();
             AplicaDiscountPlayer();
             AplicaDiscountVizinho();
         }
 
-        private List<int> GerarDados(Bairro bairro, int diminuiEleitor) {
+        private List<int> GerarDados(Bairro bairro, int diminuiEleitor)
+        {
             Eleitores eleitoresParaAvanco = bairro.SetUpBairro.Eleitores;
             List<int> dados = new List<int>();
-            for (int i = 0; i < QntdDados(eleitoresParaAvanco,diminuiEleitor); i++)
+            for (int i = 0; i < QntdDados(eleitoresParaAvanco, diminuiEleitor); i++)
             {
                 dados.Add(randomDiceValue);
             }
@@ -91,7 +94,7 @@ namespace Game
                 return false;
         }
 
-        private int QntdDados(Eleitores eleitores,int subtrair)
+        private int QntdDados(Eleitores eleitores, int subtrair)
         {
             return Mathf.Clamp(
                 (eleitores.contaEleitores > 3) ? 3 : eleitores.contaEleitores - subtrair,
@@ -108,7 +111,8 @@ namespace Game
             );
         }
 
-        private void AplicaDiscountVizinho() {
+        private void AplicaDiscountVizinho()
+        {
             int eleitorDiscountVizinho = avancoState.AvancoData.EleitorDiscountVizinho;
             avancoState.AvancoData.BairroVizinho.SetUpBairro.Eleitores.AcrescentaEleitorServerRpc(
                 eleitorDiscountVizinho

@@ -43,6 +43,7 @@ namespace Game
 
         public override void EnterState()
         {
+            if (!TurnManager.Instance.LocalIsCurrent) return;
             if (BairrosInteragiveis.Count == 0)
             {
                 //TODO: retornar para o jogador alguma interface indicando que nao ha bairros para avancar
@@ -56,6 +57,7 @@ namespace Game
 
         public override void ExitState()
         {
+            if (!TurnManager.Instance.LocalIsCurrent) return;
             if (BairrosInteragiveis.Count == 0) return;
 
             BairrosInteragiveis.MudarHabilitado(false);

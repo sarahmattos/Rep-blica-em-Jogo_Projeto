@@ -41,6 +41,7 @@ namespace Game
         }
         public override void EnterState()
         {
+            if (!TurnManager.Instance.LocalIsCurrent) return;
             if (!PodeMigrar)
             {
                 avancoState.StateMachineController.NextStateServerRpc();
@@ -54,6 +55,7 @@ namespace Game
 
         public override void ExitState()
         {
+            if (!TurnManager.Instance.LocalIsCurrent) return;
             StopAllCoroutines();
         }
 

@@ -30,6 +30,7 @@ namespace Game
         public override void EnterState()
         {
             if (!TurnManager.Instance.LocalIsCurrent) return;
+            SetUpZona.Instance.AllBairros.MudarInativity(true);
             remanejamentoData.ClearData();
             remanejamentoData.ArmazenarBairrosRemanejaveis();
             stateMachineController.ChangeStateServerRpc(0);
