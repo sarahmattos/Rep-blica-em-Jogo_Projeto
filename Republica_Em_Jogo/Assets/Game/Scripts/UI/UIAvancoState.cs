@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Game.Player;
 
 namespace Game.UI
 {
@@ -16,6 +17,7 @@ namespace Game.UI
         [SerializeField] private Sprite[] dadosSprite;
         DadosUiGeral dadosUiGeral;
         public AvancoData AvancoData => avancoState.AvancoData;
+        public PlayerStats PlayerStatsLocal => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual();
 
         private void Start()
         {
@@ -64,11 +66,19 @@ namespace Game.UI
                 for(int i=0; i<valoresSeparados.Length-1;i++){
                     dadosImageSeus[i].sprite = dadosSprite[int.Parse(valoresSeparados[i])];
                     dadosImageSeus[i].gameObject.SetActive(true);
+                    dadosImageSeus[i].color = PlayerStatsLocal.Cor;
                 }
             
                 for(int i=0; i<valoresSeparados2.Length-1;i++){
                     dadosImageVizinhos[i].sprite =  dadosSprite[int.Parse(valoresSeparados2[i])];
                     dadosImageVizinhos[i].gameObject.SetActive(true);
+
+                    PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
+                    foreach(PlayerStats player in allPlayerStats){
+                        if(player.playerID== avancoState.AvancoData.BairroVizinho.PlayerIDNoControl.Value){
+                            dadosImageVizinhos[i].color = player.Cor;
+                        }
+                    }
                 }
             } 
             
