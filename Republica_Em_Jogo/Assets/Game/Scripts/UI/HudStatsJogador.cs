@@ -289,10 +289,11 @@ namespace Game.UI
         //botao chama funcao de distribuicao de eleitor no inicio das rodadas
         public void ChamatPlayerInicioRodada()
         {
-            checaZonasInteiras(true);
+            
             eleitoresAdicionais = 0;
             if (distribuicaoInicial == true)
             {
+                checaZonasInteiras(true);
                 //se for state do inicio
                 //tem zona inteira ganha adicional
                 for (int i = 0; i < setUpZona.tenhoZona.Count; i++)
@@ -352,9 +353,9 @@ namespace Game.UI
         {
             btnsAux.SetActive(!btnsAux.activeSelf);
         }
-        public void checaZonasInteiras(bool valor)
+        public void checaZonasInteiras(bool valorParticula)
         {
-            setUpZona.PlayerTemZonaInteira(playerStats.playerID,valor);
+            setUpZona.PlayerTemZonaInteira(playerStats.playerID, valorParticula);
         }
 
     }

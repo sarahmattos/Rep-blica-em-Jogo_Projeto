@@ -46,7 +46,7 @@ public class MovimentosSociais : NetworkBehaviour
     public void sortearMS()
     {
         //reseta
-        AtualizaTextoServerRpc("", 0);
+        AtualizaTextoServerRpc("", -1);
         HabilitarBairrosPlayerAtual(true);
         int aux = Random.Range(0, MovimentoSociaisManager.movimento.Length);
         movimento = MovimentoSociaisManager.movimento[aux];
@@ -75,7 +75,7 @@ public class MovimentosSociais : NetworkBehaviour
             };
         idPlayerMS.OnValueChanged += (int previousValue, int newValue) =>
         {
-             if (newValue != 0){
+             if (newValue != -1){
                 if (newValue != (int)NetworkManager.Singleton.LocalClientId)
                 {
                     btnOk.SetActive(false);

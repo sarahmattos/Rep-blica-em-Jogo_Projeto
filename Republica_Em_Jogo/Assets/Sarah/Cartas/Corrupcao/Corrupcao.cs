@@ -44,7 +44,7 @@ public class Corrupcao : NetworkBehaviour
     public void sortearCorrupcao()
     {
         //defaultValues();
-        AtualizaTextoServerRpc("", 0);
+        AtualizaTextoServerRpc("", -1);
         HabilitarBairrosPlayerAtual(true);
         corrupcao = CorrupcaoManager.corrupcao[Random.Range(0, CorrupcaoManager.corrupcao.Length)];
         complementText = CorrupcaoManager.complementText;
@@ -68,7 +68,7 @@ public class Corrupcao : NetworkBehaviour
             };
         idPlayerCorrupcao.OnValueChanged += (int previousValue, int newValue) =>
              {
-                if (newValue != 0){
+                if (newValue != -1){
                     if (newValue != (int)NetworkManager.Singleton.LocalClientId)
                     {
                         btnOk.SetActive(false);
