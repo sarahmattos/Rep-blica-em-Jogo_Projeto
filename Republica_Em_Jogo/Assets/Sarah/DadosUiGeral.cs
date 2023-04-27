@@ -16,8 +16,10 @@ namespace Game
         private NetworkVariable<FixedString4096Bytes> dadosPlayerServer = new NetworkVariable<FixedString4096Bytes>();
         private NetworkVariable<FixedString4096Bytes> dadosVizinhoServer = new NetworkVariable<FixedString4096Bytes>();
         private NetworkVariable<Color> corVizinhoDado = new NetworkVariable<Color>();
+        private NetworkVariable<bool> saiuAvanco = new NetworkVariable<bool>();
         public UIAvancoState uIAvancoState;
         Color corDadoVizinho;
+        bool valor;
          int aux;
         // Start is called before the first frame update
         string player,vizinho;
@@ -26,6 +28,11 @@ namespace Game
         public void atualizaCorVizinhoDadoServerRpc(Color cor)
         {
             corVizinhoDado.Value = cor;
+        }
+        [ServerRpc(RequireOwnership = false)]
+        public void atualizasaiuAvancoServerRpc(bool _valor)
+        {
+            saiuAvanco.Value = _valor;
         }
         [ServerRpc(RequireOwnership = false)]
         public void atualizaUiDadosServerRpc(string _player, string _vizinho)
@@ -72,13 +79,19 @@ namespace Game
              corVizinhoDado.OnValueChanged += (Color previousValue, Color newValue) =>
             {
               if(newValue!=Color.white){
-                aux++;
+                    aux++;
                     corDadoVizinho = newValue;
+                    atualizaUiDados();
               }
                 
             };
+            saiuAvanco.OnValueChanged += (bool previousValue, bool newValue) =>
+            {
+                uIAvancoState.desativaDados();
+            };
         
         }
+        
         public void atualizaUiDados(){
             if(aux==3){
                 uIAvancoState.UpdateTextDados2(player,vizinho,corDadoVizinho);

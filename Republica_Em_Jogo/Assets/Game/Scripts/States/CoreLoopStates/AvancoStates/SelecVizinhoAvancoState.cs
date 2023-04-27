@@ -4,6 +4,7 @@ using System.Linq;
 using Game.Player;
 using Game.UI;
 using Game.Tools;
+using UnityEngine;
 
 namespace Game
 {
@@ -72,6 +73,7 @@ namespace Game
 
         private void OnBairroClicado(Bairro bairro)
         {
+            dadosUiGeral.atualizaCorVizinhoDadoServerRpc(Color.white);
             bairro.Interagivel.ChangeSelectedBairro(true);
             avancoState.AvancoData.BairroVizinho = bairro;
             foreach (PlayerStats playerStats in PlayerStatsManager.Instance.AllPlayerStats)

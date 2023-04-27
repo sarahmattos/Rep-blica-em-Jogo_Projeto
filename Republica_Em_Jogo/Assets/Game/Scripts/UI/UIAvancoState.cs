@@ -48,36 +48,39 @@ namespace Game.UI
             dadosUiGeral.atualizaUiDadosServerRpc(dadosPlayerAtual,dadosVizinhos);
 
         }
-        public void UpdateTextDados2(string _p,string _v, Color corVizinho){
-
+        public void desativaDados(){
             foreach(Image img in dadosImageSeus){
                 img.gameObject.SetActive(false);
             }
             foreach(Image img in dadosImageVizinhos){
                 img.gameObject.SetActive(false);
             }
+        }
+        public void UpdateTextDados2(string _p,string _v, Color corVizinho){
+
+            desativaDados();
 
             string[] valoresSeparados = _p.Split(';');
             string[] valoresSeparados2 = _v.Split(';');
-            int teste;
 
-            if (int.TryParse(valoresSeparados[0], out teste))
-            {
+            
                 for(int i=0; i<valoresSeparados.Length-1;i++){
                     dadosImageSeus[i].sprite = dadosSprite[int.Parse(valoresSeparados[i])];
                     dadosImageSeus[i].gameObject.SetActive(true);
                     dadosImageSeus[i].color = PlayerStatsLocal.Cor;
+                    //Debug.Log(valoresSeparados[i]);
                 }
             
                 for(int i=0; i<valoresSeparados2.Length-1;i++){
                     dadosImageVizinhos[i].sprite =  dadosSprite[int.Parse(valoresSeparados2[i])];
                     dadosImageVizinhos[i].gameObject.SetActive(true);
-                    //if()Debug.Log(AvancoData.BairroVizinho.PlayerIDNoControl.Value+" vizinhoId");
                     dadosImageVizinhos[i].color =corVizinho;
+                    //Debug.Log(valoresSeparados2[i]);
                             
                     
                 }
-            } 
+                 
+            
             
             
             text_dadosPlayerAtual.SetText("Ataque:");

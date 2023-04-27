@@ -70,6 +70,7 @@ namespace Game
             stateMachineController.saidaUltimoStado += AcrescentaRodada;
             //avancoStateIndex.OnValueChanged += AvancoIndexMuda;
             //SetAvancoStateServerRpc(0);
+            dadosUiGeral.atualizasaiuAvancoServerRpc(false);
             uiCore.MostrarAvisoEstado(explicaTexto, explicaTextoCorpo);
 
         }
@@ -82,7 +83,7 @@ namespace Game
             //SetAvancoStateServerRpc(-1);
             stateMachineController.saidaUltimoStado -= AcrescentaRodada;
             bairrosPlayerAtual.MudarInteragivel(false);
-            dadosUiGeral.resetaUiDadosServerRpc();
+            dadosUiGeral.atualizasaiuAvancoServerRpc(true);
             dadosUiGeral.atualizaCorVizinhoDadoServerRpc(Color.white);
 
         }
