@@ -32,6 +32,7 @@ namespace Game.Territorio
         public Educaçao edu;
         public Saúde saude;
         private Recursos recurso;
+        public int verId;
 
         private void Awake()
         {
@@ -79,7 +80,7 @@ namespace Game.Territorio
         {
             bairroPlayerLocalForaControl?.Invoke(this, previousValue);
             bairroPlayerLocalNoControl?.Invoke(this, newValue);
-
+            verId =newValue;
         }
 
 

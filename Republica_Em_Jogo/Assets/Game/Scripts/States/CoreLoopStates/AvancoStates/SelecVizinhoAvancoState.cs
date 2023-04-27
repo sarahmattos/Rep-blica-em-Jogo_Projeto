@@ -10,6 +10,7 @@ namespace Game
     public class SelecVizinhoAvancoState : State
     {
         private AvancoState avancoState;
+        private DadosUiGeral dadosUiGeral;
         private List<Bairro> BairrosVizinhos => avancoState.AvancoData.BairroPlayer.Vizinhos.ToList();
         public List<Bairro> VizinhosInimigos
         {
@@ -33,6 +34,7 @@ namespace Game
         private void Start()
         {
             avancoState = GetComponentInParent<AvancoState>();
+             dadosUiGeral=FindObjectOfType<DadosUiGeral>();
         }
 
         public override void EnterState()
@@ -72,7 +74,14 @@ namespace Game
         {
             bairro.Interagivel.ChangeSelectedBairro(true);
             avancoState.AvancoData.BairroVizinho = bairro;
+            foreach (PlayerStats playerStats in PlayerStatsManager.Instance.AllPlayerStats)
+                {
+                    if(bairro.PlayerIDNoControl.Value == playerStats.playerID ){
+                         dadosUiGeral.atualizaCorVizinhoDadoServerRpc(playerStats.Cor);
+                    }
+                }
             avancoState.StateMachineController.NextStateServerRpc();
+            
         }
 
 

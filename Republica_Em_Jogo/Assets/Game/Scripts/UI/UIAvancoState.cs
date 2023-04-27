@@ -48,7 +48,7 @@ namespace Game.UI
             dadosUiGeral.atualizaUiDadosServerRpc(dadosPlayerAtual,dadosVizinhos);
 
         }
-        public void UpdateTextDados2(string _p,string _v){
+        public void UpdateTextDados2(string _p,string _v, Color corVizinho){
 
             foreach(Image img in dadosImageSeus){
                 img.gameObject.SetActive(false);
@@ -72,13 +72,10 @@ namespace Game.UI
                 for(int i=0; i<valoresSeparados2.Length-1;i++){
                     dadosImageVizinhos[i].sprite =  dadosSprite[int.Parse(valoresSeparados2[i])];
                     dadosImageVizinhos[i].gameObject.SetActive(true);
-
-                    PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
-                    foreach(PlayerStats player in allPlayerStats){
-                        if(player.playerID== avancoState.AvancoData.BairroVizinho.PlayerIDNoControl.Value){
-                            dadosImageVizinhos[i].color = player.Cor;
-                        }
-                    }
+                    //if()Debug.Log(AvancoData.BairroVizinho.PlayerIDNoControl.Value+" vizinhoId");
+                    dadosImageVizinhos[i].color =corVizinho;
+                            
+                    
                 }
             } 
             

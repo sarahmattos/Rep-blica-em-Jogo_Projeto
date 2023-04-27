@@ -83,6 +83,7 @@ namespace Game
             stateMachineController.saidaUltimoStado -= AcrescentaRodada;
             bairrosPlayerAtual.MudarInteragivel(false);
             dadosUiGeral.resetaUiDadosServerRpc();
+            dadosUiGeral.atualizaCorVizinhoDadoServerRpc(Color.white);
 
         }
 
