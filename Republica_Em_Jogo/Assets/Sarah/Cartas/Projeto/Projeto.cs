@@ -262,7 +262,7 @@ public class Projeto : NetworkBehaviour
                     {
                         //se teve mais não ou empate, foi reprovado
                         text_avisoAprovacaoProjeto.text = "PROJETO NÃO APROVADO";
-                        verMapaBtn.SetActive(true);
+                        verMapaBtn.SetActive(false);
                         inVotacao = false;
                         projetoNaoAprovado = true;
                     }
@@ -414,7 +414,7 @@ public class Projeto : NetworkBehaviour
         HabilitarBairrosPlayerLocal(true);
         fecharBtn.SetActive(true);
         text_avisoAprovacaoProjeto.text = "PROJETO APROVADO \n Zona escolhida: \n\n" + zonaNameLocal + "\n\n" + "RECOMPENSA \n" + numRecompensaDefault + " carta(s) e " + numRecompensaDefault + " eleitor(es)";
-        verMapaBtn.SetActive(true);
+        verMapaBtn.SetActive(false);
         text_avisoAprovacaoProjeto.gameObject.SetActive(true);
 
         aprovado = true;
