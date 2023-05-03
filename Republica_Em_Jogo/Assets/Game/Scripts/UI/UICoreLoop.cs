@@ -22,6 +22,7 @@ namespace Game.UI
         private RodadaController rodadaController;
         public State DesenvState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
 
+        public Button NextStateButton => nextStateButton;
         private string TagPlayerAtualStilizado
         {
             get

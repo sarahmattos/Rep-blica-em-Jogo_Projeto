@@ -9,6 +9,7 @@ namespace Game
     {
         private RodadaController rodadaController;
         private GameStateHandler gameState => GameStateHandler.Instance;
+        public RodadaController RodadaController => rodadaController;
 
         private void Start()
         {
