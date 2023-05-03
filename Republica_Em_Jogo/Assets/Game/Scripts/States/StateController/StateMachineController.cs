@@ -13,7 +13,7 @@ namespace Game
         private List<State> states;
         private State currentState;
         public event Action<int> estadoMuda;
-
+        public event Action saidaUltimoStado;
         public State GetState(int index)
         {
             return states[index];
@@ -56,6 +56,7 @@ namespace Game
                 currentState = states[next];
                 currentState.InvokeEntrada();
             }
+            if (previous == states.Count - 1) saidaUltimoStado?.Invoke();
             estadoMuda?.Invoke(next);
 
         }

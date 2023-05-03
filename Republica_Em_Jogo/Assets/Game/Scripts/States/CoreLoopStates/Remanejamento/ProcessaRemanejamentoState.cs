@@ -18,15 +18,17 @@ namespace Game
         }
         public override void EnterState()
         {
+            Tools.Logger.Instance.LogPlayerAction("Moveu 1 eleitor para " + remanejamentoData.VizinhoEscolhido);
             if (!TurnManager.Instance.LocalIsCurrent) return;
-            StartCoroutine(TaskProcessaRemanejamento());
+            StartCoroutine(ProcessarRemanejamento());
 
         }
 
         public override void ExitState()
         {
             if (!TurnManager.Instance.LocalIsCurrent) return;
-            StopCoroutine(TaskProcessaRemanejamento());
+            StopCoroutine(ProcessarRemanejamento());
+            remanejamentoData.ResetSelectedBairros();
         }
 
         private void RemoveEleitorBairroEscolhido()
@@ -35,29 +37,24 @@ namespace Game
         }
         private void AdicionaEleitorVizinhoEscolhido()
         {
-
             remanejamentoData.VizinhoEscolhido.SetUpBairro.Eleitores.AcrescentaEleitorServerRpc(1);
         }
 
         private void DecrementaEleitorInBairroDictionary()
         {
-            remanejamentoData.ParBairroEleitor[remanejamentoData.BairroEscolhido] += -1;
+            remanejamentoData.ParBairroEleitorigualUm[remanejamentoData.BairroEscolhido] += -1;
         }
 
-
-
-        private IEnumerator TaskProcessaRemanejamento()
+        private IEnumerator ProcessarRemanejamento()
         {
-            yield return new WaitForSeconds(0.1f);
             RemoveEleitorBairroEscolhido();
             AdicionaEleitorVizinhoEscolhido();
             DecrementaEleitorInBairroDictionary();
             if (remanejamentoData.GetEleitor(remanejamentoData.BairroEscolhido) < 1)
             {
-                remanejamentoData.RemoveBairro(remanejamentoData.BairroEscolhido);
+                remanejamentoData.RemoveBairroParBairroEleitor(remanejamentoData.BairroEscolhido);
             }
-
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
 
             remanejamentoState.StateMachineController.NextStateServerRpc();
         }

@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 7018205475970536399}
   - component: {fileID: 4426548914482518964}
   m_Layer: 0
-  m_Name: ProcessaAvancoState
+  m_Name: MigraEleitorAvancoState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9048786227140658247}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4426548914482518964
 MonoBehaviour:
@@ -221,6 +221,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baralho: {fileID: 0}
+  explicaTexto: "Voc\xEA est\xE1 no estado Projeto"
+  explicaTextoCorpo: "Retire uma carta de a\xE7\xE3o: voc\xEA pode ganhar eleitores
+    e recursos tirando um movimento social ou perder-l\xF4s tirando uma carta de
+    corrup\xE7\xE3o. Se sortear um projeto voc\xEA dever\xE1 ter cadeiras suficientes
+    na c\xE2mara ou pedir ajuda para aprovar e receber as recompensas. "
 --- !u!1 &3005803775765269495
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,8 +271,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hudStatsJogador: {fileID: 0}
+  fimDeJogoManager: {fileID: 0}
   avancoState: {fileID: 6455126395022951460}
   qntdRecurso: 1
+  explicaTexto: "Voc\xEA est\xE1 no estado Recompensa"
+  explicaTextoCorpo: "Se voc\xEA tiver conseguido um novo bairro no estado de avan\xE7o
+    voc\xEA recebe uma carta aleat\xF3ria de recurso, juntando 3 iguais voc\xEA pode
+    troc\xE1-los no estado de distribui\xE7\xE3o por uma unidade do recurso em algum
+    bairro seu. "
+  recompensaAviso: {fileID: 0}
 --- !u!1 &3555301857857157007
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +413,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rc: {fileID: 0}
+  explicaTexto: "Voc\xEA est\xE1 na Distribui\xE7\xE3o inicial"
+  explicaTextoCorpo: " Distribua seus novos eleitores, a quantidade \xE9 calculada
+    a partir da metade de bairros que possui, em caso de decimal \xE9 arredondado
+    para o valor mais baixo. Voc\xEA pode ganhar mais eleitores se conquistar todos
+    bairros de uma zona."
   hs: {fileID: 0}
 --- !u!1 &7677490024804130843
 GameObject:
@@ -479,6 +496,7 @@ GameObject:
   - component: {fileID: 9048786227140658247}
   - component: {fileID: 6455126395022951460}
   - component: {fileID: 3293170153377813013}
+  - component: {fileID: 3347355860370370990}
   m_Layer: 0
   m_Name: AvancoState
   m_TagString: Untagged
@@ -500,8 +518,8 @@ Transform:
   m_Children:
   - {fileID: 2455354048244936061}
   - {fileID: 2231912323342625003}
-  - {fileID: 7018205475970536399}
   - {fileID: 5356792239897812448}
+  - {fileID: 7018205475970536399}
   m_Father: {fileID: 7677490024804130840}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -517,6 +535,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a7dec1dc6143e48a97bc923910eed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  subStates:
+  - {fileID: 1488523545332775419}
+  - {fileID: 4167922049000378505}
+  - {fileID: 2553095162717818238}
+  - {fileID: 4426548914482518964}
+  explicaTexto: "Voc\xEA est\xE1 no estado Avan\xE7o"
+  explicaTextoCorpo: "Neste estado voc\xEA escolhe uma zona sua para tentar conquistar
+    uma zona inimiga. A conquista se d\xE1 pela disputa de dados correspondente a
+    quantidade de eleitores das zonas envolvidas, se conquistar um bairro inimigo
+    voc\xEA pode passar alguns de seus eleitores para seu novo bairro. "
 --- !u!114 &3293170153377813013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,6 +561,18 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &3347355860370370990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8368842500771979407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8bd2d7bb9deab4a83bdeeb79fe1f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8380813538036934128
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +603,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9048786227140658247}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2553095162717818238
 MonoBehaviour:
@@ -629,6 +669,8 @@ MonoBehaviour:
   - {fileID: 147491056644140948}
   - {fileID: 5862565377857912089}
   - {fileID: 3236839533309513054}
+  explicaTexto: "Voc\xEA est\xE1 no estado Remanejamento"
+  explicaTextoCorpo: "Voc\xEA pode remanejar seus eleitores entre seus bairros!"
 --- !u!114 &5604062083967431161
 MonoBehaviour:
   m_ObjectHideFlags: 0

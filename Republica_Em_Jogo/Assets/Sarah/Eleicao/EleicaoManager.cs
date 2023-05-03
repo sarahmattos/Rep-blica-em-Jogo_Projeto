@@ -26,6 +26,15 @@ namespace Game
         public int[] eleitoresPlayers;
         private SetUpZona setUpZona;
         private string cadeiras;
+         float valorPeao;
+        [SerializeField] GameObject[] peosCamara;
+        [SerializeField] GameObject[] Cameras;
+        public bool inEleicao=false;
+        ///[SerializeField] Transform posicaoCameraEleicao;
+        //public Vector3 posicaoAntiga;
+        
+        public string explicaTexto,explicaTextoCorpo;
+        private UICoreLoop uiCore;
         void Start()
         {
            cadeirasTotais=12;
@@ -33,6 +42,8 @@ namespace Game
            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             Instance = this;
             minCadeirasVotacao=7;
+            Material material = peosCamara[0].GetComponent<MeshRenderer>().material;
+            uiCore = FindObjectOfType<UICoreLoop>();
             
         }
         [ServerRpc(RequireOwnership = false)]
@@ -48,6 +59,7 @@ namespace Game
                         hs.cadeirasUi(cadeirasCamara[i]);
                     }
                 }
+                ColorirPeao();
         }
         public void ContaTotalEleitores()
         {
@@ -89,10 +101,53 @@ namespace Game
             }
         }
         public void CalculoEleicao(){
-                ContaTotalEleitores();
-                CalcularCadeiras();
+            
+            ContaTotalEleitores();
+            CalcularCadeiras();
+            setCameraPosition(true);
+            inEleicao=true;
+        }
+        public void setCameraPosition(bool _eleicao){
+            if(_eleicao){
+                Cameras[0].SetActive(false);
+                Cameras[1].SetActive(true);
+            }else{
+                Cameras[0].SetActive(true);
+                Cameras[1].SetActive(false);
+            }
             
         }
+        public void explicarEleicao(){
+            uiCore.ExplicaStateUi.SetActive(true);
+            uiCore.ExplicaStateTextTitulo.text = explicaTexto;
+            uiCore.ExplicaStateTextCorpo.text = explicaTextoCorpo;
+        }
+        public void escondeExplicarEleicao(){
+            uiCore.ExplicaStateUi.SetActive(false);
+        }
+        public void ColorirPeao(){
+            Debug.Log("coloriu");
+            for(int i=0;i<cadeirasCamara.Length;i++){
+                        if(i==0){
+                                valorPeao =cadeirasCamara[i] * i;
+                            }else{
+                                valorPeao =cadeirasCamara[i-1] * i;
+                        }
+                                    
+                        PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
+                        foreach (PlayerStats stats in allPlayerStats)
+                        {
+                            if (stats.playerID==i)
+                            {
+                                 for(int j=0;j<cadeirasCamara[i];j++){
+                                    
+                                 Material material = peosCamara[j+(int)valorPeao].GetComponent<MeshRenderer>().material;
+                                material.SetColor("_BaseColor", stats.Cor); 
+                                }
+                            }
+                        }
+                    }
+                }
         private void OnEnable()
     {
         //jogadores conectados
@@ -101,6 +156,7 @@ namespace Game
             if (newValue != "")
             {
                 UIeleicao.Instance.MostrarCadeiras(newValue.ToString());
+                ColorirPeao();
                 //Debug.Log(newValue.ToString());
             }
         };

@@ -7,11 +7,17 @@ namespace Game
     public class EleicaoState : State
     {
         private GameStateHandler gameStateHandler => GameStateHandler.Instance;
-
+        private bool mostrouAviso=false;
         public override void EnterState()
         {
+            EleicaoManager.Instance.inEleicao=true;
             StartCoroutine(EsperaEVai(5));
-            Tools.Logger.Instance.LogWarning("EnterState: ELEICAO");
+            Debug.Log(mostrouAviso);
+           if(mostrouAviso==false){
+                mostrouAviso=true;
+                EleicaoManager.Instance.explicarEleicao();
+                Debug.Log("entrou aqui");
+            }
             //chamar conta
             
         }
@@ -25,6 +31,7 @@ namespace Game
         private IEnumerator EsperaEVai(int s)
         {
             yield return new WaitForSeconds(s);
+            EleicaoManager.Instance.escondeExplicarEleicao();
             gameStateHandler.StateMachineController.ChangeStateServerRpc((int)GameState.DESENVOLVIMENTO);
         }
     }

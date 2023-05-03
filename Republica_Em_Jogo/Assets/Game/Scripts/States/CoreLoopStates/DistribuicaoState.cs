@@ -4,6 +4,7 @@ using UnityEngine;
 using Game.UI;
 using Game.Territorio;
 using Game.Player;
+using Game.Tools;
 
 namespace Game
 {
@@ -12,51 +13,69 @@ namespace Game
         [SerializeField]
         private RecursosCartaManager rc;
 
+        public string explicaTexto, explicaTextoCorpo;
+        private UICoreLoop uiCore;
+
         [SerializeField]
         private HudStatsJogador hs;
-        private List<Bairro> bairrosDoPlayerAtual;
+        private List<Bairro> BairrosDoPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
+        private RodadaController rodadaController;
+        private SetUpZona setUpZona;
 
         public void Start()
         {
-            bairrosDoPlayerAtual = new List<Bairro>();
             TurnManager.Instance.vezDoPlayerLocal += quandoVezPlayerLocal;
+            uiCore = FindObjectOfType<UICoreLoop>();
+            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
         }
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("EnterState: DISTRIBUICAO");
-            if(!TurnManager.Instance.LocalIsCurrent) return;
-            bairrosDoPlayerAtual.AddRange(
-                PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl
-            );
-            foreach (Bairro bairro in bairrosDoPlayerAtual)
-            {
-                bairro.Interagivel.MudarHabilitado(true);
-            }
+            if (!TurnManager.Instance.LocalIsCurrent) return;
+            BairrosDoPlayerAtual.MudarHabilitado(true);
+            rodadaController = FindObjectOfType<RodadaController>();
+            uiCore.MostrarAvisoEstado(explicaTexto, explicaTextoCorpo);
         }
 
         public override void ExitState()
         {
-            if(!TurnManager.Instance.LocalIsCurrent) return;
+            if (!TurnManager.Instance.LocalIsCurrent) return;
             hs.distribuicaoInicial = false;
-            foreach (Bairro bairro in bairrosDoPlayerAtual)
-            {
-                bairro.Interagivel.MudarHabilitado(false);
-            }
-            bairrosDoPlayerAtual.Clear();
+            BairrosDoPlayerAtual.MudarHabilitado(false);
+            setUpZona.resetaParticulaUI();
         }
 
-        public void OnDestroy()
+        public override void OnDestroy()
         {
+            base.OnDestroy();
             TurnManager.Instance.vezDoPlayerLocal -= quandoVezPlayerLocal;
         }
 
         public void quandoVezPlayerLocal(bool value)
         {
+            StartCoroutine(Espera3(1, value));
+        }
+        private IEnumerator EsperaEVai2(int s)
+        {
+            yield return new WaitForSeconds(s);
+            hs.distribuicaoInicial = true;
+            rc.conferirQuantidade();
+        }
+        private IEnumerator Espera3(int s, bool value)
+        {
+            yield return new WaitForSeconds(s);
             if (value)
             {
-                hs.distribuicaoInicial = true;
-                rc.conferirQuantidade();
+                if (EleicaoManager.Instance.inEleicao)
+                {
+                    StartCoroutine(EsperaEVai2(5));
+                }
+                else
+                {
+                    hs.distribuicaoInicial = true;
+                    rc.conferirQuantidade();
+                }
+
             }
         }
     }

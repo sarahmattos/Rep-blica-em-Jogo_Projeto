@@ -25,12 +25,14 @@ public class MovimentosSociais : NetworkBehaviour
     [SerializeField] private GameObject btnOk;
     private HudStatsJogador hs;
     private RecursosCartaManager rc;
+    private Baralho baralho;
     public bool distribuicaoRecompensaRecurso = false;
 
     public void Start()
     {
         hs = FindObjectOfType<HudStatsJogador>();
         rc = FindObjectOfType<RecursosCartaManager>();
+        baralho = FindObjectOfType<Baralho>();
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -39,9 +41,12 @@ public class MovimentosSociais : NetworkBehaviour
         movimentoSocialNetworkTexto.Value = textoTotal2;
         idPlayerMS.Value = id;
     }
+    
 
     public void sortearMS()
     {
+        //reseta
+        AtualizaTextoServerRpc("", -1);
         HabilitarBairrosPlayerAtual(true);
         int aux = Random.Range(0, MovimentoSociaisManager.movimento.Length);
         movimento = MovimentoSociaisManager.movimento[aux];
@@ -53,7 +58,7 @@ public class MovimentosSociais : NetworkBehaviour
         string textoTotal = "\n" + movimento + "\n" + "\n" + "Ganhe " + quantidadeRecurso + " recurso de " + recursoTipo.ToString() + " e " + quantidadeEleitor + " eleitores";
         int id = (int)NetworkManager.Singleton.LocalClientId;
         AtualizaTextoServerRpc(textoTotal, id);
-
+        // baralho.baralhoManager(false);
 
     }
     private void OnEnable()
@@ -70,18 +75,21 @@ public class MovimentosSociais : NetworkBehaviour
             };
         idPlayerMS.OnValueChanged += (int previousValue, int newValue) =>
         {
-            if (newValue != (int)NetworkManager.Singleton.LocalClientId)
-            {
-                btnOk.SetActive(false);
-                btnFechar.SetActive(true);
-                text_aviso.text = "Movimento Social retirado pelo jogador: " + newValue;
-            }
+             if (newValue != -1){
+                if (newValue != (int)NetworkManager.Singleton.LocalClientId)
+                {
+                    btnOk.SetActive(false);
+                    btnFechar.SetActive(true);
+                    text_aviso.text = "Movimento Social retirado pelo jogador: " + newValue;
+                }
             else
-            {
-                text_aviso.text = " ";
-                btnOk.SetActive(true);
-                btnFechar.SetActive(false);
-            }
+                {
+                    text_aviso.text = " ";
+                    btnOk.SetActive(true);
+                    btnFechar.SetActive(false);
+                }
+             }
+            
         };
     }
     public void chamarRecompensasEleitor()

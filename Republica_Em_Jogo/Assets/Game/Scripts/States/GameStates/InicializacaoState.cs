@@ -26,7 +26,6 @@ namespace Game
 
         public override void EnterState()
         {
-            Logger.Instance.LogInfo("Enter state: Inicializa");
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
             todosBairros = GetBairros();
             todosBairros.Shuffle();            
@@ -37,7 +36,6 @@ namespace Game
         public override void ExitState()
         {
             StopAllCoroutines();
-            Logger.Instance.LogInfo("Exit state: Inicializa");
             EleicaoManager.Instance.ClientsConectServerRpc();
             TurnManager.Instance.UpdateTurn();
         }

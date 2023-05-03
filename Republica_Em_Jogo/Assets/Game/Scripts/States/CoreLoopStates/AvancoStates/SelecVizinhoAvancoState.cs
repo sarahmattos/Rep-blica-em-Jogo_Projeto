@@ -1,51 +1,65 @@
 using System.Collections.Generic;
 using Game.Territorio;
 using System.Linq;
+using Game.Player;
+using Game.UI;
+using Game.Tools;
+using UnityEngine;
 
 namespace Game
 {
     public class SelecVizinhoAvancoState : State
     {
         private AvancoState avancoState;
+        private DadosUiGeral dadosUiGeral;
         private List<Bairro> BairrosVizinhos => avancoState.AvancoData.BairroPlayer.Vizinhos.ToList();
-        private List<Bairro> VizinhosInimigos;
+        public List<Bairro> VizinhosInimigos
+        {
+            get
+            {
+                return (from Bairro bairro in BairrosVizinhos
+                        where bairro.PlayerIDNoControl.Value != TurnManager.Instance.PlayerAtual
+                        select bairro
+                ).ToList();
+            }
+        }
+
+        private List<Bairro> VizinhosInimigosNaoPodemInteragir
+        {
+            get
+            {
+                return SetUpZona.Instance.AllBairros.Except(VizinhosInimigos).ToList();
+            }
+        }
 
         private void Start()
         {
             avancoState = GetComponentInParent<AvancoState>();
-            VizinhosInimigos = new List<Bairro>();
+             dadosUiGeral=FindObjectOfType<DadosUiGeral>();
         }
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("Enter selec vizinho.");
-            VizinhosInimigos = GetBairrosInimigos();
-            MudaHabilitadoInteragivelBairros(VizinhosInimigos, true);
+            if (!TurnManager.Instance.LocalIsCurrent) return;
+            VizinhosInimigos.MudarHabilitado(true);
             InscreverClickInteragivelBairros(VizinhosInimigos);
+            VizinhosInimigosNaoPodemInteragir.MudarInativity(true);
         }
 
         public override void ExitState()
         {
-            Tools.Logger.Instance.LogInfo("Exit selec vizinho.");
-
+            if (!TurnManager.Instance.LocalIsCurrent) return;
             DesinscreverClickInteragivelBairros(VizinhosInimigos);
-            MudaHabilitadoInteragivelBairros(VizinhosInimigos, false);
-            VizinhosInimigos.Clear();
-        }
+            VizinhosInimigos.MudarHabilitado(false);
+            SetUpZona.Instance.AllBairros.MudarInativity(false);
 
-        private void MudaHabilitadoInteragivelBairros(List<Bairro> bairros, bool value)
-        {
-            foreach (Bairro bairro in bairros)
-            {
-                bairro.Interagivel.MudarHabilitado(value);
-            }
         }
 
         private void InscreverClickInteragivelBairros(List<Bairro> bairrosVizinhos)
         {
             foreach (Bairro bairro in bairrosVizinhos)
             {
-                bairro.Interagivel.click += OnBairroClicado;
+                bairro.Interagivel.Click += OnBairroClicado;
             }
         }
 
@@ -53,23 +67,25 @@ namespace Game
         {
             foreach (Bairro bairro in bairrosVizinhos)
             {
-                bairro.Interagivel.click -= OnBairroClicado;
+                bairro.Interagivel.Click -= OnBairroClicado;
             }
         }
 
         private void OnBairroClicado(Bairro bairro)
         {
+            dadosUiGeral.atualizaCorVizinhoDadoServerRpc(Color.white);
+            bairro.Interagivel.ChangeSelectedBairro(true);
             avancoState.AvancoData.BairroVizinho = bairro;
-            avancoState.NextAvancoStateServerRpc();
+            foreach (PlayerStats playerStats in PlayerStatsManager.Instance.AllPlayerStats)
+                {
+                    if(bairro.PlayerIDNoControl.Value == playerStats.playerID ){
+                         dadosUiGeral.atualizaCorVizinhoDadoServerRpc(playerStats.Cor);
+                    }
+                }
+            avancoState.StateMachineController.NextStateServerRpc();
+            
         }
 
-        private List<Bairro> GetBairrosInimigos()
-        {
-            return (
-                from Bairro bairro in BairrosVizinhos
-                where bairro.PlayerIDNoControl.Value != TurnManager.Instance.PlayerAtual
-                select bairro
-            ).ToList();
-        }
+
     }
 }

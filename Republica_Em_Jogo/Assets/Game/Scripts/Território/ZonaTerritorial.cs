@@ -3,12 +3,14 @@ using Game.Tools;
 using UnityEngine;
  using Game.UI;
 using Game.Player;
+using TMPro;
 using System.Collections.Generic;
 namespace Game.Territorio
 {
     public class ZonaTerritorial : MonoBehaviour
     {
         [SerializeField] private string nome;
+        [SerializeField] GameObject quantidadeGanhaParticula;
         private Bairro[] bairros;
         public Bairro[] Bairros => bairros;
         public string Nome { get => nome; }
@@ -16,7 +18,7 @@ namespace Game.Territorio
         private HudStatsJogador hs;
         private ControlePassarState cp;
         private int soma, soma2, soma3;
-        
+        public List<Outline> outlines;
         public int eleitoresAdicionais;
 
         private void Awake()
@@ -37,7 +39,13 @@ namespace Game.Territorio
                 }
             }
         }
-       
+       private void Start()
+       {    
+           foreach(Bairro bairro in bairros){
+               Outline outline = bairro.GetComponentInChildren<Outline>();
+                outlines.Add(outline);
+           }
+       }
         public void adicionarEleitoresZona(int valor){
             foreach(Bairro bairro in bairros)
             {
@@ -110,6 +118,9 @@ namespace Game.Territorio
                    soma3 += bairro.checaNumerodeSaude();
                 }
                 return soma3;
+            }
+            public void setParticulaUi(bool valor){
+                quantidadeGanhaParticula.SetActive(valor);
             }
     }
 }

@@ -1,7 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using Game.Player;
 using Game.Territorio;
+using Game.Tools;
+using Game.UI;
 using UnityEngine;
 
 namespace Game
@@ -14,22 +15,26 @@ namespace Game
         public StateMachineController StateMachineController => stateMachineController;
         private RemanejamentoData remanejamentoData = new RemanejamentoData();
         public RemanejamentoData RemanejamentoData => remanejamentoData;
+        public string explicaTexto, explicaTextoCorpo;
+        private UICoreLoop uiCore;
+
 
         private void Start()
         {
-            stateMachineController =  GetComponent<StateMachineController>();
+            stateMachineController = GetComponent<StateMachineController>();
             stateMachineController.Initialize(subStates);
             stateMachineController.ResetMachineState();
+            uiCore = FindObjectOfType<UICoreLoop>();
         }
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("Enter: Remanejamento");
-            if(!TurnManager.Instance.LocalIsCurrent) return;
-
+            if (!TurnManager.Instance.LocalIsCurrent) return;
+            SetUpZona.Instance.AllBairros.MudarInativity(true);
             remanejamentoData.ClearData();
             remanejamentoData.ArmazenarBairrosRemanejaveis();
             stateMachineController.ChangeStateServerRpc(0);
+            uiCore.MostrarAvisoEstado(explicaTexto, explicaTextoCorpo);
 
         }
 
@@ -37,23 +42,17 @@ namespace Game
         public override void ExitState()
         {
             if (!TurnManager.Instance.LocalIsCurrent) return;
-            MudarHabilitadoInteragivelBairros(false);
+            remanejamentoData.ParBairroEleitorigualUm.Keys.MudarHabilitado(false);
+            SetUpZona.Instance.AllBairros.MudarInativity(false);
+            SetUpZona.Instance.AllBairros.MudarHabilitado(false);
             stateMachineController.ResetMachineState();
-            
+
         }
 
         public override void OnNetworkDespawn()
         {
             stateMachineController.Finish();
         }
-
-        public void MudarHabilitadoInteragivelBairros(bool value) {
-            foreach(Bairro bairro in remanejamentoData.ParBairroEleitor.Keys) {
-                bairro.Interagivel.MudarHabilitado(value);
-            }
-        }
-
-
 
 
     }

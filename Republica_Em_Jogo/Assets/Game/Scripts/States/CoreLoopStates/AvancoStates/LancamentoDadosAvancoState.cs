@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Game.Territorio;
+using Game.UI;
 using UnityEngine;
 
 namespace Game
@@ -20,26 +21,25 @@ namespace Game
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("ENTER Process dados");
-
+            // UICoreLoop.Instance.UpdateTitleText("Rolando Dados...");
+            if (!TurnManager.Instance.LocalIsCurrent) return;
             LancarDados();
-            ProcessarDescontagemEleitores();           
-            avancoState.NextAvancoStateServerRpc();
+            ProcessarDescontagemEleitores();
+            avancoState.StateMachineController.NextStateServerRpc();
 
         }
 
-        public override void ExitState() 
+        public override void ExitState()
         {
-            Tools.Logger.Instance.LogInfo("EXIT Process dados");
-
+            if (!TurnManager.Instance.LocalIsCurrent) return;
         }
 
         private void LancarDados()
         {
             List<int> dadosPlayerAtual = new List<int>();
             List<int> dadosVizinhos = new List<int>();
-            dadosPlayerAtual = GerarDados(bairroPlayerAtual);
-            dadosVizinhos = GerarDados(bairroVizinho);
+            dadosPlayerAtual = GerarDados(bairroPlayerAtual, 1);
+            dadosVizinhos = GerarDados(bairroVizinho, 0);
             dadosPlayerAtual.Sort();
             dadosPlayerAtual.Reverse();
             dadosVizinhos.Sort();
@@ -47,16 +47,18 @@ namespace Game
             avancoState.AvancoData.SetDados(dadosPlayerAtual, dadosVizinhos);
         }
 
-        private void ProcessarDescontagemEleitores() {
+        private void ProcessarDescontagemEleitores()
+        {
             CalcularDiscountAvanco();
             AplicaDiscountPlayer();
             AplicaDiscountVizinho();
         }
 
-        private List<int> GerarDados(Bairro bairro) {
+        private List<int> GerarDados(Bairro bairro, int diminuiEleitor)
+        {
             Eleitores eleitoresParaAvanco = bairro.SetUpBairro.Eleitores;
             List<int> dados = new List<int>();
-            for (int i = 0; i < QntdDados(eleitoresParaAvanco); i++)
+            for (int i = 0; i < QntdDados(eleitoresParaAvanco, diminuiEleitor); i++)
             {
                 dados.Add(randomDiceValue);
             }
@@ -92,10 +94,10 @@ namespace Game
                 return false;
         }
 
-        private int QntdDados(Eleitores eleitores)
+        private int QntdDados(Eleitores eleitores, int subtrair)
         {
             return Mathf.Clamp(
-                (eleitores.contaEleitores > 3) ? 3 : eleitores.contaEleitores - 1,
+                (eleitores.contaEleitores > 3) ? 3 : eleitores.contaEleitores - subtrair,
                 1,
                 512
             );
@@ -109,7 +111,8 @@ namespace Game
             );
         }
 
-        private void AplicaDiscountVizinho() {
+        private void AplicaDiscountVizinho()
+        {
             int eleitorDiscountVizinho = avancoState.AvancoData.EleitorDiscountVizinho;
             avancoState.AvancoData.BairroVizinho.SetUpBairro.Eleitores.AcrescentaEleitorServerRpc(
                 eleitorDiscountVizinho

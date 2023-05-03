@@ -158,7 +158,8 @@ public class RecursosCartaManager : MonoBehaviour
    public void distribuiNovosRecursos(){
     if(novosEdu>0||novosSaude>0){
         avisoDistribuicao.SetActive(true);
-        text_recursoDistribuicao.SetText("Distribuia seus recursos! Clique no recurso do bairro que deseja adicionar!"+ "\n" +" Educação: "+novosEdu +" Saúde: "+novosSaude);
+        if(novosSaude>0)text_recursoDistribuicao.SetText("Distribua seu(s) recurso(s) de saúde! Clique no bairro que deseja adicionar!"+ "\n" +" Saúde: "+novosSaude);
+        if(novosSaude<=0)text_recursoDistribuicao.SetText("Distribua seu(s) recurso(s) de educação! Clique no bairro que deseja adicionar!"+ "\n" +" Educação: "+novosEdu );
     }else{
         avisoDistribuicao.SetActive(false);
         avisoDistribuicaoFinal.SetActive(true);

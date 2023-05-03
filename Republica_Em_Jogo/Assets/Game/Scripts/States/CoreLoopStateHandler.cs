@@ -23,7 +23,7 @@ namespace Game
         private State currentState;
         public State DesenvolvimentoState =>
             GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
-        public Action<CoreLoopState> estadoMuda;
+        public event Action<CoreLoopState> estadoMuda;
 
         public State CurrentState => currentState;
 
@@ -49,7 +49,6 @@ namespace Game
 
         private void Start()
         {
-            // currentState = statePairValues[CoreLoopState.DISTRIBUICAO];
             coreLoopIndex.OnValueChanged += IndexEstadoLoopMuda;
             if (!IsHost) return;
             DesenvolvimentoState.Entrada += () => ChangeStateServerRpc(0);

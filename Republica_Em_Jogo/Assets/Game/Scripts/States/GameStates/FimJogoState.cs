@@ -8,7 +8,7 @@ namespace Game
     {
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("EnterState: FIM_JOGO.");
+            Tools.Logger.Instance.LogInfo("Fim de jogo");
         }
 
         public override void ExitState()

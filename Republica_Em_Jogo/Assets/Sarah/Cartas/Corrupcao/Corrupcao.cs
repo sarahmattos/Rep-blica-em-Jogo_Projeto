@@ -25,11 +25,13 @@ public class Corrupcao : NetworkBehaviour
     [SerializeField] private GameObject btnOk;
     private HudStatsJogador hs;
     private RecursosCartaManager rc;
+    private Baralho baralho;
 
     public void Start()
     {
         hs = FindObjectOfType<HudStatsJogador>();
         rc = FindObjectOfType<RecursosCartaManager>();
+        baralho = FindObjectOfType<Baralho>();
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -42,6 +44,7 @@ public class Corrupcao : NetworkBehaviour
     public void sortearCorrupcao()
     {
         //defaultValues();
+        AtualizaTextoServerRpc("", -1);
         HabilitarBairrosPlayerAtual(true);
         corrupcao = CorrupcaoManager.corrupcao[Random.Range(0, CorrupcaoManager.corrupcao.Length)];
         complementText = CorrupcaoManager.complementText;
@@ -50,7 +53,7 @@ public class Corrupcao : NetworkBehaviour
         string textoTotal = "\n" + corrupcao + "\n" + "\n" + complementText;
         int id = (int)NetworkManager.Singleton.LocalClientId;
         AtualizaTextoServerRpc(textoTotal, id);
-
+        // baralho.baralhoManager(false);
 
     }
     private void OnEnable()
@@ -65,18 +68,20 @@ public class Corrupcao : NetworkBehaviour
             };
         idPlayerCorrupcao.OnValueChanged += (int previousValue, int newValue) =>
              {
-                 if (newValue != (int)NetworkManager.Singleton.LocalClientId)
-                 {
-                     btnOk.SetActive(false);
-                     btnFechar.SetActive(true);
-                     text_aviso.text = "Corrupção retirado pelo jogador: " + newValue;
-                 }
-                 else
-                 {
-                     text_aviso.text = " ";
-                     btnOk.SetActive(true);
-                     btnFechar.SetActive(false);
-                 }
+                if (newValue != -1){
+                    if (newValue != (int)NetworkManager.Singleton.LocalClientId)
+                    {
+                        btnOk.SetActive(false);
+                        btnFechar.SetActive(true);
+                        text_aviso.text = "Corrupção retirado pelo jogador: " + newValue;
+                    }
+                    else
+                    {
+                        text_aviso.text = " ";
+                        btnOk.SetActive(true);
+                        btnFechar.SetActive(false);
+                    }
+                }
              };
     }
     public void chamarPenalidade()

@@ -4,6 +4,7 @@ using UnityEngine;
 using Game.Player;
 using Game.UI;
 using Game.Tools;
+using UnityEngine.UI;
 
 namespace Game.Territorio
 {
@@ -11,12 +12,39 @@ namespace Game.Territorio
     {
         private ZonaTerritorial[] zonas;
         public ZonaTerritorial[] Zonas => zonas;
+
+        private List<Bairro> allBairros = new();
+        public List<Bairro> AllBairros => allBairros;
         private HudStatsJogador hs;
         public List<ZonaTerritorial> tenhoZona;
+        private MaterialPropertyBlock propertyBlock;
+        private static readonly int colorID = Shader.PropertyToID("_Color");
 
         void Start()
         {
             hs = FindObjectOfType<HudStatsJogador>();
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO).Entrada += CorOutline;
+
+            foreach (ZonaTerritorial zona in Zonas)
+            {
+                allBairros.AddRange(zona.Bairros);
+            }
+        }
+        private void OnDestroy()
+        {
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO).Saida -= CorOutline;
+        }
+        public void CorOutline()
+        {
+            for (int i = 0; i < Zonas.Length; i++)
+            {
+                foreach (Outline outline in Zonas[i].outlines)
+                {
+                    Color _cor = new Color(GameDataconfig.Instance.ZonaColorOutline[i].r, GameDataconfig.Instance.ZonaColorOutline[i].g, GameDataconfig.Instance.ZonaColorOutline[i].b);
+                    outline.OutlineColor = _cor;
+                    // Debug.Log(GameDataconfig.Instance.ZonaColorOutline[i]+Zonas[i].Nome);
+                }
+            }
         }
 
         private void Awake()
@@ -39,7 +67,8 @@ namespace Game.Territorio
         {
             foreach (ZonaTerritorial zona in zonas)
             {
-                if(zona.Nome==nome){
+                if (zona.Nome == nome)
+                {
                     //Debug.Log("recursoNameZona: "+nome);
                     zona.verificarPlayerNasZonas(valor);
                 }
@@ -75,7 +104,7 @@ namespace Game.Territorio
             }
 
         }
-        
+
         public void SepararBairrosPorPlayer(int[] _eleitoresPlayers, int numPlayer)
         {
             foreach (ZonaTerritorial zona in zonas)
@@ -83,16 +112,32 @@ namespace Game.Territorio
                 zona.ContarBairroInControlTodosPlayers(_eleitoresPlayers, numPlayer);
             }
         }
-        public void PlayerTemZonaInteira(int client){
+        public void PlayerTemZonaInteira(int client, bool valorParticula)
+        {
             tenhoZona = new List<ZonaTerritorial>();
             foreach (ZonaTerritorial zona in zonas)
             {
-               if(zona.checaSePlayerTemTodosBairrosDeUmaZona(client)!=null){
-                tenhoZona.Add(zona.checaSePlayerTemTodosBairrosDeUmaZona(client));
-               } 
+                if (zona.checaSePlayerTemTodosBairrosDeUmaZona(client) != null)
+                {
+                    tenhoZona.Add(zona.checaSePlayerTemTodosBairrosDeUmaZona(client));
+                    //
+                    if(valorParticula==true){
+                        zona.setParticulaUi(true);
+                    }else{
+                        zona.setParticulaUi(false);
+                    }
+                }
             }
         }
 
-        
+        public void resetaParticulaUI(){
+            foreach (ZonaTerritorial zona in zonas)
+            {
+                zona.setParticulaUi(false);
+                
+            }
+        }
+
+
     }
 }

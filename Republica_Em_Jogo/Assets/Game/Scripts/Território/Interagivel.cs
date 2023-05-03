@@ -1,68 +1,118 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Game.Territorio
 {
+    public enum PointerState
+    {
+        ENTER,
+        EXIT
+    }
+
     [RequireComponent(typeof(InteragivelVisualiza))]
-    public class Interagivel : MonoBehaviour
+    public class Interagivel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
     {
         [SerializeField]
         private bool habilitado;
-
-        public event Action<Bairro> click;
-        public event Action<bool> mudaHabilitado;
-        public event Action mouseExit;
-        public event Action mouseEnter;
-
-        private new Collider collider;
-
-        private Material material;
+        public event Action<Bairro> Click;
+        public event Action<bool> MudaHabilitado;
+        public event Action MouseEnter;
+        public event Action MouseExit;
+        public event Action MouseDown;
+        public event Action MouseUp;
         private Bairro bairro;
-        private InteragivelVisualiza interagivelVisualiza;
+        public event Action<bool> OnFocus;
+        public event Action<bool> Inactivity;
+        public PointerState PointerState { get; set; }
+        public bool Habilitado => habilitado;
 
-        public Material Material => material;
 
         void Awake()
         {
-            // habilitado = false;
-            material = GetComponent<MeshRenderer>().material;
             bairro = GetComponentInParent<Bairro>();
         }
 
         private void Start()
         {
-            MudarHabilitado(false);
+            PointerState = PointerState.EXIT;
+            bairro.OnFocus.OnValueChanged += OnChangeSelectBairro;
         }
 
-        void OnMouseEnter()
+        private void OnDestroy()
         {
-            if (!habilitado)
-                return;
-            mouseEnter?.Invoke();
+            bairro.OnFocus.OnValueChanged -= OnChangeSelectBairro;
+
         }
 
-        void OnMouseExit()
+        private void OnChangeSelectBairro(bool previousBool, bool nextBool)
         {
-            if (!habilitado) return;
-            mouseExit?.Invoke();
+            OnFocus?.Invoke(nextBool);
         }
 
-        void OnMouseUpAsButton()
-        {
-            if (!habilitado)
-                return;
-            click?.Invoke(bairro);
-        }
 
         public void MudarHabilitado(bool value)
         {
-            mudaHabilitado?.Invoke(value);
+            MudaHabilitado?.Invoke(value);
             habilitado = value;
             if (!value)
-                mouseExit?.Invoke();
+                MouseExit?.Invoke();
+            // Inactivity?.Invoke(false);
+        }
+
+        public void MudarInativity(bool value)
+        {
+            Inactivity?.Invoke(value);
+        }
+
+        public void ChangeSelectedBairro(bool value)
+        {
+            bairro.ChangeSelectBairroServerRpc(value);
 
         }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            PointerState = PointerState.ENTER;
+            if (!habilitado) return;
+            MouseEnter?.Invoke();
+
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (!(eventData.button == PointerEventData.InputButton.Left)) return;
+            if (!habilitado) return;
+            Click?.Invoke(bairro);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            PointerState = PointerState.EXIT;
+            if (!habilitado) return;
+            MouseExit?.Invoke();
+
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (!habilitado) return;
+            MouseDown?.Invoke();
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            if (!habilitado) return;
+            MouseUp?.Invoke();
+        }
+
+
+
+
+
+
     }
 }

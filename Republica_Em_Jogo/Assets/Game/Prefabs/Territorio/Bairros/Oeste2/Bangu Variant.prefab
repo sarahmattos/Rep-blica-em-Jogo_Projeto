@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4931218027261295680}
   - component: {fileID: 8340078800966581576}
   - component: {fileID: 5821311883895976098}
+  - component: {fileID: 6765223760547579843}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Bairro
@@ -127,8 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   habilitado: 0
-  cor1: {r: 0, g: 0, b: 0, a: 0}
-  cor2: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &5821311883895976098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +146,19 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &6765223760547579843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193423312322610545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e2262bc4440c43a95b16d8cb06d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultColor: {r: 58, g: 58, b: 58, a: 1}
 --- !u!1001 &7425277758994298190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -154,6 +166,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 802582153566928796, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 1739378843242955054, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 951099334
@@ -190,6 +206,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.18
       objectReference: {fileID: 0}
+    - target: {fileID: 7644880853625759734, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+    - target: {fileID: 7644880853717312504, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 7644880853794251683, guid: 8049ba2bfdb4e61419e6e2335f702e57, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.08

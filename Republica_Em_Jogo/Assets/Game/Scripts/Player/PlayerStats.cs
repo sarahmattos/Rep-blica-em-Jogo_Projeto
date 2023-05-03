@@ -43,11 +43,11 @@ namespace Game.Player {
         private void Awake()
         {
             BairrosInControl = new List<Bairro>();
+            
 
         }
         private void Start()
         {
-            
             GameplayLoadState.Saida += InicializaPlayerStats;
             GameplayLoadState.Saida += InscreveReceberbairrosPlayerIDControl;
         }
@@ -111,15 +111,16 @@ namespace Game.Player {
 
         public void InicializaPlayerStats()
         {
-            Tools.Logger.Instance.LogInfo("inicializando player stats");
+            Tools.Logger.Instance.LogInfo("inicializando player stats "+playerID);
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
             maxTerritorio = GameDataconfig.Instance.territoriosInScene;
             nome = string.Concat(GameDataconfig.Instance.TagParticipante," ", playerID);
             objetivoCarta = objetivosDatabase.Instance.objetivoComplemento;
             objetivo =objetivosDatabase.Instance.objetivoZona;
+            
 
         }
-
+        
         public void ContaEleitoresInBairros()
         {
             eleitoresTotais = 0;

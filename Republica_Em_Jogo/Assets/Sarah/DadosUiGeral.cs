@@ -15,11 +15,25 @@ namespace Game
     {
         private NetworkVariable<FixedString4096Bytes> dadosPlayerServer = new NetworkVariable<FixedString4096Bytes>();
         private NetworkVariable<FixedString4096Bytes> dadosVizinhoServer = new NetworkVariable<FixedString4096Bytes>();
+        private NetworkVariable<Color> corVizinhoDado = new NetworkVariable<Color>();
+        private NetworkVariable<bool> saiuAvanco = new NetworkVariable<bool>();
         public UIAvancoState uIAvancoState;
+        Color corDadoVizinho;
+        bool valor;
          int aux;
         // Start is called before the first frame update
         string player,vizinho;
         
+        [ServerRpc(RequireOwnership = false)]
+        public void atualizaCorVizinhoDadoServerRpc(Color cor)
+        {
+            corVizinhoDado.Value = cor;
+        }
+        [ServerRpc(RequireOwnership = false)]
+        public void atualizasaiuAvancoServerRpc(bool _valor)
+        {
+            saiuAvanco.Value = _valor;
+        }
         [ServerRpc(RequireOwnership = false)]
         public void atualizaUiDadosServerRpc(string _player, string _vizinho)
         {
@@ -29,8 +43,14 @@ namespace Game
         [ServerRpc(RequireOwnership = false)]
         public void resetaUiDadosServerRpc()
         {
-            dadosPlayerServer.Value = "Ataque: \n";;
+            dadosPlayerServer.Value = "Ataque: \n";
             dadosVizinhoServer.Value= "Defesa: \n";
+        }
+        [ServerRpc(RequireOwnership = false)]
+        public void reseta2UiDadosServerRpc()
+        {
+            dadosPlayerServer.Value = " ";
+            dadosVizinhoServer.Value= " ";
         }
          private void OnEnable()
             {
@@ -38,28 +58,43 @@ namespace Game
         
             dadosPlayerServer.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
             {
-               
+                if(newValue!=" "){
                     aux++;
                     player=newValue.ToString();
-                    Debug.Log("player: "+player);
                     atualizaUiDados();
+                }
+                    
                 
                 
             };
             dadosVizinhoServer.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
             {
-              
+              if(newValue!=" "){
                     aux++;
                     vizinho=newValue.ToString();
-                     Debug.Log("vizinho: "+vizinho);
                     atualizaUiDados();
+              }
                 
+            };
+             corVizinhoDado.OnValueChanged += (Color previousValue, Color newValue) =>
+            {
+              if(newValue!=Color.white){
+                    aux++;
+                    corDadoVizinho = newValue;
+                    atualizaUiDados();
+              }
+                
+            };
+            saiuAvanco.OnValueChanged += (bool previousValue, bool newValue) =>
+            {
+                uIAvancoState.desativaDados();
             };
         
         }
+        
         public void atualizaUiDados(){
-            if(aux==2){
-                uIAvancoState.UpdateTextDados2(player,vizinho);
+            if(aux==3){
+                uIAvancoState.UpdateTextDados2(player,vizinho,corDadoVizinho);
                 aux=0;
             }
             

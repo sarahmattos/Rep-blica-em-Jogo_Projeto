@@ -11,57 +11,57 @@ namespace Game
     public class RemanejamentoData
     {
 
-        private Dictionary<Bairro, int> parBairroEleitor = new Dictionary<Bairro, int>();
-        private PlayerStats playerStatsAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual();
+        private Dictionary<Bairro, int> parBairroEleitorigualUm = new();
+        public List<Bairro> BairrosPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
 
         private Bairro bairroEscolhido;
         private Bairro vizinhoEscolhido;
 
-        public Dictionary<Bairro, int> ParBairroEleitor => parBairroEleitor;
+        public Dictionary<Bairro, int> ParBairroEleitorigualUm => parBairroEleitorigualUm;
         public Bairro BairroEscolhido { get => bairroEscolhido; set => bairroEscolhido = value; }
         public Bairro VizinhoEscolhido { get => vizinhoEscolhido; set => vizinhoEscolhido = value; }
+
+        public List<Bairro> BairrosNaoRemanejaveis
+        {
+            get
+            {
+                return BairrosPlayerAtual.Except(ParBairroEleitorigualUm.Keys).ToList();
+            }
+        }
 
 
         public void ClearData()
         {
-            parBairroEleitor.Clear();
+            parBairroEleitorigualUm.Clear();
             ResetSelectedBairros();
         }
 
         public void ResetSelectedBairros()
         {
+            bairroEscolhido?.Interagivel.ChangeSelectedBairro(false);
+            VizinhoEscolhido?.Interagivel.ChangeSelectedBairro(false);
             BairroEscolhido = null;
             VizinhoEscolhido = null;
         }
 
         public void ArmazenarBairrosRemanejaveis()
         {
-            foreach (Bairro bairro in playerStatsAtual.BairrosInControl)
+            foreach (Bairro bairro in BairrosPlayerAtual)
             {
                 if (bairro.SetUpBairro.Eleitores.contaEleitores <= 1) continue;
-                parBairroEleitor.Add(bairro, bairro.SetUpBairro.Eleitores.contaEleitores - 1);
+                parBairroEleitorigualUm.Add(bairro, bairro.SetUpBairro.Eleitores.contaEleitores - 1);
             }
         }
 
-        public void RemoveBairro(Bairro bairro)
+        public void RemoveBairroParBairroEleitor(Bairro bairro)
         {
-            parBairroEleitor.Remove(bairro);
+            parBairroEleitorigualUm.Remove(bairro);
         }
 
-        // public int GetIndexInParBairroEleitor(Bairro bairro)
-        // {
-        //     return parBairroEleitor.Keys.ToList().IndexOf(bairro);
-        // }
-
-        // public void DecrementaEleitorInBairroDictionary(Bairro bairro)
-        // {
-        //     parBairroEleitor[bairro] += -1;
-
-        // }
 
         public int GetEleitor(Bairro bairro)
         {
-            return ParBairroEleitor[bairro];
+            return ParBairroEleitorigualUm[bairro];
 
 
         }

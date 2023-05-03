@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Unity.Netcode;
-using UnityEngine;
 using Game.Territorio;
 using Game.Player;
+using Game.UI;
+using Game.Tools;
+using UnityEngine;
 
 namespace Game
 {
@@ -15,8 +17,11 @@ namespace Game
         MIGRACAO
     }
 
+    [RequireComponent(typeof(StateMachineController))]
     public class AvancoState : State
     {
+        [SerializeField] private List<State> subStates;
+
         private NetworkVariable<int> avancoStateIndex = new NetworkVariable<int>(
             -1,
             NetworkVariableReadPermission.Everyone,
@@ -29,6 +34,11 @@ namespace Game
         private AvancoData avancoData = new AvancoData();
         public AvancoData AvancoData => avancoData;
         DadosUiGeral dadosUiGeral;
+        public string explicaTexto, explicaTextoCorpo;
+        private UICoreLoop uiCore;
+
+        private StateMachineController stateMachineController;
+        public StateMachineController StateMachineController => stateMachineController;
 
         public List<Bairro> bairrosPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
 
@@ -42,18 +52,26 @@ namespace Game
 
         private void Start()
         {
+            stateMachineController = GetComponent<StateMachineController>();
+            stateMachineController.Initialize(subStates);
+            stateMachineController.ResetMachineState();
+            
             statePairValues = new Dictionary<AvancoStatus, State>();
             SetPairValues();
-            dadosUiGeral=FindObjectOfType<DadosUiGeral>();
+            dadosUiGeral = FindObjectOfType<DadosUiGeral>();
+            uiCore = FindObjectOfType<UICoreLoop>();
         }
 
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("Enter State: AVAN�O");
             avancoData.ResetData();
             if (!TurnManager.Instance.LocalIsCurrent) return;
-            avancoStateIndex.OnValueChanged += AvancoIndexMuda;
-            SetAvancoStateServerRpc(0);
+            stateMachineController.ChangeStateServerRpc(0);
+            stateMachineController.saidaUltimoStado += AcrescentaRodada;
+            //avancoStateIndex.OnValueChanged += AvancoIndexMuda;
+            //SetAvancoStateServerRpc(0);
+            dadosUiGeral.atualizasaiuAvancoServerRpc(false);
+            uiCore.MostrarAvisoEstado(explicaTexto, explicaTextoCorpo);
 
         }
 
@@ -61,57 +79,50 @@ namespace Game
         {
 
             if (!TurnManager.Instance.LocalIsCurrent) return;
-            avancoStateIndex.OnValueChanged -= AvancoIndexMuda;
-            HabilitarBairrosPlayerAtual(false);
-            SetAvancoStateServerRpc(-1);
-            dadosUiGeral.resetaUiDadosServerRpc();
-
+            stateMachineController.ChangeStateServerRpc(-1);
+            //SetAvancoStateServerRpc(-1);
+            stateMachineController.saidaUltimoStado -= AcrescentaRodada;
+            bairrosPlayerAtual.MudarInteragivel(false);
+            dadosUiGeral.atualizasaiuAvancoServerRpc(true);
+            dadosUiGeral.atualizaCorVizinhoDadoServerRpc(Color.white);
 
         }
 
-
-        private void AvancoIndexMuda(int previousValue, int nextValue)
+        public override void OnNetworkDespawn()
         {
-            InvokeEventosStates(previousValue, nextValue);
-            SaindoUltimoState(previousValue);
+            stateMachineController.Finish();
         }
 
-        private void InvokeEventosStates(int previousValue, int nextValue)
-        {
-            currentState?.InvokeSaida();
-            currentState = statePairValues[(AvancoStatus)nextValue];
-            estadoMuda?.Invoke((AvancoStatus)nextValue);
-            currentState.InvokeEntrada();
-        }
 
-        private void SaindoUltimoState(int previousValue)
+        //private void AvancoIndexMuda(int nextValue)
+        //{
+        //    //InvokeEventosStates(previousValue, nextValue);
+        //    SaindoUltimoState();
+        //}
+
+
+        private void AcrescentaRodada()
         {
-            int ultimoAvancoStateIndex = (statePairValues.Count - 1);
-            if (previousValue == ultimoAvancoStateIndex)
-            {
+            //int ultimoAvancoStateIndex = (statePairValues.Count - 1);
+            //if (previousValue == ultimoAvancoStateIndex)
+            //{
                 avancoData.ContagemRodada++;
                 avancoData.ClearRodadaData();
-            }
+            //}
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        public void SetAvancoStateServerRpc(int index)
-        {
-            avancoStateIndex.Value = index;
-        }
+        //[ServerRpc(RequireOwnership = false)]
+        //public void SetAvancoStateServerRpc(int index)
+        //{
+        //    avancoStateIndex.Value = index;
+        //}
 
-        [ServerRpc(RequireOwnership = false)]
-        public void NextAvancoStateServerRpc()
-        {
-            avancoStateIndex.Value = (avancoStateIndex.Value + 1) % (statePairValues.Count);
-        }
+        //[ServerRpc(RequireOwnership = false)]
+        //public void NextAvancoStateServerRpc()
+        //{
+        //    avancoStateIndex.Value = (avancoStateIndex.Value + 1) % (statePairValues.Count);
+        //}
 
-        public void HabilitarBairrosPlayerAtual(bool value)
-        {
-            foreach (Bairro bairro in bairrosPlayerAtual)
-            {
-                bairro.Interagivel.MudarHabilitado(value);
-            }
-        }
+
     }
 }

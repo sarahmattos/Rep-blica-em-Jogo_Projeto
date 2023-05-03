@@ -11,8 +11,8 @@ namespace Game.Tools
         [SerializeField]
         private TextMeshProUGUI debugAreaText = null;
 
-        [SerializeField]
-        private bool enableDebug = false;
+        // [SerializeField]
+        // private bool enableDebug = false;
 
         [SerializeField]
         private int maxLines = 15;
@@ -28,15 +28,22 @@ namespace Game.Tools
 
         void OnEnable()
         {
-            debugAreaText.enabled = enableDebug;
-            enabled = enableDebug;
 
             if (enabled)
             {
-                debugAreaText.text += $"<color=\"white\">{DateTime.Now.ToString("HH:mm:ss.fff")} {this.GetType().Name} enabled</color>\n";
+                debugAreaText.text += "\n";
             }
 
             DontDestroyOnLoad(gameObject);
+        }
+
+        public void LogPlayerAction(string message)
+        {
+            ClearLines();
+            int playerID = TurnManager.Instance.PlayerAtual;
+            string playerHexColor = ColorUtility.ToHtmlStringRGB((GameDataconfig.Instance.PlayerColorOrder[playerID]));
+            debugAreaText.text += string.Concat(GameDataconfig.Instance.TagPlayerAtualColorizada()," : ");
+            debugAreaText.text += string.Format("<color=#{0}>{1}</color>","#fff", string.Concat(message,"\n"));
         }
 
 
@@ -44,26 +51,26 @@ namespace Game.Tools
         {
             ClearLines();
 
-            debugAreaText.text += $"<color=\"green\">{DateTime.Now.ToString("HH:mm:ss.fff")} {message}</color>\n";
+            debugAreaText.text += $"<color=\"white\"> {message}</color>\n";
         }
 
         public void LogError(string message)
         {
             ClearLines();
-            debugAreaText.text += $"<color=\"red\">{DateTime.Now.ToString("HH:mm:ss.fff")} {message}</color>\n";
+            debugAreaText.text += $"<color=\"red\">{message}</color>\n";
         }
 
         public void LogWarning(string message)
         {
             ClearLines();
-            debugAreaText.text += $"<color=\"yellow\">{DateTime.Now.ToString("HH:mm:ss.fff")} {message}</color>\n";
+            debugAreaText.text += $"<color=\"green\">{message}</color>\n";
         }
 
         private void ClearLines()
         {
             if (debugAreaText.text.Split('\n').Count() > maxLines)
             {
-                debugAreaText.text = (debugAreaText.text.Substring(debugAreaText.text.IndexOf("\n")+1));
+                debugAreaText.text = (debugAreaText.text.Substring(debugAreaText.text.IndexOf("\n") + 1));
 
             }
         }

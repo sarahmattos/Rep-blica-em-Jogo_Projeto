@@ -47,11 +47,11 @@ namespace Game.Networking
             {
                 conexaoEstabelecida?.Invoke(true);
                 conexaoIpEstabelecida?.Invoke(ipaddress);
-                Logger.Instance.LogInfo(string.Concat("Conex�o com o IP: ",ipAddressInput.text));
+                Logger.Instance.LogInfo(string.Concat("Conectando ao IP ",ipAddressInput.text));
                 
             } else
             {
-                Logger.Instance.LogError(string.Concat("Falha na conex�o com o IP: ", ipAddressInput.text));
+                Logger.Instance.LogError(string.Concat("Falha na conectar ao IP: ", ipAddressInput.text));
                 conexaoEstabelecida?.Invoke(false);
             }
         }
@@ -66,13 +66,10 @@ namespace Game.Networking
             if (NetworkManager.Singleton.StartHost())
             {
                 conexaoEstabelecida?.Invoke(true);
-                Logger.Instance.LogInfo("Criando sala Offline.");
-
             } else
             {
                 conexaoEstabelecida?.Invoke(false);
-
-                Logger.Instance.LogInfo("Falha ao criar sala.");
+                Logger.Instance.LogError("Falha ao criar sala.");
             }
 
         }
