@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Player;
 using Game.Territorio;
+using Game.Tools;
 using UnityEngine;
 
 namespace Game
@@ -11,13 +12,13 @@ namespace Game
     public class RemanejamentoData
     {
 
-        private Dictionary<Bairro, int> parBairroEleitorigualUm = new();
+        private Dictionary<Bairro, int> bairrosRemanejaveis = new();
         public List<Bairro> BairrosPlayerAtual => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
 
         private Bairro bairroEscolhido;
         private Bairro vizinhoEscolhido;
 
-        public Dictionary<Bairro, int> ParBairroEleitorigualUm => parBairroEleitorigualUm;
+        public Dictionary<Bairro, int> ParBairroEleitorigualUm => bairrosRemanejaveis;
         public Bairro BairroEscolhido { get => bairroEscolhido; set => bairroEscolhido = value; }
         public Bairro VizinhoEscolhido { get => vizinhoEscolhido; set => vizinhoEscolhido = value; }
 
@@ -32,7 +33,7 @@ namespace Game
 
         public void ClearData()
         {
-            parBairroEleitorigualUm.Clear();
+            bairrosRemanejaveis.Clear();
             ResetSelectedBairros();
         }
 
@@ -48,14 +49,14 @@ namespace Game
         {
             foreach (Bairro bairro in BairrosPlayerAtual)
             {
-                if (bairro.SetUpBairro.Eleitores.contaEleitores <= 1) continue;
-                parBairroEleitorigualUm.Add(bairro, bairro.SetUpBairro.Eleitores.contaEleitores - 1);
+                if (bairro.TemVizinhoPlayerIDIgual() && bairro.EleitoresMenorQue1())
+                    bairrosRemanejaveis.Add(bairro, bairro.SetUpBairro.Eleitores.contaEleitores - 1);
             }
         }
 
         public void RemoveBairroParBairroEleitor(Bairro bairro)
         {
-            parBairroEleitorigualUm.Remove(bairro);
+            bairrosRemanejaveis.Remove(bairro);
         }
 
 
@@ -65,6 +66,7 @@ namespace Game
 
 
         }
+
 
 
 
