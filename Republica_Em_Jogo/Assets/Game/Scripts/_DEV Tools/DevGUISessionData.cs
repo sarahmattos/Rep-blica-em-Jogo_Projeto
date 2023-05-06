@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 namespace Game.Tools
@@ -23,8 +20,9 @@ namespace Game.Tools
             guiStyle.alignment = TextAnchor.MiddleLeft;
             guiStyle.fontSize = h * 2 / 90;
             guiStyle.normal.textColor = new Color(1f, 1f, 1f, 1f);
+            string message = string.Concat("Rodada: ", rodadaController.Rodada.ToString());
 
-            GUI.Label(rect, string.Concat("rodada: ", rodadaController.Rodada), guiStyle);
+            GUI.Label(rect, message, guiStyle);
 
             //GameState
             //CoreLoopstate
