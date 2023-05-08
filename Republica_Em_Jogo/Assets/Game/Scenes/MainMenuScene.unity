@@ -916,6 +916,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5977926882699923488, guid: eca76af52ba93884cb83479eba165d9c, type: 3}
+      propertyPath: devInputShortcut.eraseLogger
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5977926882699923489, guid: eca76af52ba93884cb83479eba165d9c, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1558,7 +1562,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7887484137661636566, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.010399179
+      value: 0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 7887484137943697647, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchorMax.x

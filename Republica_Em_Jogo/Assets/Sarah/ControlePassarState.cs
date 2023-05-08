@@ -11,7 +11,7 @@ namespace Game
     {
         public static ControlePassarState instance;
         public NetworkVariable<int> QuantidadePlayerRecompensa = new NetworkVariable<int>(0);
-        public bool distribuicaoProjeto = false;
+        public bool distribuicaoProjeto = true;
         private bool primeiraDistribuicao = false;
         private RecursosCartaManager rc;
         private HudStatsJogador hs;
@@ -22,12 +22,13 @@ namespace Game
             instance = this;
             rc = FindObjectOfType<RecursosCartaManager>();
             hs = FindObjectOfType<HudStatsJogador>();
-            inicDistribState.Entrada += () =>
-            {
-                Tools.Logger.Instance.LogWarning("mudar primeiraDistribuicao ok");
+            primeiraDistribuicao = true;
+            // inicDistribState.Entrada += () =>
+            // {
+            //     Tools.Logger.Instance.LogWarning("mudar primeiraDistribuicao ok");
 
-                primeiraDistribuicao = true;
-            };
+            //     primeiraDistribuicao = true;
+            // };
         }
 
         public override void OnDestroy()
@@ -74,53 +75,52 @@ namespace Game
 
         }
 
+        //button passar stado
         public void passarState()
         {
+
+            Tools.Logger.Instance.LogInfo("primeira distribuição: " + primeiraDistribuicao);
 
             if (distribuicaoProjeto == true)
             {
                 DiminuiValServerRpc();
                 distribuicaoProjeto = false;
+                return;
             }
-            else
+
+            if (primeiraDistribuicao)
             {
-                if (!primeiraDistribuicao)
+                //Configuração do botão da interface pós distribuição Inicial do Game State geral.
+                if (!TurnManager.Instance.LocalIsUltimo)
                 {
-                    if (rc.chamarDistribuicao == false)
-                    {
-                        if (rc.comTrocaTrue == false)
-                        {
-                            Tools.Logger.Instance.LogInfo("não é a primeira distribuição. ");
-                            CoreLoopStateHandler.Instance.NextStateServerRpc();
-                        }
-                    }
+                    Tools.Logger.Instance.LogWarning("NÃO É O ÚLTIMO ok");
+                    //Resentando o state machine parar que a mudança de estado funcione corretamente.
+                    GameStateHandler.Instance.StateMachineController.ResetMachineState();
+                    GameStateHandler.Instance.StateMachineController.ChangeStateServerRpc((int)GameState.DISTRIBUI_INICIAL);
                 }
                 else
                 {
-                    //Configuração do botão da interface pós distribuição Inicial do Game State geral.
-                    if (!TurnManager.Instance.CurrentIsUltimo)
-                    {
-
-                        Tools.Logger.Instance.LogWarning("NÃO É O ÚLTIMO ok");
-                        //Resentando o state machine parar que a mudança de estado funcione corretamente.
-                        GameStateHandler.Instance.StateMachineController.ResetMachineState();
-                        GameStateHandler.Instance.StateMachineController.ChangeStateServerRpc((int)GameState.DISTRIBUI_INICIAL);
-
-                    }
-                    else
-                    {
-
-                        Tools.Logger.Instance.LogWarning(" ÚLTIMO");
-                        //GameStateHandler.Instance.StateMachineController.ResetMachineState();
-                        GameStateHandler.Instance.StateMachineController.ChangeStateServerRpc((int)GameState.DESENVOLVIMENTO);
-                    }
-
-                    primeiraDistribuicao = false;
+                    Tools.Logger.Instance.LogWarning(" ÚLTIMO");
+                    GameStateHandler.Instance.StateMachineController.ResetMachineState();
+                    GameStateHandler.Instance.StateMachineController.ChangeStateServerRpc((int)GameState.DESENVOLVIMENTO);
 
                 }
+                primeiraDistribuicao = false;
+                return;
+            }
+            if (rc.chamarDistribuicao == false)
+            {
+                if (rc.comTrocaTrue == false)
+                {
+                    Tools.Logger.Instance.LogInfo("não é a primeira distribuição. ");
+                    CoreLoopStateHandler.Instance.NextStateServerRpc();
+                }
+                return;
 
             }
+
         }
+
         public void MudacomTroca()
         {
             //botao final distribuicao

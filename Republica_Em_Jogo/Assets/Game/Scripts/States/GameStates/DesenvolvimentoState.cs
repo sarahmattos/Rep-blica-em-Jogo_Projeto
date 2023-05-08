@@ -17,6 +17,7 @@ namespace Game
         }
         public override void EnterState()
         {
+            TurnManager.Instance.SetIndexPlayerTurn(0);
             rodadaController.InscreverEvents();
 
             if (!IsHost) return;

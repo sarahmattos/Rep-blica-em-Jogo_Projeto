@@ -23,6 +23,7 @@ namespace Game
         public int GetClientesCount => clientesCount.Value;
         public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == PlayerAtual);
         public bool CurrentIsUltimo => (PlayerAtual == ordemPlayersID[ordemPlayersID.Count-1]);
+        public bool LocalIsUltimo => (((int)NetworkManager.Singleton.LocalClientId) == ordemPlayersID[ordemPlayersID.Count-1]);
 
         public event Action<bool> vezDoPlayerLocal;
         public event Action<int, int> turnoMuda;

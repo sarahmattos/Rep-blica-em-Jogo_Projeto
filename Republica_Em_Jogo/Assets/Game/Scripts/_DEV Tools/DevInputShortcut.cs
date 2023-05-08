@@ -9,15 +9,17 @@ namespace Game.Tools
     [System.Serializable]
     public class DevInputShortcut
     {
-        [SerializeField] private KeyCode defaultInput1 = KeyCode.LeftControl;
+        [SerializeField] private KeyCode defaultInput = KeyCode.LeftControl;
+        [Header("keys for dev's shortchut.")]
         [SerializeField] private KeyCode enableNextStateButton;
+        [SerializeField] private KeyCode eraseLogger = KeyCode.Backspace;
 
 
 
         public void InputCalls()
         {
             EnableNextStateButton();
-
+            EraseLogger();
 
 
         }
@@ -27,13 +29,20 @@ namespace Game.Tools
 
         private void EnableNextStateButton()
         {
-            if (Input.GetKeyDown(defaultInput1) && Input.GetKeyDown(enableNextStateButton))
+            if (Input.GetKey(defaultInput) && Input.GetKeyDown(enableNextStateButton))
             {
                 UICoreLoop.Instance.NextStateButton.gameObject.SetActive(true);
                 UICoreLoop.Instance.NextStateButton.enabled = true;
             }
         }
 
+        private void EraseLogger()
+        {
+            if (Input.GetKey(defaultInput) && Input.GetKeyDown(eraseLogger))
+            {
+                Logger.Instance.ResetLogger();
+            }
+        }
 
 
 

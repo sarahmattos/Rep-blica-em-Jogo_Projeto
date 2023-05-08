@@ -12,12 +12,12 @@ namespace Game.Tools
 
         [SerializeField] private bool devToolActive = false;
         public bool DevToolActive => devToolActive;
-        [SerializeField] private DevInputShortcut devInputShortcut = new DevInputShortcut();
-
+        [SerializeField] private DevInputShortcut devInputShortcut ;
 
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
+            devInputShortcut = new DevInputShortcut();
         }
 
 

@@ -75,7 +75,7 @@ namespace Game.Tools
             }
         }
 
-        public void ResetLoggger()
+        public void ResetLogger()
         {
             debugAreaText.text = string.Empty;
         }
