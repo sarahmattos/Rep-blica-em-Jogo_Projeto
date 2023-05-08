@@ -58,6 +58,7 @@ namespace Game.UI
         public bool distribuicaoGeral = false;
         [HideInInspector]
         public bool distribuicaoInicial = false;
+        private bool ativa=true;
         private int aux;
         public event Action eleitoresNovosDeProjeto;
         private State inicalizacao => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
@@ -356,6 +357,10 @@ namespace Game.UI
         public void checaZonasInteiras(bool valorParticula)
         {
             setUpZona.PlayerTemZonaInteira(playerStats.playerID, valorParticula);
+        }
+        public void escondeObjetivo(GameObject go){
+            ativa = !ativa;
+            go.SetActive(ativa);
         }
 
     }

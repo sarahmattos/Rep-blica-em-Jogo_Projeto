@@ -37,6 +37,7 @@ public class Projeto : NetworkBehaviour
     [SerializeField] private TMP_Text text_avisoAprovacaoProjeto;
     public GameObject projetoUI;
     [SerializeField] private GameObject restoUI;
+    [SerializeField] private GameObject infoZonas;
     [SerializeField] private GameObject bntsUi, btns2, fecharBtn;
     [SerializeField] private GameObject verMapaBtn;
     public GameObject verProjetoBtn;
@@ -139,14 +140,16 @@ public class Projeto : NetworkBehaviour
                 projetoUI.SetActive(true);
                 verProjetoBtn.SetActive(false);
                 fecharBtn.SetActive(false);
-
+                verMapaBtn.SetActive(true);
                 //interface para quem está escolhendo zona
                 bntsUi.SetActive(true);
+                infoZonas.SetActive(true);
                 // text_avisoAprovacaoProjeto.text = "Escolha uma zona:";
 
                 //interface para quem está esperando zona ser escolhida
                 if (newValue != (int)NetworkManager.Singleton.LocalClientId)
                 {
+                    infoZonas.SetActive(false);
                     bntsUi.SetActive(false);
                     text_avisoAprovacaoProjeto.text = "Aguardando zona ser escolhida.";
                     text_avisoAprovacaoProjeto.gameObject.SetActive(true);
@@ -183,6 +186,7 @@ public class Projeto : NetworkBehaviour
                 //interface para quem escolheu zona e está esperando votação
                 if (clienteLocal == (int)NetworkManager.Singleton.LocalClientId)
                 {
+                    infoZonas.SetActive(false);
                     //se tiver 7 cadeiras passa direto pra projeto aprovado
                     PlayerStats ps = hs.GetPlayerStats();
                     if (ps.numCadeiras >= EleicaoManager.Instance.minCadeirasVotacao)
@@ -211,6 +215,7 @@ public class Projeto : NetworkBehaviour
                     }
                     else
                     {
+                        infoZonas.SetActive(true);
                         text_avisoAprovacaoProjeto.text = "ZONA ESCOLHIDA: \n\n " + newValue.ToString() + "\n \n" + "VOTE: ";
                         text_avisoAprovacaoProjeto.gameObject.SetActive(true);
                         btns2.SetActive(true);
@@ -252,7 +257,7 @@ public class Projeto : NetworkBehaviour
                     btns2.SetActive(false);
                     //ativa botao de fechar interface
                     fecharBtn.SetActive(true);
-
+                    infoZonas.SetActive(false);
                     //se teve mais sim, foi aprovado
                     if (sim > EleicaoManager.Instance.minCadeirasVotacao)
                     {

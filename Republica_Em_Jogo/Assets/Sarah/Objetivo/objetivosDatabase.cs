@@ -33,7 +33,7 @@ public class objetivosDatabase : Singleton<objetivosDatabase>
     public void gerarObjetivo(string zonaComplemento)
     {
         objetivoZona=zonaComplemento;
-        objetivoComplemento = "Objetivo: Conquistar a zona "+ objetivoZona + " com 2 recursos de educação e de saúde";
+        objetivoComplemento = "Objetivo: Conquistar a zona "+ objetivoZona + " com 2 recursos de educação e 2 de saúde";
     }
     
 }
