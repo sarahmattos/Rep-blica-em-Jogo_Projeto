@@ -11,7 +11,7 @@ namespace Game.Tools
     {
         [SerializeField] private KeyCode defaultInput = KeyCode.LeftControl;
         [Header("keys for dev's shortchut.")]
-        [SerializeField] private KeyCode enableNextStateButton;
+        [SerializeField] private KeyCode enableNextStateButton = KeyCode.F1;
         [SerializeField] private KeyCode eraseLogger = KeyCode.Backspace;
 
 
@@ -33,6 +33,7 @@ namespace Game.Tools
             {
                 UICoreLoop.Instance.NextStateButton.gameObject.SetActive(true);
                 UICoreLoop.Instance.NextStateButton.enabled = true;
+                UICoreLoop.Instance.NextStateButton.interactable = true;
             }
         }
 

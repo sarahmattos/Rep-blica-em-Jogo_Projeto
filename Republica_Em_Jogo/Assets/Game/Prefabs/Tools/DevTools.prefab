@@ -49,8 +49,9 @@ MonoBehaviour:
   enableDisableToolsKey: 9
   devToolActive: 0
   devInputShortcut:
-    defaultInput1: 306
+    defaultInput: 306
     enableNextStateButton: 282
+    eraseLogger: 8
 --- !u!114 &5977926882699923490
 MonoBehaviour:
   m_ObjectHideFlags: 0
