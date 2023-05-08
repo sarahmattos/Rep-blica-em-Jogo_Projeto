@@ -94,21 +94,33 @@ public class MovimentosSociais : NetworkBehaviour
     }
     public void chamarRecompensasEleitor()
     {
-        distribuicaoRecompensaRecurso = true;
-        //receber valor uma vez
-        hs.playerRecebeEleitor = true;
-        //chama funcao pra receber esse valor
-        hs.ValorEleitoresNovos(quantidadeEleitor);
+        StartCoroutine(EsperaEVai1(0.5f));
     }
     public void chamarRecompensasRecurso()
     {
         if (distribuicaoRecompensaRecurso == true)
-        {
-            rc.distribuicaoChamada();
+            {
+                rc.distribuicaoChamada();
             distribuicaoRecompensaRecurso = false;
-        }
-
+             StartCoroutine(EsperaEVai2(1f));
+            }
+            
     }
+    private IEnumerator EsperaEVai1(float s)
+        {
+            yield return new WaitForSeconds(s);
+            distribuicaoRecompensaRecurso = true;
+            //receber valor uma vez
+            hs.playerRecebeEleitor = true;
+            //chama funcao pra receber esse valor
+            hs.ValorEleitoresNovos(quantidadeEleitor);
+        }
+        private IEnumerator EsperaEVai2(float s)
+        {
+            yield return new WaitForSeconds(s);
+            rc.chamarDistribuicao2=true;
+        }
+        
 
     public void panelFalse(GameObject panel)
     {

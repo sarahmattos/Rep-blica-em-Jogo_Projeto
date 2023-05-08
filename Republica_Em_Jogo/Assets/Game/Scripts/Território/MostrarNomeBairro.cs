@@ -58,7 +58,7 @@ namespace Game.Territorio
         //TODO: Realocar este metodo; MostarNomeBairro deveria estar encarregado de somente "mostrar o nome do bairro"
         private void EscolherBairroNoProjeto(Bairro _)
         {
-            if(!rc.chamarDistribuicao){
+            if(!rc.chamarDistribuicao2){
                 if (hs.distribuicaoGeral == true)
                 {
                     if (projeto.distribuicaoProjeto == true)

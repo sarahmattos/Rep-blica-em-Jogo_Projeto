@@ -6,6 +6,8 @@ using Game.Player;
 using Game.Territorio;
 using System;
 using Game.Tools;
+using Unity.Collections;
+using System.Collections;
 
 namespace Game.UI
 {
@@ -290,8 +292,14 @@ namespace Game.UI
         //botao chama funcao de distribuicao de eleitor no inicio das rodadas
         public void ChamatPlayerInicioRodada()
         {
-            
-            eleitoresAdicionais = 0;
+            StartCoroutine(EsperaEVai1(0.5f));
+          
+
+        }
+        private IEnumerator EsperaEVai1(float s)
+        {
+            yield return new WaitForSeconds(s);
+              eleitoresAdicionais = 0;
             if (distribuicaoInicial == true)
             {
                 checaZonasInteiras(true);
@@ -311,7 +319,6 @@ namespace Game.UI
                 eleitoresNovosDeProjeto?.Invoke();
 
             }
-
         }
 
         public void ValorEleitoresNovos(int valor)

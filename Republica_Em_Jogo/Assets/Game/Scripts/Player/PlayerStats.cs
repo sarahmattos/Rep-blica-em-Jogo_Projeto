@@ -107,6 +107,7 @@ namespace Game.Player {
         public void inicioRodada(int eleitoresAdicionais)
          {
              eleitoresNovos = (Mathf.Floor(bairrosTotais / 2))+eleitoresAdicionais;
+             if(eleitoresNovos<3)eleitoresNovos = 3;
          }
 
         public void InicializaPlayerStats()

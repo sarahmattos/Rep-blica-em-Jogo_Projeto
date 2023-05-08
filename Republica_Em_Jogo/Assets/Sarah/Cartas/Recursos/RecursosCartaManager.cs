@@ -26,6 +26,7 @@ public class RecursosCartaManager : MonoBehaviour
     public int novosEdu;
     public int novosSaude;
     public bool chamarDistribuicao=false;
+    public bool chamarDistribuicao2=false;
     private int quantidade;
     public bool comTrocaTrue=false;
     void Start()
@@ -33,7 +34,7 @@ public class RecursosCartaManager : MonoBehaviour
         hs = FindObjectOfType<HudStatsJogador>();
     }
     public void Update(){
-        if(chamarDistribuicao==true){
+        if(chamarDistribuicao2==true){
             distribuiNovosRecursos();
         }
         if(quantidade==1){
@@ -153,7 +154,7 @@ public class RecursosCartaManager : MonoBehaviour
         }
         
     }
-
+   
     //distribui esses novos recursos (interface)
    public void distribuiNovosRecursos(){
     if(novosEdu>0||novosSaude>0){
@@ -164,6 +165,7 @@ public class RecursosCartaManager : MonoBehaviour
         avisoDistribuicao.SetActive(false);
         avisoDistribuicaoFinal.SetActive(true);
         chamarDistribuicao=false;
+        chamarDistribuicao2=false;
     }
    }
 }

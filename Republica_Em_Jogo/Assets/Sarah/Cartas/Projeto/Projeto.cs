@@ -309,7 +309,21 @@ public class Projeto : NetworkBehaviour
 
         }
     }
-
+        private IEnumerator EsperaEVai1(int s)
+        {
+            yield return new WaitForSeconds(s);
+            if (playerInZona == true)
+            {
+                distribuicaoProjeto = true;
+                hs.playerRecebeEleitor = true;
+                setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
+                hs.updateRecursoCartaUI(numRecompensaDefault);
+                playerInZona = false;
+             }
+             zonaNameLocal = "";
+             clienteLocal = -1;
+             numRecompensa = -1;
+        }
     //chamado apos projeto ser aprovado
     public void eleitoresZonaFinal()
     {
@@ -317,18 +331,9 @@ public class Projeto : NetworkBehaviour
         //verifica se player tem bairro na zona escolhida
         //dá carta de recurso para jogadores que possuem bairros na zona
         //reseta algumas variáveis
-        if (playerInZona == true)
-        {
-            distribuicaoProjeto = true;
-            hs.playerRecebeEleitor = true;
-            setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
-            hs.updateRecursoCartaUI(numRecompensaDefault);
-            playerInZona = false;
-        }
-
-        zonaNameLocal = "";
-        clienteLocal = -1;
-        numRecompensa = -1;
+        
+            StartCoroutine(EsperaEVai1(1));
+        
     }
 
     //ao apertar botao de fechar interface   
