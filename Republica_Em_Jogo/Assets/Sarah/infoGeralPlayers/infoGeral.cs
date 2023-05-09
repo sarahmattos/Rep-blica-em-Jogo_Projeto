@@ -89,8 +89,8 @@ namespace Game
         //  textoTotal = ps.Nome+ ": "+ps.EleitoresTotais+" eleitores, "+ps.BairrosInControl.Count.ToString()+
                 //" bairros, "+ps.numSaude+" cartas de saúde, "+ps.numEducacao+" cartas de educação, "+ps.numCadeiras+
                // " cadeiras";
-                 textoTotal = ps.Nome+ ": "+ps.EleitoresTotais+" , "+ps.BairrosInControl.Count.ToString()+
-                " , "+ps.numSaude+" , "+ps.numEducacao+" , "+ps.numCadeiras;
+                 textoTotal = GameDataconfig.Instance.TagPlayerColorizada(ps.playerID)+ ":       "+ps.numSaude+"          "+ps.numEducacao+"          "+ps.numCadeiras+"        "+
+                 ps.EleitoresTotais+"        "+ps.BairrosInControl.Count.ToString();
                 Debug.Log(textoTotal);
                 if(ps.playerID==0)AtualizaInfo0GeralServerRpc(textoTotal);
                 if(ps.playerID==1)AtualizaInfo1GeralServerRpc(textoTotal);
