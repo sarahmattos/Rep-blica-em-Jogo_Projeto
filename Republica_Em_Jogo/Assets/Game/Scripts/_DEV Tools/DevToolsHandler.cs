@@ -8,11 +8,11 @@ namespace Game.Tools
 {
     public class DevToolsHandler : Singleton<DevToolsHandler>
     {
-        [SerializeField] private KeyCode enableDisableToolsKey;
-
         [SerializeField] private bool devToolActive = false;
         public bool DevToolActive => devToolActive;
-        [SerializeField] private DevInputShortcut devInputShortcut ;
+
+
+        [SerializeField] private DevInputShortcut devInputShortcut;
 
         private void Start()
         {
@@ -23,9 +23,10 @@ namespace Game.Tools
 
         private void Update()
         {
-            if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(enableDisableToolsKey))
+            if (Input.GetKey(devInputShortcut.DefaultInput) && Input.GetKeyDown(devInputShortcut.EnableDisableToolsKey))
             {
                 devToolActive = !devToolActive;
+                Debug.Log(devToolActive.ToString());
             }
 
             if (!devToolActive) return;

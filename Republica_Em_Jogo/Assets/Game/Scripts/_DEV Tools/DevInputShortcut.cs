@@ -9,11 +9,17 @@ namespace Game.Tools
     [System.Serializable]
     public class DevInputShortcut
     {
-        [SerializeField] private KeyCode defaultInput = KeyCode.LeftControl;
-        [Header("keys for dev's shortchut.")]
+        [Header("Tecla padrão para ser pressionada junto com a tecla de atalho.")]
+        [SerializeField] private KeyCode defaultInput = KeyCode.LeftShift;
+        
+        [Header("Tecla de atalho pra habilitar os comandos de dev secretos ;D")]
+        [SerializeField] private KeyCode enableDisableToolsKey = KeyCode.Escape;
+
+        [Header("Tecla de atalho.")]
         [SerializeField] private KeyCode enableNextStateButton = KeyCode.F1;
         [SerializeField] private KeyCode eraseLogger = KeyCode.Backspace;
-
+        public KeyCode EnableDisableToolsKey => enableDisableToolsKey;
+        public KeyCode DefaultInput => defaultInput;
 
 
         public void InputCalls()

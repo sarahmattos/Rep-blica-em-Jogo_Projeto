@@ -95,7 +95,7 @@ namespace Game.UI
 
         public void UpdateTitleText(CoreLoopState state)
         {
-            string titleText = string.Concat(GameDataconfig.Instance.TagPlayerAtualColorizada(), state.ToString());
+            string titleText = string.Concat(GameDataconfig.Instance.TagPlayerAtualColorizada(),"  ", state.ToString());
             logStateText.SetText(titleText);
         }
 

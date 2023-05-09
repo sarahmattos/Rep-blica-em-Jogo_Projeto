@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6684eb7f73a4af3449c7ea12123ae71d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableDisableToolsKey: 9
   devToolActive: 0
   devInputShortcut:
-    defaultInput: 306
+    defaultInput: 304
+    enableDisableToolsKey: 27
     enableNextStateButton: 282
     eraseLogger: 8
 --- !u!114 &5977926882699923490
