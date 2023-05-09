@@ -18,8 +18,9 @@ namespace Game
         private NetworkVariable<int> pedeInfo = new NetworkVariable<int>();
         string info0,info1,info2,info3;
         [SerializeField] private TMP_Text teste0, teste1, teste2, teste3;
-        HudStatsJogador hs;
+        [SerializeField] private GameObject infoGo;
         PlayerStats ps;
+        HudStatsJogador hs;
         string textoTotal;
         void Start()
         {
@@ -74,15 +75,21 @@ namespace Game
                     };
                     pedeInfo.OnValueChanged += (int previousValue, int newValue) =>
                     {
-                        Debug.Log("atualizou");
                         getInfos();
-                        Debug.Log("getInfo");
                     };
             }
+            private void Update()
+            {
+                if(Input.GetKeyDown(KeyCode.Tab)){
+                    chamarInfo();
+                    updateUi(true);
+                }
+                if(Input.GetKeyUp(KeyCode.Tab)){
+                    updateUi(false);
+                }
+            }
             public void chamarInfo(){
-                 Debug.Log("clicou");
                 pedeInfoServerRpc(2);
-               // updateInfoUi();
             }
         public void getInfos(){
           ps = hs.GetPlayerStats();
@@ -91,7 +98,6 @@ namespace Game
                // " cadeiras";
                  textoTotal = GameDataconfig.Instance.TagPlayerColorizada(ps.playerID)+ ":       "+ps.numSaude+"          "+ps.numEducacao+"          "+ps.numCadeiras+"        "+
                  ps.EleitoresTotais+"        "+ps.BairrosInControl.Count.ToString();
-                Debug.Log(textoTotal);
                 if(ps.playerID==0)AtualizaInfo0GeralServerRpc(textoTotal);
                 if(ps.playerID==1)AtualizaInfo1GeralServerRpc(textoTotal);
                 if(ps.playerID==2)AtualizaInfo2GeralServerRpc(textoTotal);
@@ -100,11 +106,13 @@ namespace Game
                 
         }
         public void updateInfoUi(){
-             Debug.Log("update");
             teste0.text = info0;
             teste1.text = info1;
             teste2.text = info2;
             teste3.text = info3;
+        }
+        public void updateUi(bool valor){
+            infoGo.SetActive(valor);
         }
         
     }
