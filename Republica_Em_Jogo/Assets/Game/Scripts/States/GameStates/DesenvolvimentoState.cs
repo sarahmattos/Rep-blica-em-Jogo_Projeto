@@ -9,6 +9,7 @@ namespace Game
     {
         private RodadaController rodadaController;
         private GameStateHandler gameState => GameStateHandler.Instance;
+        public RodadaController RodadaController => rodadaController;
 
         private void Start()
         {
@@ -16,6 +17,7 @@ namespace Game
         }
         public override void EnterState()
         {
+            TurnManager.Instance.SetIndexPlayerTurn(0);
             rodadaController.InscreverEvents();
 
             if (!IsHost) return;

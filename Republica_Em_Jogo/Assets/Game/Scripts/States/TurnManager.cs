@@ -22,10 +22,13 @@ namespace Game
         // public int PlayerAtual2 ;
         public int GetClientesCount => clientesCount.Value;
         public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == PlayerAtual);
+        public bool CurrentIsUltimo => (PlayerAtual == ordemPlayersID[ordemPlayersID.Count-1]);
+        public bool LocalIsUltimo => (((int)NetworkManager.Singleton.LocalClientId) == ordemPlayersID[ordemPlayersID.Count-1]);
+
         public event Action<bool> vezDoPlayerLocal;
         public event Action<int, int> turnoMuda;
         private State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
-        private State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.RECOMPENSA];
+        private State RecompensaState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.RECOMPENSA];
         public int teste, teste2;
         public int aux;
         public int TurnCount
@@ -49,8 +52,7 @@ namespace Game
 
             hs = FindObjectOfType<HudStatsJogador>();
             turnoMuda += OnTurnoMuda;
-            DistribuicaoState.Saida += UpdateTurn;
-            InicializacaoState.Saida += UpdateTurn;
+            RecompensaState.Saida += UpdateTurn;
             //Inscrever();
 
             if (!IsHost)
@@ -90,14 +92,15 @@ namespace Game
         public override void OnDestroy()
         {
             turnoMuda -= OnTurnoMuda;
-            DistribuicaoState.Saida -= UpdateTurn;
-            InicializacaoState.Saida -= UpdateTurn;
+            RecompensaState.Saida -= UpdateTurn;
+
 
             if (!IsHost)
                 return;
             ordemPlayersID.Dispose();
             clientesCount.Dispose();
             InicializacaoState.Entrada -= DefineConfigIniciais;
+
         }
 
         private void OnTurnoMuda(int _, int nextPlayer)
@@ -139,7 +142,7 @@ namespace Game
         }
 
 
-        private void UpdateTurn()
+        public void UpdateTurn()
         {
             int previousPlayer = (indexPlayerAtual == -1) ? 0 : PlayerAtual;
             if (turnCount == 0)
@@ -150,7 +153,7 @@ namespace Game
             {
                 NextTurn();
             }
-
+            Tools.Logger.Instance.LogWarning("Update turn");
             TurnCount++;
             turnoMuda?.Invoke(previousPlayer, PlayerAtual);
             //hs.testeCor();
@@ -163,7 +166,6 @@ namespace Game
         {
             indexPlayerAtual = index;
         }
-
         public void NextTurn()
         {
             indexPlayerAtual = (1 + indexPlayerAtual) % (GetClientesCount);

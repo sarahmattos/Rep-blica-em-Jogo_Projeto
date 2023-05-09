@@ -14,6 +14,7 @@ namespace Game
         MENU_SCENE_LOAD,
         GAMEPLAY_SCENE_LOAD,
         INICIALIZACAO,
+        DISTRIBUI_INICIAL,
         DESENVOLVIMENTO,
         ELEICOES,
         FIM_JOGO

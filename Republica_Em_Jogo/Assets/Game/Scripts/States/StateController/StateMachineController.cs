@@ -25,6 +25,7 @@ namespace Game
 
         public void ResetMachineState()
         {
+            // Tools.Logger.Instance.LogInfo("Reset state Machine");
             ChangeStateServerRpc(-1);
         }
 
@@ -45,6 +46,7 @@ namespace Game
 
         private void OnIndexStateMuda(int previous, int next)
         {
+            // Tools.Logger.Instance.LogError(string.Concat("previous",previous," next", next));
             if (previous != -1) 
             { 
                 currentState?.InvokeSaida();
@@ -63,12 +65,14 @@ namespace Game
         public void ChangeStateServerRpc(int newIndex)
         {
             indexState.Value = newIndex;
+
         }
 
         [ServerRpc(RequireOwnership = false)]
         public void NextStateServerRpc()
         {
             indexState.Value = (indexState.Value + 1) % states.Count;
+
 
         }
 

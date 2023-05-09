@@ -20,8 +20,7 @@ namespace Game.UI
         [SerializeField] public TMP_Text ExplicaStateTextCorpo;
         [SerializeField] public GameObject ExplicaStateUi;
         private RodadaController rodadaController;
-        public State DesenvState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
-
+        public Button NextStateButton => nextStateButton;
         private string TagPlayerAtualStilizado
         {
             get
@@ -31,19 +30,13 @@ namespace Game.UI
             }
         }
 
-
-        private void Awake()
-        {
-            nextStateButton.gameObject.SetActive(false);
-        }
-
         private void Start()
         {
             nextStateButton.onClick.AddListener(OnNextStateButtonClick);
 
             TurnManager.Instance.vezDoPlayerLocal += OnPlayerTurnUpdate;
-            DesenvState.Entrada += OnDesenvolvimento;
             CoreLoopStateHandler.Instance.estadoMuda += UpdateTextDesenv;
+            nextStateButton.gameObject.SetActive(false);
 
         }
 
@@ -52,7 +45,6 @@ namespace Game.UI
         private void OnDestroy()
         {
             TurnManager.Instance.vezDoPlayerLocal -= OnPlayerTurnUpdate;
-            DesenvState.Entrada -= OnDesenvolvimento;
             CoreLoopStateHandler.Instance.estadoMuda -= UpdateTextDesenv;
 
         }
@@ -75,15 +67,6 @@ namespace Game.UI
         }
 
 
-        private void OnDesenvolvimento()
-        {
-            // if (TurnManager.Instance.LocalIsCurrent)
-            // {
-            nextStateButton.gameObject.SetActive(true);
-            // }
-
-        }
-
         private void OnPlayerTurnUpdate(bool value)
         {
             nextStateButton.gameObject.SetActive(value);
@@ -95,7 +78,7 @@ namespace Game.UI
 
         private void UpdateTextDesenv(CoreLoopState state)
         {
-            UpdateTitleTextWithPlayerTag(string.Concat(" entrou no estado ", state));
+            UpdateTitleText(state);
         }
 
         public void MostrarAvisoEstado(string avisoTitulo,string avisoCorpo)
@@ -110,16 +93,11 @@ namespace Game.UI
             }
         }
 
-        public void UpdateTitleText(string message)
+        public void UpdateTitleText(CoreLoopState state)
         {
-            logStateText.SetText(message);
+            string titleText = string.Concat(GameDataconfig.Instance.TagPlayerAtualColorizada(), state.ToString());
+            logStateText.SetText(titleText);
         }
-
-        public void UpdateTitleTextWithPlayerTag(string message)
-        {
-            UpdateTitleText(string.Concat(GameDataconfig.Instance.TagPlayerAtualColorizada(), message));
-        }
-
 
 
     }

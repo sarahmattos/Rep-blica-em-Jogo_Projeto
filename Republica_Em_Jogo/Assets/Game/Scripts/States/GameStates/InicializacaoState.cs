@@ -37,6 +37,7 @@ namespace Game
         {
             StopAllCoroutines();
             EleicaoManager.Instance.ClientsConectServerRpc();
+            TurnManager.Instance.UpdateTurn();
         }
 
         private List<Bairro> GetBairros()
@@ -65,7 +66,7 @@ namespace Game
 
                 yield return new WaitForSeconds(intervaloTempo);
             }
-            stateHandler.StateMachineController.ChangeStateServerRpc((int)GameState.DESENVOLVIMENTO);
+            stateHandler.StateMachineController.NextStateServerRpc();
 
 
 

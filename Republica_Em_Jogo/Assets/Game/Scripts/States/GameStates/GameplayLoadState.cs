@@ -15,7 +15,7 @@ namespace Game
         {
             if (!IsServer) return;
             //stateHandler.NextStateServerRPC();
-            StartCoroutine(SperaEVai(1));
+            StartCoroutine(SperaEVai(0.3f));
         }
 
         public override void ExitState()
