@@ -13,13 +13,13 @@ namespace Game.Player
         [SerializeField] private Camera mainCamera;
         private ZoomTarget zoomTarget;
 
-        [Header("targetModifiers")]
+        [Header("move smooth props")]
         [SerializeField] Transform target;
         private float maxSpeed = 10000;
         private float smoothTime = 1f;
         private Vector3 currentVelocity = Vector3.zero;
 
-        [Header("Zoom modifiers")]
+        [Header("Zoom smooth props")]
         [SerializeField] private float maxSpeed2 = 100000;
         [SerializeField] private float smoothTime2 = 0.01f;
         private float currentVelocity2 = 0;

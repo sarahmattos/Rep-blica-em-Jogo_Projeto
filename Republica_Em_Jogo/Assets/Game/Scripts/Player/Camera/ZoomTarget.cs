@@ -41,6 +41,7 @@ namespace Game.Player
 
                 Vector3 mouseWorldPosDiff = mouseWorldPosStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 target.position += mouseWorldPosDiff;
+                transform.position += mouseWorldPosDiff;
 
             }
         }

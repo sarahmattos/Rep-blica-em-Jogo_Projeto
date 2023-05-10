@@ -9,7 +9,8 @@ namespace Game.Player
     {
 
         private Vector3 mouseWorldPosStart;
-        [SerializeField] private float speed;
+        [SerializeField][Range(1, 50)]  private int scrollWheelSpeed;
+        [SerializeField] [Range(1, 20)] private int directionalInputSpeed;
         // public float xClamp => boundary.Size.x;
         // public float zClamp => boundary.Size.z;
 
@@ -28,16 +29,32 @@ namespace Game.Player
             {
                 Pan();
             }
+
+            ProcessDirectionalInputs();
         }
         private void Pan()
         {
             // if (Input.GetAxis("Mouse Y") != 0 || Input.GetAxis("Mouse X") != 0)
             // {
-                Vector3 mouseWorldPosDiff = mouseWorldPosStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                transform.position += mouseWorldPosDiff * speed;
-                transform.ClampPositionXZ(boundary.Bounds);
+            Vector3 mouseWorldPosDiff = mouseWorldPosStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            IncreasePositionLimited(mouseWorldPosDiff * scrollWheelSpeed);
+            // transform.position += mouseWorldPosDiff * speed;
+            // transform.ClampPositionXZ(boundary.Bounds);
 
             // }
+        }
+
+        private void ProcessDirectionalInputs()
+        {
+            Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            IncreasePositionLimited(inputDirection*directionalInputSpeed);
+
+        }
+
+        private void IncreasePositionLimited(Vector3 position)
+        {
+            transform.position += position*Time.deltaTime;
+            transform.ClampPositionXZ(boundary.Bounds);
         }
 
 
