@@ -10,6 +10,7 @@ using Game.Territorio;
 using Game.Player;
 using Game.UI;
 using Game;
+using System;
 
 //namespace Game.Territorio
 //{
@@ -56,6 +57,8 @@ public class Projeto : NetworkBehaviour
     public bool aprovado = false;
     [HideInInspector]
     public bool inVotacao = false;
+
+    public event Action<string> ProjetoAprovado;
 
     //Client cashing
     private string clientDados;
@@ -281,8 +284,8 @@ public class Projeto : NetworkBehaviour
     public void sortearProjeto()
     {
         defaultValues();
-        proposta = projetoManager.proposta[Random.Range(0, projetoManager.proposta.Length)];
-        numRecompensa = projetoManager.numRecompensa[Random.Range(0, projetoManager.numRecompensa.Length)];
+        proposta = projetoManager.proposta[UnityEngine.Random.Range(0, projetoManager.proposta.Length)];
+        numRecompensa = projetoManager.numRecompensa[UnityEngine.Random.Range(0, projetoManager.numRecompensa.Length)];
         recompensaText = projetoManager.recompensaText;
         textoTotal = proposta + "\n \n" + recompensaText + "" + numRecompensa.ToString();
         atualizarProjeto(textoTotal);
@@ -428,6 +431,7 @@ public class Projeto : NetworkBehaviour
         text_avisoAprovacaoProjeto.gameObject.SetActive(true);
 
         aprovado = true;
+        ProjetoAprovado?.Invoke(zonaNameLocal);
         setUpZona.playerZona(NetworkManager.Singleton.LocalClientId, zonaNameLocal);
         if (playerInZona == true)
         {
