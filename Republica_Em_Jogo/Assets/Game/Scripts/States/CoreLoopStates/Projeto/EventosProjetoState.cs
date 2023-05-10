@@ -36,16 +36,18 @@ namespace Game
             {
                 if (zona.name == zonaEscolhida)
                 {
-                    MudaAtivityOutrasZonas(zona);
+                    MudaInteratividadeOutrasZonas(zona);
                     break;
                 }
             }
 
         }
 
-        private void MudaAtivityOutrasZonas(ZonaTerritorial zonaEscolhida)
+        private void MudaInteratividadeOutrasZonas(ZonaTerritorial zonaEscolhida)
         {
-            IEnumerable<ZonaTerritorial> outrasZonas = SetUpZona.Instance.Zonas.Except((IEnumerable<ZonaTerritorial>)zonaEscolhida);
+            List<ZonaTerritorial> outrasZonas = SetUpZona.Instance.Zonas.ToList(); //ainda com todas
+            outrasZonas.Remove(zonaEscolhida); //agora sim, só as outras zonas
+
             foreach(ZonaTerritorial zona in outrasZonas) {
                 zona.Bairros.MudarInativity(true);
                 zona.Bairros.MudarInteragivel(false);
