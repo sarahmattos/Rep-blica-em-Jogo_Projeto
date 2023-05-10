@@ -209,8 +209,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294309365
-  m_fontColor: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
+    rgba: 4290822336
+  m_fontColor: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -442,7 +442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -27.125793, y: -79.81465}
+  m_AnchoredPosition: {x: -30.613, y: -80.3}
   m_SizeDelta: {x: 3.526, y: -0.2696}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1984205045036402661
@@ -519,7 +519,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -27.039062, y: -163.20793}
+  m_AnchoredPosition: {x: -30.613, y: -171}
   m_SizeDelta: {x: 98.747314, y: -48.568787}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1984205045093060059
@@ -596,8 +596,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.010582, y: -4.5}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.000030517578, y: -2.4000015}
+  m_SizeDelta: {x: 3.7737, y: -0.5045}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &1984205045135390224
 CanvasRenderer:
@@ -629,7 +629,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 998750131, guid: fe250bbd3892cf6408ca2e9a24a94f0b, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -849,8 +849,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -70.03491, y: -5.008728}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -61.7, y: -2.4}
+  m_SizeDelta: {x: 5.4302, y: 1.555}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &1984205045557486571
 CanvasRenderer:
@@ -882,7 +882,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: -643523698, guid: fe250bbd3892cf6408ca2e9a24a94f0b, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -992,7 +992,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 33
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
