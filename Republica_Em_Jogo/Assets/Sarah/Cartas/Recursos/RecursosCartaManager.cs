@@ -51,7 +51,6 @@ public class RecursosCartaManager : MonoBehaviour
         //interface na troca de carta por recurso
         text_edu.SetText("+"+novosEdu);
         text_saude.SetText("+"+novosSaude);
-
         if(hs.eduQuant>=3 || hs.saudeQuant>=3){
             //interface troca
             comTroca.SetActive(true);
@@ -83,6 +82,15 @@ public class RecursosCartaManager : MonoBehaviour
          chamarDistribuicao=true;
          
    }
+   public void distribuicaoChamada2(){
+        StartCoroutine(EsperaChamarDistribuicai2(1f));
+         
+   }
+    private IEnumerator EsperaChamarDistribuicai2(float s)
+        {
+            yield return new WaitForSeconds(s);
+            chamarDistribuicao2=true;
+        }
     //quando clicado no botao de troca
    public void trocarSaude(){
         hs.saudeQuant-=3;//dimuinui carta
