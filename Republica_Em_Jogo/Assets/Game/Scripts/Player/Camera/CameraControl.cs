@@ -30,8 +30,9 @@ namespace Game.Player
         }
         void Update()
         {
-    
+            //follow target
             transform.position = Vector3.SmoothDamp(transform.position, target.position, ref currentVelocity, smoothTime * Time.deltaTime, maxSpeed);
+            //Update by zoomTarget
             mainCamera.orthographicSize = Mathf.SmoothDamp(mainCamera.orthographicSize, zoomTarget.OrthographicSizeTarget, ref currentVelocity2, smoothTime2 * Time.deltaTime, maxSpeed2);
 
         }
