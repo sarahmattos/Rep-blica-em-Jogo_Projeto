@@ -54,6 +54,10 @@ namespace Game
             DesenvolvimentoState.Entrada += () => ChangeStateServerRpc(0);
         }
 
+        public State GetState(CoreLoopState state) {
+            return StatePairValues[state];
+        }
+
         public override void OnDestroy()
         {
             coreLoopIndex.OnValueChanged -= IndexEstadoLoopMuda;
@@ -83,5 +87,7 @@ namespace Game
             coreLoopIndex.Value = (coreLoopIndex.Value + 1) % (statePairValues.Count);
 
         }
+
+
     }
 }

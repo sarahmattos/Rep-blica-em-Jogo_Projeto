@@ -15,15 +15,15 @@ namespace Game
         private int indexPlayerAtual = -1;
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
         //private NetworkVariable<int> clientesAtual = new NetworkVariable<int>();
-       // public int playerNow;
+        // public int playerNow;
         private int turnCount;
         public event Action FirstPlayerTurn;
         public int PlayerAtual => ordemPlayersID[indexPlayerAtual];
         // public int PlayerAtual2 ;
         public int GetClientesCount => clientesCount.Value;
         public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == PlayerAtual);
-        public bool CurrentIsUltimo => (PlayerAtual == ordemPlayersID[ordemPlayersID.Count-1]);
-        public bool LocalIsUltimo => (((int)NetworkManager.Singleton.LocalClientId) == ordemPlayersID[ordemPlayersID.Count-1]);
+        public bool CurrentIsUltimo => (PlayerAtual == ordemPlayersID[ordemPlayersID.Count - 1]);
+        public bool LocalIsUltimo => (((int)NetworkManager.Singleton.LocalClientId) == ordemPlayersID[ordemPlayersID.Count - 1]);
 
         public event Action<bool> vezDoPlayerLocal;
         public event Action<int, int> turnoMuda;
@@ -60,7 +60,7 @@ namespace Game
             InicializacaoState.Entrada += DefineConfigIniciais;
             //clientesAtual.Value = 1;
         }
-         
+
         // private void OnOrdemIdChanged(NetworkListEvent<int> changeEvent)
         // {
         //         aux++;
@@ -70,13 +70,13 @@ namespace Game
         //         if(aux== NetworkManager.Singleton.ConnectedClientsIds.Count){
         //             hs.testeCor();
         //         }
-           
-           
+
+
         // }
-       // private void OnPlayerAtualChanged(int previousValue, int newValue)
+        // private void OnPlayerAtualChanged(int previousValue, int newValue)
         //{
-       //    playerNow=newValue;
-           
+        //    playerNow=newValue;
+
         //}
         // private void OnEnable()
         // {
@@ -118,11 +118,17 @@ namespace Game
         {
             UpdateClientsCount();
             GerarPlayerOrdem();
-
         }
         private void UpdateClientsCount()
         {
             clientesCount.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void RemovePlayerIDServerRpc(int playerID)
+        {
+            ordemPlayersID.Remove(playerID);
+            clientesCount.Value = ordemPlayersID.Count;
         }
 
         private void GerarPlayerOrdem()

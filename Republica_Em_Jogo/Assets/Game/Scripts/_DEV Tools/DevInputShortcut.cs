@@ -18,6 +18,7 @@ namespace Game.Tools
         [Header("Tecla de atalho.")]
         [SerializeField] private KeyCode enableNextStateButton = KeyCode.F1;
         [SerializeField] private KeyCode eraseLogger = KeyCode.Backspace;
+        [SerializeField] private KeyCode removerJogador0 = KeyCode.Alpha0;
         public KeyCode EnableDisableToolsKey => enableDisableToolsKey;
         public KeyCode DefaultInput => defaultInput;
 
@@ -26,6 +27,7 @@ namespace Game.Tools
         {
             EnableNextStateButton();
             EraseLogger();
+            RemoverJogador0();
 
 
         }
@@ -51,7 +53,13 @@ namespace Game.Tools
             }
         }
 
-
+        private void RemoverJogador0()
+        {
+            if (Input.GetKey(defaultInput) && Input.GetKeyDown(removerJogador0))
+            {
+                
+            }
+        }
 
     }
 }

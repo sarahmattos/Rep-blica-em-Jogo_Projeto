@@ -27,6 +27,7 @@ namespace Game
         {
             PlayerStatsManager.Instance.GetLocalPlayerStats().BairrosInControl.MudarHabilitado(false);
             baralho.baralhoManager(false);
+            SetUpZona.Instance.AllBairros.MudarInativity(false);
         }
 
         private void Start()
