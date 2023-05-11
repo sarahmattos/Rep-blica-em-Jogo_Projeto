@@ -8,11 +8,14 @@ using Unity.Collections;
 using Game.UI;
 using Game.Player;
 using Game.Territorio;
+using System;
+using Game.Tools;
 
 namespace Game
 {
     public class FimDeJogoManager : NetworkBehaviour
     {
+        [SerializeField] private EventosParaFimJogo eventosParaFimJogo;
         private NetworkVariable<FixedString4096Bytes> VitoriaTextServer = new NetworkVariable<FixedString4096Bytes>();
         [SerializeField] private TMP_Text text_vitoria, text_vitoria2;
         [SerializeField] private GameObject vitoriaUi;
@@ -22,65 +25,102 @@ namespace Game
         private PlayerStats ps;
         public bool vitoria;
 
-        public void Start(){
+        public void Start()
+        {
             Instance = this;
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             hs = FindObjectOfType<HudStatsJogador>();
+
+            eventosParaFimJogo.Subscribers += VerificarObjetivoConcluido;
+            eventosParaFimJogo.Subscribers += VerifcarConquistouTodoTerritorio;
             
+            VitoriaTextServer.OnValueChanged += ConfigureUIVitoria;
+
         }
+
+        private void OnDestroy()
+        {
+            eventosParaFimJogo.Subscribers -= VerificarObjetivoConcluido;
+            eventosParaFimJogo.Subscribers -= VerifcarConquistouTodoTerritorio;
+            
+            VitoriaTextServer.OnValueChanged -= ConfigureUIVitoria;
+
+
+        }
+
         [ServerRpc(RequireOwnership = false)]
-        public void TesteServerRpc(string textoTotal2)
+        public void SetMessageFimJogoServerRpc(string textoTotal2)
         {
             VitoriaTextServer.Value = textoTotal2;
         }
-        
-         private void OnEnable()
-    {
-        //jogadores conectados
-      
-        VitoriaTextServer.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
-        {
-             if (newValue != "")
-            {
-                vitoriaUi.SetActive(true);
-                if(vitoria){
-                    text_vitoria.text="Vitória";
-                    text_vitoria2.text="Você venceu";
-                }else{
-                    text_vitoria.text="Derrota";
-                    text_vitoria2.text=newValue.ToString();
-                }
-                
-            }
-        };
-        
-    }
 
-        public void zonaObtidaEObjetivo(){
+        private void ConfigureUIVitoria(FixedString4096Bytes previousValue, FixedString4096Bytes newValue)
+        {
+            // if (newValue != "")
+            // {
+            vitoriaUi.SetActive(true);
+            if (vitoria)
+            {
+                text_vitoria.text = "Vitória";
+                text_vitoria2.text = "Você venceu";
+
+            }
+            else
+            {
+                text_vitoria.text = "Derrota";
+                text_vitoria2.text = newValue.ToString();
+            }
+            // }
+        }
+
+
+        public void VerificarObjetivoConcluido()
+        {
             ps = hs.GetPlayerStats();
-            if(setUpZona.tenhoZona.Count==0)Debug.Log("Não ganhou ainda!");
-            for(int i=0;i<setUpZona.tenhoZona.Count;i++){
-                if(setUpZona.tenhoZona[i].Nome==ps.Objetivo){
-                    if(setUpZona.tenhoZona[i].ContaRecursosEducacao()>=2 && setUpZona.tenhoZona[i].ContaRecursosSaude()>=2){
-                          vitoriaPlayer(setUpZona.tenhoZona[i].Nome);
-                    }else{
+            if (setUpZona.tenhoZona.Count == 0) Debug.Log("Não ganhou ainda!");
+            for (int i = 0; i < setUpZona.tenhoZona.Count; i++)
+            {
+                if (setUpZona.tenhoZona[i].Nome == ps.Objetivo)
+                {
+                    if (setUpZona.tenhoZona[i].ContaRecursosEducacao() >= 2 && setUpZona.tenhoZona[i].ContaRecursosSaude() >= 2)
+                    {
+                        string message = GameDataconfig.Instance.TagParticipante + " "
+                        + NetworkManager.Singleton.LocalClientId.ToString() + " venceu conquistando a zona "
+                        + setUpZona.tenhoZona[i].Nome + " com recursos suficientes!";
+
+                        vitoriaPlayer(message);
+                    }
+                    else
+                    {
                         Debug.Log("Não tem recursos suficientes na zona de objetivo ainda!");
                     }
-            
-                }Debug.Log("Não tem zona do objetivo ainda!");
+
+                }
+                Debug.Log("Não tem zona do objetivo ainda!");
             }
-            
+
         }
-        public void vitoriaPlayer(string _zonaObjectivo){
-            vitoria=true;
-            Debug.Log("Você ganhou!");
-            string textoTotal = "Jogador "+NetworkManager.Singleton.LocalClientId.ToString()+" venceu conquistando a zona "+ _zonaObjectivo+" com recursos suficientes!";
-            TesteServerRpc(textoTotal);
+
+        public void VerifcarConquistouTodoTerritorio()
+        {
+            if(!GameDataconfig.Instance.DevConfig.VenceConquistandoTudo) return;
+            if (PlayerStatsManager.Instance.GetLocalPlayerStats().bairrosTotais == GameDataconfig.Instance.TerritoriosTotal)
+            {
+                vitoriaPlayer("Venceu por conquistar todo o território!");
+            }
         }
-        public void VoltarMenu(){
-             //Application.LoadLevel("MainMenuScene");
-             Application.Quit();
+
+        public void vitoriaPlayer(string message)
+        {
+            vitoria = true;
+            SetMessageFimJogoServerRpc(message);
+        }
+
+        public void VoltarMenu()
+        {
+            //Application.LoadLevel("MainMenuScene");
+            Application.Quit();
         }
     }
-    
+
 }

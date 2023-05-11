@@ -13,8 +13,11 @@ public class GameDataconfig : Singleton<GameDataconfig>
     [SerializeField] private string tagParticipante;
     [SerializeField] private int maxRodadasParaEleicoes;
     [SerializeField] private List<Color> zonaColorOutline;
+    [SerializeField] private DevConfig devConfig;
+    public DevConfig DevConfig => devConfig;
 
-    public int territoriosInScene;
+    private int territoriosTotal;
+    public int TerritoriosTotal => territoriosTotal;
     public int MaxConnections => maxConnections;
     public List<Color> PlayerColorOrder => playerColorOrder;
     public List<Color> ZonaColorOutline => zonaColorOutline;
@@ -45,5 +48,14 @@ public class GameDataconfig : Singleton<GameDataconfig>
 
         DontDestroyOnLoad(gameObject);
     }
+
+}
+
+
+[System.Serializable]
+public class DevConfig
+{
+    [SerializeField] private bool venceConquistandoTudo;
+    public bool VenceConquistandoTudo => venceConquistandoTudo;
 
 }

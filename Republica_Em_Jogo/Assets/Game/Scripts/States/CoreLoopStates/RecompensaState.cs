@@ -13,7 +13,7 @@ namespace Game
     public class RecompensaState : State
     {
         [SerializeField] private HudStatsJogador hudStatsJogador;
-        [SerializeField] private FimDeJogoManager fimDeJogoManager;
+        // [SerializeField] private FimDeJogoManager fimDeJogoManager;
 
         [SerializeField] private AvancoState avancoState;
         [SerializeField] private int qntdRecurso = 1;
@@ -31,7 +31,7 @@ namespace Game
         public override void EnterState()
         {
             hudStatsJogador.checaZonasInteiras(false);
-            fimDeJogoManager.zonaObtidaEObjetivo();
+            // fimDeJogoManager.zonaObtidaEObjetivo();
             Tools.Logger.Instance.LogInfo("Enter State: RECOMPENSA");
             if (TurnManager.Instance.LocalIsCurrent)
             {
@@ -75,39 +75,6 @@ namespace Game
                 bairro.Interagivel.MudarHabilitado(value);
             }
         }
-
-        // private void InscreverBairros() {
-        //     foreach (Bairro bairro in bairrosDoPlayer)
-        //     {
-        //         bairro.Interagivel.click += OnClick;
-        //     }
-        // }
-
-        // private void DesincreverBairros() {
-        //     foreach (Bairro bairro in bairrosDoPlayer)
-        //     {
-        //         bairro.Interagivel.click -= OnClick;
-        //     }
-        // }
-
-        // private void AplicarRecompensa(Bairro bairro) {
-        //     bairro.SetUpBairro.Eleitores.AcrescentaEleitorServerRpc(1);
-        //     qntdEleitorAplicado++;     
-
-        // }
-
-        // private void OnClick(Bairro bairro) {
-        //     if(AplicouTodosEleitores) {
-        //         Tools.Logger.Instance.LogInfo("Recompensas aplicadas.");
-        //         return;
-        //     }
-        //     AplicarRecompensa(bairro);
-
-
-        // }
-
-
-
 
 
 

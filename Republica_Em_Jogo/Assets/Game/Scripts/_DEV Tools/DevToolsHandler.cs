@@ -9,10 +9,9 @@ namespace Game.Tools
     public class DevToolsHandler : Singleton<DevToolsHandler>
     {
         [SerializeField] private bool devToolActive = false;
-        public bool DevToolActive => devToolActive;
-
-
         [SerializeField] private DevInputShortcut devInputShortcut;
+
+        public bool DevToolActive => devToolActive;
 
         private void Start()
         {

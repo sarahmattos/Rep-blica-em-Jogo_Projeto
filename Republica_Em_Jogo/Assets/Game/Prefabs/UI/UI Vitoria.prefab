@@ -515,7 +515,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -1.0620728, y: -14}
+  m_AnchoredPosition: {x: -1.0618896, y: -14}
   m_SizeDelta: {x: -112.5746, y: 52.038}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5419710068721063779
@@ -548,8 +548,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Voc\xEA venceu!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 18cd413fed20eaa4f8c2c4a0cae36f90, type: 2}
-  m_sharedMaterial: {fileID: -3474950112430189573, guid: 18cd413fed20eaa4f8c2c4a0cae36f90, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}
+  m_sharedMaterial: {fileID: 6784369470126438407, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
