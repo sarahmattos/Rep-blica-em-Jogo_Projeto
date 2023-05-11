@@ -51,7 +51,7 @@ namespace Game
 
         private void SetTimerText(int currentTime)
         {
-            string timeFormated = string.Format("{0}:{1:00}",Minutes, Seconds);
+            string timeFormated = string.Format("{0:0}:{1:00}",Minutes, Seconds);
             text_Timer.SetText(timeFormated);
         }
 

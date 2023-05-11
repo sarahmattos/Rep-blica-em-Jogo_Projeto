@@ -45,13 +45,14 @@ namespace Game.UI
 
         private void OnExitState()
         {
-            if (!TurnManager.Instance.LocalIsCurrent) return;
+            if (TurnManager.Instance.LocalIsCurrent) return;
             animator.Play("VoterCurrencyExit");
         }
 
         public void ShowPositiveNovosEleitores(int value) {
             textEleitoresNovos.SetText(string.Concat("+",value));
         }
+
         public void ShowNegativeNovosEleitores(int value) {
             textEleitoresNovos.SetText(string.Concat("-",value));
         }
