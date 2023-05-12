@@ -12,6 +12,7 @@ public class GameDataconfig : Singleton<GameDataconfig>
     [SerializeField] private List<Color> playerColorOrder;
     [SerializeField] private string tagParticipante;
     [SerializeField] private int maxRodadasParaEleicoes;
+    [SerializeField] private int cadeirasTotal = 12;
     [SerializeField] private List<Color> zonaColorOutline;
     [SerializeField] private DevConfig devConfig;
     public DevConfig DevConfig => devConfig;
@@ -23,6 +24,7 @@ public class GameDataconfig : Singleton<GameDataconfig>
     public List<Color> ZonaColorOutline => zonaColorOutline;
     public string TagParticipante => tagParticipante;
     public int MaxRodadasParaEleicoes => maxRodadasParaEleicoes;
+    public int CadeirasTotal => cadeirasTotal;
 
     public string MenuSceneName => menuSceneName;
     public string GameplaySceneName => gameplaySceneName;

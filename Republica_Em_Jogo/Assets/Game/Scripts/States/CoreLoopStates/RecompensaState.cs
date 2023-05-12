@@ -65,18 +65,7 @@ namespace Game
         {
             SetUpZona.Instance.AllBairros.MudarHabilitado(false);
             SetUpZona.Instance.AllBairros.MudarSeleced(false);
-
         }
-
-        private void HabilitarBairros(bool value)
-        {
-            foreach (Bairro bairro in bairrosDoPlayer)
-            {
-                bairro.Interagivel.MudarHabilitado(value);
-            }
-        }
-
-
 
 
 

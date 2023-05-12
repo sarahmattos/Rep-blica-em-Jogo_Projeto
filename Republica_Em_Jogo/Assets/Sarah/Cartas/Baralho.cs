@@ -52,17 +52,6 @@ namespace Game.UI
             baralho2D.SetActive(valor);
         }
 
-        // public void cartaProjetoTrue()
-        // {
-        //     projeto.verProjetoBtn.SetActive(false);
-        // }
-        // public void cartaProjetoFalse()
-        // {
-        //     //projeto.RestoUI.SetActive(false);
-        //     projeto.verProjetoBtn.SetActive(true);
-        // }
-
-
 
     }
 }

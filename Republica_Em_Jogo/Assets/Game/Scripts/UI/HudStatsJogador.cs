@@ -250,10 +250,12 @@ namespace Game.UI
             if (playerDiminuiEleitor)
             {
                 uIVoterCurrency.ShowNegativeNovosEleitores((int)playerStats.eleitoresNovos);
+                uIVoterCurrency.PlayEnterAnim();
             }
             else
             {
                 uIVoterCurrency.ShowPositiveNovosEleitores((int)playerStats.eleitoresNovos);
+                uIVoterCurrency.PlayEnterAnim();
 
             }
 
@@ -355,7 +357,7 @@ namespace Game.UI
         public void cadeirasUi(float valor)
         {
             playerStats.numCadeiras = valor;
-            text_cadeiras.SetText(playerStats.numCadeiras.ToString());//"Cadeiras: " + "\n" + 
+            text_cadeiras.SetText(string.Concat(playerStats.numCadeiras.ToString(),"/",GameDataconfig.Instance.CadeirasTotal));//"Cadeiras: " + "\n" + 
         }
         public void BntsAuxiliares()
         {

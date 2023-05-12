@@ -9,6 +9,7 @@ namespace Game.UI
     {
         [SerializeField] private TMP_Text textEleitoresNovos;
         private Animator animator;
+        private State DistribuicaoInicialState => GameStateHandler.Instance.StateMachineController.GetState((int)CoreLoopState.DISTRIBUICAO);
         public State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.DISTRIBUICAO];
         public State ProjetoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.PROJETO];
         private void Awake()
@@ -16,48 +17,58 @@ namespace Game.UI
             animator = GetComponent<Animator>();
         }
 
-        
+
         private void Start()
         {
-            DistribuicaoState.Entrada += OnEnterState;
-            HudStatsJogador.Instance.eleitoresNovosDeProjeto += OnEnterState;
+            DistribuicaoInicialState.Entrada += PlayEnterAnim;
+            DistribuicaoInicialState.Saida += PlayExitAnim;
 
-            DistribuicaoState.Saida += OnExitState;
-            ProjetoState.Saida += OnExitState;
+            DistribuicaoState.Entrada += PlayEnterAnim;
+            DistribuicaoState.Saida += PlayExitAnim;
+            HudStatsJogador.Instance.eleitoresNovosDeProjeto += PlayEnterAnim;
+
+            ProjetoState.Saida += PlayExitAnim;
+            PlayExitAnim();
         }
 
         private void OnDestroy()
         {
-            DistribuicaoState.Entrada -= OnEnterState;
-            HudStatsJogador.Instance.eleitoresNovosDeProjeto -= OnEnterState;
+            DistribuicaoInicialState.Entrada -= PlayEnterAnim;
+            DistribuicaoInicialState.Saida -= PlayExitAnim;
+
+            DistribuicaoState.Entrada -= PlayEnterAnim;
+            DistribuicaoState.Saida -= PlayExitAnim;
+
+            HudStatsJogador.Instance.eleitoresNovosDeProjeto -= PlayEnterAnim;
 
 
-            DistribuicaoState.Saida -= OnExitState;
-            ProjetoState.Saida += OnExitState;
+            ProjetoState.Saida += PlayExitAnim;
 
         }
 
-        private void OnEnterState()
+        public void PlayEnterAnim()
         {
-            if (!TurnManager.Instance.LocalIsCurrent) return;
-            animator.Play("VoterCurrencyEnter");
+            // if (!TurnManager.Instance.LocalIsCurrent) return;
+            animator.Play("CurrencyEnter");
         }
 
-        private void OnExitState()
+        public void PlayExitAnim()
         {
-            if (TurnManager.Instance.LocalIsCurrent) return;
-            animator.Play("VoterCurrencyExit");
+            animator.Play("CurrencyExit");
         }
 
-        public void ShowPositiveNovosEleitores(int value) {
-            textEleitoresNovos.SetText(string.Concat("+",value));
+        public void ShowPositiveNovosEleitores(int value)
+        {
+            textEleitoresNovos.SetText(string.Concat("+", value));
         }
 
-        public void ShowNegativeNovosEleitores(int value) {
-            textEleitoresNovos.SetText(string.Concat("-",value));
+        public void ShowNegativeNovosEleitores(int value)
+        {
+            textEleitoresNovos.SetText(string.Concat("-", value));
         }
 
-        public void SetVoterCurrentText(string value) {
+        public void SetVoterCurrentText(string value)
+        {
             textEleitoresNovos.SetText(value);
         }
 

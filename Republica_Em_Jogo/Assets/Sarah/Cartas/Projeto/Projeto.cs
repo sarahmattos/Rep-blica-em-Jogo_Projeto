@@ -32,6 +32,7 @@ public class Projeto : NetworkBehaviour
     private ZonaTerritorial zt;
     private ControlePassarState cp;
     private Baralho baralho;
+    [SerializeField] private UIVoterCurrency uIVoterCurrency;
 
     [Header("Ui")]
     [SerializeField] private TMP_Text text_projetoCarta;
@@ -361,6 +362,7 @@ public class Projeto : NetworkBehaviour
         if (aprovado == true)
         {
             eleitoresZonaFinal();
+            uIVoterCurrency.PlayEnterAnim();
             aprovado = false;
         }
     }

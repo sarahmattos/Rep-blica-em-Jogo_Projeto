@@ -8,9 +8,16 @@ using Unity.Collections;
 using Game.UI;
 using Game.Territorio;
 using Game.Player;
+using System;
+
+public enum RecursoType {
+    EDUCACAO,
+    SAUDE
+}
 
 public class MovimentosSociais : NetworkBehaviour
 {
+
     private NetworkVariable<FixedString4096Bytes> movimentoSocialNetworkTexto = new NetworkVariable<FixedString4096Bytes>();
     private NetworkVariable<int> idPlayerMS = new NetworkVariable<int>(-1);
     public MovimentoSociaisObject MovimentoSociaisManager;
@@ -28,6 +35,8 @@ public class MovimentosSociais : NetworkBehaviour
     private Baralho baralho;
     public bool distribuicaoRecompensaRecurso = false;
 
+    public event Action<string, int> DistribuicaoRecurso; //tipo de recurso ("Saúde" ou "Educação") e quantidade
+
     public void Start()
     {
         hs = FindObjectOfType<HudStatsJogador>();
@@ -41,14 +50,14 @@ public class MovimentosSociais : NetworkBehaviour
         movimentoSocialNetworkTexto.Value = textoTotal2;
         idPlayerMS.Value = id;
     }
-    
+
 
     public void sortearMS()
     {
         //reseta
         AtualizaTextoServerRpc("", -1);
         HabilitarBairrosPlayerAtual(true);
-        int aux = Random.Range(0, MovimentoSociaisManager.movimento.Length);
+        int aux = UnityEngine.Random.Range(0, MovimentoSociaisManager.movimento.Length);
         movimento = MovimentoSociaisManager.movimento[aux];
         recursoTipo = MovimentoSociaisManager.recursoTipo[aux];
         quantidadeRecurso = MovimentoSociaisManager.quantidadeRecurso;
@@ -75,52 +84,56 @@ public class MovimentosSociais : NetworkBehaviour
             };
         idPlayerMS.OnValueChanged += (int previousValue, int newValue) =>
         {
-             if (newValue != -1){
+            if (newValue != -1)
+            {
                 if (newValue != (int)NetworkManager.Singleton.LocalClientId)
                 {
                     btnOk.SetActive(false);
                     btnFechar.SetActive(true);
                     text_aviso.text = "Movimento Social retirado pelo jogador: " + newValue;
                 }
-            else
+                else
                 {
                     text_aviso.text = " ";
                     btnOk.SetActive(true);
                     btnFechar.SetActive(false);
                 }
-             }
-            
+            }
+
         };
     }
     public void chamarRecompensasEleitor()
     {
-        StartCoroutine(EsperaEVai1(0.5f));
+        StartCoroutine(EsperaEVai1(0.2f));
     }
     public void chamarRecompensasRecurso()
     {
         if (distribuicaoRecompensaRecurso == true)
-            {
-                rc.distribuicaoChamada();
+        {
+            rc.distribuicaoChamada();
             distribuicaoRecompensaRecurso = false;
-             StartCoroutine(EsperaEVai2(1f));
-            }
-            
+            StartCoroutine(EsperaEVai2(0.2f));
+        }
+
     }
     private IEnumerator EsperaEVai1(float s)
-        {
-            yield return new WaitForSeconds(s);
-            distribuicaoRecompensaRecurso = true;
-            //receber valor uma vez
-            hs.playerRecebeEleitor = true;
-            //chama funcao pra receber esse valor
-            hs.ValorEleitoresNovos(quantidadeEleitor);
-        }
-        private IEnumerator EsperaEVai2(float s)
-        {
-            yield return new WaitForSeconds(s);
-            rc.chamarDistribuicao2=true;
-        }
-        
+    {
+        yield return new WaitForSeconds(s);
+        distribuicaoRecompensaRecurso = true;
+        //receber valor uma vez
+        hs.playerRecebeEleitor = true;
+        //chama funcao pra receber esse valor
+        hs.ValorEleitoresNovos(quantidadeEleitor);
+    }
+
+    private IEnumerator EsperaEVai2(float s)
+    {
+        yield return new WaitForSeconds(s);
+        rc.chamarDistribuicao2 = true;
+        DistribuicaoRecurso?.Invoke(recursoTipo, quantidadeRecurso);
+
+    }
+
 
     public void panelFalse(GameObject panel)
     {
