@@ -31,8 +31,8 @@ namespace Game
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             hs = FindObjectOfType<HudStatsJogador>();
 
-            eventosParaFimJogo.Subscribers += VerificarObjetivoConcluido;
-            eventosParaFimJogo.Subscribers += VerifcarConquistouTodoTerritorio;
+            eventosParaFimJogo.notify += VerificarObjetivoConcluido;
+            eventosParaFimJogo.notify += VerifcarConquistouTodoTerritorio;
             
             VitoriaTextServer.OnValueChanged += ConfigureUIVitoria;
 
@@ -40,8 +40,8 @@ namespace Game
 
         private void OnDestroy()
         {
-            eventosParaFimJogo.Subscribers -= VerificarObjetivoConcluido;
-            eventosParaFimJogo.Subscribers -= VerifcarConquistouTodoTerritorio;
+            eventosParaFimJogo.notify -= VerificarObjetivoConcluido;
+            eventosParaFimJogo.notify -= VerifcarConquistouTodoTerritorio;
             
             VitoriaTextServer.OnValueChanged -= ConfigureUIVitoria;
 

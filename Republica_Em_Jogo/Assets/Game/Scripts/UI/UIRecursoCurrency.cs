@@ -41,7 +41,7 @@ namespace Game.UI
         private void ConfigureCurrency(string recursoTipo, int quantidade)
         {
             currencyIcon.sprite = GetSprite(recursoTipo);
-            currencyText.SetText("+",quantidade);
+            currencyText.SetText(string.Concat("+",quantidade));
 
             PlayEnterAnim();
         }
@@ -59,7 +59,7 @@ namespace Game.UI
         }
 
 
-        public void SetRecursoCurrentText(string value)
+        public void SetCurrentText(string value)
         {
             currencyText.SetText(value);
         }

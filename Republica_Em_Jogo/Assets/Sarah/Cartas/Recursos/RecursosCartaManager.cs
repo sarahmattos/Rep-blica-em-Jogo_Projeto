@@ -10,7 +10,7 @@ public class RecursosCartaManager : MonoBehaviour
     private HudStatsJogador hs;
     [SerializeField] private GameObject semTroca;
     [SerializeField] private GameObject comTroca;
-    [SerializeField] private GameObject avisoDistribuicao;
+    // [SerializeField] private GameObject avisoDistribuicao;
     [SerializeField] private GameObject avisoDistribuicaoFinal;
     [SerializeField] private GameObject avisoRetiradaFinal;
     [SerializeField] private GameObject retirada;
@@ -21,7 +21,7 @@ public class RecursosCartaManager : MonoBehaviour
     [SerializeField] private Button saudeTrocaBtn2;
     [SerializeField] private TMP_Text text_edu;
     [SerializeField] private TMP_Text text_saude;
-    [SerializeField] private TMP_Text text_recursoDistribuicao;
+    // [SerializeField] private TMP_Text text_recursoDistribuicao;
     [SerializeField] private TMP_Text text_quantidaderetirada;
     public int novosEdu;
     public int novosSaude;
@@ -166,11 +166,11 @@ public class RecursosCartaManager : MonoBehaviour
     //distribui esses novos recursos (interface)
    public void distribuiNovosRecursos(){
     if(novosEdu>0||novosSaude>0){
-        avisoDistribuicao.SetActive(true);
-        if(novosSaude>0)text_recursoDistribuicao.SetText("Distribua seu(s) recurso(s) de saúde! Clique no bairro que deseja adicionar!"+ "\n" +" Saúde: "+novosSaude);
-        if(novosSaude<=0)text_recursoDistribuicao.SetText("Distribua seu(s) recurso(s) de educação! Clique no bairro que deseja adicionar!"+ "\n" +" Educação: "+novosEdu );
+        // avisoDistribuicao.SetActive(true);
+        // if(novosSaude>0)text_recursoDistribuicao.SetText("Distribua seu(s) recurso(s) de saúde! Clique no bairro que deseja adicionar!"+ "\n" +" Saúde: "+novosSaude);
+        // if(novosSaude<=0)text_recursoDistribuicao.SetText("Distribua seu(s) recurso(s) de educação! Clique no bairro que deseja adicionar!"+ "\n" +" Educação: "+novosEdu );
     }else{
-        avisoDistribuicao.SetActive(false);
+        // avisoDistribuicao.SetActive(false);
         avisoDistribuicaoFinal.SetActive(true);
         chamarDistribuicao=false;
         chamarDistribuicao2=false;

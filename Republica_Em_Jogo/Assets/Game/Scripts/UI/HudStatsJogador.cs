@@ -310,7 +310,7 @@ namespace Game.UI
                 for (int i = 0; i < setUpZona.tenhoZona.Count; i++)
                 {
                     eleitoresAdicionais += setUpZona.tenhoZona[i].eleitoresAdicionais;
-                    Debug.Log("voce possui " + setUpZona.tenhoZona[i].eleitoresAdicionais + " eleitore(s) adicionais por conquistar a zona " + setUpZona.tenhoZona[i].Nome + " inteira!");
+                    // Debug.Log("voce possui " + setUpZona.tenhoZona[i].eleitoresAdicionais + " eleitore(s) adicionais por conquistar a zona " + setUpZona.tenhoZona[i].Nome + " inteira!");
                 }
                 playerStats.inicioRodada(eleitoresAdicionais);
                 distribuaEleitorUi.SetActive(true);

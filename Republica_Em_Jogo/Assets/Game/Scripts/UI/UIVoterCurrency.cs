@@ -41,7 +41,6 @@ namespace Game.UI
 
             HudStatsJogador.Instance.eleitoresNovosDeProjeto -= PlayEnterAnim;
 
-
             ProjetoState.Saida += PlayExitAnim;
 
         }
@@ -67,7 +66,7 @@ namespace Game.UI
             textEleitoresNovos.SetText(string.Concat("-", value));
         }
 
-        public void SetVoterCurrentText(string value)
+        public void SetCurrentText(string value)
         {
             textEleitoresNovos.SetText(value);
         }
