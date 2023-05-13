@@ -1,4 +1,5 @@
 using System;
+using Game.Player;
 using TMPro;
 using UnityEngine;
 
@@ -9,9 +10,9 @@ namespace Game.UI
     {
         [SerializeField] private TMP_Text textEleitoresNovos;
         private Animator animator;
-        private State DistribuicaoInicialState => GameStateHandler.Instance.StateMachineController.GetState((int)CoreLoopState.DISTRIBUICAO);
-        public State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.DISTRIBUICAO];
-        public State ProjetoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.PROJETO];
+        private State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
+        private PlayerStats PlayerStatsLocal => PlayerStatsManager.Instance.GetLocalPlayerStats();
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
@@ -20,34 +21,32 @@ namespace Game.UI
 
         private void Start()
         {
-            DistribuicaoInicialState.Entrada += PlayEnterAnim;
-            DistribuicaoInicialState.Saida += PlayExitAnim;
-
-            DistribuicaoState.Entrada += PlayEnterAnim;
-            DistribuicaoState.Saida += PlayExitAnim;
-            HudStatsJogador.Instance.eleitoresNovosDeProjeto += PlayEnterAnim;
-
-            ProjetoState.Saida += PlayExitAnim;
             PlayExitAnim();
+            InicializacaoState.Saida += SubscribeOnGameplaySceneLoad;
         }
 
         private void OnDestroy()
         {
-            DistribuicaoInicialState.Entrada -= PlayEnterAnim;
-            DistribuicaoInicialState.Saida -= PlayExitAnim;
+            //desinscrevendo o metodo de subscrição
+            InicializacaoState.Saida -= SubscribeOnGameplaySceneLoad;
 
-            DistribuicaoState.Entrada -= PlayEnterAnim;
-            DistribuicaoState.Saida -= PlayExitAnim;
+            //desinscrevendo os metodos subscritos dentro do metodo de subscrição. hahahah
+            PlayerStatsLocal.DefiniuEleitoresNovos -= ConfigureCurrency;
+            PlayerStatsLocal.DistribuiuEleitor -= SetPositiveText;
+            PlayerStatsLocal.FimDistricaoEleitores -= PlayExitAnim;
 
-            HudStatsJogador.Instance.eleitoresNovosDeProjeto -= PlayEnterAnim;
+        }
 
-            ProjetoState.Saida += PlayExitAnim;
-
+        private void SubscribeOnGameplaySceneLoad()
+        {
+            Tools.Logger.Instance.LogInfo("Player stats local: " + PlayerStatsLocal.Nome);
+            PlayerStatsLocal.DefiniuEleitoresNovos += ConfigureCurrency;
+            PlayerStatsLocal.DistribuiuEleitor += SetPositiveText;
+            PlayerStatsLocal.FimDistricaoEleitores += PlayExitAnim;
         }
 
         public void PlayEnterAnim()
         {
-            // if (!TurnManager.Instance.LocalIsCurrent) return;
             animator.Play("CurrencyEnter");
         }
 
@@ -56,17 +55,24 @@ namespace Game.UI
             animator.Play("CurrencyExit");
         }
 
-        public void ShowPositiveNovosEleitores(int value)
+        public void ConfigureCurrency(int eleitores)
         {
-            textEleitoresNovos.SetText(string.Concat("+", value));
+            PlayEnterAnim();
+            SetCurrentText(string.Concat("+", eleitores));
         }
 
-        public void ShowNegativeNovosEleitores(int value)
+
+        public void SetPositiveText(int value)
         {
-            textEleitoresNovos.SetText(string.Concat("-", value));
+            SetCurrentText(string.Concat("+", value));
         }
 
-        public void SetCurrentText(string value)
+        public void SetNegativeText(int value)
+        {
+            SetCurrentText(string.Concat("-", value));
+        }
+
+        private void SetCurrentText(string value)
         {
             textEleitoresNovos.SetText(value);
         }

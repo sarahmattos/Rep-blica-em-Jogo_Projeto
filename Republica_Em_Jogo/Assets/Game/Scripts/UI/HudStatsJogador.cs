@@ -245,16 +245,17 @@ namespace Game.UI
         //quando o jogador distribui seus eleitores
         public void contagemEleitores()
         {
-            playerStats.eleitoresNovos--;
+            playerStats.RemoveEleitoresNovos();
+            // playerStats.eleitoresNovos--;
             //text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
             if (playerDiminuiEleitor)
             {
-                uIVoterCurrency.ShowNegativeNovosEleitores((int)playerStats.eleitoresNovos);
+                uIVoterCurrency.SetNegativeText((int)playerStats.eleitoresNovos);
                 uIVoterCurrency.PlayEnterAnim();
             }
             else
             {
-                uIVoterCurrency.ShowPositiveNovosEleitores((int)playerStats.eleitoresNovos);
+                uIVoterCurrency.SetPositiveText((int)playerStats.eleitoresNovos);
                 uIVoterCurrency.PlayEnterAnim();
 
             }
@@ -317,8 +318,9 @@ namespace Game.UI
                 distribuicaoGeral = true;
                 text_distribuaEleitor.SetText("Distribua seus eleitores");
                 //text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
-                uIVoterCurrency.ShowPositiveNovosEleitores((int)playerStats.eleitoresNovos);
+                uIVoterCurrency.SetPositiveText((int)playerStats.eleitoresNovos);
                 eleitoresNovosDeProjeto?.Invoke();
+                Debug.Log("Eleitores novos: de projeto");
 
             }
         }
@@ -327,7 +329,8 @@ namespace Game.UI
         {
             if (playerRecebeEleitor == true)
             {
-                playerStats.eleitoresNovos = valor;
+                // playerStats.eleitoresNovos = valor;
+                playerStats.SetEleitoresNovos(valor);
                 playerRecebeEleitor = false;
                 //
                 distribuaEleitorUi.SetActive(true);
@@ -335,18 +338,19 @@ namespace Game.UI
                 if (playerDiminuiEleitor == true)
                 {
                     text_distribuaEleitor.SetText("Retire seus eleitores");
-                    uIVoterCurrency.ShowNegativeNovosEleitores((int)playerStats.eleitoresNovos);
+                    uIVoterCurrency.SetNegativeText((int)playerStats.eleitoresNovos);
 
                 }
                 else
                 {
                     text_distribuaEleitor.SetText("Distribua seus eleitores");
-                    uIVoterCurrency.ShowPositiveNovosEleitores((int)playerStats.eleitoresNovos);
+                    uIVoterCurrency.SetPositiveText((int)playerStats.eleitoresNovos);
 
                 }
                 //text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
                 // uIVoterCurrency.ShowPositiveNovosEleitores((int)playerStats.eleitoresNovos);
                 eleitoresNovosDeProjeto?.Invoke();
+                Debug.Log("Eleitores novos: de projeto");
             }
 
         }
