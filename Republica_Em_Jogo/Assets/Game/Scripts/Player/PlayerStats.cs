@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using Game.UI;
 using Game.Territorio;
 using System.Linq;
+using System;
 
-namespace Game.Player {
+namespace Game.Player
+{
 
     public class PlayerStats : NetworkBehaviour
     {
@@ -26,7 +28,7 @@ namespace Game.Player {
         private List<Bairro> bairrosInControl = new List<Bairro>();
         public List<Bairro> BairrosInControl { get => bairrosInControl; set => bairrosInControl = value; }
 
-        public float eleitoresNovos;
+        public int eleitoresNovos;
         public RecursoCartaObjeto recursoManager;
 
         public int playerID => (int)OwnerClientId;
@@ -39,11 +41,28 @@ namespace Game.Player {
         public int EducacaoRecurso { get => educacaoRecurso; }
         public State GameplayLoadState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD);
 
+        public event Action<int> DefiniuEleitoresNovos;
+        public event Action<int> DistribuiuEleitor; // int -> eleitoresNovos
+        public event Action FimDistricaoEleitores;
+        
+        public void SetEleitoresNovos(int value)
+        {
+            eleitoresNovos = value;
+            DefiniuEleitoresNovos?.Invoke(eleitoresNovos);
+        }
+
+        public void RemoveEleitoresNovos() {
+            eleitoresNovos--;
+            DistribuiuEleitor?.Invoke(eleitoresNovos);
+
+            if(eleitoresNovos > 0) return;
+            FimDistricaoEleitores?.Invoke();
+        }
 
         private void Awake()
         {
             BairrosInControl = new List<Bairro>();
-            
+
 
         }
         private void Start()
@@ -58,18 +77,24 @@ namespace Game.Player {
             GameplayLoadState.Saida -= DesinscreveReceberbairrosPlayerIDControl;
         }
 
-        private void InscreveReceberbairrosPlayerIDControl() {
-            foreach(ZonaTerritorial zonas in  SetUpZona.Instance.Zonas) {
-                foreach(Bairro bairro in zonas.Bairros){
+        private void InscreveReceberbairrosPlayerIDControl()
+        {
+            foreach (ZonaTerritorial zonas in SetUpZona.Instance.Zonas)
+            {
+                foreach (Bairro bairro in zonas.Bairros)
+                {
                     bairro.bairroPlayerLocalNoControl += ArmazenaBairroInControl;
                     bairro.bairroPlayerLocalForaControl += RetiraBairroInControl;
                 }
             }
         }
 
-        private void DesinscreveReceberbairrosPlayerIDControl() {
-            foreach(ZonaTerritorial zonas in  SetUpZona.Instance.Zonas) {
-                foreach(Bairro bairro in zonas.Bairros){
+        private void DesinscreveReceberbairrosPlayerIDControl()
+        {
+            foreach (ZonaTerritorial zonas in SetUpZona.Instance.Zonas)
+            {
+                foreach (Bairro bairro in zonas.Bairros)
+                {
                     bairro.bairroPlayerLocalNoControl -= ArmazenaBairroInControl;
                     bairro.bairroPlayerLocalForaControl -= RetiraBairroInControl;
                 }
@@ -77,51 +102,57 @@ namespace Game.Player {
         }
 
         private void ArmazenaBairroInControl(Bairro bairro, int playerID)
-        {        
-            if(playerID == this.playerID)
+        {
+            if (playerID == this.playerID)
                 BairrosInControl.Add(bairro);
         }
 
         private void RetiraBairroInControl(Bairro bairro, int playerID)
         {
-            if(playerID == this.playerID)
+            if (playerID == this.playerID)
                 BairrosInControl.Remove(bairro);
         }
 
-       //randomiza qual carta de recurso
-        public void recursoDistribuicao(int quantidade){
-            for(int i = 0; i < quantidade; i++)
+        //randomiza qual carta de recurso
+        public void recursoDistribuicao(int quantidade)
+        {
+            for (int i = 0; i < quantidade; i++)
+            {
+                string rnd = recursoManager.tipoRecurso[UnityEngine.Random.Range(0, recursoManager.tipoRecurso.Length)];
+                recursoCarta.Add(rnd);
+                if (rnd == "Saúde")
                 {
-                    string rnd = recursoManager.tipoRecurso[Random.Range(0, recursoManager.tipoRecurso.Length)];
-                    recursoCarta.Add(rnd);
-                    if(rnd == "Saúde"){
-                        numSaude++;
-                    }
-                    if(rnd == "Educação"){
-                        numEducacao++;
-                    }
+                    numSaude++;
                 }
+                if (rnd == "Educação")
+                {
+                    numEducacao++;
+                }
+            }
         }
 
         //divide numero de bairros para adicionar novos eleitores
         public void inicioRodada(int eleitoresAdicionais)
-         {
-             eleitoresNovos = (Mathf.Floor(bairrosTotais / 2))+eleitoresAdicionais;
-             if(eleitoresNovos<3)eleitoresNovos = 3;
-         }
+        {
+            int totalEleitoresNovos = (int)(Mathf.Floor(bairrosTotais / 2)) + eleitoresAdicionais;
+            SetEleitoresNovos(totalEleitoresNovos);
+            if (eleitoresNovos < 3) SetEleitoresNovos(3);
+            Debug.Log("DefiniuEleitresNovosIniciorodada");
+
+        }
 
         public void InicializaPlayerStats()
         {
-            Tools.Logger.Instance.LogInfo("inicializando player stats "+playerID);
+            Tools.Logger.Instance.LogInfo("inicializando player stats " + playerID);
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
             maxTerritorio = GameDataconfig.Instance.TerritoriosTotal;
-            nome = string.Concat(GameDataconfig.Instance.TagParticipante," ", playerID);
+            nome = string.Concat(GameDataconfig.Instance.TagParticipante, " ", playerID);
             objetivoCarta = objetivosDatabase.Instance.objetivoComplemento;
-            objetivo =objetivosDatabase.Instance.objetivoZona;
-            
+            objetivo = objetivosDatabase.Instance.objetivoZona;
+
 
         }
-        
+
         public void ContaEleitoresInBairros()
         {
             eleitoresTotais = 0;
@@ -138,7 +169,7 @@ namespace Game.Player {
         // {
         //     bairrosTotais = BairrosInControl.Count;
         // }
-        
+
 
     }
 }

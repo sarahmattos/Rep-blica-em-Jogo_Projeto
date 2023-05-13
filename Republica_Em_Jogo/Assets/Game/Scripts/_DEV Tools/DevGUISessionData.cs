@@ -1,3 +1,4 @@
+using Game.Player;
 using UnityEngine;
 
 namespace Game.Tools
@@ -58,13 +59,18 @@ namespace Game.Tools
 
             //Jogador Atual
             guiLabelParams.rect.y = h / 2 + 5 * 2 * h / 90;
-            string message5 = string.Concat("Jogador atual: ", TurnManager.Instance.PlayerAtual);
+            string message5 = string.Concat("Jogador ATUAL: ", TurnManager.Instance.PlayerAtual);
             GUI.Label(guiLabelParams.rect, message5, guiLabelParams.guiStyle);
 
-            //Jogador Atual
+            //Jogador Local
             guiLabelParams.rect.y = h / 2 + 6 * 2 * h / 90;
-            string message6 = string.Concat("Turno: ", TurnManager.Instance.TurnCount);
+            string message6 = string.Concat("Jogador LOCAL: ", PlayerStatsManager.Instance.GetLocalPlayerStats());
             GUI.Label(guiLabelParams.rect, message6, guiLabelParams.guiStyle);
+            
+            //Turno
+            guiLabelParams.rect.y = h / 2 + 7 * 2 * h / 90;
+            string message7 = string.Concat("Turno: ", TurnManager.Instance.TurnCount);
+            GUI.Label(guiLabelParams.rect, message7, guiLabelParams.guiStyle);
 
 
         }
