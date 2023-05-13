@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ca0327eda74914eb80993123e9e24b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollWheelSpeed: 15
+  scrollWheelSpeed: 40
   directionalInputSpeed: 15
   boundary: {fileID: 5434598811964328171}
 --- !u!114 &5434598811964328171
