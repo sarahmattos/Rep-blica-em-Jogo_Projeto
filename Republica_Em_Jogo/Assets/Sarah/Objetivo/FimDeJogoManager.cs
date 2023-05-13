@@ -31,8 +31,8 @@ namespace Game
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             hs = FindObjectOfType<HudStatsJogador>();
 
-            eventosParaFimJogo.Subscribers += VerificarObjetivoConcluido;
-            eventosParaFimJogo.Subscribers += VerifcarConquistouTodoTerritorio;
+            eventosParaFimJogo.notify += VerificarObjetivoConcluido;
+            eventosParaFimJogo.notify += VerifcarConquistouTodoTerritorio;
             
             VitoriaTextServer.OnValueChanged += ConfigureUIVitoria;
 
@@ -40,8 +40,8 @@ namespace Game
 
         private void OnDestroy()
         {
-            eventosParaFimJogo.Subscribers -= VerificarObjetivoConcluido;
-            eventosParaFimJogo.Subscribers -= VerifcarConquistouTodoTerritorio;
+            eventosParaFimJogo.notify -= VerificarObjetivoConcluido;
+            eventosParaFimJogo.notify -= VerifcarConquistouTodoTerritorio;
             
             VitoriaTextServer.OnValueChanged -= ConfigureUIVitoria;
 
@@ -77,7 +77,7 @@ namespace Game
         public void VerificarObjetivoConcluido()
         {
             ps = hs.GetPlayerStats();
-            if (setUpZona.tenhoZona.Count == 0) Debug.Log("Não ganhou ainda!");
+            // if (setUpZona.tenhoZona.Count == 0) Debug.Log("Não ganhou ainda!");
             for (int i = 0; i < setUpZona.tenhoZona.Count; i++)
             {
                 if (setUpZona.tenhoZona[i].Nome == ps.Objetivo)
@@ -92,11 +92,11 @@ namespace Game
                     }
                     else
                     {
-                        Debug.Log("Não tem recursos suficientes na zona de objetivo ainda!");
+                        // Debug.Log("Não tem recursos suficientes na zona de objetivo ainda!");
                     }
 
                 }
-                Debug.Log("Não tem zona do objetivo ainda!");
+                // Debug.Log("Não tem zona do objetivo ainda!");
             }
 
         }

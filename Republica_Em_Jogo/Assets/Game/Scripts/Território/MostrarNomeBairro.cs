@@ -80,8 +80,12 @@ namespace Game.Territorio
             }else{
                 if(rc.novosSaude>0){
                     bairro.saude.adicionarSaude();
+                    
+
                 }else{
                     bairro.edu.adicionarEdu();
+
+                    
                 }
                    
             }

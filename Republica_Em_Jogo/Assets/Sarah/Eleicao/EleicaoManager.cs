@@ -126,7 +126,7 @@ namespace Game
             uiCore.ExplicaStateUi.SetActive(false);
         }
         public void ColorirPeao(){
-            Debug.Log("coloriu");
+            // Debug.Log("coloriu");
             for(int i=0;i<cadeirasCamara.Length;i++){
                         if(i==0){
                                 valorPeao =cadeirasCamara[i] * i;

@@ -23,7 +23,7 @@ namespace Game
         {
             jogadorLocalRemovido = false;
             uiPartidoFora.SetActive(false);
-            eventosParaFimDeJogo.Subscribers += VerificaLocalInGame;
+            eventosParaFimDeJogo.notify += VerificaLocalInGame;
 
         }
 
@@ -31,7 +31,7 @@ namespace Game
 
         private void OnDestroy()
         {
-            eventosParaFimDeJogo.Subscribers -= VerificaLocalInGame;
+            eventosParaFimDeJogo.notify -= VerificaLocalInGame;
 
 
         }

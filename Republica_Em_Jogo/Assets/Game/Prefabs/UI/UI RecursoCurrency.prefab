@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3718754249656285142}
   - component: {fileID: 3487421339639501292}
   m_Layer: 5
-  m_Name: eleitor_icon
+  m_Name: recurso icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,16 +28,16 @@ RectTransform:
   m_GameObject: {fileID: 3718754249656285136}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3894561, y: 0.3894561, z: 0.3894561}
+  m_LocalScale: {x: 0.67645615, y: 0.67645615, z: 0.67645615}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3718754250003512881}
-  m_RootOrder: 2
+  m_Father: {fileID: 4815205948263272686}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35.87, y: 0.082147}
-  m_SizeDelta: {x: 184.21, y: 185.3}
+  m_AnchoredPosition: {x: 0, y: 0.00090789795}
+  m_SizeDelta: {x: 88.484, y: 89.008}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3718754249656285141
 CanvasRenderer:
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9c0f259e96ac600428abb62bcf2e791f, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -123,7 +123,6 @@ RectTransform:
   m_Children:
   - {fileID: 3718754251578753487}
   - {fileID: 4815205948263272686}
-  - {fileID: 3718754249656285143}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -166,10 +165,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiRecursosData:
   - recursoTipo: "Sa\xFAde"
-    icone: {fileID: -1469881071, guid: 38bd820b9221e61458d0f333f17bf420, type: 3}
+    icone: {fileID: 21300000, guid: 9c0f259e96ac600428abb62bcf2e791f, type: 3}
   - recursoTipo: "Educa\xE7\xE3o"
-    icone: {fileID: 1943707865, guid: 38bd820b9221e61458d0f333f17bf420, type: 3}
+    icone: {fileID: 21300000, guid: 9242dea8ed79c4e49a3705ada26d7594, type: 3}
   movimentosSociais: {fileID: 0}
+  recursosCartaManager: {fileID: 0}
   currencyText: {fileID: 3718754250875635900}
   currencyIcon: {fileID: 3718754249656285142}
 --- !u!1 &3718754250875635902
@@ -414,14 +414,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.57573, y: 0.57573, z: 0.57573}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3718754249656285143}
   m_Father: {fileID: 3718754250003512881}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35.346, y: -36}
-  m_SizeDelta: {x: 122.79, y: 125.63}
+  m_AnchoredPosition: {x: 35.346, y: -36.165}
+  m_SizeDelta: {x: 117.8893, y: 125.63}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &4815205948263272680
 CanvasRenderer:
@@ -444,14 +445,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.5655172, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 982e46a8e4f005c4885a31429b1224fe, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

@@ -13,8 +13,14 @@ namespace Game
         private State SelecBairroAvancoState => avanco.StateMachineController.GetState((int)AvancoStatus.SELECT_BAIRRO);
 
 
-        public event Action Subscribers;
+        public event Action notify;
 
+        // //TODO: teste
+        // private void Update()
+        // {
+        //     Debug.Log("select bairo: "+SelecBairroAvancoState.name);
+            
+        // }
 
         void Start()
         {
@@ -34,7 +40,7 @@ namespace Game
 
         private void NotifySubscribers()
         {
-            Subscribers?.Invoke();
+            notify?.Invoke();
         }
 
 
