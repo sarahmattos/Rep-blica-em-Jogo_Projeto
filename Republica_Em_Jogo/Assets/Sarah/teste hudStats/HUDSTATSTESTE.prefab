@@ -304,8 +304,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.494, y: -8.937291}
-  m_SizeDelta: {x: 74.993, y: 48.6723}
+  m_AnchoredPosition: {x: 1.494, y: -9.9525}
+  m_SizeDelta: {x: 74.993, y: 44.6113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1984205044422185953
 CanvasRenderer:
@@ -336,7 +336,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Conquistar a zona:\nZONA\n\nAdicionando:\n2 recursos de educa\xE7\xE3o.\n2
-    recursos de sa\xFAde."
+    recursos de sa\xFAde.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}
   m_sharedMaterial: {fileID: 6784369470126438407, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}
