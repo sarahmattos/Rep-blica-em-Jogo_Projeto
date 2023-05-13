@@ -15,9 +15,9 @@ namespace Game.Player
 
         [Header("move smooth props")]
         [SerializeField] Transform target;
-        private float maxSpeed = 10000;
-        private float smoothTime = 1f;
-        private Vector3 currentVelocity = Vector3.zero;
+        public float maxMoveSpeed = 10000;
+        // public float smoothTime = 1f;
+        // private Vector3 currentVelocity = Vector3.zero;
 
         [Header("Zoom smooth props")]
         [SerializeField] private float maxSpeed2 = 100000;
@@ -28,12 +28,12 @@ namespace Game.Player
         {
             zoomTarget = GetComponent<ZoomTarget>();
         }
-        void Update()
+        void FixedUpdate()
         {
             //follow target
-            transform.position = Vector3.SmoothDamp(transform.position, target.position, ref currentVelocity, smoothTime * Time.deltaTime, maxSpeed);
+            transform.position = Vector3.Lerp(transform.position, target.position,  maxMoveSpeed * Time.fixedDeltaTime);
             //Update by zoomTarget
-            mainCamera.orthographicSize = Mathf.SmoothDamp(mainCamera.orthographicSize, zoomTarget.OrthographicSizeTarget, ref currentVelocity2, smoothTime2 * Time.deltaTime, maxSpeed2);
+            mainCamera.orthographicSize = Mathf.SmoothDamp(mainCamera.orthographicSize, zoomTarget.OrthographicSizeTarget, ref currentVelocity2, smoothTime2 * Time.fixedDeltaTime, maxSpeed2);
 
         }
 
