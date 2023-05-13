@@ -169,6 +169,7 @@ MonoBehaviour:
   - recursoTipo: "Educa\xE7\xE3o"
     icone: {fileID: 21300000, guid: 9242dea8ed79c4e49a3705ada26d7594, type: 3}
   movimentosSociais: {fileID: 0}
+  recursosCartaManager: {fileID: 0}
   currencyText: {fileID: 3718754250875635900}
   currencyIcon: {fileID: 3718754249656285142}
 --- !u!1 &3718754250875635902

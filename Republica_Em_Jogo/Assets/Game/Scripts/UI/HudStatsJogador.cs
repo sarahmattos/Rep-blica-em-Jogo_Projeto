@@ -26,7 +26,7 @@ namespace Game.UI
         [SerializeField] private TMP_Text text_eduCarta;
         [SerializeField] private TMP_Text text_bairros;
         // [SerializeField] private TMP_Text text_eleitoresNovos;
-        [SerializeField] private UIVoterCurrency uIVoterCurrency;
+        [SerializeField] private UIEleitorCurrency uIVoterCurrency;
         [SerializeField] private TMP_Text text_cadeiras;
         [SerializeField] public TMP_Text text_naotemeleitorpraretirar;
         [SerializeField] private GameObject acaboudistribuicaoUi;
