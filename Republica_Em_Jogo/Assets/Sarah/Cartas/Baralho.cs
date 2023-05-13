@@ -7,9 +7,11 @@ namespace Game.UI
         private Corrupcao corrupcao;
         private MovimentosSociais movimentosSociais;
 
+        RodadaController rodadaController;
         private Animator animator;
         [SerializeField] GameObject baralho2D;
-
+        public int porcentagemCop, porcentagemMs;
+            
         public State ProjetoState =>
             CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.PROJETO];
         private void Awake()
@@ -32,6 +34,8 @@ namespace Game.UI
             baralhoManager(false);
 
             ProjetoState.Entrada += () => { animator.Play("MostrarBaralho"); };
+            porcentagemCop=1;
+            porcentagemMs=2;
         }
 
         private void OnDestroy()
@@ -41,11 +45,16 @@ namespace Game.UI
 
         public void sortearAcao()
         {
+            rodadaController = FindObjectOfType<RodadaController>();
+            int rodada = rodadaController.Rodada;
+            if(rodada>1 && rodada<=7){
+                porcentagemCop +=4;
+                porcentagemMs +=8;
+            }
             int rnd = Random.Range(0, 100);
-            if (rnd >= 0 && rnd < 25) corrupcao?.sortearCorrupcao();
-            if (rnd >= 25 && rnd < 50) movimentosSociais?.sortearMS();
-            if (rnd >= 50) projeto?.sortearProjeto();
-            
+            if (rnd >= 0 && rnd < porcentagemCop) corrupcao?.sortearCorrupcao();
+            if (rnd >= porcentagemCop && rnd < porcentagemMs) movimentosSociais?.sortearMS();
+            if (rnd >= porcentagemMs) projeto?.sortearProjeto();
         }
         public void baralhoManager(bool valor)
         {
