@@ -1311,7 +1311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxConnections
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxLoopEleicoes
@@ -1344,6 +1344,10 @@ PrefabInstance:
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: zonaColorOutline.Array.size
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: devConfig.venceConquistandoTudo
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: ZonaColorOutline.Array.data[0].b
@@ -1549,6 +1553,10 @@ PrefabInstance:
       propertyPath: zonaColorOutline.Array.data[6].r
       value: 0.94117653
       objectReference: {fileID: 0}
+    - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
+      propertyPath: devConfig.mostraUISyncCarregamentoPlayers
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608621, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: m_Name
       value: GameData
@@ -1564,7 +1572,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7887484137661636566, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000030517578
+      value: 22.067087
       objectReference: {fileID: 0}
     - target: {fileID: 7887484137943697647, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchorMax.x

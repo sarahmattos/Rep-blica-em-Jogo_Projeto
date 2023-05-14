@@ -58,6 +58,8 @@ public class GameDataconfig : Singleton<GameDataconfig>
 public class DevConfig
 {
     [SerializeField] private bool venceConquistandoTudo;
+        [SerializeField] private bool mostraUISyncCarregamentoPlayers;
     public bool VenceConquistandoTudo => venceConquistandoTudo;
+    public bool MostraUISyncCarregamentoPlayers => mostraUISyncCarregamentoPlayers;
 
 }
