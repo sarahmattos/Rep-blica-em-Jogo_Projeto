@@ -34,9 +34,10 @@ namespace Game
 
             foreach (ZonaTerritorial zona in SetUpZona.Instance.Zonas)
             {
-                if (zona.name == zonaEscolhida)
+                if (zona.Nome == zonaEscolhida)
                 {
                     MudaInteratividadeOutrasZonas(zona);
+                    Tools.Logger.Instance.LogWarning("Habilitando zona:"+zona.Nome);
                     break;
                 }
             }
