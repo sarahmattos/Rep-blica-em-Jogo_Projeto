@@ -9,30 +9,23 @@ namespace Game
     {
 
         private List<Bairro> bairrosDoPlayerLocal => PlayerStatsManager.Instance.GetLocalPlayerStats().BairrosInControl;
+        private HudStatsJogador HudStatsJogador => HudStatsJogador.Instance;
         public override void EnterState()
         {
-            Tools.Logger.Instance.LogInfo("Enter: distribuicao inicial.");
-            // TurnManager.Instance.UpdateTurn();
-
             if (!TurnManager.Instance.LocalIsCurrent) return;
-            Tools.Logger.Instance.LogInfo("VOU JOGAR.");
-            HudStatsJogador hudStatsJogador = FindObjectOfType<HudStatsJogador>();
-            hudStatsJogador.distribuicaoInicial = true;
-            hudStatsJogador.ChamatPlayerInicioRodada();
-            MudarHabilitadoBairrosDoPlayer(true);
-
+            HudStatsJogador.eleitoresNovosDeProjeto += () => MudarHabilitadoBairrosDoPlayer(true);
+            // MudarHabilitadoBairrosDoPlayer(true);
 
         }
 
         public override void ExitState()
         {
-            Tools.Logger.Instance.LogInfo("EXIT: distribuicao inicial.");
-
+            HudStatsJogador.eleitoresNovosDeProjeto -= () => MudarHabilitadoBairrosDoPlayer(true);
             MudarHabilitadoBairrosDoPlayer(false);
-
             TurnManager.Instance.UpdateTurn();
 
         }
+
 
 
         private void MudarHabilitadoBairrosDoPlayer(bool value)
