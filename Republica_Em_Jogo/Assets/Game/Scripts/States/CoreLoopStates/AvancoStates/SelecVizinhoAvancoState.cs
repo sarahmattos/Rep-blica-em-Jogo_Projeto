@@ -10,6 +10,7 @@ namespace Game
 {
     public class SelecVizinhoAvancoState : State
     {
+        [SerializeField] private InteragivelBackground interagivelBackground;
         private AvancoState avancoState;
         private DadosUiGeral dadosUiGeral;
         private List<Bairro> BairrosVizinhos => avancoState.AvancoData.BairroPlayer.Vizinhos.ToList();
@@ -23,7 +24,6 @@ namespace Game
                 ).ToList();
             }
         }
-
         private List<Bairro> VizinhosInimigosNaoPodemInteragir
         {
             get
@@ -35,7 +35,7 @@ namespace Game
         private void Start()
         {
             avancoState = GetComponentInParent<AvancoState>();
-             dadosUiGeral=FindObjectOfType<DadosUiGeral>();
+            dadosUiGeral = FindObjectOfType<DadosUiGeral>();
         }
 
         public override void EnterState()
@@ -44,6 +44,9 @@ namespace Game
             VizinhosInimigos.MudarHabilitado(true);
             InscreverClickInteragivelBairros(VizinhosInimigos);
             VizinhosInimigosNaoPodemInteragir.MudarInativity(true);
+            interagivelBackground.MudaHabilitado(true);
+            interagivelBackground.Click += CancelAvanco;
+
         }
 
         public override void ExitState()
@@ -52,6 +55,8 @@ namespace Game
             DesinscreverClickInteragivelBairros(VizinhosInimigos);
             VizinhosInimigos.MudarHabilitado(false);
             SetUpZona.Instance.AllBairros.MudarInativity(false);
+            interagivelBackground.MudaHabilitado(false);
+            interagivelBackground.Click -= CancelAvanco;
 
         }
 
@@ -77,13 +82,21 @@ namespace Game
             bairro.Interagivel.ChangeSelectedBairro(true);
             avancoState.AvancoData.BairroVizinho = bairro;
             foreach (PlayerStats playerStats in PlayerStatsManager.Instance.AllPlayerStats)
+            {
+                if (bairro.PlayerIDNoControl.Value == playerStats.playerID)
                 {
-                    if(bairro.PlayerIDNoControl.Value == playerStats.playerID ){
-                         dadosUiGeral.atualizaCorVizinhoDadoServerRpc(playerStats.Cor);
-                    }
+                    dadosUiGeral.atualizaCorVizinhoDadoServerRpc(playerStats.Cor);
                 }
+            }
             avancoState.StateMachineController.NextStateServerRpc();
-            
+
+        }
+
+
+        private void CancelAvanco()
+        {
+            avancoState.StateMachineController.ChangeStateServerRpc(0);
+
         }
 
 

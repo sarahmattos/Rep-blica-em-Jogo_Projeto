@@ -137,13 +137,11 @@ namespace Game.Player
             int totalEleitoresNovos = (int)(Mathf.Floor(bairrosTotais / 2)) + eleitoresAdicionais;
             SetEleitoresNovos(totalEleitoresNovos);
             if (eleitoresNovos < 3) SetEleitoresNovos(3);
-            Debug.Log("DefiniuEleitresNovosIniciorodada");
 
         }
 
         public void InicializaPlayerStats()
         {
-            Tools.Logger.Instance.LogInfo("inicializando player stats " + playerID);
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
             maxTerritorio = GameDataconfig.Instance.TerritoriosTotal;
             nome = string.Concat(GameDataconfig.Instance.TagParticipante, " ", playerID);

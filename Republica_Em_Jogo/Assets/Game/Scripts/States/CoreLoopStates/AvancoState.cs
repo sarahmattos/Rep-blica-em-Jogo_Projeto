@@ -64,7 +64,7 @@ namespace Game
 
         public override void EnterState()
         {
-            avancoData.ResetData();
+            // avancoData.ResetData();
             if (!TurnManager.Instance.LocalIsCurrent) return;
             stateMachineController.ChangeStateServerRpc(0);
             stateMachineController.saidaUltimoStado += AcrescentaRodada;

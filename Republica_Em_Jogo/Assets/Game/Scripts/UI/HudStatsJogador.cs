@@ -320,7 +320,6 @@ namespace Game.UI
                 //text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
                 uIVoterCurrency.SetPositiveText((int)playerStats.eleitoresNovos);
                 eleitoresNovosDeProjeto?.Invoke();
-                Debug.Log("Eleitores novos: de projeto");
 
             }
         }
@@ -347,10 +346,8 @@ namespace Game.UI
                     uIVoterCurrency.SetPositiveText((int)playerStats.eleitoresNovos);
 
                 }
-                //text_eleitoresNovos.SetText(string.Concat("+",playerStats.eleitoresNovos.ToString()));
-                // uIVoterCurrency.ShowPositiveNovosEleitores((int)playerStats.eleitoresNovos);
+
                 eleitoresNovosDeProjeto?.Invoke();
-                Debug.Log("Eleitores novos: de projeto");
             }
 
         }

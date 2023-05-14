@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e512dfaea7415b144911b71a651189a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avisoPassaEleitor: {fileID: 0}
 --- !u!1 &836988661643616584
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,7 +144,7 @@ GameObject:
   - component: {fileID: 2231912323342625003}
   - component: {fileID: 4167922049000378505}
   m_Layer: 0
-  m_Name: SelectVizinhoState
+  m_Name: SelectVizinho Avanco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3355b88cb4e0b342a53a18539d35dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interagivelBackground: {fileID: 0}
 --- !u!1 &2882936339556594487
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,7 +273,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hudStatsJogador: {fileID: 0}
-  fimDeJogoManager: {fileID: 0}
   avancoState: {fileID: 6455126395022951460}
   qntdRecurso: 1
   explicaTexto: "Voc\xEA est\xE1 no estado Recompensa"
@@ -291,7 +292,7 @@ GameObject:
   - component: {fileID: 2029313823299753350}
   - component: {fileID: 5862565377857912089}
   m_Layer: 0
-  m_Name: Select Vizinho
+  m_Name: Select Vizinho Reman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -324,6 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b658e3486e3574dbffd83d6a4bb5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interagivelBackground: {fileID: 0}
 --- !u!1 &5549998794331524842
 GameObject:
   m_ObjectHideFlags: 0

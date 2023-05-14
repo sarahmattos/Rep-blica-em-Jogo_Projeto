@@ -34,14 +34,14 @@ namespace Game.Player
         }
         private void Pan()
         {
-            if (Input.GetAxis("Mouse Y") != 0 || Input.GetAxis("Mouse X") != 0)
-            {
+            // if (Input.GetAxis("Mouse Y") != 0 || Input.GetAxis("Mouse X") != 0)
+            // {
             Vector3 mouseWorldPosDiff = mouseWorldPosStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             IncreasePositionLimited(mouseWorldPosDiff * scrollWheelSpeed);
             // transform.position += mouseWorldPosDiff * speed;
             // transform.ClampPositionXZ(boundary.Bounds);
 
-            }
+            // }
         }
 
         private void ProcessDirectionalInputs()
