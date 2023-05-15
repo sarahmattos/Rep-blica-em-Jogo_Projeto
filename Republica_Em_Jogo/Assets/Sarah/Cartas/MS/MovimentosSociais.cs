@@ -104,7 +104,7 @@ public class MovimentosSociais : NetworkBehaviour
     }
     public void chamarRecompensasEleitor()
     {
-        StartCoroutine(EsperaEVai1(0.2f));
+        StartCoroutine(EsperaEVai1(0.1f));
     }
     public void chamarRecompensasRecurso()
     {
@@ -112,7 +112,7 @@ public class MovimentosSociais : NetworkBehaviour
         {
             rc.distribuicaoChamada();
             distribuicaoRecompensaRecurso = false;
-            StartCoroutine(EsperaEVai2(0.2f));
+            StartCoroutine(EsperaEVai2(0.1f));
         }
 
     }

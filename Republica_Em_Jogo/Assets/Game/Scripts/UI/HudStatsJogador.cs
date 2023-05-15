@@ -295,7 +295,7 @@ namespace Game.UI
         //botao chama funcao de distribuicao de eleitor no inicio das rodadas
         public void ChamatPlayerInicioRodada()
         {
-            StartCoroutine(EsperaEVai1(0.5f));
+            StartCoroutine(EsperaEVai1(0));
           
 
         }

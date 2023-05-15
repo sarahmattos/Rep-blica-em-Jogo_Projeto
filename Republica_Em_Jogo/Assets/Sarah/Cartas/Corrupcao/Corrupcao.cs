@@ -86,7 +86,7 @@ public class Corrupcao : NetworkBehaviour
     }
     public void chamarPenalidade()
     {
-       StartCoroutine(EsperaEVai1(1f));
+       StartCoroutine(EsperaEVai1(0.1f));
     }
     public void chamarPenalidade2()
     {

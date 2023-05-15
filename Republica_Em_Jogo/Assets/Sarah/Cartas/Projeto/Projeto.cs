@@ -313,7 +313,7 @@ public class Projeto : NetworkBehaviour
 
         }
     }
-        private IEnumerator EsperaEVai1(int s)
+        private IEnumerator EsperaEVai1(float s)
         {
             yield return new WaitForSeconds(s);
             if (playerInZona == true)
@@ -336,7 +336,7 @@ public class Projeto : NetworkBehaviour
         //dá carta de recurso para jogadores que possuem bairros na zona
         //reseta algumas variáveis
         
-            StartCoroutine(EsperaEVai1(1));
+            StartCoroutine(EsperaEVai1(0.1f));
         
     }
 
