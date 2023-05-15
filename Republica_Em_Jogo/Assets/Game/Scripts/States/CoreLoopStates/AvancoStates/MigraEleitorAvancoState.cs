@@ -2,7 +2,9 @@
 
 using System;
 using System.Collections;
+using System.Linq;
 using Game.Territorio;
+using Game.Tools;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +16,9 @@ namespace Game
         private const int minEleitores = 1;
         private const int maxEleitores = 3;
         private AvancoState avancoState;
+        private Bairro BairroPlayerAtual => avancoState.AvancoData.BairroPlayer;
+        private Bairro BairroVizinho => avancoState.AvancoData.BairroVizinho;
+
         public int MaxQntdEleitoresMigrar =>
             Math.Clamp(
                 (avancoState.AvancoData.BairroPlayer.SetUpBairro.Eleitores.contaEleitores - 1),
@@ -30,6 +35,7 @@ namespace Game
         private void Start()
         {
             avancoState = GetComponentInParent<AvancoState>();
+            // MigrouEleitores += (value, bairro) => {SetUpZona.Instance.AllBairros.MudarInativity(false);};
         }
 
         public override void OnDestroy()
@@ -45,7 +51,12 @@ namespace Game
                 avancoState.StateMachineController.NextStateServerRpc();
                 return;
             }
+
             MigraEleitores?.Invoke();
+            SetUpZona.Instance.AllBairros.MudarInativity(true);
+            BairroPlayerAtual.Interagivel.MudarInativity(false);
+            BairroVizinho.Interagivel.MudarInativity(false);
+
             // avisoPassaEleitor.SetActive(true);
 
         }
