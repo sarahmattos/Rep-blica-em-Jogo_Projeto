@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1705563446128435433}
   - component: {fileID: 147491056644140948}
   m_Layer: 0
-  m_Name: Select Bairro
+  m_Name: Select Bairro Remanejamento
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 2455354048244936061}
   - component: {fileID: 1488523545332775419}
   m_Layer: 0
-  m_Name: SelecBairroState
+  m_Name: SelecBairro Avanco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

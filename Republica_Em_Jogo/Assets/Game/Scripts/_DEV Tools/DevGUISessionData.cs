@@ -40,20 +40,20 @@ namespace Game.Tools
 
             //GameState
             guiLabelParams.rect.y = h / 2 + 2 * 2 * h / 90;
-            string message2 = string.Concat("Rodada: ", GameStateHandler.Instance.StateMachineController.GetCurrentState().name);
+            string message2 = string.Concat("Estado principal: ", GameStateHandler.Instance.StateMachineController.GetCurrentState().name);
             GUI.Label(guiLabelParams.rect, message2, guiLabelParams.guiStyle);
 
             //CoreLoopstate
             guiLabelParams.rect.y = h / 2 + 3 * 2 * h / 90;
-            string message3 = string.Concat("Rodada: ", CoreLoopStateHandler.Instance.CurrentState.name);
+            string message3 = string.Concat("Sub-estado atual: ", CoreLoopStateHandler.Instance.CurrentState.name);
             GUI.Label(guiLabelParams.rect, message3, guiLabelParams.guiStyle);
             //ordem dos jogadores
 
             guiLabelParams.rect.y = h / 2 + 4 * 2 * h / 90;
-            string message4 = "jogadores: ";
+            string message4 = "Ordem dos jogadores: ";
             foreach (int playerID in TurnManager.Instance.ordemPlayersID)
             {
-                message4 = string.Concat(message4, playerID, "_");
+                message4 = string.Concat(message4, playerID, " _ ");
             }
             GUI.Label(guiLabelParams.rect, message4, guiLabelParams.guiStyle);
 

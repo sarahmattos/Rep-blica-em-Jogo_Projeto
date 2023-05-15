@@ -25,7 +25,6 @@ namespace Game.Tools
             if (Input.GetKey(devInputShortcut.DefaultInput) && Input.GetKeyDown(devInputShortcut.EnableDisableToolsKey))
             {
                 devToolActive = !devToolActive;
-                Debug.Log(devToolActive.ToString());
             }
 
             if (!devToolActive) return;

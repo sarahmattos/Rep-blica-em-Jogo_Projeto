@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avanco: {fileID: 0}
+  SelectBairroAvancoState: {fileID: 0}
 --- !u!114 &662923552516578254
 MonoBehaviour:
   m_ObjectHideFlags: 0

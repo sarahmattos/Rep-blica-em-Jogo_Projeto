@@ -10,23 +10,16 @@ namespace Game
         [SerializeField] private AvancoState avanco;
         private State RecompensaState => CoreLoopStateHandler.Instance.GetState(CoreLoopState.RECOMPENSA);
         private State AvancoState => CoreLoopStateHandler.Instance.GetState(CoreLoopState.AVANCO);
-        private State SelecBairroAvancoState => avanco.StateMachineController.GetState((int)AvancoStatus.SELECT_BAIRRO);
+        [SerializeField] private State SelectBairroAvancoState;
 
 
         public event Action notify;
-
-        // //TODO: teste
-        // private void Update()
-        // {
-        //     Debug.Log("select bairo: "+SelecBairroAvancoState.name);
-            
-        // }
 
         void Start()
         {
             RecompensaState.Entrada += NotifySubscribers;
             AvancoState.Saida += NotifySubscribers;
-            SelecBairroAvancoState.Entrada += NotifySubscribers;
+            SelectBairroAvancoState.Entrada += NotifySubscribers;
 
 
         }
@@ -35,7 +28,7 @@ namespace Game
         {
             RecompensaState.Entrada -= NotifySubscribers;
             AvancoState.Saida -= NotifySubscribers;
-            SelecBairroAvancoState.Entrada -= NotifySubscribers;
+            SelectBairroAvancoState.Entrada -= NotifySubscribers;
         }
 
         private void NotifySubscribers()
