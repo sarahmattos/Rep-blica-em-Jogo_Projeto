@@ -20,7 +20,9 @@ namespace Game.UI
         [SerializeField] public TMP_Text ExplicaStateTextCorpo;
         [SerializeField] public GameObject ExplicaStateUi;
         private RodadaController rodadaController;
+        private Animator animator;
         public Button NextStateButton => nextStateButton;
+        private State DesenvolvimentoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
         private string TagPlayerAtualStilizado
         {
             get
@@ -30,35 +32,53 @@ namespace Game.UI
             }
         }
 
+
+
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
+
         private void Start()
         {
+
             nextStateButton.onClick.AddListener(OnNextStateButtonClick);
 
+            DesenvolvimentoState.Entrada += OnDesenvolvimentoStateEnter;
             TurnManager.Instance.vezDoPlayerLocal += OnPlayerTurnUpdate;
             CoreLoopStateHandler.Instance.estadoMuda += UpdateTextDesenv;
+
             nextStateButton.gameObject.SetActive(false);
 
         }
 
-
-
         private void OnDestroy()
         {
+            DesenvolvimentoState.Saida -= OnDesenvolvimentoStateEnter;
+
             TurnManager.Instance.vezDoPlayerLocal -= OnPlayerTurnUpdate;
             CoreLoopStateHandler.Instance.estadoMuda -= UpdateTextDesenv;
 
+
         }
 
-        // public void OnNextTurnButtonClick()
+        private void OnDesenvolvimentoStateEnter()
+        {
+            rodadaController = FindObjectOfType<RodadaController>();
+            if (rodadaController.Rodada == 1) PlayEnterAnim();
+
+        }
+        // private void OnRodadaMuda(int rodada)
         // {
-        //     if (CoreLoopStateHandler.Instance.CurrentStateIgualUltimoState)
-        //     {
-        //         CoreLoopStateHandler.Instance.NextStateServerRpc();
-        //         return;
-        //     }
-        //     TurnManager.Instance.NextTurn();
-        //     CoreLoopStateHandler.Instance.ChangeStateServerRpc(0);
+        //     Debug.Log("Rodada atualiza");
+        //     if (rodada == 1) PlayEnterAnim();
+
         // }
+
+        private void PlayEnterAnim()
+        {
+            animator.Play("EnterUiCoreLoop");
+        }
 
         public void OnNextStateButtonClick()
         {
@@ -81,7 +101,7 @@ namespace Game.UI
             UpdateTitleText(state);
         }
 
-        public void MostrarAvisoEstado(string avisoTitulo,string avisoCorpo)
+        public void MostrarAvisoEstado(string avisoTitulo, string avisoCorpo)
         {
             rodadaController = FindObjectOfType<RodadaController>();
             int rodada = rodadaController.Rodada;
@@ -95,7 +115,7 @@ namespace Game.UI
 
         public void UpdateTitleText(CoreLoopState state)
         {
-            string titleText = string.Concat(GameDataconfig.Instance.TagPlayerAtualColorizada(),"  ", state.ToString());
+            string titleText = string.Concat(GameDataconfig.Instance.TagPlayerAtualColorizada(), "  ", state.ToString());
             logStateText.SetText(titleText);
         }
 

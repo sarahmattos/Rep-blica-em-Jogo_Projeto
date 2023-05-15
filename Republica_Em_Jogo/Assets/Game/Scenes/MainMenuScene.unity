@@ -537,6 +537,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DevTools
       objectReference: {fileID: 0}
+    - target: {fileID: 5977926882699923495, guid: eca76af52ba93884cb83479eba165d9c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eca76af52ba93884cb83479eba165d9c, type: 3}
 --- !u!1 &1526223902
@@ -1311,7 +1315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxConnections
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxLoopEleicoes
@@ -1572,7 +1576,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7887484137661636566, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000015258789
+      value: 0.71079445
       objectReference: {fileID: 0}
     - target: {fileID: 7887484137943697647, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1586,10 +1590,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas Logger
       objectReference: {fileID: 0}
+    - target: {fileID: 7887484138069535936, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7887484138069535948, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 422421207}
+    - target: {fileID: 7887484138069535948, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7887484138069535951, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_Pivot.x
       value: 0
