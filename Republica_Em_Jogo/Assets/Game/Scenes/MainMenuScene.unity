@@ -978,6 +978,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6789077691707189888, guid: 5a3910248392b8d4da8b26c692897967, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}
+    - target: {fileID: 6789077691707189888, guid: 5a3910248392b8d4da8b26c692897967, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6784369470126438407, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}
+    - target: {fileID: 8177778213983380661, guid: 5a3910248392b8d4da8b26c692897967, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}
+    - target: {fileID: 8177778213983380661, guid: 5a3910248392b8d4da8b26c692897967, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6784369470126438407, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a3910248392b8d4da8b26c692897967, type: 3}
 --- !u!1001 &6756490649280844433
@@ -1576,7 +1592,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7887484137661636566, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.00001974619
       objectReference: {fileID: 0}
     - target: {fileID: 7887484137943697647, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchorMax.x

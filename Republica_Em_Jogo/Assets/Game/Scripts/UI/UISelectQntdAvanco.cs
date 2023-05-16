@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Territorio;
+using Game.Tools;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,8 +25,11 @@ namespace Game.UI
             migraEleitorAvancoState.MigraEleitores += EnableButtonsByEleitoresDisponiveis;
             migraEleitorAvancoState.MigraEleitores += PlayEnterAnim;
             migraEleitorAvancoState.MigrouEleitores += PlayExitAnim;
+            PlayExitAnim(0, new Bairro());
 
         }
+
+
         private void OnDestroy()
         {
             migraEleitorAvancoState.MigraEleitores -= EnableButtonsByEleitoresDisponiveis;
@@ -48,9 +52,12 @@ namespace Game.UI
 
         private void EnableButtonsByEleitoresDisponiveis()
         {
-            for (int i = 0; i < MaxEleitoresMigrar - 1; i++)
+            Debug.Log("Max eleitores Migrar: " + MaxEleitoresMigrar);
+
+            for (int i = 0; i < 3; i++)
             {
-                buttonsOrdered[i].interactable = true;
+                bool podeAtivarButtonByIndex = i < (MaxEleitoresMigrar);
+                buttonsOrdered[i].interactable = podeAtivarButtonByIndex;
             }
         }
 

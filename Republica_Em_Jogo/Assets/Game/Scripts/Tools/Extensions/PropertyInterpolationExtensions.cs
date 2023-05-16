@@ -64,12 +64,12 @@ namespace Game.Tools
 
             transform.localScale = scale;
         }
-        public static async Task EaseOutLocalPosition(this Transform transform, Vector3 targetPosition)
+        public static async Task EaseOutLocalPosition(this Transform transform, Vector3 targetPosition, float timeInterval)
         {
 
             Vector3 start = transform.localPosition;
             float elapsedTime = 0;
-            float timeInterval = 0.1f;
+            // float timeInterval = 0.1f;
 
             while (elapsedTime < timeInterval)
             {
