@@ -165,6 +165,7 @@ public class Projeto : NetworkBehaviour
         {
             if (newValue != -1)
             {
+                projetoUI.SetActive(true);
                 numRecompensa = newValue;
                 numRecompensaDefault = numRecompensa;
             }
@@ -174,6 +175,7 @@ public class Projeto : NetworkBehaviour
         {
             if (newValue != "")
             {
+                projetoUI.SetActive(true);
                 text_projetoCarta.text = newValue.ToString();
             }
         };
