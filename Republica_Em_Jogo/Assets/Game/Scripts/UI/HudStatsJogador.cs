@@ -34,6 +34,7 @@ namespace Game.UI
         [SerializeField] private GameObject distribuaEleitorUi;
         [SerializeField] private GameObject btnsAux;
         [SerializeField] private GameObject corUi;
+        [SerializeField] private GameObject[] olhoEsconde;
         [SerializeField] private Transform corUiPai;
 
         [Header("Referencias")]
@@ -370,7 +371,18 @@ namespace Game.UI
         }
         public void escondeObjetivo(GameObject go){
             ativa = !ativa;
-            go.SetActive(ativa);
+            if(ativa){
+                olhoEsconde[0].SetActive(true);
+                olhoEsconde[1].SetActive(false);
+                go.SetActive(true);
+            }else{
+                olhoEsconde[0].SetActive(false);
+                olhoEsconde[1].SetActive(true);
+                go.SetActive(false);
+            }
+            
+
+            
         }
 
     }
