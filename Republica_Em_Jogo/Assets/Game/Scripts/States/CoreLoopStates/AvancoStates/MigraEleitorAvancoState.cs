@@ -12,7 +12,7 @@ namespace Game
 {
     public class MigraEleitorAvancoState : State
     {
-        [SerializeField] GameObject avisoPassaEleitor;
+        // [SerializeField] GameObject avisoPassaEleitor;
         private const int minEleitores = 1;
         private const int maxEleitores = 3;
         private AvancoState avancoState;
@@ -35,7 +35,6 @@ namespace Game
         private void Start()
         {
             avancoState = GetComponentInParent<AvancoState>();
-            // MigrouEleitores += (value, bairro) => {SetUpZona.Instance.AllBairros.MudarInativity(false);};
         }
 
         public override void OnDestroy()
@@ -57,13 +56,12 @@ namespace Game
             BairroPlayerAtual.Interagivel.MudarInativity(false);
             BairroVizinho.Interagivel.MudarInativity(false);
 
-            // avisoPassaEleitor.SetActive(true);
-
         }
 
         public override void ExitState()
         {
             if (!TurnManager.Instance.LocalIsCurrent) return;
+            SetUpZona.Instance.AllBairros.MudarInativity(false);
             StopAllCoroutines();
         }
 
@@ -89,8 +87,6 @@ namespace Game
             avancoState.AvancoData.BairroVizinho.SetPlayerControlServerRpc(playerID);
         }
 
-        //Por equanto, ainda é automatico. 
-        //TODO: definir como sera a feito
         private void MudarQntdEleitoresBairros(int eleitores)
         {
             int eleitoresMigrar = MaxQntdEleitoresMigrar;

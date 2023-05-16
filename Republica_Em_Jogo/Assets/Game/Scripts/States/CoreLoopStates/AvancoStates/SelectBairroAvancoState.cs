@@ -43,7 +43,7 @@ namespace Game
 
         public override void EnterState()
         {
-            avancoState.AvancoData.ResetData();
+            avancoState.AvancoData.ClearRodadaData();
             Tools.Logger.Instance.LogInfo("Select bairro Avanco state: enter");
             if (!TurnManager.Instance.LocalIsCurrent) return;
             if (BairrosInteragiveis.Count == 0)

@@ -127,7 +127,7 @@ namespace Game.Territorio
 
         private async void SetSetupBairroPosition(Vector3 targetPosition)
         {
-            await bairro.SetUpBairro.transform.EaseOutLocalPosition(targetPosition);
+            await bairro.SetUpBairro.transform.EaseOutLocalPosition(targetPosition, 0.1f);
 
         }
     }
