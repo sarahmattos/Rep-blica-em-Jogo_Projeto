@@ -31,6 +31,10 @@ namespace Game
         private StateMachineController stateMachineController;
         public StateMachineController StateMachineController => stateMachineController;
 
+        public State GetState(GameState state)
+        {
+            return stateMachineController.GetState((int)state);
+        }
         private void Awake()
         {
             stateMachineController = GetComponent<StateMachineController>();

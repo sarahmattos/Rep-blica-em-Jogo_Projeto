@@ -12,7 +12,7 @@ namespace Game
 {
     public class EleicaoManager : NetworkBehaviour
     {
-        
+
         private NetworkVariable<FixedString4096Bytes> EleicaoText = new NetworkVariable<FixedString4096Bytes>();
         private NetworkVariable<int> conectados = new NetworkVariable<int>();
         public HudStatsJogador hs;
@@ -26,40 +26,43 @@ namespace Game
         public int[] eleitoresPlayers;
         private SetUpZona setUpZona;
         private string cadeiras;
-         float valorPeao;
+        float valorPeao;
         [SerializeField] GameObject[] peosCamara;
         [SerializeField] GameObject[] Cameras;
-        public bool inEleicao=false;
+        public bool inEleicao = false;
         ///[SerializeField] Transform posicaoCameraEleicao;
         //public Vector3 posicaoAntiga;
-        
-        public string explicaTexto,explicaTextoCorpo;
+
+        public string explicaTexto, explicaTextoCorpo;
         private UICoreLoop uiCore;
         void Start()
         {
-           cadeirasTotais=12;
-           zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
-           setUpZona = GameObject.FindObjectOfType<SetUpZona>();
+            cadeirasTotais = 12;
+            zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
+            setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             Instance = this;
-            minCadeirasVotacao=7;
+            minCadeirasVotacao = 7;
             Material material = peosCamara[0].GetComponent<MeshRenderer>().material;
             uiCore = FindObjectOfType<UICoreLoop>();
-            
+
         }
         [ServerRpc(RequireOwnership = false)]
         public void ClientsConectServerRpc()
         {
             conectados.Value = NetworkManager.Singleton.ConnectedClientsIds.Count;
         }
-        public void cadeirasInicial(){
+        public void cadeirasInicial()
+        {
             cadeirasCamara = new float[numConectados];
-            for(int i=0;i<cadeirasCamara.Length;i++){
-                    cadeirasCamara[i]=cadeirasTotais/numConectados;
-                    if(i==(int)NetworkManager.Singleton.LocalClientId){
-                        hs.cadeirasUi(cadeirasCamara[i]);
-                    }
+            for (int i = 0; i < cadeirasCamara.Length; i++)
+            {
+                cadeirasCamara[i] = cadeirasTotais / numConectados;
+                if (i == (int)NetworkManager.Singleton.LocalClientId)
+                {
+                    hs.cadeirasUi(cadeirasCamara[i]);
                 }
-                ColorirPeao();
+            }
+            ColorirPeao();
         }
         public void ContaTotalEleitores()
         {
@@ -82,7 +85,7 @@ namespace Game
         }
         public void CalcularCadeiras()
         {
-            cadeiras="";
+            cadeiras = "";
             eleitoresPlayers = new int[numConectados];
             cadeirasCamara = new float[numConectados];
             setUpZona.SepararBairrosPorPlayer(eleitoresPlayers, numConectados);
@@ -90,85 +93,104 @@ namespace Game
             {
                 float aux = ((float)eleitoresPlayers[i] * (float)cadeirasTotais) / (float)somaEleitores;
                 cadeirasCamara[i] = Mathf.Round(aux);
-                 if(i==(int)NetworkManager.Singleton.LocalClientId){
-                        hs.cadeirasUi(cadeirasCamara[i]);
-                    }
-                      
-                if(NetworkManager.Singleton.IsServer){
-                    cadeiras += "Player "+i+" tem: "+cadeirasCamara[i].ToString() +" cadeiras"+ "\n";
-                    EleicaoText.Value = cadeiras;
+                if (i == (int)NetworkManager.Singleton.LocalClientId)
+                {
+                    hs.cadeirasUi(cadeirasCamara[i]);
                 }
+
+                if (!NetworkManager.Singleton.IsServer) return;
+                PlayerStats playerStats = PlayerStatsManager.Instance.GetPlayerStats(i);
+                cadeiras += string.Concat(playerStats.numCadeiras, "  cadeiras \n");
+
+
             }
+
+            if (!NetworkManager.Singleton.IsServer) return;
+            EleicaoText.Value = cadeiras;
+
         }
-        public void CalculoEleicao(){
-            
+        public void CalculoEleicao()
+        {
+
             ContaTotalEleitores();
             CalcularCadeiras();
             setCameraPosition(true);
-            inEleicao=true;
+            inEleicao = true;
         }
-        public void setCameraPosition(bool _eleicao){
-            if(_eleicao){
+        public void setCameraPosition(bool _eleicao)
+        {
+            if (_eleicao)
+            {
                 Cameras[0].SetActive(false);
                 Cameras[1].SetActive(true);
-            }else{
+            }
+            else
+            {
                 Cameras[0].SetActive(true);
                 Cameras[1].SetActive(false);
             }
-            
+
         }
-        public void explicarEleicao(){
+        public void explicarEleicao()
+        {
             uiCore.ExplicaStateUi.SetActive(true);
             uiCore.ExplicaStateTextTitulo.text = explicaTexto;
             uiCore.ExplicaStateTextCorpo.text = explicaTextoCorpo;
         }
-        public void escondeExplicarEleicao(){
+        public void escondeExplicarEleicao()
+        {
             uiCore.ExplicaStateUi.SetActive(false);
         }
-        public void ColorirPeao(){
+        public void ColorirPeao()
+        {
             // Debug.Log("coloriu");
-            for(int i=0;i<cadeirasCamara.Length;i++){
-                        if(i==0){
-                                valorPeao =cadeirasCamara[i] * i;
-                            }else{
-                                valorPeao =cadeirasCamara[i-1] * i;
-                        }
-                                    
-                        PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
-                        foreach (PlayerStats stats in allPlayerStats)
+            for (int i = 0; i < cadeirasCamara.Length; i++)
+            {
+                if (i == 0)
+                {
+                    valorPeao = cadeirasCamara[i] * i;
+                }
+                else
+                {
+                    valorPeao = cadeirasCamara[i - 1] * i;
+                }
+
+                PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
+                foreach (PlayerStats stats in allPlayerStats)
+                {
+                    if (stats.playerID == i)
+                    {
+                        for (int j = 0; j < cadeirasCamara[i]; j++)
                         {
-                            if (stats.playerID==i)
-                            {
-                                 for(int j=0;j<cadeirasCamara[i];j++){
-                                    
-                                 Material material = peosCamara[j+(int)valorPeao].GetComponent<MeshRenderer>().material;
-                                material.SetColor("_BaseColor", stats.Cor); 
-                                }
-                            }
+
+                            Material material = peosCamara[j + (int)valorPeao].GetComponent<MeshRenderer>().material;
+                            material.SetColor("_BaseColor", stats.Cor);
                         }
                     }
                 }
+            }
+        }
         private void OnEnable()
-    {
-        //jogadores conectados
-        EleicaoText.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
         {
-            if (newValue != "")
+            //jogadores conectados
+            EleicaoText.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
             {
-                UIeleicao.Instance.MostrarCadeiras(newValue.ToString());
-                ColorirPeao();
-                //Debug.Log(newValue.ToString());
-            }
-        };
-        conectados.OnValueChanged += (int previousValue, int newValue) =>
-        {
-            if (newValue != 0)
+                if (newValue != "")
+                {
+                    UIeleicao.Instance.MostrarCadeiras(newValue.ToString());
+                    ColorirPeao();
+                    //Debug.Log(newValue.ToString());
+                }
+            };
+            conectados.OnValueChanged += (int previousValue, int newValue) =>
             {
-                numConectados=newValue;
-                cadeirasInicial();
-            }
-        };
-    }
-    
+                if (newValue != 0)
+                {
+                    numConectados = newValue;
+                    cadeirasInicial();
+                }
+            };
+        }
+
     }
 }
