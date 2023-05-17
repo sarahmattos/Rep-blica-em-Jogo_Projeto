@@ -26,13 +26,13 @@ namespace Game.Networking
 
         public void ConfigAndStartHostIP()
         {
-            StartHostIP(playerNameHandler.GetPlayerName, IPManager.Instance.myIpAddress(), IPManager.Instance.portDefault);
+            StartHostIP(playerNameHandler.GetInputNameValue, IPManager.Instance.myIpAddress(), IPManager.Instance.portDefault);
         }
 
         public void ConfigAndStartClientIP()
         {
 
-            StartClientIP(playerNameHandler.GetPlayerName, ipAddressInput.text, IPManager.Instance.portDefault);
+            StartClientIP(playerNameHandler.GetInputNameValue, ipAddressInput.text, IPManager.Instance.portDefault);
         }
 
 
@@ -41,7 +41,7 @@ namespace Game.Networking
         {
             var utp = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
             utp.SetConnectionData(ipaddress, (ushort)port);
-            SetConnectionPayload(GetPlayerId(), playerName);
+            SetConnectionPayload( playerName);
 
             if(NetworkManager.Singleton.StartClient())
             {
@@ -62,7 +62,7 @@ namespace Game.Networking
 
             var utp = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
             utp.SetConnectionData(ipaddress, (ushort)port);
-            SetConnectionPayload(GetPlayerId(), playerName);
+            SetConnectionPayload(playerName);
             if (NetworkManager.Singleton.StartHost())
             {
                 conexaoEstabelecida?.Invoke(true);
@@ -74,11 +74,11 @@ namespace Game.Networking
 
         }
 
-        private void SetConnectionPayload(string playerId, string playerName)
+        private void SetConnectionPayload(string playerName)
         {
             var payload = JsonUtility.ToJson(new ConnectionPayload()
             {
-                playerId = playerId,
+                // playerId = playerId,
                 playerName = playerName,
                 isDebug = Debug.isDebugBuild
             });
@@ -100,7 +100,7 @@ namespace Game.Networking
 
     public class ConnectionPayload
     {
-        public string playerId;
+        // public string playerId;
         public string playerName;
         public bool isDebug;
     }

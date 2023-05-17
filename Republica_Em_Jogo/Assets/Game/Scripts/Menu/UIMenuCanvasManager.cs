@@ -12,6 +12,7 @@ namespace Game.Networking
         [SerializeField] private Canvas CanvasInicial;
         [SerializeField] private Canvas CanvasPosConexao;
         [SerializeField] private Canvas CanvasCarregamento;
+        [SerializeField] private Canvas canvasNameHandler;
 
         private void Start()
         {
@@ -40,6 +41,7 @@ namespace Game.Networking
         {
             CanvasPosConexao.enabled = false;
             CanvasInicial.enabled = true;
+            canvasNameHandler.enabled = true;
             CanvasCarregamento.enabled = false;
         }
 
@@ -47,9 +49,12 @@ namespace Game.Networking
         private void OnConexaoEstabelecida(bool value)
         {
             CanvasInicial.enabled = !value;
+            canvasNameHandler.enabled = !value;
             CanvasPosConexao.enabled = value;
+            canvasNameHandler.enabled = value;
 
-            if(!value) CanvasCarregamento.enabled = false;
+
+            if (!value) CanvasCarregamento.enabled = false;
         }
 
         private void OnlineSetup(bool value)
@@ -69,7 +74,8 @@ namespace Game.Networking
             StartCoroutine(DesabilitaCarregamentoAtrasado(5));
         }
 
-        private IEnumerator DesabilitaCarregamentoAtrasado(float s) {
+        private IEnumerator DesabilitaCarregamentoAtrasado(float s)
+        {
             yield return new WaitForSeconds(s);
             CanvasCarregamento.enabled = false;
         }

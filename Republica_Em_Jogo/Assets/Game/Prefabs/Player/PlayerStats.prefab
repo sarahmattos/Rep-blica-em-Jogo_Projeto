@@ -45,13 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d93e092421a3044891739f7a5dde27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: 
   cor: {r: 0, g: 0, b: 0, a: 1}
   maxTerritorio: 0
-  objetivo: {fileID: 0}
+  objetivo: 
   objetivoCarta: 
   recursoCarta: []
+  numSaude: 0
+  numEducacao: 0
+  saudeRecurso: 0
+  educacaoRecurso: 0
   nome: 
   eleitoresTotais: 0
+  numCadeiras: 0
+  eleitoresNovos: 0
   recursoManager: {fileID: 11400000, guid: ab97f966fa74b0b428388e24158a777d, type: 2}
 --- !u!114 &927022735948903033
 MonoBehaviour:
@@ -67,5 +74,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 951099334
   AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
+  DontDestroyWithOwner: 1
   AutoObjectParentSync: 1

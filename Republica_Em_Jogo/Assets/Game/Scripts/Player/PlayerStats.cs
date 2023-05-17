@@ -5,13 +5,14 @@ using Game.UI;
 using Game.Territorio;
 using System.Linq;
 using System;
+using Unity.Collections;
 
 namespace Game.Player
 {
 
     public class PlayerStats : NetworkBehaviour
     {
-
+        private NetworkVariable<FixedString32Bytes> playerName = new NetworkVariable<FixedString32Bytes>(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         [SerializeField] private Color cor;
         [SerializeField] private int maxTerritorio;
         [SerializeField] private string objetivo;
@@ -32,6 +33,8 @@ namespace Game.Player
         public RecursoCartaObjeto recursoManager;
 
         public int playerID => (int)OwnerClientId;
+        public string PlayerName => playerName.Value.ToString();
+
         public Color Cor { get => cor; }
         public string Objetivo { get => objetivo; }
         public string ObjetivoCarta { get => objetivoCarta; }
@@ -44,25 +47,10 @@ namespace Game.Player
         public event Action<int> DefiniuEleitoresNovos;
         public event Action<int> DistribuiuEleitor; // int -> eleitoresNovos
         public event Action FimDistricaoEleitores;
-        
-        public void SetEleitoresNovos(int value)
-        {
-            eleitoresNovos = value;
-            DefiniuEleitoresNovos?.Invoke(eleitoresNovos);
-        }
-
-        public void RemoveEleitoresNovos() {
-            eleitoresNovos--;
-            DistribuiuEleitor?.Invoke(eleitoresNovos);
-
-            if(eleitoresNovos > 0) return;
-            FimDistricaoEleitores?.Invoke();
-        }
 
         private void Awake()
         {
             BairrosInControl = new List<Bairro>();
-
 
         }
         private void Start()
@@ -76,6 +64,36 @@ namespace Game.Player
             GameplayLoadState.Saida -= InicializaPlayerStats;
             GameplayLoadState.Saida -= DesinscreveReceberbairrosPlayerIDControl;
         }
+
+        public override void OnNetworkSpawn()
+        {
+            SetPlayerName(PlayerNameHandler.Instance.GetInputNameValue);
+        }
+
+
+        // [ClientRpc]
+        private void SetPlayerName(string playerName)
+        {
+            if(!IsOwner) return;
+            this.playerName.Value = playerName;
+        }
+
+
+        public void SetEleitoresNovos(int value)
+        {
+            eleitoresNovos = value;
+            DefiniuEleitoresNovos?.Invoke(eleitoresNovos);
+        }
+
+        public void RemoveEleitoresNovos()
+        {
+            eleitoresNovos--;
+            DistribuiuEleitor?.Invoke(eleitoresNovos);
+
+            if (eleitoresNovos > 0) return;
+            FimDistricaoEleitores?.Invoke();
+        }
+
 
         private void InscreveReceberbairrosPlayerIDControl()
         {

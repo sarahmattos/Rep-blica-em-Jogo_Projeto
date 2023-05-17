@@ -11,8 +11,8 @@ namespace Game.Player
     {
         //private string playerName;
         private TMP_InputField inputField;
-        //public string PlayerName { get => playerName; set => playerName = value; }
-        public string GetPlayerName => PlayerPrefs.GetString("playerName");
+        public string GetInputNameValue => PlayerPrefs.GetString("playerName");
+        // public string InputNameValue => inputField.text;
 
         private void Awake()
         {
@@ -28,7 +28,7 @@ namespace Game.Player
 
         private void Start()
         {
-            inputField.text = GetPlayerName;
+            inputField.text = GetInputNameValue;
         }
 
 

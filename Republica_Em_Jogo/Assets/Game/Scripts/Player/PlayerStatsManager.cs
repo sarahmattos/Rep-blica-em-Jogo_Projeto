@@ -12,26 +12,30 @@ namespace Game.Player
         private State gameplayLoadState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD);
         private PlayerStats[] allPlayerStats;
         public PlayerStats[] AllPlayerStats => allPlayerStats;
-        public PlayerStats GetLocalPlayerStats() {
-            foreach(PlayerStats playerStats in AllPlayerStats) {
-                if(playerStats.IsLocalPlayer) {
+        public PlayerStats GetLocalPlayerStats()
+        {
+            foreach (PlayerStats playerStats in AllPlayerStats)
+            {
+                if (playerStats.IsLocalPlayer)
+                {
                     return playerStats;
                 }
             }
-            Tools.Logger.Instance.LogError("Falha ao enviar o PlayerStats do player local como referência.");
-
-            return null;
+            // Tools.Logger.Instance.LogError("Falha ao enviar o PlayerStats do player local como referência.");
+            throw new NullReferenceException("Falha ao enviar o PlayerStats do player local");
         }
 
-        public PlayerStats GetPlayerStats(int playerID) {
-            foreach(PlayerStats playerStats in AllPlayerStats) {
-                if(playerStats.playerID == playerID) 
+        public PlayerStats GetPlayerStats(int playerID)
+        {
+            foreach (PlayerStats playerStats in AllPlayerStats)
+            {
+                if (playerStats.playerID == playerID)
                     return playerStats;
             }
             throw new ArgumentOutOfRangeException("PlayerID parameter nao encontrado");
         }
-            
-        
+
+
         public PlayerStats GetPlayerStatsDoPlayerAtual()
         {
             foreach (PlayerStats playerStats in AllPlayerStats)
@@ -47,12 +51,13 @@ namespace Game.Player
 
         private void Start()
         {
-            gameplayLoadState.Saida += FindAllPlayerStats;
+            gameplayLoadState.Entrada += FindAllPlayerStats;
         }
 
         private void OnDestroy()
         {
-            gameplayLoadState.Saida -= FindAllPlayerStats;
+
+            gameplayLoadState.Entrada -= FindAllPlayerStats;
         }
 
         private void FindAllPlayerStats()

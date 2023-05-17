@@ -149,7 +149,7 @@ namespace Game.UI
         public override void OnNetworkSpawn()
         {
             state = GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
-            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD).Saida += FindingLocalPlayerStats;
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD).Saida += ConfigureHudStats;
             projeto = FindObjectOfType<Projeto>();
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             eleicaoManager = FindObjectOfType<EleicaoManager>();
@@ -158,12 +158,12 @@ namespace Game.UI
 
         public override void OnNetworkDespawn()
         {
-            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD).Saida -= FindingLocalPlayerStats;
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD).Saida -= ConfigureHudStats;
             GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO).Entrada += AtualizarPlayerStatsBairro;
 
         }
 
-        private void FindingLocalPlayerStats()
+        private void ConfigureHudStats()
         {
             PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
             foreach (PlayerStats stats in allPlayerStats)
@@ -179,7 +179,9 @@ namespace Game.UI
         private void InitializeHudStats()
         {
             // iconJogador.color = playerStats.Cor;
-            text_nomeJogador.SetText(GameDataconfig.Instance.TagPlayerColorizada(playerStats.playerID));
+            // text_nomeJogador.SetText(GameDataconfig.Instance.TagPlayerColorizada(playerStats.playerID));
+            text_nomeJogador.SetText(playerStats.PlayerName);
+            text_nomeJogador.color = playerStats.Cor;
             text_eleitores.SetText(textToDisplayEleitores);
             text_objetivo.SetText(playerStats.ObjetivoCarta);
 
