@@ -17,7 +17,7 @@ namespace Game
 
         private void Start()
         {
-            if (GameDataconfig.Instance.DevConfig.MostraUISyncCarregamentoPlayers) CanvasUiCarregamento.enabled = true;
+            CanvasUiCarregamento.enabled = GameDataconfig.Instance.DevConfig.MostraUISyncCarregamentoPlayers;
             GameplaySceneLoad.Saida += OnGameplaySceneLoad;
         }
 
@@ -29,7 +29,7 @@ namespace Game
 
         public override void OnNetworkSpawn()
         {
-            if (!GameDataconfig.Instance.DevConfig.MostraUISyncCarregamentoPlayers) return;
+            if (GameDataconfig.Instance.DevConfig.MostraUISyncCarregamentoPlayers) return;
 
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnect;
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnect;
@@ -38,7 +38,7 @@ namespace Game
 
         public override void OnNetworkDespawn()
         {
-            if (!GameDataconfig.Instance.DevConfig.MostraUISyncCarregamentoPlayers) return;
+            if (GameDataconfig.Instance.DevConfig.MostraUISyncCarregamentoPlayers) return;
             
             NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnect;
             NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnect;

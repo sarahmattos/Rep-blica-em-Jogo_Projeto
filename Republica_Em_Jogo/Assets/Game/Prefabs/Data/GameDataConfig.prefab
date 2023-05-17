@@ -48,10 +48,22 @@ MonoBehaviour:
   menuSceneName: MainMenuScene
   gameplaySceneName: GameplayScene
   playerColorOrder:
-  - {r: 1, g: 0.545098, b: 0.5803921, a: 1}
-  - {r: 0.6745098, g: 0.8705883, b: 0.6666667, a: 1}
-  - {r: 0.6627451, g: 0.8980393, b: 0.89019614, a: 1}
-  - {r: 0.9528302, g: 0.78357273, b: 0.5788893, a: 1}
+  - {r: 0.8867924, g: 0.7512946, b: 0.0033463205, a: 1}
+  - {r: 1, g: 0.26064357, b: 0.20188677, a: 1}
+  - {r: 0.52156866, g: 0.38039216, b: 0.8862745, a: 1}
+  - {r: 0.42361435, g: 0.7830189, b: 0.40923816, a: 1}
   tagParticipante: Jogador
   maxRodadasParaEleicoes: 2
-  territoriosInScene: 28
+  cadeirasTotal: 12
+  zonaColorOutline:
+  - {r: 0.52156866, g: 0.3764706, b: 0.25490198, a: 0}
+  - {r: 0.9960785, g: 0.9803922, b: 0.45882356, a: 0}
+  - {r: 1, g: 0.30566037, b: 0.64188975, a: 0}
+  - {r: 0.52156866, g: 1, b: 0.60784316, a: 0}
+  - {r: 0.46274513, g: 0.76470596, b: 0.9333334, a: 0}
+  - {r: 0.080153026, g: 0.50528777, b: 0.745283, a: 0}
+  - {r: 1, g: 0.40211642, b: 0, a: 0}
+  devConfig:
+    venceConquistandoTudo: 1
+    mostraUISyncCarregamentoPlayers: 0
+    onlineUiButtonAtivos: 0

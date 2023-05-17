@@ -1,9 +1,7 @@
-using Game;
 using Game.Player;
 using Game.Tools;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameDataconfig : Singleton<GameDataconfig>
 {
@@ -39,7 +37,7 @@ public class GameDataconfig : Singleton<GameDataconfig>
     public string TagPlayerAtualColorizada()
     {
         PlayerStats playerAtual = PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual();
-        
+
         return TagPlayerColorizada(playerAtual);
     }
 
@@ -57,8 +55,10 @@ public class GameDataconfig : Singleton<GameDataconfig>
 public class DevConfig
 {
     [SerializeField] private bool venceConquistandoTudo;
-        [SerializeField] private bool mostraUISyncCarregamentoPlayers;
+    [SerializeField] private bool mostraUISyncCarregamentoPlayers;
+    [SerializeField] private bool onlineUiButtonAtivos;
     public bool VenceConquistandoTudo => venceConquistandoTudo;
     public bool MostraUISyncCarregamentoPlayers => mostraUISyncCarregamentoPlayers;
+    public bool OnlineUiButtonAtivos => onlineUiButtonAtivos;
 
 }

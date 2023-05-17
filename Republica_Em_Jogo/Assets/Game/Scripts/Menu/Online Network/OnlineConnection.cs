@@ -4,6 +4,7 @@ using TMPro;
 using Logger = Game.Tools.Logger;
 using Game.Tools;
 using System;
+using UnityEngine.UI;
 
 namespace Game.Networking { 
 public class OnlineConnection : Singleton<OnlineConnection>
@@ -13,6 +14,18 @@ public class OnlineConnection : Singleton<OnlineConnection>
 
         public Action<bool> conexaoEstabelecida;
         public Action<string> joinCodeConexaoEstabelecida;
+        [SerializeField] private Button[] onlineButtons;
+
+        private void Start()
+        {
+            SwitchOnlineButton();
+
+        }
+
+        private void SwitchOnlineButton() {
+            foreach(Button button in onlineButtons) button.interactable = GameDataconfig.Instance.DevConfig.OnlineUiButtonAtivos;
+        }
+
         async public void CreateGame()
         {
             if(OnlineRelayManager.Instance.IsRelayEnalbed)
