@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using UnityEngine;
 using System.Collections;
+using Game.Player;
 
 namespace Game
 {
@@ -13,9 +14,10 @@ namespace Game
         private GameStateHandler stateHandler => GameStateHandler.Instance;
         public override void EnterState()
         {
+            PlayerStatsManager.Instance.FindAllPlayerStats();
             if (!IsServer) return;
-            //stateHandler.NextStateServerRPC();
-            StartCoroutine(SperaEVai(0.3f));
+            // stateHandler.StateMachineController.NextStateServerRpc();
+            StartCoroutine(SperaEVai(1f));
         }
 
         public override void ExitState()

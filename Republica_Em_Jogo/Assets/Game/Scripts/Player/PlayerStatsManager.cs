@@ -45,8 +45,10 @@ namespace Game.Player
                     return playerStats;
                 }
             }
-            Tools.Logger.Instance.LogError("Falha ao enviar o PlayerStats do player atual como referência.");
-            return null;
+
+            return new PlayerStats();
+
+            throw new ArgumentOutOfRangeException("PLayer Stats atual ainda não definido.");
         }
 
         private void Start()
@@ -60,9 +62,13 @@ namespace Game.Player
             gameplayLoadState.Entrada -= FindAllPlayerStats;
         }
 
-        private void FindAllPlayerStats()
+        public void FindAllPlayerStats()
         {
             allPlayerStats = FindObjectsOfType<PlayerStats>();
+            
         }
+
+
+
     }
 }

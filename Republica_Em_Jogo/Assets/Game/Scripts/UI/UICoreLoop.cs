@@ -1,20 +1,14 @@
 using Game.Tools;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
-using Logger = Game.Tools.Logger;
 
 namespace Game.UI
 {
     public class UICoreLoop : Singleton<UICoreLoop>
     {
         [SerializeField] private Button nextStateButton;
+        [SerializeField] private TMP_Text playerAtualText;
         [SerializeField] private TMP_Text logStateText;
         [SerializeField] public TMP_Text ExplicaStateTextTitulo;
         [SerializeField] public TMP_Text ExplicaStateTextCorpo;
@@ -46,7 +40,7 @@ namespace Game.UI
 
             DesenvolvimentoState.Entrada += OnDesenvolvimentoStateEnter;
             TurnManager.Instance.vezDoPlayerLocal += OnPlayerTurnUpdate;
-            CoreLoopStateHandler.Instance.estadoMuda += UpdateTextDesenv;
+            CoreLoopStateHandler.Instance.estadoMuda += UpdateTitleText;
 
             nextStateButton.gameObject.SetActive(false);
 
@@ -57,7 +51,7 @@ namespace Game.UI
             DesenvolvimentoState.Saida -= OnDesenvolvimentoStateEnter;
 
             TurnManager.Instance.vezDoPlayerLocal -= OnPlayerTurnUpdate;
-            CoreLoopStateHandler.Instance.estadoMuda -= UpdateTextDesenv;
+            CoreLoopStateHandler.Instance.estadoMuda -= UpdateTitleText;
 
 
         }
@@ -91,15 +85,14 @@ namespace Game.UI
         {
             nextStateButton.gameObject.SetActive(value);
 
-            UpdateTextDesenv(Tools.CollectionExtensions.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues,
-                CoreLoopStateHandler.Instance.CurrentState));
+            // UpdateTitleText(Tools.CollectionExtensions.KeyByValue(CoreLoopStateHandler.Instance.StatePairValues, CoreLoopStateHandler.Instance.CurrentState));
 
         }
 
-        private void UpdateTextDesenv(CoreLoopState state)
-        {
-            UpdateTitleText(state);
-        }
+        // private void UpdateTextDesenv(CoreLoopState state)
+        // {
+        //     UpdateTitleText(state);
+        // }
 
         public void MostrarAvisoEstado(string avisoTitulo, string avisoCorpo)
         {
@@ -115,8 +108,10 @@ namespace Game.UI
 
         public void UpdateTitleText(CoreLoopState state)
         {
-            string titleText = string.Concat(GameDataconfig.Instance.TagPlayerAtualColorizada(), "  ", state.ToString());
-            logStateText.SetText(titleText);
+            // string titleText = string.Concat( state.ToString());
+            logStateText.SetText(state.ToString());
+            playerAtualText.SetText(GameDataconfig.Instance.TagPlayerAtualColorizada());
+
         }
 
 

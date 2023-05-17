@@ -52,8 +52,6 @@ namespace Game.UI
 
         private void EnableButtonsByEleitoresDisponiveis()
         {
-            Debug.Log("Max eleitores Migrar: " + MaxEleitoresMigrar);
-
             for (int i = 0; i < 3; i++)
             {
                 bool podeAtivarButtonByIndex = i < (MaxEleitoresMigrar);

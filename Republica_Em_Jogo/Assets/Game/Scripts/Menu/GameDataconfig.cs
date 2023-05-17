@@ -1,4 +1,5 @@
 using Game;
+using Game.Player;
 using Game.Tools;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,20 +30,17 @@ public class GameDataconfig : Singleton<GameDataconfig>
     public string MenuSceneName => menuSceneName;
     public string GameplaySceneName => gameplaySceneName;
 
-    public string TagPlayerColorizada(int playerID)
+    public string TagPlayerColorizada(PlayerStats playerStats)
     {
-        string playerHexColor = ColorUtility.ToHtmlStringRGB(
-            (GameDataconfig.Instance.PlayerColorOrder[playerID]));
-
-        return string.Format("<color=#{0}>{1}</color>",
-            playerHexColor,
-            string.Concat(GameDataconfig.Instance.TagParticipante, " ", playerID));
+        string playerHexColor = ColorUtility.ToHtmlStringRGB((GameDataconfig.Instance.PlayerColorOrder[playerStats.playerID]));
+        return string.Format("<color=#{0}>{1}</color>", playerHexColor, playerStats.PlayerName);
     }
 
     public string TagPlayerAtualColorizada()
     {
-        int playerAtualID = TurnManager.Instance.PlayerAtual;
-        return TagPlayerColorizada(playerAtualID);
+        PlayerStats playerAtual = PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual();
+        
+        return TagPlayerColorizada(playerAtual);
     }
 
     private void Start()
@@ -50,6 +48,7 @@ public class GameDataconfig : Singleton<GameDataconfig>
 
         DontDestroyOnLoad(gameObject);
     }
+
 
 }
 
