@@ -85,8 +85,7 @@ namespace Game
         }
         public void CalcularCadeiras()
         {
-            Debug.Log("cadeirastotals:" + cadeirasTotais);
-            Debug.Log("soma eleitores:" + somaEleitores);
+
             cadeiras = "";
             eleitoresPlayers = new int[numConectados];
             cadeirasCamara = new int[numConectados];
@@ -96,10 +95,6 @@ namespace Game
                 float aux = ((float)eleitoresPlayers[i] * (float)cadeirasTotais) / (float)somaEleitores;
 
                 cadeirasCamara[i] = (int)Mathf.Round(aux);
-
-                Debug.Log("player: " + i);
-                Debug.Log("resultado cadeiras: " + aux);
-                Debug.Log("arredondado: " + cadeirasCamara[i]);
 
                 if (i == (int)NetworkManager.Singleton.LocalClientId)
                 {

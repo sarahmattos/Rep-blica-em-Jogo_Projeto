@@ -49,9 +49,11 @@ namespace Game
 
         public void AtualizarTextPlayers()
         {
+
             string playersName = "";
-            foreach (PlayerStats playerStats in PlayerStatsManager.Instance.AllPlayerStats)
+            foreach (int playerID in TurnManager.Instance.ordemPlayersID)
             {
+                PlayerStats playerStats = PlayerStatsManager.Instance.GetPlayerStats(playerID);
                 playersName += string.Concat(GameDataconfig.Instance.TagPlayerColorizada(playerStats), ": \n");
             }
             textPlayers.SetText(playersName);
