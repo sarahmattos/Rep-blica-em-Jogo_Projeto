@@ -24,7 +24,9 @@ namespace Game.Player
         [SerializeField] private int educacaoRecurso;
         [SerializeField] private string nome;
         [SerializeField] private int eleitoresTotais;
-        public float numCadeiras;
+        private NetworkVariable<int> numCadeiras = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public int NumCadeiras => numCadeiras.Value;
+        public void SetNumCadeiras(int value) => numCadeiras.Value = value;
         public int bairrosTotais => bairrosInControl.Count;
         private List<Bairro> bairrosInControl = new List<Bairro>();
         public List<Bairro> BairrosInControl { get => bairrosInControl; set => bairrosInControl = value; }

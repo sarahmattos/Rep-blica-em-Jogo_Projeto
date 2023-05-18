@@ -195,7 +195,7 @@ public class Projeto : NetworkBehaviour
                     infoZonas.SetActive(false);
                     //se tiver 7 cadeiras passa direto pra projeto aprovado
                     PlayerStats ps = hs.GetPlayerStats();
-                    if (ps.numCadeiras >= EleicaoManager.Instance.minCadeirasVotacao)
+                    if (ps.NumCadeiras >= EleicaoManager.Instance.minCadeirasVotacao)
                     {
                         projetoAprovado();
 
@@ -206,7 +206,7 @@ public class Projeto : NetworkBehaviour
                         text_avisoAprovacaoProjeto.gameObject.SetActive(true);
                         verMapaBtn.SetActive(false);
                         verProjetoBtn.SetActive(false);
-                        UpdateVotacaoServerRpc(0, (int)ps.numCadeiras);
+                        UpdateVotacaoServerRpc(0, (int)ps.NumCadeiras);
                         inVotacao = true;
                     }
 
@@ -410,7 +410,7 @@ public class Projeto : NetworkBehaviour
         if (NetworkManager.Singleton.IsClient)
         {
             PlayerStats ps = hs.GetPlayerStats();
-            UpdateVotacaoServerRpc(resposta, (int)ps.numCadeiras);
+            UpdateVotacaoServerRpc(resposta, (int)ps.NumCadeiras);
         }
         //texto interface recebe valores e botoees somem
         if (resposta == 0) mostrarResposta = "a favor";

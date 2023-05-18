@@ -18,7 +18,7 @@ namespace Game
         public HudStatsJogador hs;
         public static EleicaoManager Instance;
         public int somaEleitores;
-        public float[] cadeirasCamara;
+        public int[] cadeirasCamara;
         public int cadeirasTotais, minCadeirasVotacao;
         [SerializeField] private List<Bairro> todosBairros;
         private ZonaTerritorial[] zonasTerritoriais;
@@ -53,13 +53,13 @@ namespace Game
         }
         public void cadeirasInicial()
         {
-            cadeirasCamara = new float[numConectados];
+            cadeirasCamara = new int[numConectados];
             for (int i = 0; i < cadeirasCamara.Length; i++)
             {
                 cadeirasCamara[i] = cadeirasTotais / numConectados;
                 if (i == (int)NetworkManager.Singleton.LocalClientId)
                 {
-                    hs.cadeirasUi(cadeirasCamara[i]);
+                    hs.AtualizarCadeirasUI((int)cadeirasCamara[i]);
                 }
             }
             ColorirPeao();
@@ -85,22 +85,30 @@ namespace Game
         }
         public void CalcularCadeiras()
         {
+            Debug.Log("cadeirastotals:" + cadeirasTotais);
+            Debug.Log("soma eleitores:" + somaEleitores);
             cadeiras = "";
             eleitoresPlayers = new int[numConectados];
-            cadeirasCamara = new float[numConectados];
+            cadeirasCamara = new int[numConectados];
             setUpZona.SepararBairrosPorPlayer(eleitoresPlayers, numConectados);
             for (int i = 0; i < eleitoresPlayers.Length; i++)
             {
                 float aux = ((float)eleitoresPlayers[i] * (float)cadeirasTotais) / (float)somaEleitores;
-                cadeirasCamara[i] = Mathf.Round(aux);
+
+                cadeirasCamara[i] = (int)Mathf.Round(aux);
+
+                Debug.Log("player: " + i);
+                Debug.Log("resultado cadeiras: " + aux);
+                Debug.Log("arredondado: " + cadeirasCamara[i]);
+
                 if (i == (int)NetworkManager.Singleton.LocalClientId)
                 {
-                    hs.cadeirasUi(cadeirasCamara[i]);
+                    hs.AtualizarCadeirasUI(cadeirasCamara[i]);
                 }
 
                 if (!NetworkManager.Singleton.IsServer) return;
                 PlayerStats playerStats = PlayerStatsManager.Instance.GetPlayerStats(i);
-                cadeiras += string.Concat(playerStats.numCadeiras, "  cadeiras \n");
+                cadeiras += string.Concat(playerStats.NumCadeiras, "  cadeiras \n");
 
 
             }

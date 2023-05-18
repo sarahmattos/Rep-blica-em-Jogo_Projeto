@@ -358,10 +358,12 @@ namespace Game.UI
         {
             return playerStats;
         }
-        public void cadeirasUi(float valor)
+
+        //TODO: Marcando aqui para refatorar depois
+        public void AtualizarCadeirasUI(int valor)
         {
-            playerStats.numCadeiras = valor;
-            text_cadeiras.SetText(string.Concat(playerStats.numCadeiras.ToString(),"/",GameDataconfig.Instance.CadeirasTotal));//"Cadeiras: " + "\n" + 
+            playerStats.SetNumCadeiras(valor);
+            text_cadeiras.SetText(string.Concat(valor.ToString(),"/",GameDataconfig.Instance.CadeirasTotal));//"Cadeiras: " + "\n" + 
         }
         public void BntsAuxiliares()
         {
