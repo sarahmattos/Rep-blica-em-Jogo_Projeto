@@ -11,11 +11,11 @@ namespace Game.Tools
     //Equacoes de suavizacao: https://docs.google.com/document/d/1z5l1M5Y23YGOXPalfq-Il0mTXhGWpzOSy4Fm2gJGUU8/edit?usp=sharing
     public static class PropertyInterpolationExtensions
     {
-        public static async Task EaseOutQuadraticSizeDelta(this RectTransform rectTransform, Vector2 sizeDelta)
+        public static async Task EaseOutQuadraticSizeDelta(this RectTransform rectTransform, Vector2 sizeDelta, float timeInterval)
         {
             Vector2 start = rectTransform.sizeDelta;
             float elapsedTime = 0;
-            float timeInterval = 0.5f;
+            // float timeInterval = 0.5f;
             while (elapsedTime < timeInterval)
             {
                 float t = TimeInterpolation.EaseInOutQuad(elapsedTime, timeInterval);

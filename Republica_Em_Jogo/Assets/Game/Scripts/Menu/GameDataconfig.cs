@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameDataconfig : Singleton<GameDataconfig>
 {
+
     [SerializeField] private int maxConnections;
     [SerializeField] private string menuSceneName;
     [SerializeField] private string gameplaySceneName;
@@ -43,6 +44,7 @@ public class GameDataconfig : Singleton<GameDataconfig>
 
     private void Start()
     {
+        if (devConfig.Rate60FPS) Application.targetFrameRate = 60;
 
         DontDestroyOnLoad(gameObject);
     }
@@ -54,11 +56,15 @@ public class GameDataconfig : Singleton<GameDataconfig>
 [System.Serializable]
 public class DevConfig
 {
+
     [SerializeField] private bool venceConquistandoTudo;
     [SerializeField] private bool mostraUISyncCarregamentoPlayers;
     [SerializeField] private bool onlineUiButtonAtivos;
+    [SerializeField] private bool rate60FPS;
+
     public bool VenceConquistandoTudo => venceConquistandoTudo;
+
     public bool MostraUISyncCarregamentoPlayers => mostraUISyncCarregamentoPlayers;
     public bool OnlineUiButtonAtivos => onlineUiButtonAtivos;
-
+    public bool Rate60FPS => rate60FPS;
 }

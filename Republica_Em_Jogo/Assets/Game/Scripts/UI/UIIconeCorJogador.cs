@@ -93,7 +93,7 @@ namespace Game.UI
         {
 
             Vector2 sizeDelta = new Vector2(width, rectTransform.sizeDelta.y);
-            await rectTransform.EaseOutQuadraticSizeDelta(sizeDelta);
+            await rectTransform.EaseOutQuadraticSizeDelta(sizeDelta, 0.5f);
 
         }
 
