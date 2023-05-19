@@ -40,18 +40,18 @@ namespace Game.Tools
 
             //GameState
             guiLabelParams.rect.y = h / 2 + 2 * 2 * h / 90;
-            string message2 = string.Concat("Estado principal: ", GameStateHandler.Instance.StateMachineController.GetCurrentState().name);
+            string message2 = string.Concat("Estado principal: ", GameStateHandler.Instance?.StateMachineController.GetCurrentState().name);
             GUI.Label(guiLabelParams.rect, message2, guiLabelParams.guiStyle);
 
             //CoreLoopstate
             guiLabelParams.rect.y = h / 2 + 3 * 2 * h / 90;
-            string message3 = string.Concat("Sub-estado atual: ", CoreLoopStateHandler.Instance.CurrentState.name);
+            string message3 = string.Concat("Sub-estado atual: ", CoreLoopStateHandler.Instance?.CurrentState.name);
             GUI.Label(guiLabelParams.rect, message3, guiLabelParams.guiStyle);
             //ordem dos jogadores
 
             guiLabelParams.rect.y = h / 2 + 4 * 2 * h / 90;
             string message4 = "Ordem dos jogadores: ";
-            foreach (int playerID in TurnManager.Instance.ordemPlayersID)
+            foreach (int playerID in TurnManager.Instance?.ordemPlayersID)
             {
                 message4 = string.Concat(message4, playerID, " _ ");
             }
@@ -64,12 +64,12 @@ namespace Game.Tools
 
             //Jogador Local
             guiLabelParams.rect.y = h / 2 + 6 * 2 * h / 90;
-            string message6 = string.Concat("Jogador LOCAL: ", PlayerStatsManager.Instance.GetLocalPlayerStats().Nome);
+            string message6 = string.Concat("Jogador LOCAL: ", PlayerStatsManager.Instance?.GetLocalPlayerStats().Nome);
             GUI.Label(guiLabelParams.rect, message6, guiLabelParams.guiStyle);
             
             //Turno
             guiLabelParams.rect.y = h / 2 + 7 * 2 * h / 90;
-            string message7 = string.Concat("Turno: ", TurnManager.Instance.TurnCount);
+            string message7 = string.Concat("Turno: ", TurnManager.Instance?.TurnCount);
             GUI.Label(guiLabelParams.rect, message7, guiLabelParams.guiStyle);
 
 

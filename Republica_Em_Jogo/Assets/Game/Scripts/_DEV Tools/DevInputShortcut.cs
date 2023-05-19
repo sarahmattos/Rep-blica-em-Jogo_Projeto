@@ -11,14 +11,14 @@ namespace Game.Tools
     {
         [Header("Tecla padrão para ser pressionada junto com a tecla de atalho.")]
         [SerializeField] private KeyCode defaultInput = KeyCode.LeftShift;
-        
+
         [Header("Tecla de atalho pra habilitar os comandos de dev secretos ;D")]
         [SerializeField] private KeyCode enableDisableToolsKey = KeyCode.Escape;
 
         [Header("Tecla de atalho.")]
         [SerializeField] private KeyCode enableNextStateButton = KeyCode.F1;
         [SerializeField] private KeyCode eraseLogger = KeyCode.Backspace;
-        [SerializeField] private KeyCode removerJogador0 = KeyCode.Alpha0;
+        [SerializeField] private KeyCode botoesMultifuncoes = KeyCode.E;
         public KeyCode EnableDisableToolsKey => enableDisableToolsKey;
         public KeyCode DefaultInput => defaultInput;
 
@@ -27,7 +27,7 @@ namespace Game.Tools
         {
             EnableNextStateButton();
             EraseLogger();
-            RemoverJogador0();
+            HabilitarBotoesMultifuncoes();
 
 
         }
@@ -39,7 +39,8 @@ namespace Game.Tools
         {
             if (Input.GetKey(defaultInput) && Input.GetKeyDown(enableNextStateButton))
             {
-                UICoreLoop.Instance.NextStateButton.gameObject.SetActive(true);
+                if(UICoreLoop.Instance == null) return;
+                UICoreLoop.Instance?.NextStateButton.gameObject.SetActive(true);
                 UICoreLoop.Instance.NextStateButton.enabled = true;
                 UICoreLoop.Instance.NextStateButton.interactable = true;
             }
@@ -49,17 +50,24 @@ namespace Game.Tools
         {
             if (Input.GetKey(defaultInput) && Input.GetKeyDown(eraseLogger))
             {
-                Logger.Instance.ResetLogger();
+                Logger.Instance?.ResetLogger();
             }
         }
 
-        private void RemoverJogador0()
+
+        private void HabilitarBotoesMultifuncoes()
         {
-            if (Input.GetKey(defaultInput) && Input.GetKeyDown(removerJogador0))
+            if (Input.GetKey(defaultInput) && Input.GetKeyDown(botoesMultifuncoes))
             {
-                
+
+                HudStatsJogador.Instance?.BntsAuxiliares();
             }
         }
+
+
+
+
+
 
     }
 }

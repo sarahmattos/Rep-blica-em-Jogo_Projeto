@@ -52,6 +52,7 @@ MonoBehaviour:
     enableDisableToolsKey: 27
     enableNextStateButton: 282
     eraseLogger: 8
+    botoesMultifuncoes: 101
 --- !u!114 &5977926882699923490
 MonoBehaviour:
   m_ObjectHideFlags: 0

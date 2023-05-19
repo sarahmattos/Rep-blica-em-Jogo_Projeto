@@ -85,13 +85,6 @@ namespace Game.UI
 
             base.OnDestroy();
         }
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                BntsAuxiliares();
-            }
-        }
 
         private List<int> getOrdemPlayersID()
         {
