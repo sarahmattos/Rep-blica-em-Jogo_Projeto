@@ -5,6 +5,7 @@ using Game.Territorio;
 using Game.Tools;
 using UnityEngine;
 using System.Linq;
+using Game.Player;
 
 namespace Game
 {
@@ -28,33 +29,57 @@ namespace Game
         }
 
 
-        private void OnProjetoAprovado(string zonaEscolhida)
+        private void OnProjetoAprovado(string zonaName)
         {
-            Tools.Logger.Instance.LogInfo(string.Concat("projeto aprovado na zona: ", zonaEscolhida));
+            ZonaTerritorial zona = GetZona(zonaName);
+            InativarOutrasZonas(zona);
+            if (!PlayerLocalTemBairroNaZonaEscolhida(zona)) return;
+            zona.Bairros.MudarHabilitado(true);
 
-            foreach (ZonaTerritorial zona in SetUpZona.Instance.Zonas)
-            {
-                if (zona.Nome == zonaEscolhida)
-                {
-                    MudaInteratividadeOutrasZonas(zona);
-                    Tools.Logger.Instance.LogWarning("Habilitando zona:"+zona.Nome);
-                    break;
-                }
-            }
+
 
         }
 
-        private void MudaInteratividadeOutrasZonas(ZonaTerritorial zonaEscolhida)
+        private ZonaTerritorial GetZona(string zonaName)
+        {
+            foreach (ZonaTerritorial zona in SetUpZona.Instance.Zonas)
+            {
+                if (zona.Nome == zonaName)
+                {
+                    return zona;
+                }
+            }
+            throw new NullReferenceException("zona {zonaName} não existe.");
+        }
+
+
+        private bool PlayerLocalTemBairroNaZonaEscolhida(ZonaTerritorial zonaEscolhida)
+        {
+            foreach (Bairro bairro in zonaEscolhida.Bairros)
+            {
+                if (bairro.playerInControl == PlayerStatsManager.Instance.GetLocalPlayerStats()) return true;
+            }
+            Debug.Log("Não tem bairros na zona escolhida");
+            return false;
+        }
+
+        private void InativarOutrasZonas(ZonaTerritorial zonaEscolhida)
         {
             List<ZonaTerritorial> outrasZonas = SetUpZona.Instance.Zonas.ToList(); //ainda com todas
             outrasZonas.Remove(zonaEscolhida); //agora sim, só as outras zonas
 
-            foreach(ZonaTerritorial zona in outrasZonas) {
+            foreach (ZonaTerritorial zona in outrasZonas)
+            {
                 zona.Bairros.MudarInativity(true);
                 zona.Bairros.MudarInteragivel(false);
 
             }
         }
+
+
+
+
+
 
 
 

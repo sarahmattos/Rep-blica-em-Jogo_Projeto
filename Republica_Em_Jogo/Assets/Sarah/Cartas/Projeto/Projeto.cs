@@ -65,7 +65,7 @@ public class Projeto : NetworkBehaviour
     private string clientDados;
     private string textoTotal = "";
 
-    public TMP_Text Text_avisoAprovacaoProjeto => text_avisoAprovacaoProjeto; 
+    public TMP_Text Text_avisoAprovacaoProjeto => text_avisoAprovacaoProjeto;
 
     public void Awake()
     {
@@ -315,21 +315,21 @@ public class Projeto : NetworkBehaviour
 
         }
     }
-        private IEnumerator EsperaEVai1(float s)
+    private IEnumerator EsperaEVai1(float s)
+    {
+        yield return new WaitForSeconds(s);
+        if (playerInZona == true)
         {
-            yield return new WaitForSeconds(s);
-            if (playerInZona == true)
-            {
-                distribuicaoProjeto = true;
-                hs.playerRecebeEleitor = true;
-                setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
-                hs.updateRecursoCartaUI(numRecompensaDefault);
-                playerInZona = false;
-             }
-             zonaNameLocal = "";
-             clienteLocal = -1;
-             numRecompensa = -1;
+            distribuicaoProjeto = true;
+            hs.playerRecebeEleitor = true;
+            setUpZona.eleitoresZona(numRecompensa, zonaNameLocal);
+            hs.updateRecursoCartaUI(numRecompensaDefault);
+            playerInZona = false;
         }
+        zonaNameLocal = "";
+        clienteLocal = -1;
+        numRecompensa = -1;
+    }
     //chamado apos projeto ser aprovado
     public void eleitoresZonaFinal()
     {
@@ -337,9 +337,9 @@ public class Projeto : NetworkBehaviour
         //verifica se player tem bairro na zona escolhida
         //dá carta de recurso para jogadores que possuem bairros na zona
         //reseta algumas variáveis
-        
-            StartCoroutine(EsperaEVai1(0.1f));
-        
+
+        StartCoroutine(EsperaEVai1(0.1f));
+
     }
 
     //ao apertar botao de fechar interface   
@@ -364,9 +364,12 @@ public class Projeto : NetworkBehaviour
         if (aprovado == true)
         {
             eleitoresZonaFinal();
-            uIEleitorCurrency.PlayEnterAnim();
             aprovado = false;
         }
+
+        if (playerInZona) uIEleitorCurrency.PlayEnterAnim();
+
+
     }
 
     //reseta variaveis oou pede pro hosta fazer isso
@@ -428,7 +431,7 @@ public class Projeto : NetworkBehaviour
     //funcao ao projeto ser aprovado
     public void projetoAprovado()
     {
-        HabilitarBairrosPlayerLocal(true);
+        // HabilitarBairrosPlayerLocal(true);
         fecharBtn.SetActive(true);
         text_avisoAprovacaoProjeto.text = "PROJETO APROVADO \n Zona escolhida: \n\n" + zonaNameLocal + "\n\n" + "RECOMPENSA \n" + numRecompensaDefault + " carta(s) e " + numRecompensaDefault + " eleitor(es)";
         verMapaBtn.SetActive(false);
@@ -445,14 +448,6 @@ public class Projeto : NetworkBehaviour
         inVotacao = false;
     }
 
-    private void HabilitarBairrosPlayerLocal(bool value)
-    {
-        List<Bairro> bairros = PlayerStatsManager.Instance.GetLocalPlayerStats().BairrosInControl;
-        foreach (Bairro bairro in bairros)
-        {
-            bairro.Interagivel.MudarHabilitado(value);
-        }
-    }
 
 
 }
