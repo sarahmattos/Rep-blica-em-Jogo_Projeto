@@ -10,7 +10,7 @@ namespace Game
     {
 
 
-        private State avancoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.AVANCO];
+        private State avancoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.AVANÇO];
 
         private List<GameObject> objetosFilhos;
 

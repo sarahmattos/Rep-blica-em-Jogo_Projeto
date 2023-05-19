@@ -10,7 +10,7 @@ namespace Game.UI
     {
         [SerializeField] private TMP_Text textEleitoresNovos;
         private Animator animator;
-        private State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
+        private State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO);
         private PlayerStats PlayerStatsLocal => PlayerStatsManager.Instance.GetLocalPlayerStats();
 
         private void Awake()

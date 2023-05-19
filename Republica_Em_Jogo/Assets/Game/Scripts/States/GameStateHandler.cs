@@ -13,10 +13,10 @@ namespace Game
     {
         MENU_SCENE_LOAD,
         GAMEPLAY_SCENE_LOAD,
-        INICIALIZACAO,
+        INICIALIZAÇÃO,
         DISTRIBUI_INICIAL,
         DESENVOLVIMENTO,
-        ELEICOES,
+        ELEIÇÕES,
         FIM_JOGO
     }
 

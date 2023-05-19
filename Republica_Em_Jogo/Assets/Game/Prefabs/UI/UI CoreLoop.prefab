@@ -600,8 +600,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -147.34, y: 2.5022}
-  m_SizeDelta: {x: -294.68, y: -5.0043}
+  m_AnchoredPosition: {x: -134.83, y: 1.7000008}
+  m_SizeDelta: {x: -293.92, y: -18.802}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5162582640450163673
 CanvasRenderer:
@@ -665,7 +665,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 32
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1193,8 +1193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIeleicaoObjsParent: {fileID: 2960947594049671958}
-  textPlayers: {fileID: 0}
-  textCadeiras: {fileID: 0}
+  textPlayers: {fileID: 3413155024301251739}
+  textCadeiras: {fileID: 883647984}
 --- !u!1 &2960947594049671958
 GameObject:
   m_ObjectHideFlags: 0
@@ -1210,7 +1210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7136162672372272088
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1404,8 +1404,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -147.49217, y: 1.7000008}
-  m_SizeDelta: {x: -317.4009, y: -18.8017}
+  m_AnchoredPosition: {x: -137.9905, y: 1.7000008}
+  m_SizeDelta: {x: -300.2454, y: -18.8017}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8063726489263309844
 CanvasRenderer:
@@ -1708,6 +1708,7 @@ GameObject:
   - component: {fileID: 751154332240040719}
   - component: {fileID: 7}
   - component: {fileID: 5100571887158688757}
+  - component: {fileID: 4819851647716381427}
   m_Layer: 5
   m_Name: UI timer
   m_TagString: Untagged
@@ -1780,6 +1781,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!225 &4819851647716381427
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7551812488081396842}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &7877284582523149654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,8 +1904,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 29.9304, y: 0}
-  m_SizeDelta: {x: -211.0411, y: 0}
+  m_AnchoredPosition: {x: 40.789402, y: 0}
+  m_SizeDelta: {x: -232.7591, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9162020892422878252
 CanvasRenderer:
@@ -1922,7 +1935,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DESENVOLVIMENTO
+  m_text: "DISTRIBUI\xC7\xC3O"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 18cd413fed20eaa4f8c2c4a0cae36f90, type: 2}
   m_sharedMaterial: {fileID: -3474950112430189573, guid: 18cd413fed20eaa4f8c2c4a0cae36f90, type: 2}
@@ -2057,7 +2070,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pr\xF3ximo estado"
+  m_text: "Pr\xF3xima etapa"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}
   m_sharedMaterial: {fileID: 6784369470126438407, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}

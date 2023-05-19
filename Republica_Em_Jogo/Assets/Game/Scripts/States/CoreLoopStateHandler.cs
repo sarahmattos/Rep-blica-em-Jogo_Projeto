@@ -9,8 +9,8 @@ namespace Game
 {
     public enum CoreLoopState
     {
-        DISTRIBUICAO,
-        AVANCO,
+        DISTRIBUIÇÃO,
+        AVANÇO,
         REMANEJAMENTO,
         PROJETO,
         RECOMPENSA
@@ -34,8 +34,8 @@ namespace Game
 
         private void SetLoopStatePairValues()
         {
-            StatePairValues.Add(CoreLoopState.DISTRIBUICAO, GetComponentInChildren<DistribuicaoState>());
-            StatePairValues.Add(CoreLoopState.AVANCO, GetComponentInChildren<AvancoState>());
+            StatePairValues.Add(CoreLoopState.DISTRIBUIÇÃO, GetComponentInChildren<DistribuicaoState>());
+            StatePairValues.Add(CoreLoopState.AVANÇO, GetComponentInChildren<AvancoState>());
             statePairValues.Add(CoreLoopState.REMANEJAMENTO, GetComponentInChildren<RemanejamentoState>());
             StatePairValues.Add(CoreLoopState.PROJETO, GetComponentInChildren<ProjetoState>());
             StatePairValues.Add(CoreLoopState.RECOMPENSA, GetComponentInChildren<RecompensaState>());

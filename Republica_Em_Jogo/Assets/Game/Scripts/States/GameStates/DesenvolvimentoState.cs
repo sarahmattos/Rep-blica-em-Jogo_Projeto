@@ -38,7 +38,7 @@ namespace Game
 
         private void GoToEleicao()
         {
-            gameState.StateMachineController.ChangeStateServerRpc((int)GameState.ELEICOES);
+            gameState.StateMachineController.ChangeStateServerRpc((int)GameState.ELEIÇÕES);
         }
 
 

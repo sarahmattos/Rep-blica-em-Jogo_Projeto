@@ -9,7 +9,7 @@ namespace Game.Territorio
     {
         private CanvasGroup canvasGroup;
 
-        public State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
+        public State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO);
 
         private void Awake()
         {

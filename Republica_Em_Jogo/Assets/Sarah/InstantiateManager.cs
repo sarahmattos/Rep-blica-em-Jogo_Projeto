@@ -11,7 +11,7 @@ namespace Game.UI
         public static InstantiateManager Instance;
         [SerializeField] private GameObject UiIconeCorJogador;
         // Start is called before the first frame update
-        public State Inicializacaostate => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
+        public State Inicializacaostate => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO);
 
 
         void Start()

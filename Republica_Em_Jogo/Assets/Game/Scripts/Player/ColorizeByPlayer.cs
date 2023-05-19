@@ -9,7 +9,7 @@ namespace Game.Player
         private Image image;
 
         public PlayerStats PlayerStatsLocal => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual();
-        public State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
+        public State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO);
 
         void Start()
         {

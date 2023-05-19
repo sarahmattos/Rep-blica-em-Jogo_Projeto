@@ -27,7 +27,7 @@ namespace Game
 
         public event Action<bool> vezDoPlayerLocal;
         public event Action<int, int> turnoMuda;
-        private State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
+        private State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO);
         private State RecompensaState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.RECOMPENSA];
         public int teste, teste2;
         public int aux;

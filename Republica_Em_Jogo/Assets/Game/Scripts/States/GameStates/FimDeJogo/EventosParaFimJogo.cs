@@ -9,7 +9,7 @@ namespace Game
     {
         [SerializeField] private AvancoState avanco;
         private State RecompensaState => CoreLoopStateHandler.Instance.GetState(CoreLoopState.RECOMPENSA);
-        private State AvancoState => CoreLoopStateHandler.Instance.GetState(CoreLoopState.AVANCO);
+        private State AvancoState => CoreLoopStateHandler.Instance.GetState(CoreLoopState.AVANÇO);
         [SerializeField] private State SelectBairroAvancoState;
 
 

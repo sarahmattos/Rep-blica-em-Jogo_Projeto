@@ -44,7 +44,7 @@ namespace Game.Territorio
             bairro.SetUpBairro.Eleitores.NumeroEleitores.OnValueChanged += OnNumeroEleitoresMuda;
             bairro.PlayerIDNoControl.OnValueChanged += bairroColorModificador.SetBairroColorByPlayer;
             interagivel.Inactivity += bairroColorModificador.SetInativityColor;
-            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO).Entrada += Initialize;
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO).Entrada += Initialize;
         }
 
 
@@ -57,7 +57,7 @@ namespace Game.Territorio
             bairro.SetUpBairro.Eleitores.NumeroEleitores.OnValueChanged -= OnNumeroEleitoresMuda;
             bairro.PlayerIDNoControl.OnValueChanged -= bairroColorModificador.SetBairroColorByPlayer;
             interagivel.Inactivity -= bairroColorModificador.SetInativityColor;
-            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO).Entrada -= Initialize;
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO).Entrada -= Initialize;
         }
 
         private void Initialize()

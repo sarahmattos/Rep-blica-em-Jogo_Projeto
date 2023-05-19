@@ -64,7 +64,7 @@ namespace Game.UI
         private bool ativa=true;
         private int aux;
         public event Action eleitoresNovosDeProjeto;
-        private State inicalizacao => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
+        private State inicalizacao => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO);
         private State desenvolvimentoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
 
         private void Start()
@@ -141,7 +141,7 @@ namespace Game.UI
         }
         public override void OnNetworkSpawn()
         {
-            state = GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO);
+            state = GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO);
             GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD).Saida += ConfigureHudStats;
             projeto = FindObjectOfType<Projeto>();
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();

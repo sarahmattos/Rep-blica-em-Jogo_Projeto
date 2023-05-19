@@ -9,7 +9,7 @@ namespace Game.UI
         [SerializeField] private SelectBairroAvancoState selectBairroAvancoState;
         [SerializeField] private SelectBairroRemanejamentoState selectBairroRemanejamentoState;
         
-        public State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.DISTRIBUICAO];
+        public State DistribuicaoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.DISTRIBUIÇÃO];
         public State ProjetoState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.PROJETO];
         public State EleicaoState => GameStateHandler.Instance.StateMachineController.GetState((int)CoreLoopState.PROJETO);
         private Button button;

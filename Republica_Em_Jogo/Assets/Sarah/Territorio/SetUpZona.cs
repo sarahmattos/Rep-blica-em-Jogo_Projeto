@@ -23,7 +23,7 @@ namespace Game.Territorio
         void Start()
         {
             hs = FindObjectOfType<HudStatsJogador>();
-            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO).Entrada += CorOutline;
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO).Entrada += CorOutline;
 
             foreach (ZonaTerritorial zona in Zonas)
             {
@@ -32,7 +32,7 @@ namespace Game.Territorio
         }
         private void OnDestroy()
         {
-            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZACAO).Saida -= CorOutline;
+            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO).Saida -= CorOutline;
         }
         public void CorOutline()
         {

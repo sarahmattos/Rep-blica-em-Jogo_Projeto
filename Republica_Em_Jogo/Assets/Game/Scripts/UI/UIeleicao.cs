@@ -12,12 +12,12 @@ namespace Game
         [SerializeField] private TMP_Text textPlayers;
         [SerializeField] private TMP_Text textCadeiras;
         public static UIeleicao Instance;
-        private State eleicaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.ELEICOES);
+        private State eleicaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.ELEIÇÕES);
 
 
         private void Start()
         {
-            GameStateHandler.Instance.GetState(GameState.INICIALIZACAO).Saida += AtualizarTextPlayers;
+            GameStateHandler.Instance.GetState(GameState.INICIALIZAÇÃO).Saida += AtualizarTextPlayers;
             UIeleicaoObjsParent.SetActive(false);
             eleicaoState.Entrada += OnEleicaoEntrada;
             eleicaoState.Saida += OnEleicaoSaida;
@@ -25,7 +25,7 @@ namespace Game
         }
         private void OnDestroy()
         {
-            GameStateHandler.Instance.GetState(GameState.INICIALIZACAO).Saida -= AtualizarTextPlayers;
+            GameStateHandler.Instance.GetState(GameState.INICIALIZAÇÃO).Saida -= AtualizarTextPlayers;
             eleicaoState.Entrada -= OnEleicaoEntrada;
             eleicaoState.Saida -= OnEleicaoSaida;
         }
