@@ -28,6 +28,7 @@ namespace Game
         public event Action<bool> vezDoPlayerLocal;
         public event Action<int, int> turnoMuda;
         private State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO);
+        private State DistribInicialState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DISTRIBUI_INICIAL);
         private State RecompensaState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.RECOMPENSA];
         public int teste, teste2;
         public int aux;
@@ -36,6 +37,8 @@ namespace Game
             get => turnCount;
             set => turnCount = value;
         }
+
+        public event Action<int> PlayerRemovido;
 
         private void Awake()
         {
@@ -53,46 +56,23 @@ namespace Game
             hs = FindObjectOfType<HudStatsJogador>();
             turnoMuda += OnTurnoMuda;
             RecompensaState.Saida += UpdateTurn;
-            //Inscrever();
+            DistribInicialState.Saida += ObserverRemocaoPlayer;
 
             if (!IsHost)
                 return;
             InicializacaoState.Entrada += DefineConfigIniciais;
-            //clientesAtual.Value = 1;
         }
 
-        // private void OnOrdemIdChanged(NetworkListEvent<int> changeEvent)
-        // {
-        //         aux++;
-        //         teste=changeEvent.Value;
-        //         teste2=changeEvent.Index;
-        //         hs.ordemId.Add(changeEvent.Value);
-        //         if(aux== NetworkManager.Singleton.ConnectedClientsIds.Count){
-        //             hs.testeCor();
-        //         }
 
-
-        // }
-        // private void OnPlayerAtualChanged(int previousValue, int newValue)
-        //{
-        //    playerNow=newValue;
-
-        //}
-        // private void OnEnable()
-        // {
-        //     ordemPlayersID.OnListChanged += OnOrdemIdChanged;
-
-        // }
-        // private void OnDisable()
-        // {
-        //     ordemPlayersID.OnListChanged -= OnOrdemIdChanged;
-
-        // }
 
         public override void OnDestroy()
         {
             turnoMuda -= OnTurnoMuda;
             RecompensaState.Saida -= UpdateTurn;
+            DistribInicialState.Saida -= ObserverRemocaoPlayer;
+            ordemPlayersID.OnListChanged -= (NetworkListEvent<int> changeEvent) => { PlayerRemovido?.Invoke(changeEvent.Value); };
+
+
 
 
             if (!IsHost)
@@ -134,6 +114,11 @@ namespace Game
 
         }
 
+        private void ObserverRemocaoPlayer()
+        {
+            ordemPlayersID.OnListChanged += (NetworkListEvent<int> changeEvent) => { PlayerRemovido?.Invoke(changeEvent.Value); };
+        }
+
         private void GerarPlayerOrdem()
         {
             List<int> allClientID = new List<int>();
@@ -149,6 +134,7 @@ namespace Game
                 ordemPlayersID.Add(allClientID[i]);
             }
         }
+
 
 
         public void UpdateTurn()

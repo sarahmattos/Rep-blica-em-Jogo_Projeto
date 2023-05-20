@@ -1,17 +1,17 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Tools;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Game.Player
 {
-    public class PlayerStatsManager : Singleton<PlayerStatsManager>
+    public class PlayerStatsManager : NetworkSingleton<PlayerStatsManager>
     {
         private State gameplayLoadState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD);
-        private PlayerStats[] allPlayerStats;
-        public PlayerStats[] AllPlayerStats => allPlayerStats;
+        private List<PlayerStats> allPlayerStats = new List<PlayerStats>();
+        public List<PlayerStats> AllPlayerStats => allPlayerStats;
         public PlayerStats GetLocalPlayerStats()
         {
             foreach (PlayerStats playerStats in AllPlayerStats)
@@ -54,18 +54,40 @@ namespace Game.Player
         private void Start()
         {
             gameplayLoadState.Entrada += FindAllPlayerStats;
+            TurnManager.Instance.PlayerRemovido += RemovePlayerStats;
         }
 
         private void OnDestroy()
         {
 
             gameplayLoadState.Entrada -= FindAllPlayerStats;
+            TurnManager.Instance.PlayerRemovido -= RemovePlayerStats;
+
         }
 
         public void FindAllPlayerStats()
         {
-            allPlayerStats = FindObjectsOfType<PlayerStats>();
-            
+            allPlayerStats = FindObjectsOfType<PlayerStats>().ToList();
+
+        }
+
+        public void RemovePlayerStats(PlayerStats playerStats)
+        {
+            allPlayerStats.Remove(playerStats);
+        }
+
+        public void RemovePlayerStats(int playerID)
+        {
+            for (int i = 0; i < allPlayerStats.Count; i++)
+            {
+                PlayerStats playerStats = allPlayerStats[i];
+                if (playerStats.playerID == playerID)
+                {
+                    allPlayerStats.Remove(playerStats);
+                    Tools.Logger.Instance.LogInfo("Local id in player stats list encontrado e sendo removido");
+                    return;
+                }
+            }
         }
 
 

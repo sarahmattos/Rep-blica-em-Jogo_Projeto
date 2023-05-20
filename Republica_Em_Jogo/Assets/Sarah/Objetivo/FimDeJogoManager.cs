@@ -56,13 +56,12 @@ namespace Game
 
         private void ConfigureUIVitoria(FixedString4096Bytes previousValue, FixedString4096Bytes newValue)
         {
-            // if (newValue != "")
-            // {
+
             vitoriaUi.SetActive(true);
             if (vitoria)
             {
                 text_vitoria.text = "Vitória";
-                text_vitoria2.text = "Você venceu";
+                text_vitoria2.text = newValue.ToString();
 
             }
             else
@@ -70,7 +69,6 @@ namespace Game
                 text_vitoria.text = "Derrota";
                 text_vitoria2.text = newValue.ToString();
             }
-            // }
         }
 
 
@@ -106,7 +104,7 @@ namespace Game
             if(GameDataconfig.Instance.DevConfig.VenceConquistandoTudo == false) return;
             if (PlayerStatsManager.Instance.GetLocalPlayerStats().bairrosTotais == SetUpZona.Instance.AllBairros.Count)
             {
-                AnuncinarVitória("Porquistar todo o território!");
+                AnuncinarVitória("Conquista total do território!");
             }
         }
 

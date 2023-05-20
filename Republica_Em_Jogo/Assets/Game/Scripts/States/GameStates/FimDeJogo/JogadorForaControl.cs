@@ -20,10 +20,13 @@ namespace Game
         [SerializeField] private GameObject uiPartidoFora;
         private List<Bairro> bairrosPlayerLocal => PlayerStatsManager.Instance.GetLocalPlayerStats().BairrosInControl;
 
+        public bool JogadorLocalRemovido => jogadorLocalRemovido;
         private void Start()
         {
             uiPartidoFora.SetActive(false);
-            eventosParaFimDeJogo.notify += VerificarPlayerLocalNaoTemBairro;
+
+            //a verificação e remoção está sendo feita após a saida do avanço para evitar erro nos bairros
+            CoreLoopStateHandler.Instance.GetState(CoreLoopState.AVANÇO).Saida += VerificarPlayerLocalNaoTemBairro;
 
         }
 
@@ -31,7 +34,7 @@ namespace Game
 
         private void OnDestroy()
         {
-            eventosParaFimDeJogo.notify -= VerificarPlayerLocalNaoTemBairro;
+            CoreLoopStateHandler.Instance.GetState(CoreLoopState.AVANÇO).Saida += VerificarPlayerLocalNaoTemBairro;
 
 
         }
@@ -39,14 +42,13 @@ namespace Game
         private void VerificarPlayerLocalNaoTemBairro()
         {
             if (jogadorLocalRemovido) return;
-            Tools.Logger.Instance.LogInfo("Bairros in control: " + bairrosPlayerLocal.Count);
             if (bairrosPlayerLocal.Count > 0) return;
             RemoverJogador();
         }
 
         private void RemoverJogador()
         {
-            Tools.Logger.Instance.LogInfo("Jogador local remivdo");
+            //PlayerStatsManager.Instance.RemovePlayerStatsClientRpc((int)NetworkManager.Singleton.LocalClientId);
             TurnManager.Instance.RemovePlayerIDServerRpc((int)NetworkManager.Singleton.LocalClientId);
             ActiveUIJogadorFora();
             jogadorLocalRemovido = true;
@@ -55,8 +57,8 @@ namespace Game
 
         private void ActiveUIJogadorFora()
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            // Cursor.lockState = CursorLockMode.Locked;
+            // Cursor.visible = false;
             uiPartidoFora.SetActive(true);
         }
 

@@ -33,6 +33,7 @@ public class Projeto : NetworkBehaviour
     private ControlePassarState cp;
     private Baralho baralho;
     [SerializeField] private UIEleitorCurrency uIEleitorCurrency;
+    [SerializeField] private JogadorForaControl jogadorForaControl;
 
     [Header("Ui")]
     [SerializeField] private TMP_Text text_projetoCarta;
@@ -221,11 +222,22 @@ public class Projeto : NetworkBehaviour
                     }
                     else
                     {
-                        infoZonas.SetActive(true);
-                        text_avisoAprovacaoProjeto.text = "ZONA ESCOLHIDA: \n\n " + newValue.ToString() + "\n \n" + "VOTE: ";
-                        text_avisoAprovacaoProjeto.gameObject.SetActive(true);
-                        btns2.SetActive(true);
-                        inVotacao = true;
+                        if (jogadorForaControl.JogadorLocalRemovido)
+                        {
+                            VotacaoAFavorAutomatica();
+                            text_avisoAprovacaoProjeto.SetText("Seu partido não está apto para votar.");
+                            text_avisoAprovacaoProjeto.gameObject.SetActive(true);
+                            fecharBtn.SetActive(true);
+                        }
+                        else
+                        {
+                            infoZonas.SetActive(true);
+                            text_avisoAprovacaoProjeto.text = "ZONA ESCOLHIDA: \n\n " + newValue.ToString() + "\n \n" + "VOTE: ";
+                            text_avisoAprovacaoProjeto.gameObject.SetActive(true);
+                            btns2.SetActive(true);
+                            inVotacao = true;
+                        }
+
                     }
 
 
@@ -405,6 +417,9 @@ public class Projeto : NetworkBehaviour
         }
 
     }
+
+    private void VotacaoAFavorAutomatica() => votacao(0);
+
 
     //funcao disparada ao apertar no botao de a favor ou contra a votação
     public void votacao(int resposta)

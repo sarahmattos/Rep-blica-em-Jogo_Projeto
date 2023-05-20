@@ -17,7 +17,7 @@ namespace Game
 
         private void Start()
         {
-            GameStateHandler.Instance.GetState(GameState.INICIALIZAÇÃO).Saida += AtualizarTextPlayers;
+            eleicaoState.Entrada += AtualizarTextPlayers;
             UIeleicaoObjsParent.SetActive(false);
             eleicaoState.Entrada += OnEleicaoEntrada;
             eleicaoState.Saida += OnEleicaoSaida;
@@ -25,7 +25,7 @@ namespace Game
         }
         private void OnDestroy()
         {
-            GameStateHandler.Instance.GetState(GameState.INICIALIZAÇÃO).Saida -= AtualizarTextPlayers;
+            eleicaoState.Entrada -= AtualizarTextPlayers;
             eleicaoState.Entrada -= OnEleicaoEntrada;
             eleicaoState.Saida -= OnEleicaoSaida;
         }

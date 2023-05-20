@@ -13,6 +13,7 @@ namespace Game
         [SerializeField] private Baralho baralho;
         public string explicaTexto, explicaTextoCorpo;
         private UICoreLoop uiCore;
+        
 
         public override void EnterState()
         {

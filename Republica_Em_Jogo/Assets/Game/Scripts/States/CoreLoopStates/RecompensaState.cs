@@ -32,7 +32,6 @@ namespace Game
         {
             hudStatsJogador.checaZonasInteiras(false);
             // fimDeJogoManager.zonaObtidaEObjetivo();
-            Tools.Logger.Instance.LogInfo("Enter State: RECOMPENSA");
             if (TurnManager.Instance.LocalIsCurrent)
             {
                 recompensaAviso.SetActive(true);
