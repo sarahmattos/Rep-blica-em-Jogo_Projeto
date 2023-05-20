@@ -88,7 +88,7 @@ namespace Game
                         + NetworkManager.Singleton.LocalClientId.ToString() + " venceu conquistando a zona "
                         + setUpZona.tenhoZona[i].Nome + " com recursos suficientes!";
 
-                        vitoriaPlayer(message);
+                        AnuncinarVitória(message);
                     }
                     else
                     {
@@ -103,14 +103,14 @@ namespace Game
 
         public void VerifcarConquistouTodoTerritorio()
         {
-            if(!GameDataconfig.Instance.DevConfig.VenceConquistandoTudo) return;
-            if (PlayerStatsManager.Instance.GetLocalPlayerStats().bairrosTotais == GameDataconfig.Instance.TerritoriosTotal)
+            if(GameDataconfig.Instance.DevConfig.VenceConquistandoTudo == false) return;
+            if (PlayerStatsManager.Instance.GetLocalPlayerStats().bairrosTotais == SetUpZona.Instance.AllBairros.Count)
             {
-                vitoriaPlayer("Venceu por conquistar todo o território!");
+                AnuncinarVitória("Porquistar todo o território!");
             }
         }
 
-        public void vitoriaPlayer(string message)
+        public void AnuncinarVitória(string message)
         {
             vitoria = true;
             SetMessageFimJogoServerRpc(message);

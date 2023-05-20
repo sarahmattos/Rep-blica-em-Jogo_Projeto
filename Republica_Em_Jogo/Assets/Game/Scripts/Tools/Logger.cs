@@ -8,21 +8,19 @@ namespace Game.Tools
 {
     public class Logger : Singleton<Logger>
     {
-        [SerializeField]
-        private TextMeshProUGUI debugAreaText = null;
+        [SerializeField] private TextMeshProUGUI debugAreaText = null;
+        private LoggerDisplayer loggerDisplayer;
+        public LoggerDisplayer LoggerDisplayer => loggerDisplayer;
 
         // [SerializeField]
         // private bool enableDebug = false;
 
-        [SerializeField]
-        private int maxLines = 15;
+        [SerializeField] private int maxLines = 15;
 
         void Awake()
         {
-            if (debugAreaText == null)
-            {
-                debugAreaText = GetComponent<TextMeshProUGUI>();
-            }
+            loggerDisplayer = GetComponent<LoggerDisplayer>();
+
             debugAreaText.text = string.Empty;
         }
 

@@ -31,6 +31,9 @@ namespace Game
             SelectBairroAvancoState.Entrada -= NotifySubscribers;
         }
 
+
+
+
         private void NotifySubscribers()
         {
             notify?.Invoke();

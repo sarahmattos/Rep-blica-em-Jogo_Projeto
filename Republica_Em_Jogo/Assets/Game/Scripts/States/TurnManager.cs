@@ -127,8 +127,11 @@ namespace Game
         [ServerRpc(RequireOwnership = false)]
         public void RemovePlayerIDServerRpc(int playerID)
         {
+            Tools.Logger.Instance.LogWarning("antes tinha: " + ordemPlayersID.Count);
             ordemPlayersID.Remove(playerID);
             clientesCount.Value = ordemPlayersID.Count;
+            Tools.Logger.Instance.LogWarning("AGORA TEM: " + ordemPlayersID.Count);
+
         }
 
         private void GerarPlayerOrdem()

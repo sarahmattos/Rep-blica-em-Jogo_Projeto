@@ -12,9 +12,9 @@ namespace Game.Player
 
     public class PlayerStats : NetworkBehaviour
     {
+        private int maxTerritorio => SetUpZona.Instance.AllBairros.Count;
         private NetworkVariable<FixedString32Bytes> playerName = new NetworkVariable<FixedString32Bytes>(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         [SerializeField] private Color cor;
-        [SerializeField] private int maxTerritorio;
         [SerializeField] private string objetivo;
         [SerializeField] private string objetivoCarta;
         [SerializeField] private List<string> recursoCarta = new List<string>();
@@ -76,7 +76,7 @@ namespace Game.Player
         // [ClientRpc]
         private void SetPlayerName(string playerName)
         {
-            if(!IsOwner) return;
+            if (!IsOwner) return;
             this.playerName.Value = playerName;
         }
 
@@ -163,7 +163,6 @@ namespace Game.Player
         public void InicializaPlayerStats()
         {
             cor = GameDataconfig.Instance.PlayerColorOrder[playerID];
-            maxTerritorio = GameDataconfig.Instance.TerritoriosTotal;
             nome = string.Concat(GameDataconfig.Instance.TagParticipante, " ", playerID);
             objetivoCarta = objetivosDatabase.Instance.objetivoComplemento;
             objetivo = objetivosDatabase.Instance.objetivoZona;

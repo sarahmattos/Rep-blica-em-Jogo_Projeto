@@ -44,7 +44,6 @@ namespace Game
         public override void EnterState()
         {
             avancoState.AvancoData.ClearRodadaData();
-            Tools.Logger.Instance.LogInfo("Select bairro Avanco state: enter");
             if (!TurnManager.Instance.LocalIsCurrent) return;
             if (BairrosInteragiveis.Count == 0)
             {
@@ -59,7 +58,6 @@ namespace Game
 
         public override void ExitState()
         {
-            Tools.Logger.Instance.LogInfo("Select bairro Avanco state: EXIT");
 
             if (!TurnManager.Instance.LocalIsCurrent) return;
             if (BairrosInteragiveis.Count == 0) return;

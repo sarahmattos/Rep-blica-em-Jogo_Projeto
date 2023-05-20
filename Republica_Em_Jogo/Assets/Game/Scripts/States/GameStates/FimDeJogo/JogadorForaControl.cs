@@ -18,12 +18,12 @@ namespace Game
         // private State SelecBairroAvancoState => avanco.StateMachineController.GetState((int)AvancoStatus.SELECT_BAIRRO);
 
         [SerializeField] private GameObject uiPartidoFora;
+        private List<Bairro> bairrosPlayerLocal => PlayerStatsManager.Instance.GetLocalPlayerStats().BairrosInControl;
 
         private void Start()
         {
-            jogadorLocalRemovido = false;
             uiPartidoFora.SetActive(false);
-            eventosParaFimDeJogo.notify += VerificaLocalInGame;
+            eventosParaFimDeJogo.notify += VerificarPlayerLocalNaoTemBairro;
 
         }
 
@@ -31,24 +31,26 @@ namespace Game
 
         private void OnDestroy()
         {
-            eventosParaFimDeJogo.notify -= VerificaLocalInGame;
+            eventosParaFimDeJogo.notify -= VerificarPlayerLocalNaoTemBairro;
 
 
         }
 
-        private void VerificaLocalInGame()
+        private void VerificarPlayerLocalNaoTemBairro()
         {
-            Tools.Logger.Instance.LogWarning("vERIFICOU SE JOGADOR ESTÁ FORA");
-            List<Bairro> bairrosPlayerLocal = PlayerStatsManager.Instance.GetLocalPlayerStats().BairrosInControl;
+            if (jogadorLocalRemovido) return;
+            Tools.Logger.Instance.LogInfo("Bairros in control: " + bairrosPlayerLocal.Count);
             if (bairrosPlayerLocal.Count > 0) return;
-            if (jogadorLocalRemovido == true) return;
             RemoverJogador();
         }
 
         private void RemoverJogador()
         {
+            Tools.Logger.Instance.LogInfo("Jogador local remivdo");
             TurnManager.Instance.RemovePlayerIDServerRpc((int)NetworkManager.Singleton.LocalClientId);
             ActiveUIJogadorFora();
+            jogadorLocalRemovido = true;
+
         }
 
         private void ActiveUIJogadorFora()

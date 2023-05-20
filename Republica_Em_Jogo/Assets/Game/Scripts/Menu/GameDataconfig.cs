@@ -17,8 +17,6 @@ public class GameDataconfig : Singleton<GameDataconfig>
     [SerializeField] private DevConfig devConfig;
     public DevConfig DevConfig => devConfig;
 
-    private int territoriosTotal;
-    public int TerritoriosTotal => territoriosTotal;
     public int MaxConnections => maxConnections;
     public List<Color> PlayerColorOrder => playerColorOrder;
     public List<Color> ZonaColorOutline => zonaColorOutline;
@@ -58,9 +56,11 @@ public class DevConfig
     [SerializeField] private bool venceConquistandoTudo;
     [SerializeField] private bool mostraUISyncCarregamentoPlayers;
     [SerializeField] private bool onlineUiButtonAtivos;
+    [SerializeField] private bool mostrarLog;
 
     public bool VenceConquistandoTudo => venceConquistandoTudo;
 
     public bool MostraUISyncCarregamentoPlayers => mostraUISyncCarregamentoPlayers;
     public bool OnlineUiButtonAtivos => onlineUiButtonAtivos;
+    public bool MostrarLog => mostrarLog;
 }

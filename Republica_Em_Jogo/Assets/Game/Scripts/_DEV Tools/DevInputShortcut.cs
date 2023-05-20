@@ -19,6 +19,7 @@ namespace Game.Tools
         [SerializeField] private KeyCode enableNextStateButton = KeyCode.F1;
         [SerializeField] private KeyCode eraseLogger = KeyCode.Backspace;
         [SerializeField] private KeyCode botoesMultifuncoes = KeyCode.E;
+        [SerializeField] private KeyCode showLogger = KeyCode.F2;
         public KeyCode EnableDisableToolsKey => enableDisableToolsKey;
         public KeyCode DefaultInput => defaultInput;
 
@@ -64,7 +65,14 @@ namespace Game.Tools
             }
         }
 
+        private void HabilitarLogger()
+        {
+            if (Input.GetKey(defaultInput) && Input.GetKeyDown(showLogger))
+            {
 
+                Logger.Instance.LoggerDisplayer.SwitchLoggerVisibility();
+            }
+        }
 
 
 
