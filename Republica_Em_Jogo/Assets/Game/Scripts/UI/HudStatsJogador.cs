@@ -52,7 +52,7 @@ namespace Game.UI
         public List<int> ordemId;
         [SerializeField] List<Color> cor;
         [SerializeField] List<GameObject> objetosCores;
-        private string textToDisplayEleitores => string.Concat("", playerStats.EleitoresTotais);
+        private string textToDisplayEleitores => string.Concat("", playerStats.GetEleitoresTotais());
         [HideInInspector]
         public bool playerRecebeEleitor = true;
         [HideInInspector]

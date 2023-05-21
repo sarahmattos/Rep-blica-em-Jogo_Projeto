@@ -23,8 +23,8 @@ namespace Game.Player
         [SerializeField] private int saudeRecurso;
         [SerializeField] private int educacaoRecurso;
         [SerializeField] private string nome;
-        [SerializeField] private int eleitoresTotais;
-        private NetworkVariable<int> numCadeiras = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        [SerializeField] private NetworkVariable<int> eleitoresTotais = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        [SerializeField] private NetworkVariable<int> numCadeiras = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public int NumCadeiras => numCadeiras.Value;
         public void SetNumCadeiras(int value) => numCadeiras.Value = value;
         public int bairrosTotais => bairrosInControl.Count;
@@ -36,12 +36,12 @@ namespace Game.Player
 
         public int playerID => (int)OwnerClientId;
         public string PlayerName => playerName.Value.ToString();
+        public NetworkVariable<int> EleitoresTotais  => eleitoresTotais;
 
         public Color Cor { get => cor; }
         public string Objetivo { get => objetivo; }
         public string ObjetivoCarta { get => objetivoCarta; }
         public string Nome { get => nome; }
-        public int EleitoresTotais { get => eleitoresTotais; }
         public int SaudeRecurso { get => saudeRecurso; }
         public int EducacaoRecurso { get => educacaoRecurso; }
         public State GameplayLoadState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD);
@@ -79,7 +79,15 @@ namespace Game.Player
             if (!IsOwner) return;
             this.playerName.Value = playerName;
         }
-
+        private void SetEleitoresTotais(int eleitoresTotais)
+        {
+            if (!IsOwner) return;
+            this.eleitoresTotais.Value = eleitoresTotais;
+        }
+        public int GetEleitoresTotais()
+        {
+            return eleitoresTotais.Value;
+        }
 
         public void SetEleitoresNovos(int value)
         {
@@ -172,13 +180,14 @@ namespace Game.Player
 
         public void ContaEleitoresInBairros()
         {
-            eleitoresTotais = 0;
+            int total = 0;
 
-            for (int i = 0; i < BairrosInControl.Count; i++)
-            {
-                eleitoresTotais += BairrosInControl[i].SetUpBairro.Eleitores.contaEleitores;
-                //Debug.Log(bairrosInControl[i].Nome + " " + bairrosInControl[i].SetUpBairro.Eleitores.contaEleitores);
+            foreach(Bairro bairro in BairrosInControl) {
+                total += bairro.SetUpBairro.Eleitores.contaEleitores;
             }
+
+            SetEleitoresTotais(total);
+
 
         }
 

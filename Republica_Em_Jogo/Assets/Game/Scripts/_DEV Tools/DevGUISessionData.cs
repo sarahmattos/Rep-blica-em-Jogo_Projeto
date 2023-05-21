@@ -66,7 +66,7 @@ namespace Game.Tools
             guiLabelParams.rect.y = h / 2 + 6 * 2 * h / 90;
             string message6 = string.Concat("Jogador LOCAL: ", PlayerStatsManager.Instance?.GetLocalPlayerStats()?.Nome);
             GUI.Label(guiLabelParams.rect, message6, guiLabelParams.guiStyle);
-            
+
             //Turno
             guiLabelParams.rect.y = h / 2 + 7 * 2 * h / 90;
             string message7 = string.Concat("Turno: ", TurnManager.Instance?.TurnCount);
@@ -77,7 +77,6 @@ namespace Game.Tools
             string message8 = string.Concat("PlayerStats counter: ", PlayerStatsManager.Instance?.AllPlayerStats.Count);
             GUI.Label(guiLabelParams.rect, message8, guiLabelParams.guiStyle);
         }
-
 
 
     }

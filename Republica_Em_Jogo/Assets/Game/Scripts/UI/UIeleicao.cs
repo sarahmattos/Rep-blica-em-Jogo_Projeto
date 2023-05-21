@@ -1,31 +1,31 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 using Game.Player;
+using Game.Tools;
 
 namespace Game
 {
-    public class UIeleicao : MonoBehaviour
+    public class UIeleicao : Singleton<UIeleicao>
     {
         [SerializeField] private GameObject UIeleicaoObjsParent;
         [SerializeField] private TMP_Text textPlayers;
         [SerializeField] private TMP_Text textCadeiras;
-        public static UIeleicao Instance;
         private State eleicaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.ELEIÇÕES);
 
 
         private void Start()
         {
             eleicaoState.Entrada += AtualizarTextPlayers;
+            eleicaoState.Entrada += AtualizarTextCadeiras;
             UIeleicaoObjsParent.SetActive(false);
             eleicaoState.Entrada += OnEleicaoEntrada;
             eleicaoState.Saida += OnEleicaoSaida;
-            Instance = this;
         }
         private void OnDestroy()
         {
             eleicaoState.Entrada -= AtualizarTextPlayers;
+            eleicaoState.Entrada -= AtualizarTextCadeiras;
             eleicaoState.Entrada -= OnEleicaoEntrada;
             eleicaoState.Saida -= OnEleicaoSaida;
         }
@@ -42,21 +42,29 @@ namespace Game
             EleicaoManager.Instance.inEleicao = false;
             UIeleicaoObjsParent.SetActive(false);
         }
-        public void MostrarCadeiras(string valor)
-        {
-            textCadeiras.text = valor;
-        }
 
         public void AtualizarTextPlayers()
         {
 
-            string playersName = "";
+            string text = "";
             foreach (int playerID in TurnManager.Instance.ordemPlayersID)
             {
                 PlayerStats playerStats = PlayerStatsManager.Instance.GetPlayerStats(playerID);
-                playersName += string.Concat(GameDataconfig.Instance.TagPlayerColorizada(playerStats), ": \n");
+                text += string.Concat(GameDataconfig.Instance.TagPlayerColorizada(playerStats), ": \n");
             }
-            textPlayers.SetText(playersName);
+            textPlayers.SetText(text);
+        }
+
+        public void AtualizarTextCadeiras()
+        {
+            string text = "";
+            foreach (int playerID in TurnManager.Instance.ordemPlayersID)
+            {
+                PlayerStats playerStats = PlayerStatsManager.Instance.GetPlayerStats(playerID);
+                int playerCadeiras = EleicaoManager.Instance.CalculoCadeiras.Calcular(playerStats);
+                text += string.Concat(playerCadeiras, " cadeiras \n");
+            }
+            textCadeiras.SetText(text);
         }
 
 

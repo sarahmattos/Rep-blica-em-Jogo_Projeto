@@ -95,17 +95,17 @@ public class Corrupcao : NetworkBehaviour
     private IEnumerator EsperaEVai1(float s)
         {
             yield return new WaitForSeconds(s);
-             hs.playerDiminuiEleitor = true;
+            hs.playerDiminuiEleitor = true;
             PlayerStats ps = hs.GetPlayerStats();
-            if(ps.EleitoresTotais>ps.BairrosInControl.Count){
-            hs.playerRecebeEleitor = true;
-            hs.ValorEleitoresNovos(penalidade);
+            if(ps.GetEleitoresTotais()>ps.BairrosInControl.Count){
+                hs.playerRecebeEleitor = true;
+                hs.ValorEleitoresNovos(penalidade);
             }else{
-            hs.text_naotemeleitorpraretirar.text="Não possui eleitores suficientes para retirada!";
-            hs.AtualizaUIAposDistribuicao();
+                hs.text_naotemeleitorpraretirar.text="Não possui eleitores suficientes para retirada!";
+                hs.AtualizaUIAposDistribuicao();
             }
         }
-       
+
     public void panelFalse(GameObject panel)
     {
         panel.SetActive(false);

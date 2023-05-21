@@ -118,7 +118,7 @@ namespace Game.Territorio
 
                         //teste
                         PlayerStats ps = hs.GetPlayerStats();
-                        if (ps.EleitoresTotais <= ps.BairrosInControl.Count)
+                        if (ps.GetEleitoresTotais() <= ps.BairrosInControl.Count)
                         {
                             hs.text_naotemeleitorpraretirar.text = "Não possui eleitores suficientes para retirada!";
                             hs.AtualizaUIAposDistribuicao();

@@ -604,6 +604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projetoManager: {fileID: 11400000, guid: 2910fdc27ce7cdd489424b00e81158d5, type: 2}
   uIEleitorCurrency: {fileID: 0}
+  jogadorForaControl: {fileID: 0}
   text_projetoCarta: {fileID: 0}
   text_avisoAprovacaoProjeto: {fileID: 0}
   projetoUI: {fileID: 0}
@@ -4135,7 +4136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: maxConnections
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7864590252159608619, guid: 97314952ada68f441a61fc21d6289858, type: 3}
       propertyPath: devConfig.rate60FPS
@@ -4196,7 +4197,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7887484137661636566, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000076293945
+      value: 0.00016792672
       objectReference: {fileID: 0}
     - target: {fileID: 7887484137943697647, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchorMax.x

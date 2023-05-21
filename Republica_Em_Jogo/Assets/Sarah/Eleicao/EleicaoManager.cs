@@ -7,6 +7,7 @@ using Game.Territorio;
 using Game.Tools;
 using Unity.Collections;
 using Game.UI;
+using System;
 
 namespace Game
 {
@@ -19,29 +20,29 @@ namespace Game
         public static EleicaoManager Instance;
         public int somaEleitores;
         public int[] cadeirasCamara;
-        public int cadeirasTotais, minCadeirasVotacao;
+        public int minCadeirasVotacao;
         [SerializeField] private List<Bairro> todosBairros;
         private ZonaTerritorial[] zonasTerritoriais;
         public int numConectados;
         public int[] eleitoresPlayers;
         private SetUpZona setUpZona;
-        private string cadeiras;
+        private string textoUiCadeiras;
         float valorPeao;
         [SerializeField] GameObject[] peosCamara;
         [SerializeField] GameObject[] Cameras;
         public bool inEleicao = false;
         ///[SerializeField] Transform posicaoCameraEleicao;
         //public Vector3 posicaoAntiga;
+        public CalculoCadeirasEleicao CalculoCadeiras { get; private set;} = new CalculoCadeirasEleicao();
 
         public string explicaTexto, explicaTextoCorpo;
         private UICoreLoop uiCore;
         void Start()
         {
-            cadeirasTotais = 12;
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             Instance = this;
-            minCadeirasVotacao = 7;
+            minCadeirasVotacao = (int)GameDataconfig.Instance.CadeirasTotal/2 + 1;
             Material material = peosCamara[0].GetComponent<MeshRenderer>().material;
             uiCore = FindObjectOfType<UICoreLoop>();
 
@@ -56,7 +57,7 @@ namespace Game
             cadeirasCamara = new int[numConectados];
             for (int i = 0; i < cadeirasCamara.Length; i++)
             {
-                cadeirasCamara[i] = cadeirasTotais / numConectados;
+                cadeirasCamara[i] = GameDataconfig.Instance.CadeirasTotal / numConectados;
                 if (i == (int)NetworkManager.Singleton.LocalClientId)
                 {
                     hs.AtualizarCadeirasUI((int)cadeirasCamara[i]);
@@ -85,33 +86,55 @@ namespace Game
         }
         public void CalcularCadeiras()
         {
+            PlayerStats playerStatsLocal = hs.GetPlayerStats();
+            int novasCadeiras = CalculoCadeiras.Calcular(playerStatsLocal);
 
-            cadeiras = "";
+            hs.AtualizarCadeirasUI(novasCadeiras);
+
+
+            //TODO: Não mexi por precausão. Não sei até onde se estende o acoplamento destas propriedades e métodos.
             eleitoresPlayers = new int[numConectados];
             cadeirasCamara = new int[numConectados];
             setUpZona.SepararBairrosPorPlayer(eleitoresPlayers, numConectados);
+
             for (int i = 0; i < eleitoresPlayers.Length; i++)
             {
-                float aux = ((float)eleitoresPlayers[i] * (float)cadeirasTotais) / (float)somaEleitores;
-
+                int aux = eleitoresPlayers[i] * GameDataconfig.Instance.CadeirasTotal / somaEleitores;
                 cadeirasCamara[i] = (int)Mathf.Round(aux);
-
-                if (i == (int)NetworkManager.Singleton.LocalClientId)
-                {
-                    hs.AtualizarCadeirasUI(cadeirasCamara[i]);
-                }
-
-                if (!NetworkManager.Singleton.IsServer) return;
-                PlayerStats playerStats = PlayerStatsManager.Instance.GetPlayerStats(i);
-                cadeiras += string.Concat(playerStats.NumCadeiras, "  cadeiras \n");
-
-
+                //if (i == (int)NetworkManager.Singleton.LocalClientId)
+                //{
+                //    hs.AtualizarCadeirasUI(cadeirasCamara[i]);
+                //}
+                //PlayerStats playerStats = PlayerStatsManager.Instance.GetPlayerStats(i);
+                //cadeiras += string.Concat(playerStats.NumCadeiras, "  cadeiras \n");
             }
 
-            if (!NetworkManager.Singleton.IsServer) return;
-            EleicaoText.Value = cadeiras;
+            EleicaoText.Value = " _ ";
 
         }
+
+
+        //Regras aqui: https://prmdcp2.wixsite.com/mppeb/blank-ghuf9
+        // public int RecontagemDeCadeiras(PlayerStats playerStats)
+        // {
+        //     double quocienteEleitoral = playerStats.GetEleitoresTotais() / cadeirasTotais;
+        //     int cadeirasArredondado = (int)Math.Round(quocienteEleitoral * GetTotalEleitoresInTerritorio());
+        //     return cadeirasArredondado;
+        // }
+
+
+
+        private int GetTotalEleitoresInTerritorio()
+        {
+            int eleitoresInTerritorio = 0;
+            foreach (Bairro bairro in setUpZona.AllBairros)
+            {
+                eleitoresInTerritorio += bairro.SetUpBairro.Eleitores.contaEleitores;
+            }
+            return eleitoresInTerritorio;
+        }
+
+
         public void CalculoEleicao()
         {
 
@@ -178,13 +201,10 @@ namespace Game
             //jogadores conectados
             EleicaoText.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
             {
-                if (newValue != "")
-                {
-                    UIeleicao.Instance.MostrarCadeiras(newValue.ToString());
-                    ColorirPeao();
-                    //Debug.Log(newValue.ToString());
-                }
+                ColorirPeao();
+
             };
+
             conectados.OnValueChanged += (int previousValue, int newValue) =>
             {
                 if (newValue != 0)
@@ -196,4 +216,7 @@ namespace Game
         }
 
     }
+
+
+    
 }
