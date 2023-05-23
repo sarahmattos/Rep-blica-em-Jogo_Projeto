@@ -34,11 +34,12 @@ namespace Game
             // fimDeJogoManager.zonaObtidaEObjetivo();
             if (TurnManager.Instance.LocalIsCurrent)
             {
+
                 recompensaAviso.SetActive(true);
                 GameObject go = recompensaAviso.transform.GetChild(0).gameObject;
                 TMP_Text textoAviso = go.GetComponent<TMP_Text>();
                 uiCore.MostrarAvisoEstado(explicaTexto, explicaTextoCorpo);
-
+                uiCore.NextStateButton.interactable = false;
                 if (!TemRecompensa)
                 {
                     // Tools.Logger.Instance.LogInfo("Como não avançou em nenhum bairro, não há recompensa nesta rodada.");
@@ -64,6 +65,8 @@ namespace Game
         {
             SetUpZona.Instance.AllBairros.MudarHabilitado(false);
             SetUpZona.Instance.AllBairros.MudarSeleced(false);
+            uiCore.NextStateButton.interactable = true;
+
         }
 
 
