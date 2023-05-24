@@ -121,6 +121,7 @@ namespace Game.Territorio
                         if (ps.GetEleitoresTotais() <= ps.BairrosInControl.Count)
                         {
                             hs.text_naotemeleitorpraretirar.text = "Não possui eleitores suficientes para retirada!";
+                            hs.sairIcone();
                             hs.AtualizaUIAposDistribuicao();
                         }
                     }

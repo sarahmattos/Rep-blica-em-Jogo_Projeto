@@ -298,6 +298,10 @@ namespace Game.UI
 
             }
         }
+        public void sairIcone(){
+             uIVoterCurrency.PlayExitAnim();
+        }
+        
 
         //para o bairro acessar quantos eleitores novos podem ser distribuidos
         public void valorEleitorNovo()
