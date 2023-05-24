@@ -57,12 +57,13 @@ namespace Game.Player
             TurnManager.Instance.PlayerRemovido += RemovePlayerStats;
         }
 
-        private void OnDestroy()
+        public override void OnDestroy()
         {
 
             gameplayLoadState.Entrada -= FindAllPlayerStats;
             TurnManager.Instance.PlayerRemovido -= RemovePlayerStats;
 
+            base.OnDestroy();
         }
 
         public void FindAllPlayerStats()

@@ -48,7 +48,6 @@ namespace Game.Territorio
         private void ColorirPeao(int _, int __)
         {
             int peaoIndexAtual = 0;
-
             foreach (PlayerStats playerStats in PlayerStatsManager.Instance.AllPlayerStats)
             {
                 for (int i = 0; i < playerStats.NumCadeiras.Value; i++)

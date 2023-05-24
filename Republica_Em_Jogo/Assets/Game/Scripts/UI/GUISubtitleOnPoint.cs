@@ -32,6 +32,7 @@ namespace Game
             };
             guiLabelParams.guiStyle.normal.textColor = new Color(1f, 1f, 1f, 1f);
             guiLabelParams.guiStyle.alignment = TextAnchor.MiddleLeft;
+
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -47,14 +48,21 @@ namespace Game
         private void OnGUI()
         {
             if (!mouseIn) return;
-            GUI.Label(
-                new Rect(MousePosition.x + offSet.x, -MousePosition.y + camera.pixelHeight - offSet.y, 150, 50), 
-                subtitle
-            );
+            UpdateFontSize();
+            UpdateRect();
+            GUI.Label(guiLabelParams.rect, subtitle, guiLabelParams.guiStyle);
 
 
         }
 
+        private void UpdateFontSize()
+        {
+            guiLabelParams.guiStyle.fontSize = h * 2 / 90;
+        }
+        private void UpdateRect()
+        {
+            guiLabelParams.rect = new Rect(MousePosition.x + offSet.x, -MousePosition.y + camera.pixelHeight - offSet.y, 150, 50);
+        }
 
     }
 }

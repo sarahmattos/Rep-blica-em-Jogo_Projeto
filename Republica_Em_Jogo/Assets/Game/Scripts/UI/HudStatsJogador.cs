@@ -61,17 +61,25 @@ namespace Game.UI
         public bool distribuicaoGeral = false;
         [HideInInspector]
         public bool distribuicaoInicial = false;
-        private bool ativa=true;
+        private bool ativa = true;
         private int aux;
         public event Action eleitoresNovosDeProjeto;
         private State inicalizacao => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO);
-        private State desenvolvimentoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
+        private State DesenvolvimentoState => GameStateHandler.Instance.GetState(GameState.DESENVOLVIMENTO);
+        private State GameplayerLoadScene => GameStateHandler.Instance.GetState(GameState.GAMEPLAY_SCENE_LOAD);
+        private State EleicaoState => GameStateHandler.Instance.GetState(GameState.ELEIÇÕES);
+
 
         private void Start()
         {
             // inicalizacao.Saida += testeCor;
             TurnManager.Instance.turnoMuda += respostaVisualOrdem;
-            desenvolvimentoState.Entrada += () => respostaVisualOrdem(-1, TurnManager.Instance.PlayerAtual);
+            DesenvolvimentoState.Entrada += () => respostaVisualOrdem(-1, TurnManager.Instance.PlayerAtual);
+            inicalizacao.Saida += UpdateUICadeiras;
+            EleicaoState.Saida += () => text_cadeiras.SetText(string.Concat(playerStats.NumCadeiras.Value, "/", GameDataconfig.Instance.CadeirasTotal));
+
+
+
 
         }
 
@@ -80,7 +88,10 @@ namespace Game.UI
             TurnManager.Instance.vezDoPlayerLocal -= (bool value) => { button.SetActive(value); };
             // inicalizacao.Saida -= testeCor;
             TurnManager.Instance.turnoMuda -= respostaVisualOrdem;
-            desenvolvimentoState.Entrada -= () => respostaVisualOrdem(-1, TurnManager.Instance.PlayerAtual);
+            DesenvolvimentoState.Entrada -= () => respostaVisualOrdem(-1, TurnManager.Instance.PlayerAtual);
+            inicalizacao.Saida -= UpdateUICadeiras;
+            EleicaoState.Saida -= () => text_cadeiras.SetText(string.Concat(playerStats.NumCadeiras.Value, "/", GameDataconfig.Instance.CadeirasTotal));
+
 
 
             base.OnDestroy();
@@ -96,13 +107,22 @@ namespace Game.UI
             return aux;
         }
 
+        private void UpdateUICadeiras()
+        {
+            playerStats.NumCadeiras.OnValueChanged += (int _, int newValue) =>
+            {
+                text_cadeiras.SetText(string.Concat(newValue, "/", GameDataconfig.Instance.CadeirasTotal));
+            };
+            text_cadeiras.SetText(string.Concat(playerStats.NumCadeiras.Value, "/", GameDataconfig.Instance.CadeirasTotal));
+
+
+        }
+
 
         public void testeCor()
         {
             ordemId = new List<int>();
             ordemId = getOrdemPlayersID();
-            Debug.Log("testeColor");
-            Debug.Log(ordemId.Count);
             if (aux == 0)
             {
                 for (int i = 0; i < ordemId.Count; i++)
@@ -141,32 +161,28 @@ namespace Game.UI
         }
         public override void OnNetworkSpawn()
         {
-            state = GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO);
-            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD).Saida += ConfigureHudStats;
             projeto = FindObjectOfType<Projeto>();
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             eleicaoManager = FindObjectOfType<EleicaoManager>();
-            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO).Entrada += AtualizarPlayerStatsBairro;
+            state = GameStateHandler.Instance.GetState(GameState.INICIALIZAÇÃO);
+
+            inicalizacao.Saida -= UpdateUICadeiras;
+            GameplayerLoadScene.Saida += ConfigureHudStats;
+            DesenvolvimentoState.Entrada += AtualizarPlayerStatsBairro;
         }
 
         public override void OnNetworkDespawn()
         {
-            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.GAMEPLAY_SCENE_LOAD).Saida -= ConfigureHudStats;
-            GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO).Entrada += AtualizarPlayerStatsBairro;
+            inicalizacao.Saida -= UpdateUICadeiras;
+            GameplayerLoadScene.Saida -= ConfigureHudStats;
+            DesenvolvimentoState.Entrada -= AtualizarPlayerStatsBairro;
 
         }
 
         private void ConfigureHudStats()
         {
-            PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
-            foreach (PlayerStats stats in allPlayerStats)
-            {
-                if (stats.IsLocalPlayer)
-                {
-                    playerStats = stats;
-                    InitializeHudStats();
-                }
-            }
+            playerStats = PlayerStatsManager.Instance.GetLocalPlayerStats();
+            InitializeHudStats();
         }
 
         private void InitializeHudStats()
@@ -177,6 +193,7 @@ namespace Game.UI
             text_nomeJogador.color = playerStats.Cor;
             text_eleitores.SetText(textToDisplayEleitores);
             text_objetivo.SetText(playerStats.ObjetivoCarta);
+            text_cadeiras.SetText(string.Concat(playerStats.NumCadeiras.Value, "/", GameDataconfig.Instance.CadeirasTotal));
 
         }
 
@@ -191,7 +208,7 @@ namespace Game.UI
 
                 //muda a interface
                 text_saudeCarta.SetText(playerStats.numSaude.ToString());//"Saúde: " + 
-                text_eduCarta.SetText( playerStats.numEducacao.ToString());//"Edu: " +
+                text_eduCarta.SetText(playerStats.numEducacao.ToString());//"Edu: " +
 
                 //pega os valores da classe player stats, mais tarde é usado na troca
                 atualizarRecursoAntesTroca();
@@ -292,13 +309,13 @@ namespace Game.UI
         public void ChamatPlayerInicioRodada()
         {
             StartCoroutine(EsperaEVai1(0));
-          
+
 
         }
         private IEnumerator EsperaEVai1(float s)
         {
             yield return new WaitForSeconds(s);
-              eleitoresAdicionais = 0;
+            eleitoresAdicionais = 0;
             if (distribuicaoInicial == true)
             {
                 checaZonasInteiras(true);
@@ -356,7 +373,6 @@ namespace Game.UI
         public void AtualizarCadeirasUI(int valor)
         {
             playerStats.SetNumCadeiras(valor);
-            text_cadeiras.SetText(string.Concat(valor.ToString(),"/",GameDataconfig.Instance.CadeirasTotal));//"Cadeiras: " + "\n" + 
         }
         public void BntsAuxiliares()
         {
@@ -366,20 +382,24 @@ namespace Game.UI
         {
             setUpZona.PlayerTemZonaInteira(playerStats.playerID, valorParticula);
         }
-        public void escondeObjetivo(GameObject go){
+        public void escondeObjetivo(GameObject go)
+        {
             ativa = !ativa;
-            if(ativa){
+            if (ativa)
+            {
                 olhoEsconde[0].SetActive(true);
                 olhoEsconde[1].SetActive(false);
                 go.SetActive(true);
-            }else{
+            }
+            else
+            {
                 olhoEsconde[0].SetActive(false);
                 olhoEsconde[1].SetActive(true);
                 go.SetActive(false);
             }
-            
 
-            
+
+
         }
 
     }

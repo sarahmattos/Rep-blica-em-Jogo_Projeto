@@ -59,7 +59,7 @@ namespace Game
             {
                 if (bairro.playerInControl == PlayerStatsManager.Instance.GetLocalPlayerStats()) return true;
             }
-            Debug.Log("Não tem bairros na zona escolhida");
+            // Debug.Log("Não tem bairros na zona escolhida");
             return false;
         }
 

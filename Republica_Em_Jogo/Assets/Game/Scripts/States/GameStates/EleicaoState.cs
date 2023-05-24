@@ -12,11 +12,9 @@ namespace Game
         {
             EleicaoManager.Instance.inEleicao=true;
             StartCoroutine(EsperaEVai(5));
-            Debug.Log(mostrouAviso);
            if(mostrouAviso==false){
                 mostrouAviso=true;
                 EleicaoManager.Instance.explicarEleicao();
-                Debug.Log("entrou aqui");
             }
             //chamar conta
             

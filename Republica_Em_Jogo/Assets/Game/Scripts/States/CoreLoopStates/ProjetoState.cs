@@ -26,7 +26,7 @@ namespace Game
 
         public override void ExitState()
         {
-            PlayerStatsManager.Instance.GetLocalPlayerStats().BairrosInControl.MudarHabilitado(false);
+            PlayerStatsManager.Instance.GetLocalPlayerStats()?.BairrosInControl.MudarHabilitado(false);
             baralho.baralhoManager(false);
             SetUpZona.Instance.AllBairros.MudarInativity(false);
         }

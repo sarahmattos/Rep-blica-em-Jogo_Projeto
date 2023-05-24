@@ -14,7 +14,7 @@ namespace Game
     public class EleicaoManager : NetworkBehaviour
     {
 
-        private NetworkVariable<FixedString4096Bytes> EleicaoText = new NetworkVariable<FixedString4096Bytes>();
+        // private NetworkVariable<FixedString4096Bytes> EleicaoText = new NetworkVariable<FixedString4096Bytes>();
         private NetworkVariable<int> conectados = new NetworkVariable<int>();
         public HudStatsJogador hs;
         public static EleicaoManager Instance;
@@ -109,7 +109,7 @@ namespace Game
                 //cadeiras += string.Concat(playerStats.NumCadeiras, "  cadeiras \n");
             }
 
-            EleicaoText.Value = " _ ";
+            // EleicaoText.Value = " _ ";
 
         }
 

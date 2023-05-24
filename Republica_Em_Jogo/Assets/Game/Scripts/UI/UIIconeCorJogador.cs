@@ -19,16 +19,20 @@ namespace Game.UI
         private RectTransform parentRectTransform;
         private Image image;
         private VerticalLayoutGroup verticalLayoutGroup;
+        private JogadorForaControl jogadorForaControl;
         public float MinWidth => parentRectTransform.sizeDelta.x * MinWidthPercentage;
         public float MaxWidth => parentRectTransform.sizeDelta.x * MaxWidthPercentage - verticalLayoutGroup.padding.left;
 
 
-        private void GetReferenceComponents()
+
+        private void SetReferenceComponents()
         {
             rectTransform = GetComponent<RectTransform>();
             image = GetComponent<Image>();
             parentRectTransform = transform.parent.GetComponent<RectTransform>();
             verticalLayoutGroup = GetComponentInParent<VerticalLayoutGroup>();
+            jogadorForaControl = FindObjectOfType<JogadorForaControl>();
+
         }
 
         private void Start()
@@ -43,16 +47,19 @@ namespace Game.UI
 
         }
 
+
         private void OnDestroy()
         {
             TurnManager.Instance.turnoMuda -= OnTurnoMudaAsync;
+            jogadorForaControl.JogadorFoiRemovido -= OnJogadorRemovido;
+
         }
 
 
 
         public async void Intialize(Color color, int playerIndex)
         {
-            GetReferenceComponents();
+            SetReferenceComponents();
             image.color = color;
             this.playerID = playerIndex;
 
@@ -60,6 +67,17 @@ namespace Game.UI
             if (TurnManager.Instance.PlayerAtual != playerID) await SetRectWidthAsync(MinWidth);
             else await SetRectWidthAsync(MaxWidth);
 
+            if (PlayerStatsManager.Instance.GetLocalPlayerStats().playerID != playerID) return;
+            jogadorForaControl.JogadorFoiRemovido += OnJogadorRemovido;
+
+
+        }
+
+        private void OnJogadorRemovido()
+        {
+            Debug.Log("On Jogador Removido.");
+
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0.5f);
         }
 
 

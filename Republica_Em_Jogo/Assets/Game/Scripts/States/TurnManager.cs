@@ -29,7 +29,7 @@ namespace Game
         public event Action<int, int> turnoMuda;
         private State InicializacaoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.INICIALIZAÇÃO);
         private State DistribInicialState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DISTRIBUI_INICIAL);
-        private State RecompensaState => CoreLoopStateHandler.Instance.StatePairValues[CoreLoopState.RECOMPENSA];
+        private State RecompensaState => CoreLoopStateHandler.Instance?.StatePairValues[CoreLoopState.RECOMPENSA];
         public int teste, teste2;
         public int aux;
         public int TurnCount

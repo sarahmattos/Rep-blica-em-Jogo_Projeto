@@ -19,6 +19,7 @@ namespace Game
 
         [SerializeField] private GameObject uiPartidoFora;
         private List<Bairro> bairrosPlayerLocal => PlayerStatsManager.Instance.GetLocalPlayerStats().BairrosInControl;
+        public event Action JogadorFoiRemovido;
 
         public bool JogadorLocalRemovido => jogadorLocalRemovido;
         private void Start()
@@ -52,6 +53,8 @@ namespace Game
             TurnManager.Instance.RemovePlayerIDServerRpc((int)NetworkManager.Singleton.LocalClientId);
             ActiveUIJogadorFora();
             jogadorLocalRemovido = true;
+            JogadorFoiRemovido?.Invoke();
+            Tools.Logger.Instance.LogInfo("JogadorLocalRemovido");
 
         }
 

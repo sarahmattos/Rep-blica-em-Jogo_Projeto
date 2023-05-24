@@ -102,7 +102,7 @@ namespace Game
         public void VerifcarConquistouTodoTerritorio()
         {
             if(GameDataconfig.Instance.DevConfig.VenceConquistandoTudo == false) return;
-            if (PlayerStatsManager.Instance.GetLocalPlayerStats().bairrosTotais == SetUpZona.Instance.AllBairros.Count)
+            if (PlayerStatsManager.Instance.GetLocalPlayerStats()?.bairrosTotais == SetUpZona.Instance.AllBairros.Count)
             {
                 AnuncinarVitória("Conquista total do território!");
             }
