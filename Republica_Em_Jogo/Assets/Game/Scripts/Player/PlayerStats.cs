@@ -48,6 +48,14 @@ namespace Game.Player
         public event Action<int> DefiniuEleitoresNovos;
         public event Action<int> DistribuiuEleitor; // int -> eleitoresNovos
         public event Action FimDistricaoEleitores;
+        public event Action PlayerForaJogo;
+        private bool foraDoJogo = false;
+
+        public void SetPlayerForaJogo(bool value)
+        {
+            foraDoJogo = true;
+            PlayerForaJogo?.Invoke();
+        }
 
         private void Awake()
         {

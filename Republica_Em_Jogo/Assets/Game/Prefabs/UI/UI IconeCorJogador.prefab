@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2083057835600783990}
   - component: {fileID: 3101029272545494778}
   - component: {fileID: 7050295601156289061}
+  - component: {fileID: 2694774495196507673}
   m_Layer: 5
   m_Name: UI IconeCorJogador
   m_TagString: Untagged
@@ -113,3 +114,15 @@ MonoBehaviour:
   playerID: 0
   MinWidthPercentage: 0.5
   MaxWidthPercentage: 0.93
+--- !u!225 &2694774495196507673
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3826305282769214985}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0

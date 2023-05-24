@@ -54,6 +54,7 @@ namespace Game
             ActiveUIJogadorFora();
             jogadorLocalRemovido = true;
             JogadorFoiRemovido?.Invoke();
+            PlayerStatsManager.Instance.GetLocalPlayerStats().SetPlayerForaJogo(true);
             Tools.Logger.Instance.LogInfo("JogadorLocalRemovido");
 
         }
