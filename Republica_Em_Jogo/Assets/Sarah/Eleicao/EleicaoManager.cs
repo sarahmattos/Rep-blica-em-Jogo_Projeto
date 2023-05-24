@@ -33,7 +33,7 @@ namespace Game
         public bool inEleicao = false;
         ///[SerializeField] Transform posicaoCameraEleicao;
         //public Vector3 posicaoAntiga;
-        public CalculoCadeirasEleicao CalculoCadeiras { get; private set;} = new CalculoCadeirasEleicao();
+        public CalculoCadeirasEleicao CalculoCadeiras { get; private set; } = new CalculoCadeirasEleicao();
 
         public string explicaTexto, explicaTextoCorpo;
         private UICoreLoop uiCore;
@@ -42,7 +42,7 @@ namespace Game
             zonasTerritoriais = FindObjectsOfType<ZonaTerritorial>();
             setUpZona = GameObject.FindObjectOfType<SetUpZona>();
             Instance = this;
-            minCadeirasVotacao = (int)GameDataconfig.Instance.CadeirasTotal/2 + 1;
+            minCadeirasVotacao = (int)GameDataconfig.Instance.CadeirasTotal / 2 + 1;
             Material material = peosCamara[0].GetComponent<MeshRenderer>().material;
             uiCore = FindObjectOfType<UICoreLoop>();
 
@@ -63,7 +63,7 @@ namespace Game
                     hs.AtualizarCadeirasUI((int)cadeirasCamara[i]);
                 }
             }
-            ColorirPeao();
+            // ColorirPeao();
         }
         public void ContaTotalEleitores()
         {
@@ -167,43 +167,17 @@ namespace Game
         {
             uiCore.ExplicaStateUi.SetActive(false);
         }
-        public void ColorirPeao()
-        {
-            // Debug.Log("coloriu");
-            for (int i = 0; i < cadeirasCamara.Length; i++)
-            {
-                if (i == 0)
-                {
-                    valorPeao = cadeirasCamara[i] * i;
-                }
-                else
-                {
-                    valorPeao = cadeirasCamara[i - 1] * i;
-                }
 
-                PlayerStats[] allPlayerStats = FindObjectsOfType<PlayerStats>();
-                foreach (PlayerStats stats in allPlayerStats)
-                {
-                    if (stats.playerID == i)
-                    {
-                        for (int j = 0; j < cadeirasCamara[i]; j++)
-                        {
 
-                            Material material = peosCamara[j + (int)valorPeao].GetComponent<MeshRenderer>().material;
-                            material.SetColor("_BaseColor", stats.Cor);
-                        }
-                    }
-                }
-            }
-        }
+
         private void OnEnable()
         {
             //jogadores conectados
-            EleicaoText.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
-            {
-                ColorirPeao();
+            // EleicaoText.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
+            // {
+            //     ColorirPeao();
 
-            };
+            // };
 
             conectados.OnValueChanged += (int previousValue, int newValue) =>
             {
@@ -218,5 +192,5 @@ namespace Game
     }
 
 
-    
+
 }

@@ -6,8 +6,6 @@ using UnityEngine;
 
 namespace Game
 {
-
-
     public class CalculoCadeirasEleicao
     {
         private int cadeirasTotais = 12;
@@ -38,6 +36,9 @@ namespace Game
             return cadeirasArredondado;
         }
 
+
+
+        #region RecontagemOficial
         //REFERENCIAS
         //Regras aqui: https://prmdcp2.wixsite.com/mppeb/blank-ghuf9
         //https://www.cnnbrasil.com.br/politica/entenda-como-e-feita-a-conta-que-define-o-numero-de-deputados-do-meu-estado/
@@ -48,13 +49,12 @@ namespace Game
             List<float> allQp = quocientesPartidarios(players, qe);
             List<int> allQpCeiling = AllQpCeiling(allQp);
             float CeilingDiff = this.CeilingDiff(allQp);
-            List<float> mediaMovel = MediaMovel(allQpCeiling, players);
+            List<float> maiorMedia = MaiorMedia(allQpCeiling, players);
 
             //falta so as cadeiras extras
 
             return 0;
         }
-
 
         private List<PlayerStats> playerStatsInOrdem()
         {
@@ -101,7 +101,7 @@ namespace Game
             return diff;
         }
 
-        private List<float> MediaMovel(List<int> allQpCeiling, List<PlayerStats> players)
+        private List<float> MaiorMedia(List<int> allQpCeiling, List<PlayerStats> players)
         {
             List<float> mmTotal = new List<float>();
             for (int i = 0; i < players.Count; i++)
@@ -112,6 +112,7 @@ namespace Game
             return mmTotal;
         }
 
+        #endregion
 
 
     }

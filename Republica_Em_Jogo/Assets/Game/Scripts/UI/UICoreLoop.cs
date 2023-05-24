@@ -17,16 +17,7 @@ namespace Game.UI
         private Animator animator;
         public Button NextStateButton => nextStateButton;
         private State DesenvolvimentoState => GameStateHandler.Instance.StateMachineController.GetState((int)GameState.DESENVOLVIMENTO);
-        private string TagPlayerAtualStilizado
-        {
-            get
-            {
-                return string.Concat(GameDataconfig.Instance.TagParticipante, " ", TurnManager.Instance.PlayerAtual);
-
-            }
-        }
-
-
+        private State DistribuicaoIncial => GameStateHandler.Instance.GetState(GameState.DISTRIBUI_INICIAL);
 
         private void Awake()
         {
@@ -41,7 +32,7 @@ namespace Game.UI
             DesenvolvimentoState.Entrada += OnDesenvolvimentoStateEnter;
             TurnManager.Instance.vezDoPlayerLocal += OnPlayerTurnUpdate;
             CoreLoopStateHandler.Instance.estadoMuda += UpdateTitleText;
-
+            DistribuicaoIncial.Entrada += OnDistribuicaoIncialEnter;
             nextStateButton.gameObject.SetActive(false);
 
         }
@@ -49,6 +40,7 @@ namespace Game.UI
         private void OnDestroy()
         {
             DesenvolvimentoState.Saida -= OnDesenvolvimentoStateEnter;
+            DistribuicaoIncial.Entrada -= OnDistribuicaoIncialEnter;
 
             TurnManager.Instance.vezDoPlayerLocal -= OnPlayerTurnUpdate;
             CoreLoopStateHandler.Instance.estadoMuda -= UpdateTitleText;
@@ -62,12 +54,6 @@ namespace Game.UI
             if (rodadaController.Rodada == 1) PlayEnterAnim();
 
         }
-        // private void OnRodadaMuda(int rodada)
-        // {
-        //     Debug.Log("Rodada atualiza");
-        //     if (rodada == 1) PlayEnterAnim();
-
-        // }
 
         private void PlayEnterAnim()
         {
@@ -89,10 +75,9 @@ namespace Game.UI
 
         }
 
-        // private void UpdateTextDesenv(CoreLoopState state)
-        // {
-        //     UpdateTitleText(state);
-        // }
+        private void OnDistribuicaoIncialEnter() {
+            UpdateTitleText(CoreLoopState.DISTRIBUIÇÃO);
+        }
 
         public void MostrarAvisoEstado(string avisoTitulo, string avisoCorpo)
         {

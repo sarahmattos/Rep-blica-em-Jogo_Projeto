@@ -25,8 +25,7 @@ namespace Game.Player
         [SerializeField] private string nome;
         [SerializeField] private NetworkVariable<int> eleitoresTotais = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         [SerializeField] private NetworkVariable<int> numCadeiras = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public int NumCadeiras => numCadeiras.Value;
-        public void SetNumCadeiras(int value) => numCadeiras.Value = value;
+        public NetworkVariable<int> NumCadeiras => numCadeiras;
         public int bairrosTotais => bairrosInControl.Count;
         private List<Bairro> bairrosInControl = new List<Bairro>();
         public List<Bairro> BairrosInControl { get => bairrosInControl; set => bairrosInControl = value; }
@@ -36,7 +35,7 @@ namespace Game.Player
 
         public int playerID => (int)OwnerClientId;
         public string PlayerName => playerName.Value.ToString();
-        public NetworkVariable<int> EleitoresTotais  => eleitoresTotais;
+        public NetworkVariable<int> EleitoresTotais => eleitoresTotais;
 
         public Color Cor { get => cor; }
         public string Objetivo { get => objetivo; }
@@ -79,6 +78,14 @@ namespace Game.Player
             if (!IsOwner) return;
             this.playerName.Value = playerName;
         }
+
+        public void SetNumCadeiras(int value)
+        {
+            numCadeiras.Value = value;
+
+        }
+
+
         private void SetEleitoresTotais(int eleitoresTotais)
         {
             if (!IsOwner) return;
@@ -182,7 +189,8 @@ namespace Game.Player
         {
             int total = 0;
 
-            foreach(Bairro bairro in BairrosInControl) {
+            foreach (Bairro bairro in BairrosInControl)
+            {
                 total += bairro.SetUpBairro.Eleitores.contaEleitores;
             }
 
