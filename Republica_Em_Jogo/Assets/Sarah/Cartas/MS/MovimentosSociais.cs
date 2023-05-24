@@ -84,13 +84,14 @@ public class MovimentosSociais : NetworkBehaviour
             };
         idPlayerMS.OnValueChanged += (int previousValue, int newValue) =>
         {
+
             if (newValue != -1)
             {
                 if (newValue != (int)NetworkManager.Singleton.LocalClientId)
                 {
                     btnOk.SetActive(false);
                     btnFechar.SetActive(true);
-                    text_aviso.text = "Movimento Social retirado pelo jogador: " + newValue;
+                    text_aviso.text = "Movimento Social retirado pelo partido " + PlayerStatsManager.Instance.GetPlayerStats(newValue).PlayerName;
                 }
                 else
                 {

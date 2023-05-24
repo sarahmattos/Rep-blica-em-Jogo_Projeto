@@ -83,7 +83,7 @@ namespace Game
                     if (setUpZona.tenhoZona[i].ContaRecursosEducacao() >= 2 && setUpZona.tenhoZona[i].ContaRecursosSaude() >= 2)
                     {
                         string message = GameDataconfig.Instance.TagParticipante + " "
-                        + NetworkManager.Singleton.LocalClientId.ToString() + " venceu conquistando a zona "
+                        + PlayerStatsManager.Instance.GetLocalPlayerStats().PlayerName + " venceu conquistando a zona "
                         + setUpZona.tenhoZona[i].Nome + " com recursos suficientes!";
 
                         AnuncinarVitória(message);

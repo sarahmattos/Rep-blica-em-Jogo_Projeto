@@ -73,7 +73,7 @@ public class Corrupcao : NetworkBehaviour
                     {
                         btnOk.SetActive(false);
                         btnFechar.SetActive(true);
-                        text_aviso.text = "Corrupção retirado pelo jogador: " + newValue;
+                        text_aviso.text = "Corrupção retirado pelo partido " + PlayerStatsManager.Instance.GetPlayerStats(newValue).PlayerName;
                     }
                     else
                     {
