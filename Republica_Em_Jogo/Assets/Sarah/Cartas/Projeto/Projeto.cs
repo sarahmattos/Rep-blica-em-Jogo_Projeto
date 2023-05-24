@@ -277,7 +277,7 @@ public class Projeto : NetworkBehaviour
                     fecharBtn.SetActive(true);
                     infoZonas.SetActive(false);
                     //se teve mais sim, foi aprovado
-                    if (sim > EleicaoManager.Instance.minCadeirasVotacao)
+                    if (sim >= EleicaoManager.Instance.minCadeirasVotacao)
                     {
                         projetoAprovado();
                     }
