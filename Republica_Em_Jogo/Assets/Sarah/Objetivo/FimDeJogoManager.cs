@@ -33,7 +33,7 @@ namespace Game
 
             eventosParaFimJogo.notify += VerificarObjetivoConcluido;
             eventosParaFimJogo.notify += VerifcarConquistouTodoTerritorio;
-            
+
             VitoriaTextServer.OnValueChanged += ConfigureUIVitoria;
 
         }
@@ -42,7 +42,7 @@ namespace Game
         {
             eventosParaFimJogo.notify -= VerificarObjetivoConcluido;
             eventosParaFimJogo.notify -= VerifcarConquistouTodoTerritorio;
-            
+
             VitoriaTextServer.OnValueChanged -= ConfigureUIVitoria;
 
 
@@ -101,7 +101,7 @@ namespace Game
 
         public void VerifcarConquistouTodoTerritorio()
         {
-            if(GameDataconfig.Instance.DevConfig.VenceConquistandoTudo == false) return;
+            if (GameDataconfig.Instance.DevConfig.VenceConquistandoTudo == false) return;
             if (PlayerStatsManager.Instance.GetLocalPlayerStats()?.bairrosTotais == SetUpZona.Instance.AllBairros.Count)
             {
                 AnuncinarVitória("Conquista total do território!");

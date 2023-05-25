@@ -19,7 +19,7 @@ namespace Game
             {
                 {
                     return (from Bairro bairro in remanejamentoData.BairroEscolhido.Vizinhos
-                            where bairro.PlayerIDNoControl.Value == TurnManager.Instance.PlayerAtual
+                            where bairro.PlayerIDNoControl.Value == TurnManager.Instance.PlayerAtualID
                             select bairro).ToList();
                 }
             }

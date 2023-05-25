@@ -21,8 +21,9 @@ namespace Game.Player
                     return playerStats;
                 }
             }
+            return new PlayerStats();
             // Tools.Logger.Instance.LogError("Falha ao enviar o PlayerStats do player local como referência.");
-            throw new NullReferenceException("Falha ao enviar o PlayerStats do player local");
+            //throw new NullReferenceException("Falha ao enviar o PlayerStats do player local");
         }
 
         public PlayerStats GetPlayerStats(int playerID)
@@ -40,7 +41,7 @@ namespace Game.Player
         {
             foreach (PlayerStats playerStats in AllPlayerStats)
             {
-                if (playerStats.playerID == TurnManager.Instance.PlayerAtual)
+                if (playerStats.playerID == TurnManager.Instance.PlayerAtualID)
                 {
                     return playerStats;
                 }

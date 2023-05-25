@@ -12,17 +12,17 @@ namespace Game
         //Para fazer isso via client, pode ser usado m�todos ServerRpc, assim como � feito nesta classe
         private HudStatsJogador hs;
         public NetworkList<int> ordemPlayersID;
-        private int indexPlayerAtual = -1;
+        private int indexPlayerAtual => ordemPlayersID.IndexOf(PlayerAtualID);
         private NetworkVariable<int> clientesCount = new NetworkVariable<int>();
         //private NetworkVariable<int> clientesAtual = new NetworkVariable<int>();
         // public int playerNow;
         private int turnCount;
         public event Action FirstPlayerTurn;
-        public int PlayerAtual => ordemPlayersID[indexPlayerAtual];
+        public int PlayerAtualID = 0;
         // public int PlayerAtual2 ;
         public int GetClientesCount => clientesCount.Value;
-        public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == PlayerAtual);
-        public bool CurrentIsUltimo => (PlayerAtual == ordemPlayersID[ordemPlayersID.Count - 1]);
+        public bool LocalIsCurrent => ((int)NetworkManager.Singleton.LocalClientId == PlayerAtualID);
+        public bool CurrentIsUltimo => (PlayerAtualID == ordemPlayersID[ordemPlayersID.Count - 1]);
         public bool LocalIsUltimo => (((int)NetworkManager.Singleton.LocalClientId) == ordemPlayersID[ordemPlayersID.Count - 1]);
 
         public event Action<bool> vezDoPlayerLocal;
@@ -139,10 +139,10 @@ namespace Game
 
         public void UpdateTurn()
         {
-            int previousPlayer = (indexPlayerAtual == -1) ? 0 : PlayerAtual;
+            int previousPlayer = (indexPlayerAtual == -1) ? 0 : PlayerAtualID;
             if (turnCount == 0)
             {
-                SetIndexPlayerTurn(0);
+                ResetPlayerTurn();
             }
             else
             {
@@ -150,20 +150,23 @@ namespace Game
             }
             Tools.Logger.Instance.LogWarning("Update turn");
             TurnCount++;
-            turnoMuda?.Invoke(previousPlayer, PlayerAtual);
+            turnoMuda?.Invoke(previousPlayer, PlayerAtualID);
             //hs.testeCor();
             // PlayerAtual2 = hs.ordemId[indexPlayerAtual];
             // hs.respostaVisualOrdem(PlayerAtual2);
 
         }
 
-        public void SetIndexPlayerTurn(int index)
+        public void ResetPlayerTurn()
         {
-            indexPlayerAtual = index;
+            PlayerAtualID = ordemPlayersID[0];
+            //indexPlayerAtual = index;
         }
         public void NextTurn()
         {
-            indexPlayerAtual = (1 + indexPlayerAtual) % (GetClientesCount);
+            int nextIndexPlayerIdOrdem = ordemPlayersID.IndexOf(PlayerAtualID) + 1;
+            PlayerAtualID = ordemPlayersID[nextIndexPlayerIdOrdem % GetClientesCount];
+            //indexPlayerAtual = (1 + indexPlayerAtual) % (GetClientesCount);
         }
 
 

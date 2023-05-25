@@ -19,7 +19,7 @@ namespace Game
             get
             {
                 return (from Bairro bairro in BairrosVizinhos
-                        where bairro.PlayerIDNoControl.Value != TurnManager.Instance.PlayerAtual
+                        where bairro.PlayerIDNoControl.Value != TurnManager.Instance.PlayerAtualID
                         select bairro
                 ).ToList();
             }

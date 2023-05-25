@@ -59,7 +59,7 @@ namespace Game.UI
             this.playerID = playerIndex;
 
             //Set RectTransform largura inicial de acordo com o player Atual
-            if (TurnManager.Instance.PlayerAtual != playerID) await SetRectWidthAsync(MinWidth);
+            if (TurnManager.Instance.PlayerAtualID != playerID) await SetRectWidthAsync(MinWidth);
             else await SetRectWidthAsync(MaxWidth);
 
 

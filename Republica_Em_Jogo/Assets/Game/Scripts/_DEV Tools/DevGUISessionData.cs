@@ -59,7 +59,7 @@ namespace Game.Tools
 
             //Jogador Atual
             guiLabelParams.rect.y = h / 2 + 5 * 2 * h / 90;
-            string message5 = string.Concat("Jogador ATUAL: ", TurnManager.Instance.PlayerAtual);
+            string message5 = string.Concat("Jogador ATUAL: ", TurnManager.Instance.PlayerAtualID);
             GUI.Label(guiLabelParams.rect, message5, guiLabelParams.guiStyle);
 
             //Jogador Local

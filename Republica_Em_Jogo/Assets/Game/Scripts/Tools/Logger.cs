@@ -38,7 +38,7 @@ namespace Game.Tools
         public void LogPlayerAction(string message)
         {
             ClearLines();
-            int playerID = TurnManager.Instance.PlayerAtual;
+            int playerID = TurnManager.Instance.PlayerAtualID;
             string playerHexColor = ColorUtility.ToHtmlStringRGB((GameDataconfig.Instance.PlayerColorOrder[playerID]));
             debugAreaText.text += string.Concat(GameDataconfig.Instance.TagPlayerAtualColorizada()," : ");
             debugAreaText.text += string.Format("<color=#{0}>{1}</color>","#fff", string.Concat(message,"\n"));

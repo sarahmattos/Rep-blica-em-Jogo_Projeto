@@ -74,7 +74,7 @@ namespace Game.UI
         {
             // inicalizacao.Saida += testeCor;
             TurnManager.Instance.turnoMuda += respostaVisualOrdem;
-            DesenvolvimentoState.Entrada += () => respostaVisualOrdem(-1, TurnManager.Instance.PlayerAtual);
+            DesenvolvimentoState.Entrada += () => respostaVisualOrdem(-1, TurnManager.Instance.PlayerAtualID);
             inicalizacao.Saida += UpdateUICadeiras;
             EleicaoState.Saida += () => text_cadeiras.SetText(string.Concat(playerStats.NumCadeiras.Value, "/", GameDataconfig.Instance.CadeirasTotal));
 
@@ -88,7 +88,7 @@ namespace Game.UI
             TurnManager.Instance.vezDoPlayerLocal -= (bool value) => { button.SetActive(value); };
             // inicalizacao.Saida -= testeCor;
             TurnManager.Instance.turnoMuda -= respostaVisualOrdem;
-            DesenvolvimentoState.Entrada -= () => respostaVisualOrdem(-1, TurnManager.Instance.PlayerAtual);
+            DesenvolvimentoState.Entrada -= () => respostaVisualOrdem(-1, TurnManager.Instance.PlayerAtualID);
             inicalizacao.Saida -= UpdateUICadeiras;
             EleicaoState.Saida -= () => text_cadeiras.SetText(string.Concat(playerStats.NumCadeiras.Value, "/", GameDataconfig.Instance.CadeirasTotal));
 
