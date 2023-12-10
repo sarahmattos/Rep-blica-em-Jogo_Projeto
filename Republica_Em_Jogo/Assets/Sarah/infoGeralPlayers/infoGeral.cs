@@ -11,6 +11,7 @@ namespace Game
 {
     public class infoGeral : NetworkBehaviour
     {
+        private bool infoViewState = false;
         private NetworkVariable<FixedString4096Bytes> stringInfoPlayer0 = new NetworkVariable<FixedString4096Bytes>();
         private NetworkVariable<FixedString4096Bytes> stringInfoPlayer1 = new NetworkVariable<FixedString4096Bytes>();
         private NetworkVariable<FixedString4096Bytes> stringInfoPlayer2 = new NetworkVariable<FixedString4096Bytes>();
@@ -90,14 +91,36 @@ namespace Game
 
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                chamarInfo();
-                updateUi(true);
+                MostrarInfo();
             }
             if (Input.GetKeyUp(KeyCode.Tab))
             {
-                updateUi(false);
+                EsconderInfo();
             }
         }
+
+        public void MostrarInfo()
+        {
+            chamarInfo();
+            infoViewState = true;
+            infoGo.SetActive(infoViewState);
+        }
+
+        public void EsconderInfo()
+        {
+            infoViewState = false;
+            infoGo.SetActive(infoViewState);
+            
+
+
+        }
+        public void SwitchInfoView()
+        {
+            infoViewState = !infoViewState;
+            infoGo.SetActive(infoViewState);
+        }
+
+
         public void chamarInfo()
         {
             pedeInfoServerRpc(2);
@@ -145,10 +168,7 @@ namespace Game
                 teste3.text = separatedStrings3[1];
             }
         }
-        public void updateUi(bool valor)
-        {
-            infoGo.SetActive(valor);
-        }
+
 
     }
 }

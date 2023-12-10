@@ -89,8 +89,8 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SurfaceDistortionAmount: 0.728
-    - _SurfaceNoiseCutoff: 0.73
+    - _SurfaceDistortionAmount: 0.386
+    - _SurfaceNoiseCutoff: 0.486
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
