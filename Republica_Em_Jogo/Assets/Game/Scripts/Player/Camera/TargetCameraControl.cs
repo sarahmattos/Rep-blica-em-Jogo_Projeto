@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Tools;
@@ -9,8 +10,8 @@ namespace Game.Player
     {
 
         private Vector3 mouseWorldPosStart;
-        [SerializeField][Range(1, 50)]  private int scrollWheelSpeed;
-        [SerializeField] [Range(1, 20)] private int directionalInputSpeed;
+        [SerializeField][Range(1, 50)] private int scrollWheelSpeed;
+        [SerializeField][Range(1, 20)] private int directionalInputSpeed;
         // public float xClamp => boundary.Size.x;
         // public float zClamp => boundary.Size.z;
 
@@ -31,15 +32,33 @@ namespace Game.Player
             }
 
             ProcessDirectionalInputs();
+            PerformMobileMovement();
         }
+
+        private void PerformMobileMovement()
+        {
+
+
+            if (Input.touchCount == 1)
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                {
+                    Vector3 touchDirection = new Vector3(Input.GetTouch(0).deltaPosition.x, 0, Input.GetTouch(0).deltaPosition.y);
+
+                    IncreasePositionBounded(-1 * touchDirection);
+                }
+
+
+            }
+
+        }
+
         private void Pan()
         {
             if (Input.GetAxis("Mouse Y") != 0 || Input.GetAxis("Mouse X") != 0)
             {
-            Vector3 mouseWorldPosDiff = mouseWorldPosStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            IncreasePositionLimited(mouseWorldPosDiff * scrollWheelSpeed);
-            // transform.position += mouseWorldPosDiff * speed;
-            // transform.ClampPositionXZ(boundary.Bounds);
+                Vector3 mouseWorldPosDiff = mouseWorldPosStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                IncreasePositionBounded(mouseWorldPosDiff * scrollWheelSpeed);
 
             }
         }
@@ -47,13 +66,13 @@ namespace Game.Player
         private void ProcessDirectionalInputs()
         {
             Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            IncreasePositionLimited(inputDirection*directionalInputSpeed);
+            IncreasePositionBounded(inputDirection * directionalInputSpeed);
 
         }
 
-        private void IncreasePositionLimited(Vector3 position)
+        public void IncreasePositionBounded(Vector3 position)
         {
-            transform.position += position*Time.deltaTime;
+            transform.position += position * Time.deltaTime;
             transform.ClampPositionXZ(boundary.Bounds);
         }
 

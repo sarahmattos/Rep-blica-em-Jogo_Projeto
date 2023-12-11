@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace Game.Player
@@ -22,14 +21,15 @@ namespace Game.Player
         private void Start()
         {
             orthographicSizeTarget = zoomMax;
+
         }
 
         void Update()
         {
-            if (Input.GetAxis("Mouse ScrollWheel") != 0)
-                Zoom(Input.GetAxis("Mouse ScrollWheel"));
-
+            PerformMouseZoom();
+            PerformMobileZoom();
         }
+
 
 
         private void Zoom(float zoomDiff)
@@ -47,6 +47,33 @@ namespace Game.Player
         }
 
 
+        private void PerformMouseZoom()
+        {
+            if (Input.GetAxis("Mouse ScrollWheel") != 0)
+            {
+                Zoom(Input.GetAxis("Mouse ScrollWheel"));
+            }
+        }
+
+
+        private void PerformMobileZoom()
+        {
+            if (Input.touchCount == 2)
+            {
+                Touch touchOne = Input.GetTouch(0);
+                Touch touchTwo = Input.GetTouch(1);
+
+                Vector2 touchOnePrevPosition = touchOne.position - touchOne.deltaPosition;
+                Vector2 touchTwoPrevPosition = touchTwo.position - touchTwo.deltaPosition;
+
+                float prevMagnitude = (touchOnePrevPosition - touchTwoPrevPosition).magnitude;
+                float currentMangitude = (touchOne.position - touchTwo.position).magnitude;
+
+                float difference = currentMangitude - prevMagnitude;
+                Zoom(difference * 0.001f);
+
+            }
+        }
 
 
     }
