@@ -7,7 +7,6 @@ using UnityEngine;
 public class OlharParaCamera : MonoBehaviour
 {
     [SerializeField] private bool active;
-    private float tempoAtualizaRotacao = 0.3f;
     private Transform transformCam;
 
     private void Awake()

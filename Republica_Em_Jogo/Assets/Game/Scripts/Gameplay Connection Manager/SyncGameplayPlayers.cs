@@ -21,7 +21,7 @@ namespace Game
             GameplaySceneLoad.Saida += OnGameplaySceneLoad;
         }
 
-        private void OnDestroy()
+        public override void OnDestroy()
         {
             GameplaySceneLoad.Saida -= OnGameplaySceneLoad;
 

@@ -22,7 +22,7 @@ namespace Game.Networking
         }
 
 
-        private void OnDestroy()
+        public override void OnDestroy()
         {
             OnlineRelayManager.Instance.joinCodeGenerated -= SetJoinCodeText;
             OnlineConnection.Instance.joinCodeConexaoEstabelecida -= SetJoinCodeText;

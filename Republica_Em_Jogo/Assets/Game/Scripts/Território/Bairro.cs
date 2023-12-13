@@ -17,7 +17,6 @@ namespace Game.Territorio
         public NetworkVariable<int> PlayerIDNoControl => playerIDNoControl;
         [SerializeField] private Bairro[] vizinhos;
         public Bairro[] Vizinhos => vizinhos;
-        public event Action playerControlMuda;
         public event Action<Bairro, int> bairroPlayerLocalForaControl;
         public event Action<Bairro, int> bairroPlayerLocalNoControl;
         public NetworkVariable<bool> OnFocus = new NetworkVariable<bool>(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);

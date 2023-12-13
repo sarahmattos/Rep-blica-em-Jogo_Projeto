@@ -48,7 +48,7 @@ namespace Game.Territorio
         }
 
 
-        private void OnDestroy()
+        public override void OnDestroy()
         {
             interagivel.MouseEnter -= MouseEnterVisualiza;
             interagivel.MouseExit -= MouseOutVisualiza;

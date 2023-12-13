@@ -16,8 +16,6 @@ public class Saúde : NetworkBehaviour
     private Recursos recurso;
     public GameObject[] saudeIcone;
 
-    public event Action<string> DistribuiuRecurso;
-    public event Action<string, int> terminouDistribuicao;
 
 
 

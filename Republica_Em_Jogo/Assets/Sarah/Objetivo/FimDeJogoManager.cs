@@ -38,7 +38,7 @@ namespace Game
 
         }
 
-        private void OnDestroy()
+        public override void OnDestroy()
         {
             eventosParaFimJogo.notify -= VerificarObjetivoConcluido;
             eventosParaFimJogo.notify -= VerifcarConquistouTodoTerritorio;

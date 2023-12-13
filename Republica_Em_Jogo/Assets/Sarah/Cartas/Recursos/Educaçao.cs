@@ -16,7 +16,6 @@ public class Educaçao : NetworkBehaviour
     private Bairro bairro;
     private Recursos recurso;
     public GameObject eduIcone;
-    public event Action<string> DistribuiuRecurso;
 
 
     [ServerRpc(RequireOwnership = false)]
