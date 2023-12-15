@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5853193835489826722}
   - component: {fileID: 5853193835489826733}
   - component: {fileID: 5853193835489826732}
+  - component: {fileID: 1887326828}
+  - component: {fileID: 1887326827}
   m_Layer: 0
   m_Name: CanvasInicial
   m_TagString: Untagged
@@ -103,6 +105,48 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &1887326828
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853193835489826734}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &1887326827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853193835489826734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c599025d4029b284ca60037c7a84e3fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnShow:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Game.RectTransformTweenController, Assembly-CSharp
+        m_MethodName: DoMoveOption
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHide:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5853193836374322110
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +388,7 @@ PrefabInstance:
       objectReference: {fileID: 6784369470126438407, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}
     - target: {fileID: 9098816977590033421, guid: f3768b77e4fe06b469db37edd65c94a1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9098816977590033421, guid: f3768b77e4fe06b469db37edd65c94a1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -582,7 +626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5168785289941902658, guid: 28db01983277db14e941737050179252, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5168785289941902658, guid: 28db01983277db14e941737050179252, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode

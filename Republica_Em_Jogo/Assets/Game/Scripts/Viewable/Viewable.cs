@@ -12,12 +12,14 @@ namespace Game.UI
 
         public virtual void Hide()
         {
-            OnShow?.Invoke();
+            
+
+            OnHide?.Invoke();
         }
 
         public virtual void Show()
         {
-            OnHide?.Invoke();
+            OnShow?.Invoke();
         }
     }
 }

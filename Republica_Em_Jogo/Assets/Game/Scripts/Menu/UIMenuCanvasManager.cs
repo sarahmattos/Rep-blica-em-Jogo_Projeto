@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Networking
 {
@@ -13,7 +14,7 @@ namespace Game.Networking
         [SerializeField] private Canvas CanvasPosConexao;
         [SerializeField] private Canvas CanvasCarregamento;
         [SerializeField] private Canvas canvasNameHandler;
-
+        public UnityEvent OnPlayerEnterRoom;
         private void Start()
         {
             ResetCanvasRenders();
@@ -52,7 +53,7 @@ namespace Game.Networking
             canvasNameHandler.enabled = !value;
             CanvasPosConexao.enabled = value;
             canvasNameHandler.enabled = value;
-
+            OnPlayerEnterRoom?.Invoke();
 
             if (!value) CanvasCarregamento.enabled = false;
         }
