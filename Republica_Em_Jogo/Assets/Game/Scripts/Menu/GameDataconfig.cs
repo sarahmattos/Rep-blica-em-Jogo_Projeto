@@ -43,8 +43,14 @@ public class GameDataconfig : Singleton<GameDataconfig>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+       if(PlayerPrefs.HasKey("maxConnections")) SetMaxConnections(PlayerPrefs.GetInt("maxConnections"));
     }
 
+    public void SetMaxConnections(int value)
+    {
+        maxConnections = value;
+        PlayerPrefs.SetInt("maxConnections", value);
+    }
 
 }
 
