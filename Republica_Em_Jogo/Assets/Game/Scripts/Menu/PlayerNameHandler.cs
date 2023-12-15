@@ -28,7 +28,20 @@ namespace Game.Player
 
         private void Start()
         {
-            inputField.text = GetInputNameValue;
+            SetInputPlayerName();
+        }
+
+        private void SetInputPlayerName()
+        {
+            if (PlayerPrefs.HasKey("playerName"))
+            {
+                inputField.text = GetInputNameValue;
+
+            } 
+            else
+            {
+                inputField.text = string.Concat("#", Random.Range(100, 999));
+            }
         }
 
 

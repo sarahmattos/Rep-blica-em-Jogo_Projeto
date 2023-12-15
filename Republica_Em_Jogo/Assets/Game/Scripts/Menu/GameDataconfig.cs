@@ -49,7 +49,6 @@ public class GameDataconfig : Singleton<GameDataconfig>
 
     public void SetMaxConnections(int value)
     {
-        Debug.Log("max connections updaate:" + value);
         maxConnections = value;
         PlayerPrefs.SetInt("maxConnections", value);
     }

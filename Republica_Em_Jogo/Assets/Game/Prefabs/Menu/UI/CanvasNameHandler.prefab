@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 797401120280425180}
   - component: {fileID: 2142357467483343336}
   - component: {fileID: 1971638925429451853}
+  - component: {fileID: 913523192}
   m_Layer: 0
   m_Name: Button_OK
   m_TagString: Untagged
@@ -308,6 +309,46 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 913523192}
+        m_TargetAssemblyTypeName: Game.RectTransformTweenController, Assembly-CSharp
+        m_MethodName: DoScaleOption
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1971638925429451853}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &913523192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5923870431566349755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b00b709fb1e6749bc0565ee9acc424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenOptions:
+  - tweenTypeData: {x: 0, y: 0, z: 0}
+    duration: 0.5
+    ease: 1
 --- !u!1 &8265669584330290625
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,7 +1287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000041007996, y: -85.36398}
+  m_AnchoredPosition: {x: -0.00003624, y: -542.66}
   m_SizeDelta: {x: 630.257, y: 170.728}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8265669586188926304
@@ -1326,9 +1367,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenOptions:
-  - tweenTypeData: {x: -8.7, y: -522.61, z: 0}
+  - tweenTypeData: {x: 0, y: 437.24597, z: 0}
     duration: 0.5
-    ease: 6
-  - tweenTypeData: {x: 0.000041008, y: -85.36398, z: 0}
+    ease: 7
+  - tweenTypeData: {x: 0, y: -437.246, z: 0}
     duration: 0.5
     ease: 6
