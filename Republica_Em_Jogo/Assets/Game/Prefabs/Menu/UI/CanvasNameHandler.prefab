@@ -416,7 +416,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Equipe A
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}
   m_sharedMaterial: {fileID: 6784369470126438407, guid: cb6a8a4e13d118c4a826a7aec031008d, type: 2}

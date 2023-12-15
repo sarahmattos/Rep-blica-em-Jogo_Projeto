@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: movimentosSociasAtributos
   m_EditorClassIdentifier: 
   movimento:
-  - "Estudantes e pais ocuparam a secretaria de educa\xE7\xE3o exigindo a climatiza\xE7\xE3o
-    imediata de todas as escolas. Seu partido aprovou esse projeto! "
-  - "O movimento negro fez uma manifesta\xE7\xE3o exigindo a  aplica\xE7\xE3o efetiva
-    do ensino da hist\xF3ria e cultura negra nas escolas. Seu partido aprovou esse
-    projeto! "
-  - "o Movimento feminista fez uma manifesta\xE7\xE3o exigindo o atendimento de mulheres
-    v\xEDtimas de viol\xEAncia. Seu partido aprovou  esse projeto! "
-  - "O movimento dos trabalhadores sem teto ocupou um pr\xE9dio abandonado da prefeitura
-    reivindicando o direito \xE0 moradia. Seu partido aprovou esse projeto!"
-  - "O movimento LGBT fez uma manifesta\xE7\xE3o exigindo o atendimento especializado 
-    de v\xEDtimas de homofobia. Seu partido aprovou esse projeto!"
+  - "Estudantes e respons\xE1veis ocuparam a Secretaria Municipal de Educa\xE7\xE3o
+    exigindo a climatiza\xE7\xE3o imediata de todas as escolas da rede!"
+  - " Movimento dos Trabalhadores Sem Teto (MTST) ocupou um pr\xE9dio abandonado
+    da prefeitura reivindicando o direito \xE0 moradia.  "
+  - "O Movimento Negro fez uma manifesta\xE7\xE3o exigindo a aplica\xE7\xE3o efetiva
+    do ensino da Hist\xF3ria e Cultura Afro-Brasileira e Ind\xEDgena nas escolas
+    municipais."
+  - "O Movimento Feminista fez uma manifesta\xE7\xE3o exigindo a melhoria e efici\xEAncia
+    no atendimento de mulheres v\xEDtimas de viol\xEAncia."
+  - "O movimento LGBTQIAP+ fez uma manifesta\xE7\xE3o exigindo o atendimento especializado
+    de v\xEDtimas de homofobia."
   recursoTipo:
   - "Educa\xE7\xE3o"
   - "Educa\xE7\xE3o"

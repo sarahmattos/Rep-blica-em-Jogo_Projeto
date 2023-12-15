@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: CorrupcaoAtributos
   m_EditorClassIdentifier: 
   corrupcao:
-  - Um membro do seu partido foi pego recebendo propina!
-  - Seu partido foi pego utilizando candidatos laranjas!
-  - "Um membro de seu partido foi pego utilizando funcion\xE1rios fantasmas!"
+  - Um integrante do seu partido foi pego recebendo propina!
+  - "Seu partido foi pego utilizando candidatos laranjas na \xFAltima elei\xE7\xE3o!"
+  - "O gabinete do vereador de seu partido est\xE1 sendo investigado pela utiliza\xE7\xE3o
+    de funcion\xE1rios fantasmas."
   penalidade: 2
-  complementText: " Perca dois eleitores e duas cartas e n\xE3o apresente projeto
-    nesta rodada."
+  complementText: "Perca dois eleitores e duas cartas. n\xE3o apresente projeto nesta
+    rodada."

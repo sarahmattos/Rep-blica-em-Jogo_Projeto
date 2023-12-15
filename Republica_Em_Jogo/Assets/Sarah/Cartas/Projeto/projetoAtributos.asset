@@ -13,46 +13,49 @@ MonoBehaviour:
   m_Name: projetoAtributos
   m_EditorClassIdentifier: 
   proposta:
-  - "Aumento da verba na educa\xE7\xE3o elevando o repasse para creches e escolas
-    na zona escolhida: "
-  - 'Amplia o direito de meia-entrada para garis e enfermeiras municipais na zona
-    escolhida:  '
-  - "Aumenta verba para constru\xE7\xE3o e manuten\xE7\xE3o de \xE1reas de lazer
-    na zona escolhida: "
-  - "Constru\xE7\xE3o de um conjunto habitacional na zona escolhida: "
-  - "Dobra o n\xFAmero de banheiros qu\xEDmicos no per\xEDodo do carnaval na zona
-    escolhida: "
-  - "Reduz o iptu para imov\xE9is localizados na zona escolhida: "
-  - "Obriga a instala\xE7\xE3o de ar condicionado em toda frota de \xF4nibus na zona
-    escolhida: "
-  - 'Aumenta a coleta de lixo reciclado na zona escolhida: '
-  - "Libera verba para a manuten\xE7\xE3o das cal\xE7adas na zona escolhida: "
-  - "Acaba com o aux\xEDlio sa\xFAde dos vereadores na zona escolhida: "
-  - "Canaliza\xE7\xE3o de rios e constru\xE7ao de reservat\xF3rios contra enchentes
-    na zona escolhida: "
-  - 'Aumenta o quantitativo de guardas municipais na zona escolhida: '
-  - "D\xE1 insen\xE7\xE3o da taxa de ilumina\xE7\xE3o p\xFAblica para os bairros
-    na zona escolhida: "
-  - "Cria postos de acesso wi-fi p\xFAblicos nos bairros da zona escolhida: "
-  - 'Aumenta a coleta seletiva de lixo reciclado na zona escolhida: '
-  - "Aumento de verba na educa\xE7\xE3o elevando o repasse para creches e  escolas
-    na zona escolhida: "
-  - "Constru\xE7\xE3o de um piscin\xE3o para lazer p\xFAblico na zona escolhida: "
-  - "Cria faixas excluisivas para \xF4nibus nos bairros na zona escolhida: "
-  - "Altera para tempo integral o per\xEDodo de aulas nas escolas municipais na zona
-    escolhida: "
-  - "Libera verba para manuten\xE7\xE3o e reasfaltamento na zona escolhida: "
-  - "Constru\xE7\xE3o de cl\xEDnicas veterin\xE1rias p\xFAblicas na zona escolhida: "
-  - "Aumento de verba para obras de melhoria do saneamento b\xE1sico na zona escolhida: "
-  - "Autoriza a constru\xE7\xE3o de ciclovias p\xFAblicas na zona escolhida: "
-  - "Legaliza a circula\xE7\xE3o de Vans para complementar o transporte na zona escolhida: "
-  - "Libera verba para a manuten\xE7\xE3o da ilumina\xE7\xE3o p\xFAblica na zona
-    escolhida: "
-  - "Estabelece o concurso para novos garis que ser\xE2o alocados na zona escolhida: "
-  - "Diminui\xE7\xE3o do itbi nas commpras de im\xF3veis na zona escolhida: "
-  - "Garante a constru\xE7\xE3o de bibliotecas p\xFAblicas nos bairros na zona escolhida: "
-  - "Aumento do or\xE7amento para a educa\xE7\xE3o na zona escolhida: "
-  - "Congela o aumento das passagens de \xF4nibus por um ano na zona escolhida: "
-  - "Libera verba para a constru\xE7\xE3o de bibliotecas municipais na zona escolhida: "
+  - "Aumenta a verba destinada \xE0 educa\xE7\xE3o, elevando o repasse para creches
+    e escolas municipais na zona: "
+  - "Amplia o direito de meia-entrada em eventos e espa\xE7os culturais no munic\xEDpio
+    do RJ, para garis e enfermeiras municipais na zona:  "
+  - "Aumenta o repasse de verbas para constru\xE7\xE3o e manuten\xE7\xE3o de \xE1reas
+    de lazer na zona:"
+  - "Aprova a constru\xE7\xE3o de um conjunto habitacional de interesse social na
+    zona:"
+  - "Dobra o n\xFAmero de banheiros qu\xEDmicos disponibilizados no per\xEDodo do
+    carnaval na zona:"
+  - "Amplia o desconto do IPTU ao mun\xEDcipe que dispuser de uma ou mais \xE1rvores
+    plantadas no seu im\xF3vel, estando localizados na zona:"
+  - "Torna obrigat\xF3ria a opera\xE7\xE3o com ar-condicionado em toda frota de ve\xEDculos
+    destinados ao transporte coletivo de passageiros no munic\xEDpio do Rio de Janeiro."
+  - "Institui o Programa \u201CColeta Seletiva de Lixo dos Sub\xFArbios Cariocas\u201D,
+    em bairros da zona:"
+  - "Amplia a verba manuten\xE7\xE3o de cal\xE7adas em ruas localizadas na zona:"
+  - "Institui incentivos para o uso de asfalto produzido com borracha de pneus reciclados,
+    em todo o munic\xEDpio do Rio de Janeiro:"
+  - "Veda o recebimento de ajuda de custo, a t\xEDtulo de \u201Caux\xEDlio palet\xF3\u201D,
+    aos vereadores do Rio de Janeiro."
+  - "Institui a implanta\xE7\xE3o de cisternas para capta\xE7\xE3o, armazenamento
+    e reaproveitamento das \xE1guas da chuva em im\xF3veis p\xFAblicos situados na
+    zona:"
+  - 'Aumenta o quantitativo de guardas municipais atuantes na zona:'
+  - "Amplia os pontos p\xFAblicos de acesso ao sistema de internet gratuita por Wi-fi
+    nos bairros da zona:"
+  - "Aprova a constru\xE7\xE3o de um piscin\xE3o para lazer p\xFAblico na zona:"
+  - "Cria faixas exclusivas para circula\xE7\xE3o de transporte coletivo p\xFAblico
+    nos bairros das zonas:"
+  - "Altera para tempo integral o per\xEDodo de aulas nas escolas municipais de todo
+    o munic\xEDpio do Rio de Janeiro:"
+  - "Aprova a constru\xE7\xE3o de cl\xEDnicas veterin\xE1rias populares em bairros
+    da zona:"
+  - "Aumento do repasse de verba destinada a obras de melhoria do saneamento b\xE1sico
+    em bairros da zona:"
+  - " Autoriza a constru\xE7\xE3o de ciclovias e ciclofaixas p\xFAblicas nos bairros
+    da zona:"
+  - "Regulamenta o Servi\xE7o de Transporte Urbano Especial Suplementar de Passageiros,
+    realizado por vans, kombis e similares, no munic\xEDpio do Rio de Janeiro."
+  - "Libera verba para manuten\xE7\xE3o da ilumina\xE7\xE3o p\xFAblica dos bairros
+    da zona:"
+  - "Destina verba para amplia\xE7\xE3o dos acervos das bibliotecas de escolas municipais
+    presentes na zona:"
   numRecompensa: 010000000200000003000000
   recompensaText: 'Eleitores e cartas ganhas se aprovado: '
