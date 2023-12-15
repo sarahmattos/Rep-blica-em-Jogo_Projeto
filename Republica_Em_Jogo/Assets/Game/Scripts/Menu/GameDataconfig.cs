@@ -42,12 +42,14 @@ public class GameDataconfig : Singleton<GameDataconfig>
 
     private void Start()
     {
+        if (PlayerPrefs.HasKey("maxConnections")) maxConnections = PlayerPrefs.GetInt("maxConnections");
+
         DontDestroyOnLoad(gameObject);
-       if(PlayerPrefs.HasKey("maxConnections")) SetMaxConnections(PlayerPrefs.GetInt("maxConnections"));
     }
 
     public void SetMaxConnections(int value)
     {
+        Debug.Log("max connections updaate:" + value);
         maxConnections = value;
         PlayerPrefs.SetInt("maxConnections", value);
     }
@@ -63,10 +65,13 @@ public class DevConfig
     [SerializeField] private bool mostraUISyncCarregamentoPlayers;
     [SerializeField] private bool onlineUiButtonAtivos;
     [SerializeField] private bool mostrarLog;
+    [SerializeField] private bool mostarOpcao1player;
 
     public bool VenceConquistandoTudo => venceConquistandoTudo;
 
     public bool MostraUISyncCarregamentoPlayers => mostraUISyncCarregamentoPlayers;
     public bool OnlineUiButtonAtivos => onlineUiButtonAtivos;
     public bool MostrarLog => mostrarLog;
+
+    public bool MostarOpcao1player => mostarOpcao1player;
 }
