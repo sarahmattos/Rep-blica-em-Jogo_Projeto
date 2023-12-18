@@ -48,6 +48,8 @@ namespace Game
                 }
                 hudStatsJogador.updateRecursoCartaUI(qntdRecurso);
                 textoAviso.text = "Você ganhou uma carta de recurso por ter influenciado um novo bairro!";
+                GameStateEmitter.SendMessage("");
+
             }
 
 
@@ -66,7 +68,6 @@ namespace Game
             SetUpZona.Instance.AllBairros.MudarHabilitado(false);
             SetUpZona.Instance.AllBairros.MudarSeleced(false);
             uiCore.NextStateButton.interactable = true;
-
         }
 
 

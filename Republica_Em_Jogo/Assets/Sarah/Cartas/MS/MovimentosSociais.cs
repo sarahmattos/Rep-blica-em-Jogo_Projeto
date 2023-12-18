@@ -9,6 +9,7 @@ using Game.UI;
 using Game.Territorio;
 using Game.Player;
 using System;
+using Game;
 
 public enum RecursoType {
     EDUCACAO,
@@ -67,7 +68,8 @@ public class MovimentosSociais : NetworkBehaviour
         string textoTotal = "\n" + movimento + "\n" + "\n" + "Ganhe " + quantidadeRecurso + " recurso de " + recursoTipo.ToString() + " e " + quantidadeEleitor + " eleitores";
         int id = (int)NetworkManager.Singleton.LocalClientId;
         AtualizaTextoServerRpc(textoTotal, id);
-        // baralho.baralhoManager(false);
+        
+        GameStateEmitter.SendMessage("Movimento Social: receba e aplique recursos.");
 
     }
     private void OnEnable()

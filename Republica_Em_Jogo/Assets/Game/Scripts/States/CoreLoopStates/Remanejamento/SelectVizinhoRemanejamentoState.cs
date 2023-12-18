@@ -40,6 +40,8 @@ namespace Game
             SetUpZona.Instance.AllBairros.Except(VizinhosDoPlayerAtual).MudarInativity(true);
             interagivelBackground.MudaHabilitado(true);
             interagivelBackground.Click += CancelRemanejamento;
+            GameStateEmitter.SendMessage("Selecione um bairro vizinho.");
+
         }
 
         public override void ExitState()

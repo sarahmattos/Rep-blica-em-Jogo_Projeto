@@ -35,6 +35,7 @@ namespace Game
             BairrosDoPlayerAtual.MudarHabilitado(true);
             rodadaController = FindObjectOfType<RodadaController>();
             uiCore.MostrarAvisoEstado(explicaTexto, explicaTextoCorpo);
+            GameStateEmitter.SendMessage("Ditribua novos eleitores e troque cartas por recursos.");
         }
 
         public override void ExitState()

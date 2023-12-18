@@ -50,7 +50,7 @@ namespace Game
                 avancoState.StateMachineController.NextStateServerRpc();
                 return;
             }
-
+            GameStateEmitter.SendMessage("Bairro conquistado!");
             MigraEleitores?.Invoke();
             SetUpZona.Instance.AllBairros.MudarInativity(true);
             BairroPlayerAtual.Interagivel.MudarInativity(false);

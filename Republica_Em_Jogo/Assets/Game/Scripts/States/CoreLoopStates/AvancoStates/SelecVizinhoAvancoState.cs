@@ -46,6 +46,7 @@ namespace Game
             VizinhosInimigosNaoPodemInteragir.MudarInativity(true);
             interagivelBackground.MudaHabilitado(true);
             interagivelBackground.Click += CancelAvanco;
+            GameStateEmitter.SendMessage("Selecione um bairro vizinho.");
 
         }
 

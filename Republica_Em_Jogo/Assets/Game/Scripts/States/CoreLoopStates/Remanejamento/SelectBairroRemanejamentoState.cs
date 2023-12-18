@@ -25,6 +25,8 @@ namespace Game
             remanejamentoData.ParBairroEleitorigualUm.Keys.MudarInativity(false);
             remanejamentoData.BairrosNaoRemanejaveis.MudarInativity(true);
             InscreverClickInteragivelBairros();
+            GameStateEmitter.SendMessage("Selecione um bairro.");
+
 
         }
 

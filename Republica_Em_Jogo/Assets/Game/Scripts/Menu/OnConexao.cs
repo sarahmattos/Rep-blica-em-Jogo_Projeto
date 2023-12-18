@@ -57,7 +57,7 @@ namespace Game.Networking
 
         private void OfflineConexao(bool obj)
         {
-            textModoConexao.SetText("OFFLINE");
+            textModoConexao.SetText("LOCAL");
             textModoConexao.color = offlineModeColor;
         }
 

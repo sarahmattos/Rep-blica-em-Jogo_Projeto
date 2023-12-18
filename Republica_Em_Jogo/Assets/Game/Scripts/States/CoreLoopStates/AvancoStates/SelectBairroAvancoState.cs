@@ -13,7 +13,7 @@ namespace Game
         private const int eleitoresBairroMinParaAvancar = 2;
         private AvancoState avancoState;
         private List<Bairro> BairrosInControl => PlayerStatsManager.Instance.GetPlayerStatsDoPlayerAtual().BairrosInControl;
-
+        
 
         public List<Bairro> BairrosInteragiveis
         {
@@ -47,12 +47,15 @@ namespace Game
             if (!TurnManager.Instance.LocalIsCurrent) return;
             if (BairrosInteragiveis.Count == 0)
             {
+                GameStateEmitter.SendMessage("Não há mais bairros para avançar.");
                 //TODO: retornar para o jogador alguma interface indicando que nao ha bairros para avancar
                 return;
             }
             BairrosInteragiveis.MudarHabilitado(true);
             bairroNaoPodemInteragir.MudarInativity(true);
             InscreverClickInteragivelBairros(BairrosInteragiveis);
+            GameStateEmitter.SendMessage("Selecione um bairro.");
+
 
         }
 

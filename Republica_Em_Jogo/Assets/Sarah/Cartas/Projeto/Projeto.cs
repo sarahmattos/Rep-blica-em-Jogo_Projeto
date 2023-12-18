@@ -305,6 +305,8 @@ public class Projeto : NetworkBehaviour
         textoTotal = proposta + "\n \n" + recompensaText + "" + numRecompensa.ToString();
         atualizarProjeto(textoTotal);
         text_avisoAprovacaoProjeto.gameObject.SetActive(false);
+        GameStateEmitter.SendMessage("Escolha uma zona para promover um projeto.");
+
 
     }
 

@@ -8,6 +8,7 @@ using Unity.Collections;
 using Game.UI;
 using Game.Player;
 using Game.Territorio;
+using Game;
 
 public class Corrupcao : NetworkBehaviour
 {
@@ -53,6 +54,8 @@ public class Corrupcao : NetworkBehaviour
         string textoTotal = "\n" + corrupcao + "\n" + "\n" + complementText;
         int id = (int)NetworkManager.Singleton.LocalClientId;
         AtualizaTextoServerRpc(textoTotal, id);
+        GameStateEmitter.SendMessage("Corrupção: perca recursos.");
+
         // baralho.baralhoManager(false);
 
     }
