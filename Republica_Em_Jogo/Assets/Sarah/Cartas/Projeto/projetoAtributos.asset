@@ -49,7 +49,7 @@ MonoBehaviour:
     da zona:"
   - "Aumento do repasse de verba destinada a obras de melhoria do saneamento b\xE1sico
     em bairros da zona:"
-  - " Autoriza a constru\xE7\xE3o de ciclovias e ciclofaixas p\xFAblicas nos bairros
+  - "Autoriza a constru\xE7\xE3o de ciclovias e ciclofaixas p\xFAblicas nos bairros
     da zona:"
   - "Regulamenta o Servi\xE7o de Transporte Urbano Especial Suplementar de Passageiros,
     realizado por vans, kombis e similares, no munic\xEDpio do Rio de Janeiro."
@@ -57,5 +57,19 @@ MonoBehaviour:
     da zona:"
   - "Destina verba para amplia\xE7\xE3o dos acervos das bibliotecas de escolas municipais
     presentes na zona:"
+  - "Cria o Programa de Promo\xE7\xE3o \xE0 Sa\xFAde Mental de crian\xE7as e jovens
+    em escolas municipais do Rio de Janeiro."
+  - "Pro\xEDbe nomear unidades escolares da rede p\xFAblica municipal e logradouros
+    com nome de escravocratas, eugenistas e torturadores, e d\xE1 outras provid\xEAncias. "
+  - "Cria o Programa Municipal de Assist\xEAncia Oftalmol\xF3gica e fornecimento
+    obrigat\xF3rio gratuito de \xF3culos de grau aos integrantes de fam\xEDlias inscritas
+    no Cadastro \xDAnico para Programas Sociais do Governo Federal (Cad\xDAnico)."
+  - "Estabelece como \xE1rea de especial interesse social, para fins de regulariza\xE7\xE3o
+    fundi\xE1ria de im\xF3veis localizados em comunidades da zona:"
+  - "Concede incentivos fiscais para estabelecimentos privados localizados na zona
+    __________________,  que atuem nos ramos gastron\xF4mico, cultural e tur\xEDstico."
+  - "Institui o Programa Municipal de Acessibilidade e Inclus\xE3o de Pessoas com
+    defici\xEAncia em festas populares, incluindo o carnal de rua e d\xE1 outras
+    provid\xEAncias. "
   numRecompensa: 010000000200000003000000
   recompensaText: 'Eleitores e cartas ganhas se aprovado: '

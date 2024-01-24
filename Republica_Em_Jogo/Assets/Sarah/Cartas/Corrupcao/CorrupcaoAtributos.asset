@@ -17,6 +17,20 @@ MonoBehaviour:
   - "Seu partido foi pego utilizando candidatos laranjas na \xFAltima elei\xE7\xE3o!"
   - "O gabinete do vereador de seu partido est\xE1 sendo investigado pela utiliza\xE7\xE3o
     de funcion\xE1rios fantasmas."
+  - "Um(a) vereador(a) de seu partido est\xE1 respondendo por ato de improbidade
+    administrativa."
+  - "Um dos secret\xE1rios de governo, filiado a seu partido, foi afastado para apura\xE7\xE3o
+    de crime de responsabilidade. "
+  - 'Um(a) integrante de seu partido foi advertido(a) por tentativa de praticar abuso
+    de autoridade. '
+  - "Um vereador de seu partido foi afastado e est\xE1 sendo investigado pelo crime
+    de ass\xE9dio sexual. "
+  - "O seu partido foi pego com irregularidades na presta\xE7\xE3o de contas eleitorais
+    e perder\xE1 o direito ao recebimento da cota do Fundo Partid\xE1rio da pr\xF3xima
+    elei\xE7\xE3o. "
+  - "O Minist\xE9rio P\xFAblico aceitou den\xFAncia e investigar\xE1 um(a) vereador(a)
+    de seu partido por associa\xE7\xE3o criminosa. "
+  - "Um(a) vereador(a)de seu partido est\xE1 sendo investigado(a) por compra de votos."
   penalidade: 2
   complementText: "Perca dois eleitores e duas cartas. n\xE3o apresente projeto nesta
     rodada."
