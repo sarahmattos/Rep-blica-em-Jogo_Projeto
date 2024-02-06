@@ -2661,6 +2661,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8727295169972986319, guid: 0a9b4cd525bf9e14f9f80cfe9b374a93, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8727295169973419503, guid: 0a9b4cd525bf9e14f9f80cfe9b374a93, type: 3}
       propertyPath: m_Name
       value: Ocean calm Water
@@ -5623,7 +5627,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7887484137661636566, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 549866.3
+      value: 594930.6
       objectReference: {fileID: 0}
     - target: {fileID: 7887484137943697647, guid: 9a78e5295172fef498ea292c5eeae4e0, type: 3}
       propertyPath: m_AnchorMax.x
