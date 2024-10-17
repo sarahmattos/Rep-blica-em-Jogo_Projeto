@@ -1,9 +1,6 @@
 using Game.Networking;
 using Game.Tools;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using TMPro;
 using UnityEngine;
@@ -13,7 +10,7 @@ public class IPManager : Singleton<IPManager>
     [SerializeField] private TMP_Text text_IP;
     [SerializeField] private List<string> allIpAddress;
 
-    public int portDefault => 7777;
+    public int portDefault => 8007;
 
     private void Start()
     {
