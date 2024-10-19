@@ -1,16 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using TMPro;
-using Unity.Netcode;
-using Unity.Collections;
-using Game.Territorio;
-using Game.Player;
-using Game.UI;
 using Game;
+using Game.Player;
+using Game.Territorio;
+using Game.UI;
 using System;
+using System.Collections;
+using TMPro;
+using Unity.Collections;
+using Unity.Netcode;
+using UnityEngine;
 
 //namespace Game.Territorio
 //{
@@ -448,6 +445,8 @@ public class Projeto : NetworkBehaviour
     //funcao ao projeto ser aprovado
     public void projetoAprovado()
     {
+        GameStateEmitter.SendMessage("Distribua seus eleitores.");
+
         // HabilitarBairrosPlayerLocal(true);
         fecharBtn.SetActive(true);
         text_avisoAprovacaoProjeto.text = "PROJETO APROVADO \n Zona escolhida: \n\n" + zonaNameLocal + "\n\n" + "RECOMPENSA \n" + numRecompensaDefault + " carta(s) e " + numRecompensaDefault + " eleitor(es)";
@@ -463,6 +462,7 @@ public class Projeto : NetworkBehaviour
             cp.AumentaValServerRpc();
         }
         inVotacao = false;
+
     }
 
 

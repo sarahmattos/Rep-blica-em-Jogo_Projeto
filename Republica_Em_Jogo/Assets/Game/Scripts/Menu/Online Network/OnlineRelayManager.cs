@@ -20,8 +20,8 @@ namespace Game.Networking
 
         public UnityTransport Transport => NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
         public bool IsRelayEnalbed => Transport != null && Transport.Protocol == UnityTransport.ProtocolType.RelayUnityTransport;
-        
-        public async Task<RelayHostData>  SetupRelay()
+
+        public async Task<RelayHostData> SetupRelay()
         {
             connecting?.Invoke(true);
 
@@ -46,6 +46,7 @@ namespace Game.Networking
                 ConnectionData = allocation.ConnectionData
             };
 
+            Debug.Log(string.Concat(" port: ", allocation.RelayServer.Port, " - ServerIpv4: ", allocation.RelayServer.IpV4));
             relayHostData.JoinCode = await Relay.Instance.GetJoinCodeAsync(relayHostData.AllocationID);
 
             //Enviando os dados.
@@ -54,7 +55,7 @@ namespace Game.Networking
 
             // Tools.Logger.Instance.LogInfo($"AllocationID: {relayHostData.AllocationID}");
             // Tools.Logger.Instance.LogInfo($"C�digo da sala: {relayHostData.JoinCode}");
-            
+
             joinCodeGenerated?.Invoke(relayHostData.JoinCode);
             connecting?.Invoke(false);
             return relayHostData;
@@ -78,7 +79,7 @@ namespace Game.Networking
             }
 
             //Alocando pelo joinCode fornecido.
-            JoinAllocation joinAllocation =await Relay.Instance.JoinAllocationAsync(joinCode);
+            JoinAllocation joinAllocation = await Relay.Instance.JoinAllocationAsync(joinCode);
             RelayJoinData relayJoinData = new RelayJoinData
             {
                 Key = joinAllocation.Key,
@@ -96,7 +97,7 @@ namespace Game.Networking
                 relayJoinData.Key, relayJoinData.ConnectionData, relayJoinData.HostConnectionData);
 
 
-        //    Tools.Logger.Instance.LogInfo($"Connectado: {joinCode}");
+            //    Tools.Logger.Instance.LogInfo($"Connectado: {joinCode}");
             connecting?.Invoke(false);
 
             return relayJoinData;

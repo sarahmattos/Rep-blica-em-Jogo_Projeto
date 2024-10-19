@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using Game.Player;
 using Game.Territorio;
-using UnityEngine;
-using System.Linq;
-using Game.UI;
-using TMPro;
 using Game.Tools;
+using Game.UI;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 namespace Game
 {
@@ -51,7 +49,6 @@ namespace Game
                 GameStateEmitter.SendMessage("");
 
             }
-
 
 
             // qntdEleitorAplicado = 0;

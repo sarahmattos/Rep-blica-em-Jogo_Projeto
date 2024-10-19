@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Unity.Netcode;
-using Unity.Collections;
+using Game.Player;
 using Game.UI;
 using TMPro;
-using Game.Player;
+using Unity.Collections;
+using Unity.Netcode;
+using UnityEngine;
 
 namespace Game
 {
@@ -64,7 +62,7 @@ namespace Game
                     info0 = newValue.ToString();
                     updateInfoUi();
                 };
-        
+
             stringInfoPlayer1.OnValueChanged += (FixedString4096Bytes previousValue, FixedString4096Bytes newValue) =>
             {
                 info1 = newValue.ToString();
@@ -87,7 +85,7 @@ namespace Game
         }
         private void Update()
         {
-            
+
 
             if (Input.GetKeyDown(KeyCode.Tab))
             {
@@ -110,14 +108,15 @@ namespace Game
         {
             infoViewState = false;
             infoGo.SetActive(infoViewState);
-            
+
 
 
         }
         public void SwitchInfoView()
         {
             infoViewState = !infoViewState;
-            infoGo.SetActive(infoViewState);
+            if (infoViewState) MostrarInfo();
+            else EsconderInfo();
         }
 
 
@@ -144,26 +143,30 @@ namespace Game
         {
 
             string[] separatedStrings0 = info0.Split(';');
-            if(separatedStrings0.Length>0){
+            if (separatedStrings0.Length > 0)
+            {
                 nome0.text = separatedStrings0[0];
                 teste0.text = separatedStrings0[1];
             }
-            
-            
+
+
             string[] separatedStrings1 = info1.Split(';');
-            if(separatedStrings1.Length>0){
+            if (separatedStrings1.Length > 0)
+            {
                 nome1.text = separatedStrings1[0];
                 teste1.text = separatedStrings1[1];
             }
 
             string[] separatedStrings2 = info2.Split(';');
-             if(separatedStrings2.Length>0){
+            if (separatedStrings2.Length > 0)
+            {
                 nome2.text = separatedStrings2[0];
                 teste2.text = separatedStrings2[1];
-             }
+            }
 
             string[] separatedStrings3 = info3.Split(';');
-            if(separatedStrings3.Length>0){
+            if (separatedStrings3.Length > 0)
+            {
                 nome3.text = separatedStrings3[0];
                 teste3.text = separatedStrings3[1];
             }

@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using Unity.Netcode;
-using Unity.Collections;
-using Game.UI;
+using Game;
 using Game.Player;
 using Game.Territorio;
-using Game;
+using Game.UI;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using Unity.Collections;
+using Unity.Netcode;
+using UnityEngine;
 
 public class Corrupcao : NetworkBehaviour
 {
@@ -54,7 +53,7 @@ public class Corrupcao : NetworkBehaviour
         string textoTotal = "\n" + corrupcao + "\n" + "\n" + complementText;
         int id = (int)NetworkManager.Singleton.LocalClientId;
         AtualizaTextoServerRpc(textoTotal, id);
-        GameStateEmitter.SendMessage("Corrupção: perca recursos.");
+        GameStateEmitter.SendMessage("Corrupção: remova recursos.");
 
         // baralho.baralhoManager(false);
 
@@ -71,43 +70,47 @@ public class Corrupcao : NetworkBehaviour
             };
         idPlayerCorrupcao.OnValueChanged += (int previousValue, int newValue) =>
              {
-                if (newValue != -1){
-                    if (newValue != (int)NetworkManager.Singleton.LocalClientId)
-                    {
-                        btnOk.SetActive(false);
-                        btnFechar.SetActive(true);
-                        text_aviso.text = "Corrupção retirado pelo partido " + PlayerStatsManager.Instance.GetPlayerStats(newValue).PlayerName;
-                    }
-                    else
-                    {
-                        text_aviso.text = " ";
-                        btnOk.SetActive(true);
-                        btnFechar.SetActive(false);
-                    }
-                }
+                 if (newValue != -1)
+                 {
+                     if (newValue != (int)NetworkManager.Singleton.LocalClientId)
+                     {
+                         btnOk.SetActive(false);
+                         btnFechar.SetActive(true);
+                         text_aviso.text = "Corrupção retirado pelo partido " + PlayerStatsManager.Instance.GetPlayerStats(newValue).PlayerName;
+                     }
+                     else
+                     {
+                         text_aviso.text = " ";
+                         btnOk.SetActive(true);
+                         btnFechar.SetActive(false);
+                     }
+                 }
              };
     }
     public void chamarPenalidade()
     {
-       StartCoroutine(EsperaEVai1(0.1f));
+        StartCoroutine(EsperaEVai1(0.1f));
     }
     public void chamarPenalidade2()
     {
         rc.verificacaoInicial(penalidade2);
     }
     private IEnumerator EsperaEVai1(float s)
+    {
+        yield return new WaitForSeconds(s);
+        hs.playerDiminuiEleitor = true;
+        PlayerStats ps = hs.GetPlayerStats();
+        if (ps.GetEleitoresTotais() > ps.BairrosInControl.Count)
         {
-            yield return new WaitForSeconds(s);
-            hs.playerDiminuiEleitor = true;
-            PlayerStats ps = hs.GetPlayerStats();
-            if(ps.GetEleitoresTotais()>ps.BairrosInControl.Count){
-                hs.playerRecebeEleitor = true;
-                hs.ValorEleitoresNovos(penalidade);
-            }else{
-                hs.text_naotemeleitorpraretirar.text="Não possui eleitores suficientes para retirada!";
-                hs.AtualizaUIAposDistribuicao();
-            }
+            hs.playerRecebeEleitor = true;
+            hs.ValorEleitoresNovos(penalidade);
         }
+        else
+        {
+            hs.text_naotemeleitorpraretirar.text = "Não possui eleitores suficientes para retirada!";
+            hs.AtualizaUIAposDistribuicao();
+        }
+    }
 
     public void panelFalse(GameObject panel)
     {

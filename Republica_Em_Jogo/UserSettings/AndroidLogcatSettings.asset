@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "0074614461",
         "name": "com.ProjetoRepublicaEmJogoDigital.RepublicaEmJogoDigital",
-        "processId": 5126,
+        "processId": 3085,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -18,6 +18,18 @@
             "deviceId": "0074614461",
             "name": "com.ProjetoRepublicaEmJogoDigital.RepublicaEmJogoDigital",
             "processId": 5126,
+            "exited": false
+        },
+        {
+            "deviceId": "0074614461",
+            "name": "com.ProjetoRepublicaEmJogoDigital.RepublicaEmJogoDigital",
+            "processId": 1976,
+            "exited": false
+        },
+        {
+            "deviceId": "0074614461",
+            "name": "com.ProjetoRepublicaEmJogoDigital.RepublicaEmJogoDigital",
+            "processId": 3085,
             "exited": false
         }
     ],

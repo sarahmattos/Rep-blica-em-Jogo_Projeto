@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using Game.Territorio;
 using Game.Tools;
-using UnityEngine;
 
 namespace Game
 {
@@ -20,12 +17,15 @@ namespace Game
         public override void EnterState()
         {
             remanejamentoData.ResetSelectedBairros();
-            if (!TurnManager.Instance.LocalIsCurrent) return;
-            remanejamentoData.ParBairroEleitorigualUm.Keys.MudarHabilitado(true);
-            remanejamentoData.ParBairroEleitorigualUm.Keys.MudarInativity(false);
-            remanejamentoData.BairrosNaoRemanejaveis.MudarInativity(true);
-            InscreverClickInteragivelBairros();
-            GameStateEmitter.SendMessage("Selecione um bairro.");
+            if (TurnManager.Instance.LocalIsCurrent)
+            {
+                remanejamentoData.ParBairroEleitorigualUm.Keys.MudarHabilitado(true);
+                remanejamentoData.ParBairroEleitorigualUm.Keys.MudarInativity(false);
+                remanejamentoData.BairrosNaoRemanejaveis.MudarInativity(true);
+                InscreverClickInteragivelBairros();
+                GameStateEmitter.SendMessage("Selecione um bairro.");
+            }
+
 
 
         }

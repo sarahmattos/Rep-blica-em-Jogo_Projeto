@@ -1,10 +1,10 @@
+using Game.Player;
+using Game.Territorio;
+using Game.Tools;
+using Game.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.UI;
-using Game.Territorio;
-using Game.Player;
-using Game.Tools;
 
 namespace Game
 {
@@ -31,12 +31,21 @@ namespace Game
 
         public override void EnterState()
         {
-            if (!TurnManager.Instance.LocalIsCurrent) return;
-            BairrosDoPlayerAtual.MudarHabilitado(true);
-            rodadaController = FindObjectOfType<RodadaController>();
-            uiCore.MostrarAvisoEstado(explicaTexto, explicaTextoCorpo);
-            GameStateEmitter.SendMessage("Ditribua novos eleitores e troque cartas por recursos.");
+            if (TurnManager.Instance.LocalIsCurrent)
+            {
+                BairrosDoPlayerAtual.MudarHabilitado(true);
+                rodadaController = FindObjectOfType<RodadaController>();
+                uiCore.MostrarAvisoEstado(explicaTexto, explicaTextoCorpo);
+                GameStateEmitter.SendMessage("Ditribua novos eleitores e troque cartas por recursos.");
+            }
+            else
+            {
+                GameStateEmitter.SendMessage("Aguarde ações do jogador.");
+            }
         }
+
+
+
 
         public override void ExitState()
         {
